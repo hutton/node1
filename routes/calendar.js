@@ -17,7 +17,11 @@ function makeid(length)
 exports.new = function(req, res){
 	var id = makeid(10);
 
-  	res.send("Create new calendar: " + id);
+  	console.log("Create new calendar: " + id);
+
+  	// Create calendar and redirect
+
+  	res.redirect('/' + id);
 };
 
 

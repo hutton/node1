@@ -38,7 +38,7 @@ app.get('/users', user.list);
 app.get('/new', calendar.new);
 app.get('/mail', mail.show);
 app.post('/mail', mail.send);
-app.get('/?', calendar.view);
+app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

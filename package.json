@@ -9,6 +9,6 @@
     "express": "3.1.0",
     "ejs": "*",
     "less-middleware": "*",
-    "sendgrid": "*"
+    "sendgrid-nodejs": "*"
   }
 }
