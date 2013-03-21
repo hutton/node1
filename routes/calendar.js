@@ -3,28 +3,39 @@
  * GET users listing.
  */
 
-function makeid(length)
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+ var Calendar = require("../models/calendar").Calendar;
 
-    for( var i=0; i < length; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+ function makeid(length)
+ {
+ 	var text = "";
+ 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    return text;
+ 	for( var i=0; i < length; i++ )
+ 		text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+ 	return text;
 }
 
 exports.new = function(req, res){
-	var id = makeid(10);
+ 	var id = makeid(10);
 
-  	console.log("Create new calendar: " + id);
+ 	console.log("Create new calendar: " + id);
 
-  	// Create calendar and redirect
+ 	var newCalendar = new Calendar({name: id});
 
-  	res.redirect('/' + id);
+ 	newCalendar.save(function(err){
+ 		if (err){
+ 			console.log(err);
+ 		}
+ 	});
+
+ 	console.log("Calendar saved: " + newCalendar.id);
+
+	// Create calendar and redirect
+	res.redirect('/' + id);	
 };
 
 
 exports.view = function(req, res){
-  	res.send("Viewing calendar");
+	res.send("Viewing calendar");
 };
