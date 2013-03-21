@@ -31,7 +31,7 @@ exports.receive = function(req, res){
 	//   	sendMail(req.body.to, req.body.from, req.body.subject, data);
 	// });
 
-res.render('mail', { title: 'Mail sent' });
+	res.render('mail', { title: 'Mail sent' });
 };
 
 function sendMail(to, from, subject, body){

@@ -30,13 +30,19 @@ var CalendarSchema = new mongoose.Schema({
 });
 
 function getEmailAddresses(text){
-  var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
+	var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
 
+	var result = text.match(re);
+
+	if (result == null){
+		return []
+	}
+	
 	return text.match(re);
 }
 
 function createDates(startDate, numberOfDays){
-  	var now = new Date();
+	var now = new Date();
 
 	var startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -56,7 +62,8 @@ function saveCallback(err){
 }
 
 function makeIdFromSubject(subject){
-	return subject;
+	// Need to check for dups
+	return subject.replace(/ /g,"-");
 }
 
 CalendarSchema.statics.newCalendar = function(to, from, subject, message){
@@ -64,7 +71,7 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 
 	console.log("Creating new calendar: " + id);
 
-  	var now = new Date();
+	var now = new Date();
 
 	var startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -88,9 +95,9 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 
 	var attendees = _.map(attendeeAddresses, function(address){
 		return new Attendee({
-				name: "",
-				email: address
-			})
+			name: "",
+			email: address
+		})
 	});
 
 	_.each(attendees, function(attendee){
@@ -99,8 +106,7 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 
 	newCalendar.save(saveCallback);
 
-	Mail.sendMail(calendar, subject, from, message);
-
+	Mail.sendMail(newCalendar, subject, to, message);
 
 	console.log("Calendar saved: " + newCalendar.id);
 
