@@ -33,6 +33,7 @@
  	mongoose.connect(dbPath, function onMongooseError(err) {
  		if (err) throw err;
  	});
+
  });
 
  app.configure('development', function(){
@@ -44,8 +45,11 @@
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
  app.post('/mail', mail.receive);
+
  app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
 
+ global.app = app;
+ 
  http.createServer(app).listen(app.get('port'), function(){
  	console.log("Express server listening on port " + app.get('port'));
  });

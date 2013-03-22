@@ -6,16 +6,18 @@ var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
 
 function sendMail(calendar, subject, from, message){
-	console.log("Sending mail to: " + calendar.id );
+	console.log("Sending mail to group: " + calendar.id );
 
 	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
 
 	_.each(calendar.attendees, function(attendee){
-
-		app.render('basic', {
+		global.app.render('basic', {
 			subject: subject, 
 			message: message
 		}, function(err, html){
+
+			console.log("Sending mail to: " + attendee.email );
+
 			var mail = new SendGrid.Email({
 				to: attendee.email,
 				from: from,
