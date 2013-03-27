@@ -98,19 +98,28 @@
 /* ------------------------------------- 
 		BODY 
 		------------------------------------- */
-		table.body-wrap { width: 100%;}
+		table.body-wrap {
+			width: 100%;
+			background: #FFFFFF;
+		}
 
 
 /* ------------------------------------- 
 		FOOTER 
 		------------------------------------- */
-		table.footer-wrap { width: 100%;	clear:both!important;
+		table.footer-wrap { width: 100%;	clear:both!important; 			color: #a0a0a0;
+
 		}
 		.footer-wrap .container td.content  p { border-top: 1px solid rgb(215,215,215); padding-top:15px;}
 		.footer-wrap .container td.content p {
 			font-size:10px;
 			font-weight: bold;
 
+		}
+
+		.footer-wrap a {
+			font-size: 11px;
+			color: #a0a0a0;
 		}
 
 
@@ -227,6 +236,7 @@
 
 		#availContainer{
 			margin: 0px 10px;
+			border-top: 1px solid #e0e0e0;
 		}
 
 		#availContainerInner{
@@ -243,6 +253,7 @@
 			display: block;
 			text-align: left;
 			overflow-x: auto;
+			margin-top: 20px;
 		}
 
 		#nameTable{
@@ -259,6 +270,12 @@
 			height: 40px;
 		}
 
+		.other-column{
+			color: #a0a0a0;
+			border-right: 1px solid #d8d8d8;
+			border-bottom: 1px solid #d8d8d8;
+		}
+
 		.other-column div{
 			font-size: 12px;
 			text-align: center;
@@ -272,24 +289,52 @@
 		.avail-row{
 		}
 
+		.avail-row > td{
+		    color: rgba(0, 0, 0, 0.2);
+		    font-size: 11px;
+		    font-weight: bold;
+		    text-align: center;
+		}
+
 		.name-cell{
 			/*@editable*/ font-family:Arial;
 			/*@editable*/ font-size:12px;
-			padding-left: 5px;
+			padding-left: 4px;
 			color: #FAFAFA;
 			text-align: left;
+			pointer-events: none;
+		}
+
+		.name-cell > div{
+		    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+		    display: inline;
+		    padding: 2px 4px;		
 		}
 
 		.avail{
-			background: #8080ff;
+			background: #C4D6BA;
+			border: 1px solid rgba(0,0,0,0.05);
 		}
 
 		.busy{
-			background: #ff8080;
+			background: #F4BCBA;
+			border: 1px solid rgba(0,0,0,0.05);
 		}
 
 		.unknown{
-			background: #606060;
+			background: #e8e8e8;
+		}
+
+		.legend-item{
+			margin: 0px 10px;
+			color: #a0a0a0;
+			font-size: 12px;
+		}
+
+		.legend-item > span{
+			display: inline-block;
+			width: 10px;
+			height: 10px;
 		}
 
 		@media only screen and (max-width: 600px) {
@@ -312,7 +357,7 @@
 
 	</head>
 
-	<body bgcolor="#FFFFFF">
+	<body bgcolor="#F1F1F1">
 
 		<!-- BODY -->
 		<table class="body-wrap">
@@ -337,163 +382,172 @@
 		<div id="availContainer">
 			<div id="availContainerInner">
 				<div id="availContainerInner2">
-				<table border="0" cellpadding="0" cellspacing="0" class="availabilityTable" id="availTable">
-					<tr class="top-row">
-						<td class="other-column">
-							<div>
-								Monday <br /> 12th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Tuesday <br /> 13th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Wednesday <br /> 14th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Thursday <br /> 15th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Friday <br /> 16th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Saturday <br /> 17th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Sunday <br /> 18th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Monday <br /> 19th May
-							</div>
-						</td>
-						<td class="other-column">
-							<div>
-								Tuesday <br /> 20th May
-							</div>
-						</td>
-					</tr>
-					<tr class="other-row avail-row">
-						<td class="avail">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="avail">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="unknown">
-						</td>
-					</tr>
-					<tr class="other-row avail-row">
-						<td class="avail">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="avail">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="busy">
-						</td>
-						<td class="busy">
-						</td>
-					</tr>
-					<tr class="other-row avail-row">
-						<td class="unknown">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="avail">
-						</td>
-						<td class="avail">
-						</td>
-						<td class="avail">
-						</td>
-						<td class="avail">
-						</td>
-						<td class="unknown">
-						</td>
-						<td class="busy">
-						</td>
-					</tr>
-				</table>
-				<table border="0" cellpadding="0" cellspacing="0" width="0" class="availabilityTable" id="nameTable">
-					<tr class="top-row">
-						<td>
-						</td>
-					</tr>
-					<tr class="other-row">
-						<td class="name-cell">
-							simon@linelineline.com
-						</td>
-					</tr>
-					<tr class="other-row">
-						<td class="name-cell">
-							cat.surname@hotmail.co.uk
-						</td>
-					</tr>
-					<tr class="other-row">
-						<td class="name-cell">
-							dave.fastnet@gmail.com
-						</td>
-					</tr>
-				</table>
+					<table border="0" cellpadding="0" cellspacing="0" class="availabilityTable" id="availTable">
+						<tr class="top-row">
+							<td class="other-column">
+								<div>
+									Monday <br /> 12th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Tuesday <br /> 13th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Wednesday <br /> 14th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Thursday <br /> 15th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Friday <br /> 16th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Saturday <br /> 17th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Sunday <br /> 18th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Monday <br /> 19th May
+								</div>
+							</td>
+							<td class="other-column">
+								<div>
+									Tuesday <br /> 20th May
+								</div>
+							</td>
+						</tr>
+						<tr class="other-row avail-row">
+							<td class="avail">
+								Free
+							</td>
+							<td class="busy">
+								Busy
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="avail">
+								Free
+							</td>
+							<td class="busy">
+								Busy
+							</td>
+							<td class="busy">
+								Busy
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="unknown">
+							</td>
+						</tr>
+						<tr class="other-row avail-row">
+							<td class="avail">
+							</td>
+							<td class="busy">
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="busy">
+							</td>
+							<td class="avail">
+							</td>
+							<td class="busy">
+							</td>
+							<td class="busy">
+							</td>
+							<td class="busy">
+							</td>
+						</tr>
+						<tr class="other-row avail-row">
+							<td class="unknown">
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="avail">
+							</td>
+							<td class="avail">
+							</td>
+							<td class="avail">
+							</td>
+							<td class="avail">
+							</td>
+							<td class="unknown">
+							</td>
+							<td class="busy">
+							</td>
+						</tr>
+					</table>
+					<table border="0" cellpadding="0" cellspacing="0" width="0" class="availabilityTable" id="nameTable">
+						<tr class="top-row">
+							<td>
+							</td>
+						</tr>
+						<tr class="other-row">
+							<td class="name-cell">
+								<div>
+								simon&#64;linelineline.com
+								</div>
+							</td>
+						</tr>
+						<tr class="other-row">
+							<td class="name-cell">
+								<div>
+								cat.surname&#64;hotmail.co.uk
+								</div>
+							</td>
+						</tr>
+						<tr class="other-row">
+							<td class="name-cell">
+								<div>
+								dave.fastnet&#64;gmail.com
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
-		</div>
 
-		<!-- FOOTER -->
-		<table class="footer-wrap">
-			<tr>
-				<td></td>
-				<td class="container">
+			<!-- FOOTER -->
+			<table class="footer-wrap">
+				<tr>
+					<td></td>
+					<td class="container">
+						<!-- content -->
+						<div class="content">
+							<table>
+								<tr>
+									<td align="center">
+										<p>
+											<a href="#">What is this?</a> |
+											<a href="#"><unsubscribe>Unsubscribe</unsubscribe></a>
+										</p>
+									</td>
+								</tr>
+							</table>
+						</div><!-- /content -->
 
-					<!-- content -->
-					<div class="content">
-						<table>
-							<tr>
-								<td align="center">
-									<p>
-										<a href="#">Edit your calendar</a> |
-										<a href="#">What is this?</a> |
-										<a href="#"><unsubscribe>Unsubscribe</unsubscribe></a>
-									</p>
-								</td>
-							</tr>
-						</table>
-					</div><!-- /content -->
-
-				</td>
-				<td></td>
-			</tr>
-		</table><!-- /FOOTER -->
-	</body>
-	</html>
+					</td>
+					<td></td>
+				</tr>
+			</table><!-- /FOOTER -->
+		</body>
+</html>

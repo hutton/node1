@@ -2,9 +2,10 @@
 var SendGrid = require('sendgrid-nodejs');
 var fs = require('fs');
 var Calendar = require("../models/calendar").Calendar;
+var _ = require("underscore");
 
 exports.show = function(req, res){
-	res.render('mail');
+	res.render('mail.html');
 };
 
 function startsWith(input, query){
@@ -12,12 +13,20 @@ function startsWith(input, query){
 }
 
 exports.receive = function(req, res){
-	console.log("Mail send");
+	console.log("Mail received");
 
 	if (startsWith(req.body.to, "start")){
 		Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, req.body.message);
 	} else {
-		var calendar = Calendar.findCalendar(req.body.to);
+		var calendar = Calendar.findCalendar("test-subject", function(err, calendar){
+			if (err){
+				res.send('No calendar');
+			}
+
+			calendar.updateCalendar(calendar.attendees[0], 
+				[calendar.choices[_.random(0,calendar.choices.length - 1)].date,calendar.choices[_.random(0,calendar.choices.length - 1)].date], 
+				[calendar.choices[_.random(0,calendar.choices.length - 1)].date]);
+		});
 	}
 
 	// console.log(req.body.to);

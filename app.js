@@ -12,14 +12,16 @@
  , mail = require('./routes/mail')
  , http = require('http')
  , path = require('path')
- , mongoose = require('mongoose');
+ , mongoose = require('mongoose')
+ , cons = require('consolidate')
+ , _ = require('underscore');
 
  var app = express();
 
  app.configure(function(){
  	app.set('port', process.env.PORT || 3000);
  	app.set('views', __dirname + '/views');
- 	app.set('view engine', 'ejs');
+ 	app.set('view engine', 'html');
  	app.set('view cache', false);
  	app.use(express.favicon());
  	app.use(express.logger('dev'));
@@ -33,8 +35,9 @@
  	mongoose.connect(dbPath, function onMongooseError(err) {
  		if (err) throw err;
  	});
-
  });
+
+app.engine('html', cons.underscore);
 
  app.configure('development', function(){
  	app.use(express.errorHandler());
@@ -46,7 +49,8 @@
  app.get('/mail', mail.show);
  app.post('/mail', mail.receive);
 
- app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
+ //app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
+ app.get('/calendar/*', calendar.view);
 
  global.app = app;
  

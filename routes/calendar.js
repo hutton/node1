@@ -3,7 +3,12 @@
  * GET users listing.
  */
 
+ require("../models/attendee");
  var Calendar = require("../models/calendar").Calendar;
+ 
+ var moment = require("moment");
+ var mongoose = require("mongoose");
+ var _ = require("underscore");
 
  function makeid(length)
  {
@@ -14,9 +19,9 @@
  		text += possible.charAt(Math.floor(Math.random() * possible.length));
 
  	return text;
-}
+ }
 
-exports.new = function(req, res){
+ exports.new = function(req, res){
  	var id = makeid(10);
 
  	console.log("Create new calendar: " + id);
@@ -37,5 +42,21 @@ exports.new = function(req, res){
 
 
 exports.view = function(req, res){
-	res.send("Viewing calendar");
+	var id = "test-subject";
+
+	console.log(req.route.params[0]);
+
+	Calendar.findCalendar(req.route.params[0], function(err, calendar){
+		if (err || calendar == null){
+			res.send('No calendar');
+		} else {
+			_.each(calendar.choices, function(choice){
+				choice.columnDate = moment(choice.date).format("dddd</br>Do MMM");
+			});
+
+			res.render('basic-web.html', { message: calendar.name,
+				attendees: calendar.attendees,
+				choices: calendar.choices });
+		}
+	});
 };

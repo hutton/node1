@@ -1,3 +1,4 @@
+
 var Attendee = require("../models/attendee").Attendee;
 var AttendeeSchema = require("../models/attendee").AttendeeSchema;
 
@@ -16,14 +17,10 @@ var CalendarSchema = new mongoose.Schema({
 		type: String,
 		index: true
 	},
-	choices: [
-	{
+	choices: [{	
 		date: Date, 
 		busy: [AttendeeSchema],
-		free: [
-		{
-			freeUser: [AttendeeSchema]
-		}]
+		free: [AttendeeSchema]
 	}],
 	attendees: [AttendeeSchema],
 	date: { type: Date, default: Date.now }
@@ -63,7 +60,7 @@ function saveCallback(err){
 
 function makeIdFromSubject(subject){
 	// Need to check for dups
-	return subject.replace(/ /g,"-");
+	return subject.replace(/ /g,"-").toLowerCase();
 }
 
 CalendarSchema.statics.newCalendar = function(to, from, subject, message){
@@ -78,7 +75,13 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 	var dates =  createDates(startDate, 14);
 
 	var choices = _.map(dates, function(date){
-		return {date: date};
+
+		// Should be new
+		return {
+			date: date,
+			busy: [],
+			free:[] 
+		};
 	});
 
 	var newCalendar = new Calendar({
@@ -121,29 +124,57 @@ function ___update(){
 	choice.busy.push(newAttendee);
 }
 
-CalendarSchema.statics.findCalendar = function(to, callback){
+CalendarSchema.statics.findCalendar = function(id, callback){
 
-	var calendarId = to; // strip rest of address
+	var calendarId = id; // strip rest of address
 
-	Calendar.find({id: to}, callback);
+	Calendar.findOne({id: calendarId}, callback);
 }
 
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
-	_.each(busyDates, function(date){
-		this.choices.find({date: date}, function(choice, err){
+	console.log("Updating calendar");
+
+	var self = this;
+
+	console.log(attendee.email + " is busy on " + busyDates);
+	console.log(attendee.email + " is free on " + freeDates);
+
+	_.each(this.choices, function(choice){
+		var index = _.indexOf(busyDates, choice.date);
+
+		if (index != -1){
+
 			choice.busy.push(attendee);
-			choice.free.id(attendee._id).remove();
-		});
-	});
 
-	_.each(freeDates, function(date){
-		this.choices.find({date: date}, function(choice, err){
-			choice.free.push(attendee);
+			console.log("choice: " + choice);
+
+			// var found = _.indexOf(choice.free, attendee);
+
+			// if (found != -1){
+			// 	choice.free[found].remove();
+			// }
+		}
+
+		index = _.indexOf(freeDates, choice);
+
+		if (index != -1){
 			choice.busy.id(attendee._id).remove();
-		});
+
+			// var found = _.indexOf(choice.busy, attendee);
+
+			// if (found != -1){
+			// 	choice.busy[found].remove();
+			// }
+		}
 	});
 
-	this.save();
+	this.save(function(err){
+		if (err){
+			console.log(err);
+		} else {
+			console.log("Calendar saved")
+		}
+	});
 }
 
 var Calendar = mongoose.model('Calendar', CalendarSchema);
