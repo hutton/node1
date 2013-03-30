@@ -7,8 +7,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>ZURBemails</title>
 	
-	<link rel="stylesheet" type="text/css" href="stylesheets/email.css" />
-
 	<style type="text/css">
 
 /* ------------------------------------- 
@@ -259,11 +257,11 @@
 		#nameTable{
 			float: left;
 			display: block;
-			width: 0px;
 			position: absolute;
 			left: 0px;
 			top: 0px;
-
+			width: 100%;
+			pointer-events: none;
 		}
 
 		.top-row{
@@ -305,10 +303,12 @@
 			pointer-events: none;
 		}
 
-		.name-cell > div{
+		.name-cell > a{
 		    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
-		    display: inline;
+		    display: inline-block;
 		    padding: 2px 4px;		
+		    text-decoration: none;
+		    color: #ffffff;
 		}
 
 		.avail{
@@ -393,88 +393,24 @@
 							<% }); %>
 						</tr>
 
-
-						<% _.each(attendees, function(attendee) { %> 
+						<% _.each(attendees, function(attendee) { var attendeeId = String(attendee._id); %> 
 							<tr class="other-row avail-row">
 								<% _.each(choices, function(choice) { %> 
-									<% if (_.indexOf(choice.free,attendee) != -1) { %>
+									<% if (_.find(choice.free, function(freeId){ return String(freeId) === attendeeId; })) { %>
 										<td class="avail">
 											Free
 										</td>
-									<% } elsif (_.indexOf(choice.busy,attendee) != -1) { %>
+									<% } else if (_.find(choice.busy, function(busyId){ return String(busyId) === attendeeId; })) { %>
 										<td class="busy">
 											Busy
 										</td>
 									<% } else { %>
 										<td class="unknown">
 										</td>
-									<% } %>
+									<% } %> 
 								<% }); %>
 							</tr>
-						<% }); %>
-							<td class="avail">
-								Free
-							</td>
-							<td class="busy">
-								Busy
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="avail">
-								Free
-							</td>
-							<td class="busy">
-								Busy
-							</td>
-							<td class="busy">
-								Busy
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="unknown">
-							</td>
-						<tr class="other-row avail-row">
-							<td class="avail">
-							</td>
-							<td class="busy">
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="busy">
-							</td>
-							<td class="avail">
-							</td>
-							<td class="busy">
-							</td>
-							<td class="busy">
-							</td>
-							<td class="busy">
-							</td>
-						</tr>
-						<tr class="other-row avail-row">
-							<td class="unknown">
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="avail">
-							</td>
-							<td class="avail">
-							</td>
-							<td class="avail">
-							</td>
-							<td class="avail">
-							</td>
-							<td class="unknown">
-							</td>
-							<td class="busy">
-							</td>
-						</tr>
+						<% }); %> 
 					</table>
 					<table border="0" cellpadding="0" cellspacing="0" width="0" class="availabilityTable" id="nameTable">
 						<tr class="top-row">
@@ -484,9 +420,9 @@
 						<% _.each(attendees, function(attendee) { %> 
 							<tr class="other-row">
 								<td class="name-cell">
-									<div>
+									<a href="#">
 										<%= attendee.email %>
-									</div>
+									</a>
 								</td>
 							</tr>
 						<% }); %>

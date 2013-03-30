@@ -42,10 +42,6 @@
 
 
 exports.view = function(req, res){
-	var id = "test-subject";
-
-	console.log(req.route.params[0]);
-
 	Calendar.findCalendar(req.route.params[0], function(err, calendar){
 		if (err || calendar == null){
 			res.send('No calendar');
@@ -53,6 +49,8 @@ exports.view = function(req, res){
 			_.each(calendar.choices, function(choice){
 				choice.columnDate = moment(choice.date).format("dddd</br>Do MMM");
 			});
+
+			console.log("Showing: " + calendar.name);
 
 			res.render('basic-web.html', { message: calendar.name,
 				attendees: calendar.attendees,

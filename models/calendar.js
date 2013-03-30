@@ -19,8 +19,8 @@ var CalendarSchema = new mongoose.Schema({
 	},
 	choices: [{	
 		date: Date, 
-		busy: [AttendeeSchema],
-		free: [AttendeeSchema]
+		busy: [mongoose.SchemaType.ObjectId],
+		free: [mongoose.SchemaType.ObjectId]
 	}],
 	attendees: [AttendeeSchema],
 	date: { type: Date, default: Date.now }
@@ -38,7 +38,29 @@ function getEmailAddresses(text){
 	return text.match(re);
 }
 
-function createDates(startDate, numberOfDays){
+function getEmailAddressesAndBody(text){
+	var body = text;
+ 
+	var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
+ 
+	var result = text.match(re);
+ 
+	if (result == null){
+		return [[],body]
+	}
+ 
+	if (result.length > 0){
+		var startIndex = body.indexOf(result[0]);
+ 
+		if (startIndex != -1){
+			body = body.substr(0,startIndex);
+		}
+	}
+ 
+	return [result, body];
+}
+
+function createDates(numberOfDays){
 	var now = new Date();
 
 	var startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -60,7 +82,13 @@ function saveCallback(err){
 
 function makeIdFromSubject(subject){
 	// Need to check for dups
-	return subject.replace(/ /g,"-").toLowerCase();
+	var id = subject.replace(/ /g,"-").toLowerCase();
+
+	Calendar.findOne({id: id}, function(err, calendar){
+
+	});
+
+	return id;
 }
 
 CalendarSchema.statics.newCalendar = function(to, from, subject, message){
@@ -68,11 +96,7 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 
 	console.log("Creating new calendar: " + id);
 
-	var now = new Date();
-
-	var startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-	var dates =  createDates(startDate, 14);
+	var dates =  createDates(14);
 
 	var choices = _.map(dates, function(date){
 
@@ -90,7 +114,10 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 		choices: choices
 	});
 
-	var attendeeAddresses = getEmailAddresses(message);
+	var splitMessage = getEmailAddressesAndBody(message);
+
+	var attendeeAddresses = splitMessage[0];
+	var body = splitMessage[1];
 
 	attendeeAddresses.push(from);
 
@@ -109,7 +136,7 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 
 	newCalendar.save(saveCallback);
 
-	Mail.sendMail(newCalendar, subject, to, message);
+	Mail.sendMail(newCalendar, subject, to, body);
 
 	console.log("Calendar saved: " + newCalendar.id);
 
@@ -144,27 +171,28 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 		if (index != -1){
 
-			choice.busy.push(attendee);
+			choice.busy.push(attendee._id);
 
 			console.log("choice: " + choice);
 
-			// var found = _.indexOf(choice.free, attendee);
+			var found = _.indexOf(choice.free, attendee);
 
-			// if (found != -1){
-			// 	choice.free[found].remove();
-			// }
+			if (found != -1){
+				choice.free[found].remove();
+			}
 		}
 
-		index = _.indexOf(freeDates, choice);
+		index = _.indexOf(freeDates, choice.date);
 
 		if (index != -1){
-			choice.busy.id(attendee._id).remove();
 
-			// var found = _.indexOf(choice.busy, attendee);
+			choice.free.push(attendee._id);
 
-			// if (found != -1){
-			// 	choice.busy[found].remove();
-			// }
+			var found = _.indexOf(choice.busy, attendee);
+
+			if (found != -1){
+				choice.busy[found].remove();
+			}
 		}
 	});
 
