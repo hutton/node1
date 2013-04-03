@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
- var dbPath      = 'mongodb://localhost:27017/test';
+ 
+ var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
 
  var express = require('express')
  , routes = require('./routes')
@@ -15,6 +16,10 @@
  , mongoose = require('mongoose')
  , cons = require('consolidate')
  , _ = require('underscore');
+
+ if (_.isUndefined(connectionString)){
+ 	connectionString = 'mongodb://localhost:27017/test';
+ }
 
  var app = express();
 
@@ -32,12 +37,12 @@
  	app.use(app.router);
  	app.use(require('less-middleware')({ src: __dirname + '/public' }));
  	app.use(express.static(path.join(__dirname, 'public')));
- 	mongoose.connect(dbPath, function onMongooseError(err) {
+ 	mongoose.connect(connectionString, function onMongooseError(err) {
  		if (err) throw err;
  	});
  });
 
-app.engine('html', cons.underscore);
+ app.engine('html', cons.underscore);
 
  app.configure('development', function(){
  	app.use(express.errorHandler());

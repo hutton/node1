@@ -8,6 +8,12 @@
   "dependencies": {
     "express": "3.1.0",
     "ejs": "*",
+    "underscore": "*",
+    "moment": "*",
+    "consolidate": "*",
+    "mongoose": "*",
+    "mongodb": "*",
+    "natural": "*",
     "less-middleware": "*",
     "sendgrid-nodejs": "*"
   }

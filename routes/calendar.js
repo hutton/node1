@@ -52,9 +52,15 @@ exports.view = function(req, res){
 
 			console.log("Showing: " + calendar.name);
 
-			res.render('basic-web.html', { message: calendar.name,
-				attendees: calendar.attendees,
-				choices: calendar.choices });
+			global.app.render('calendar-part.html', {
+				choices: calendar.choices,
+				attendees: calendar.attendees
+			}, function(err, html){
+				res.render('basic-web.html', { 
+					name: calendar.name,
+					calendar: html
+				});
+			});
 		}
 	});
 };

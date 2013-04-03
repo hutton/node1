@@ -1,0 +1,49 @@
+			<div id="availContainerInner">
+				<div id="availContainerInner2">
+					<table border="0" cellpadding="0" cellspacing="0" class="availabilityTable" id="availTable">
+						<tr class="top-row">
+							<% _.each(choices, function(choice) { %> 
+							<td class="other-column">
+								<div>
+									<%= choice.columnDate %>
+								</div>
+							</td>
+							<% }); %>
+						</tr>
+
+						<% _.each(attendees, function(attendee) { var attendeeId = String(attendee._id); %> 
+							<tr class="other-row avail-row">
+								<% _.each(choices, function(choice) { %> 
+									<% if (_.find(choice.free, function(freeId){ return String(freeId) === attendeeId; })) { %>
+										<td class="avail">
+											Free
+										</td>
+									<% } else if (_.find(choice.busy, function(busyId){ return String(busyId) === attendeeId; })) { %>
+										<td class="busy">
+											Busy
+										</td>
+									<% } else { %>
+										<td class="unknown">
+										</td>
+									<% } %> 
+								<% }); %>
+							</tr>
+						<% }); %> 
+					</table>
+					<table border="0" cellpadding="0" cellspacing="0" width="0" class="availabilityTable" id="nameTable">
+						<tr class="top-row">
+							<td>
+							</td>
+						</tr>
+						<% _.each(attendees, function(attendee) { %> 
+							<tr class="other-row">
+								<td class="name-cell">
+									<a href="#">
+										<%= attendee.email %>
+									</a>
+								</td>
+							</tr>
+						<% }); %>
+					</table>
+				</div>
+			</div>

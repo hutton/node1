@@ -20,15 +20,15 @@ exports.receive = function(req, res){
 	console.log("Mail received");
 
 	if (startsWith(req.body.to, "start")){
-		var newCalendar = Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, req.body.message);
-
-		res.redirect('/calendar/' + newCalendar.id);	
+		var newCalendar = Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, req.body.message, function(newCalendar){
+			res.redirect('/calendar/' + newCalendar.id);	
+		});
 	} else {
 
 		var localEmail = getLocalPartOfEmail(req.body.to);
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
-			if (err){
+			if (err && calendar != null){
 				res.send('No calendar');
 			}
 

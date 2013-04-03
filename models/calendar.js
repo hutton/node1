@@ -80,22 +80,48 @@ function saveCallback(err){
 	}
 }
 
-function makeIdFromSubject(subject){
+function createCalendar(subject, choices, attendees, callback){
 	// Need to check for dups
 	var id = subject.replace(/ /g,"-").toLowerCase();
 
-	Calendar.findOne({id: id}, function(err, calendar){
+	var newCalendar = new Calendar({
+		id: id,
+		name: subject,
+		choices: choices
+	});	
 
+	Calendar.find({id: new RegExp('^'+ newCalendar.id +'*', "i")}, 'id').exec(function(err, docs){
+		var originalId = newCalendar.id
+	    var tryId = originalId;
+	    var count = 1;
+
+	    while (true){
+	        if (_.find(docs, function(doc){ return doc.id == tryId; }) == null){
+	            break;
+	        } else {
+	            tryId = originalId + count++;
+	        }
+	    }
+
+	    newCalendar.id = tryId;
+
+		_.each(attendees, function(attendee){
+			newCalendar.attendees.push(attendee);
+		});
+
+		newCalendar.save(function(err, calendar){
+	        if (err){
+	            console.log("Failed to create calendar: " + err);
+	        } else {
+	            console.log("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+	        }
+	    });    
+
+	    callback(newCalendar);
 	});
-
-	return id;
 }
 
-CalendarSchema.statics.newCalendar = function(to, from, subject, message){
-	var id = makeIdFromSubject(subject);
-
-	console.log("Creating new calendar: " + id);
-
+CalendarSchema.statics.newCalendar = function(to, from, subject, message, callback){
 	var dates =  createDates(14);
 
 	var choices = _.map(dates, function(date){
@@ -106,12 +132,6 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 			busy: [],
 			free:[] 
 		};
-	});
-
-	var newCalendar = new Calendar({
-		id: id,
-		name: subject,
-		choices: choices
 	});
 
 	var splitMessage = getEmailAddressesAndBody(message);
@@ -130,17 +150,13 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message){
 		})
 	});
 
-	_.each(attendees, function(attendee){
-		newCalendar.attendees.push(attendee);
+	createCalendar(subject, choices, attendees, function(newCalendar){
+		Mail.sendMail(newCalendar, subject, body);
+
+		console.log("Calendar saved: " + newCalendar.id);
+
+		callback(newCalendar);
 	});
-
-	newCalendar.save(saveCallback);
-
-	Mail.sendMail(newCalendar, subject, to, body);
-
-	console.log("Calendar saved: " + newCalendar.id);
-
-	return newCalendar;
 }
 
 function ___update(){
