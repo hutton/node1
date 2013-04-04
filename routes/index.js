@@ -4,5 +4,9 @@
  */
 
 exports.index = function(req, res){
-  res.render('index.html', { title: 'Express' });
+  res.render('index.html');
+};
+
+exports.help = function(req, res){
+  res.render('help.html');
 };

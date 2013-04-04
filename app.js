@@ -49,6 +49,7 @@
  });
 
  app.get('/', routes.index);
+ app.get('/help', routes.help);
  app.get('/users', user.list);
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
