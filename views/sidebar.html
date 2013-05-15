@@ -158,6 +158,9 @@
 		max-width: 176px;
     	overflow: hidden;
     	text-overflow: ellipsis;
+    	display: block;
+    	text-decoration: none;
+    	color: #808080;
 	}
 
 	.avail{
@@ -320,13 +323,13 @@
 								<% _.each(choice.busy, function(busy) { %> 
 									<li class="avail-container">
 										<div class="avail busy">Busy</div>
-										<div class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></div>
+										<a href="#" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a>
 									</li>
 								<% }); %>
 								<% _.each(choice.free, function(free) { %> 
 									<li class="avail-container">
 										<div class="avail free">Free</div>
-										<div class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></div>
+										<a href="#" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a>
 									</li>
 								<% }); %>
 								<li class="option-container">
