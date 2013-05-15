@@ -4,6 +4,8 @@ var fs = require('fs');
 var Calendar = require("../models/calendar").Calendar;
 var _ = require("underscore");
 
+var Mail = require("../tools/mail");
+
 exports.show = function(req, res){
 	res.render('mail.html');
 };
@@ -35,6 +37,8 @@ exports.receive = function(req, res){
 			calendar.updateCalendar(calendar.attendees[0], 
 				[calendar.choices[_.random(0,calendar.choices.length - 1)].date], 
 				[calendar.choices[_.random(0,calendar.choices.length - 1)].date]);
+
+			Mail.sendMail(calendar, req.body.subject, req.body.message);
 		});
 	}
 

@@ -47,20 +47,26 @@ exports.view = function(req, res){
 			res.send('No calendar');
 		} else {
 			_.each(calendar.choices, function(choice){
-				choice.columnDate = moment(choice.date).format("dddd</br>Do MMM");
+				choice.columnDate = moment(choice.date).format("dddd Do MMM");
 			});
 
 			console.log("Showing: " + calendar.name);
 
-			global.app.render('calendar-part.html', {
+			res.render('sidebar.html', {
 				choices: calendar.choices,
 				attendees: calendar.attendees
-			}, function(err, html){
-				res.render('basic-web.html', { 
-					name: calendar.name,
-					calendar: html
-				});
 			});
+
+
+			// global.app.render('calendar-part.html', {
+			// 	choices: calendar.choices,
+			// 	attendees: calendar.attendees
+			// }, function(err, html){
+			// 	res.render('basic-web.html', { 
+			// 		name: calendar.name,
+			// 		calendar: html
+			// 	});
+			// });
 		}
 	});
 };
