@@ -17,9 +17,10 @@ function sendMail(calendar, subject, message){
 
 	_.each(calendar.attendees, function(attendee){
 
-		global.app.render('sidebar.html', {
+		global.app.render('responsive_view.html', {
 			choices: calendar.choices,
-			attendees: calendar.attendees
+			attendees: calendar.attendees,
+			message: message
 		}, function(err, html){
 
 			if (err){

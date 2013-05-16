@@ -52,21 +52,11 @@ exports.view = function(req, res){
 
 			console.log("Showing: " + calendar.name);
 
-			res.render('sidebar.html', {
+			res.render('responsive_view.html', {
 				choices: calendar.choices,
-				attendees: calendar.attendees
+				attendees: calendar.attendees,
+				message: ''
 			});
-
-
-			// global.app.render('calendar-part.html', {
-			// 	choices: calendar.choices,
-			// 	attendees: calendar.attendees
-			// }, function(err, html){
-			// 	res.render('basic-web.html', { 
-			// 		name: calendar.name,
-			// 		calendar: html
-			// 	});
-			// });
 		}
 	});
 };

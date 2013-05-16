@@ -189,8 +189,6 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 			choice.busy.push(attendee._id);
 
-			console.log("choice: " + choice);
-
 			var found = _.indexOf(choice.free, attendee);
 
 			if (found != -1){
@@ -217,6 +215,15 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 			console.log(err);
 		} else {
 			console.log("Calendar saved")
+		}
+	});
+}
+
+CalendarSchema.methods.getAttendeeFromAddress = function(address){
+	return _.find(this.attendees, function(attendee){
+
+		if (attendee.email == address){
+			return attendee;
 		}
 	});
 }

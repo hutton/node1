@@ -5,6 +5,7 @@ var Calendar = require("../models/calendar").Calendar;
 var _ = require("underscore");
 
 var Mail = require("../tools/mail");
+var Nlp = require("../tools/nlp");
 
 exports.show = function(req, res){
 	res.render('mail.html');
@@ -18,11 +19,17 @@ function getLocalPartOfEmail(address){
 	return address.split("@")[0];
 }
 
+function extractMessage(fullMessage){
+	return fullMessage;
+}
+
 exports.receive = function(req, res){
 	console.log("Mail received");
 
-	if (startsWith(req.body.to, "start")){
-		var newCalendar = Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, req.body.message, function(newCalendar){
+	var message = extractMessage(req.body.message);
+
+	if (startsWith(req.body.to, "start@")){
+		var newCalendar = Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, message, function(newCalendar){
 			res.redirect('/calendar/' + newCalendar.id);	
 		});
 	} else {
@@ -32,13 +39,21 @@ exports.receive = function(req, res){
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
 			if (err && calendar != null){
 				res.send('No calendar');
+			} else {
+				var fromAttendee = calendar.getAttendeeFromAddress(req.body.from);
+
+				var dates = Nlp.processBody(calendar, message);
+
+				if (fromAttendee != null){
+					calendar.updateCalendar(fromAttendee, 
+						dates[0], 
+						dates[1]);
+
+					Mail.sendMail(calendar, req.body.subject, req.body.message);
+				} else {
+					console.log("Couldn't find " + req.body.from + " in calendar " + calendar.name);
+				}
 			}
-
-			calendar.updateCalendar(calendar.attendees[0], 
-				[calendar.choices[_.random(0,calendar.choices.length - 1)].date], 
-				[calendar.choices[_.random(0,calendar.choices.length - 1)].date]);
-
-			Mail.sendMail(calendar, req.body.subject, req.body.message);
 		});
 	}
 

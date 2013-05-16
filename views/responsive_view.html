@@ -1,14 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<!-- If you delete this meta tag, Earth will fall into the sun. -->
-<meta name="viewport" content="width=device-width" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>ZURBemails</title>
-	
-<link rel="stylesheet" type="text/css" href="stylesheets/email.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width">
 
+<title>Convenely</title>
+  
 <style type="text/css">
 	/* ------------------------------------- 
 			GLOBAL 
@@ -17,7 +12,7 @@
 		margin:0;
 		padding:0;
 	}
-	* { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+	* { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
 
 	img { 
 		max-width: 100%; 
@@ -58,8 +53,6 @@
 
 	.header.container table td.logo { padding: 15px; }
 	.header.container table td.label { padding: 15px; padding-left:0px;}
-	.header  h6 { color: #d0d0d0; }
-
 
 	/* ------------------------------------- 
 			BODY 
@@ -102,6 +95,7 @@
 		font-weight: normal; 
 		font-size:14px; 
 		line-height:1.6;
+		font-family: Arial;
 	}
 	p.lead { font-size:17px; }
 	p.last { margin-bottom:0px;}
@@ -135,77 +129,47 @@
 	ul.sidebar li a.last { border-bottom-width:0px;}
 	ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.sidebar li a h5,ul.sidebar li a h6,ul.sidebar li a p { margin-bottom:0!important;}
 
-	.date-header{
-		font-size: 12px;
-		font-weight: bold;
+	.avail-table{
+		font-size: 12px; 
 		color: #808080;
-		padding: 8px 16px;
-		border: 1px solid #c0c0c0;
 	}
 
-	.avail-container{
-		font-size: 12px;
+	.avail-date-header{
+		font-weight: bold; padding: 5px 10px; border-bottom: 1px solid #c0c0c0;
+	}
+
+	.avail-address{
+		padding: 4px 10px;
+	}
+
+	.avail-address a{
+		text-decoration: none;
 		color: #808080;
-		background: #f1f1f1;
-		border-left: 1px solid #c0c0c0;
-		border-right: 1px solid #c0c0c0;
-		border-bottom: 1px solid #c0c0c0;
+		cursor: default;
 	}
 
-	.avail-name{
-		padding: 4px 0px 4px 16px;
-		border-top: 1px solid #FFFFFF;
-		width: 176px;
-    	overflow: hidden;
-    	text-overflow: ellipsis;
-    	display: block;
-    	text-decoration: none;
-    	color: #808080;
+	.avail-status{
+		padding: 4px 0px; text-align: center;
 	}
 
-	.avail{
-		width: 40px;
-		float: right;
-		padding: 5px 0px 4px 16px;
+	.avail-option-container{
+		text-align: center;
 	}
 
-	.free{
-		background: #C4D6BA;
+	.avail-option{
+		background: #c0c0c0; 
+		padding: 2px 8px; 
+		color: #ffffff; 
+		text-decoration: none; 
+		display: inline-block;
 	}
 
-	.busy{
-		background: #F4BCBA;
+	.avail-option:hover{
+		background: #a0a0a0; 
 	}
 
-	.option-container{
-		font-size: 12px;
-		color: #606060;
-		background: #f1f1f1;
-		border-left: 1px solid #c0c0c0;
-		border-right: 1px solid #c0c0c0;
-		border-bottom: 1px solid #c0c0c0;
-}
-
-	.option-label{
-		padding: 4px 0px 4px 16px;
-		border-top: 1px solid #FFFFFF;
-		font-weight: bold;
-	}
-
-
-	.option{
-		float: right;
-		padding: 0px 12px;
-		background: #c0c0c0;
-		color: #ffffff;
-		margin: 5px 6px 0px 0px;
-		cursor: pointer;
-	}
-
-	.divider{
-		height: 10px;
-		background: white;
-		border: none;
+	.avail-option-header{
+		padding: 6px 10px;
 	}
 
 	/* --------------------------------------------------- 
@@ -238,7 +202,6 @@
 		width: 300px;
 		float:left;
 	}
-	.column tr td { padding: 15px; }
 	.column-wrap { 
 		padding:0!important; 
 		margin:0 auto; 
@@ -257,8 +220,6 @@
 	-------------------------------------------- */
 	@media only screen and (max-width: 600px) {
 		
-		a[class="btn"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}
-
 		div[class="column"] { width: auto!important; float:none!important;}
 		
 	}
@@ -272,12 +233,12 @@
 <table class="head-wrap" bgcolor="#f1f1f1">
 	<tr>
 		<td></td>
-		<td class="header container" >
+		<td class="header container">
 				
 				<div class="content">
 				<table bgcolor="#f1f1f1">
 					<tr>
-						<td align="right"><h6 class="collapse">Convenely</h6></td>
+						<td align="right"><h6 style="color: #CCCCCC;" class="collapse">Convenely</h6></td>
 					</tr>
 				</table>
 				</div>
@@ -299,12 +260,7 @@
 				<table>
 				<tr>
 					<td>				
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet.</p>
-						
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-						
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet.</p>
+						<p><%= message %></p>
 					</td>
 				</tr>
 			</table>
@@ -314,34 +270,42 @@
 				<table>
 				<tr>
 					<td>				
-													
-						<ul class="sidebar">
+						<table class="avail-table" border="0" cellspacing="0">
+							<col width="*"/>
+							<col width="50"/>
+							<col width="50"/>
 							<% _.each(choices, function(choice) { %> 
-								<li class="date-header">
-									<div><%= choice.columnDate %></div>
-								</li>
-								<% _.each(choice.busy, function(busy) { %> 
-									<li class="avail-container">
-										<div class="avail busy">Busy</div>
-										<a href="#" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a>
-									</li>
-								<% }); %>
-								<% _.each(choice.free, function(free) { %> 
-									<li class="avail-container">
-										<div class="avail free">Free</div>
-										<a href="#" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a>
-									</li>
-								<% }); %>
-								<li class="option-container">
-									<a class="option">Free</a>
-									<a class="option">Busy</a>
-								<div class="option-label">How about you?</div>
-								</li>
-								<li class="divider"></li>
-
+							<tr>
+								<td colspan="3" class="avail-date-header" colspan="3"><%= choice.columnDate %></td>
+							</tr>
+							<tr colspan="3" Height="4"></tr>
+							<% _.each(choice.busy, function(busy) { %> 
+							<tr>
+								<td colspan="2" class="avail-address"><a href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
+								<td class="avail-status" bgcolor="#F4BCBA">Busy</td>
+							</tr>
 							<% }); %>
-						</ul>
-						
+							<% _.each(choice.free, function(free) { %> 
+							<tr>
+								<td colspan="2" class="avail-address"><a href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a></td>
+								<td class="avail-status" bgcolor="#C4D6BA">Free</td>
+							</tr>
+							<% }); %>
+							<tr colspan="3" Height="4"></tr>
+							<tr bgcolor="#ebebeb">
+								<td class="avail-option-header">
+									<span>How about you?</span>
+								</td>
+								<td class="avail-option-container">
+									<a class="avail-option" href="#">Free</a>
+								</td>
+								<td class="avail-option-container">
+									<a class="avail-option" href="#">Busy</a>
+								</td>
+							</tr>
+							<tr colspan="3" Height="20"></tr>
+							<% }); %>
+						</table>
 					</td>
 				</tr>
 			</table>				
@@ -381,6 +345,6 @@
 		<td></td>
 	</tr>
 </table><!-- /FOOTER -->
-
 </body>
 </html>
+
