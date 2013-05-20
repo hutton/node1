@@ -6,6 +6,18 @@ var SendGrid = require('sendgrid-nodejs');
 var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
 
+function getEmailAddresses(text){
+    var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
+
+    var result = text.match(re);
+
+    if (result == null){
+        return []
+    }
+    
+    return text.match(re);
+}
+
 function sendMail(calendar, subject, message){
 	console.log("Sending mail to group: " + calendar.id );
 
@@ -261,5 +273,6 @@ function decodeHTMLEntities(text){
 
 module.exports = {
 	sendMail: sendMail,
-	htmlMailToText: htmlMailToText
+	htmlMailToText: htmlMailToText,
+    getEmailAddresses: getEmailAddresses
 }

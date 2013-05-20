@@ -23,23 +23,25 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 	console.log(req.body);
 
 	var message = req.body.text;
+	var to = Mail.getEmailAddresses(req.body.to)[0];
+	var from = Mail.getEmailAddresses(req.body.from)[0];
 
 	if (message != null){
 		message = Mail.htmlMailToText(req.body.html);
 	}
 
-	if (startsWith(req.body.to, "start@")){
-		var newCalendar = Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, message, function(newCalendar){
+	if (startsWith(to, "start@")){
+		var newCalendar = Calendar.newCalendar(to, from, req.body.subject, message, function(newCalendar){
 			createCalendarCallback(newCalendar);
 		});
 	} else {
-		var localEmail = getLocalPartOfEmail(req.body.to);
+		var localEmail = getLocalPartOfEmail(to);
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
 			if (err || calendar == null){
 				error('No calendar');
 			} else {
-				var fromAttendee = calendar.getAttendeeFromAddress(req.body.from);
+				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
 				var dates = Nlp.processBody(calendar, message);
 
@@ -50,7 +52,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 					Mail.sendMail(calendar, req.body.subject, message);
 				} else {
-					console.log("Couldn't find " + req.body.from + " in calendar " + calendar.name);
+					console.log("Couldn't find " + from + " in calendar " + calendar.name);
 				}
 
 				updateCalendarCallback(calendar);
