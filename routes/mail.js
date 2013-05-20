@@ -19,26 +19,23 @@ function getLocalPartOfEmail(address){
 	return address.split("@")[0];
 }
 
-function extractMessage(fullMessage){
-	return fullMessage;
-}
+function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
+	var message = req.body.text;
 
-exports.receive = function(req, res){
-	console.log("Mail received");
-
-	var message = extractMessage(req.body.message);
+	if (message != null){
+		message = Mail.htmlMailToText(req.body.html);
+	}
 
 	if (startsWith(req.body.to, "start@")){
 		var newCalendar = Calendar.newCalendar(req.body.to, req.body.from, req.body.subject, message, function(newCalendar){
-			res.redirect('/calendar/' + newCalendar.id);	
+			createCalendarCallback(newCalendar);
 		});
 	} else {
-
 		var localEmail = getLocalPartOfEmail(req.body.to);
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
-			if (err && calendar != null){
-				res.send('No calendar');
+			if (err || calendar == null){
+				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(req.body.from);
 
@@ -49,13 +46,42 @@ exports.receive = function(req, res){
 						dates[0], 
 						dates[1]);
 
-					Mail.sendMail(calendar, req.body.subject, req.body.message);
+					Mail.sendMail(calendar, req.body.subject, message);
 				} else {
 					console.log("Couldn't find " + req.body.from + " in calendar " + calendar.name);
 				}
+
+				updateCalendarCallback(calendar);
 			}
 		});
 	}
+}
 
-	res.render('mail', { title: 'Mail sent' });
+exports.sendGridReceive = function(req, res){
+	console.log("Mail received from SendGrid");
+
+	processEmailRequest(req, res, function(newCalendar){
+		res.send( 200 );
+	},
+	function(calendar){
+		res.send( 200 );
+	},
+	function(){
+		res.send( 200 );
+	});
+
+}
+
+exports.receive = function(req, res){
+	console.log("Mail received from browser");
+
+	processEmailRequest(req, res, function(newCalendar){
+		res.redirect('/calendar/' + newCalendar.id);	
+	},
+	function(calendar){
+		res.redirect('/calendar/' + calendar.id);	
+	},
+	function(message){
+		res.send(message);
+	});
 };

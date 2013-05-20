@@ -54,6 +54,7 @@
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
  app.post('/mail', mail.receive);
+ app.post('/sendgrid', mail.sendGridReceive);
 
  //app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
  app.get('/calendar/*', calendar.view);
