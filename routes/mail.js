@@ -20,6 +20,8 @@ function getLocalPartOfEmail(address){
 }
 
 function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
+	console.log(req.body);
+
 	var message = req.body.text;
 
 	if (message != null){
