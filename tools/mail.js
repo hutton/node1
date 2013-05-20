@@ -18,6 +18,7 @@ function sendMail(calendar, subject, message){
 	_.each(calendar.attendees, function(attendee){
 
 		global.app.render('responsive_view.html', {
+			calendar: calendar,
 			choices: calendar.choices,
 			attendees: calendar.attendees,
 			message: message
@@ -32,7 +33,7 @@ function sendMail(calendar, subject, message){
 			try{
 				var mail = new SendGrid.Email({
 					to: attendee.email,
-					from: calendar.id + "@bookmarksiobeta.com",
+					from: calendar.id + "@convenely.com",
 					subject: subject,
 					html: html
 				});

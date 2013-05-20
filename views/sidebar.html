@@ -323,13 +323,13 @@
 								<% _.each(choice.busy, function(busy) { %> 
 									<li class="avail-container">
 										<div class="avail busy">Busy</div>
-										<a href="#" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a>
+										<a href="http://convenely.com/calendar/<%= calendar.id %>" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a>
 									</li>
 								<% }); %>
 								<% _.each(choice.free, function(free) { %> 
 									<li class="avail-container">
 										<div class="avail free">Free</div>
-										<a href="#" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a>
+										<a href="http://convenely.com/calendar/<%= calendar.id %>" class="avail-name"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a>
 									</li>
 								<% }); %>
 								<li class="option-container">

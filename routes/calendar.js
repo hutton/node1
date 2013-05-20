@@ -53,6 +53,7 @@ exports.view = function(req, res){
 			console.log("Showing: " + calendar.name);
 
 			res.render('responsive_view.html', {
+				calendar: calendar,
 				choices: calendar.choices,
 				attendees: calendar.attendees,
 				message: ''
