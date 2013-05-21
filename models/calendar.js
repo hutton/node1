@@ -26,18 +26,6 @@ var CalendarSchema = new mongoose.Schema({
 	date: { type: Date, default: Date.now }
 });
 
-function getEmailAddresses(text){
-	var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
-
-	var result = text.match(re);
-
-	if (result == null){
-		return []
-	}
-	
-	return text.match(re);
-}
-
 function getEmailAddressesAndBody(text){
 	var body = text;
  

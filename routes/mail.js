@@ -26,7 +26,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 	var to = Mail.getEmailAddresses(req.body.to)[0];
 	var from = Mail.getEmailAddresses(req.body.from)[0];
 
-	if (message != null){
+	if (req.body.html != null){
 		message = Mail.htmlMailToText(req.body.html);
 	}
 
