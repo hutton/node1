@@ -28,6 +28,8 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 	if (req.body.html != null){
 		message = Mail.htmlMailToText(req.body.html);
+
+		message = Mail.firstResponse(message);
 	}
 
 	if (startsWith(to, "start@")){
