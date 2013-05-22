@@ -37,6 +37,7 @@
  	app.use(app.router);
  	app.use(require('less-middleware')({ src: __dirname + '/public' }));
  	app.use(express.static(path.join(__dirname, 'public')));
+ 	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
  	mongoose.connect(connectionString, function onMongooseError(err) {
  		if (err) throw err;
  	});
