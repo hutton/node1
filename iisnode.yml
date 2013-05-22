@@ -91,7 +91,7 @@ loggingEnabled: true
 # SECURITY NOTE: if log files contain sensitive information, this setting should be modified to contain enough entropy to be considered
 # cryptographically secure; in most situations, a GUID is sufficient
 
-logDirectory: iisnode
+logDirectory: public/logs/iisnode
 
 # debuggingEnabled - controls whether the built-in debugger is available
 
