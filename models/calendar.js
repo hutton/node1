@@ -23,6 +23,7 @@ var CalendarSchema = new mongoose.Schema({
 		busy: [mongoose.SchemaType.ObjectId],
 		free: [mongoose.SchemaType.ObjectId]
 	}],
+	createdBy: { type: String, default: "" },
 	attendees: [AttendeeSchema],
 	date: { type: Date, default: Date.now }
 });
@@ -69,14 +70,15 @@ function saveCallback(err){
 	}
 }
 
-function createCalendar(subject, choices, attendees, callback){
+function createCalendar(subject, choices, attendees, from, callback){
 	// Need to check for dups
 	var id = subject.replace(/ /g,"-").toLowerCase();
 
 	var newCalendar = new Calendar({
 		id: id,
 		name: subject,
-		choices: choices
+		choices: choices,
+		createdBy: from
 	});	
 
 	Calendar.find({id: new RegExp('^'+ newCalendar.id +'*', "i")}, 'id').exec(function(err, docs){
@@ -139,7 +141,7 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message, callba
 		})
 	});
 
-	createCalendar(subject, choices, attendees, function(newCalendar){
+	createCalendar(subject, choices, attendees, from, function(newCalendar){
 		Mail.sendMail(newCalendar, subject, body);
 
 		console.log("Calendar saved: " + newCalendar.id);
@@ -174,7 +176,6 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 	var choices = this.choices;
 
 	_.each(busyDates, function(busyDate){
-		console.log("Looking for " + busyDate + " in " + choices);
 
 		var foundChoice = _.find(choices, function(choice){
 			if (moment(choice.date).diff(moment(busyDate), "days") == 0){
@@ -219,7 +220,6 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 		if (foundChoice != null){
 
-			console.log("looking for " + foundChoice.free + " in " + attendee._id);
 			var found = _.find(foundChoice.free, function(att){
 				if (att.equals(attendee._id)){
 					return att;
@@ -227,7 +227,6 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 			});
 
 			if (found == null){
-				console.log("add to free " + found);
 				foundChoice.free.push(attendee._id);
 			}
 
@@ -247,52 +246,6 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 			choices.push(newChoice);
 		}
 	});
-
-	// _.each(this.choices, function(choice){
-	// 	var index = _.indexOf(busyDate, choice.date);
-
-	// 	if (index != -1){
-
-	// 		choice.busy.push(attendee._id);
-
-	// 		var found = _.indexOf(choice.free, attendee);
-
-	// 		if (found != -1){
-	// 			choice.free[found].remove();
-	// 		}
-	// 	} else {
-	// 		console.log("Couldn't find date, adding it");
-
-	// 		var newChoice = {
-	// 					date: date,
-	// 					busy: [attendee],
-	// 					free:[] 
-	// 				};
-
-	// 		choices.push(newChoice);
-	// 	}
-
-	// 	index = _.indexOf(freeDate, choice.date);
-
-	// 	if (index != -1){
-
-	// 		choice.free.push(attendee._id);
-
-	// 		var found = _.indexOf(choice.busy, attendee);
-
-	// 		if (found != -1){
-	// 			choice.busy[found].remove();
-	// 		}
-	// 	} else {
-	// 		var newChoice = {
-	// 					date: date,
-	// 					busy: [],
-	// 					free:[attendee] 
-	// 				};
-
-	// 		choices.push(newChoice);
-	// 	}
-	// });
 
 	this.save(function(err){
 		if (err){

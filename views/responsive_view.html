@@ -30,7 +30,7 @@
 			</div>
 			
 				<div class="column" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 300px;float: left;">
-				<table bgcolor="#f8f8f8" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
+				<table bgcolor="#ffffff" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
 				<% if ( choices.length == 0 ){ %>
 				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
@@ -38,7 +38,7 @@
 							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
-								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;">some.one@email.com</a></b> has created a <b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely</b> email list to help schedule an event with the following people:</td>
+								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= calendar.createdBy %></a></b> has created a <a href="http://convenely.com" style="color: #808080;text-decoration: none;cursor: default;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely.com</b></a> email list to help schedule an event with the following people:</td>
 								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 							</tr>
 						</table>
@@ -52,6 +52,19 @@
 						</table>
 					</td>
 				</tr>
+				<% } else { %>
+				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
+						<table border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
+							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
+							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
+								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em; text-align: center;">Availability by <a href="http://convenely.com" style="color: #808080;text-decoration: none;cursor: default;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely.com</b></a></td>
+								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 				<% } %>
 				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
@@ -62,7 +75,7 @@
 								<td width="300" colspan="3" class="avail-date-header" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: bold;border-bottom: 1px solid #c0c0c0;"><a href="#" class="none-link" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= choice.columnDate %></a></td>
 								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 							</tr>
-							<tr colspan="4" height="4" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
+							<tr colspan="4" height="2" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<% _.each(choice.busy, function(busy) { %> 
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 								<td width="245" colspan="2" class="avail-address" style="margin: 0;padding: 4px 10px;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
@@ -89,7 +102,7 @@
 									<a class="avail-option" href="http://convenely.com/calendar/<%= calendar.id %>">Busy</a>
 								</td>
 							</tr-->
-							<tr colspan="3" height="20" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
+							<tr colspan="3" height="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<% }); %>
 						</table>
 					</td>

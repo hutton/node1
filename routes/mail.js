@@ -32,6 +32,10 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		message = Mail.firstResponse(message);
 	}
 
+	console.log("Mail from: " + from);
+	console.log("Mail to: " + to);
+	console.log("Mail message: " + message);
+
 	if (startsWith(to, "start@")){
 		var newCalendar = Calendar.newCalendar(to, from, req.body.subject, message, function(newCalendar){
 			createCalendarCallback(newCalendar);
@@ -41,6 +45,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
 			if (err || calendar == null){
+				console.log("Couldn't find event for: " + localEmail);
 				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
