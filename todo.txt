@@ -1,7 +1,11 @@
-- Add dates on demand
-- Hide 'How about you?'
+- Add winston 
+- Log parsed email as it arrives
 - Split web and mail templates
-- Remove header bar
-- Add texts
 - Start work on natural
 
+Done
+----
+- Add texts
+- Add dates on demand
+- Hide 'How about you?'
+- Remove header bar
