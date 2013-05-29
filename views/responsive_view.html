@@ -12,7 +12,7 @@
 		margin:0;
 		padding:0;
 	}
-	* { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+	* { font-family: Arial, sans-serif; }
 
 	img { 
 		max-width: 100%; 
@@ -148,6 +148,12 @@
 		cursor: default;
 	}
 
+	.none-link{
+		text-decoration: none;
+		color: #808080;
+		cursor: default;
+	}
+
 	.avail-status{
 		padding: 4px 0px; text-align: center;
 	}
@@ -177,7 +183,7 @@
 		font-size: 13px; 
 		color: #808080;
 		background: #f1f1f1;
-		padding: 10px 10px;
+		padding: 5px 5px;
 		line-height: 1.6em;
 	}
 
@@ -228,42 +234,11 @@
 
 	/* Be sure to place a .clear element after each set of columns, just to be safe */
 	.clear { display: block; clear: both; }
-
-
-	/* ------------------------------------------- 
-			PHONE
-			For clients that support media queries.
-			Nothing fancy. 
-	-------------------------------------------- */
-	@media only screen and (max-width: 600px) {
-		
-		div[class="column"] { width: auto!important; float:none!important;}
-		
-	}
 </style>
 
 </head>
  
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
-
-<!-- HEADER -->
-<table class="head-wrap">
-	<tr>
-		<td></td>
-		<!--td class="header container">
-				
-				<div class="content">
-				<table bgcolor="#f1f1f1">
-					<tr>
-						<td align="right"><h6 style="color: #CCCCCC;" class="collapse">Convenely</h6></td>
-					</tr>
-				</table>
-				</div>
-				
-		</td-->
-		<td></td>
-	</tr>
-</table><!-- /HEADER -->
 
 <!-- BODY -->
 <table class="body-wrap">
@@ -280,25 +255,28 @@
 						<p><%= message %></p>
 					</td>
 				</tr>
+				<tr Height="20"></tr>
 			</table>
 			</div>
 			
 				<div class="column">
-				<table>
+				<table bgcolor="#f8f8f8">
 				<% if ( choices.length == 0 ){ %>
 				<tr>
 					<td>				
-						<table class="sidebar-note" border="0" cellspacing="0">
-							<col width="*"/>
+						<table border="0" cellspacing="0">
+							<tr Height="5"></tr>
 							<tr>
-								<td><b>some.one@email.com</b> has created a <b>Convenely</b> email list to help schedule an event with the following people:</td>
+								<td width="5"></td>
+								<td class="sidebar-note"><b><a class="none-link" href="#">some.one@email.com</a></b> has created a <b>Convenely</b> email list to help schedule an event with the following people:</td>
+								<td width="5"></td>
 							</tr>
 						</table>
 						<table class="sidebar-attendee" border="0" cellspacing="0">
 							<col width="*"/>
 							<% _.each(attendees, function(attendee) { %> 
 							<tr>
-								<td><b><%= attendee.email %></b></td>
+								<td><b><a class="none-link" href="#"><%= attendee.email %></a></b></td>
 							</tr>
 							<% }); %>
 						</table>
@@ -308,24 +286,23 @@
 				<tr>
 					<td>				
 						<table class="avail-table" border="0" cellspacing="0">
-							<col width="*"/>
-							<col width="50"/>
-							<col width="50"/>
 							<% _.each(choices, function(choice) { %> 
 							<tr>
-								<td colspan="3" class="avail-date-header" colspan="3"><%= choice.columnDate %></td>
+								<td width="300" colspan="4" class="avail-date-header" colspan="3"><a href="#" class="none-link"><%= choice.columnDate %></a></td>
 							</tr>
-							<tr colspan="3" Height="4"></tr>
+							<tr colspan="4" Height="4"></tr>
 							<% _.each(choice.busy, function(busy) { %> 
 							<tr>
-								<td colspan="2" class="avail-address"><a href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
-								<td class="avail-status" bgcolor="#F4BCBA"><span>&#10008;</span> Busy</td>
+								<td width="240" colspan="2" class="avail-address"><a class="none-link" href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
+								<td width="50" class="avail-status" bgcolor="#F4BCBA"><span>&#10008;</span> Busy</td>
+								<td width="10"></td>
 							</tr>
 							<% }); %>
 							<% _.each(choice.free, function(free) { %> 
 							<tr>
-								<td colspan="2" class="avail-address"><a href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a></td>
-								<td class="avail-status" bgcolor="#C4D6BA"><span>&#10004;</span> Free</td>
+								<td width="240" colspan="2" class="avail-address"><a class="none-link" href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a></td>
+								<td width="50" class="avail-status" bgcolor="#C4D6BA"><span>&#10004;</span> Free</td>
+								<td width="10"></td>
 							</tr>
 							<% }); %>
 							<!--tr colspan="3" Height="4"></tr>
@@ -347,52 +324,27 @@
 				</tr>
 				<tr>
 					<td>				
-						<table class="sidebar-note" border="0" cellspacing="0">
+						<table border="0" cellspacing="0">
 							<col width="*"/>
 							<tr>
-								<td>Reply to this mail with when you're available and we'll keep track of who is available when.
+								<td width="5"></td>
+								<td class="sidebar-note">Reply to this mail with when you're available and we'll keep track of who is available when.
 <a href="http://convenely.com/help">Learn more</a></td>
+								<td width="5"></td>
 							</tr>
+							<tr Height="5"></tr>
 						</table>
 					</td>
 				</tr>
 			</table>				
 			</div>
-				
 				<div class="clear"></div>			
-			
 			</div>
-
 		</td>
 		<td></td>
 	</tr>
 </table><!-- /BODY -->
 
-<!-- FOOTER -->
-<table class="footer-wrap">
-	<tr>
-		<td></td>
-		<td class="container">
-			
-				<!-- content -->
-				<div class="content">
-				<table>
-				<tr>
-					<td align="center">
-						<p>
-							<a href="#">Terms</a> |
-							<a href="#">Privacy</a> |
-							<a href="#"><unsubscribe>Unsubscribe</unsubscribe></a>
-						</p>
-					</td>
-				</tr>
-			</table>
-				</div><!-- /content -->
-				
-		</td>
-		<td></td>
-	</tr>
-</table><!-- /FOOTER -->
 </body>
 </html>
 
