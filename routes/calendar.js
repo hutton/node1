@@ -1,4 +1,4 @@
-
+ 
 /*
  * GET users listing.
  */
@@ -52,9 +52,13 @@ exports.view = function(req, res){
 
 			console.log("Showing: " + calendar.name);
 
+			var sortedChoices = _.sortBy(calendar.choices, function(choice){
+				return choice.date;
+			});
+
 			res.render('responsive_view.html', {
 				calendar: calendar,
-				choices: calendar.choices,
+				choices: sortedChoices,
 				attendees: calendar.attendees,
 				message: ''
 			});

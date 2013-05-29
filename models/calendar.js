@@ -5,6 +5,7 @@ var AttendeeSchema = require("../models/attendee").AttendeeSchema;
 var Mail = require("../tools/mail");
 
 var mongoose = require("mongoose");
+var moment = require("moment");
 var _ = require("underscore");
 
 
@@ -110,7 +111,7 @@ function createCalendar(subject, choices, attendees, callback){
 }
 
 CalendarSchema.statics.newCalendar = function(to, from, subject, message, callback){
-	var dates =  createDates(14);
+	var dates =  createDates(0);
 
 	var choices = _.map(dates, function(date){
 
@@ -170,33 +171,128 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 	console.log(attendee.email + " is busy on " + busyDates);
 	console.log(attendee.email + " is free on " + freeDates);
 
-	_.each(this.choices, function(choice){
-		var index = _.indexOf(busyDates, choice.date);
+	var choices = this.choices;
 
-		if (index != -1){
+	_.each(busyDates, function(busyDate){
+		console.log("Looking for " + busyDate + " in " + choices);
 
-			choice.busy.push(attendee._id);
+		var foundChoice = _.find(choices, function(choice){
+			if (moment(choice.date).diff(moment(busyDate), "days") == 0){
+				return choice;
+			};
+		});
 
-			var found = _.indexOf(choice.free, attendee);
+		if (foundChoice != null){
+			var found = _.find(foundChoice.busy, function(att){
+				if (att.equals(attendee._id)){
+					return att;
+				}
+			});
 
-			if (found != -1){
-				choice.free[found].remove();
+			if (found == null){
+				foundChoice.busy.push(attendee._id);
 			}
-		}
 
-		index = _.indexOf(freeDates, choice.date);
-
-		if (index != -1){
-
-			choice.free.push(attendee._id);
-
-			var found = _.indexOf(choice.busy, attendee);
-
-			if (found != -1){
-				choice.busy[found].remove();
+			for (var i = 0; i < foundChoice.free.length; i++){
+				if ( foundChoice.free[i].equals(attendee._id)){
+					foundChoice.free.splice(i,1);	
+					break;
+				}
 			}
+		} else {
+			var newChoice = {
+						date: busyDate,
+						busy: [attendee._id],
+						free:[] 
+					};
+
+			choices.push(newChoice);
 		}
 	});
+
+	_.each(freeDates, function(freeDate){
+		var foundChoice = _.find(choices, function(choice){
+			if (moment(choice.date).diff(moment(freeDate), "days") == 0){
+				return choice;
+			};
+		});
+
+		if (foundChoice != null){
+
+			console.log("looking for " + foundChoice.free + " in " + attendee._id);
+			var found = _.find(foundChoice.free, function(att){
+				if (att.equals(attendee._id)){
+					return att;
+				}
+			});
+
+			if (found == null){
+				console.log("add to free " + found);
+				foundChoice.free.push(attendee._id);
+			}
+
+			for (var i = 0; i < foundChoice.busy.length; i++){
+				if ( foundChoice.busy[i].equals(attendee._id)){
+					foundChoice.busy.splice(i,1);	
+					break;
+				}
+			}
+		} else {
+			var newChoice = {
+						date: freeDate,
+						busy: [],
+						free:[attendee._id] 
+					};
+
+			choices.push(newChoice);
+		}
+	});
+
+	// _.each(this.choices, function(choice){
+	// 	var index = _.indexOf(busyDate, choice.date);
+
+	// 	if (index != -1){
+
+	// 		choice.busy.push(attendee._id);
+
+	// 		var found = _.indexOf(choice.free, attendee);
+
+	// 		if (found != -1){
+	// 			choice.free[found].remove();
+	// 		}
+	// 	} else {
+	// 		console.log("Couldn't find date, adding it");
+
+	// 		var newChoice = {
+	// 					date: date,
+	// 					busy: [attendee],
+	// 					free:[] 
+	// 				};
+
+	// 		choices.push(newChoice);
+	// 	}
+
+	// 	index = _.indexOf(freeDate, choice.date);
+
+	// 	if (index != -1){
+
+	// 		choice.free.push(attendee._id);
+
+	// 		var found = _.indexOf(choice.busy, attendee);
+
+	// 		if (found != -1){
+	// 			choice.busy[found].remove();
+	// 		}
+	// 	} else {
+	// 		var newChoice = {
+	// 					date: date,
+	// 					busy: [],
+	// 					free:[attendee] 
+	// 				};
+
+	// 		choices.push(newChoice);
+	// 	}
+	// });
 
 	this.save(function(err){
 		if (err){

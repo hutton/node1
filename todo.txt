@@ -1,1 +1,7 @@
-- Plan journeys
+- Add dates on demand
+- Hide 'How about you?'
+- Split web and mail templates
+- Remove header bar
+- Add texts
+- Start work on natural
+

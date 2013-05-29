@@ -55,11 +55,15 @@ function sendMail(calendar, subject, message){
 		choice.columnDate = moment(choice.date).format("dddd Do MMM");
 	});
 
+    var sortedChoices = _.sortBy(calendar.choices, function(choice){
+        return choice.date;
+    });
+
 	_.each(calendar.attendees, function(attendee){
 
 		global.app.render('responsive_view.html', {
 			calendar: calendar,
-			choices: calendar.choices,
+			choices: sortedChoices,
 			attendees: calendar.attendees,
 			message: message
 		}, function(err, html){

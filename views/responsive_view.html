@@ -172,6 +172,23 @@
 		padding: 6px 10px;
 	}
 
+	.sidebar-note{
+		font-weight: normal;
+		font-size: 13px; 
+		color: #808080;
+		background: #f1f1f1;
+		padding: 10px 10px;
+		line-height: 1.6em;
+	}
+
+	.sidebar-attendee{
+		font-weight: normal;
+		font-size: 13px; 
+		color: #808080;
+		padding: 10px 10px;
+		line-height: 1.6em;
+	}
+
 	/* --------------------------------------------------- 
 			RESPONSIVENESS
 			Nuke it from orbit. It's the only way to be sure. 
@@ -230,10 +247,10 @@
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
 
 <!-- HEADER -->
-<table class="head-wrap" bgcolor="#f1f1f1">
+<table class="head-wrap">
 	<tr>
 		<td></td>
-		<td class="header container">
+		<!--td class="header container">
 				
 				<div class="content">
 				<table bgcolor="#f1f1f1">
@@ -243,7 +260,7 @@
 				</table>
 				</div>
 				
-		</td>
+		</td-->
 		<td></td>
 	</tr>
 </table><!-- /HEADER -->
@@ -268,6 +285,26 @@
 			
 				<div class="column">
 				<table>
+				<% if ( choices.length == 0 ){ %>
+				<tr>
+					<td>				
+						<table class="sidebar-note" border="0" cellspacing="0">
+							<col width="*"/>
+							<tr>
+								<td><b>some.one@email.com</b> has created a <b>Convenely</b> email list to help schedule an event with the following people:</td>
+							</tr>
+						</table>
+						<table class="sidebar-attendee" border="0" cellspacing="0">
+							<col width="*"/>
+							<% _.each(attendees, function(attendee) { %> 
+							<tr>
+								<td><b><%= attendee.email %></b></td>
+							</tr>
+							<% }); %>
+						</table>
+					</td>
+				</tr>
+				<% } %>
 				<tr>
 					<td>				
 						<table class="avail-table" border="0" cellspacing="0">
@@ -282,16 +319,16 @@
 							<% _.each(choice.busy, function(busy) { %> 
 							<tr>
 								<td colspan="2" class="avail-address"><a href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
-								<td class="avail-status" bgcolor="#F4BCBA">Busy</td>
+								<td class="avail-status" bgcolor="#F4BCBA"><span>&#10008;</span> Busy</td>
 							</tr>
 							<% }); %>
 							<% _.each(choice.free, function(free) { %> 
 							<tr>
 								<td colspan="2" class="avail-address"><a href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a></td>
-								<td class="avail-status" bgcolor="#C4D6BA">Free</td>
+								<td class="avail-status" bgcolor="#C4D6BA"><span>&#10004;</span> Free</td>
 							</tr>
 							<% }); %>
-							<tr colspan="3" Height="4"></tr>
+							<!--tr colspan="3" Height="4"></tr>
 							<tr bgcolor="#ebebeb">
 								<td class="avail-option-header">
 									<span>How about you?</span>
@@ -302,9 +339,20 @@
 								<td class="avail-option-container">
 									<a class="avail-option" href="http://convenely.com/calendar/<%= calendar.id %>">Busy</a>
 								</td>
-							</tr>
+							</tr-->
 							<tr colspan="3" Height="20"></tr>
 							<% }); %>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>				
+						<table class="sidebar-note" border="0" cellspacing="0">
+							<col width="*"/>
+							<tr>
+								<td>Reply to this mail with when you're available and we'll keep track of who is available when.
+<a href="http://convenely.com/help">Learn more</a></td>
+							</tr>
 						</table>
 					</td>
 				</tr>
