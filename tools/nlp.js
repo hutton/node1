@@ -3,6 +3,26 @@ var _ = require("underscore");
 var natural = require("natural");
 var moment = require("moment");
 
+var classifier = new natural.BayesClassifier();
+
+function train(){
+	console.log("*** Training ***");
+
+	classifier.addDocument("i can do any dddd.", 'free');
+	classifier.addDocument("i'm free on dddd.", 'free');
+	classifier.addDocument("dddd are no good for me dddd.", 'busy');
+	classifier.addDocument("i'm not free on any dddd.", 'busy');
+	classifier.addDocument("i can only do dddd", 'free');
+
+	classifier.train();
+}
+
+train();
+
+function processBody2(calendar, body){
+	classifier.classify(body);
+}
+
 function processBody(calendar, body){
 	var busyDates = [];
 	var freeDates = [];
