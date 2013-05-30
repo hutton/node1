@@ -9,6 +9,7 @@
  var moment = require("moment");
  var mongoose = require("mongoose");
  var _ = require("underscore");
+var logger = require("../tools/logger");
 
  function makeid(length)
  {
@@ -24,17 +25,17 @@
  exports.new = function(req, res){
  	var id = makeid(10);
 
- 	console.log("Create new calendar: " + id);
+ 	logger.info("Create new calendar: " + id);
 
  	var newCalendar = new Calendar({name: id});
 
  	newCalendar.save(function(err){
  		if (err){
- 			console.log(err);
+ 			logger.error(err);
  		}
  	});
 
- 	console.log("Calendar saved: " + newCalendar.id);
+ 	logger.info("Calendar saved: " + newCalendar.id);
 
 	// Create calendar and redirect
 	res.redirect('/' + id);	
@@ -50,7 +51,7 @@ exports.view = function(req, res){
 				choice.columnDate = moment(choice.date).format("dddd Do MMM");
 			});
 
-			console.log("Showing: " + calendar.name);
+			logger.info("Showing: " + calendar.name);
 
 			var sortedChoices = _.sortBy(calendar.choices, function(choice){
 				return choice.date;

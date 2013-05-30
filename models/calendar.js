@@ -7,7 +7,7 @@ var Mail = require("../tools/mail");
 var mongoose = require("mongoose");
 var moment = require("moment");
 var _ = require("underscore");
-
+var logger = require("../tools/logger");
 
 var CalendarSchema = new mongoose.Schema({
 	id: { 
@@ -66,7 +66,7 @@ function createDates(numberOfDays){
 
 function saveCallback(err){
 	if (err){
-		console.log(err);
+		logger.error(err);
 	}
 }
 
@@ -102,9 +102,9 @@ function createCalendar(subject, choices, attendees, from, callback){
 
 		newCalendar.save(function(err, calendar){
 	        if (err){
-	            console.log("Failed to create calendar: " + err);
+	            logger.error("Failed to create calendar: " + err);
 	        } else {
-	            console.log("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+	            logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
 	        }
 	    });    
 
@@ -144,19 +144,19 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message, callba
 	createCalendar(subject, choices, attendees, from, function(newCalendar){
 		Mail.sendMail(newCalendar, subject, body);
 
-		console.log("Calendar saved: " + newCalendar.id);
+		logger.info("Calendar saved: " + newCalendar.id);
 
 		callback(newCalendar);
 	});
 }
 
-function ___update(){
-	var choice = newCalendar.choices[0];
+// function ___update(){
+// 	var choice = newCalendar.choices[0];
 
-	console.log(choice);
+// 	console.log(choice);
 
-	choice.busy.push(newAttendee);
-}
+// 	choice.busy.push(newAttendee);
+// }
 
 CalendarSchema.statics.findCalendar = function(id, callback){
 
@@ -166,12 +166,12 @@ CalendarSchema.statics.findCalendar = function(id, callback){
 }
 
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
-	console.log("Updating calendar");
+	logger.info("Updating calendar");
 
 	var self = this;
 
-	console.log(attendee.email + " is busy on " + busyDates);
-	console.log(attendee.email + " is free on " + freeDates);
+	logger.info(attendee.email + " is busy on " + busyDates);
+	logger.info(attendee.email + " is free on " + freeDates);
 
 	var choices = this.choices;
 
@@ -249,9 +249,9 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 	this.save(function(err){
 		if (err){
-			console.log(err);
+			logger.error(err);
 		} else {
-			console.log("Calendar saved")
+			logger.info("Calendar saved")
 		}
 	});
 }

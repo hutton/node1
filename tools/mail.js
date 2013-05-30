@@ -2,6 +2,7 @@
 var _ = require("underscore");
 var moment = require("moment");
 var SendGrid = require('sendgrid-nodejs');
+var logger = require("./logger");
 
 var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
@@ -47,7 +48,7 @@ function getEmailAddresses(text){
 }
 
 function sendMail(calendar, subject, message){
-	console.log("Sending mail to group: " + calendar.id );
+	logger.info("Sending mail to group: " + calendar.id );
 
 	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
 
@@ -69,10 +70,10 @@ function sendMail(calendar, subject, message){
 		}, function(err, html){
 
 			if (err){
-				console.log(err);
+				logger.info(err);
 			}
 
-			console.log("Sending mail to: " + attendee.email );
+			logger.info("Sending mail to: " + attendee.email );
 
 			try{
 				var mail = new SendGrid.Email({
@@ -84,13 +85,13 @@ function sendMail(calendar, subject, message){
 
 				sender.send(mail, function(success, err){
 					if(success) 
-						console.log('Email sent to: ' + attendee.email);
+						logger.info('Email sent to: ' + attendee.email);
 					else 
-						console.log(err);
+						logger.error(err);
 				});
 	        } catch (e){
-	        	console.log("Failed to send email to: " + mail.to);
-	        	console.log(e);
+	        	logger.error("Failed to send email to: " + mail.to);
+	        	logger.error(e);
 	        }
 		});
 	});

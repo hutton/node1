@@ -6,6 +6,7 @@ var _ = require("underscore");
 
 var Mail = require("../tools/mail");
 var Nlp = require("../tools/nlp");
+var logger = require("../tools/logger");
 
 exports.show = function(req, res){
 	res.render('mail.html');
@@ -20,7 +21,7 @@ function getLocalPartOfEmail(address){
 }
 
 function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
-	console.log(req.body);
+	logger.info(req.body);
 
 	var message = req.body.text;
 	var to = Mail.getEmailAddresses(req.body.to)[0];
@@ -32,9 +33,9 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		message = Mail.firstResponse(message);
 	}
 
-	console.log("Mail from: " + from);
-	console.log("Mail to: " + to);
-	console.log("Mail message: " + message);
+	logger.info("Mail from: " + from);
+	logger.info("Mail to: " + to);
+	logger.info("Mail message: " + message);
 
 	if (startsWith(to, "start@")){
 		var newCalendar = Calendar.newCalendar(to, from, req.body.subject, message, function(newCalendar){
@@ -45,7 +46,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
 			if (err || calendar == null){
-				console.log("Couldn't find event for: " + localEmail);
+				logger.error("Couldn't find event for: " + localEmail);
 				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
@@ -59,7 +60,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 					Mail.sendMail(calendar, req.body.subject, message);
 				} else {
-					console.log("Couldn't find " + from + " in calendar " + calendar.name);
+					logger.error("Couldn't find " + from + " in calendar " + calendar.name);
 				}
 
 				updateCalendarCallback(calendar);
@@ -69,7 +70,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 }
 
 exports.sendGridReceive = function(req, res){
-	console.log("Mail received from SendGrid");
+	logger.info("Mail received from SendGrid");
 
 	processEmailRequest(req, res, function(newCalendar){
 		res.send( 200 );
@@ -84,7 +85,7 @@ exports.sendGridReceive = function(req, res){
 }
 
 exports.receive = function(req, res){
-	console.log("Mail received from browser");
+	logger.info("Mail received from browser");
 
 	processEmailRequest(req, res, function(newCalendar){
 		res.redirect('/calendar/' + newCalendar.id);	

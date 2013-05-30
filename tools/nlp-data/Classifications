@@ -1,0 +1,88 @@
+Classifications
+
+free_single day
+busy_single day
+
+free_single_exclusive day span
+busy_single_exclusive day span
+
+free_multi day
+busy_multi day
+
+free_multi_exclusive day span
+busy_multi_exclusive day span
+
+
+
+dow
+date := today, tomorrow, 
+
+spans -> week or month
+
+
+Context for email chain "when can you do in September"
+
+Find date from text "25th", "Thurs 25th"
+
+Rules
+-----
+If sentence contains 'next week' shift context to next week for rest of sentence.
+
+
+
+------------------------------------------------
+
+Easy
+----
+25th would be OK						free_single day
+25th works for me 						free_single day
+how about Thurs 25th					free_single day
+Thurs 21st looks OK						free_single day
+next week isn't great 					busy_multi span
+I’m away this week
+I've got no plans for tomorrow 
+Thursday is best for me
+Wednesday works for me. 
+Shall we go for Wednesday
+suggest Wednesday 19th?
+How about 12th / 13th, 19th / 20th Dec? 
+might be OK for 1st
+Can't do 31st
+can't make tomorrow
+can do 31st or 1st Nov.
+wont be able to make the 31st
+Wednesday Oct 31st is best for me
+I'm in for Wednesday 29th
+I should be able to make the 29th
+can’t make it on the 31st
+I can't do 30th
+Friday 3rd anyone?
+I could do that Friday
+the 3rd is a possibility.
+I‘m away this week and next
+
+Medium
+------
+I can do Monday, Wednesday and possibly Thursday
+I can do Monday or Tuesday or Wednesday or Thursday. 
+I can do Tuesday or Wednesday or Thursday but not Monday
+I could do the 1st but not the 31st
+I wont be around on the 29th and the 31st is tricky
+22nd would possibly be OK, 29th or 30th, definitely, 31st, definitely not
+Does 22nd, 29th or 30th August work for anyone
+
+Hard
+----
+Tuesday of the next week works [shifts context to next week], possibly Wednesday or Thursday at a push.
+busy next week [shift context] could do any day the week after.
+possibility of Thurs next week [shift context] greater possibility of Friday
+I’m free Mon – Thurs this week, next week and the week after. [repeat Mon - Thurs for next and week after]
+the 1st, this Thursday could be a good plan.
+Thursday’s are generally best for me
+I'm now down to the 29th or 30th, or as they are also known, next Wednesday or Thursday
+I can't make you dates, but will offer Friday the 31st August.
+
+
+
+
+

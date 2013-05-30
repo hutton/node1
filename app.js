@@ -15,25 +15,28 @@
  , path = require('path')
  , mongoose = require('mongoose')
  , cons = require('consolidate')
- , winston = require('winston')
+ , logger = require('./tools/logger')
  , _ = require('underscore');
 
  if (_.isUndefined(connectionString)){
  	connectionString = 'mongodb://localhost:27017/test';
  }
 
-winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {timestamp: true});
-
  var app = express();
 
+var winstonStream = {
+    write: function(message, encoding){
+        logger.info(message);
+    }
+};
+ 
  app.configure(function(){
  	app.set('port', process.env.PORT || 3000);
  	app.set('views', __dirname + '/views');
  	app.set('view engine', 'html');
  	app.set('view cache', false);
  	app.use(express.favicon());
- 	app.use(express.logger('dev'));
+	app.use(express.logger({stream:winstonStream}));
  	app.use(express.bodyParser());
  	app.use(express.methodOverride());
  	app.use(express.cookieParser('your secret here'));
@@ -71,6 +74,6 @@ winston.add(winston.transports.Console, {timestamp: true});
  global.app = app;
  
  http.createServer(app).listen(app.get('port'), function(){
- 	winston.log("Express server listening on port " + app.get('port'));
+ 	logger.info("Express server listening on port " + app.get('port'));
  });
 

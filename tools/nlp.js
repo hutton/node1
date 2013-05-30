@@ -2,11 +2,12 @@ var _ = require("underscore");
 
 var natural = require("natural");
 var moment = require("moment");
+var logger = require("../tools/logger");
 
 var classifier = new natural.BayesClassifier();
 
 function train(){
-	console.log("*** Training ***");
+	logger.info("Training NLP");
 
 	classifier.addDocument("i can do any dddd.", 'free');
 	classifier.addDocument("i'm free on dddd.", 'free');
