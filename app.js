@@ -15,11 +15,15 @@
  , path = require('path')
  , mongoose = require('mongoose')
  , cons = require('consolidate')
+ , winston = require('winston')
  , _ = require('underscore');
 
  if (_.isUndefined(connectionString)){
  	connectionString = 'mongodb://localhost:27017/test';
  }
+
+winston.remove(winston.transports.Console);
+winston.add(winston.transports.Console, {timestamp: true});
 
  var app = express();
 
@@ -39,7 +43,11 @@
  	app.use(express.static(path.join(__dirname, 'public')));
  	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
  	mongoose.connect(connectionString, function onMongooseError(err) {
- 		if (err) throw err;
+ 		if (err){
+ 			winston.log('MongoDB failed to start up');
+ 			winston.log(err);
+ 			throw err;	
+ 		} 
  	});
  });
 
@@ -63,5 +71,6 @@
  global.app = app;
  
  http.createServer(app).listen(app.get('port'), function(){
- 	console.log("Express server listening on port " + app.get('port'));
+ 	winston.log("Express server listening on port " + app.get('port'));
  });
+
