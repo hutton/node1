@@ -32,6 +32,16 @@ If sentence contains 'next week' shift context to next week for rest of sentence
 
 ------------------------------------------------
 
+this week and next
+Thurs 25th
+1st Nov
+Oct 31st
+next week
+this week
+tomorrow
+Thursday
+25th
+
 Easy
 ----
 25th would be OK						free_single day

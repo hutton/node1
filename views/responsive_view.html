@@ -37,18 +37,21 @@
 						<table border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
 							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
-								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= calendar.createdBy %></a></b> has created a <a href="http://convenely.com" style="color: #808080;text-decoration: none;cursor: default;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely.com</b></a> email list to help schedule an event with the following people:</td>
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
+								<td class="sidebar-note" style="margin: 0;padding: 5px 10px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= calendar.createdBy %></a></b> has created a <b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely.com</b> email list to help schedule an event with the following people:</td>
 							</tr>
 						</table>
-						<table class="sidebar-attendee" border="0" cellspacing="0" style="margin: 0;padding: 10px 10px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;line-height: 1.6em;width: 100%;">
+						<table class="sidebar-attendee" border="0" cellspacing="0" style="margin: 0;padding: 0px 0px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;line-height: 1.6em;width: 100%;">
 							<col width="*" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></col>
+							<tr height="3" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<% _.each(attendees, function(attendee) { %> 
+							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+								<td width="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 								<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= attendee.email %></a></b></td>
+								<td width="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 							</tr>
 							<% }); %>
+							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 						</table>
 					</td>
 				</tr>
@@ -58,10 +61,9 @@
 						<table border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
 							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
-								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em; text-align: center;">Availability by <a href="http://convenely.com" style="color: #808080;text-decoration: none;cursor: default;"><b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely.com</b></a></td>
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
+								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em; text-align: center;">Availability by <b style="margin: 0;padding: 0;font-family: Arial, sans-serif;">Convenely.com</b>  <a href="http://convenely.com/" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #2BA6CB;">learn more</a></td>
 							</tr>
+							<tr height="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 						</table>
 					</td>
 				</tr>
@@ -107,20 +109,20 @@
 						</table>
 					</td>
 				</tr>
+				<% if ( choices.length == 0 ){ %>
 				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
 						<table border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
 							<col width="*" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></col>
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
-								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em;">Reply to this mail with when you're available and we'll keep track of who is available when.
-<a href="http://convenely.com/help" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #2BA6CB;">Learn more</a></td>
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
+								<td class="sidebar-note" style="margin: 0;padding: 5px 10px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em;">Reply to this mail with when you're available and we'll keep track of who is available when.
+<a href="http://convenely.com/" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #2BA6CB;">Learn more</a></td>
 							</tr>
 							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 						</table>
 					</td>
 				</tr>
+				<% } %>
 			</table>				
 			</div>
 				<div class="clear" style="margin: 0;padding: 0;font-family: Arial, sans-serif;display: block;clear: both;"></div>			
