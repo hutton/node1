@@ -47,6 +47,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
 			if (err || calendar == null){
 				logger.error("Couldn't find event for: " + localEmail);
+				logger.error(err);
 				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
