@@ -60,6 +60,8 @@ function sendMail(calendar, subject, message){
         return choice.date;
     });
 
+    message = message.replace(/\n/g, '<br />');
+
 	_.each(calendar.attendees, function(attendee){
 
 		global.app.render('responsive_view.html', {
