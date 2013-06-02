@@ -45,9 +45,14 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		var localEmail = getLocalPartOfEmail(to);
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
-			if (err || calendar == null){
-				logger.error("Couldn't find event for: " + localEmail);
-				logger.error(err);
+			if (err){
+				logger.error("Error finding event: " + localEmail);
+				logger.error("Error: " + err);
+				error('Error finding calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar " + localEmail);
+
+				res.send('No calendar');
 				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
@@ -79,8 +84,8 @@ exports.sendGridReceive = function(req, res){
 	function(calendar){
 		res.send( 200 );
 	},
-	function(){
-		res.send( 200 );
+	function(error){
+		res.send( 500 );
 	});
 
 }
