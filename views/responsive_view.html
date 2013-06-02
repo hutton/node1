@@ -77,17 +77,17 @@
 								<td width="300" colspan="3" class="avail-date-header" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: bold;border-bottom: 1px solid #c0c0c0;"><a href="#" class="none-link" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= choice.columnDate %></a></td>
 								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 							</tr>
-							<% _.each(choice.busy, function(busy) { %> 
-							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
-								<td width="245" colspan="2" class="avail-address" style="margin: 0;padding: 4px 10px;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
-								<td width="50" class="avail-status" bgcolor="#fe673b" style="margin: 0;padding: 4px 0px;font-family: Arial, sans-serif;text-align: center; color:#ffffff;"><span style="margin: 0;padding: 0;font-family: Arial, sans-serif;">&#10008;</span> Busy</td>
-								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
-							</tr>
-							<% }); %>
 							<% _.each(choice.free, function(free) { %> 
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 								<td width="245" colspan="2" class="avail-address" style="margin: 0;padding: 4px 10px;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).email %></a></td>
 								<td width="50" class="avail-status" bgcolor="#51da73" style="margin: 0;padding: 4px 0px;font-family: Arial, sans-serif;text-align: center; color: #ffffff;"><span style="margin: 0;padding: 0;font-family: Arial, sans-serif;">&#10004;</span> Free</td>
+								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
+							</tr>
+							<% }); %>
+							<% _.each(choice.busy, function(busy) { %> 
+							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+								<td width="245" colspan="2" class="avail-address" style="margin: 0;padding: 4px 10px;font-family: Arial, sans-serif;"><a class="none-link" href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).email %></a></td>
+								<td width="50" class="avail-status" bgcolor="#fe673b" style="margin: 0;padding: 4px 0px;font-family: Arial, sans-serif;text-align: center; color:#ffffff;"><span style="margin: 0;padding: 0;font-family: Arial, sans-serif;">&#10008;</span> Busy</td>
 								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 							</tr>
 							<% }); %>
@@ -129,6 +129,7 @@
 		</td>
 		<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 	</tr>
+	<tr height="20" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 </table><!-- /BODY -->
 
 </body>

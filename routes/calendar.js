@@ -44,9 +44,14 @@ var logger = require("../tools/logger");
 
 exports.view = function(req, res){
 	Calendar.findCalendar(req.route.params[0], function(err, calendar){
-		if (err || calendar === null){
+		if (err){
+			logger.error("Error finding calendar " + req.route.params[0]);
+			logger.error("Error:" + err);
+
+			res.send('No calendar');
+		} else if (!calendar){
 			logger.error("Could not find calendar " + req.route.params[0]);
-			logger.error(err);
+
 			res.send('No calendar');
 		} else {
 			_.each(calendar.choices, function(choice){
