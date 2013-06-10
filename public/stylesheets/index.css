@@ -1,3 +1,4 @@
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
 body{padding-top:20px;padding-bottom:40px;font-family:'Open Sans',sans-serif;}
 .container-narrow{margin:0 auto;max-width:700px;}
 .container-narrow>hr{margin:30px 0;}
