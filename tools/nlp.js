@@ -10,41 +10,41 @@ var classifier = new natural.BayesClassifier();
 function train(){
 	logger.info("Training NLP");
 
-	classifier.addDocument("i can do", 'free');
-	classifier.addDocument("i can't do", 'busy');
+	classifier.addDocument("i can do xxxx", 'free');
+	classifier.addDocument("i cant do xxxx", 'busy');
 
 	classifier.addDocument("would be OK", 'free');
+	classifier.addDocument("would not be OK", 'busy');
 
 
-	// classifier.addDocument("i'm free on", 'free2');
-	// classifier.addDocument("i can only do", 'free3');
-	// classifier.addDocument("would be OK", 'free4');
-	// classifier.addDocument("works for me", 'free5');
-	// classifier.addDocument("how about", 'free6');
-	// classifier.addDocument("looks OK", 'free7');
-	// classifier.addDocument("I've got no plans for", 'free8');
-	// classifier.addDocument("is best for me", 'free9');
-	// classifier.addDocument("Shall we go for", 'free10');
-	// classifier.addDocument("suggest", 'free11');
-	// classifier.addDocument("might be OK", 'free12');
-	// classifier.addDocument("can do", 'free13');
-	// classifier.addDocument("is best for me", 'free14');
-	// classifier.addDocument("I'm in for", 'free15');
-	// classifier.addDocument("anyone?", 'free17');
-	// classifier.addDocument("I could do", 'free18');
-	// classifier.addDocument("is a possibility", 'free19');
-	// classifier.addDocument("anyone?", 'free20');
+	classifier.addDocument("im free on xxxx", 'free');
+	classifier.addDocument("i can only do xxxx", 'free');
+	classifier.addDocument("xxxx would be OK", 'free');
+	classifier.addDocument("xxxx works for me", 'free');
+	classifier.addDocument("how about xxxx", 'free');
+	classifier.addDocument("looks OK", 'free');
+	classifier.addDocument("Ive got no plans for xxxx", 'free');
+	classifier.addDocument("xxxx is best for me", 'free');
+	classifier.addDocument("Shall we go for xxxx", 'free');
+	classifier.addDocument("suggest", 'free');
+	classifier.addDocument("xxxx might be OK", 'free');
+	classifier.addDocument("can do xxxx", 'free');
+	classifier.addDocument("xxxx is best for me", 'free');
+	classifier.addDocument("Im in for xxxx", 'free');
+	classifier.addDocument("xxxx anyone?", 'free');
+	classifier.addDocument("I could do xxxx", 'free');
+	classifier.addDocument("xxxx is a possibility", 'free');
+	classifier.addDocument("xxxx anyone?", 'free');
 
-	// classifier.addDocument("are no good for me", 'busy1');
-	// classifier.addDocument("isn't great", 'busy2');
-	// classifier.addDocument("i can't do", 'busy3');
-	// classifier.addDocument("can't make", 'busy4');
-	// classifier.addDocument("wont be able to make", 'busy5');
-	// classifier.addDocument("I should be able to make", 'busy6');
-	// classifier.addDocument("I can't do", 'busy7');
-	// classifier.addDocument("I’m away", 'busy8');
-	// classifier.addDocument("can't do", 'busy9');
-	// classifier.addDocument("can’t make it", 'busy10');
+	classifier.addDocument("xxxx are no good for me", 'busy');
+	classifier.addDocument("xxxx isnt great", 'busy');
+	classifier.addDocument("i cant do xxxx", 'busy');
+	classifier.addDocument("cant make xxxx", 'busy');
+	classifier.addDocument("wont be able to make xxxx", 'busy');
+	classifier.addDocument("I cant do xxxx", 'busy');
+	classifier.addDocument("Im away xxxx", 'busy');
+	classifier.addDocument("cant do xxxx", 'busy');
+	classifier.addDocument("cant make it xxxx", 'busy');
 
 	classifier.train();
 }
@@ -174,6 +174,8 @@ function extractDates(text){
 }
 
 function getSentiment(text){
+	text = text.replace(/'/, '');
+
 	return classifier.classify(text);
 }
 
@@ -306,7 +308,7 @@ function processBody2(calendar, body){
 
 module.exports = {
 	processBody: processBody,
-	processBody2: processBody2,
+	getSentiment: getSentiment,
 	extractDates: extractDates,
 	blankMatches: blankMatches,
 	addSentimentToMatches: addSentimentToMatches

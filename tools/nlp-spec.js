@@ -18,14 +18,35 @@ function compareMatches(expected, result){
 	return true;
 }
 
-function validate(expected, text){
+function compareDates(expected, result){
+	if (expected[0].length !== result[0].length || expected[1].length !== result[1].length){
+		return false;
+	}
+ 
+	for (var i=0; i < expected[0].length; i++){
+		if (!expected[0][i].is(result[0][i])){
+			return false;
+		}
+
+	}
+
+	for (var i=0; i < expected[1].length; i++){
+		if (!expected[1][i].is(result[1][i])){
+			return false;
+		}
+	}
+ 
+	return true;
+}
+
+function validateExtractText(expected, text){
 	var result = nlp.extractDates(text);
 
 	if (compareMatches(expected, result)){
-		console.log( "Success with: " + text);
+		console.log( "Success extract with: " + text);
 	} else {
 		console.log( "*********************");
-		console.log( "Failed! with: " + text);
+		console.log( "Failed extract! with: " + text);
 		console.log( "Expected:");
 		prettyPrintResult(expected);
 		console.log( "Result:");
@@ -40,55 +61,76 @@ function prettyPrintResult(result){
 	}
 }
 
-console.log(nlp.processBody("i can't do 3rd I can do 19th"));
+function validate(text, expected){
+	var result = nlp.processBody(text);
+
+	if (compareDates(expected, result)){
+		console.log( "Success with: " + text);
+	} else {
+		console.log( "*********************");
+		console.log( "Failed! with: " + text);
+		console.log( "Expected:");
+		console.log(expected);
+		console.log( "Result:");
+		console.log(result);
+		console.log( "*********************");
+	}
+}
+
+// console.log(nlp.getSentiment("i can do 19th"));
+// console.log(nlp.getSentiment("i can't do 3rd"));
 
 
-// return nlp.addSentimentToMatches("3rd match 18ee not dates 19th end", [
-// 	{ match: "3rd", date: Date.future("3rd"), index: 0 },
+// console.log(nlp.addSentimentToMatches("i can do 3rd i can't do 19th ", [
+// 	{ match: "3rd", date: Date.future("3rd"), index: 9 },
 // 	{ match: "19th", date: Date.future("19th"), index: 25 },
-// 	]);
+// 	]));
+
+validate("21st match", [[],[Date.future("21st")]]);
+validate("i can do the 21st i can't do the 1st", [[Date.future("1st")],[Date.future("21st")]]);
+
 
 // Simple dates e.g. 1st, 22nd 
-// validate([
-// 	{ match: "21st", date: Date.future("21st"), index: 0 },
-// 	], "21st match");
-// validate([
-// 	{ match: "1st", date: Date.future("1st"), index: 0 },
-// 	{ match: "18th", date: Date.future("18th"), index: 10 },
-// 	{ match: "22nd", date: Date.future("22nd"), index: 28 },
-// 	], "1st match 18th not 47 dates 22nd");
-// validate([
-// 	{ match: "3rd", date: Date.future("3rd"), index: 0 },
-// 	{ match: "19th", date: Date.future("19th"), index: 25 },
-// 	], "3rd match 18ee not dates 19th end");
+validateExtractText([
+	{ match: "21st", date: Date.future("21st"), index: 0 },
+	], "21st match");
+validateExtractText([
+	{ match: "1st", date: Date.future("1st"), index: 0 },
+	{ match: "18th", date: Date.future("18th"), index: 10 },
+	{ match: "22nd", date: Date.future("22nd"), index: 28 },
+	], "1st match 18th not 47 dates 22nd");
+validateExtractText([
+	{ match: "3rd", date: Date.future("3rd"), index: 0 },
+	{ match: "19th", date: Date.future("19th"), index: 25 },
+	], "3rd match 18ee not dates 19th end");
 
-// // Simple day e.g. Wednesday, thurs, fri
-// validate([
-// 	{ match: "Friday", date: Date.future("Friday"), index: 5 },
-// 	], "next Friday is good");
-// validate([
-// 	{ match: "thurs", date: Date.future("Thursday"), index: 0 },
-// 	], "thurs is good");
-// validate([
-// 	{ match: "thurs", date: Date.future("Thursday"), index: 0 },
-// 	{ match: "Wednesday", date: Date.future("Wednesday"), index: 9 },
-// 	{ match: "Saturday", date: Date.future("Saturday"), index: 22 },
-// 	{ match: "sunday", date: Date.future("Sunday"), index: 40 },
-// 	], "thurs is Wednesday or Saturday good not sunday");
+// Simple day e.g. Wednesday, thurs, fri
+validateExtractText([
+	{ match: "Friday", date: Date.future("Friday"), index: 5 },
+	], "next Friday is good");
+validateExtractText([
+	{ match: "thurs", date: Date.future("Thursday"), index: 0 },
+	], "thurs is good");
+validateExtractText([
+	{ match: "thurs", date: Date.future("Thursday"), index: 0 },
+	{ match: "Wednesday", date: Date.future("Wednesday"), index: 9 },
+	{ match: "Saturday", date: Date.future("Saturday"), index: 22 },
+	{ match: "sunday", date: Date.future("Sunday"), index: 40 },
+	], "thurs is Wednesday or Saturday good not sunday");
 
-// // Two part dates e.g. Friday 21st
-// validate([
-// 	{ match: "Friday 21st", date: Date.future("21st"), index: 0 },
-// 	], "Friday 21st is good");
-// validate([
-// 	{ match: "Friday 21st", date: Date.future("21st"), index: 0 },
-// 	{ match: "Mon 1st", date: Date.future("1st"), index: 33 },
-// 	{ match: "22nd", date: Date.future("22nd"), index: 20 },
-// 	], "Friday 21st and the 22nd but not Mon 1st");
-// validate([
-// 	{ match: "Friday 21st", date: Date.future("21st"), index: 0 },
-// 	{ match: "Saturday 2nd", date: Date.future("2nd"), index: 12 },
-// 	{ match: "Wed 3rd", date: Date.future("3rd"), index: 25 },
-// 	{ match: "Thursday", date: Date.future("Thursday"), index: 38 },
-// 	], "Friday 21st Saturday 2nd,Wed 3rd then Thursday");
+// Two part dates e.g. Friday 21st
+validateExtractText([
+	{ match: "Friday 21st", date: Date.future("21st"), index: 0 },
+	], "Friday 21st is good");
+validateExtractText([
+	{ match: "Friday 21st", date: Date.future("21st"), index: 0 },
+	{ match: "Mon 1st", date: Date.future("1st"), index: 33 },
+	{ match: "22nd", date: Date.future("22nd"), index: 20 },
+	], "Friday 21st and the 22nd but not Mon 1st");
+validateExtractText([
+	{ match: "Friday 21st", date: Date.future("21st"), index: 0 },
+	{ match: "Saturday 2nd", date: Date.future("2nd"), index: 12 },
+	{ match: "Wed 3rd", date: Date.future("3rd"), index: 25 },
+	{ match: "Thursday", date: Date.future("Thursday"), index: 38 },
+	], "Friday 21st Saturday 2nd,Wed 3rd then Thursday");
 
