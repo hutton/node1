@@ -57,7 +57,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
-				var dates = Nlp.processBody(calendar, message);
+				var dates = Nlp.processBody(message);
 
 				if (fromAttendee != null){
 					calendar.updateCalendar(fromAttendee, 

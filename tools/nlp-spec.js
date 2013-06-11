@@ -40,7 +40,7 @@ function prettyPrintResult(result){
 	}
 }
 
-console.log(nlp.processBody2("3rd match 18ee not dates 19th end"));
+console.log(nlp.processBody("i can't do 3rd I can do 19th"));
 
 
 // return nlp.addSentimentToMatches("3rd match 18ee not dates 19th end", [

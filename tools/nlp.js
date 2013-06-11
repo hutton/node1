@@ -10,13 +10,41 @@ var classifier = new natural.BayesClassifier();
 function train(){
 	logger.info("Training NLP");
 
-	classifier.addDocument("i can do any dddd.", 'free');
-	classifier.addDocument("i'm free on dddd.", 'free');
-	classifier.addDocument("dddd are no good for me dddd.", 'busy');
-	classifier.addDocument("i'm not free on any dddd.", 'busy');
-	classifier.addDocument("i can only do dddd", 'free');
+	classifier.addDocument("i can do", 'free');
+	classifier.addDocument("i can't do", 'busy');
 
 	classifier.addDocument("would be OK", 'free');
+
+
+	// classifier.addDocument("i'm free on", 'free2');
+	// classifier.addDocument("i can only do", 'free3');
+	// classifier.addDocument("would be OK", 'free4');
+	// classifier.addDocument("works for me", 'free5');
+	// classifier.addDocument("how about", 'free6');
+	// classifier.addDocument("looks OK", 'free7');
+	// classifier.addDocument("I've got no plans for", 'free8');
+	// classifier.addDocument("is best for me", 'free9');
+	// classifier.addDocument("Shall we go for", 'free10');
+	// classifier.addDocument("suggest", 'free11');
+	// classifier.addDocument("might be OK", 'free12');
+	// classifier.addDocument("can do", 'free13');
+	// classifier.addDocument("is best for me", 'free14');
+	// classifier.addDocument("I'm in for", 'free15');
+	// classifier.addDocument("anyone?", 'free17');
+	// classifier.addDocument("I could do", 'free18');
+	// classifier.addDocument("is a possibility", 'free19');
+	// classifier.addDocument("anyone?", 'free20');
+
+	// classifier.addDocument("are no good for me", 'busy1');
+	// classifier.addDocument("isn't great", 'busy2');
+	// classifier.addDocument("i can't do", 'busy3');
+	// classifier.addDocument("can't make", 'busy4');
+	// classifier.addDocument("wont be able to make", 'busy5');
+	// classifier.addDocument("I should be able to make", 'busy6');
+	// classifier.addDocument("I can't do", 'busy7');
+	// classifier.addDocument("I’m away", 'busy8');
+	// classifier.addDocument("can't do", 'busy9');
+	// classifier.addDocument("can’t make it", 'busy10');
 
 	classifier.train();
 }
@@ -229,9 +257,9 @@ function turnMatchesIntoDates(matches){
 		if (!_.isUndefined(match.date)){
 			currentSentiment.push(match.date);
 		} else if (!_.isUndefined(match.sentiment)){
-			if (match.sentiment === "free"){
+			if (match.sentiment.startsWith("free")){
 				currentSentiment = freeDates;
-			} else if (match.sentiment === "busy"){
+			} else if (match.sentiment.startsWith("busy")){
 				currentSentiment = busyDates;
 			}
 		}
@@ -240,7 +268,7 @@ function turnMatchesIntoDates(matches){
 	return [busyDates, freeDates];
 }
 
-function processBody2(body){
+function processBody(body){
 	var sentences = sentenceParser(body);
 
 	var busyDates = [];
@@ -253,14 +281,14 @@ function processBody2(body){
 
 		dates = turnMatchesIntoDates(matches);
 
-		busyDates.push(dates[0]);
-		freeDates.push(dates[1]);
+		busyDates.push.apply(busyDates, dates[0]);
+		freeDates.push.apply(freeDates, dates[1]);
 	});
 
 	return [busyDates, freeDates];
 }
 
-function processBody(calendar, body){
+function processBody2(calendar, body){
 	var busyDates = [];
 	var freeDates = [];
 
