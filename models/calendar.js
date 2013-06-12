@@ -112,7 +112,7 @@ function createCalendar(subject, choices, attendees, from, callback){
 	});
 }
 
-CalendarSchema.statics.newCalendar = function(to, from, subject, message, callback){
+CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, message, callback){
 	var dates =  createDates(0);
 
 	var choices = _.map(dates, function(date){
@@ -129,14 +129,21 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message, callba
 
 	var attendeeAddresses = splitMessage[0];
 	var body = splitMessage[1];
+	var name = "";
 
 	attendeeAddresses.push(from);
 
 	attendeeAddresses = _.uniq(attendeeAddresses);
 
 	var attendees = _.map(attendeeAddresses, function(address){
+		name = "";
+
+		if (address == from){
+			name = fromName;
+		}
+
 		return new Attendee({
-			name: "",
+			name: name,
 			email: address
 		})
 	});
@@ -150,16 +157,7 @@ CalendarSchema.statics.newCalendar = function(to, from, subject, message, callba
 	});
 }
 
-// function ___update(){
-// 	var choice = newCalendar.choices[0];
-
-// 	console.log(choice);
-
-// 	choice.busy.push(newAttendee);
-// }
-
 CalendarSchema.statics.findCalendar = function(id, callback){
-
 	var calendarId = id; // strip rest of address
 
 	Calendar.findOne({id: calendarId}, callback);

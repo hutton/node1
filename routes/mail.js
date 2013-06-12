@@ -21,10 +21,9 @@ function getLocalPartOfEmail(address){
 }
 
 function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
-	logger.info(req.body);
-
 	var message = req.body.text;
 	var to = Mail.getEmailAddresses(req.body.to)[0];
+	var fromName = Mail.getEmailName(req.body.from);
 	var from = Mail.getEmailAddresses(req.body.from)[0];
 
 	if (req.body.html != null){
@@ -33,12 +32,12 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		message = Mail.firstResponse(message);
 	}
 
-	logger.info("Mail from: " + from);
+	logger.info("Mail from: " + from + " (" + fromName + ")");
 	logger.info("Mail to: " + to);
 	logger.info("Mail message: " + message);
 
 	if (startsWith(to, "start@")){
-		var newCalendar = Calendar.newCalendar(to, from, req.body.subject, message, function(newCalendar){
+		var newCalendar = Calendar.newCalendar(to, from, fromName, req.body.subject, message, function(newCalendar){
 			createCalendarCallback(newCalendar);
 		});
 	} else {
@@ -56,6 +55,10 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
+
+				if (fromAttendee.name == ""){
+					fromAttendee.name = fromName;
+				}
 
 				var dates = Nlp.processBody(message);
 
@@ -85,6 +88,8 @@ exports.sendGridReceive = function(req, res){
 		res.send( 200 );
 	},
 	function(error){
+		logger.info(req.body);
+
 		res.send( 500 );
 	});
 
@@ -100,6 +105,8 @@ exports.receive = function(req, res){
 		res.redirect('/calendar/' + calendar.id);	
 	},
 	function(message){
+		logger.info(req.body);
+
 		res.send(message);
 	});
 };

@@ -47,6 +47,16 @@ function getEmailAddresses(text){
     return text.match(re);
 }
 
+function getEmailName(text){
+    var result = text.match(/"[a-z A-Z 0-9]*"/g);
+
+    if (result == null){
+        return "";
+    }
+
+    return result[0].replace(/"/, '');
+}
+
 function sendMail(calendar, subject, message){
 	logger.info("Sending mail to group: " + calendar.id );
 
@@ -79,8 +89,8 @@ function sendMail(calendar, subject, message){
 
 			try{
 				var mail = new SendGrid.Email({
-					to: attendee.email,
-					from: calendar.id + "@convenely.com",
+					to: "\"" + attendee.name + "\"" + " <" + attendee.email + ">",
+					from: "\"" + calendar.name + " via Convenely\"" + " <" + calendar.id + "@convenely.com>",
 					subject: subject,
 					html: html
 				});
@@ -310,5 +320,6 @@ module.exports = {
 	sendMail: sendMail,
 	htmlMailToText: htmlMailToText,
     getEmailAddresses: getEmailAddresses,
-    firstResponse: firstResponse
+    firstResponse: firstResponse,
+    getEmailName: getEmailName
 }
