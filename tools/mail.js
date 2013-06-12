@@ -53,7 +53,7 @@ function getEmailName(text){
         return "";
     }
 
-    return result[0].replace(/"/, '');
+    return result[0].replace(/\"/g,'');
 }
 
 function sendMail(calendar, subject, message){
