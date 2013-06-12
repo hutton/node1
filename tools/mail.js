@@ -1,4 +1,3 @@
-
 var _ = require("underscore");
 var moment = require("moment");
 var SendGrid = require('sendgrid-nodejs');
@@ -89,8 +88,10 @@ function sendMail(calendar, subject, message){
 
 			try{
 				var mail = new SendGrid.Email({
-					to: "\"" + attendee.name + "\"" + " <" + attendee.email + ">",
-					from: "\"" + calendar.name + " via Convenely\"" + " <" + calendar.id + "@convenely.com>",
+					to: attendee.email,
+					toname: attendee.name,
+					from: calendar.id + "@convenely.com",
+					fromname: calendar.name + " via Convenely",
 					subject: subject,
 					html: html
 				});
