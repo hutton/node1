@@ -1,4 +1,3 @@
-
 var SendGrid = require('sendgrid-nodejs');
 var fs = require('fs');
 var Calendar = require("../models/calendar").Calendar;
@@ -88,9 +87,10 @@ exports.sendGridReceive = function(req, res){
 		res.send( 200 );
 	},
 	function(error){
+		logger.info(error);
 		logger.info(req.body);
 
-		res.send( 500 );
+		res.send( 200 );
 	});
 
 }
