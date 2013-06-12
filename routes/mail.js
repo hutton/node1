@@ -1,4 +1,4 @@
-var SendGrid = require('sendgrid-nodejs');
+var SendGrid = require('sendgrid');
 var fs = require('fs');
 var Calendar = require("../models/calendar").Calendar;
 var _ = require("underscore");
@@ -66,7 +66,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 						dates[0], 
 						dates[1]);
 
-					Mail.sendMail(calendar, req.body.subject, message);
+					Mail.sendMail(calendar, req.body.subject, message, fromName);
 				} else {
 					logger.error("Couldn't find " + from + " in calendar " + calendar.name);
 				}

@@ -149,7 +149,7 @@ CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, messa
 	});
 
 	createCalendar(subject, choices, attendees, from, function(newCalendar){
-		Mail.sendMail(newCalendar, subject, body);
+		Mail.sendMail(newCalendar, subject, body, fromName);
 
 		logger.info("Calendar saved: " + newCalendar.id);
 

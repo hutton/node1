@@ -1,6 +1,6 @@
 var _ = require("underscore");
 var moment = require("moment");
-var SendGrid = require('sendgrid-nodejs');
+var SendGrid = require('sendgrid');
 var logger = require("./logger");
 
 var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
@@ -56,7 +56,7 @@ function getEmailName(text){
     return result[0].replace(/\"/g,'');
 }
 
-function sendMail(calendar, subject, message){
+function sendMail(calendar, subject, message, fromName){
 	logger.info("Sending mail to group: " + calendar.id );
 
 	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
@@ -89,12 +89,18 @@ function sendMail(calendar, subject, message){
 			try{
 				var mail = new SendGrid.Email({
 					to: attendee.email,
-					toname: attendee.name,
 					from: calendar.id + "@convenely.com",
-					fromname: calendar.name + " via Convenely",
 					subject: subject,
 					html: html
 				});
+
+                if (attendee.name != null && attendee.name != ""){
+                    mail.toname = attendee.name;
+                }
+
+                if (fromName != ""){
+                    mail.fromname = fromName + " via Convenely";
+                }
 
 				sender.send(mail, function(success, err){
 					if(success) 

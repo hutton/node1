@@ -27,6 +27,7 @@ body {
 .jumbotron h1 {
   font-size: 35px;
   line-height: 1.2em;
+  color: ##4c4c4c;
 }
 .jumbotron .btn {
   font-size: 21px;
@@ -44,4 +45,5 @@ body {
 }
 .lead {
   font-size: 20px;
+  color: #999;
 }

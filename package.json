@@ -15,6 +15,6 @@
     "mongodb": "*",
     "natural": "*",
     "less-middleware": "*",
-    "sendgrid-nodejs": "*"
+    "sendgrid": "*"
   }
 }
