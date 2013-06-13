@@ -50,6 +50,8 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		to = Mail.getEmailAddresses(req.body.to)[0];
 	}
 
+	logger.info(req.body.from);
+
 	var fromName = Mail.getEmailName(req.body.from);
 	var from = Mail.getEmailAddresses(req.body.from)[0];
 	var message = extractMessageFromRequest(req.body);
