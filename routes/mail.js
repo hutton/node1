@@ -80,7 +80,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 exports.sendGridReceive = function(req, res){
 	logger.info("Mail received from SendGrid");
 	
-	logger.info(req);
+	logger.info(req.body);
 
 	processEmailRequest(req, res, function(newCalendar){
 		res.send( 200 );
