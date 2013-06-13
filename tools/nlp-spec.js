@@ -78,24 +78,23 @@ function validate(text, expected){
 	}
 }
 
-// console.log(nlp.getSentiment("i can do 19th"));
-// console.log(nlp.getSentiment("i can't do 3rd"));
-
+// console.log(nlp.getSentiment("_______ isnt great"));
 
 // console.log(nlp.addSentimentToMatches("i can do 3rd i can't do 19th ", [
 // 	{ match: "3rd", date: Date.future("3rd"), index: 9 },
 // 	{ match: "19th", date: Date.future("19th"), index: 25 },
 // 	]));
 
-// validate("21st match", [[],[Date.future("21st")]]);
-// validate("i can do the 21st i can't do the 1st", [[Date.future("1st")],[Date.future("21st")]]);
+validate("21st match", [[],[Date.future("21st")]]);
+validate("i can do the 21st i can't do the 1st", [[Date.future("1st")],[Date.future("21st")]]);
 
 
-// validate("25th would be OK", [[],[Date.future("25th")]]);
-// validate("25th works for me", [[],[Date.future("25th")]]);
-// validate("how about Thurs 25th", [[],[Date.future("25th")]]);
-// validate("Thurs 21st looks OK", [[],[Date.future("25th")]]);
-// validate("next week isn't great", [[Date.future("Monday"),Date.future("Tuesday"),Date.future("Wednesday"),Date.future("Thursday"),Date.future("Friday"),Date.future("Saturday"),Date.future("Sunday")],[]]);
+validate("25th would be OK", [[],[Date.future("25th")]]);
+validate("25th works for me", [[],[Date.future("25th")]]);
+validate("how about Thurs 25th", [[],[Date.future("25th")]]);
+validate("Thurs 21st looks OK", [[],[Date.future("21st")]]);
+validate("next week isn't great", [dateTools.getNextDays(Date.future("Monday"), 7),[]]);
+validate("i can do any day next week", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
 
 
 // // Simple dates e.g. 1st, 22nd 
@@ -143,16 +142,26 @@ function validate(text, expected){
 // 	], "Friday 21st Saturday 2nd,Wed 3rd then Thursday");
 
 // Match weeks i.e. next week
-var dates = dateTools.getNextDays(Date.future("Monday"), 6);
-
-console.log(dates);
+var dates = dateTools.getNextDays(Date.future("Monday"), 7);
 
 validateExtractText([
-	{ match: "next week", date: dates[0], index: 0 },
-	{ match: "next week", date: dates[1], index: 0 },
-	{ match: "next week", date: dates[2], index: 0 },
-	{ match: "next week", date: dates[3], index: 0 },
-	{ match: "next week", date: dates[4], index: 0 },
-	{ match: "next week", date: dates[5], index: 0 },
-	{ match: "next week", date: dates[6], index: 0 },
-	], "next week");
+	{ match: "next week", date: dates[0], index: 17 },
+	{ match: "next week", date: dates[1], index: 17 },
+	{ match: "next week", date: dates[2], index: 17 },
+	{ match: "next week", date: dates[3], index: 17 },
+	{ match: "next week", date: dates[4], index: 17 },
+	{ match: "next week", date: dates[5], index: 17 },
+	{ match: "next week", date: dates[6], index: 17 },
+	], "i can do any day next week if that's ok");
+
+validateExtractText([
+	{ match: "this week", date: dates[0], index: 17 },
+	{ match: "this week", date: dates[1], index: 17 },
+	{ match: "this week", date: dates[2], index: 17 },
+	{ match: "this week", date: dates[3], index: 17 },
+	{ match: "this week", date: dates[4], index: 17 },
+	{ match: "this week", date: dates[5], index: 17 },
+	{ match: "this week", date: dates[6], index: 17 },
+	], "i can do any day this week if that's ok");
+
+

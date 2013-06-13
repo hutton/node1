@@ -4,6 +4,7 @@ var natural = require("natural");
 var moment = require("moment");
 var sugar = require("sugar");
 var logger = require("../tools/logger");
+var dateTools = require("../tools/dates");
 
 var classifier = new natural.BayesClassifier();
 
@@ -68,11 +69,12 @@ function blankMatches(text, matches){
 		if (!finished && charIndex >= match.index){
 			string += "_";
 
-			if (charIndex >= (match.index + match.match.length - 1)){					
+			while (charIndex >= (match.index + match.match.length - 1)){					
 				matchIndex++;
 
 				if (matchIndex > matches.length - 1){
 					finished = true;
+					break;
 				}
 
 				match = matches[matchIndex];
@@ -160,6 +162,33 @@ function twoPartDate(text){
 	return matches;
 }
 
+function matchWeeks(text){
+  var re = /(next week)/ig
+ 
+	var result;
+	var matches = [];
+ 
+	while((result = re.exec(text)) !== null){
+
+		var formattedDay = formatDay(result[0]);
+
+		var days = dateTools.getNextDays(Date.future("Monday"), 7);
+
+		days.each(function(day){
+			var match = {
+				match: result[0],
+				date: day,
+				index: result.index
+			};
+	 
+			matches.push(match);
+		});
+	}
+ 
+	return matches;
+}
+
+
 function extractDates(text){
 	var matches = [];
 
@@ -168,6 +197,8 @@ function extractDates(text){
 	matches.push.apply(matches, simpleDate(text));
 	text = blankMatches(text, matches);
 	matches.push.apply(matches, simpleDay(text));
+	text = blankMatches(text, matches);
+	matches.push.apply(matches, matchWeeks(text));
 	text = blankMatches(text, matches);
 
 	return matches;
@@ -190,7 +221,7 @@ function addSentimentToMatches(text, matches){
 	var matchIndex = 0;
 	var match = matches[matchIndex];
 
-	while (splitStart < text.length){
+	while (splitStart < text.length || matchIndex < matches.length){
 		var sentimentText = text.slice(splitStart, match.index);
 		var sentiment = getSentiment(sentimentText);
 
@@ -253,16 +284,28 @@ function turnMatchesIntoDates(matches){
 	var busyDates = [];
 	var freeDates = [];
 
-	var currentSentiment = freeDates;
+	var currentSentiment = null;
+
+	var dateToAddToNextSentiment = [];
 
 	matches.each(function(match){
 		if (!_.isUndefined(match.date)){
-			currentSentiment.push(match.date);
+			if (currentSentiment == null){
+				dateToAddToNextSentiment.push(match.date);
+			} else {
+				currentSentiment.push(match.date);
+			}
 		} else if (!_.isUndefined(match.sentiment)){
 			if (match.sentiment.startsWith("free")){
 				currentSentiment = freeDates;
 			} else if (match.sentiment.startsWith("busy")){
 				currentSentiment = busyDates;
+			}
+
+			if (dateToAddToNextSentiment.length > 0){
+				currentSentiment.push.apply(currentSentiment, dateToAddToNextSentiment);
+
+				dateToAddToNextSentiment = [];
 			}
 		}
 	});

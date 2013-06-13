@@ -1,7 +1,7 @@
 var sugar = require("sugar");
 
 function getNextDays(startDate, count){
-	var result = [startDate];
+	var result = [];
 
 	while(count-- > 0){
 		result.push(new Date(startDate));
