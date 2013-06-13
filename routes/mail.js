@@ -22,14 +22,12 @@ function getLocalPartOfEmail(address){
 function extractMessageFromRequest(requestBody){
 	var message = "";
 
-	if (_.has(requestBody,"stripped-html") && requestBody['stripped-html'] != null){
-		logger.info("Getting stripped-html:" + requestBody['stripped-html']);
+	logger.info(requestBody);
 
+	if (_.has(requestBody,"stripped-html") && requestBody['stripped-html'] != null){
 		message = Mail.htmlMailToText(requestBody['stripped-html']);
 	}
 	else if (_.has(requestBody,"stripped-text") && requestBody['stripped-text'] != null){
-		logger.info("Getting stripped-text:" + requestBody['stripped-text']);
-
 		message = requestBody['stripped-text'];
 	} else if (_.has(requestBody,"html") && requestBody.html != null){
 		message = Mail.htmlMailToText(requestBody.html);
