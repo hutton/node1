@@ -19,17 +19,40 @@ function getLocalPartOfEmail(address){
 	return address.split("@")[0];
 }
 
-function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
-	var message = req.body.text;
-	var to = Mail.getEmailAddresses(req.body.to)[0];
-	var fromName = Mail.getEmailName(req.body.from);
-	var from = Mail.getEmailAddresses(req.body.from)[0];
+function extractMessageFromRequest(requestBody){
+	var message = "";
 
-	if (req.body.html != null){
-		message = Mail.htmlMailToText(req.body.html);
+	if (_.has(requestBody,"stripped-html") && requestBody['stripped-html'] != null){
+		message = Mail.htmlMailToText(requestBody['stripped-html']);
+	}
+	else if (_.has(requestBody,"stripped-text") && requestBody['stripped-text'] != null){
+		message = requestBody['stripped-text'];
+	} else if (_.has(requestBody,"html") && requestBody.html != null){
+		message = Mail.htmlMailToText(requestBody.html);
+
+		message = Mail.firstResponse(message);
+	} else {
+		message = requestBody.text;
 
 		message = Mail.firstResponse(message);
 	}
+
+	return message;
+}
+
+function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
+	
+	var to = "";
+
+	if (_.has(req.body,"recipient")){
+		to = Mail.getEmailAddresses(req.body.recipient)[0];
+	} else {
+		to = Mail.getEmailAddresses(req.body.to)[0];
+	}
+
+	var fromName = Mail.getEmailName(req.body.from);
+	var from = Mail.getEmailAddresses(req.body.from)[0];
+	var message = extractMessageFromRequest(req.body);
 
 	logger.info("Mail from: " + from + " (" + fromName + ")");
 	logger.info("Mail to: " + to);
@@ -78,10 +101,8 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 }
 
 exports.sendGridReceive = function(req, res){
-	logger.info("Mail received from SendGrid");
+	logger.info("Mail received from HTTP POST");
 	
-	logger.info(req.body);
-
 	processEmailRequest(req, res, function(newCalendar){
 		res.send( 200 );
 	},
@@ -90,7 +111,6 @@ exports.sendGridReceive = function(req, res){
 	},
 	function(error){
 		logger.info(error);
-		logger.info(req.body);
 
 		res.send( 200 );
 	});
