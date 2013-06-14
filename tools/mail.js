@@ -47,13 +47,13 @@ function getEmailAddresses(text){
 }
 
 function getEmailName(text){
-    var result = text.match(/"[a-z A-Z 0-9]*"/g);
+    var result = text.match(/"[a-z A-Z 0-9 "']*(?=<)"/g);
 
     if (result == null){
         return "";
     }
 
-    return result[0].replace(/\"/g,'');
+    return result[0].replace(/\"/g,'').trim();
 }
 
 function sendMail(calendar, subject, message, fromName){
