@@ -22,8 +22,6 @@ function getLocalPartOfEmail(address){
 function extractMessageFromRequest(requestBody){
 	var message = "";
 
-	logger.info(requestBody);
-
 	if (_.has(requestBody,"stripped-text") && requestBody['stripped-text'] != null){
 		message = requestBody['stripped-text'];
 	}
