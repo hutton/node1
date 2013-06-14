@@ -26,9 +26,13 @@ function extractMessageFromRequest(requestBody){
 
 	if (_.has(requestBody,"body-plain") && requestBody['body-plain'] != null){
 		message = requestBody['body-plain'];
+
+		message = Mail.firstResponse(message);
 	}
 	else if (_.has(requestBody,"body-html") && requestBody['body-html'] != null){
 		message = Mail.htmlMailToText(requestBody['body-html']);
+
+		message = Mail.firstResponse(message);
 	} else if (_.has(requestBody,"html") && requestBody.html != null){
 		message = Mail.htmlMailToText(requestBody.html);
 
