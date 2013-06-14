@@ -97,6 +97,9 @@ validate("next week isn't great", [dateTools.getNextDays(Date.future("Monday"), 
 validate("i can do any day next week", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
 
 
+
+// I can do next week.  I can't do Wednesday
+
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([
 // 	{ match: "21st", date: Date.future("21st"), index: 0 },

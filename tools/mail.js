@@ -47,7 +47,7 @@ function getEmailAddresses(text){
 }
 
 function getEmailName(text){
-    var result = text.match(/"[a-z A-Z 0-9 "']*(?=<)"/g);
+    var result = text.match(/[a-z A-Z 0-9 "']*(?=<)/g);
 
     if (result == null){
         return "";
