@@ -69,7 +69,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 			createCalendarCallback(newCalendar);
 		});
 	} else {
-		var localEmail = getLocalPartOfEmail(from);
+		var localEmail = getLocalPartOfEmail(to);
 
 		var calendar = Calendar.findCalendar(localEmail, function(err, calendar){
 			if (err){

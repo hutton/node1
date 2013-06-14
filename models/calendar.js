@@ -164,8 +164,6 @@ CalendarSchema.statics.findCalendar = function(id, callback){
 }
 
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
-	logger.info("Updating calendar");
-
 	var self = this;
 
 	logger.info(attendee.email + " is busy on " + busyDates);
