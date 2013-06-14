@@ -89,7 +89,7 @@ function sendMail(calendar, subject, message, fromName){
 			try{
 				var mail = new SendGrid.Email({
 					to: attendee.email,
-					from: calendar.id + "@convenely.com",
+					from: calendar.id + "@convenely.mailgun.org",
 					subject: subject,
 					html: html
 				});
