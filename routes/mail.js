@@ -24,11 +24,11 @@ function extractMessageFromRequest(requestBody){
 
 	logger.info(requestBody);
 
-	if (_.has(requestBody,"stripped-text") && requestBody['stripped-text'] != null){
-		message = requestBody['stripped-text'];
+	if (_.has(requestBody,"body-plain") && requestBody['body-plain'] != null){
+		message = requestBody['body-plain'];
 	}
-	else if (_.has(requestBody,"stripped-html") && requestBody['stripped-html'] != null){
-		message = Mail.htmlMailToText(requestBody['stripped-html']);
+	else if (_.has(requestBody,"body-html") && requestBody['body-html'] != null){
+		message = Mail.htmlMailToText(requestBody['body-html']);
 	} else if (_.has(requestBody,"html") && requestBody.html != null){
 		message = Mail.htmlMailToText(requestBody.html);
 
