@@ -20,10 +20,13 @@
 				
 				<div class="column" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 300px;float: left;">
 				<table style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
+				<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+						<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
-						<p style="margin: 0;padding: 0;font-family: Arial;margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;"><%= message %></p>
+						<p style="margin: 0;padding: 0;font-family: Arial;margin-bottom: 10px;font-weight: normal;font-size: 16px;line-height: 1.6;"><%= message %></p>
 					</td>
+					<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
 				</tr>
 				<tr height="20" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 			</table>
@@ -55,22 +58,11 @@
 						</table>
 					</td>
 				</tr>
-				<% } else { %>
-				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
-					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
-						<table border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
-							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
-							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
-								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em; text-align: center;">Availability by <b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;">Convenely.com</a></b>  <a href="http://convenely.com/" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #2BA6CB;">Learn more</a></td>
-							</tr>
-							<tr height="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
-						</table>
-					</td>
-				</tr>
 				<% } %>
 				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
 						<table class="avail-table" border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;font-size: 12px;color: #808080;width: 100%;">
+							<tr colspan="3" height="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
 							<% _.each(choices, function(choice) { %> 
 							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
 								<td width="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></td>
@@ -121,7 +113,20 @@
 						</table>
 					</td>
 				</tr>
+				<% } else { %>
+				<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+					<td style="margin: 0;padding: 0;font-family: Arial, sans-serif;">				
+						<table border="0" cellspacing="0" style="margin: 0;padding: 0;font-family: Arial, sans-serif;width: 100%;">
+							<tr height="5" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
+							<tr style="margin: 0;padding: 0;font-family: Arial, sans-serif;">
+								<td class="sidebar-note" style="margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: normal;font-size: 13px;color: #808080;background: #f1f1f1;line-height: 1.6em; text-align: center;">Availability by <b style="margin: 0;padding: 0;font-family: Arial, sans-serif;"><a href="#" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;">Convenely.com</a></b>  <a href="http://convenely.com/" style="margin: 0;padding: 0;font-family: Arial, sans-serif;color: #2BA6CB;">Learn more</a></td>
+							</tr>
+							<tr height="10" style="margin: 0;padding: 0;font-family: Arial, sans-serif;"></tr>
+						</table>
+					</td>
+				</tr>
 				<% } %>
+
 			</table>				
 			</div>
 				<div class="clear" style="margin: 0;padding: 0;font-family: Arial, sans-serif;display: block;clear: both;"></div>			
