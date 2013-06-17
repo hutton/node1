@@ -100,6 +100,7 @@ validate("i can do any day next week", [[],dateTools.getNextDays(Date.future("Mo
 
 // I can do next week.  I can't do Wednesday
 // Me can't do Wednesday. Me busy on Thursday 
+// I can't on tuesday or wednesday. I can do thursday
 
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([
