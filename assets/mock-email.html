@@ -12,11 +12,12 @@
 			margin-top: 50px;
 			width: 500px;
 			height: 350px;
-			border: 3px #eee solid;
-			border-radius: 5px;
+			border: 3px #bbb solid;
+			border-radius: 10px;
 			font-family: Arial;
 			font-size: 13px;
-			color: #bbb;
+			color: #999;
+			overflow: hidden;
 		}
 
 		.header{
@@ -25,7 +26,7 @@
 
 		.header-title{
 			text-align: center;
-			padding: 2px 0px 5px 0px;
+			padding: 5px 0px 10px 0px;
 		}
 
 		.header-row{
@@ -52,11 +53,37 @@
 			margin: 5px 10px;
 			line-height: 1.4em;
 		}
+
+		.body-text{
+			float: left;
+			margin-top: 7px;
+		}
+
+		#start-mail{
+		}
+
+		#started-mail{
+			height: 460px;
+		}
+
+		#started-table{
+			float: right;
+			width: 240px;
+		}
+
+		#avail-mail{
+			height: 460px;
+		}
+
+		#avail-table{
+			float: right;
+			width: 240px;
+		}
 	</style>
 </head>
  
 <body>
-	<div class="mail">
+	<div class="mail" id="start-mail">
 		<div class="header">
 			<div class="header-title">
 				New email
@@ -64,14 +91,6 @@
 			<div class="header-row">
 				<div class="header-label">
 					To:
-				</div>
-				<div class="header-field">
-					start@convenly.com
-				</div>
-			</div>
-			<div class="header-row">
-				<div class="header-label">
-					From:
 				</div>
 				<div class="header-field">
 					start@convenly.com
@@ -99,6 +118,87 @@ gilberte@bookmarks.io<br/>
 aschermerhorn@oneline.co<br/> 
 sgerrity@gmail.com<br/> 
  
+ 		</div>
+	</div>
+
+	<div class="mail" id="started-mail">
+		<div class="header">
+			<div class="header-title">
+				Re: Poker night
+			</div>
+			<div class="header-row">
+				<div class="header-label">
+					To:
+				</div>
+				<div class="header-field">
+					scott@ourwork.com
+				</div>
+			</div>
+			<div class="header-row">
+				<div class="header-label">
+					From:
+				</div>
+				<div class="header-field">
+					poker-night@convenly.com
+				</div>
+			</div>
+			<div class="header-row">
+				<div class="header-label">
+					Subject:
+				</div>
+				<div class="header-field">
+					Re: Poker night
+				</div>
+			</div>
+		</div>
+		<div class="body">
+			<div class="body-text">
+				Hi guys, time for another poker night.<br/> When can you do?
+
+				<br/> 
+	 		</div>
+			<img id="started-table" src="startedtable.png"/>
+ 		</div>
+	</div>
+
+	<div class="mail" id="avail-mail">
+		<div class="header">
+			<div class="header-title">
+				Re: Poker night
+			</div>
+			<div class="header-row">
+				<div class="header-label">
+					To:
+				</div>
+				<div class="header-field">
+					scott@ourwork.com
+				</div>
+			</div>
+			<div class="header-row">
+				<div class="header-label">
+					From:
+				</div>
+				<div class="header-field">
+					poker-night@convenly.com
+				</div>
+			</div>
+			<div class="header-row">
+				<div class="header-label">
+					Subject:
+				</div>
+				<div class="header-field">
+					Re: Poker night
+				</div>
+			</div>
+		</div>
+		<div class="body">
+			<div class="body-text">
+				Ok, looks like next Thursday is best for </br>
+				 everyone, see you around 8.</br>
+				 </br>
+				...and don't forget to bring chips!
+			</div>
+			<img id="avail-table" src="availtable.png"/>
  		</div>
 	</div>
 </body>
