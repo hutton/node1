@@ -10,7 +10,7 @@ function firstResponse(fullMessage) {
     var outlookMatch = /^.*On.*(\n)?wrote:$/m;
     var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
-    var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely.com\s+wrote:/m;
+    var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely\s+wrote:/m;
     var regex4 = /-+original\s+message-+\s*$/m;
     var regex5 = /from:\s*$/m;
  
