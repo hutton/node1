@@ -11,6 +11,20 @@ function getNextDays(startDate, count){
 	return result;
 }
 
+function getThisWeekDays(){
+	var result = [];
+
+	var startDate = Date.create("today");
+
+	do {
+		result.push(new Date(startDate));
+		startDate.advance("1 day");
+	} while(startDate.getDay() != 1)
+
+	return result;
+}
+
 module.exports = {
-	getNextDays: getNextDays
+	getNextDays: getNextDays,
+	getThisWeekDays: getThisWeekDays
 }

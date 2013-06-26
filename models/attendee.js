@@ -11,6 +11,10 @@ var AttendeeSchema = new mongoose.Schema({
 	}
 });
 
+AttendeeSchema.methods.prettyName = function(){
+	return name || email;
+}
+
 var Attendee = mongoose.model('Attendee', AttendeeSchema);
 
 module.exports = {

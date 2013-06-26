@@ -12,33 +12,31 @@ function train(){
 	logger.info("Training NLP");
 
 	classifier.addDocument("i can do xxxx", 'free');
-	classifier.addDocument("i cant do xxxx", 'busy');
-
 	classifier.addDocument("would be OK", 'free');
-	classifier.addDocument("would not be OK", 'busy');
-
-
 	classifier.addDocument("im free on xxxx", 'free');
 	classifier.addDocument("i can only do xxxx", 'free');
-	classifier.addDocument("xxxx would be OK", 'free');
-	classifier.addDocument("xxxx works for me", 'free');
+	classifier.addDocument("xxxx would be OK", 'free-backwards');
+	classifier.addDocument("xxxx works for me", 'free-backwards');
 	classifier.addDocument("how about xxxx", 'free');
-	classifier.addDocument("looks OK", 'free');
+	classifier.addDocument("xxxx looks OK", 'free-backwards');
 	classifier.addDocument("Ive got no plans for xxxx", 'free');
-	classifier.addDocument("xxxx is best for me", 'free');
+	classifier.addDocument("xxxx is best for me", 'free-backwards');
 	classifier.addDocument("Shall we go for xxxx", 'free');
 	classifier.addDocument("suggest", 'free');
-	classifier.addDocument("xxxx might be OK", 'free');
+	classifier.addDocument("xxxx might be OK", 'free-backwards');
 	classifier.addDocument("can do xxxx", 'free');
-	classifier.addDocument("xxxx is best for me", 'free');
+	classifier.addDocument("xxxx is best for me", 'free-backwards');
 	classifier.addDocument("Im in for xxxx", 'free');
-	classifier.addDocument("xxxx anyone?", 'free');
+	classifier.addDocument("xxxx anyone?", 'free-backwards');
 	classifier.addDocument("I could do xxxx", 'free');
-	classifier.addDocument("xxxx is a possibility", 'free');
-	classifier.addDocument("xxxx anyone?", 'free');
+	classifier.addDocument("xxxx is a possibility", 'free-backwards');
+	classifier.addDocument("xxxx anyone?", 'free-backwards');
+	classifier.addDocument("I should be able to make xxxx", 'free');
 
-	classifier.addDocument("xxxx are no good for me", 'busy');
-	classifier.addDocument("xxxx isnt great", 'busy');
+	classifier.addDocument("would not be OK", 'busy');
+	classifier.addDocument("i cant do xxxx", 'busy');
+	classifier.addDocument("xxxx are no good for me", 'busy-backwards');
+	classifier.addDocument("xxxx isnt great", 'busy-backwards');
 	classifier.addDocument("i cant do xxxx", 'busy');
 	classifier.addDocument("cant make xxxx", 'busy');
 	classifier.addDocument("wont be able to make xxxx", 'busy');
@@ -46,6 +44,10 @@ function train(){
 	classifier.addDocument("Im away xxxx", 'busy');
 	classifier.addDocument("cant do xxxx", 'busy');
 	classifier.addDocument("cant make it xxxx", 'busy');
+	classifier.addDocument("xxxx is bad", 'busy-backwards');
+	classifier.addDocument("busy on xxxx", 'busy');
+	classifier.addDocument("cant make it on xxxx", 'busy');
+
 
 	classifier.train();
 }
@@ -119,7 +121,7 @@ function formatDay(day){
 
 // Simple day e.g. Wednesday, thurs, fri
 function simpleDay(text){
-  var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri)/ig
+  var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|today|tomorrow)/ig
  
 	var result;
 	var matches = [];
@@ -162,19 +164,19 @@ function twoPartDate(text){
 	return matches;
 }
 
-function matchWeeks(text){
-  var re = /(next week)/ig
+function matchThisWeekAndNext(text){
+  	var re = /(this week and next)/ig
  
 	var result;
 	var matches = [];
  
 	while((result = re.exec(text)) !== null){
 
-		var formattedDay = formatDay(result[0]);
+		var thisWeekAndNext = dateTools.getThisWeekDays();
 
-		var days = dateTools.getNextDays(Date.future("Monday"), 7);
+		thisWeekAndNext.push.apply(thisWeekAndNext,dateTools.getNextDays(Date.future("Monday"), 7));
 
-		days.each(function(day){
+		thisWeekAndNext.each(function(day){
 			var match = {
 				match: result[0],
 				date: day,
@@ -188,16 +190,87 @@ function matchWeeks(text){
 	return matches;
 }
 
+function matchWeeks(text){
+  	var re = /(next week)/ig
+ 
+	var result;
+	var matches = [];
+ 
+	while((result = re.exec(text)) !== null){
+
+		var days = dateTools.getNextDays(Date.future("Monday"), 7);
+
+		days.each(function(day){
+			var match = {
+				match: result[0],
+				date: day,
+				index: result.index
+			};
+	 
+			matches.push(match);
+		});
+	}
+
+  	re = /(this week)/ig
+ 
+	while((result = re.exec(text)) !== null){
+
+		var days = dateTools.getThisWeekDays();
+
+		days.each(function(day){
+			var match = {
+				match: result[0],
+				date: day,
+				index: result.index
+			};
+	 
+			matches.push(match);
+		});
+	}
+
+ 
+	return matches;
+}
+
+function monthDate(text){
+  var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|) (january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec) [0-9]{1,2}(th|rd|st|nd|)/ig
+ 
+	var result;
+	var matches = [];
+ 
+	while((result = re.exec(text)) !== null){
+
+		var match = {
+			match: result[0],
+			date: Date.future(result[0]),
+			index: result.index
+		};
+
+		matches.push(match);
+	}
+
+	return matches;
+}
+
 
 function extractDates(text){
 	var matches = [];
 
+	matches.push.apply(matches, monthDate(text));
+	text = blankMatches(text, matches);
+
 	matches.push.apply(matches, twoPartDate(text));
 	text = blankMatches(text, matches);
+
 	matches.push.apply(matches, simpleDate(text));
 	text = blankMatches(text, matches);
+
 	matches.push.apply(matches, simpleDay(text));
 	text = blankMatches(text, matches);
+
+	matches.push.apply(matches, matchThisWeekAndNext(text));
+	text = blankMatches(text, matches);
+
 	matches.push.apply(matches, matchWeeks(text));
 	text = blankMatches(text, matches);
 
@@ -225,7 +298,7 @@ function addSentimentToMatches(text, matches){
 		var sentimentText = text.slice(splitStart, match.index);
 		var sentiment = getSentiment(sentimentText);
 
-		if (sentimentText.length > 1){
+		if (sentimentText.trim().length > 2){
 			matchesWithSentiment.push({match: sentimentText, sentiment: sentiment, index: splitStart});
 		}
 
@@ -253,62 +326,64 @@ function addSentimentToMatches(text, matches){
 }
 
 function sentenceParser(text) {
-    var tmp = text.split(/(\S.+?[.])(?=\s+|$)/g);
-    var sentences = [];
-    //join acronyms, titles
-    for (var i in tmp) {
-        if (tmp[i]) {
-            tmp[i] = tmp[i].replace(/^\s+|\s+$/g, ''); //trim extra whitespace
-            //join common abbreviations + acronyms
-            if (tmp[i].match(/(^| )(mr|dr|llb|md|bl|phd|ma|ba|mrs|miss|misses|mister|sir|esq|mstr|jr|sr|st|lit|inc|fl|ex|eg|jan|feb|mar|apr|jun|aug|sept?|oct|nov|dec)\. ?$/i) || tmp[i].match(/[ |\.][a-z]\.?$/i)) {
-                tmp[parseInt(i) + 1] = tmp[i] + ' ' + tmp[parseInt(i) + 1];
-            }
-            else {
-                sentences.push(tmp[i]);
-                tmp[i] = '';
-            }
-        }
-    }   
-    //cleanup afterwards
-    var clean = [];
-    for (var i in sentences) {
-        sentences[i] = sentences[i].replace(/^\s+|\s+$/g, ''); //trim extra whitespace
-        if (sentences[i]) {
-            clean.push(sentences[i]);
-        }
-    }
-    return clean;
+  	return text.split(/(\S.+?[.!?])(?=\s+|$)/).exclude(function(s){
+		return s.trim().length == 0;
+	});
 }
 
 function turnMatchesIntoDates(matches){
 	var busyDates = [];
 	var freeDates = [];
 
-	var currentSentiment = null;
+	var previousSentiment = '';
+	var latestSentiment = '';
 
 	var dateToAddToNextSentiment = [];
 
 	matches.each(function(match){
 		if (!_.isUndefined(match.date)){
-			if (currentSentiment == null){
-				dateToAddToNextSentiment.push(match.date);
-			} else {
-				currentSentiment.push(match.date);
-			}
+			dateToAddToNextSentiment.push(match.date);
 		} else if (!_.isUndefined(match.sentiment)){
-			if (match.sentiment.startsWith("free")){
-				currentSentiment = freeDates;
-			} else if (match.sentiment.startsWith("busy")){
-				currentSentiment = busyDates;
-			}
+			previousSentiment = latestSentiment;
+			latestSentiment = match.sentiment;
 
 			if (dateToAddToNextSentiment.length > 0){
-				currentSentiment.push.apply(currentSentiment, dateToAddToNextSentiment);
-
-				dateToAddToNextSentiment = [];
+				if (previousSentiment != ''){
+					if (latestSentiment === "free-backwards"){
+						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+					} else if (latestSentiment === "busy-backwards"){
+						busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+					} else if (previousSentiment.startsWith("free")){
+						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+					} else if (previousSentiment.startsWith("busy")){
+						busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+					} else {
+						// Default add to free
+						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+					}
+	
+					dateToAddToNextSentiment = [];
+				}
 			}
 		}
 	});
+
+	if (dateToAddToNextSentiment.length > 0){
+		if (latestSentiment === "free-backwards"){
+			freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+		} else if (latestSentiment === "busy-backwards"){
+			busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+		} else if (latestSentiment === "free"){
+			freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+		} else if (latestSentiment === "busy"){
+			busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+		} else {
+			// Default add to free
+			freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+		}
+
+		dateToAddToNextSentiment = [];
+	}
 
 	return [busyDates, freeDates];
 }
@@ -320,31 +395,15 @@ function processBody(body){
 	var freeDates = [];
 
 	sentences.each(function(sentence){
-		var matches = extractDates(body);
+		var matches = extractDates(sentence);
 
-		matches = addSentimentToMatches(body, matches);
+		matches = addSentimentToMatches(sentence, matches);
 
 		dates = turnMatchesIntoDates(matches);
 
 		busyDates.push.apply(busyDates, dates[0]);
 		freeDates.push.apply(freeDates, dates[1]);
 	});
-
-	return [busyDates, freeDates];
-}
-
-function processBody2(calendar, body){
-	var busyDates = [];
-	var freeDates = [];
-
-	var freeMoment = moment().add({d:_.random(0,14)});
-	var busyMoment = moment().add({d:_.random(0,14)});
-
-	var freeDate = new Date(freeMoment.year(), freeMoment.month(), freeMoment.date());
-	var busyDate = new Date(busyMoment.year(), busyMoment.month(), busyMoment.date());
-
-	busyDates = [freeDate];
-	freeDates = [busyDate];
 
 	return [busyDates, freeDates];
 }

@@ -85,22 +85,47 @@ function validate(text, expected){
 // 	{ match: "19th", date: Date.future("19th"), index: 25 },
 // 	]));
 
+
+var thisWeekAndNext = dateTools.getThisWeekDays();
+thisWeekAndNext.push.apply(thisWeekAndNext,dateTools.getNextDays(Date.future("Monday"), 7));
+
 validate("21st match", [[],[Date.future("21st")]]);
 validate("i can do the 21st i can't do the 1st", [[Date.future("1st")],[Date.future("21st")]]);
-
-
 validate("25th would be OK", [[],[Date.future("25th")]]);
 validate("25th works for me", [[],[Date.future("25th")]]);
 validate("how about Thurs 25th", [[],[Date.future("25th")]]);
 validate("Thurs 21st looks OK", [[],[Date.future("21st")]]);
 validate("next week isn't great", [dateTools.getNextDays(Date.future("Monday"), 7),[]]);
 validate("i can do any day next week", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
-
-
-
-// I can do next week.  I can't do Wednesday
-// Me can't do Wednesday. Me busy on Thursday 
-// I can't on tuesday or wednesday. I can do thursday
+validate("i can do any day this week", [[],dateTools.getThisWeekDays()]);
+validate("i can't do any day next week", [dateTools.getNextDays(Date.future("Monday"), 7),[]]);
+validate("i can't do any day this week", [dateTools.getThisWeekDays(),[]]);
+validate("well this week is bad for me", [dateTools.getThisWeekDays(),[]]);
+validate("I can't do Wednesday", [[Date.future("Wednesday")],[]]);
+validate("I can do next week", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
+validate("I can do next week. I can't do Wednesday", [[Date.future("Wednesday")],dateTools.getNextDays(Date.future("Monday"), 7)]);
+validate("Me can't do Wednesday. Me busy on Thursday", [[Date.future("Wednesday"), Date.future("Thursday")],[]]);
+validate("I can't on tuesday or wednesday. I can do thursday", [[Date.future("Tuesday"), Date.future("Wednesday")],[Date.future("Thursday")]]);
+validate("I’m away this week", [dateTools.getThisWeekDays(),[]]);
+validate("Thursday is best for me", [[],[Date.future("Thursday")]]);
+validate("Wednesday works for me.", [[],[Date.future("Wednesday")]]);
+validate("Shall we go for Wednesday", [[],[Date.future("Wednesday")]]);
+validate("suggest Wednesday 19th?", [[],[Date.future("19th")]]);
+validate("How about 12th / 13th, 19th / 20th Dec? ", [[],[Date.future("12th"),Date.future("13th"),Date.future("19th"),Date.future("20th")]]);
+validate("might be OK for 1st", [[],[Date.future("1st")]]);
+validate("Can't do 31st", [[Date.future("31st")],[]]);
+validate("can't make tomorrow", [[Date.create("tomorrow")],[]]);
+validate("can't make today", [[Date.create("today")],[]]);
+validate("31st or 1st Nov.", [[],[Date.future("31st"), Date.future("1st")]]);
+validate("wont be able to make the 31st", [[Date.future("31st")],[]]);
+validate("Wednesday Oct 31st is best for me", [[],[Date.future("Oct 31st")]]);
+validate("I'm in for Wednesday 29th", [[],[Date.future("29th")]]);
+validate("I should be able to make the 29th", [[],[Date.future("29th")]]);
+validate("can't make it on the 31st", [[Date.future("31st")],[]]);
+validate("I can't do 30th", [[Date.future("30th")],[]]);
+validate("Friday 3rd anyone?", [[],[Date.future("3rd")]]);
+validate("the 3rd is a possibility.", [[],[Date.future("3rd")]]);
+validate("I‘m away this week and next", [thisWeekAndNext,[]]);
 
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([
@@ -147,26 +172,26 @@ validate("i can do any day next week", [[],dateTools.getNextDays(Date.future("Mo
 // 	], "Friday 21st Saturday 2nd,Wed 3rd then Thursday");
 
 // Match weeks i.e. next week
-var dates = dateTools.getNextDays(Date.future("Monday"), 7);
+// var dates = dateTools.getNextDays(Date.future("Monday"), 7);
 
-validateExtractText([
-	{ match: "next week", date: dates[0], index: 17 },
-	{ match: "next week", date: dates[1], index: 17 },
-	{ match: "next week", date: dates[2], index: 17 },
-	{ match: "next week", date: dates[3], index: 17 },
-	{ match: "next week", date: dates[4], index: 17 },
-	{ match: "next week", date: dates[5], index: 17 },
-	{ match: "next week", date: dates[6], index: 17 },
-	], "i can do any day next week if that's ok");
+// var thisWeek = dateTools.getThisWeekDays();
 
-validateExtractText([
-	{ match: "this week", date: dates[0], index: 17 },
-	{ match: "this week", date: dates[1], index: 17 },
-	{ match: "this week", date: dates[2], index: 17 },
-	{ match: "this week", date: dates[3], index: 17 },
-	{ match: "this week", date: dates[4], index: 17 },
-	{ match: "this week", date: dates[5], index: 17 },
-	{ match: "this week", date: dates[6], index: 17 },
-	], "i can do any day this week if that's ok");
+// validateExtractText([
+// 	{ match: "next week", date: dates[0], index: 17 },
+// 	{ match: "next week", date: dates[1], index: 17 },
+// 	{ match: "next week", date: dates[2], index: 17 },
+// 	{ match: "next week", date: dates[3], index: 17 },
+// 	{ match: "next week", date: dates[4], index: 17 },
+// 	{ match: "next week", date: dates[5], index: 17 },
+// 	{ match: "next week", date: dates[6], index: 17 },
+// 	], "i can do any day next week if that's ok");
+
+// var matchDays = [];
+
+// thisWeek.each(function(day){
+// 	matchDays.push({match: "this week", date: day, index: 17});
+// });
+
+// validateExtractText(matchDays, "i can do any day this week if that's ok");
 
 
