@@ -59,11 +59,7 @@ exports.view = function(req, res){
 			});
 
 			_.each(calendar.attendees, function(attendee){
-				if (attendee.name != null && attendee.name != ""){
-		                    	attendee.prettyName = attendee.name;
-		                } else {
-		                	attendee.prettyName = attendee.email;
-		                }
+				attendee.prettyName = attendee.name || attendee.email;
 			});
 
 			logger.info("Showing: " + calendar.name);
