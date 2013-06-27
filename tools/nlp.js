@@ -48,6 +48,7 @@ function train(){
 	classifier.addDocument("busy on xxxx", 'busy');
 	classifier.addDocument("cant make it on xxxx", 'busy');
 
+	classifier.addDocument("xxxx except xxxx", 'flip');
 
 	classifier.train();
 }
@@ -228,6 +229,28 @@ function matchWeeks(text){
 		});
 	}
 
+  	re = /(week of the|week of) (monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|)?( |)[0-9]{1,2}(th|rd|st|nd|)/ig
+ 
+	while((result = re.exec(text)) !== null){
+
+		var datePartMatch = result[0].match("[0-9]{1,2}(th|rd|st|nd)");
+
+		if (datePartMatch != null && datePartMatch.length > 0){
+			var days = dateTools.getNextDays(Date.future(datePartMatch[0]), 7);
+
+			days.each(function(day){
+				var match = {
+					match: result[0],
+					date: day,
+					index: result.index
+				};
+		 
+				matches.push(match);
+			});
+		}
+	}
+
+
  
 	return matches;
 }
@@ -256,6 +279,12 @@ function monthDate(text){
 function extractDates(text){
 	var matches = [];
 
+	matches.push.apply(matches, matchThisWeekAndNext(text));
+	text = blankMatches(text, matches);
+
+	matches.push.apply(matches, matchWeeks(text));
+	text = blankMatches(text, matches);
+
 	matches.push.apply(matches, monthDate(text));
 	text = blankMatches(text, matches);
 
@@ -266,12 +295,6 @@ function extractDates(text){
 	text = blankMatches(text, matches);
 
 	matches.push.apply(matches, simpleDay(text));
-	text = blankMatches(text, matches);
-
-	matches.push.apply(matches, matchThisWeekAndNext(text));
-	text = blankMatches(text, matches);
-
-	matches.push.apply(matches, matchWeeks(text));
 	text = blankMatches(text, matches);
 
 	return matches;
@@ -340,6 +363,8 @@ function turnMatchesIntoDates(matches){
 
 	var dateToAddToNextSentiment = [];
 
+	console.log(matches);
+
 	matches.each(function(match){
 		if (!_.isUndefined(match.date)){
 			dateToAddToNextSentiment.push(match.date);
@@ -349,6 +374,11 @@ function turnMatchesIntoDates(matches){
 
 			if (dateToAddToNextSentiment.length > 0){
 				if (previousSentiment != ''){
+
+					if (latestSentiment == 'flip'){
+						latestSentiment = (previousSentiment == 'free') ? 'busy' : 'free';
+					}
+
 					if (latestSentiment === "free-backwards"){
 						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
 					} else if (latestSentiment === "busy-backwards"){
@@ -386,6 +416,12 @@ function turnMatchesIntoDates(matches){
 	}
 
 	return [busyDates, freeDates];
+}
+
+function addDatesToList(addToList, otherList, dates){
+	addToList.push.apply(addToList, dates);
+
+	// otherList
 }
 
 function processBody(body){
