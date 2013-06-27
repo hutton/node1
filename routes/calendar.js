@@ -58,6 +58,10 @@ exports.view = function(req, res){
 				choice.columnDate = moment(choice.date).format("dddd Do MMM");
 			});
 
+			_.each(calendar.attendees, function(attendee){
+				attendee.prettyName = attendee.name || attendee.email;
+			});
+
 			logger.info("Showing: " + calendar.name);
 
 			var sortedChoices = _.sortBy(calendar.choices, function(choice){

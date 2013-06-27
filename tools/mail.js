@@ -71,6 +71,10 @@ function sendMail(calendar, subject, message, fromName){
 
     message = message.replace(/\n/g, '<br />');
 
+    _.each(calendar.attendees, function(attendee){
+        attendee.prettyName = attendee.name || attendee.email;
+    });
+
 	_.each(calendar.attendees, function(attendee){
 
 		global.app.render('responsive_view.html', {
