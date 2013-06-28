@@ -48,7 +48,7 @@ function train(){
 	classifier.addDocument("busy on xxxx", 'busy');
 	classifier.addDocument("cant make it on xxxx", 'busy');
 
-	classifier.addDocument("xxxx except xxxx", 'flip');
+	// classifier.addDocument("xxxx except xxxx", 'flip');
 
 	classifier.train();
 }
@@ -303,7 +303,15 @@ function extractDates(text){
 function getSentiment(text){
 	text = text.replace(/'/, '');
 
-	return classifier.classify(text);
+	var classification;
+
+	if (text.has('except') || text.has('apart from')){
+		classification = 'flip';
+	} else {
+		classification = classifier.classify(text);		
+	}
+
+	return classification;
 }
 
 function addSentimentToMatches(text, matches){
@@ -363,8 +371,6 @@ function turnMatchesIntoDates(matches){
 
 	var dateToAddToNextSentiment = [];
 
-	console.log(matches);
-
 	matches.each(function(match){
 		if (!_.isUndefined(match.date)){
 			dateToAddToNextSentiment.push(match.date);
@@ -380,16 +386,16 @@ function turnMatchesIntoDates(matches){
 					}
 
 					if (latestSentiment === "free-backwards"){
-						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+						addDatesToList(freeDates, busyDates, dateToAddToNextSentiment);
 					} else if (latestSentiment === "busy-backwards"){
-						busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+						addDatesToList(busyDates, freeDates, dateToAddToNextSentiment);
 					} else if (previousSentiment.startsWith("free")){
-						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+						addDatesToList(freeDates, busyDates, dateToAddToNextSentiment);
 					} else if (previousSentiment.startsWith("busy")){
-						busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+						addDatesToList(busyDates, freeDates, dateToAddToNextSentiment);
 					} else {
 						// Default add to free
-						freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+						addDatesToList(freeDates, busyDates, dateToAddToNextSentiment);
 					}
 	
 					dateToAddToNextSentiment = [];
@@ -400,16 +406,16 @@ function turnMatchesIntoDates(matches){
 
 	if (dateToAddToNextSentiment.length > 0){
 		if (latestSentiment === "free-backwards"){
-			freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+			addDatesToList(freeDates, busyDates, dateToAddToNextSentiment);
 		} else if (latestSentiment === "busy-backwards"){
-			busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+			addDatesToList(busyDates, freeDates, dateToAddToNextSentiment);
 		} else if (latestSentiment === "free"){
-			freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+			addDatesToList(freeDates, busyDates, dateToAddToNextSentiment);
 		} else if (latestSentiment === "busy"){
-			busyDates.push.apply(busyDates, dateToAddToNextSentiment);
+			addDatesToList(busyDates, freeDates, dateToAddToNextSentiment);
 		} else {
 			// Default add to free
-			freeDates.push.apply(freeDates, dateToAddToNextSentiment);
+			addDatesToList(freeDates, busyDates, dateToAddToNextSentiment);
 		}
 
 		dateToAddToNextSentiment = [];
@@ -421,7 +427,15 @@ function turnMatchesIntoDates(matches){
 function addDatesToList(addToList, otherList, dates){
 	addToList.push.apply(addToList, dates);
 
-	// otherList
+	dates.each(function(date){
+
+		for (var i=0; i < otherList.length; i++){
+			if (date.is(otherList[i])){
+				otherList.splice(i, 1);
+				break;
+			}
+		}
+	});
 }
 
 function processBody(body){
