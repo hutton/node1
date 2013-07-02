@@ -261,6 +261,64 @@ CalendarSchema.methods.getAttendeeFromAddress = function(address){
 	});
 }
 
+CalendarSchema.methods.addAttendee = function(message){
+	var splitMessage = getEmailAddressesAndBody(message);
+
+	var attendeeAddresses = splitMessage[0];
+	var name = "";
+	var calendar = this;
+
+	attendeeAddresses = _.uniq(attendeeAddresses);
+
+	var attendees = _.map(attendeeAddresses, function(address){
+		name = "";
+
+		return new Attendee({
+			name: name,
+			email: address
+		})
+	});
+
+	_.each(attendees, function(attendee){
+		calendar.attendees.push(attendee);
+	});
+
+	calendar.save(function(err, calendar){
+        if (err){
+            logger.error("Failed to create calendar: " + err);
+        } else {
+            logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+        }
+    });    
+}
+
+CalendarSchema.methods.removeAttendee = function(message){
+	var splitMessage = getEmailAddressesAndBody(message);
+
+	var attendeeAddresses = splitMessage[0];
+	var name = "";
+	var calendar = this;
+
+	attendeeAddresses = _.uniq(attendeeAddresses);
+
+	_.each(attendeeAddresses, function(attendeeAddress){
+		var attendee = calendar.getAttendeeFromAddress(attendeeAddress);
+
+		var i = calendar.attendees.indexOf(attendee);
+
+		calendar.attendees.splice(i,1);
+
+	});
+
+	calendar.save(function(err, calendar){
+        if (err){
+            logger.error("Failed to create calendar: " + err);
+        } else {
+            logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+        }
+    });    
+}
+
 var Calendar = mongoose.model('Calendar', CalendarSchema);
 
 module.exports = {

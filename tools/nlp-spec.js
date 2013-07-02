@@ -144,6 +144,20 @@ validate(
 	"I can do pretty much any week in July. The week of the 8th I can do any day except Wednesday 10th.", 
 	[[Date.future("10th")],dateTools.getNextDays(Date.future("8th"), 7).filter(function(date){ return !date.is(Date.future("10th")) })]);
 
+validate(
+	"I can do Monday, Tuesday and Friday of next week.", 
+	[[],[dateTools.getNext("Monday"), dateTools.getNext("Tuesday"), dateTools.getNext("Friday")]]);
+
+validate(
+	"I'm busy next wednesday and thursday whatever", 
+	[[dateTools.getNext("Wednesday"), dateTools.getNext("Thursday")],[]]);
+
+
+validate(
+	"I can do next wednesday and thurs, I'm busy on the 3rd though.", 
+	[[Date.future("3rd")],[dateTools.getNext("Wednesday"), dateTools.getNext("Thursday")]]);
+
+
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([
 // 	{ match: "21st", date: Date.future("21st"), index: 0 },

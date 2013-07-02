@@ -24,7 +24,41 @@ function getThisWeekDays(){
 	return result;
 }
 
+function getNext(day){
+	var d = Date.future("Monday");
+
+	day = day.toLowerCase();
+
+	switch (day){
+		case "monday":
+			break;
+		case "tuesday":
+			d.advance("1 day");
+			break;
+		case "wednesday":
+			d.advance("2 day");
+			break;
+		case "thursday":
+			d.advance("3 day");
+			break;
+		case "friday":
+			d.advance("4 day");
+			break;
+		case "saturday":
+			d.advance("5 day");
+			break;
+		case "sunday":
+			d.advance("6 day");
+			break;
+		default:
+			console.log("No day " + day);
+	}
+
+	return d;
+}
+
 module.exports = {
 	getNextDays: getNextDays,
-	getThisWeekDays: getThisWeekDays
+	getThisWeekDays: getThisWeekDays,
+	getNext: getNext
 }

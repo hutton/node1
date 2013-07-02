@@ -59,13 +59,14 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 	var fromName = Mail.getEmailName(req.body.from);
 	var from = Mail.getEmailAddresses(req.body.from)[0];
 	var message = extractMessageFromRequest(req.body);
+	var subject = req.body.subject;
 
 	logger.info("Mail from: " + from + " (" + fromName + ")");
 	logger.info("Mail to: " + to);
 	logger.info("Mail message: " + message);
 
 	if (startsWith(to, "start@")){
-		var newCalendar = Calendar.newCalendar(to, from, fromName, req.body.subject, message, function(newCalendar){
+		var newCalendar = Calendar.newCalendar(to, from, fromName, subject, message, function(newCalendar){
 			createCalendarCallback(newCalendar);
 		});
 	} else {
@@ -82,25 +83,39 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 				res.send('No calendar');
 				error('No calendar');
 			} else {
-				var fromAttendee = calendar.getAttendeeFromAddress(from);
+				if (subject.toLowerCase() == "add"){
+					logger.info("Adding attendee to event");
 
-				if (fromAttendee.name == ""){
-					fromAttendee.name = fromName;
-				}
+					calendar.addAttendee(message);
 
-				var dates = Nlp.processBody(message);
+					updateCalendarCallback(calendar);
+				} else if (subject.toLowerCase() == "remove"){
+					logger.info("Removing attendee from event");
 
-				if (fromAttendee != null){
-					calendar.updateCalendar(fromAttendee, 
-						dates[0], 
-						dates[1]);
+					calendar.removeAttendee(message);
 
-					Mail.sendMail(calendar, req.body.subject, message, fromName);
+					updateCalendarCallback(calendar);
 				} else {
-					logger.error("Couldn't find " + from + " in calendar " + calendar.name);
-				}
+					var fromAttendee = calendar.getAttendeeFromAddress(from);
 
-				updateCalendarCallback(calendar);
+					if (fromAttendee.name == ""){
+						fromAttendee.name = fromName;
+					}
+
+					var dates = Nlp.processBody(message);
+
+					if (fromAttendee != null){
+						calendar.updateCalendar(fromAttendee, 
+							dates[0], 
+							dates[1]);
+
+						Mail.sendMail(calendar, subject, message, fromName);
+					} else {
+						logger.error("Couldn't find " + from + " in calendar " + calendar.name);
+					}
+
+					updateCalendarCallback(calendar);
+				}
 			}
 		});
 	}

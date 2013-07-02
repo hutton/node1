@@ -47,6 +47,7 @@ function train(){
 	classifier.addDocument("xxxx is bad", 'busy-backwards');
 	classifier.addDocument("busy on xxxx", 'busy');
 	classifier.addDocument("cant make it on xxxx", 'busy');
+	classifier.addDocument("im busy xxxx", 'busy');
 
 	// classifier.addDocument("xxxx except xxxx", 'flip');
 
@@ -143,6 +144,7 @@ function simpleDay(text){
 	return matches;
 }
 
+// Tuesday 10th
 function twoPartDate(text){
   var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri) [0-9]{1,2}(th|rd|st|nd|)/ig
  
@@ -165,6 +167,7 @@ function twoPartDate(text){
 	return matches;
 }
 
+// this week and next
 function matchThisWeekAndNext(text){
   	var re = /(this week and next)/ig
  
@@ -191,7 +194,58 @@ function matchThisWeekAndNext(text){
 	return matches;
 }
 
+// Monday, Tuesday and Wednesday of next week
+// next Monday, Tuesday and Thursday
+function matchDaysOfNextWeeks(text){
+  	var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|, | and )+ (of next week|next week)/ig
+ 
+	var result;
+	var matches = [];
+ 
+	while((result = re.exec(text)) !== null){
+
+		var reInner = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri)/ig
+
+		while((resultInner = reInner.exec(result[0])) !== null){
+			var formattedDay = formatDay(resultInner[0]);
+
+			var match = {
+				match: result[0],
+				date: dateTools.getNext(formattedDay),
+				index: result.index
+			};
+	 
+			matches.push(match);
+		}
+	}
+
+  	re = /next (monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|, | and )+/ig
+ 
+	while((result = re.exec(text)) !== null){
+
+		var reInner = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri)/ig
+
+		while((resultInner = reInner.exec(result[0])) !== null){
+			var formattedDay = formatDay(resultInner[0]);
+
+			var match = {
+				match: result[0],
+				date: dateTools.getNext(formattedDay),
+				index: result.index
+			};
+	 
+			matches.push(match);
+		}
+	}
+
+	return matches;
+}
+
+// next week
+// this week
+// week of the 18th
 function matchWeeks(text){
+
   	var re = /(next week)/ig
  
 	var result;
@@ -255,6 +309,7 @@ function matchWeeks(text){
 	return matches;
 }
 
+// Monday January 10th
 function monthDate(text){
   var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|) (january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec) [0-9]{1,2}(th|rd|st|nd|)/ig
  
@@ -279,21 +334,35 @@ function monthDate(text){
 function extractDates(text){
 	var matches = [];
 
+	// next Monday, Tuesday and Thursday
+	// Monday, Tuesday and Wednesday of next week
+	matches.push.apply(matches, matchDaysOfNextWeeks(text));
+	text = blankMatches(text, matches);
+
+	// this week and next
 	matches.push.apply(matches, matchThisWeekAndNext(text));
 	text = blankMatches(text, matches);
 
+	// Monday, Tuesday and Wednesday of next week
+	// next week
+	// this week
+	// week of the 18th
 	matches.push.apply(matches, matchWeeks(text));
 	text = blankMatches(text, matches);
 
+	// Monday January 10th
 	matches.push.apply(matches, monthDate(text));
 	text = blankMatches(text, matches);
 
+	// Tuesday 10th
 	matches.push.apply(matches, twoPartDate(text));
 	text = blankMatches(text, matches);
 
+	// 1st, 22nd 
 	matches.push.apply(matches, simpleDate(text));
 	text = blankMatches(text, matches);
 
+	// Tuesday
 	matches.push.apply(matches, simpleDay(text));
 	text = blankMatches(text, matches);
 
