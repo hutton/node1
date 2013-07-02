@@ -1,60 +1,18 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: normal;
-}
-body {
-  padding-top: 20px;
-  padding-bottom: 40px;
-  font-family: 'Open Sans', sans-serif;
-}
-/* Custom container */
-.container-narrow {
-  margin: 0 auto;
-  max-width: 825px;
-}
-.container-narrow > hr {
-  margin: 15px 0;
-}
-/* Main marketing message and sign up button */
-.jumbotron {
-  margin: 20px 0;
-  text-align: center;
-}
-.jumbotron h1 {
-  font-size: 50px;
-  color: #4c4c4c;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
-/* Supporting marketing content */
-.marketing {
-  margin: 10px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-.marketing h4 {
-  font-size: 21px;
-  color: #737373;
-  line-height: 1.6em;
-  margin-top: 60px;
-}
-.marketing h6 {
-  font-size: 17px;
-  color: #a0a0a0;
-  line-height: 1.6em;
-}
-.lead {
-  font-size: 20px;
-  color: #999;
-  margin-bottom: 50px;
-}
-.image-container {
-  margin: 20px;
-}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+body{padding-top:0px;padding-bottom:40px;font-family:'Open Sans',sans-serif;}
+.container-narrow{margin:0 auto;max-width:825px;}
+.container-narrow>hr{margin:15px 0;}
+hr.fancy-line{border:0;height:1px;position:relative;margin:0.5em 0;margin:50px 0px;}
+hr.fancy-line:before{top:-0.5em;height:1em;}
+hr.fancy-line:after{content:'';height:0.5em;top:1px;}
+hr.fancy-line:before,hr.fancy-line:after{content:'';position:absolute;width:100%;}
+hr.fancy-line,hr.fancy-line:before{background:-moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:-webkit-gradient(radial, center center, 0px, center center, 75%, color-stop(0%, rgba(0, 0, 0, 0.1)), color-stop(75%, rgba(0, 0, 0, 0)));background:-webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:-o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:-ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);}
+.jumbotron{margin:20px 0;text-align:center;}
+.jumbotron h1{font-size:50px;color:#4c4c4c;line-height:1.1em;}
+.jumbotron .btn{font-size:21px;padding:14px 24px;}
+.marketing{margin:10px 0;}
+.marketing p+h4{margin-top:28px;}
+.marketing h4{font-size:21px;color:#737373;line-height:1.6em;margin-top:60px;}
+.marketing h6{font-size:17px;color:#a0a0a0;line-height:1.6em;}
+.lead{font-size:20px;color:#999;margin-bottom:50px;}
+.image-container{margin:20px;}

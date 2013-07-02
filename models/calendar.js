@@ -304,10 +304,33 @@ CalendarSchema.methods.removeAttendee = function(message){
 	_.each(attendeeAddresses, function(attendeeAddress){
 		var attendee = calendar.getAttendeeFromAddress(attendeeAddress);
 
-		var i = calendar.attendees.indexOf(attendee);
+		if (attendee != null){
+			_.each(calendar.choices, function(choice){
+				for (var i = 0; i < choice.busy.length; i++){
+					if ( choice.busy[i].equals(attendee._id)){
+						choice.busy.splice(i,1);	
+						break;
+					}
+				}
 
-		calendar.attendees.splice(i,1);
+				for (var i = 0; i < choice.free.length; i++){
+					if ( choice.free[i].equals(attendee._id)){
+						choice.free.splice(i,1);	
+						break;
+					}
+				}
 
+				if (choice.busy.length == 0 && choice.free.length == 0){
+					var i = calendar.choices.indexOf(choice);
+
+					calendar.choices.splice(i,1);
+				}
+			});
+
+			var i = calendar.attendees.indexOf(attendee);
+
+			calendar.attendees.splice(i,1);
+		}
 	});
 
 	calendar.save(function(err, calendar){

@@ -83,38 +83,40 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 				res.send('No calendar');
 				error('No calendar');
 			} else {
-				if (subject.toLowerCase() == "add"){
-					logger.info("Adding attendee to event");
+				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
-					calendar.addAttendee(message);
+				if (fromAttendee != null){
+					if (subject.toLowerCase() == "add"){
+						logger.info("Adding attendee to event");
 
-					updateCalendarCallback(calendar);
-				} else if (subject.toLowerCase() == "remove"){
-					logger.info("Removing attendee from event");
+						calendar.addAttendee(message);
 
-					calendar.removeAttendee(message);
+						updateCalendarCallback(calendar);
+					} else if (subject.toLowerCase() == "remove"){
+						logger.info("Removing attendee from event");
 
-					updateCalendarCallback(calendar);
-				} else {
-					var fromAttendee = calendar.getAttendeeFromAddress(from);
+						calendar.removeAttendee(message);
 
-					if (fromAttendee.name == ""){
-						fromAttendee.name = fromName;
-					}
+						updateCalendarCallback(calendar);
+					} else {
+						if (fromAttendee.name == ""){
+							fromAttendee.name = fromName;
+						}
 
-					var dates = Nlp.processBody(message);
+						var dates = Nlp.processBody(message);
 
-					if (fromAttendee != null){
 						calendar.updateCalendar(fromAttendee, 
 							dates[0], 
 							dates[1]);
 
 						Mail.sendMail(calendar, subject, message, fromName);
-					} else {
-						logger.error("Couldn't find " + from + " in calendar " + calendar.name);
-					}
 
-					updateCalendarCallback(calendar);
+						updateCalendarCallback(calendar);
+					} 
+				} else {
+					logger.error("Couldn't find " + from + " in calendar " + calendar.name);
+
+					error('No calendar');
 				}
 			}
 		});
