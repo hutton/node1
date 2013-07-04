@@ -89,6 +89,7 @@ function validate(text, expected){
 var thisWeekAndNext = dateTools.getThisWeekDays();
 thisWeekAndNext.push.apply(thisWeekAndNext,dateTools.getNextDays(Date.future("Monday"), 7));
 
+validate("Monday Tuesday", [[],[Date.future("Monday"),Date.future("Tuesday")]]);
 validate("21st match", [[],[Date.future("21st")]]);
 validate("i can do the 21st i can't do the 1st", [[Date.future("1st")],[Date.future("21st")]]);
 validate("25th would be OK", [[],[Date.future("25th")]]);
