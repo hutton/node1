@@ -89,7 +89,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 
-						calendar.addAttendee(message);
+						calendar.addAttendee(message, fromName);
 
 						updateCalendarCallback(calendar);
 					} else if (subject.toLowerCase() == "remove"){

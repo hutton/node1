@@ -120,6 +120,65 @@ function sendMail(calendar, subject, message, fromName){
 	});
 }
 
+function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
+    logger.info("Sending mail to attendee: " + toAttendee.email );
+
+    var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
+
+    _.each(calendar.choices, function(choice){
+        choice.columnDate = moment(choice.date).format("dddd Do MMM");
+    });
+
+    var sortedChoices = _.sortBy(calendar.choices, function(choice){
+        return choice.date;
+    });
+
+    message = message.replace(/\n/g, '<br />');
+
+    toAttendee.prettyName = toAttendee.name || toAttendee.email;
+
+    global.app.render('responsive_view.html', {
+        calendar: calendar,
+        choices: sortedChoices,
+        attendees: calendar.attendees,
+        message: message
+    }, function(err, html){
+
+        if (err){
+            logger.info(err);
+        }
+
+        logger.info("Sending mail to: " + toAttendee.email );
+
+        try{
+            var mail = new SendGrid.Email({
+                to: totoAttendee.email,
+                from: calendar.id + "@convenely.mailgun.org",
+                subject: subject,
+                html: html
+            });
+
+            if (toAttendee.name != null && toAttendee.name != ""){
+                mail.toname = toAttendee.name;
+            }
+
+            if (fromName != ""){
+                mail.fromname = fromName + " via Convenely";
+            }
+
+            sender.send(mail, function(success, err){
+                if(success) 
+                    logger.info('Email sent to: ' + toAttendee.email);
+                else 
+                    logger.error(err);
+            });
+        } catch (e){
+            logger.error("Failed to send email to: " + mail.to);
+            logger.error(e);
+        }
+    });
+}
+
 function htmlMailToText(str){
     str = (str || "").toString("utf-8").trim();
  

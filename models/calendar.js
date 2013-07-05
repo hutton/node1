@@ -261,7 +261,7 @@ CalendarSchema.methods.getAttendeeFromAddress = function(address){
 	});
 }
 
-CalendarSchema.methods.addAttendee = function(message){
+CalendarSchema.methods.addAttendee = function(message, fromName){
 	var splitMessage = getEmailAddressesAndBody(message);
 
 	var attendeeAddresses = splitMessage[0];
@@ -287,7 +287,11 @@ CalendarSchema.methods.addAttendee = function(message){
         if (err){
             logger.error("Failed to create calendar: " + err);
         } else {
-            logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+			_.each(attendees, function(attendee){
+				Mail.sendMailToAttendee(calendar, attendee, calendar.name, "You've been added to the '" + calendar.name + "' email list.  Reply to this email with when you're availalbe for this event.", fromName);
+			});
+
+            logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
         }
     });    
 }

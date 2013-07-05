@@ -32,6 +32,7 @@ function train(){
 	classifier.addDocument("xxxx is a possibility", 'free-backwards');
 	classifier.addDocument("xxxx anyone?", 'free-backwards');
 	classifier.addDocument("I should be able to make xxxx", 'free');
+	classifier.addDocument("xxxx is good for me", 'free-backwards');
 
 	classifier.addDocument("would not be OK", 'busy');
 	classifier.addDocument("i cant do xxxx", 'busy');

@@ -127,37 +127,29 @@ validate("I can't do 30th", [[Date.future("30th")],[]]);
 validate("Friday 3rd anyone?", [[],[Date.future("3rd")]]);
 validate("the 3rd is a possibility.", [[],[Date.future("3rd")]]);
 validate("I‘m away this week and next", [thisWeekAndNext,[]]);
-
 validate(
 	"Can I tentatively suggest the late July date of Thursday July 10th then? As I'm getting my eyes fixed 2 weeks later, it will be my last chance to have to speak to all of you without realising what you actually look like", 
 	[[],[Date.future("July 10th")]]);
-
 validate(
 	"The week of the 8th I can do", 
 	[[],dateTools.getNextDays(Date.future("8th"), 7)]);
-
 validate(
 	"The week of the 8th is best for me", 
 	[[],dateTools.getNextDays(Date.future("8th"), 7)]);
-
-
 validate(
 	"I can do pretty much any week in July. The week of the 8th I can do any day except Wednesday 10th.", 
 	[[Date.future("10th")],dateTools.getNextDays(Date.future("8th"), 7).filter(function(date){ return !date.is(Date.future("10th")) })]);
-
 validate(
 	"I can do Monday, Tuesday and Friday of next week.", 
 	[[],[dateTools.getNext("Monday"), dateTools.getNext("Tuesday"), dateTools.getNext("Friday")]]);
-
 validate(
 	"I'm busy next wednesday and thursday whatever", 
 	[[dateTools.getNext("Wednesday"), dateTools.getNext("Thursday")],[]]);
-
-
 validate(
 	"I can do next wednesday and thurs, I'm busy on the 3rd though.", 
 	[[Date.future("3rd")],[dateTools.getNext("Wednesday"), dateTools.getNext("Thursday")]]);
-
+validate("next week is good for me", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
+validate("Yeah next week is good for me apart from Tuesday", [[Date.future("Tuesday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(Date.future("Tuesday"))})]);
 
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([
