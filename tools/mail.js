@@ -153,7 +153,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
         try{
             var mail = new SendGrid.Email({
                 to: totoAttendee.email,
-                from: calendar.id + "@convenely.mailgun.org",
+                from: calendar.id + "@convenely.com",
                 subject: subject,
                 html: html
             });
