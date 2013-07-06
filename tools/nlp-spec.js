@@ -150,6 +150,7 @@ validate(
 	[[Date.future("3rd")],[dateTools.getNext("Wednesday"), dateTools.getNext("Thursday")]]);
 validate("next week is good for me", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
 validate("Yeah next week is good for me apart from Tuesday", [[Date.future("Tuesday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(Date.future("Tuesday"))})]);
+validate("Yeah next week is good for me apart from Monday and Tuesday", [[Date.future("Monday"), Date.future("Tuesday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(Date.future("Monday")) && !date.is(Date.future("Tuesday"))})]);
 
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([

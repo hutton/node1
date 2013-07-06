@@ -384,6 +384,14 @@ function getSentiment(text){
 	return classification;
 }
 
+function isValidSentiment(text){
+	if (text === "and"){
+		return false;
+	}
+
+	return true;
+}
+
 function addSentimentToMatches(text, matches){
 	if (matches.length == 0){
 		return matches;
@@ -399,7 +407,7 @@ function addSentimentToMatches(text, matches){
 		var sentimentText = text.slice(splitStart, match.index);
 		var sentiment = getSentiment(sentimentText);
 
-		if (sentimentText.trim().length > 2){
+		if (sentimentText.trim().length > 2 && isValidSentiment(sentimentText.trim())){
 			matchesWithSentiment.push({match: sentimentText, sentiment: sentiment, index: splitStart});
 		}
 
