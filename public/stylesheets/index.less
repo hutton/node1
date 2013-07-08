@@ -1,4 +1,6 @@
 
+@import "elements.less";
+
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
 }
@@ -86,6 +88,10 @@ hr.fancy-line, hr.fancy-line:before {
 	background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 75%);
 }
 
+.masthead{
+	position: relative;
+}
+
 /* Main marketing message and sign up button */
 .jumbotron {
 	margin: 20px 0;
@@ -99,6 +105,24 @@ hr.fancy-line, hr.fancy-line:before {
 .jumbotron .btn {
 	font-size: 21px;
 	padding: 14px 24px;
+}
+
+.beta-label{
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+
+	position: absolute;
+	padding: 10px;
+	background: #0083c3;
+	color: white;
+	border-radius: .3em;
+
+	.rotation(5deg);
+
+	right: 10px;
+
+	box-shadow: 0px 1px 3px #888;
 }
 
 /* Supporting marketing content */

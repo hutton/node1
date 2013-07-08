@@ -41,8 +41,7 @@ var logger = require("../tools/logger");
 	res.redirect('/' + id);	
 };
 
-
-exports.view = function(req, res){
+function renderCalendar(req, res, format){
 	Calendar.findCalendar(req.route.params[0], function(err, calendar){
 		if (err){
 			logger.error("Error finding calendar " + req.route.params[0]);
@@ -68,12 +67,33 @@ exports.view = function(req, res){
 				return choice.date;
 			});
 
-			res.render('responsive_view.html', {
-				calendar: calendar,
-				choices: sortedChoices,
-				attendees: calendar.attendees,
-				message: ''
-			});
+			if (format === "text"){
+				res.render('calendar_view.txt', {
+					calendar: calendar,
+					choices: sortedChoices,
+					attendees: calendar.attendees,
+					message: ''
+				});
+			} else if (format === 'html'){
+				res.render('responsive_view.html', {
+					calendar: calendar,
+					choices: sortedChoices,
+					attendees: calendar.attendees,
+					message: ''
+				});
+			}
 		}
 	});
-};
+	if (format === "text"){
+
+	}
+}
+
+exports.viewText = function(req, res){
+	renderCalendar(req, res, "text");
+}
+
+exports.view = function(req, res){
+	renderCalendar(req, res, "html");
+}
+

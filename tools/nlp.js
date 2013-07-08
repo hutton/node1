@@ -385,7 +385,8 @@ function getSentiment(text){
 }
 
 function isValidSentiment(text){
-	if (text === "and"){
+	if (text === "and" ||
+		text === "or"){
 		return false;
 	}
 

@@ -1,0 +1,17 @@
+<%= message %>
+
+<% if ( choices.length == 0 ){ %>Welcome!  <%= calendar.createdBy %> has created a email list to help schedule an event with the following people
+	
+	<% _.each(attendees, function(attendee) { %><%= attendee.email %><% }); %><% } %><% if ( choices.length > 0 ){ %>
+	<% _.each(choices, function(choice) { %>
+
+<%= choice.columnDate %>
+------------------<% _.each(choice.free, function(free) { %> 
+Free    <%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).prettyName %><% }); %><% _.each(choice.busy, function(busy) { %> 
+Busy    <%= _.find(attendees, function(attendee){ return String(attendee._id) === String(busy); }).prettyName %><% }); %><% }); %><% } %>
+
+<% if ( choices.length == 0 ){ %>
+Reply to this mail with when you're available and we'll keep track of who is available when.  Learn more at http://convenely.com
+<% } else { %>
+Availability by Convenely.com Learn more at http://convenely.com
+<% } %>

@@ -55,6 +55,7 @@ var winstonStream = {
  });
 
  app.engine('html', cons.underscore);
+ app.engine('txt', cons.underscore);
 
  app.configure('development', function(){
  	app.use(express.errorHandler());
@@ -70,6 +71,7 @@ var winstonStream = {
 
  //app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
  app.get('/calendar/*', calendar.view);
+ app.get('/calendar-text/*', calendar.viewText);
 
  global.app = app;
  
