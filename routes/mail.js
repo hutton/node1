@@ -65,10 +65,12 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 	logger.info("Mail to: " + to);
 	logger.info("Mail message: " + message);
 
-	if (startsWith(to, "start@")){
+	if (startsWith(to, "start-betalist@")){
 		var newCalendar = Calendar.newCalendar(to, from, fromName, subject, message, function(newCalendar){
 			createCalendarCallback(newCalendar);
 		});
+	} else if (startsWith(to, "start@")){
+		Mail.sendWereInBetaEmail(from);
 	} else {
 		var localEmail = getLocalPartOfEmail(to);
 
@@ -78,6 +80,8 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 				logger.error("Error: " + err);
 				error('Error finding calendar');
 			} else if (!calendar){
+				Mail.sendCouldntFindCalendarEmail(from, to);
+
 				logger.error("Could not find calendar " + localEmail);
 
 				res.send('No calendar');
@@ -114,9 +118,11 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 						updateCalendarCallback(calendar);
 					} 
 				} else {
-					logger.error("Couldn't find " + from + " in calendar " + calendar.name);
+					Mail.sendCouldntFindYouInCalendarEmail(from, to);
 
-					error('No calendar');
+					logger.error("Couldn't find " + from + " in calendar " + calendar.id);
+
+					error( from + ' is not in calendar ' + calendar.id);
 				}
 			}
 		});

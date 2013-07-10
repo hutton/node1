@@ -179,6 +179,56 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
     });
 }
 
+function sendWereInBetaEmail(to){
+    var message = "Sorry!  We're in private beta at the moment so can't help you with scheduling your event.  Be sure to sign up to our mailing list at http://eepurl.com/B2A1j so we can let you know when we launch.\
+\
+Thanks\
+Simon\
+";
+
+    sendTextMail(to, "simon@convenely.com" ,"Hold your horses!", message);
+}
+
+function sendCouldntFindCalendarEmail(to, missingCalendarEmail){
+    var message = "Hi, \
+You sent an email to " + missingCalendarEmail + " but we don't have an event registered at that address.  If you think you have the right address please let me know so I can look into it.\
+\
+Thanks\
+Simon";
+
+    sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't find the event you were looking for.", message);
+}
+
+
+function sendCouldntFindYouInCalendarEmail(to, missingCalendarEmail){
+    var message = "Hi, \
+You sent an email to " + missingCalendarEmail + " but your email address isn't registered with this event.\
+\
+Thanks\
+Simon";
+
+    sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't update your event.", message);
+}
+
+function sendTextMail(to, from, subject, message){
+    var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
+
+    var mail = new SendGrid.Email({
+        to: to,
+        from: from,
+        subject: subject,
+        text: message
+    });
+
+    sender.send(mail, function(success, err){
+        if(success) 
+            logger.info('Email sent to: ' + to + ' subject:' + subject);
+        else 
+            logger.info('Failed to send email to: ' + to + ' subject:' + subject);
+            logger.error(err);
+    });
+}
+
 function htmlMailToText(str){
     str = (str || "").toString("utf-8").trim();
  
@@ -391,5 +441,9 @@ module.exports = {
 	htmlMailToText: htmlMailToText,
     getEmailAddresses: getEmailAddresses,
     firstResponse: firstResponse,
-    getEmailName: getEmailName
+    getEmailName: getEmailName,
+    sendTextMail: sendTextMail,
+    sendWereInBetaEmail: sendWereInBetaEmail,
+    sendCouldntFindCalendarEmail: sendCouldntFindCalendarEmail,
+    sendCouldntFindYouInCalendarEmail: sendCouldntFindYouInCalendarEmail
 }
