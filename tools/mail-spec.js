@@ -1,7 +1,7 @@
 var mail = require("./mail");
 
 
-function validate(expected, actual){
+function validate(actual, expected){
 	if (expected === actual){
 		console.log("Success with: ", expected);
 	} else {
@@ -30,3 +30,30 @@ of who is available when Learn more";
 
 validate(mail.firstResponse(m), "Monday Tuesday ");
 
+ m = "Simon@bookmarks.io\
+\
+\
+\
+\
+\
+On 10 Jul 2013, at 19:29, Simon Hutton via Convenely <feeding@convenely.com> wrote:\
+\
+\
+\
+ Convenely\
+\
+\
+\
+Go\
+\
+       Welcome! *simon.hutton@gmail.com <#>* has created a email list to\
+\
+help schedule an event with the following people     *simon.hutton@gmail.com<#>\
+\
+*      Reply to this mail with when you're available and we'll keep track\
+\
+of who is available when Learn more <http://convenely.com/#howdoesitwork>\
+\
+";
+
+validate(mail.firstResponse(m), "Simon@bookmarks.io");

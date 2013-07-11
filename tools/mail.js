@@ -7,7 +7,7 @@ var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
 
 function firstResponse(fullMessage) {
-    var outlookMatch = /On.*(\n)?wrote:/m;
+    var outlookMatch = /On.*(\n)?wrote:/mg;
     var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely\s+wrote:/m;
@@ -173,7 +173,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
                     logger.error(err);
             });
         } catch (e){
-            logger.error("Failed to send email to: " + mail.to);
+            logger.error("Failed to send email to: " + toAttendee.email);
             logger.error(e);
         }
     });
@@ -445,5 +445,6 @@ module.exports = {
     sendTextMail: sendTextMail,
     sendWereInBetaEmail: sendWereInBetaEmail,
     sendCouldntFindCalendarEmail: sendCouldntFindCalendarEmail,
-    sendCouldntFindYouInCalendarEmail: sendCouldntFindYouInCalendarEmail
+    sendCouldntFindYouInCalendarEmail: sendCouldntFindYouInCalendarEmail,
+    sendMailToAttendee: sendMailToAttendee
 }

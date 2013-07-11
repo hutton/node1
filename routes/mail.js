@@ -25,19 +25,27 @@ function extractMessageFromRequest(requestBody){
 	logger.info(requestBody);
 
 	if (_.has(requestBody,"body-plain") && requestBody['body-plain'] != null){
+		logger.info("Using body-plain");
+
 		message = requestBody['body-plain'];
 
 		message = Mail.firstResponse(message);
 	}
 	else if (_.has(requestBody,"body-html") && requestBody['body-html'] != null){
+		logger.info("Using body-html");
+
 		message = Mail.htmlMailToText(requestBody['body-html']);
 
 		message = Mail.firstResponse(message);
 	} else if (_.has(requestBody,"html") && requestBody.html != null){
+		logger.info("Using html");
+
 		message = Mail.htmlMailToText(requestBody.html);
 
 		message = Mail.firstResponse(message);
 	} else {
+		logger.info("Using requestBody.text");
+
 		message = requestBody.text;
 
 		message = Mail.firstResponse(message);
@@ -71,6 +79,8 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		});
 	} else if (startsWith(to, "start@")){
 		Mail.sendWereInBetaEmail(from);
+
+		error( 'Trying to start event with ' + to);
 	} else {
 		var localEmail = getLocalPartOfEmail(to);
 
