@@ -28,7 +28,7 @@ help schedule an event with the following people *simon.hutton@gmail.com<#> \
 * Reply to this mail with when you're available and we'll keep track \
 of who is available when Learn more";
 
-validate(mail.firstResponse(m), "Monday Tuesday ");
+// validate(mail.firstResponse(m), "Monday Tuesday ");
 
  m = "Simon@bookmarks.io\
 \
@@ -36,7 +36,10 @@ validate(mail.firstResponse(m), "Monday Tuesday ");
 \
 \
 \
-On 10 Jul 2013, at 19:29, Simon Hutton via Convenely <feeding@convenely.com> wrote:\
+On 10 Jul 2013, at 19:29, Simon Hutton via Convenely <feeding@convenely.com>\
+\
+\
+ wrote:\
 \
 \
 \

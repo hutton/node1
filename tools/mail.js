@@ -7,24 +7,33 @@ var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
 
 function firstResponse(fullMessage) {
-    var outlookMatch = /On.*(\n)?wrote:/mg;
+    var outlookMatch = /On.*(\n)*wrote:/m;
     var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
-    var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely\s+wrote:/m;
+    var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely.com\s+wrote:/m;
     var regex4 = /-+original\s+message-+\s*$/m;
     var regex5 = /from:\s*$/m;
+
+    // var outlookMatch = /On.*(\n)?wrote:/mi;
+    // var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
+    // var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
+    // var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely\s+wrote:/m;
+    // var regex4 = /-+original\s+message-+\s*$/m;
+    // var regex5 = /from:\s*$/m;
  
     var regexMatchs = [];
  
     regexMatchs.push(outlookMatch);
-    regexMatchs.push(regex1);
-    regexMatchs.push(regex2);
-    regexMatchs.push(regex3);
-    regexMatchs.push(regex4);
-    regexMatchs.push(regex5);
+    // regexMatchs.push(regex1);
+    // regexMatchs.push(regex2);
+    // regexMatchs.push(regex3);
+    // regexMatchs.push(regex4);
+    // regexMatchs.push(regex5);
  
     for (var i=0; i < regexMatchs.length; i++){
-        var matches = fullMessage.split(regexMatchs[0]);        
+        var matches = fullMessage.split(regexMatchs[0]);
+
+        console.log(matches);        
  
         if (matches.length > 1){
             return matches[0];

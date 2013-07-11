@@ -100,6 +100,10 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
 				if (fromAttendee != null){
+					if (_.has(req.body,"stripped-text") && req.body['stripped-text'] != null){
+						message = req.body['stripped-text'];
+					}
+					
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 
