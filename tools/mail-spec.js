@@ -30,33 +30,35 @@ of who is available when Learn more";
 
 // validate(mail.firstResponse(m), "Monday Tuesday ");
 
- m = "Simon@bookmarks.io\
-\
-\
-\
-\
-\
-On 10 Jul 2013, at 19:29, Simon Hutton via Convenely <feeding@convenely.com>\
-\
-\
- wrote:\
-\
-\
-\
- Convenely\
-\
-\
-\
-Go\
-\
-       Welcome! *simon.hutton@gmail.com <#>* has created a email list to\
-\
-help schedule an event with the following people     *simon.hutton@gmail.com<#>\
-\
-*      Reply to this mail with when you're available and we'll keep track\
-\
-of who is available when Learn more <http://convenely.com/#howdoesitwork>\
-\
+ m = "Simon@bookmarks.io\n\
+\n\
+\n\
+\n\
+\n\
+\n\
+On 10 Jul 2013, at 19:29, Simon Hutton via Convenely <feeding@convenely.com>\n\
+\n\
+\n\
+wrote:\n\
+\n\
+\n\
+\n\
+ Convenely\n\
+\n\
+\n\
+\n\
+Go\n\
+\n\
+       Welcome! *simon.hutton@gmail.com <#>* has created a email list to\n\
+\n\
+help schedule an event with the following people     *simon.hutton@gmail.com<#>\n\
+\n\
+*      Reply to this mail with when you're available and we'll keep track\n\
+\n\
+of who is available when Learn more <http://convenely.com/#howdoesitwork>\n\
+\n\
 ";
+
+console.log(m);
 
 validate(mail.firstResponse(m), "Simon@bookmarks.io");
