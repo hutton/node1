@@ -44,6 +44,11 @@ function getEmailAddressesAndBody(text){
 		if (startIndex != -1){
 			body = body.substr(0,startIndex);
 		}
+
+		for (var i=0; i < result.length; i++) {
+			result[i] = result[i].replace(/\uFFFD/g, '');
+		}
+
 	}
  
 	return [result, body];
