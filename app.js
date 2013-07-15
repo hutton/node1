@@ -45,31 +45,31 @@ var winstonStream = {
  	app.use(express.static(path.join(__dirname, 'public')));
  	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
  	
- 	// mongoose.connect(connectionString, function onMongooseError(err) {
- 	// 	if (err){
- 	// 		winston.log('MongoDB failed to start up');
- 	// 		winston.log(err);
- 	// 		throw err;	
- 	// 	} 
- 	// });
+ 	mongoose.connect(connectionString, function onMongooseError(err) {
+ 		if (err){
+ 			winston.log('MongoDB failed to start up');
+ 			winston.log(err);
+ 			throw err;	
+ 		} 
+ 	});
  	
- 	var options = {
-	         server:{
-	             auto_reconnect: true
-	         }
-	     };
+ //	var options = {
+	//          server:{
+	//              auto_reconnect: true
+	//          }
+	//      };
 
-	var db = mongoose.createConnection(connectionString, options);
+	// var db = mongoose.createConnection(connectionString, options);
 	
-	db.on('error', function(err) {
-	    logger.info("DB connection Error: "+err);
-	});
-	db.on('open', function() {
-	    logger.info("DB connected");
-	});
-	db.on('close', function(str) {
-	    logger.info("DB disconnected: "+str);
-	});
+	// db.on('error', function(err) {
+	//     logger.info("DB connection Error: "+err);
+	// });
+	// db.on('open', function() {
+	//     logger.info("DB connected");
+	// });
+	// db.on('close', function(str) {
+	//     logger.info("DB disconnected: "+str);
+	// });
  });
 
  app.engine('html', cons.underscore);
