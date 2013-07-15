@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -45,13 +44,38 @@ var winstonStream = {
  	app.use(require('less-middleware')({ src: __dirname + '/public' }));
  	app.use(express.static(path.join(__dirname, 'public')));
  	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
- 	mongoose.connect(connectionString, function onMongooseError(err) {
- 		if (err){
- 			winston.log('MongoDB failed to start up');
- 			winston.log(err);
- 			throw err;	
- 		} 
- 	});
+ 	// mongoose.connect(connectionString, function onMongooseError(err) {
+ 	// 	if (err){
+ 	// 		winston.log('MongoDB failed to start up');
+ 	// 		winston.log(err);
+ 	// 		throw err;	
+ 	// 	} 
+ 	// });
+ 	
+ 	var options = {
+	        server:{
+	            auto_reconnect: true,
+	            socketOptions:{
+	                connectTimeoutMS:3600000,
+	                keepAlive:3600000,
+	                socketTimeoutMS:3600000
+	            }
+	        }
+	    };
+
+	var db = mongoose.createConnection(connectionString, options);
+	
+	db.on('error', function(err) {
+	    logger.error("DB connection Error: " + err);
+	});
+	
+	db.on('open', function() {
+	    logger.info("DB connected");
+	});
+	
+	db.on('close', function(str) {
+	    logger.info("DB disconnected: "+ str);
+	});
  });
 
  app.engine('html', cons.underscore);
