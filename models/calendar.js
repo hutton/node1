@@ -1,4 +1,3 @@
-
 var Attendee = require("../models/attendee").Attendee;
 var AttendeeSchema = require("../models/attendee").AttendeeSchema;
 
@@ -44,6 +43,10 @@ function getEmailAddressesAndBody(text){
  
 		if (startIndex != -1){
 			body = body.substr(0,startIndex);
+		}
+		
+		for(int i=0; i < result.length; i++) {
+			result[i] = result[i].replace(/\uFFFD/g, '');
 		}
 	}
  
