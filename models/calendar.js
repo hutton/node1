@@ -1,3 +1,4 @@
+
 var Attendee = require("../models/attendee").Attendee;
 var AttendeeSchema = require("../models/attendee").AttendeeSchema;
 
