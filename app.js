@@ -56,9 +56,9 @@ var winstonStream = {
 	        server:{
 	            auto_reconnect: true,
 	            socketOptions:{
-	                connectTimeoutMS:3600000,
-	                keepAlive:3600000,
-	                socketTimeoutMS:3600000
+	                connectTimeoutMS:60000,
+	                keepAlive:60000,
+	                socketTimeoutMS:60000
 	            }
 	        }
 	    };
