@@ -46,7 +46,8 @@ function getEmailAddressesAndBody(text){
 		}
 
 		for (var i=0; i < result.length; i++) {
-			result[i] = result[i].replace(/\uFFFD/g, '');
+			result[i] = result[i].trim().toLowerCase();
+			result[i] = result[i].replace(/[^a-z0-9 @.-]/ig, '');
 		}
 
 	}
