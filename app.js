@@ -63,19 +63,7 @@ var winstonStream = {
 	        }
 	    };
 
-	var db = mongoose.createConnection(connectionString, options);
-	
-	db.on('error', function(err) {
-	    logger.error("DB connection Error: " + err);
-	});
-	
-	db.on('open', function() {
-	    logger.info("DB connected");
-	});
-	
-	db.on('close', function(str) {
-	    logger.info("DB disconnected: "+ str);
-	});
+	mongoose.createConnection(connectionString, options);
  });
 
  app.engine('html', cons.underscore);
