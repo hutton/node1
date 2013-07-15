@@ -22,8 +22,6 @@ function getLocalPartOfEmail(address){
 function extractMessageFromRequest(requestBody){
 	var message = "";
 
-	logger.info(requestBody);
-
 	if (_.has(requestBody,"body-plain") && requestBody['body-plain'] != null){
 		logger.info("Using body-plain");
 
@@ -71,6 +69,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 	logger.info("Mail from: " + from + " (" + fromName + ")");
 	logger.info("Mail to: " + to);
+	logger.info("Mail subject: " + subject);
 	logger.info("Mail message: " + message);
 
 	if (startsWith(to, "start-betalist@")){
@@ -103,7 +102,7 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 					// if (_.has(req.body,"stripped-text") && req.body['stripped-text'] != null){
 					// 	message = req.body['stripped-text'];
 					// }
-					
+
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 

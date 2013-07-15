@@ -7,20 +7,13 @@ var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
 
 function firstResponse(fullMessage) {
-    var outlookMatch = /^.*On.*(\n)*wrote:$/m;
+    var outlookMatch = /^.*On.*(\r\n|\n)*wrote:$/m;
     var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely.com\s+wrote:/m;
     var regex4 = /-+original\s+message-+\s*$/m;
     var regex5 = /from:\s*$/m;
 
-    // var outlookMatch = /On.*(\n)?wrote:/mi;
-    // var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
-    // var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
-    // var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely\s+wrote:/m;
-    // var regex4 = /-+original\s+message-+\s*$/m;
-    // var regex5 = /from:\s*$/m;
- 
     var regexMatchs = [];
  
     regexMatchs.push(outlookMatch);
@@ -114,10 +107,13 @@ function sendMail(calendar, subject, message, fromName){
                 }
 
 				sender.send(mail, function(success, err){
-					if(success) 
-						logger.info('Email sent to: ' + attendee.email);
-					else 
-						logger.error(err);
+					if(success) {
+                        logger.info('Email sent to: ' + attendee.email);
+                    }
+					else {
+                        logger.error(err);
+                        logger.info('Failed sending email to: ' + attendee.email);
+                    }
 				});
 	        } catch (e){
 	        	logger.error("Failed to send email to: " + mail.to);
@@ -174,10 +170,13 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
             }
 
             sender.send(mail, function(success, err){
-                if(success) 
+                if(success) {
                     logger.info('Email sent to: ' + toAttendee.email);
-                else 
+                }
+                else {
+                    logger.info('Failed sending email to: ' + toAttendee.email);
                     logger.error(err);
+                }
             });
         } catch (e){
             logger.error("Failed to send email to: " + toAttendee.email);
@@ -228,11 +227,13 @@ function sendTextMail(to, from, subject, message){
     });
 
     sender.send(mail, function(success, err){
-        if(success) 
+        if(success) {
             logger.info('Email sent to: ' + to + ' subject:' + subject);
-        else 
+        }
+        else {
             logger.info('Failed to send email to: ' + to + ' subject:' + subject);
             logger.error(err);
+        }
     });
 }
 
