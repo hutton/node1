@@ -45,7 +45,7 @@ var winstonStream = {
  	app.use(express.static(path.join(__dirname, 'public')));
  	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
 
- 	connectionString = connectionString + "?maxIdleTimeMS=60000";
+ 	connectionString = connectionString + "/?maxIdleTimeMS=60000";
 
  	logger.info("Connecting to: " + connectionString);
  	
