@@ -45,17 +45,24 @@ var winstonStream = {
  	app.use(express.static(path.join(__dirname, 'public')));
  	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
 
- 	connectionString = connectionString + "/?maxIdleTimeMS=60000";
+ 	connectionString = connectionString + "?maxIdleTimeMS=60000";
 
  	logger.info("Connecting to: " + connectionString);
- 	
- 	mongoose.connect(connectionString, function onMongooseError(err) {
- 		if (err){
- 			winston.log('MongoDB failed to start up');
- 			winston.log(err);
- 			throw err;	
- 		} 
- 	});
+
+ 	var options = {
+ 		server: {
+ 			socketOptions: {
+ 				keepAlive: 1
+ 			}
+ 		},
+ 		replset: {
+ 			socketOptions: {
+ 				keepAlive: 1
+ 			}
+ 		} 		
+ 	};
+
+ 	mongoose.connect(connectionString, options);
  	
  //	var options = {
 	//          server:{
