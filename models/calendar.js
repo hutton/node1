@@ -293,7 +293,7 @@ CalendarSchema.methods.addAttendee = function(message, fromName){
             logger.error("Failed to create calendar: " + err);
         } else {
 			_.each(attendees, function(attendee){
-				Mail.sendMailToAttendee(calendar, attendee, calendar.name, "You've been added to the '" + calendar.name + "' email list.  Reply to this email with when you're availalbe for this event.", fromName);
+				Mail.sendMailToAttendee(calendar, attendee, calendar.name, "You've been added to the '" + calendar.name + "' email list.\n\nReply to this email with when you're available.", fromName);
 			});
 
             logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");

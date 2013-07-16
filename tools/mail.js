@@ -138,6 +138,10 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 
     message = message.replace(/\n/g, '<br />');
 
+    _.each(calendar.attendees, function(attendee){
+        attendee.prettyName = attendee.name || attendee.email;
+    });
+
     toAttendee.prettyName = toAttendee.name || toAttendee.email;
 
     global.app.render('responsive_view.html', {
@@ -155,7 +159,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 
         try{
             var mail = new SendGrid.Email({
-                to: totoAttendee.email,
+                to: toAttendee.email,
                 from: calendar.id + "@convenely.com",
                 subject: subject,
                 html: html
@@ -186,7 +190,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 }
 
 function sendWereInBetaEmail(to){
-    var message = "Sorry!  We're in private beta at the moment so can't help with scheduling your event. \n\
+    var message = "We're in private beta at the moment so can't help with scheduling your event. \n\
 \n\
 Be sure to sign up to our mailing list at http://eepurl.com/B2A1j so we can let you know when we launch.\n\
 \n\
