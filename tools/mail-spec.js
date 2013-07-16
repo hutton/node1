@@ -92,3 +92,36 @@ of who is available when Learn more <http://convenely.com/#howdoesitwork>\r\n\
 
 validate(mail.firstResponse(m), "Simon@bookmarks.io");
 
+m = "Monday it good for me.\n\
+\n\
+\n\
+\n\
+From: again@convenely.com [mailto:again@convenely.com]\n\
+\n\
+Sent: 15 July 2013 12:53\n\
+\n\
+To: Simon HUTTON\n\
+\n\
+Subject: Re: Again\n\
+\n\
+\n\
+\n\
+I can do Thursday\n\
+\n\
+\n\
+\n\
+Thursday 18th Jul\n\
+\n\
+\n\
+Simon Hutton\n\
+\n\
+✔ Free\n\
+\n\
+\n\
+\n\
+Availability by Convenely.com Learn more<http://convenely.com/#howdoesitwork>\n\
+";
+
+validate(mail.firstResponse(m), "Monday it good for me.");
+
+

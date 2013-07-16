@@ -8,7 +8,7 @@ var sendGridPassword = 'ifpn5yay'
 
 function firstResponse(fullMessage) {
     var outlookMatch = /^.*On.*(\r\n|\n)*wrote:$/m;
-    var regex1 = /From:\s*(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
+    var regex1 = /From:.*@convenely.*$/m;
     var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
     var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely.com\s+wrote:/m;
     var regex4 = /-+original\s+message-+\s*$/m;
@@ -24,7 +24,7 @@ function firstResponse(fullMessage) {
     regexMatchs.push(regex5);
  
     for (var i=0; i < regexMatchs.length; i++){
-        var matches = fullMessage.split(regexMatchs[0]);        
+        var matches = fullMessage.split(regexMatchs[i]);        
  
         if (matches.length > 1){
             return matches[0];
@@ -186,32 +186,39 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 }
 
 function sendWereInBetaEmail(to){
-    var message = "Sorry!  We're in private beta at the moment so can't help you with scheduling your event.  Be sure to sign up to our mailing list at http://eepurl.com/B2A1j so we can let you know when we launch.\
-\
-Thanks\
-Simon\
+    var message = "Sorry!  We're in private beta at the moment so can't help with scheduling your event. \n\
+\n\
+Be sure to sign up to our mailing list at http://eepurl.com/B2A1j so we can let you know when we launch.\n\
+\n\
+Thanks\n\
+Simon\n\
+\n\
 ";
 
     sendTextMail(to, "simon@convenely.com" ,"Hold your horses!", message);
 }
 
 function sendCouldntFindCalendarEmail(to, missingCalendarEmail){
-    var message = "Hi, \
-You sent an email to " + missingCalendarEmail + " but we don't have an event registered at that address.  If you think you have the right address please let me know so I can look into it.\
-\
-Thanks\
-Simon";
+    var message = "Hi, \n\
+You sent an email to " + missingCalendarEmail + " but we don't have an event registered at that address.  If you think you have the right address please let me know so I can look into it.\n\
+\n\
+Thanks\n\
+Simon\n\
+\n\
+";
 
     sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't find the event you were looking for.", message);
 }
 
 
 function sendCouldntFindYouInCalendarEmail(to, missingCalendarEmail){
-    var message = "Hi, \
-You sent an email to " + missingCalendarEmail + " but your email address isn't registered with this event.\
-\
-Thanks\
-Simon";
+    var message = "Hi, \n\
+You sent an email to " + missingCalendarEmail + " but your email address isn't registered with this event.\n\
+\n\
+Thanks\n\
+Simon\n\
+\n\
+";
 
     sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't update your event.", message);
 }

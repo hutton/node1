@@ -1,32 +1,174 @@
-h1,h2,h3,h4,h5,h6{font-weight:normal;}
-body{padding-top:0px;padding-bottom:40px;font-family:'Open Sans',sans-serif;}
-.container-narrow{margin:0 auto;max-width:825px;}
-.container-narrow>hr{margin:15px 0;}
-.navbar .nav>li>a{padding:10px 10px 10px;}
-.navbar{margin-bottom:40px;}
-.navbar .navbar-inner{padding:0;}
-.navbar .nav{margin:0;display:table;width:100%;}
-.navbar .nav li{display:table-cell;width:1%;float:none;}
-.navbar .nav li a{font-weight:bold;text-align:center;border-left:1px solid rgba(255, 255, 255, 0.75);border-right:1px solid rgba(0, 0, 0, 0.1);}
-.navbar .nav li:first-child a{border-left:0;border-radius:3px 0 0 3px;}
-.navbar .nav li:last-child a{border-right:0;border-radius:0 3px 3px 0;}
-hr.fancy-line{border:0;height:1px;position:relative;margin:0.5em 0;margin:50px 0px;}
-hr.fancy-line:before{top:-0.5em;height:1em;}
-hr.fancy-line:after{content:'';height:0.5em;top:1px;}
-hr.fancy-line:before,hr.fancy-line:after{content:'';position:absolute;width:100%;}
-hr.fancy-line,hr.fancy-line:before{background:-moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:-webkit-gradient(radial, center center, 0px, center center, 75%, color-stop(0%, rgba(0, 0, 0, 0.1)), color-stop(75%, rgba(0, 0, 0, 0)));background:-webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:-o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:-ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);background:radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);}
-.masthead{position:relative;}
-.jumbotron{margin:20px 0;text-align:center;}
-.jumbotron h1{font-size:54px;color:#4c4c4c;line-height:1.1em;}
-.jumbotron .btn{font-size:21px;padding:14px 24px;}
-.beta-label{-webkit-transform-style:preserve-3d;-webkit-backface-visibility:hidden;-webkit-perspective:1000;position:absolute;padding:10px;background:#0083c3;color:white;border-radius:.3em;-webkit-transform:rotate(5deg);-moz-transform:rotate(5deg);-o-transform:rotate(5deg);-ms-transform:rotate(5deg);transform:rotate(5deg);right:10px;box-shadow:0px 1px 3px #888;}
-.marketing{margin:10px 0;}
-.marketing p+h4{margin-top:28px;}
-.marketing h4{font-size:21px;color:#737373;line-height:1.6em;margin-top:20px;}
-h5{font-size:19px;color:#a0a0a0;line-height:1.6em;}
-h6{font-size:17px;color:#a0a0a0;line-height:1.6em;}
-.center{text-align:center;font-size:46px;line-height:1.2em;margin-bottom:20px;color:#4c4c4c;}
-.image-text{margin-top:40px;}
-.lead{font-size:22px;color:#999;margin-bottom:50px;}
-.image-container{margin:20px;}
-#how-subheading{margin:20px 0px 15px 0px;text-align:center;}
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+body {
+  padding-top: 0px;
+  padding-bottom: 40px;
+  font-family: 'Open Sans', sans-serif;
+}
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 825px;
+}
+.container-narrow > hr {
+  margin: 15px 0;
+}
+.navbar .nav > li > a {
+  padding: 10px 10px 10px;
+}
+.navbar {
+  margin-bottom: 40px;
+}
+.navbar .navbar-inner {
+  padding: 0;
+}
+.navbar .nav {
+  margin: 0;
+  display: table;
+  width: 100%;
+}
+.navbar .nav li {
+  display: table-cell;
+  width: 1%;
+  float: none;
+}
+.navbar .nav li a {
+  font-weight: bold;
+  text-align: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.75);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.navbar .nav li:first-child a {
+  border-left: 0;
+  border-radius: 3px 0 0 3px;
+}
+.navbar .nav li:last-child a {
+  border-right: 0;
+  border-radius: 0 3px 3px 0;
+}
+hr.fancy-line {
+  border: 0;
+  height: 1px;
+  position: relative;
+  margin: 0.5em 0;
+  /* Keep other elements away from pseudo elements*/
+
+  margin: 50px 0px;
+}
+hr.fancy-line:before {
+  top: -0.5em;
+  height: 1em;
+}
+hr.fancy-line:after {
+  content: '';
+  height: 0.5em;
+  /* half the height of :before */
+
+  top: 1px;
+  /* height of hr*/
+
+}
+hr.fancy-line:before,
+hr.fancy-line:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+}
+hr.fancy-line,
+hr.fancy-line:before {
+  background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 75%, color-stop(0%, rgba(0, 0, 0, 0.1)), color-stop(75%, rgba(0, 0, 0, 0)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 75%);
+}
+.masthead {
+  position: relative;
+}
+/* Main marketing message and sign up button */
+.jumbotron {
+  margin: 20px 0;
+  text-align: center;
+}
+h1 {
+  font-size: 54px;
+  color: #4c4c4c;
+  line-height: 1.1em;
+  text-align: center;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+.beta-label {
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  position: absolute;
+  padding: 10px;
+  background: #0083c3;
+  color: white;
+  border-radius: .3em;
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  -o-transform: rotate(5deg);
+  -ms-transform: rotate(5deg);
+  transform: rotate(5deg);
+  right: 10px;
+  box-shadow: 0px 1px 3px #888;
+}
+/* Supporting marketing content */
+.marketing {
+  margin: 10px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+.marketing h4 {
+  font-size: 19px;
+  color: #737373;
+  line-height: 1.6em;
+  margin-top: 20px;
+  font-weight: bold;
+}
+h5 {
+  font-size: 19px;
+  color: #a0a0a0;
+  line-height: 1.6em;
+}
+h6 {
+  font-size: 17px;
+  color: #a0a0a0;
+  line-height: 1.6em;
+}
+.image-text {
+  margin-top: 40px;
+}
+.lead {
+  font-size: 22px;
+  color: #999;
+  margin-bottom: 50px;
+  text-align: center;
+}
+.image-container {
+  margin: 20px;
+}
