@@ -26,5 +26,5 @@ h1{font-size:54px;color:#4c4c4c;line-height:1.1em;text-align:center;}
 h5{font-size:19px;color:#a0a0a0;line-height:1.6em;}
 h6{font-size:17px;color:#a0a0a0;line-height:1.6em;}
 .image-text{margin-top:40px;}
-.lead{font-size:31px;color:#999;margin-top:20px;margin-bottom:50px;text-align:center;line-height:1.3em;}
+.lead{font-size:31px;color:#999;margin-top:20px;margin-bottom:50px;text-align:center;line-height:1.3em;max-width:760px;margin-left:auto;margin-right:auto;}
 .image-container{margin:20px;}
