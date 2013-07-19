@@ -1,22 +1,18 @@
-
+** Tag line
 Create an email list to keep track of when people are free and schedule an event.
 
 
 ** Pitch in one sentence
 Create an email list to keep track of when people are free and schedule an event.
 
-Find the best time for an event over email.
-Simple group scheduling over email.
-
 ** Description
-Convenely gives you an email list with a difference.  It uses Natural Language Processing (NLP) to scan emails and extract any availability information from the sender, we then build a simple table showing who is available when and include it in every message.
-
-It couldn't be simpler, there's no link to send around or website to visit just reply to the mailing list and we'll do the rest. 
-
-Convenely is an email only product.  It's main selling point is that groups of people can find the most suitable day for an event just from their inbox.  
-
+Convenely gives you an email list with a difference.  We use Natural Language Processing (NLP) to extract availability information from emails sent to the list and use it to show who is available when in every email.
+This makes finding the best time to do something with a group of people a breeze and because it's all done over email you can do it from any device anywhere.
+It couldn't be simpler, there's no link to send around or website to visit just reply to the email list and we'll do the rest. 
 
 ** Comments
+
+Convenely is an email only product, our website is purely 
 
 Exisiting group scheduling webapps work by sending a link to users who open a page and fill out when they're available.  Convenely lets you do all this from your inbox, just reply to the mailing list with when you're available ("I can do Tuesday, Wednesday or Friday", "next Thursday is good for me", "any day this week apart from Friday") and we will do the rest.
 
@@ -24,5 +20,11 @@ Exisiting group scheduling webapps work by sending a link to users who open a pa
 
 
 
+
+
+Find the best time for an event over email.
+Simple group scheduling over email.
+
+Convenely is an email only product.  It's main selling point is that groups of people can find the most suitable day for an event just from their inbox.  
 
 When a group is arranging an event they generally have a group email chain going disscussing where they're meeting or what they're going to do, why shouldn't their scheduling discisson be in there too?

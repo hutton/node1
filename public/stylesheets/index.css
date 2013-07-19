@@ -25,6 +25,5 @@ h1{font-size:54px;color:#4c4c4c;line-height:1.1em;text-align:center;}
 .marketing h4{font-size:19px;color:#737373;line-height:1.6em;margin-top:20px;font-weight:bold;}
 h5{font-size:19px;color:#a0a0a0;line-height:1.6em;}
 h6{font-size:17px;color:#a0a0a0;line-height:1.6em;}
-.image-text{margin-top:40px;}
-.lead{font-size:31px;color:#999;margin-top:20px;margin-bottom:50px;text-align:center;line-height:1.3em;max-width:760px;margin-left:auto;margin-right:auto;}
+@media (min-width:768px){.image-text1{margin-top:50px;} .image-text2{margin-top:80px;} .image-text3{margin-top:90px;} .image-texta{margin-top:50px;} .image-textb{margin-top:50px;}}.lead{font-size:31px;color:#999;margin-top:20px;margin-bottom:50px;text-align:center;line-height:1.3em;max-width:760px;margin-left:auto;margin-right:auto;}
 .image-container{margin:20px;}
