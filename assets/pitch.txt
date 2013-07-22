@@ -1,9 +1,10 @@
 ** Tag line
-Create an email list to keep track of when people are free and schedule an event.
+Create an email list to keep track of when people are free to help schedule events.
 
 
 ** Pitch in one sentence
 Create an email list to keep track of when people are free and schedule an event.
+Create an email list to keep track of when people are free to help schedule events.
 
 ** Description
 Convenely gives you an email list with a difference.  We use Natural Language Processing (NLP) to extract availability information from emails sent to the list and use it to show who is available when in every email.
