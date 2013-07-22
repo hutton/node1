@@ -7,7 +7,7 @@ Create an email list to keep track of when people are free and schedule an event
 Create an email list to keep track of when people are free to help schedule events.
 
 ** Description
-Convenely gives you an email list with a difference.  We use Natural Language Processing (NLP) to extract availability information from emails sent to the list and use it to show who is available when in every email.
+Convenely gives you an email list with a difference.  We use Natural Language Processing (NLP) to extract availability information from emails sent to the list and use it to show who is available when.
 This makes finding the best time to do something with a group of people a breeze and because it's all done over email you can do it from any device anywhere.
 It couldn't be simpler, there's no link to send around or website to visit just reply to the email list and we'll do the rest. 
 
