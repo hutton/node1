@@ -1,5 +1,6 @@
 h1,h2,h3,h4,h5,h6{font-weight:normal;}
 body{padding-top:0px;padding-bottom:40px;font-family:'Open Sans',sans-serif;}
+p{color:#a0a0a0;font-size:16px;line-height:1.5em;}
 .container-narrow{margin:0 auto;max-width:825px;}
 .container-narrow>hr{margin:15px 0;}
 .container-wide-inner{margin-left:20px;margin-right:20px;}

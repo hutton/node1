@@ -1,3 +1,5 @@
+Simple Scheduling Over Email
+
 ** Tag line
 Create an email list to keep track of when people are free to help schedule events.
 
@@ -13,7 +15,9 @@ It couldn't be simpler, there's no link to send around or website to visit just 
 
 ** Comments
 
-Convenely is an email only product, our website is purely 
+Convenely is a email only product, everything is done over email including creating and maintaining your list.
+
+
 
 Exisiting group scheduling webapps work by sending a link to users who open a page and fill out when they're available.  Convenely lets you do all this from your inbox, just reply to the mailing list with when you're available ("I can do Tuesday, Wednesday or Friday", "next Thursday is good for me", "any day this week apart from Friday") and we will do the rest.
 
@@ -29,3 +33,6 @@ Simple group scheduling over email.
 Convenely is an email only product.  It's main selling point is that groups of people can find the most suitable day for an event just from their inbox.  
 
 When a group is arranging an event they generally have a group email chain going disscussing where they're meeting or what they're going to do, why shouldn't their scheduling discisson be in there too?
+
+
+
