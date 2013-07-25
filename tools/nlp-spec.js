@@ -20,6 +20,11 @@ function compareMatches(expected, result){
 }
 
 function compareDates(expected, result){
+	expected[0] = expected[0].sort();
+	expected[1] = expected[1].sort();
+	result[0] = result[0].sort();
+	result[1] = result[1].sort();
+
 	if (expected[0].length !== result[0].length || expected[1].length !== result[1].length){
 		return false;
 	}
@@ -149,11 +154,23 @@ validate(
 	"I can do next wednesday and thurs, I'm busy on the 3rd though.", 
 	[[Date.future("3rd")],[dateTools.getNext("Wednesday"), dateTools.getNext("Thursday")]]);
 validate("next week is good for me", [[],dateTools.getNextDays(Date.future("Monday"), 7)]);
-validate("Yeah next week is good for me apart from Tuesday", [[Date.future("Tuesday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(Date.future("Tuesday"))})]);
-validate("Yeah next week is good for me apart from Monday and Tuesday", [[Date.future("Monday"), Date.future("Tuesday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(Date.future("Monday")) && !date.is(Date.future("Tuesday"))})]);
+validate("Yeah next week is good for me apart from Friday", [[dateTools.getNext("Friday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(dateTools.getNext("Friday"))})]);
+validate("Yeah next week is good for me apart from Monday and Tuesday", [[dateTools.getNext("Monday"), dateTools.getNext("Tuesday")],dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(dateTools.getNext("Monday")) && !date.is(dateTools.getNext("Tuesday"))})]);
 validate("I can do Tuesday or Wednesday or Thursday but not Monday", [[Date.future("Monday")],[Date.future("Tuesday"),Date.future("Wednesday"),Date.future("Thursday")]]);
 
 validate("I could do the 1st but not the 31st", [[Date.future("31st")],[Date.future("1st")]]);
+
+validate("I can't do next week except Thursday and Friday", 
+	[
+		dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(dateTools.getNext("Thursday")) && !date.is(dateTools.getNext("Friday"))}),
+		[dateTools.getNext("Thursday"), dateTools.getNext("Friday")]
+	]);
+
+validate("I can do next week except Thursday and Friday", 
+	[
+		[dateTools.getNext("Thursday"), dateTools.getNext("Friday")],
+		dateTools.getNextDays(Date.future("Monday"), 7).filter(function(date){ return !date.is(dateTools.getNext("Thursday")) && !date.is(dateTools.getNext("Friday"))})
+	]);
 
 
 

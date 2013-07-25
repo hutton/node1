@@ -198,10 +198,29 @@ function matchThisWeekAndNext(text){
 // Monday, Tuesday and Wednesday of next week
 // next Monday, Tuesday and Thursday
 function matchDaysOfNextWeeks(text){
-  	var re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|, | and )+ (of next week|next week)/ig
- 
 	var result;
 	var matches = [];
+ 
+  	var re = /next week.*(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri)+/ig
+ 
+	while((result = re.exec(text)) !== null){
+
+		var reInner = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri)/ig
+
+		while((resultInner = reInner.exec(result[0])) !== null){
+			var formattedDay = formatDay(resultInner[0]);
+
+			var match = {
+				match: resultInner[0],
+				date: dateTools.getNext(formattedDay),
+				index: result.index + resultInner.index
+			};
+	 
+			matches.push(match);
+		}
+	}
+
+  	re = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tues|wed|thurs|fri|, | and )+ (of next week|next week)/ig
  
 	while((result = re.exec(text)) !== null){
 
@@ -366,6 +385,10 @@ function extractDates(text){
 	// Tuesday
 	matches.push.apply(matches, simpleDay(text));
 	text = blankMatches(text, matches);
+
+	matches = matches.sortBy(function(match){
+		return match.index;
+	});
 
 	return matches;
 }
