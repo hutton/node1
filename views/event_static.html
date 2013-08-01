@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Convenely</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
   <meta name="description" content="Simple Scheduling Over Email" />
 
@@ -32,11 +33,39 @@
 
    <div id="top-row-spacer"></div>
    <div class="event-row">
-      <span class="name">Sidney</span>
-      <span class="row-state">&#10004;</span>
+      <span class="name">Wednesday 19th</span>
+      <span class="row-state-free"><div>&#10004;</div></span>
       <span class="unknown-count">(3)</span>
       <span class="busy-count">4</span>
       <span class="free-count">6</span>
+   </div>
+   <div class="event-row">
+      <span class="name">Thursday 20th</span>
+      <span class="row-state-busy"><div>&#10008;</div></span>
+      <span class="unknown-count">(2)</span>
+      <span class="busy-count">2</span>
+      <span class="free-count">9</span>
+   </div>
+   <div class="event-row">
+      <span class="name">Friday 21st</span>
+      <span class="row-state-busy"><div>&#10008;</div></span>
+      <span class="unknown-count">(2)</span>
+      <span class="busy-count">4</span>
+      <span class="free-count">4</span>
+   </div>
+   <div class="event-row">
+      <span class="name">Saturday 22nd</span>
+      <span class="row-state-unknown"><div>?</div></span>
+      <span class="unknown-count">(2)</span>
+      <span class="busy-count">0</span>
+      <span class="free-count">3</span>
+   </div>
+   <div class="event-row">
+      <span class="name">Sunday 23rd</span>
+      <span class="row-state-free"><div>&#10004;</div></span>
+      <span class="unknown-count">(3)</span>
+      <span class="busy-count">3</span>
+      <span class="free-count">0</span>
    </div>
 
     <!-- Le javascript
@@ -56,5 +85,10 @@
    ga('create', 'UA-42036841-1', 'convenely.com');
    ga('send', 'pageview');
    </script>
+
+   <script>
+      addEventListener("load", function() {window.scrollTo(1, 0);}, false);
+    </script>
+
 </body>
 </html>
