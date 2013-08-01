@@ -1,0 +1,11 @@
+body{padding-top:0px;padding-bottom:40px;font-size:22px;font-family:'Open Sans',sans-serif;}
+#top-row-spacer{height:40px;}
+.navbar-fixed-top .navbar-inner{background:white;box-shadow:none;}
+.title{text-align:center;padding-top:10px;}
+.event-row{height:40px;}
+.row-item{float:right;width:30px;text-align:center;}
+.event-row .name{padding-top:1px;margin-left:5px;float:left;}
+.event-row .free-count{padding-top:1px;color:#51da73;float:right;width:30px;text-align:center;}
+.event-row .busy-count{padding-top:1px;color:#fe673b;float:right;width:30px;text-align:center;}
+.event-row .unknown-count{padding-top:1px;color:#808080;float:right;width:30px;text-align:center;}
+.event-row .row-state{background:#51da73;color:white;float:right;padding-top:1px;height:40px;text-align:center;width:40px;}

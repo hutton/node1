@@ -10,3 +10,7 @@ exports.index = function(req, res){
 exports.help = function(req, res){
   res.render('help.html');
 };
+
+exports.event = function(req, res){
+  res.render('event_static.html');
+};
