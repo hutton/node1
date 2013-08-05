@@ -73,6 +73,20 @@
           <span class="busy-count">4</span>
           <span class="free-count">4</span>
         </div>
+        <div class="event-row-details">
+          <div class="details-row">
+            <span class="details-name">Dave</span>
+            <span class="details-state-free"><div>&#10004;</div></span>
+          </div>
+          <div class="details-row">
+            <span class="details-name">Christopher</span>
+            <span class="details-state-busy"><div>&#10008;</div></span>
+          </div>
+          <div class="details-row">
+            <span class="details-name">Sarah</span>
+            <span class="details-state-busy"><div>&#10008;</div></span>
+          </div>
+        </div>
       </div>
       <div class="event-row">
         <div class="event-row-top">
@@ -117,6 +131,7 @@
 
       $(document).ready(function(){
         $(".event-row-top").click(function(){
+          $(".event-row-details").slideUp('fast');
           $(this).parent().find(".event-row-details").slideToggle('fast');
         });
       });
