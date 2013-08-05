@@ -9,6 +9,17 @@ body{
 	min-height: 800px;
 }
 
+.navbar-inner{
+	border-color: #e8e8e8;
+}
+
+.rows-container{
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 800px;
+}
+
 #top-row-spacer{
 	height: 40px;
 }
@@ -24,7 +35,12 @@ body{
 }
 
 .event-row{
+	padding: 4px 10px;
+}
+
+.event-row-top{
 	height: 40px;
+	cursor: pointer;
 }
 
 @row-top-padding: 1px;
@@ -39,9 +55,8 @@ body{
 	margin-right: 4px;
 }
 
-.event-row .name{
+.event-row .date{
 	padding-top: @row-top-padding;
-	margin-left: 5px;
 	float: left;
 	margin-top: 10px;
 	/*color: #0083c3;*/
@@ -71,7 +86,6 @@ body{
 	width: 34px;
 	border-radius: 20px;
 	margin-left: 3px;
-	margin-right: 3px;
 	margin-top: 3px;
 }
 
@@ -100,4 +114,45 @@ body{
 
 .row-state-unknown > div{
 	padding-top: 7px;
+}
+
+/* Details */
+.event-row-details{
+	font-size: 18px;
+	display: none;
+}
+
+.details-row{
+	padding: 5px 0px;
+}
+
+.details-state{
+	color: white;
+	float: right;
+	height: 24px;
+	text-align: center;
+	width: 24px;
+	border-radius: 20px;
+	margin-top: -2px;
+	font-size: 14px;
+}
+
+.details-state-free{
+	background: #51da73;
+	margin-right: 66px;
+	.details-state;
+}
+
+.details-state-busy{
+	.details-state;
+	margin-right: 39px;
+	background: #fe673b;
+}
+
+.details-state-busy > div{
+	padding-top: 3px;
+}
+
+.details-state-free > div{
+	padding-top: 3px;
 }
