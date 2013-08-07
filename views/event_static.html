@@ -27,6 +27,7 @@
 
       <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
+         <div class="title-add">+</div>
          <div class="title">Something night</div>
        </div>
      </div>
@@ -108,9 +109,6 @@
       </div>
     </div>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="/javascripts/jquery-1.8.2.min.js"></script>
     <script src="/javascripts/bootstrap/bootstrap-scrollspy.js"></script>
     <script src="/javascripts/bootstrap/bootstrap-tooltip.js"></script>
@@ -130,8 +128,13 @@
       addEventListener("load", function() {window.scrollTo(1, 0);}, false);
 
       $(document).ready(function(){
-        $(".event-row-top").click(function(){
-          $(".event-row-details").slideUp('fast');
+        $(".event-row-top").click(function(event){
+          $(".event-row-details").each(function(index,element){
+            if ($(element).parent().find(".event-row-top")[0] != $(event.target).closest('.event-row-top')[0] ){
+              $(element).slideUp('fast');
+            }
+          });
+
           $(this).parent().find(".event-row-details").slideToggle('fast');
         });
       });
