@@ -14,3 +14,7 @@ exports.help = function(req, res){
 exports.event = function(req, res){
   res.render('event_static.html');
 };
+
+exports.highlight = function(req, res){
+  res.render('highlight-demo.html');
+};

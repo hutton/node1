@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Convenely</title>
+
+	<style type="text/css">
+		div{
+			white-space: pre-wrap;
+		}
+
+		strong{
+			border: 1px solid #000000;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div contentEditable=true>text span</div>
+</body>
+
+<script src="/javascripts/jquery-1.8.2.min.js"></script>
+
+<script src="/javascripts/rangy-core.js"></script>
+<script src="/javascripts/rangy-selectionsaverestore.js"></script>
+
+<script src="/javascripts/highlight.js"></script>
+
+<script>
+$(document).ready(function(){
+	$( "div" ).highlight({
+		color: "orange"
+	});	
+});
+</script>
+
+</html>
+

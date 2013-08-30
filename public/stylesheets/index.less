@@ -35,14 +35,14 @@ p{
 	border-bottom: #e0e0e0 1px solid;
 	margin-bottom: 80px;
 
-    background: rgb(255,255,255); /* Old browsers */
-    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 92%, rgba(240,240,240,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(92%,rgba(255,255,255,1)), color-stop(100%,rgba(240,240,240,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* IE10+ */
-    background: linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* W3C */
-    filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafaf7', endColorstr='#ecebe6',GradientType=0 )"; /* IE6-9 */
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 92%, rgba(240,240,240,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(92%,rgba(255,255,255,1)), color-stop(100%,rgba(240,240,240,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* IE10+ */
+	background: linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 92%,rgba(240,240,240,1) 100%); /* W3C */
+	filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafaf7', endColorstr='#ecebe6',GradientType=0 )"; /* IE6-9 */
 
 	margin-left: -20px;
 	margin-right: -20px;
@@ -131,15 +131,11 @@ h1 {
 	line-height: 1.1em;
 	text-align: center;
 }
-.jumbotron .btn {
-	font-size: 21px;
-	padding: 14px 24px;
-}
 
 .beta-label{
-    -webkit-transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
 
 	position: absolute;
 	padding: 10px;
@@ -217,7 +213,7 @@ h6 {
 	margin-right: auto;
 }
 
- .description{
+.description{
 	font-size: 18px;
 	color: #999;
 	text-align: justify;
@@ -226,4 +222,146 @@ h6 {
 
 .image-container{
 	margin: 20px;
+}
+
+
+/* Mock email */
+.mail{
+	margin-top: 50px;
+	max-width: 500px;
+	border: 1px #bbb solid;
+	font-family: Arial;
+	font-size: 13px;
+	color: #999;
+	overflow: hidden;
+	text-align: left;
+	box-shadow: 0px 15px 45px rgba(0,0,0,0.5);
+	margin-bottom: 60px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mail-top-border{
+	background: url("/images/stripe.png") repeat;
+	height: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #bbb;
+}
+
+.header{
+}
+
+.header-title{
+	text-align: center;
+	padding: 2px 0px 2px 0px;
+	background: #eee;
+	border-bottom: 1px solid #bbb;
+}
+
+.header-row{
+	border-bottom: 1px solid #eee;
+	position: relative;
+}
+
+.header-row:last-of-type{
+	border-bottom: 2px solid #eee;
+}
+
+.header-label{
+	width: 75px;
+	text-align: right;
+	float: left;
+	padding: 3px 0px 0px 0px;
+	margin-right: 5px;
+}
+
+div.header-field{
+    outline: none;
+	white-space: pre-wrap;
+	box-shadow: none;
+	margin-right: 10px;
+	background: white;
+	padding: 3px 4px 2px 4px;
+	margin-bottom: 0px;
+	border: none;
+	color: #000000;
+	display: block;
+	position: relative;
+	margin-left: 80px;
+}
+
+div.div-placeholder{
+	color: @placeholder-color;
+	font-style: italic;
+}
+
+div.header-field > strong{
+	border: 1px solid #B7CCD3;
+	border-radius: 20px;
+	background: #CBE4EC;
+	padding: 0px 8px;
+	font-weight: normal;
+}
+
+input.header-field{
+	box-shadow: none;
+	margin-right: 10px;
+	background: white;
+	padding: 2px 4px 2px 4px;
+	margin-bottom: 0px;
+	border: none;
+	color: #d0d0d0;
+	font-size: 13px;
+	font-family: 'Open Sans', sans-serif;
+	outline: none;
+}
+
+input.header-field:focus{
+	color: #000000;
+}
+
+.body{
+	margin: 5px 10px;
+	line-height: 1.4em;
+	height: 200px;
+}
+
+.body-text{
+	float: left;
+	margin-top: 7px;
+}
+
+.mail-footer{
+	background: #eee;
+	border-top: 1px solid #bbb;
+	padding: 5px 0px;
+	height: 26px;
+}
+
+#send-mail{
+	float: right;
+	margin-right: 10px;
+}
+
+#send-mail > i{
+	margin-right: 6px;
+}
+
+@placeholder-color: #c0c0c0;
+
+input.header-field::-webkit-input-placeholder { /* WebKit browsers */
+	color: @placeholder-color;
+	font-style: italic;
+}
+input.header-field:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: @placeholder-color;
+	font-style: italic;
+}
+input.header-field::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: @placeholder-color;
+	font-style: italic;
+}
+input.header-field:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color: @placeholder-color;
+	font-style: italic;
 }

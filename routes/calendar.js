@@ -3,39 +3,39 @@
  * GET users listing.
  */
 
- require("../models/attendee");
- var Calendar = require("../models/calendar").Calendar;
- 
- var moment = require("moment");
- var mongoose = require("mongoose");
- var _ = require("underscore");
+require("../models/attendee");
+var Calendar = require("../models/calendar").Calendar;
+
+var moment = require("moment");
+var mongoose = require("mongoose");
+var _ = require("underscore");
 var logger = require("../tools/logger");
 
  function makeid(length)
  {
- 	var text = "";
- 	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	var text = "";
+	var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
- 	for( var i=0; i < length; i++ )
- 		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	for( var i=0; i < length; i++ )
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
 
- 	return text;
+	return text;
  }
 
  exports.new = function(req, res){
- 	var id = makeid(10);
+	var id = makeid(10);
 
- 	logger.info("Create new calendar: " + id);
+	logger.info("Create new calendar: " + id);
 
- 	var newCalendar = new Calendar({name: id});
+	var newCalendar = new Calendar({name: id});
 
- 	newCalendar.save(function(err){
- 		if (err){
- 			logger.error(err);
- 		}
- 	});
+	newCalendar.save(function(err){
+		if (err){
+			logger.error(err);
+		}
+	});
 
- 	logger.info("Calendar saved: " + newCalendar.id);
+	logger.info("Calendar saved: " + newCalendar.id);
 
 	// Create calendar and redirect
 	res.redirect('/' + id);	
@@ -67,8 +67,11 @@ function renderCalendar(req, res, format){
 				return choice.date;
 			});
 
+			var attendee = calendar.attendees[0];
+
 			if (format === "text"){
 				res.render('calendar_view.txt', {
+					attendee: attendee,
 					calendar: calendar,
 					choices: sortedChoices,
 					attendees: calendar.attendees,
@@ -76,6 +79,7 @@ function renderCalendar(req, res, format){
 				});
 			} else if (format === 'html'){
 				res.render('responsive_view.html', {
+					attendee: attendee,
 					calendar: calendar,
 					choices: sortedChoices,
 					attendees: calendar.attendees,
@@ -84,9 +88,6 @@ function renderCalendar(req, res, format){
 			}
 		}
 	});
-	if (format === "text"){
-
-	}
 }
 
 exports.viewText = function(req, res){
