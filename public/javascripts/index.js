@@ -1,8 +1,8 @@
 addEventListener("load", function() {window.scrollTo(1, 0);}, false);
 
 var fromPlaceholder = "Your email address";
-var toPlaceholder = "Invitees";
-var subjectPlaceholder = "e.g. Poker night";
+var toPlaceholder = "Invitees email addresses";
+var subjectPlaceholder = "Your event";
 
 function styleInputDiv(element, defaultText){
 	if ($(element).text() === defaultText){
@@ -36,6 +36,12 @@ function initInputDivDefaultText(element, defaultText){
 	element.text(defaultText);
 }
 
+function inputFromDefaultText(text, defaultText){
+	if (text === defaultText){
+		return "";
+	}
+}
+
 $(document).ready(function(){
 
 	$("#mail-from").highlight();
@@ -45,11 +51,16 @@ $(document).ready(function(){
 	initInputDivDefaultText($("#mail-to"), toPlaceholder);
 	initInputDivDefaultText($("#mail-subject"), subjectPlaceholder);
 
-	$("#send-mail").on("click touchstart",function(){
+	$("#send-mail").on("click touchstart", function(){
 		var to = $("#mail-to").text();
-		var from = $("#mail-from").text();
-		var subject = $("#mail-subject").text();
 		var message = $("#mail-message").text();
+
+		var from = inputFromDefaultText($("#mail-from").text(), fromPlaceholder);
+		var subject = inputFromDefaultText($("#mail-subject").text(), subjectPlaceholder);
+
+		if (from === "" || subject === "" || message === ""){
+			return;
+		}
 
 		$.ajax({
 			url: "/new-mail",

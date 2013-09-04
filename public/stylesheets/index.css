@@ -67,8 +67,6 @@ p {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafaf7', endColorstr='#ecebe6',GradientType=0 );
   /* IE6-9 */
 
-  margin-left: -20px;
-  margin-right: -20px;
 }
 .navbar .nav > li > a {
   padding: 10px 10px 10px;
@@ -210,6 +208,12 @@ h6 {
   }
   .image-textb {
     margin-top: 50px;
+  }
+}
+@media (max-width: 768px) {
+  .container-wide {
+    margin-left: -20px;
+    margin-right: -20px;
   }
 }
 .lead {
