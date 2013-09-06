@@ -14,3 +14,7 @@ exports.help = function(req, res){
 exports.event = function(req, res){
   res.render('event_static.html');
 };
+
+exports.event2 = function(req, res){
+  res.render('event2_static.html');
+};
