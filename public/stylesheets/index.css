@@ -67,8 +67,6 @@ p {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafaf7', endColorstr='#ecebe6',GradientType=0 );
   /* IE6-9 */
 
-  margin-left: -20px;
-  margin-right: -20px;
 }
 .navbar .nav > li > a {
   padding: 10px 10px 10px;
@@ -154,10 +152,6 @@ h1 {
   line-height: 1.1em;
   text-align: center;
 }
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-}
 .beta-label {
   -webkit-transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
@@ -216,6 +210,12 @@ h6 {
     margin-top: 50px;
   }
 }
+@media (max-width: 768px) {
+  .container-wide {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
 .lead {
   font-size: 31px;
   color: #999;
@@ -235,4 +235,131 @@ h6 {
 }
 .image-container {
   margin: 20px;
+}
+/* Mock email */
+.mail {
+  margin-top: 50px;
+  max-width: 500px;
+  border: 1px #bbb solid;
+  font-family: Arial;
+  font-size: 13px;
+  color: #999;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0px 15px 45px rgba(0, 0, 0, 0.5);
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.mail-top-border {
+  background: url("/images/stripe.png") repeat;
+  height: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #bbb;
+}
+.header-title {
+  text-align: center;
+  padding: 2px 0px 2px 0px;
+  background: #eee;
+  border-bottom: 1px solid #bbb;
+}
+.header-row {
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+.header-row:last-of-type {
+  border-bottom: 2px solid #eee;
+}
+.header-label {
+  width: 75px;
+  text-align: right;
+  float: left;
+  padding: 3px 0px 0px 0px;
+  margin-right: 5px;
+}
+div.header-field {
+  outline: none;
+  white-space: pre-wrap;
+  box-shadow: none;
+  margin-right: 10px;
+  background: white;
+  padding: 3px 4px 2px 4px;
+  margin-bottom: 0px;
+  border: none;
+  color: #000000;
+  display: block;
+  position: relative;
+  margin-left: 80px;
+}
+div.div-placeholder {
+  color: #c0c0c0;
+  font-style: italic;
+}
+div.header-field > strong {
+  border: 1px solid #B7CCD3;
+  border-radius: 20px;
+  background: #CBE4EC;
+  padding: 0px 8px;
+  font-weight: normal;
+}
+input.header-field {
+  box-shadow: none;
+  margin-right: 10px;
+  background: white;
+  padding: 2px 4px 2px 4px;
+  margin-bottom: 0px;
+  border: none;
+  color: #d0d0d0;
+  font-size: 13px;
+  font-family: 'Open Sans', sans-serif;
+  outline: none;
+}
+input.header-field:focus {
+  color: #000000;
+}
+.body {
+  margin: 5px 10px;
+  line-height: 1.4em;
+  height: 200px;
+}
+.body-text {
+  float: left;
+  margin-top: 7px;
+}
+.mail-footer {
+  background: #eee;
+  border-top: 1px solid #bbb;
+  padding: 5px 0px;
+  height: 26px;
+}
+#send-mail {
+  float: right;
+  margin-right: 10px;
+}
+#send-mail > i {
+  margin-right: 6px;
+}
+input.header-field::-webkit-input-placeholder {
+  /* WebKit browsers */
+
+  color: #c0c0c0;
+  font-style: italic;
+}
+input.header-field:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+
+  color: #c0c0c0;
+  font-style: italic;
+}
+input.header-field::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+
+  color: #c0c0c0;
+  font-style: italic;
+}
+input.header-field:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+
+  color: #c0c0c0;
+  font-style: italic;
 }

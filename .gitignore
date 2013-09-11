@@ -6,3 +6,5 @@ iisnode/index.html
 npm-debug.log
 
 public/images/favicon copy.png
+
+routes/index.js

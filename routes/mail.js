@@ -53,7 +53,6 @@ function extractMessageFromRequest(requestBody){
 }
 
 function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
-	
 	var to = "";
 
 	if (_.has(req.body,"recipient")){
@@ -99,10 +98,6 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
 				if (fromAttendee != null){
-					// if (_.has(req.body,"stripped-text") && req.body['stripped-text'] != null){
-					// 	message = req.body['stripped-text'];
-					// }
-
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 
@@ -116,20 +111,20 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 						updateCalendarCallback(calendar);
 					} else {
-						if (fromAttendee.name == ""){
+						if (fromAttendee.name === ""){
 							fromAttendee.name = fromName;
 						}
 
 						var dates = Nlp.processBody(message);
 
-						calendar.updateCalendar(fromAttendee, 
-							dates[0], 
+						calendar.updateCalendar(fromAttendee,
+							dates[0],
 							dates[1]);
 
 						Mail.sendMail(calendar, subject, message, fromName);
 
 						updateCalendarCallback(calendar);
-					} 
+					}
 				} else {
 					Mail.sendCouldntFindYouInCalendarEmail(from, to);
 
@@ -141,6 +136,24 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 		});
 	}
 }
+
+exports.newMail = function(req, res){
+	logger.info("New mail from web");
+
+	var to = req.body.to;
+	var from = req.body.from;
+	var subject = req.body.subject;
+	var message = req.body.message;
+
+	logger.info("Mail from: " + from);
+	logger.info("Mail to: " + to);
+	logger.info("Mail subject: " + subject);
+	logger.info("Mail message: " + message);
+
+	var newCalendar = Calendar.newCalendar(to, from, "", subject, message, function(newCalendar){
+		res.send(200, { redirect: '/event/' + newCalendar.attendees[0].attendeeId });
+	});
+};
 
 exports.sendGridReceive = function(req, res){
 	logger.info("Mail received from HTTP POST");
@@ -156,17 +169,16 @@ exports.sendGridReceive = function(req, res){
 
 		res.send( 200 );
 	});
-
-}
+};
 
 exports.receive = function(req, res){
 	logger.info("Mail received from browser");
 
 	processEmailRequest(req, res, function(newCalendar){
-		res.redirect('/calendar/' + newCalendar.id);	
+		res.redirect('/calendar/' + newCalendar.id);
 	},
 	function(calendar){
-		res.redirect('/calendar/' + calendar.id);	
+		res.redirect('/calendar/' + calendar.id);
 	},
 	function(message){
 		logger.info(req.body);

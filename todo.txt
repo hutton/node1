@@ -1,10 +1,22 @@
+Phase 2
+-------
+
+- Add mock email on home
+- Get when web version working
+- Get auto updating with web updates
+- Update responsive table (reflect web version changes)
+- Show recent updates in mails
+- Add live demo to home
+- Restyle home
+
+
+
+Done
+----
 - Add winston 
 - Log parsed email as it arrives
 - Split web and mail templates
 - Start work on natural
-
-Done
-----
 - Add texts
 - Add dates on demand
 - Hide 'How about you?'

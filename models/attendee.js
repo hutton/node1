@@ -8,6 +8,10 @@ var AttendeeSchema = new mongoose.Schema({
 	email: {
 		type: String,
 		index: true
+	},
+	attendeeId: {
+		type: String,
+		index: true
 	}
 });
 
@@ -16,4 +20,4 @@ var Attendee = mongoose.model('Attendee', AttendeeSchema);
 module.exports = {
 	Attendee: Attendee,
 	AttendeeSchema: AttendeeSchema
-}
+};

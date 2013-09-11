@@ -9,16 +9,16 @@ var _ = require("underscore");
 var logger = require("../tools/logger");
 
 var CalendarSchema = new mongoose.Schema({
-	id: { 
-		type: String, 
+	id: {
+		type: String,
 		index: true
 	},
 	name: {
 		type: String,
 		index: true
 	},
-	choices: [{	
-		date: Date, 
+	choices: [{
+		date: Date,
 		busy: [mongoose.SchemaType.ObjectId],
 		free: [mongoose.SchemaType.ObjectId]
 	}],
@@ -34,8 +34,8 @@ function getEmailAddressesAndBody(text){
  
 	var result = text.match(re);
  
-	if (result == null){
-		return [[],body]
+	if (result === null){
+		return [[],body];
 	}
  
 	if (result.length > 0){
@@ -84,37 +84,50 @@ function createCalendar(subject, choices, attendees, from, callback){
 		name: subject,
 		choices: choices,
 		createdBy: from
-	});	
+	});
 
 	Calendar.find({id: new RegExp('^'+ newCalendar.id +'*', "i")}, 'id').exec(function(err, docs){
-		var originalId = newCalendar.id
-	    var tryId = originalId;
-	    var count = 1;
+		var originalId = newCalendar.id;
+		var tryId = originalId;
+		var count = 1;
 
-	    while (true){
-	        if (_.find(docs, function(doc){ return doc.id == tryId; }) == null){
-	            break;
-	        } else {
-	            tryId = originalId + count++;
-	        }
-	    }
+		while (true){
+			var found = _.find(docs, function(doc){ return doc.id == tryId; });
 
-	    newCalendar.id = tryId;
+			if (found === null || _.isUndefined(found)){
+				break;
+			} else {
+				tryId = originalId + count++;
+			}
+		}
+
+		newCalendar.id = tryId;
 
 		_.each(attendees, function(attendee){
 			newCalendar.attendees.push(attendee);
 		});
 
 		newCalendar.save(function(err, calendar){
-	        if (err){
-	            logger.error("Failed to create calendar: " + err);
-	        } else {
-	            logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
-	        }
-	    });    
+			if (err){
+				logger.error("Failed to create calendar: " + err);
+			} else {
+				logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+			}
+		});
 
-	    callback(newCalendar);
+		callback(newCalendar);
 	});
+}
+
+function makeId(length)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < length; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }
 
 CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, message, callback){
@@ -126,7 +139,7 @@ CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, messa
 		return {
 			date: date,
 			busy: [],
-			free:[] 
+			free:[]
 		};
 	});
 
@@ -149,8 +162,9 @@ CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, messa
 
 		return new Attendee({
 			name: name,
-			email: address
-		})
+			email: address,
+			attendeeId: makeId(5)
+		});
 	});
 
 	createCalendar(subject, choices, attendees, from, function(newCalendar){
@@ -160,13 +174,25 @@ CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, messa
 
 		callback(newCalendar);
 	});
-}
+};
 
 CalendarSchema.statics.findCalendar = function(id, callback){
 	var calendarId = id; // strip rest of address
 
 	Calendar.findOne({id: calendarId}, callback);
-}
+};
+
+CalendarSchema.statics.findCalendarByAttendeeId = function(id, callback){
+	Calendar.findOne({"attendees.attendeeId": id}, function(err, calendar){
+		// find attendee
+		var attendee = _.find(calendar.attendees, function(attendee){
+			return attendee.attendeeId == id;
+		});
+
+		callback(err, calendar, attendee);
+	});
+};
+
 
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
 	var self = this;
@@ -179,9 +205,9 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 	_.each(busyDates, function(busyDate){
 
 		var foundChoice = _.find(choices, function(choice){
-			if (moment(choice.date).diff(moment(busyDate), "days") == 0){
+			if (moment(choice.date).diff(moment(busyDate), "days") === 0){
 				return choice;
-			};
+			}
 		});
 
 		if (foundChoice != null){
@@ -197,7 +223,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 			for (var i = 0; i < foundChoice.free.length; i++){
 				if ( foundChoice.free[i].equals(attendee._id)){
-					foundChoice.free.splice(i,1);	
+					foundChoice.free.splice(i,1);
 					break;
 				}
 			}
@@ -205,7 +231,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 			var newChoice = {
 						date: busyDate,
 						busy: [attendee._id],
-						free:[] 
+						free:[]
 					};
 
 			choices.push(newChoice);
@@ -214,9 +240,9 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 	_.each(freeDates, function(freeDate){
 		var foundChoice = _.find(choices, function(choice){
-			if (moment(choice.date).diff(moment(freeDate), "days") == 0){
+			if (moment(choice.date).diff(moment(freeDate), "days") === 0){
 				return choice;
-			};
+			}
 		});
 
 		if (foundChoice != null){
@@ -233,7 +259,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 			for (var i = 0; i < foundChoice.busy.length; i++){
 				if ( foundChoice.busy[i].equals(attendee._id)){
-					foundChoice.busy.splice(i,1);	
+					foundChoice.busy.splice(i,1);
 					break;
 				}
 			}
@@ -241,7 +267,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 			var newChoice = {
 						date: freeDate,
 						busy: [],
-						free:[attendee._id] 
+						free:[attendee._id]
 					};
 
 			choices.push(newChoice);
@@ -252,10 +278,10 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 		if (err){
 			logger.error(err);
 		} else {
-			logger.info("Calendar saved")
+			logger.info("Calendar saved");
 		}
 	});
-}
+};
 
 CalendarSchema.methods.getAttendeeFromAddress = function(address){
 	return _.find(this.attendees, function(attendee){
@@ -264,7 +290,7 @@ CalendarSchema.methods.getAttendeeFromAddress = function(address){
 			return attendee;
 		}
 	});
-}
+};
 
 CalendarSchema.methods.addAttendee = function(message, fromName){
 	var splitMessage = getEmailAddressesAndBody(message);
@@ -280,8 +306,9 @@ CalendarSchema.methods.addAttendee = function(message, fromName){
 
 		return new Attendee({
 			name: name,
-			email: address
-		})
+			email: address,
+			attendeeId: makeId(5)
+		});
 	});
 
 	_.each(attendees, function(attendee){
@@ -289,17 +316,17 @@ CalendarSchema.methods.addAttendee = function(message, fromName){
 	});
 
 	calendar.save(function(err, calendar){
-        if (err){
-            logger.error("Failed to create calendar: " + err);
-        } else {
+		if (err){
+			logger.error("Failed to create calendar: " + err);
+		} else {
 			_.each(attendees, function(attendee){
 				Mail.sendMailToAttendee(calendar, attendee, calendar.name, "You've been added to the '" + calendar.name + "' email list.\n\nReply to this email with when you're available.", fromName);
 			});
 
-            logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
-        }
-    });    
-}
+			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
+		}
+	});
+};
 
 CalendarSchema.methods.removeAttendee = function(message){
 	var splitMessage = getEmailAddressesAndBody(message);
@@ -313,26 +340,24 @@ CalendarSchema.methods.removeAttendee = function(message){
 	_.each(attendeeAddresses, function(attendeeAddress){
 		var attendee = calendar.getAttendeeFromAddress(attendeeAddress);
 
-		if (attendee != null){
+		if (attendee !== null){
 			_.each(calendar.choices, function(choice){
 				for (var i = 0; i < choice.busy.length; i++){
 					if ( choice.busy[i].equals(attendee._id)){
-						choice.busy.splice(i,1);	
+						choice.busy.splice(i,1);
 						break;
 					}
 				}
 
-				for (var i = 0; i < choice.free.length; i++){
-					if ( choice.free[i].equals(attendee._id)){
-						choice.free.splice(i,1);	
+				for (var j = 0; j < choice.free.length; j++){
+					if ( choice.free[j].equals(attendee._id)){
+						choice.free.splice(j,1);
 						break;
 					}
 				}
 
-				if (choice.busy.length == 0 && choice.free.length == 0){
-					var i = calendar.choices.indexOf(choice);
-
-					calendar.choices.splice(i,1);
+				if (choice.busy.length === 0 && choice.free.length === 0){
+					calendar.choices.splice(calendar.choices.indexOf(choice),1);
 				}
 			});
 
@@ -343,16 +368,16 @@ CalendarSchema.methods.removeAttendee = function(message){
 	});
 
 	calendar.save(function(err, calendar){
-        if (err){
-            logger.error("Failed to create calendar: " + err);
-        } else {
-            logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
-        }
-    });    
-}
+		if (err){
+			logger.error("Failed to create calendar: " + err);
+		} else {
+			logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+		}
+	});
+};
 
 var Calendar = mongoose.model('Calendar', CalendarSchema);
 
 module.exports = {
 	Calendar: Calendar
-}
+};
