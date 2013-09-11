@@ -17,7 +17,6 @@ body{
 .table td{
 	padding: 8px 0px;
 	border-top: none;
-
 }
 
 .navbar-inner{
@@ -38,7 +37,6 @@ body{
 
 .navbar-fixed-top .navbar-inner{
 	background: white;
-	box-shadow: none;
 }
 
 .title{
@@ -58,6 +56,7 @@ body{
 .days-table td{
 	text-align: center;
 	padding: 0px 0px;
+	width: 30px;
 }
 
 .event-table tr{
@@ -70,6 +69,8 @@ body{
 }
 
 @month-divider-color: #e8e8e8;
+@selected-color: #a0a0a0;
+
 
 .event-table td.first{
 	border-left: 1px solid @month-divider-color;
@@ -97,34 +98,42 @@ body{
 	margin-right: auto;
 	width: 38px;
 	height: 38px;
-	opacity:0.5;
-	cursor:pointer;
+	opacity: 0.6;
+	cursor: pointer;
 }
 
 .event-table td>div.selected{
-	opacity:1.0;
+	opacity: 1.0;
 }
 
 .event-table td>div.selected>div:nth-of-type(3){
-	border-bottom:4px solid #e8e8e8;position:relative;top:10px;margin:0px 6px;
+	border-bottom: 4px solid @selected-color;
+	position: relative;
+	top: 14px;
+	margin: 0px 6px;
+}
+
+.event-table td>div.selected> .pie:before,
+.event-table td>div.selected> .pie:after{
+	background: @selected-color;
 }
 
 .event-table td > div.month{
 	position: absolute;
 	width: 0px;
 	height: 0px;
-	font-size: 20px;
+	font-size: 12px;
 	color: #e0e0e0;
-	top: 40px;
-	left: 20px;
 	font-weight: bold;
+	top: -10px;
 
-		-moz-transform: rotate(90deg); /* Firefox */
-		-ms-transform: rotate(90deg); /* IE */
-		-webkit-transform: rotate(90deg); /* Safari and Chrome */
-		-o-transform: rotate(90deg); /* Opera */
-		transform:rotate(90deg);
+	display: none;
 
+		// -moz-transform: rotate(90deg); /* Firefox */
+		// -ms-transform: rotate(90deg); /* IE */
+		// -webkit-transform: rotate(90deg); /* Safari and Chrome */
+		// -o-transform: rotate(90deg); /* Opera */
+		// transform:rotate(90deg);
 }
 
 .inner{
@@ -139,7 +148,8 @@ body{
 
 .free{
 	.inner;
-	background: rgba(81, 218, 115, 0.6);
+	background: #9FE4AF;
+
 }
 
 .busy{
@@ -156,6 +166,7 @@ body{
 	position: relative;
 	top: 4px;
 	font-size: 18px;
+	color: @selected-color;
 	//color: rgba(0,0,0,0.4);
 }
 

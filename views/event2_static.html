@@ -173,6 +173,7 @@
             </div>
           </td>
           <td class="first">
+              <div class="month">March</div>
               <div>
                 <div class="pie" data-start="0" data-value="0"></div>
                 <div class="unknown">
@@ -556,7 +557,8 @@
       $(".event-table td > div").click(function(event){
 
         if ($(this).hasClass('selected')){
-          $(".selected").removeClass('selected');
+          $(this).find('div:nth-of-type(2)').toggleClass('free');
+          $(this).find('div:nth-of-type(2)').toggleClass('unknown');
         } else {
           $(".selected").removeClass('selected');
 
