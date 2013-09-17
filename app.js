@@ -79,6 +79,7 @@ var winstonStream = {
  app.get('/mail', mail.show);
  app.get('/event', routes.event);
  app.get('/event2', routes.event2);
+ app.get('/email', routes.email);
  app.post('/mail', mail.receive);
  app.post('/sendgrid', mail.sendGridReceive);
 

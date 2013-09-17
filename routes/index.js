@@ -18,3 +18,7 @@ exports.event = function(req, res){
 exports.event2 = function(req, res){
   res.render('event2_static.html');
 };
+
+exports.email = function(req, res){
+  res.render('email.html');
+};
