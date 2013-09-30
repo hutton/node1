@@ -24,6 +24,12 @@ body{
 	min-height: 50px;
 }
 
+.navbar-fixed-top .navbar-inner, 
+.navbar-fixed-bottom .navbar-inner, 
+.navbar-static-top .navbar-inner{
+	box-shadow: none;
+}
+
 .event-container{
 	max-width: 600px;
 	margin-left: auto;
@@ -69,7 +75,7 @@ body{
 }
 
 @month-divider-color: #e8e8e8;
-@selected-color: #808080;
+@selected-color: #a0a0a0;
 
 
 .event-table td.first{
@@ -148,8 +154,7 @@ body{
 
 .free{
 	.inner;
-	background: #9FE4AF;
-
+	background: #4AD16C;
 }
 
 .busy{
@@ -162,12 +167,21 @@ body{
 	background: #ffffff;
 }
 
+.free > .content {
+	color: white;
+}
+
 .content {
 	position: relative;
 	top: 4px;
-	font-size: 18px;
+	font-size: 16px;
 	color: @selected-color;
 	//color: rgba(0,0,0,0.4);
 }
 
-.footer-text{margin:6px;text-align:center;font-size:14px;line-height:1.3em;}
+.footer-text {
+	margin: 6px;
+	text-align: center;
+	font-size: 14px;
+	line-height: 1.3em;
+}
