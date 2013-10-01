@@ -1,17 +1,67 @@
+@free-color: #4AD16C;
+@font-size: 21px;
+
 body{
 	padding-top: 0px;
 	padding-bottom: 40px;
 
-	font-size: 21px;
+	font-size: @font-size;
 	font-family: 'Open Sans', sans-serif;
 	color: #808080;
 
 	min-height: 800px;
 }
 
+a{
+	color: @free-color;
+	cursor: pointer;
+}
+
+a:hover{
+	color: @free-color;
+	text-decoration: none;
+}
+
+a:active{
+	color: @free-color;
+	text-decoration: none;
+}
+
 .row{
 	margin-left: 0px;
 	margin-right: 0px;
+}
+
+.fixed-width{
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+	position: relative;
+}
+
+.info{
+	max-width: 570px;
+	margin-left: auto;
+	margin-right: auto;
+
+	font-size: 16px;
+	padding: 15px 15px;
+
+	line-height: 1.6em;
+}
+
+.info h2{
+	font-size: 16px;
+	color: #606060;
+	line-height: 1.3em;
+	padding: 4px 0px;
+	margin: 0px;
+}
+
+.info .btn{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 
 .table td{
@@ -38,16 +88,41 @@ body{
 }
 
 #top-row-spacer{
-	height: 60px;
+	height: 57px;
 }
 
 .navbar-fixed-top .navbar-inner{
 	background: white;
 }
 
+.title-button-container{
+	position: absolute;
+	height: 0px;
+	right: 0px;
+	overflow: visible;
+}
+
+#show-info{
+	position: relative;
+	right: 12px;
+	top: 12px;
+}
+
 .title{
 	text-align: center;
-	padding-top: 15px;
+	padding-top: 12px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tiile-button{
+}
+
+#email-group{
+	text-align: center;
+	margin: 20px 0px 0px 0px;	
+	display: block;
+	font-size: @font-size;
 }
 
 .days-table{
@@ -154,7 +229,7 @@ body{
 
 .free{
 	.inner;
-	background: #4AD16C;
+	background: @free-color;
 }
 
 .busy{
@@ -182,6 +257,6 @@ body{
 .footer-text {
 	margin: 6px;
 	text-align: center;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.3em;
 }
