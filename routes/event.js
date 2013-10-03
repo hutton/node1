@@ -36,7 +36,7 @@ function renderEvent(req, res){
 			var sortedChoices = _.sortBy(calendar.choices, function(choice){
 				return choice.date;
 			});
-			res.render('event.html', {
+			res.render('event2.html', {
 				attendee: attendee,
 				calendar: calendar,
 				choices: sortedChoices,

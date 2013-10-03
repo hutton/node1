@@ -7,6 +7,7 @@
 
  var express = require('express')
  , routes = require('./routes')
+ , events = require('./routes/event')
  , user = require('./routes/user')
  , calendar = require('./routes/calendar')
  , mail = require('./routes/mail')
@@ -77,8 +78,8 @@ var winstonStream = {
  app.get('/users', user.list);
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
- app.get('/event', routes.event);
- app.get('/event/*', routes.event);
+ //app.get('/event', routes.event);
+ app.get('/event/*', events.view);
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
  app.post('/mail', mail.receive);
