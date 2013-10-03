@@ -18,58 +18,58 @@
  , _ = require('underscore');
 
  if (_.isUndefined(connectionString)){
- 	connectionString = 'mongodb://localhost:27017/test';
+	connectionString = 'mongodb://localhost:27017/test';
  }
 
  var app = express();
 
 var winstonStream = {
-    write: function(message, encoding){
-        logger.info(message);
-    }
+	write: function(message, encoding){
+		logger.info(message);
+	}
 };
  
  app.configure(function(){
- 	app.set('port', process.env.PORT || 3000);
- 	app.set('views', __dirname + '/views');
- 	app.set('view engine', 'html');
- 	app.set('view cache', false);
- 	app.use(express.favicon());
+	app.set('port', process.env.PORT || 3000);
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'html');
+	app.set('view cache', false);
+	app.use(express.favicon());
 	app.use(express.logger({stream:winstonStream}));
- 	app.use(express.bodyParser());
- 	app.use(express.methodOverride());
- 	app.use(express.cookieParser('your secret here'));
- 	app.use(express.session());
- 	app.use(app.router);
- 	app.use(require('less-middleware')({ src: __dirname + '/public' }));
- 	app.use(express.static(path.join(__dirname, 'public')));
- 	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+	app.use(express.cookieParser('your secret here'));
+	app.use(express.session());
+	app.use(app.router);
+	app.use(require('less-middleware')({ src: __dirname + '/public' }));
+	app.use(express.static(path.join(__dirname, 'public')));
+	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
 
- 	connectionString = connectionString + "?maxIdleTimeMS=60000";
+	connectionString = connectionString + "?maxIdleTimeMS=60000";
 
- 	logger.info("Connecting to: " + connectionString);
+	logger.info("Connecting to: " + connectionString);
 
- 	var options = {
- 		server: {
- 			socketOptions: {
- 				keepAlive: 1
- 			}
- 		},
- 		replset: {
- 			socketOptions: {
- 				keepAlive: 1
- 			}
- 		} 		
- 	};
+	var options = {
+		server: {
+			socketOptions: {
+				keepAlive: 1
+			}
+		},
+		replset: {
+			socketOptions: {
+				keepAlive: 1
+			}
+		}
+	};
 
- 	mongoose.connect(connectionString, options);
+	mongoose.connect(connectionString, options);
  });
 
  app.engine('html', cons.underscore);
  app.engine('txt', cons.underscore);
 
  app.configure('development', function(){
- 	app.use(express.errorHandler());
+	app.use(express.errorHandler());
  });
 
  app.get('/', routes.index);
@@ -78,6 +78,7 @@ var winstonStream = {
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
  app.get('/event', routes.event);
+ app.get('/event/*', routes.event);
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
  app.post('/mail', mail.receive);
@@ -90,6 +91,6 @@ var winstonStream = {
  global.app = app;
  
  http.createServer(app).listen(app.get('port'), function(){
- 	logger.info("Express server listening on port " + app.get('port'));
+	logger.info("Express server listening on port " + app.get('port'));
  });
 

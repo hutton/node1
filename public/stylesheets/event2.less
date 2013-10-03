@@ -45,7 +45,7 @@ a:active{
 	margin-right: auto;
 
 	font-size: 16px;
-	padding: 15px 15px;
+	padding: 25px 15px;
 
 	line-height: 1.6em;
 }
@@ -78,6 +78,7 @@ a:active{
 .navbar-fixed-bottom .navbar-inner, 
 .navbar-static-top .navbar-inner{
 	box-shadow: none;
+	background: white;
 }
 
 .event-container{
@@ -120,7 +121,7 @@ a:active{
 
 #email-group{
 	text-align: center;
-	margin: 20px 0px 0px 0px;	
+	margin: 30px 0px 0px 0px;	
 	display: block;
 	font-size: @font-size;
 }
@@ -204,11 +205,10 @@ a:active{
 	width: 0px;
 	height: 0px;
 	font-size: 12px;
-	color: #e0e0e0;
+	color: #a0a0a0;
 	font-weight: bold;
-	top: -10px;
-
-	display: none;
+	top: -4px;
+	left: 2px;
 
 		// -moz-transform: rotate(90deg); /* Firefox */
 		// -ms-transform: rotate(90deg); /* IE */
@@ -252,6 +252,13 @@ a:active{
 	font-size: 16px;
 	color: @selected-color;
 	//color: rgba(0,0,0,0.4);
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .footer-text {
