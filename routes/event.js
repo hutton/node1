@@ -39,7 +39,7 @@ function renderEvent(req, res){
 			res.render('event2.html', {
 				attendee: attendee,
 				calendar: calendar,
-				choices: sortedChoices,
+				choices: JSON.stringify(sortedChoices),
 				attendees: calendar.attendees,
 				message: ''
 			});
