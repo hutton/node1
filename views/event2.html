@@ -580,7 +580,14 @@ var choices = new Backbone.Collection;
 
 choices.reset(<%= choices %>);
 
+var attendees = new Backbone.Collection;
+
+attendees.reset(<%= attendees %>);
+
+var calendar = new Backbone.Model(<%= calendar %>);
+
 console.log(choices.length);
+console.log(attendees.length);
 </script>
 
 </body>

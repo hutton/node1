@@ -38,9 +38,9 @@ function renderEvent(req, res){
 			});
 			res.render('event2.html', {
 				attendee: attendee,
-				calendar: calendar,
+				calendar: JSON.stringify(calendar),
 				choices: JSON.stringify(sortedChoices),
-				attendees: calendar.attendees,
+				attendees: JSON.stringify(calendar.attendees),
 				message: ''
 			});
 		}
