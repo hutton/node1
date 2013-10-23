@@ -27,8 +27,14 @@ function renderEvent(req, res){
 				choice.columnDate = moment(choice.date).format("dddd Do MMM");
 			});
 
-			_.each(calendar.attendees, function(attendee){
-				attendee.prettyName = attendee.name || attendee.email;
+			var cleanedAttendees = [];
+
+			_.each(calendar.attendees, function(att){
+				cleanedAttendees.push({
+					_id: att._id,
+					prettyName: att.name || att.email,
+					me: att._id == attendee._id
+				});
 			});
 
 			logger.info("Showing: " + calendar.name);
@@ -37,11 +43,8 @@ function renderEvent(req, res){
 				return choice.date;
 			});
 			res.render('event2.html', {
-				attendee: attendee,
-				calendar: JSON.stringify(calendar),
 				choices: JSON.stringify(sortedChoices),
-				attendees: JSON.stringify(calendar.attendees),
-				message: ''
+				attendees: JSON.stringify(cleanedAttendees)
 			});
 		}
 	});

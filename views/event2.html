@@ -563,8 +563,8 @@
   <script src="/javascripts/underscore-min.js"></script>
   <script src="/javascripts/backbone-min.js"></script>
 
-  <script src="/javascripts/event-app.js"></script>
-
+  <script src="/javascripts/helper.js"></script>
+  
   <!--script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -575,20 +575,30 @@
   ga('send', 'pageview');
 </script-->
 
-<script>
-var choices = new Backbone.Collection;
+  <script type="text/template" id="choice-template">
+    <div>
+      <div class="pie" data-start="0" data-value="00"></div>
+      <div class="unknown">
+        <div class="content">
+          <@= date.getDate() @>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </script>
 
-choices.reset(<%= choices %>);
+  <script>
+    var bootstrapedChoices = new Backbone.Collection;
 
-var attendees = new Backbone.Collection;
+    bootstrapedChoices.reset(expandDates(<%= choices %>));
 
-attendees.reset(<%= attendees %>);
+    var bootstrappedAttendees = new Backbone.Collection;
 
-var calendar = new Backbone.Model(<%= calendar %>);
+    bootstrappedAttendees.reset(<%= attendees %>);
+  </script>
 
-console.log(choices.length);
-console.log(attendees.length);
-</script>
+  <script src="/javascripts/views/choices-view.js"></script>
+  <script src="/javascripts/event-app.js"></script>
 
 </body>
 </html>

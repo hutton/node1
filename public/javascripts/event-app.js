@@ -1,8 +1,11 @@
 
-
 window.EventApp = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+
+		this.ChoicesView = new ChoicesView({collection: bootstrapedChoices, attendees: bootstrappedAttendees});
+
+		this.ChoicesView.render();
 	},
 
 	el: $("body"),
