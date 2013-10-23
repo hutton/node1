@@ -11,8 +11,7 @@ window.EventApp = Backbone.View.extend({
 	el: $("body"),
 
 	events: {
-		"click #show-info":				"infoClicked",
-		"click .event-table td > div":	"dayClicked"
+		"click #show-info":				"infoClicked"
 	},
 
 	initialise: function(){
@@ -21,19 +20,6 @@ window.EventApp = Backbone.View.extend({
 
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
-	},
-
-	dayClicked: function(event){
-		var target = $(event.currentTarget);
-
-		if (target.hasClass('selected')){
-			target.find('div:nth-of-type(2)').toggleClass('free');
-			target.find('div:nth-of-type(2)').toggleClass('unknown');
-		} else {
-			$(".selected").removeClass('selected');
-
-			target.addClass('selected');
-		}
 	}
 });
 

@@ -50,6 +50,7 @@ window.ChoiceView = Backbone.View.extend({
 	template: _.template($('#choice-template').html()),
 
 	events: {
+		"click div":	"dayClicked"
 	},
 
 	render: function(){
@@ -66,21 +67,38 @@ window.ChoiceView = Backbone.View.extend({
 		}
 
 		if (this.model.has("free")){
-			var deg = this.calcDegrees(bootstrappedAttendees.length, this.model.get("free").length);
+			var freeDates = this.model.get("free");
 
-			this.$el.find(".pie").data("value", deg);
+			var deg = this.calcDegrees(bootstrappedAttendees.length, freeDates.length);
 
-			if (deg > 180){
+			this.$el.find(".pie").attr("data-value", deg);
+
+			if (deg >= 180){
 				this.$el.find(".pie").addClass("big");
 			}
 
-			// if (this.model.get("free"))
+			if (currentAttendee != null && freeDates.indexOf(currentAttendee.get("_id")) != -1){
+				this.$el.find(".unknown").addClass("free").removeClass("unknown");
+			}
 		}
 
 		return this;
 	},
 
+	dayClicked: function(event){
+		var target = $(this.$el).find("div");
+
+		if (target.hasClass('selected')){
+			target.find('div:nth-of-type(2)').toggleClass('free');
+			target.find('div:nth-of-type(2)').toggleClass('unknown');
+		} else {
+			$(".selected").removeClass('selected');
+
+			target.addClass('selected');
+		}
+	},
+
 	calcDegrees: function(total, count){
-		return (count / total) * 360;
+		return Math.round((count / total) * 36) * 10;
 	}
 });

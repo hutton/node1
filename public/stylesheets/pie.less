@@ -3,6 +3,8 @@
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
+@import "elements.less";
+
 	@pie-half-size: 19px;
 	@pie-size: 38px;
 
@@ -102,82 +104,119 @@
   now rotate each piece based on their cumulative starting
   position
 */
-	.pie[data-start="30"] {
-		-moz-transform: rotate(30deg); /* Firefox */
-		-ms-transform: rotate(30deg); /* IE */
-		-webkit-transform: rotate(30deg); /* Safari and Chrome */
-		-o-transform: rotate(30deg); /* Opera */
-		transform:rotate(30deg);
-	}
-	.pie[data-start="60"] {
-		-moz-transform: rotate(60deg); /* Firefox */
-		-ms-transform: rotate(60deg); /* IE */
-		-webkit-transform: rotate(60deg); /* Safari and Chrome */
-		-o-transform: rotate(60deg); /* Opera */
-		transform:rotate(60deg);
-	}
-	.pie[data-start="100"] {
-		-moz-transform: rotate(100deg); /* Firefox */
-		-ms-transform: rotate(100deg); /* IE */
-		-webkit-transform: rotate(100deg); /* Safari and Chrome */
-		-o-transform: rotate(100deg); /* Opera */
-		transform:rotate(100deg);
-	}
 /*
   and rotate the amount of the pie that's showing.
 
   NOTE: add an extra degree to all but the final piece, 
   to fill in unsightly gaps.
 */
+	.pie[data-value="10"]:BEFORE {
+		.rotation(11deg);
+	}
+	.pie[data-value="20"]:BEFORE {
+		.rotation(21deg);
+	}
 	.pie[data-value="30"]:BEFORE {
-		-moz-transform: rotate(31deg); /* Firefox */
-		-ms-transform: rotate(31deg); /* IE */
-		-webkit-transform: rotate(31deg); /* Safari and Chrome */
-		-o-transform: rotate(31deg); /* Opera */
-		transform:rotate(31deg);
+		.rotation(31deg);
 	}
 	.pie[data-value="40"]:BEFORE {
-		-moz-transform: rotate(41deg); /* Firefox */
-		-ms-transform: rotate(41deg); /* IE */
-		-webkit-transform: rotate(41deg); /* Safari and Chrome */
-		-o-transform: rotate(41deg); /* Opera */
-		transform:rotate(41deg);
+		.rotation(41deg);
+	}
+	.pie[data-value="50"]:BEFORE {
+		.rotation(51deg);
 	}
 	.pie[data-value="60"]:BEFORE {
-		-moz-transform: rotate(61deg); /* Firefox */
-		-ms-transform: rotate(61deg); /* IE */
-		-webkit-transform: rotate(61deg); /* Safari and Chrome */
-		-o-transform: rotate(61deg); /* Opera */
-		transform:rotate(61deg);
+		.rotation(61deg);
 	}
 	.pie[data-value="70"]:BEFORE {
-		-moz-transform: rotate(71deg); /* Firefox */
-		-ms-transform: rotate(71deg); /* IE */
-		-webkit-transform: rotate(71deg); /* Safari and Chrome */
-		-o-transform: rotate(71deg); /* Opera */
-		transform:rotate(71deg);
+		.rotation(71deg);
 	}
 	.pie[data-value="80"]:BEFORE {
-		-moz-transform: rotate(81deg); /* Firefox */
-		-ms-transform: rotate(81deg); /* IE */
-		-webkit-transform: rotate(81deg); /* Safari and Chrome */
-		-o-transform: rotate(81deg); /* Opera */
-		transform:rotate(81deg);
+		.rotation(81deg);
+	}
+	.pie[data-value="90"]:BEFORE {
+		.rotation(91deg);
+	}
+	.pie[data-value="100"]:BEFORE {
+		.rotation(101deg);
+	}
+	.pie[data-value="110"]:BEFORE {
+		.rotation(111deg);
+	}
+	.pie[data-value="120"]:BEFORE {
+		.rotation(121deg);
+	}
+	.pie[data-value="130"]:BEFORE {
+		.rotation(131deg);
+	}
+	.pie[data-value="140"]:BEFORE {
+		.rotation(141deg);
 	}
 	.pie[data-value="150"]:BEFORE {
-		-moz-transform: rotate(151deg); /* Firefox */
-		-ms-transform: rotate(151deg); /* IE */
-		-webkit-transform: rotate(151deg); /* Safari and Chrome */
-		-o-transform: rotate(151deg); /* Opera */
-		transform:rotate(151deg);
+		.rotation(151deg);
 	}
-
+	.pie[data-value="160"]:BEFORE {
+		.rotation(161deg);
+	}
+	.pie[data-value="170"]:BEFORE {
+		.rotation(171deg);
+	}
+	.pie[data-value="180"]:BEFORE {
+		.rotation(181deg);
+	}
+	.pie[data-value="190"]:BEFORE {
+		.rotation(191deg);
+	}
+	.pie[data-value="200"]:BEFORE {
+		.rotation(201deg);
+	}
+	.pie[data-value="210"]:BEFORE {
+		.rotation(211deg);
+	}
+	.pie[data-value="220"]:BEFORE {
+		.rotation(221deg);
+	}
+	.pie[data-value="230"]:BEFORE {
+		.rotation(231deg);
+	}
+	.pie[data-value="240"]:BEFORE {
+		.rotation(241deg);
+	}
+	.pie[data-value="250"]:BEFORE {
+		.rotation(251deg);
+	}
 	.pie[data-value="260"]:BEFORE {
-		-moz-transform: rotate(260deg); /* Firefox */
-		-ms-transform: rotate(260deg); /* IE */
-		-webkit-transform: rotate(260deg); /* Safari and Chrome */
-		-o-transform: rotate(260deg); /* Opera */
-		transform:rotate(260deg);
+		.rotation(261deg);
+	}
+	.pie[data-value="270"]:BEFORE {
+		.rotation(271deg);
+	}
+	.pie[data-value="280"]:BEFORE {
+		.rotation(281deg);
+	}
+	.pie[data-value="290"]:BEFORE {
+		.rotation(291deg);
+	}
+	.pie[data-value="300"]:BEFORE {
+		.rotation(301deg);
+	}
+	.pie[data-value="310"]:BEFORE {
+		.rotation(311deg);
+	}
+	.pie[data-value="320"]:BEFORE {
+		.rotation(321deg);
+	}
+	.pie[data-value="330"]:BEFORE {
+		.rotation(331deg);
+	}
+	.pie[data-value="340"]:BEFORE {
+		.rotation(341deg);
+	}
+	.pie[data-value="350"]:BEFORE {
+		.rotation(351deg);
+	}
+	.pie[data-value="360"]:BEFORE {
+		.rotation(361deg);
 	}
 /*
 NOTE: you could also apply custom classes (i.e. .s0 .v30)

@@ -577,7 +577,7 @@
 
   <script type="text/template" id="choice-template">
     <div>
-      <div class="pie" data-start="0" data-value="00"></div>
+      <div class="pie" data-start="0" data-value="0"></div>
       <div class="unknown">
         <div class="content">
           <@= date.getDate() @>
@@ -595,6 +595,8 @@
     var bootstrappedAttendees = new Backbone.Collection;
 
     bootstrappedAttendees.reset(<%= attendees %>);
+
+    var currentAttendee = bootstrappedAttendees.findWhere({me: true});
   </script>
 
   <script src="/javascripts/views/choices-view.js"></script>
