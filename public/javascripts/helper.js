@@ -4,6 +4,15 @@ _.templateSettings = {
   escape: /\<\@\-(.+?)\@\>/gim
 };
 
+Array.prototype.removeElement = function(element) {
+	var index = this.indexOf(element);
+ 
+	while (index !== -1){
+		this.splice(index, 1);
+		index = this.indexOf(element);
+	}
+};
+
 function tomorrow(date){
 	var newDate = new Date(date);
 

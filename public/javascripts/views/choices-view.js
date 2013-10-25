@@ -50,7 +50,7 @@ window.ChoiceView = Backbone.View.extend({
 	template: _.template($('#choice-template').html()),
 
 	events: {
-		"click div":	"dayClicked"
+		"click div:first":	"dayClicked"
 	},
 
 	render: function(){
@@ -86,16 +86,35 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	dayClicked: function(event){
-		var target = $(this.$el).find("div");
+		var target = $(this.$el).find("div:first");
 
 		if (target.hasClass('selected')){
 			target.find('div:nth-of-type(2)').toggleClass('free');
 			target.find('div:nth-of-type(2)').toggleClass('unknown');
+
+			this.toggleFree();
 		} else {
 			$(".selected").removeClass('selected');
 
 			target.addClass('selected');
 		}
+	},
+
+	toggleFree: function(){
+		var currentAttendeeId = currentAttendee.get("_id");
+		var freeDates = this.model.get("free");
+
+		if (_.isUndefined(freeDates) || freeDates.indexOf(currentAttendeeId) == -1){
+			if (_.isUndefined(freeDates)){
+				this.model.set("free", [currentAttendeeId]);
+			} else {
+				freeDates.push(currentAttendeeId);
+			}
+		} else {
+			freeDates.removeElement(currentAttendeeId);
+		}
+
+		this.model.save();
 	},
 
 	calcDegrees: function(total, count){

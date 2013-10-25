@@ -50,6 +50,37 @@ function renderEvent(req, res){
 	});
 }
 
+function updateChoice(req, res){
+	Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+		if (err){
+			logger.error("Error finding calendar " + req.route.params[0]);
+			logger.error("Error:" + err);
+
+			res.status(404);
+		} else if (!calendar){
+			logger.error("Could not find calendar " + req.route.params[0]);
+
+			res.status(404);
+		} else {
+			logger.info("Updating: " + calendar.name);
+
+			var postedChoice = req.body;
+
+			// calendar.updateChoice(attendee, )
+
+			if (_.isUndefined(postedChoice._id)){
+				logger.info("A new choice");				
+			}
+
+			res.status(200);
+		}		
+	});
+}
+
 exports.view = function(req, res){
 	renderEvent(req, res);
+};
+
+exports.updateChoice = function(req, res){
+	updateChoice(req, res);
 };

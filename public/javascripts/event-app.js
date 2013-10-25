@@ -14,10 +14,6 @@ window.EventApp = Backbone.View.extend({
 		"click #show-info":				"infoClicked"
 	},
 
-	initialise: function(){
-		_.bindAll(this);
-	},
-
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
 	}
@@ -28,5 +24,5 @@ $(document).ready(function(){
 
 	window.App = new EventApp();
 
-	window.App.initialise();
+	window.App.initialize();
 });
