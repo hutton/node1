@@ -68,10 +68,6 @@ function updateChoice(req, res){
 
 			calendar.updateChoice(attendee, postedChoice.date, postedChoice.free);
 
-			if (_.isUndefined(postedChoice._id)){
-				logger.info("A new choice");				
-			} 
-
 			res.status(200);
 		}		
 	});
