@@ -66,11 +66,11 @@ function updateChoice(req, res){
 
 			var postedChoice = req.body;
 
-			// calendar.updateChoice(attendee, )
+			calendar.updateChoice(attendee, postedChoice.date, postedChoice.free);
 
 			if (_.isUndefined(postedChoice._id)){
 				logger.info("A new choice");				
-			}
+			} 
 
 			res.status(200);
 		}		

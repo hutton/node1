@@ -193,6 +193,13 @@ CalendarSchema.statics.findCalendarByAttendeeId = function(id, callback){
 	});
 };
 
+CalendarSchema.methods.findChoiceByDate = function(date){
+	return _.find(this.choices, function(choice){
+		if (moment(choice.date).diff(moment(date), "days") === 0){
+			return choice;
+		}
+	});
+};
 
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
 	var self = this;
@@ -204,11 +211,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 
 	_.each(busyDates, function(busyDate){
 
-		var foundChoice = _.find(choices, function(choice){
-			if (moment(choice.date).diff(moment(busyDate), "days") === 0){
-				return choice;
-			}
-		});
+		var foundChoice = self.findChoiceByDate(busyDate);
 
 		if (foundChoice != null){
 			var found = _.find(foundChoice.busy, function(att){
@@ -239,11 +242,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 	});
 
 	_.each(freeDates, function(freeDate){
-		var foundChoice = _.find(choices, function(choice){
-			if (moment(choice.date).diff(moment(freeDate), "days") === 0){
-				return choice;
-			}
-		});
+		var foundChoice = self.findChoiceByDate(freeDate);
 
 		if (foundChoice != null){
 
@@ -273,6 +272,43 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 			choices.push(newChoice);
 		}
 	});
+
+	this.save(function(err){
+		if (err){
+			logger.error(err);
+		} else {
+			logger.info("Calendar saved");
+		}
+	});
+};
+
+CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
+	var isFree = freeAttendees.indexOf(attendee._id.toString()) != -1;
+
+	var foundChoice = this.findChoiceByDate(date);
+
+	if (foundChoice != null){
+		if (isFree){
+			foundChoice.free.push(attendee._id);
+		} else {
+			for (var i = 0; i < foundChoice.free.length; i++){
+				if ( foundChoice.free[i].equals(attendee._id)){
+					foundChoice.free.splice(i,1);
+					break;
+				}
+			}
+		}
+	} else {
+		if (isFree){
+			var newChoice = {
+						date: date,
+						busy: [],
+						free:[attendee._id]
+					};
+
+			this.choices.push(newChoice);
+		}
+	}
 
 	this.save(function(err){
 		if (err){
