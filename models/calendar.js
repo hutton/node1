@@ -285,11 +285,7 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 	var isFree = freeAttendees.indexOf(attendee._id.toString()) != -1;
 
-	logger.info("isFree:" + isFree);
-
 	var foundChoice = this.findChoiceByDate(date);
-
-	logger.info("foundChoice:" + foundChoice);
 
 	if (_.isUndefined(foundChoice) || foundChoice == null){
 		if (isFree){
