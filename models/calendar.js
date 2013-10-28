@@ -291,7 +291,17 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 
 	logger.info("foundChoice:" + foundChoice);
 
-	if (foundChoice !== null){
+	if (_.isUndefined(foundChoice) || foundChoice == null){
+		if (isFree){
+			var newChoice = {
+						date: date,
+						busy: [],
+						free:[attendee._id]
+					};
+
+			this.choices.push(newChoice);
+		}
+	} else {
 		if (isFree){
 			foundChoice.free.push(attendee._id);
 		} else {
@@ -301,16 +311,6 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 					break;
 				}
 			}
-		}
-	} else {
-		if (isFree){
-			var newChoice = {
-						date: date,
-						busy: [],
-						free:[attendee._id]
-					};
-
-			this.choices.push(newChoice);
 		}
 	}
 
