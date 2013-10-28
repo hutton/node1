@@ -53,12 +53,8 @@ window.ChoiceView = Backbone.View.extend({
 		"click div:first":	"dayClicked"
 	},
 
-	pie: null,
-
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
-
-		this.pie = this.$el.find(".pie");
 
 		var date = this.model.get("date").getDate();
 
@@ -79,38 +75,27 @@ window.ChoiceView = Backbone.View.extend({
 		if (this.model.has("free")){
 			var freeDates = this.model.get("free");
 
-			this.targetDeg = this.calcDegrees(bootstrappedAttendees.length, freeDates.length);
+			var deg = this.calcDegrees(bootstrappedAttendees.length, freeDates.length);
 
-			this.animatePie();
+			var pie = this.$el.find(".pie");
 
-			if (currentAttendee !== null && freeDates.indexOf(currentAttendee.get("_id")) != -1){
+			//pie.attr("data-value", deg);
+
+			pie.animate(
+		        data-value: deg,
+		        1000,
+		        function(now) { $(this).attr("data-value", now); }
+		        );
+
+			if (deg >= 180){
+				pie.addClass("big");
+			} else {
+				pie.removeClass("big");
+			}
+
+			if (currentAttendee != null && freeDates.indexOf(currentAttendee.get("_id")) != -1){
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
-		}
-	},
-
-	animatePie: function(){
-		var current = parseInt(this.pie.attr("data-value"));
-		var change = 0;
-
-		if (current < this.targetDeg){
-			change = 10;
-		}
-
-		if (current > this.targetDeg){
-			change = -10;
-		}
-
-		if (change !== 0){
-			this.pie.attr("data-value", current + change);
-
-			if (current + change >= 180){
-				this.pie.addClass("big");
-			} else {
-				this.pie.removeClass("big");
-			}
-
-			_.delay(this.animatePie, 15);
 		}
 	},
 
