@@ -37,6 +37,8 @@ function renderEvent(req, res){
 				});
 			});
 
+			var cleanedCalendar = { name: calendar.name };
+
 			logger.info("Showing: " + calendar.name);
 
 			var sortedChoices = _.sortBy(calendar.choices, function(choice){
@@ -44,7 +46,8 @@ function renderEvent(req, res){
 			});
 			res.render('event2.html', {
 				choices: JSON.stringify(sortedChoices),
-				attendees: JSON.stringify(cleanedAttendees)
+				attendees: JSON.stringify(cleanedAttendees),
+				calendar: JSON.stringify(cleanedCalendar),
 			});
 		}
 	});
@@ -68,8 +71,8 @@ function updateChoice(req, res){
 
 			calendar.updateChoice(attendee, postedChoice.date, postedChoice.free);
 
-			res.status(200);
-		}		
+			res.send(200);
+		}
 	});
 }
 

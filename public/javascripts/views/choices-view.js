@@ -1,47 +1,3 @@
-window.ChoicesView = Backbone.View.extend({
-	initialize: function(){
-		_.bindAll(this);
-
-		var that = this;
-	
-		this._choiceViews = [];
-	 
-		this.collection.each(function(choice) {
-			that._choiceViews.push(new ChoiceView({
-			model : choice,
-			tagName : 'td'
-			}));
-		});
-	},
-
-	el: $(".event-table"),
-
-	events: {
-	},
-
-	render: function(){
-		var that = this;
-
-		$(this.el).empty();
-
-		var row = null;
-
-		_(this._choiceViews).each(function(choice) {
-			if (choice.model.get("date").getDay() == 1){
-				$(that.el).append($("<tr></tr>"));
-
-				row = $(that.el).find("tr:last");
-			}
-
-			if (row !== null){
-				row.append(choice.render().el);
-			}
-		});
-
-		return this;
-	}
-});
-
 window.ChoiceView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
@@ -70,20 +26,30 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.addClass("first-seven");
 		}
 
-		this.updateFreeCounter();
+		this.updateFreeCounter(false);
 
 		return this;
 	},
 
-	updateFreeCounter: function(){
+	updateFreeCounter: function(animate){
 		if (this.model.has("free")){
 			var freeDates = this.model.get("free");
 
-			this.targetDeg = this.calcDegrees(bootstrappedAttendees.length, freeDates.length);
+			this.targetDeg = this.calcDegrees(window.App.attendees.length, freeDates.length);
 
-			this.animatePie();
+			if (animate){
+				this.animatePie();
+			} else {
+				this.pie.attr("data-value", this.targetDeg);
 
-			if (currentAttendee !== null && freeDates.indexOf(currentAttendee.get("_id")) != -1){
+				if (this.targetDeg >= 180){
+					this.pie.addClass("big");
+				} else {
+					this.pie.removeClass("big");
+				}
+			}
+
+			if (window.App.currentAttendee !== null && freeDates.indexOf(window.App.currentAttendee.get("_id")) != -1){
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
 		}
@@ -130,7 +96,7 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	toggleFree: function(){
-		var currentAttendeeId = currentAttendee.get("_id");
+		var currentAttendeeId = window.App.currentAttendee.get("_id");
 		var freeDates = this.model.get("free");
 
 		if (_.isUndefined(freeDates) || freeDates.indexOf(currentAttendeeId) == -1){
@@ -143,12 +109,56 @@ window.ChoiceView = Backbone.View.extend({
 			freeDates.removeElement(currentAttendeeId);
 		}
 
-		this.updateFreeCounter();
+		this.updateFreeCounter(true);
 
 		this.model.save();
 	},
 
 	calcDegrees: function(total, count){
 		return Math.round((count / total) * 36) * 10;
+	}
+});
+
+window.ChoicesView = Backbone.View.extend({
+	initialize: function(){
+		_.bindAll(this);
+
+		var that = this;
+	
+		this._choiceViews = [];
+	 
+		this.collection.each(function(choice) {
+			that._choiceViews.push(new ChoiceView({
+			model : choice,
+			tagName : 'td'
+			}));
+		});
+	},
+
+	el: $(".event-table"),
+
+	events: {
+	},
+
+	render: function(){
+		var that = this;
+
+		$(this.el).empty();
+
+		var row = null;
+
+		_(this._choiceViews).each(function(choice) {
+			if (choice.model.get("date").getDay() == 1){
+				$(that.el).append($("<tr></tr>"));
+
+				row = $(that.el).find("tr:last");
+			}
+
+			if (row !== null){
+				row.append(choice.render().el);
+			}
+		});
+
+		return this;
 	}
 });

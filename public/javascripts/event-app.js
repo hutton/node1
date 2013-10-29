@@ -2,8 +2,22 @@
 window.EventApp = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+	},
 
-		this.ChoicesView = new ChoicesView({collection: bootstrapedChoices, attendees: bootstrappedAttendees});
+	loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
+		this.choices = new ChoicesModel;
+
+		this.choices.reset(expandDates(bootstrapedChoices));
+
+		this.attendees = new Backbone.Collection;
+
+		this.attendees.reset(bootstrappedAttendees);
+
+		this.calendarName = new CalendarModel(bootstrappedCalendar);
+
+		this.currentAttendee = this.attendees.findWhere({me: true});
+
+		this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
 
 		this.ChoicesView.render();
 	},
@@ -17,12 +31,4 @@ window.EventApp = Backbone.View.extend({
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
 	}
-});
-
-$(document).ready(function(){
-	FastClick.attach(document.body);
-
-	window.App = new EventApp();
-
-	window.App.initialize();
 });
