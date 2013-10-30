@@ -20,18 +20,6 @@ window.ChoiceView = Backbone.View.extend({
 		var day = this.model.get("date").getDay();
 		var month = this.model.get("date").getMonth();
 
-		if (date == 1){
-			this.$el.addClass("first");
-		}
-
-		if (date >= 2 && date <= 7){
-			this.$el.addClass("first-seven");
-		}
-
-		if (day == 1 && date <= 7){
-			// this.$el.prepend($("<div class='month-label'>" + month + "</div>"));
-		}
-
 		this.updateFreeCounter(false);
 
 		return this;
@@ -143,9 +131,7 @@ window.ChoicesView = Backbone.View.extend({
 
 	el: $(".event-table"),
 
-	events: {
-		"scroll .event-container > div":  "eventScrolled",
-	},
+	monthTitleTemplate: _.template($('#month-title-template').html()),
 
 	render: function(){
 		var that = this;
@@ -155,21 +141,82 @@ window.ChoicesView = Backbone.View.extend({
 		var row = null;
 
 		_(this._choiceViews).each(function(choice) {
-			if (choice.model.get("date").getDay() == 1){
-				$(that.el).append($("<tr></tr>"));
+			var date = choice.model.get("date");
 
-				row = $(that.el).find("tr:last");
+			if (date.getDay() == 1){
+				that.$el.append($("<tr></tr>"));
+
+				row = that.$el.find("tr:last");
+
+				rowItemCount = 0;
 			}
 
 			if (row !== null){
+				if (date.getDate() == 1){
+
+					row = that.insertMonthTitle(rowItemCount, row, moment(date).format("MMM"));
+				}
+
 				row.append(choice.render().el);
+				rowItemCount++;
 			}
 		});
 
 		return this;
 	},
 
-	eventScrolled: function(){
-		alert("scrolled");
+	insertMonthTitle: function(rowItemCount, row, month){
+		var originalRowItemCount = rowItemCount;
+
+		var showTitle = true;
+
+		// if (date == 1){
+		// 	this.$el.addClass("first");
+		// }
+
+		// if (date >= 2 && date <= 7){
+		// 	this.$el.addClass("first-seven");
+		// }
+
+		var itemsInserted = 0;
+
+		while (itemsInserted < 7){
+			var newItem = $(this.monthTitleTemplate({month: month, showTitle: showTitle}));
+
+			if (showTitle){
+				newItem.removeClass("first-seven").addClass("first");
+			}
+
+			row.append(newItem);
+			itemsInserted++;
+
+			showTitle = false;
+
+			if (itemsInserted == 7 - rowItemCount){
+				this.$el.append($("<tr></tr>"));
+
+				row = this.$el.find("tr:last");
+			}
+		}
+
+		// while (rowItemCount < 7){
+		// 	row.append($(this.monthTitleTemplate({month: month, showTitle: showTitle})));
+		// 	rowItemCount++;
+		// 	showTitle = false;
+		// }
+
+		// this.$el.append($("<tr></tr>"));
+
+		// row = this.$el.find("tr:last");
+
+		// rowItemCount = 0;
+
+		// while (rowItemCount < originalRowItemCount){
+		// 	row.append($(this.monthTitleTemplate({month: month, showTitle: showTitle})));
+		// 	rowItemCount++;
+		// 	showTitle = false;
+		// }
+
+		return row;
 	}
 });

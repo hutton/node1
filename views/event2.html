@@ -82,6 +82,7 @@
   <script src="/javascripts/fastclick.js"></script>
 
   <script src="/javascripts/underscore-min.js"></script>
+  <script src="/javascripts/moment.js"></script>
   <script src="/javascripts/backbone-min.js"></script>
 
   <script src="/javascripts/helper.js"></script>
@@ -106,6 +107,16 @@
       </div>
       <div></div>
     </div>
+  </script>
+
+  <script type="text/template" id="month-title-template">
+    <td class="first-seven">
+      <@ if (showTitle){ @>
+        <div class="month">
+          <@= month @>
+        </div>
+      <@ } @>
+    </td>
   </script>
 
   <script src="/javascripts/models/choice-model.js"></script>
