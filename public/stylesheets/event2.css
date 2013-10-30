@@ -123,20 +123,11 @@ a:active {
 .days-table td:nth-of-type(7) {
   color: #c8c8c8;
 }
-.month-label-container {
-  height: 0px;
-}
-.month-label {
-  text-align: center;
-  font-size: 10px;
+.event-table td > div.month-label {
+  font-size: 30px;
   padding: 0px 10px;
-  border-left: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
-  border-right: 1px solid #e8e8e8;
-  background: white;
-  width: 70px;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  z-index: 100;
 }
 .event-table tr {
   height: 60px;

@@ -37,7 +37,10 @@ function renderEvent(req, res){
 				});
 			});
 
-			var cleanedCalendar = { name: calendar.name };
+			var cleanedCalendar = {
+				name: calendar.name,
+				id: calendar.id
+			};
 
 			logger.info("Showing: " + calendar.name);
 

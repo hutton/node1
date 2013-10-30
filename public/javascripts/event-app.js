@@ -13,13 +13,15 @@ window.EventApp = Backbone.View.extend({
 
 		this.attendees.reset(bootstrappedAttendees);
 
-		this.calendarName = new CalendarModel(bootstrappedCalendar);
+		this.model = new CalendarModel(bootstrappedCalendar);
 
 		this.currentAttendee = this.attendees.findWhere({me: true});
 
 		this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
 
 		this.ChoicesView.render();
+
+		this.render();
 	},
 
 	el: $("body"),
@@ -30,5 +32,21 @@ window.EventApp = Backbone.View.extend({
 
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
+	},
+
+	render: function(){
+		this.$el.find(".title").html(this.model.get("name"));
+
+		var names = this.attendees.pluck("prettyName");
+		var nameList = "";
+		_.each(names, function(name){
+			nameList = nameList + name + ", ";
+		});
+
+		nameList = nameList.slice(0, -2);
+
+		this.$el.find(".attendees").html(nameList);
+
+		this.$el.find("#email-group").attr("href", "mailto:" + this.model.get("id") + "@convenely.com");
 	}
 });

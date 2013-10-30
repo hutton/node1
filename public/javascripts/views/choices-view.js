@@ -17,6 +17,8 @@ window.ChoiceView = Backbone.View.extend({
 		this.pie = this.$el.find(".pie");
 
 		var date = this.model.get("date").getDate();
+		var day = this.model.get("date").getDay();
+		var month = this.model.get("date").getMonth();
 
 		if (date == 1){
 			this.$el.addClass("first");
@@ -24,6 +26,10 @@ window.ChoiceView = Backbone.View.extend({
 
 		if (date >= 2 && date <= 7){
 			this.$el.addClass("first-seven");
+		}
+
+		if (day == 1 && date <= 7){
+			// this.$el.prepend($("<div class='month-label'>" + month + "</div>"));
 		}
 
 		this.updateFreeCounter(false);
@@ -138,6 +144,7 @@ window.ChoicesView = Backbone.View.extend({
 	el: $(".event-table"),
 
 	events: {
+		"scroll .event-container > div":  "eventScrolled",
 	},
 
 	render: function(){
@@ -160,5 +167,9 @@ window.ChoicesView = Backbone.View.extend({
 		});
 
 		return this;
+	},
+
+	eventScrolled: function(){
+		alert("scrolled");
 	}
 });
