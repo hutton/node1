@@ -73,13 +73,14 @@ a:active{
 .navbar-inner{
 	border-color: @divider-color;
 	min-height: 50px;
+	background: #f8f8f8;
 }
 
 .navbar-fixed-top .navbar-inner, 
 .navbar-fixed-bottom .navbar-inner, 
 .navbar-static-top .navbar-inner{
 	box-shadow: none;
-	background: white;
+	background: #f8f8f8;
 }
 
 .event-container{
@@ -94,7 +95,7 @@ a:active{
 }
 
 .navbar-fixed-top .navbar-inner{
-	background: white;
+	background: #f8f8f8;
 }
 
 .navbar-inner{
@@ -103,10 +104,12 @@ a:active{
 
 .navbar-fixed-top{
 	border-bottom: 1px solid @divider-color;
+	background: #f8f8f8;
 }
 
 .navbar-fixed-bottom{
 	border-top: 1px solid @divider-color;
+	background: #f8f8f8;
 }
 
 .title-button-container{
@@ -166,6 +169,7 @@ a:active{
 .month{
 	color: #a0a0a0;
 	top: 8px;
+	left: 10px;
 }
 
 .event-table tr{
@@ -196,7 +200,6 @@ a:active{
 .event-table td:nth-of-type(7) .unknown{
 }
 
-
 .event-table td > div{
 	position: relative;
 	margin-left: auto;
@@ -207,12 +210,19 @@ a:active{
 	cursor: pointer;
 }
 
+.event-table td>div.today>div:nth-of-type(3){
+	border-bottom: 4px solid @free-color;
+	position: relative;
+	top: 14px;
+	margin: 0px 6px;
+}
+
 .event-table td>div.selected{
 	opacity: 1.0;
 }
 
 .event-table td>div.selected>div:nth-of-type(3){
-	border-bottom: 4px solid @selected-color;
+	border-top: 4px solid @selected-color;
 	position: relative;
 	top: 14px;
 	margin: 0px 6px;

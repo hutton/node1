@@ -29,6 +29,16 @@ function yesturday(date){
 	return newDate;
 }
 
+function sameDay(date1, date2){
+	if (date1.getDate() == date2.getDate() &&
+		date1.getMonth() == date2.getMonth() &&
+		date1.getFullYear() == date2.getFullYear()){
+		return true;
+	}
+
+	return false;
+}
+
 function expandDates(input){
 	var processedInput = _.map(input, function(choice){
 		return {date: new Date(choice.date), _id: choice._id, free: choice.free};

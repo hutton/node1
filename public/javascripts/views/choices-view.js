@@ -16,13 +16,15 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.pie = this.$el.find(".pie");
 
-		var date = this.model.get("date").getDate();
-		var day = this.model.get("date").getDay();
-		var month = this.model.get("date").getMonth();
-
 		this.updateFreeCounter(false);
 
 		return this;
+	},
+
+	setToday: function(){
+		var target = this.$el.find("div:first");
+
+		target.addClass("today");
 	},
 
 	updateFreeCounter: function(animate){
@@ -133,12 +135,15 @@ window.ChoicesView = Backbone.View.extend({
 
 	monthTitleTemplate: _.template($('#month-title-template').html()),
 
+	today: new Date(),
+
 	render: function(){
 		var that = this;
 
 		$(this.el).empty();
 
 		var row = null;
+		var todayAdded = false;
 
 		_(this._choiceViews).each(function(choice) {
 			var date = choice.model.get("date");
@@ -154,11 +159,19 @@ window.ChoicesView = Backbone.View.extend({
 			if (row !== null){
 				if (date.getDate() == 1){
 
-					row = that.insertMonthTitle(rowItemCount, row, moment(date).format("MMM"));
+					row = that.insertMonthTitle(rowItemCount, row, moment(date).format("MMMM"));
 				}
 
 				row.append(choice.render().el);
 				rowItemCount++;
+			}
+
+			if (!todayAdded && sameDay(that.today, date)){
+				var target = choice.$el.find("div:first");
+
+				target.addClass("today");
+
+				 todayAdded = true;
 			}
 		});
 
@@ -168,29 +181,25 @@ window.ChoicesView = Backbone.View.extend({
 	insertMonthTitle: function(rowItemCount, row, month){
 		var originalRowItemCount = rowItemCount;
 
-		var showTitle = true;
-
-		// if (date == 1){
-		// 	this.$el.addClass("first");
-		// }
-
-		// if (date >= 2 && date <= 7){
-		// 	this.$el.addClass("first-seven");
-		// }
+		var showTitleAt = 0;
+		var first = true;
 
 		var itemsInserted = 0;
 
-		while (itemsInserted < 7){
-			var newItem = $(this.monthTitleTemplate({month: month, showTitle: showTitle}));
+		if (rowItemCount > 3){
+			showTitleAt = 7 - rowItemCount;
+		}
 
-			if (showTitle){
+		while (itemsInserted < 7){
+			var newItem = $(this.monthTitleTemplate({month: month, showTitle: itemsInserted == showTitleAt}));
+
+			if (first){
 				newItem.removeClass("first-seven").addClass("first");
+				first = false;
 			}
 
 			row.append(newItem);
 			itemsInserted++;
-
-			showTitle = false;
 
 			if (itemsInserted == 7 - rowItemCount){
 				this.$el.append($("<tr></tr>"));
@@ -198,24 +207,6 @@ window.ChoicesView = Backbone.View.extend({
 				row = this.$el.find("tr:last");
 			}
 		}
-
-		// while (rowItemCount < 7){
-		// 	row.append($(this.monthTitleTemplate({month: month, showTitle: showTitle})));
-		// 	rowItemCount++;
-		// 	showTitle = false;
-		// }
-
-		// this.$el.append($("<tr></tr>"));
-
-		// row = this.$el.find("tr:last");
-
-		// rowItemCount = 0;
-
-		// while (rowItemCount < originalRowItemCount){
-		// 	row.append($(this.monthTitleTemplate({month: month, showTitle: showTitle})));
-		// 	rowItemCount++;
-		// 	showTitle = false;
-		// }
 
 		return row;
 	}
