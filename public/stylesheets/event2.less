@@ -211,10 +211,13 @@ a:active{
 }
 
 .event-table td>div.today>div:nth-of-type(3){
-	border-bottom: 4px solid @free-color;
+	background: #808080;
 	position: relative;
-	top: 14px;
-	margin: 0px 6px;
+	top: 12px;
+	margin: 0px auto;
+	width: 8px;
+	height: 8px;
+	border-radius: 10px;
 }
 
 .event-table td>div.selected{
@@ -226,6 +229,9 @@ a:active{
 	position: relative;
 	top: 14px;
 	margin: 0px 6px;
+	width: auto;
+	height: auto;
+	border-radius: 0px;
 }
 
 .event-table td>div.selected> .pie:before,
@@ -273,6 +279,12 @@ a:active{
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.footer-date{
+	font-size: 16px;
+	margin-left: 12px;
+	display: none;
 }
 
 .footer-text {

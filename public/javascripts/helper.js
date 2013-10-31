@@ -4,6 +4,8 @@ _.templateSettings = {
   escape: /\<\@\-(.+?)\@\>/gim
 };
 
+var isTouchDevice = 'ontouchstart' in window || !!(navigator.msMaxTouchPoints);
+
 Array.prototype.removeElement = function(element) {
 	var index = this.indexOf(element);
  

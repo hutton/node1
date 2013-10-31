@@ -89,6 +89,12 @@ window.ChoiceView = Backbone.View.extend({
 
 			target.addClass('selected');
 		}
+
+		this.updateSelectedText();
+	},
+
+	updateSelectedText: function(){
+
 	},
 
 	toggleFree: function(){
@@ -171,9 +177,11 @@ window.ChoicesView = Backbone.View.extend({
 
 				target.addClass("today");
 
-				 todayAdded = true;
+				todayAdded = true;
 			}
 		});
+
+		this.$el.find(".today")[0].scrollIntoView(true);
 
 		return this;
 	},
