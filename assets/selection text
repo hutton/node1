@@ -1,0 +1,30 @@
+function isTouchDevice() { return 'ontouchstart' in window || !!(navigator.msMaxTouchPoints);}
+ 
+$("#myImage")[0].scrollIntoView();
+ 
+ 
+Thursday 31 October
+ 
+Nobody has marked this as free yet.
+Click the date again to be the first.
+ 
+Everyone except you is free.
+Click the date again for a full house!
+ 
+Dave and Pete are free.
+Click the date again to join them.
+ 
+Only you and Dave can't make it.
+Click the date again to show you're free.
+ 
+ 
+Everyone can make it!.
+Click the date again to spoil the party.
+ 
+Only you are free so far.
+Click the date again to change your mind.
+ 
+Dave, Pete and yourself are free.
+Click the date again to change your mind.
+ 
+Only Dave isn't free.

@@ -30,6 +30,10 @@ window.EventApp = Backbone.View.extend({
 		"click #show-info":				"infoClicked"
 	},
 
+	footerDateEl: $(".footer-date"),
+
+	footerTextEl: $(".footer-text"),
+
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
 	},
@@ -48,5 +52,89 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find(".attendees").html(nameList);
 
 		this.$el.find("#email-group").attr("href", "mailto:" + this.model.get("id") + "@convenely.com");
+	},
+
+	updateSelectedText: function(choiceModel){
+		var mom = moment(choiceModel.get("date"));
+
+		var today = new Date();
+    	today.setHours(0, 0, 0, 0);
+		var diff = moment(today).diff(mom, 'days');
+
+		$(".navbar-fixed-bottom").show();
+
+		var dateTex = "";
+
+		if (diff == 0){
+			dateText = "Today";
+		} else if (diff == -1){
+			dateText = "Tomorrow";
+		} else if (diff == 1){
+			dateText = "Yesterday";
+		} else {
+			dateText = mom.format("dddd D MMMM");
+		}
+
+		this.footerDateEl.html(dateText);
+
+		var footerText = "";
+		var currentAttendeeId = window.App.currentAttendee.get("_id");
+		var freeAttendees = choiceModel.get("free");
+
+		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
+			// You're not free
+			if (_.isUndefined(freeAttendees) || freeAttendees.length == 0){
+				footerText = "Nobody has marked this as free yet.";
+			} else if (freeAttendees.length - 1 == App.attendees.length) {
+				footerText = "Everyone except you is free.";
+			} else {
+				footerText = this.buildAttendeeNameText(freeAttendees);
+			}
+		} else {
+			// You're free
+			if (freeAttendees.length == App.attendees.length){
+				footerText = "Everyone can make it!.";
+			} else {
+				footerText = this.buildAttendeeNameText(freeAttendees);	
+			}
+		}
+
+		this.footerTextEl.html(footerText);
+	},
+
+	buildAttendeeNameText: function(freeAttendees){
+		var prettyNames = [];
+		var meFound = false;
+		var that = this;
+
+		_.each(freeAttendees, function(attendeeId){
+			var attendee = that.attendees.findWhere({_id: attendeeId});
+
+			if (!_.isUndefined(attendee)){
+				if (attendee.get('me')){
+					meFound = true;
+				} else {
+					prettyNames.push("<strong>" + attendee.get('prettyName') + "</strong>");
+				}
+			}
+		});
+
+		var text = "";
+
+		if (meFound && prettyNames.length == 0){
+			text = "Only <strong>you</strong> are free so far."
+		} else if (!meFound && prettyNames.length == 1){
+			text = "Only " + prettyNames[0] + " is free so far."
+		} else if (meFound){
+			text = prettyNames.join(", ");
+			text.slice(0, -2);
+			text = text + " and <strong>you</strong> are free."
+		} else {
+			text = prettyNames.join(", ");
+			text.slice(0, -2);
+			text = text + " are free."
+		}
+
+		return text;
 	}
 });

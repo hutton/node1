@@ -90,11 +90,7 @@ window.ChoiceView = Backbone.View.extend({
 			target.addClass('selected');
 		}
 
-		this.updateSelectedText();
-	},
-
-	updateSelectedText: function(){
-
+		App.updateSelectedText(this.model);
 	},
 
 	toggleFree: function(){
@@ -182,6 +178,8 @@ window.ChoicesView = Backbone.View.extend({
 		});
 
 		this.$el.find(".today")[0].scrollIntoView(true);
+
+		console.log($(".event-container > .row").scrollTop());
 
 		return this;
 	},
