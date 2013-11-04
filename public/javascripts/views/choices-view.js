@@ -179,7 +179,8 @@ window.ChoicesView = Backbone.View.extend({
 
 		this.$el.find(".today")[0].scrollIntoView(true);
 
-		console.log($(".event-container > .row").scrollTop());
+		var body = $("body");
+		body.scrollTop(body.scrollTop() - 60);
 
 		return this;
 	},
