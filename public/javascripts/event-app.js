@@ -30,6 +30,8 @@ window.EventApp = Backbone.View.extend({
 		"click #show-info":				"infoClicked"
 	},
 
+	footerEl: $(".footer"),
+
 	footerDateEl: $(".footer-date"),
 
 	footerTextEl: $(".footer-text"),
@@ -55,6 +57,7 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	updateSelectedText: function(choiceModel){
+		var that = this;
 		var mom = moment(choiceModel.get("date"));
 
 		var today = new Date();
@@ -75,31 +78,34 @@ window.EventApp = Backbone.View.extend({
 			dateText = mom.format("dddd D MMMM");
 		}
 
-		this.footerDateEl.html(dateText);
-
 		var footerText = "";
 		var currentAttendeeId = window.App.currentAttendee.get("_id");
 		var freeAttendees = choiceModel.get("free");
 
 		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
 			// You're not free
-			if (_.isUndefined(freeAttendees) || freeAttendees.length == 0){
-				footerText = "Nobody has marked this as free yet.";
+			if (_.isUndefined(freeAttendees) || freeAttendees.length === 0){
+				footerText = "<strong>Nobody</strong> has marked this as free yet.";
 			} else if (freeAttendees.length - 1 == App.attendees.length) {
-				footerText = "Everyone except you is free.";
+				footerText = "<strong>Everyone</string> except you is free.";
 			} else {
 				footerText = this.buildAttendeeNameText(freeAttendees);
 			}
 		} else {
 			// You're free
 			if (freeAttendees.length == App.attendees.length){
-				footerText = "Everyone can make it!.";
+				footerText = "<strong>Everyone</strong> can make it.";
 			} else {
-				footerText = this.buildAttendeeNameText(freeAttendees);	
+				footerText = this.buildAttendeeNameText(freeAttendees);
 			}
 		}
 
-		this.footerTextEl.html(footerText);
+		this.footerEl.fadeOut(100, function(){
+			that.footerDateEl.html(dateText);
+			that.footerTextEl.html(footerText);
+
+			that.footerEl.fadeIn(100);
+		});
 	},
 
 	buildAttendeeNameText: function(freeAttendees){
@@ -121,18 +127,26 @@ window.EventApp = Backbone.View.extend({
 
 		var text = "";
 
-		if (meFound && prettyNames.length == 0){
-			text = "Only <strong>you</strong> are free so far."
-		} else if (!meFound && prettyNames.length == 1){
-			text = "Only " + prettyNames[0] + " is free so far."
+		if (meFound && prettyNames.length === 0){
+			text = "Only <strong>you</strong> are free so far.";
+		} else if (!meFound && prettyNames.length === 1){
+			text = "Only " + prettyNames[0] + " is free so far.";
 		} else if (meFound){
 			text = prettyNames.join(", ");
 			text.slice(0, -2);
-			text = text + " and <strong>you</strong> are free."
+			text = text + " and <strong>you</strong> are free.";
 		} else {
-			text = prettyNames.join(", ");
-			text.slice(0, -2);
-			text = text + " are free."
+			for (var i=0; i < prettyNames.length; i++){
+				text = text + prettyNames[i];
+
+				if (i < prettyNames.length - 2 ){
+					text = text + ", ";
+				} else if (i === prettyNames.length - 2){
+					text = text + " and ";
+				}
+			}
+
+			text = text + " are free.";
 		}
 
 		return text;

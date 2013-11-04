@@ -237,14 +237,12 @@ a:active {
   -ms-user-select: none;
   user-select: none;
 }
-.footer-date {
+.footer {
+  line-height: 1.3em;
   font-size: 16px;
-  margin-top: 4px;
+  margin: 7px 4px;
   text-align: center;
 }
-.footer-text {
-  margin: 6px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 1.3em;
+.footer-date {
+  margin-bottom: 4px;
 }
