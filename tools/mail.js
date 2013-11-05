@@ -62,14 +62,22 @@ function sendMail(calendar, subject, message, fromName){
 	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
 
 	_.each(calendar.choices, function(choice){
-		choice.columnDate = moment(choice.date).format("dddd Do MMM");
+		choice.columnDate = moment(choice.date).format("dddd D MMMM");
 	});
 
 	var sortedChoices = _.sortBy(calendar.choices, function(choice){
 		return choice.date;
 	});
 
+	sortedChoices = _.filter(sortedChoices, function(choice){
+		return choice.free.length > 0;
+	});
+
 	message = message.replace(/\n/g, '<br />');
+
+	if (_.isUndefined(subject) || subject.length === 0){
+		subject = "RE: " + calendar.name;
+	}
 
 	_.each(calendar.attendees, function(attendee){
 		attendee.prettyName = attendee.name || attendee.email;
@@ -130,11 +138,15 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
 
 	_.each(calendar.choices, function(choice){
-		choice.columnDate = moment(choice.date).format("dddd Do MMM");
+		choice.columnDate = moment(choice.date).format("dddd D MMMM");
 	});
 
 	var sortedChoices = _.sortBy(calendar.choices, function(choice){
 		return choice.date;
+	});
+
+	sortedChoices = _.filter(sortedChoices, function(choice){
+		return choice.free.length > 0;
 	});
 
 	message = message.replace(/\n/g, '<br />');

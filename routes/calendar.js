@@ -54,7 +54,7 @@ function renderCalendar(req, res, format){
 			res.send('No calendar');
 		} else {
 			_.each(calendar.choices, function(choice){
-				choice.columnDate = moment(choice.date).format("dddd Do MMM");
+				choice.columnDate = moment(choice.date).format("dddd D MMMM");
 			});
 
 			_.each(calendar.attendees, function(attendee){
@@ -65,6 +65,10 @@ function renderCalendar(req, res, format){
 
 			var sortedChoices = _.sortBy(calendar.choices, function(choice){
 				return choice.date;
+			});
+
+			sortedChoices = _.filter(sortedChoices, function(choice){
+				return choice.free.length > 0;
 			});
 
 			var attendee = calendar.attendees[0];
