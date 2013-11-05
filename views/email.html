@@ -15,7 +15,7 @@
 			margin:0;
 			padding:0;
 		}
-		* { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
+		* { font-family: Arial, sans-serif; }
 
 		img { 
 			max-width: 100%; 
@@ -167,6 +167,12 @@
 			height: 24px;
 		}
 
+		.free{
+			background: #b0b0b0;
+			width: 30%;
+			height: 4px;
+		}
+
 		.calendar tr td.header{
 			font-weight: bold;
 		}
@@ -223,40 +229,6 @@
 								<td>
 									<p>Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et pharetra vitae. consequat vel lacus. Sed iaculis pulvinar ligula, ornare fringilla ante viverra et. In hac habitasse platea dictumst. Donec vel orci mi, eu congue justo. Integer eget odio est, eget malesuada lorem. Aenean sed tellus dui, vitae viverra risus. Nullam massa sapien, pulvinar eleifend fringilla id, convallis eget nisi. Mauris a sagittis dui. Pellentesque non lacinia mi. Fusce sit amet libero sit amet erat venenatis sollicitudin vitae vel eros. Cras nunc sapien, interdum sit amet porttitor ut, congue quis urna.</p>
 									
-									<!-- social & contact -->
-									<table class="social" width="100%">
-										<tr>
-											<td>
-
-												<!-- column 1 -->
-												<table align="left" class="column">
-													<tr>
-														<td>				
-
-															<h5 class="">Reply to this email</h5>
-															<p>Reply to this mail with when you're free and we'll update the calendar above.</p>
-															<p><a href="#">How does that work?</a></p>
-														</td>
-													</tr>
-												</table><!-- /column 1 -->	
-
-												<!-- column 2 -->
-												<table align="left" class="column">
-													<tr>
-														<td>				
-
-															<h5 class="">or visit your event page</h5>					
-															<p>Click <a href="#">here</a> to visit your personal page for this event to show when you're free.</p>			
-														</td>
-													</tr>
-												</table><!-- /column 2 -->
-
-													<span class="clear"></span>	
-
-												</td>
-											</tr>
-										</table><!-- /social & contact -->
-				
 									<table class="calendar" cellspacing="0">
 										<tr>
 											<td class="header">MON</td>
@@ -270,9 +242,15 @@
 										<tr>
 											<td>3</td>
 											<td>4</td>
-											<td class="selected">5</td>
+											<td class="selected">
+												5
+												<div class="free"></div>
+											</td>
 											<td>6</td>
-											<td>7</td>
+											<td>
+												7
+												<div class="free"></div>
+											</td>
 											<td class="weekend selected">8</td>
 											<td class="weekend">9</td>
 										</tr>
@@ -323,6 +301,35 @@
 										</tr>
 									</table>
 
+									<table class="social" width="100%">
+										<tr>
+											<td>
+
+												<!-- column 1 -->
+												<table align="left" class="column">
+													<tr>
+														<td>				
+															<p>Reply to this mail with when you're free and we'll update the calendar above.</p>
+															<p><a href="#">How does that work?</a></p>
+														</td>
+													</tr>
+												</table><!-- /column 1 -->	
+
+												<!-- column 2 -->
+												<table align="left" class="column">
+													<tr>
+														<td>				
+															<p>Click <a href="#">here</a> to visit your personal page for this event to show when you're free.</p>			
+														</td>
+													</tr>
+												</table><!-- /column 2 -->
+
+												<span class="clear"></span>	
+
+											</td>
+										</tr>
+									</table><!-- /social & contact -->
+			
 									</td>
 								</tr>
 							</table>

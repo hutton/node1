@@ -177,10 +177,10 @@ window.ChoicesView = Backbone.View.extend({
 			}
 		});
 
-		this.$el.find(".today")[0].scrollIntoView(true);
+		this.$el.find(".this-month")[0].scrollIntoView(true);
 
 		var body = $("body");
-		body.scrollTop(body.scrollTop() - 70);
+		body.scrollTop(body.scrollTop() + 5);
 
 		return this;
 	},
@@ -203,6 +203,10 @@ window.ChoicesView = Backbone.View.extend({
 			if (first){
 				newItem.removeClass("first-seven").addClass("first");
 				first = false;
+			}
+
+			if (moment().format("MMMM") == month){
+				newItem.addClass("this-month");
 			}
 
 			row.append(newItem);
