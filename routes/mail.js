@@ -178,7 +178,9 @@ exports.receive = function(req, res){
 	
 	logger.info("mandrill_events: " + req.body.mandrill_events);
 	
-	logger.info("mandrill_events.event: " + req.body.mandrill_events[0].event);
+	logger.info("mandrill_events[0]: " + req.body.mandrill_events[0]);
+	
+	logger.info("mandrill_events[0].event: " + req.body.mandrill_events[0].event);
 	
 	res.send( 200 );
 
