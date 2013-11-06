@@ -174,7 +174,7 @@ exports.sendGridReceive = function(req, res){
 exports.receive = function(req, res){
 	logger.info("Mail received from browser");
 	
-	logger.info(req.body);
+	logger.info(req);
 
 	processEmailRequest(req, res, function(newCalendar){
 		res.redirect('/calendar/' + newCalendar.id);
