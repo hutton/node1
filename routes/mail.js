@@ -175,6 +175,8 @@ exports.receive = function(req, res){
 	logger.info("Mail received from browser");
 	
 	logger.info(req.body);
+	
+	logger.info("Event:" + req.body.event);
 
 	processEmailRequest(req, res, function(newCalendar){
 		res.redirect('/calendar/' + newCalendar.id);
