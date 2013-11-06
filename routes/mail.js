@@ -176,7 +176,9 @@ exports.receive = function(req, res){
 	
 	logger.info(req.body);
 	
-	logger.info("Event:" + req.body.event);
+	logger.info("mandrill_events: " + req.body.mandrill_events);
+	
+	logger.info("mandrill_events.event: " + req.body.mandrill_events.event);
 
 	processEmailRequest(req, res, function(newCalendar){
 		res.redirect('/calendar/' + newCalendar.id);
