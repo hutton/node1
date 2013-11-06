@@ -7,10 +7,6 @@ var Mail = require("../tools/mail");
 var Nlp = require("../tools/nlp");
 var logger = require("../tools/logger");
 
-exports.show = function(req, res){
-	res.render('mail.html');
-};
-
 function startsWith(input, query){
 	return input.substr(0,query.length) === query;
 }
@@ -52,19 +48,12 @@ function extractMessageFromRequest(requestBody){
 	return message;
 }
 
-function processEmailRequest(req, res, createCalendarCallback, updateCalendarCallback, error){
-	var to = "";
-
-	if (_.has(req.body,"recipient")){
-		to = Mail.getEmailAddresses(req.body.recipient)[0];
-	} else {
-		to = Mail.getEmailAddresses(req.body.to)[0];
-	}
-
-	var fromName = Mail.getEmailName(req.body.from);
-	var from = Mail.getEmailAddresses(req.body.from)[0];
-	var message = extractMessageFromRequest(req.body);
-	var subject = req.body.subject;
+function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCallback, error){
+	var to = parsedReq.to;
+	var from = parsedReq.from;
+	var fromName = parsedReq.fromName;
+	var subject = parsedReq.subject;
+	var message = parsedReq.message;
 
 	logger.info("Mail from: " + from + " (" + fromName + ")");
 	logger.info("Mail to: " + to);
@@ -92,12 +81,11 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 
 				logger.error("Could not find calendar " + localEmail);
 
-				res.send('No calendar');
 				error('No calendar');
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
-				if (fromAttendee != null){
+				if (fromAttendee !== null){
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 
@@ -137,58 +125,47 @@ function processEmailRequest(req, res, createCalendarCallback, updateCalendarCal
 	}
 }
 
-exports.newMail = function(req, res){
-	logger.info("New mail from web");
+function processIncomingMandrillEmail(mandrill_event){
+	if (mandrill_event.event != "inbound"){
+		logger.error("Mandrill event '" + mandrill_event.event + "' found, expected 'inbound'");
 
-	var to = req.body.to;
-	var from = req.body.from;
-	var subject = req.body.subject;
-	var message = req.body.message;
+		return null;
+	}
 
-	logger.info("Mail from: " + from);
-	logger.info("Mail to: " + to);
-	logger.info("Mail subject: " + subject);
-	logger.info("Mail message: " + message);
+	var parsed = {};
 
-	var newCalendar = Calendar.newCalendar(to, from, "", subject, message, function(newCalendar){
-		res.send(200, { redirect: '/event/' + newCalendar.attendees[0].attendeeId });
-	});
-};
+	parsed.to = mandrill_event.msg.to[0][0];
+	parsed.fromName = mandrill_event.msg.from_name;
+	parsed.from = mandrill_event.msg.from_email;
+	parsed.subject = mandrill_event.msg.subject;
 
-exports.sendGridReceive = function(req, res){
-	logger.info("Mail received from HTTP POST");
-	
-	processEmailRequest(req, res, function(newCalendar){
-		res.send( 200 );
-	},
-	function(calendar){
-		res.send( 200 );
-	},
-	function(error){
-		logger.info(error);
+	if (_.has(mandrill_event.msg, "text") && mandrill_event.msg.text !== null){
+		parsed.message = Mail.firstResponse(mandrill_event.msg.text);
+	} else if (_.has(mandrill_event.msg, "html") && mandrill_event.msg.html !== null){
+		var message = Mail.htmlMailToText(mandrill_event.msg.html);
 
-		res.send( 200 );
-	});
+		parsed.message = Mail.firstResponse(message);
+	}
+
+	return parsed;
+}
+
+exports.show = function(req, res){
+	res.render('mail.html');
 };
 
 exports.receive = function(req, res){
 	logger.info("Mail received from browser");
-	
-	logger.info(req.body);
-	
-	logger.info("mandrill_events: " + req.body.mandrill_events);
-	
-	var incoming = JSON.parse(req.body.mandrill_events);
-	
-	logger.info("incoming: " + incoming);
-	
-	logger.info("incoming[0]: " + incoming[0]);
-	
-	logger.info("incoming[0].event: " + incoming[0].event);
-	
-	res.send( 200 );
 
-	processEmailRequest(req, res, function(newCalendar){
+	var parsed = {};
+
+	parsed.to = Mail.getEmailAddresses(req.body.to)[0];
+	parsed.fromName = Mail.getEmailName(req.body.from);
+	parsed.from = Mail.getEmailAddresses(req.body.from)[0];
+	parsed.message = extractMessageFromRequest(req.body);
+	parsed.subject = req.body.subject;
+
+	processEmailRequest(parsed, function(newCalendar){
 		res.redirect('/calendar/' + newCalendar.id);
 	},
 	function(calendar){
@@ -198,5 +175,40 @@ exports.receive = function(req, res){
 		logger.info(req.body);
 
 		res.send(message);
+	});
+};
+
+exports.mandrillShow = function(req, res){
+	res.send(200, 'Ready!');
+};
+
+exports.mandrillReceive = function(req, res){
+	logger.info("Mail received from /mandrillReceive");
+
+	var mandrill_events = JSON.parse(req.body.mandrill_events);
+
+	logger.info("mandrill_events: " + mandrill_events);
+
+	_.each(mandrill_events, function(mandrill_event){
+		logger.info("mandrill_event: " + mandrill_event);
+
+		var parsed = processIncomingMandrillEmail(mandrill_event);
+
+		logger.info("parsed mandrill_event: " + parsed);
+
+		if (parsed !== null){
+			processEmailRequest(parsed,
+				function(newCalendar){
+					res.send( 200 );
+				},
+				function(calendar){
+					res.send( 200 );
+				},
+				function(error){
+					logger.info(error);
+
+					res.send( 200 );
+				});
+		}
 	});
 };

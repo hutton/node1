@@ -84,7 +84,9 @@ var winstonStream = {
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
  app.post('/mail', mail.receive);
- app.post('/sendgrid', mail.sendGridReceive);
+
+ app.get('/mandrillReceive', mail.mandrillShow);
+ app.post('/mandrillReceive', mail.mandrillReceive);
 
  //app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
  app.get('/calendar/*', calendar.view);

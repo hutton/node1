@@ -20,5 +20,5 @@ exports.event2 = function(req, res){
 };
 
 exports.email = function(req, res){
-  res.render('email.html');
+  res.render('email2.html');
 };
