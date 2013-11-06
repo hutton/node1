@@ -1,4 +1,3 @@
-
 - Fix empty dates in email template
 - Add subject when empty RE: Strom day
 - Swap email template around
@@ -7,3 +6,32 @@
   - Enter email to save, post and redirect to own page
   - Create welcome email
 - Add helper 'Tap/click again mark as free'
+
+
+
+var email = require('./incoming.json');
+var _ = require("./underscore.js");
+
+function processIncomingMandrillEmail(email){
+	if (email.event != "inbound"){
+		return null;
+	}
+
+	var parsed = {};
+
+	parsed.to = email.msg.to[0][0];
+	parsed.fromName = email.msg.from_name;
+	parsed.from = email.msg.from_email;
+	parsed.subject = email.msg.subject;
+
+	if (_.has(email.msg, "text") && email.msg.text !== null){
+		parsed.message = email.msg.text;
+	} else if (_.has(email.msg, "html") && email.msg.html !== null){
+		parsed.message = email.msg.text;
+	}
+
+	return parsed;
+}
+
+console.log(processIncomingMandrillEmail(email[0]));
+//console.log(email[0].event);
