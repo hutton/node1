@@ -52,8 +52,8 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 	var to = parsedReq.to;
 	var from = parsedReq.from;
 	var fromName = parsedReq.fromName;
-	var subject = parsedReq.subject;
-	var message = parsedReq.message;
+	var subject = parsedReq.subject || "";
+	var message = parsedReq.message || "";
 
 	logger.info("Mail from: " + from + " (" + fromName + ")");
 	logger.info("Mail to: " + to);
@@ -187,14 +187,8 @@ exports.mandrillReceive = function(req, res){
 
 	var mandrill_events = JSON.parse(req.body.mandrill_events);
 
-	logger.info("mandrill_events: " + mandrill_events);
-
 	_.each(mandrill_events, function(mandrill_event){
-		logger.info("mandrill_event: " + mandrill_event);
-
 		var parsed = processIncomingMandrillEmail(mandrill_event);
-
-		logger.info("parsed mandrill_event: " + parsed);
 
 		if (parsed !== null){
 			processEmailRequest(parsed,
