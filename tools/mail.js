@@ -2,9 +2,12 @@ var _ = require("underscore");
 var moment = require("moment");
 var SendGrid = require('sendgrid');
 var logger = require("./logger");
+var mandrill = require('mandrill-api/mandrill');
 
 var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
 var sendGridPassword = 'ifpn5yay'
+
+var mandrillApiKey = 'ZghEsfeVFCfYT5zLpmRX2Q';
 
 function firstResponse(fullMessage) {
 	var outlookMatch = /^.*On.*(\r\n|\n)*wrote:$/m;
@@ -49,7 +52,7 @@ function getEmailAddresses(text){
 function getEmailName(text){
 	var result = text.match(/[a-z A-Z 0-9 "']*(?=<)/g);
 
-	if (result == null){
+	if (result === null){
 		return "";
 	}
 
@@ -59,7 +62,7 @@ function getEmailName(text){
 function sendMail(calendar, subject, message, fromName){
 	logger.info("Sending mail to group: " + calendar.id );
 
-	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
+	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
 
 	_.each(calendar.choices, function(choice){
 		choice.columnDate = moment(choice.date).format("dddd D MMMM");
@@ -100,30 +103,32 @@ function sendMail(calendar, subject, message, fromName){
 			logger.info("Sending mail to: " + attendee.email );
 
 			try{
-				var mail = new SendGrid.Email({
-					to: attendee.email,
-					from: calendar.id + "@convenely.com",
-					subject: subject,
-					html: html
-				});
+				var message = {
+					"html": html,
+					"subject": subject,
+					"from_email": calendar.id + "@convenely.com",
+					"to": [{
+						"email": attendee.email,
+						"type": "to"
+					}]};
 
-				if (attendee.name != null && attendee.name != ""){
-					mail.toname = attendee.name;
+				if (attendee.name !== null && attendee.name != ""){
+					message.to.name = attendee.name;
 				}
 
-				if (fromName != ""){
-					mail.fromname = fromName + " via Convenely";
+				if (fromName !== ""){
+					message.from_name = fromName + " via Convenely";
 				}
 
-				sender.send(mail, function(success, err){
-					if(success) {
+				mandrill_client.messages.send({"message": message}, function(result) {
 						logger.info('Email sent to: ' + attendee.email);
-					}
-					else {
-						logger.error(err);
+					    logger.info(result);
+					}, function(e) {
+
+					    logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+
 						logger.info('Failed sending email to: ' + attendee.email);
-					}
-				});
+					});
 			} catch (e){
 				logger.error("Failed to send email to: " + mail.to);
 				logger.error(e);
@@ -136,6 +141,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 	logger.info("Sending mail to attendee: " + toAttendee.email );
 
 	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
+	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
 
 	_.each(calendar.choices, function(choice){
 		choice.columnDate = moment(choice.date).format("dddd D MMMM");
@@ -172,30 +178,34 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 		logger.info("Sending mail to: " + toAttendee.email );
 
 		try{
-			var mail = new SendGrid.Email({
-				to: toAttendee.email,
-				from: calendar.id + "@convenely.com",
-				subject: subject,
-				html: html
-			});
+
+			var message = {
+				"html": html,
+				"subject": subject,
+				"from_email": calendar.id + "@convenely.com",
+				"to": [{
+					"email": toAttendee.email,
+					"type": "to"
+				}]};
+
 
 			if (toAttendee.name != null && toAttendee.name != ""){
-				mail.toname = toAttendee.name;
+				message.to.name = toAttendee.name;
 			}
 
 			if (fromName != ""){
-				mail.fromname = fromName + " via Convenely";
+				message.from_name = fromName + " via Convenely";
 			}
 
-			sender.send(mail, function(success, err){
-				if(success) {
+			mandrill_client.messages.send({"message": message}, function(result) {
 					logger.info('Email sent to: ' + toAttendee.email);
-				}
-				else {
-					logger.info('Failed sending email to: ' + toAttendee.email);
-					logger.error(err);
-				}
-			});
+				    logger.info(result);
+				}, function(e) {
+
+				    logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+
+					logger.error('Failed sending email to: ' + toAttendee.email);
+				});
 		} catch (e){
 			logger.error("Failed to send email to: " + toAttendee.email);
 			logger.error(e);
