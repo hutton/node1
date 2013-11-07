@@ -1,11 +1,7 @@
 var _ = require("underscore");
 var moment = require("moment");
-var SendGrid = require('sendgrid');
 var logger = require("./logger");
 var mandrill = require('mandrill-api/mandrill');
-
-var sendGridUser = 'azure_18f15c117d3bbf0ffd99b5f44d934396@azure.com'
-var sendGridPassword = 'ifpn5yay'
 
 var mandrillApiKey = 'ZghEsfeVFCfYT5zLpmRX2Q';
 
@@ -27,7 +23,7 @@ function firstResponse(fullMessage) {
 	regexMatchs.push(regex5);
  
 	for (var i=0; i < regexMatchs.length; i++){
-		var matches = fullMessage.split(regexMatchs[i]);        
+		var matches = fullMessage.split(regexMatchs[i]);
  
 		if (matches.length > 1){
 			return matches[0];
@@ -140,7 +136,6 @@ function sendMail(calendar, subject, message, fromName){
 function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 	logger.info("Sending mail to attendee: " + toAttendee.email );
 
-	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
 	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
 
 	_.each(calendar.choices, function(choice){
@@ -251,25 +246,26 @@ Simon\n\
 	sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't update your event.", message);
 }
 
-function sendTextMail(to, from, subject, message){
-	var sender = new SendGrid.SendGrid(sendGridUser,sendGridPassword);
+function sendTextMail(to, from, subject, text){
+	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
 
-	var mail = new SendGrid.Email({
-		to: to,
-		from: from,
-		subject: subject,
-		text: message
-	});
+	var message = {
+		"text": text,
+		"subject": subject,
+		"from_email": from,
+		"to": [{
+			"email": to,
+			"type": "to"
+		}]};
 
-	sender.send(mail, function(success, err){
-		if(success) {
+	mandrill_client.messages.send({"message": message}, function(result) {
 			logger.info('Email sent to: ' + to + ' subject:' + subject);
-		}
-		else {
-			logger.info('Failed to send email to: ' + to + ' subject:' + subject);
-			logger.error(err);
-		}
-	});
+		    logger.info(result);
+		}, function(e) {
+
+			logger.error('Failed to send email to: ' + to + ' subject:' + subject);
+		    logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+		});
 }
 
 function htmlMailToText(str){
