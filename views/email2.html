@@ -6,43 +6,100 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 	<style type="text/css">
-		body{
-			font-family: Arial;
-			font-size: 14px;
-		}
+	body{
+		font-family: Arial;
+		font-size: 14px;
+	}
 
-		.full-width{
-			max-width: 600px;
-		}
+	.full-width{
+		max-width: 600px;
+	}
 
-		.title{
-			text-align: center;
-			padding: 10px;
-			font-size: 18px;
-			color: #808080;
-		}
+	.bottom-border{
+		border-bottom: 1px solid #e8e8e8;
+	}
 
-		.message-title{
-			padding: 10px;
-			color: #808080;
-		}
+	.top-border{
+		border-top: 1px solid #e8e8e8;
+	}
 
-		.message-content{
-			padding: 10px 40px 40px 40px;
-			color: #404040;
-		}
+	.title{
+		text-align: center;
+		padding: 10px;
+		font-size: 18px;
+		color: #808080;
+	}
 
+	.message-title{
+		padding: 30px 0px 20px 10px;
+		color: #c0c0c0;
+	}
 
+	.message-content{
+		padding: 10px 40px 30px 40px;
+		color: #404040;
+	}
+
+	.center{
+		text-align: center;
+	}
+
+	.event-link-cell{
+		padding: 10px 0px 20px 0px;
+	}
+
+	.event-link{
+		color: #4ad16c;	
+		text-decoration: none;
+		font-size: 18px;
+	}
+
+	.avail-title{
+		font-size: 18px;
+		color: #808080;
+		padding: 20px 0px 10px 0px;
+	}
+
+	.avail-table{
+		margin: 0px 0px;
+		padding: 0;
+		font-size: 12px;
+		color: #808080;
+		width: 100%;
+
+	}
+
+	.avail-date-header{
+		padding: 5px 5px;
+		font-weight: bold;
+		border-bottom: 1px solid #c0c0c0;
+	}
+
+	.none-link{
+		color: #808080
+		;text-decoration: none;
+		cursor: default;
+	}
+
+	.avail-address{
+		padding: 4px 10px;
+	}
+
+	.avail-status{
+		padding: 4px 0px;
+		text-align: center; 
+		color: #ffffff;
+	}
 
 	</style>
 </head>
-<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" bgcolor="#f8f8f8">
 	<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
 		<!-- Header -->
-		<tr bgcolor="#F1F1F1">
+		<tr class="bottom-border">
 			<td>
 				<table class="full-width" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
-					<tr bgcolor="#F1F1F1">
+					<tr>
 						<td class="title">
 							Strom day
 						</td>
@@ -53,10 +110,10 @@
 		<!-- Body -->
 		<tr bgcolor="#FFFFFF">
 			<td>
-				<table class="full-width" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
+				<table class="full-width message-table" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
 					<tr>
 						<td class="message-title">
-							Loren Ipsum &ltloren.ipsum@gmail.com&gt wrote:
+							&ltloren.ipsum@gmail.com&gt wrote:
 						</td>
 					</tr>
 					<tr>
@@ -71,17 +128,100 @@
 			</td>
 		</tr>
 		<!-- Footer -->
-		<tr bgcolor="#F1F1F1">
+		<tr class="top-border">
 			<td>
 				<table class="full-width" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
-					<tr bgcolor="#F1F1F1">
-						<td>
-							Footer!
+					<tr>
+						<td class="avail-title center">
+							Here's the latest avaialbility
 						</td>
 					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</body>
-</html>
+					<tr>
+						<td class="event-link-cell center">
+							<a class="event-link" href="http://convenely.com">Update Event Online ></a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table class="avail-table" border="0" cellspacing="0">
+								<tbody>
+									<tr colspan="3" height="10"></tr>
+
+									<tr>
+										<td width="5"></td>
+										<td width="300" colspan="3" class="avail-date-header">
+											<a href="#" class="none-link">Wednesday 2 October</a>
+										</td>
+										<td width="5"></td>
+									</tr>
+
+									<tr>
+										<td width="245" colspan="2" class="avail-address">
+											<a class="none-link" href="#">simon.hutton@gmail.com</a>
+										</td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
+										<td width="5"></td>
+									</tr>
+
+									<tr colspan="3" height="10"></tr>
+
+									<tr>
+										<td width="5"></td>
+										<td width="300" colspan="3" class="avail-date-header"><a href="#" class="none-link">Wednesday 16 October</a></td>
+										<td width="5"></td>
+									</tr>
+
+									<tr>
+										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">simon.hutton@gmail.com</a></td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
+										<td width="5"></td>
+									</tr>
+
+
+									<tr colspan="3" height="10"></tr>
+
+									<tr>
+										<td width="5"></td>
+										<td width="300" colspan="3" class="avail-date-header"><a href="#" class="none-link">Wednesday 23 October</a></td>
+										<td width="5"></td>
+									</tr>
+
+									<tr>
+										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">simon.hutton@gmail.com</a></td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
+										<td width="5"></td>
+									</tr>
+
+
+									<tr colspan="3" height="10"></tr>
+
+									<tr>
+										<td width="5"></td>
+										<td width="300" colspan="3" class="avail-date-header"><a href="#" class="none-link">Friday 25 October</a></td>
+										<td width="5"></td>
+									</tr>
+
+									<tr>
+										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">second@gmail.com</a></td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
+										<td width="5"></td>
+									</tr>
+
+									<tr>
+										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">simon.hutton@gmail.com</a></td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
+										<td width="5"></td>
+									</tr>
+
+
+									<tr colspan="3" height="10"></tr>
+
+								</tbody></table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+	</html>
