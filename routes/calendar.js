@@ -82,12 +82,13 @@ function renderCalendar(req, res, format){
 					message: ''
 				});
 			} else if (format === 'html'){
-				res.render('responsive_view.html', {
+				res.render('email-template.html', {
 					attendee: attendee,
 					calendar: calendar,
 					choices: sortedChoices,
 					attendees: calendar.attendees,
-					message: ''
+					message: 'this is the message',
+					subject: 'the subject'
 				});
 			}
 		}

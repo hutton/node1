@@ -57,7 +57,7 @@
 	.did-you-know{
 		color: #808080;
 		padding: 10px 20px;
-		background: #f0f0f0;
+		background: #f2f2f2;
 		line-height: 1.5em;
 		text-align: left;
 	}
@@ -103,7 +103,7 @@
 				<table class="full-width" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
 					<tr>
 						<td class="title">
-							RE: Storm day
+							<%= subject %>
 						</td>
 					</tr>
 				</table>
@@ -115,15 +115,13 @@
 				<table class="full-width message-table" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
 					<tr>
 						<td class="message-title">
-							&ltloren.ipsum@gmail.com&gt wrote:
+
+							<%= attendee.prettyName %> wrote:
 						</td>
 					</tr>
 					<tr>
 						<td class="message-content">
-							Great idea!<br/>
-							I can do Wednesday and Thursday but not next week.</br>
-							<br/>
-							Loren
+							<%= message %>
 						</td>
 					</tr>
 				</table>
@@ -135,7 +133,7 @@
 				<table class="full-width" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
 					<tr>
 						<td class="event-link-cell center">
-							<a class="event-link" href="http://convenely.com">Update Event Online ></a>
+							<a class="event-link" href="http://convenely.com/event/<%= attendee.attendeeId %>">Update Event Online ></a>
 						</td>
 					</tr>
 					<tr>
@@ -144,84 +142,37 @@
 							<p>Reply with when you're free; "I can do next Monday", "Any day next week is good apart from Friday" and we'll update the event and let everyone know.</p>
 						</td>
 					</tr>
+					<% if ( choices.length > 0 ){ %>
 					<tr>
 						<td>
 							<table class="avail-table" border="0" cellspacing="0">
 								<tbody>
 									<tr colspan="3" height="10"></tr>
+									<% _.each(choices, function(choice) { %> 
 
 									<tr>
 										<td width="5"></td>
 										<td width="300" colspan="3" class="avail-date-header">
-											<a href="#" class="none-link">Wednesday 2 October</a>
+											<a href="#" class="none-link"><%= choice.columnDate %></a>
 										</td>
 										<td width="5"></td>
 									</tr>
-
+									<% _.each(choice.free, function(free) { %> 
 									<tr>
 										<td width="245" colspan="2" class="avail-address">
-											<a class="none-link" href="#">simon.hutton@gmail.com</a>
+											<a class="none-link" href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).prettyName %></a>
 										</td>
 										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
 										<td width="5"></td>
 									</tr>
+									<% }); %>
 
 									<tr colspan="3" height="10"></tr>
-
-									<tr>
-										<td width="5"></td>
-										<td width="300" colspan="3" class="avail-date-header"><a href="#" class="none-link">Wednesday 16 October</a></td>
-										<td width="5"></td>
-									</tr>
-
-									<tr>
-										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">simon.hutton@gmail.com</a></td>
-										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
-										<td width="5"></td>
-									</tr>
-
-
-									<tr colspan="3" height="10"></tr>
-
-									<tr>
-										<td width="5"></td>
-										<td width="300" colspan="3" class="avail-date-header"><a href="#" class="none-link">Wednesday 23 October</a></td>
-										<td width="5"></td>
-									</tr>
-
-									<tr>
-										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">simon.hutton@gmail.com</a></td>
-										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
-										<td width="5"></td>
-									</tr>
-
-
-									<tr colspan="3" height="10"></tr>
-
-									<tr>
-										<td width="5"></td>
-										<td width="300" colspan="3" class="avail-date-header"><a href="#" class="none-link">Friday 25 October</a></td>
-										<td width="5"></td>
-									</tr>
-
-									<tr>
-										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">second@gmail.com</a></td>
-										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
-										<td width="5"></td>
-									</tr>
-
-									<tr>
-										<td width="245" colspan="2" class="avail-address"><a class="none-link" href="#">simon.hutton@gmail.com</a></td>
-										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
-										<td width="5"></td>
-									</tr>
-
-
-									<tr colspan="3" height="10"></tr>
-
+									<% }); %>
 								</tbody></table>
 							</td>
 						</tr>
+						<% } %>
 					</table>
 				</td>
 			</tr>

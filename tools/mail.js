@@ -84,12 +84,13 @@ function sendMail(calendar, subject, message, fromName){
 
 	_.each(calendar.attendees, function(attendee){
 
-		global.app.render('responsive_view.html', {
+		global.app.render('email-template.html', {
 			attendee: attendee,
 			calendar: calendar,
 			choices: sortedChoices,
 			attendees: calendar.attendees,
-			message: message
+			message: message,
+			subject: subject
 		}, function(err, html){
 
 			if (err){
@@ -158,12 +159,13 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 
 	toAttendee.prettyName = toAttendee.name || toAttendee.email;
 
-	global.app.render('responsive_view.html', {
+	global.app.render('email-template.html', {
 		attendee: toAttendee,
 		calendar: calendar,
 		choices: sortedChoices,
 		attendees: calendar.attendees,
-		message: message
+		message: message,
+		subject: subject
 	}, function(err, html){
 
 		if (err){
