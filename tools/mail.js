@@ -6,6 +6,10 @@ var mandrill = require('mandrill-api/mandrill');
 var mandrillApiKey = 'ZghEsfeVFCfYT5zLpmRX2Q';
 
 function firstResponse(fullMessage) {
+
+	logger.info("Getting first response:");
+	logger.info(fullMessage);
+
 	var outlookMatch = /^.*On.*(\r\n|\n)*wrote:$/m;
 	var regex1 = /From:.*@convenely.*$/m;
 	var regex2 = /<(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely/m;
@@ -29,6 +33,9 @@ function firstResponse(fullMessage) {
 			return matches[0];
 		}
 	}
+
+	logger.info("Got:");
+	logger.info(fullMessage);
  
 	return fullMessage;
 }
