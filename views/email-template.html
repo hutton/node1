@@ -72,6 +72,7 @@
 
 	.avail-table{
 		margin: 0px 0px;
+		margin-bottom: 20px;
 		padding: 0;
 		font-size: 12px;
 		color: #808080;
@@ -145,12 +146,6 @@
 							<a class="event-link" href="http://convenely.com/event/<%= attendee.attendeeId %>">View Event Online ></a>
 						</td>
 					</tr>
-					<tr>
-						<td class="did-you-know center">
-							<p><b>Did you know</b> you can update your availability by replying to this email?</p>
-							<p>Reply with when you're free <a href="#" class="none-link">("I can do next Monday", "Any day next week is good apart from Friday")</a> and we'll update the event and let everyone know.</p>
-						</td>
-					</tr>
 					<% if ( choices.length > 0 ){ %>
 					<tr>
 						<td>
@@ -171,20 +166,27 @@
 										<td width="245" colspan="2" class="avail-address">
 											<a class="none-link" href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).prettyName %></a>
 										</td>
-										<td width="50" class="avail-status" bgcolor="#51da73"><span>✔</span> Free</td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span fgColor="#ffffff">&#10003;</span> Free</td>
 										<td width="5"></td>
 									</tr>
 									<% }); %>
 
 									<tr colspan="3" height="10"></tr>
 									<% }); %>
-								</tbody></table>
-							</td>
-						</tr>
-						<% } %>
-					</table>
-				</td>
-			</tr>
-		</table>
-	</body>
-	</html>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<% } %>
+					<tr>
+						<td class="did-you-know center">
+							<p><b>Did you know</b> you can update your availability by replying to this email?</p>
+							<p>Reply with when you're free <a href="#" class="none-link">("I can do next Monday", "Any day next week is good apart from Friday")</a> and we'll update the event and let everyone know.</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

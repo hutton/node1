@@ -102,6 +102,7 @@ window.EventApp = Backbone.View.extend({
 
 		this.footerEl.fadeOut(100, function(){
 			that.footerDateEl.html(dateText);
+
 			that.footerTextEl.html(footerText);
 
 			that.footerEl.fadeIn(100);

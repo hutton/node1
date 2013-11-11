@@ -48,8 +48,14 @@ function expandDates(input){
 
 	allPopulatedDates = _.map(processedInput, function(choice){ return choice.date.toISOString();});
 
-	var earliestDate = processedInput[0].date;
-	var latestDate = processedInput[0].date;
+
+	var earliestDate = new Date();
+	var latestDate = new Date();
+
+	if (input.length > 0){
+		earliestDate = processedInput[0].date;
+		latestDate = processedInput[0].date;
+	}
 
 	for (var i = 1; i < processedInput.length; i++){
 		if (processedInput[i].date < earliestDate){
