@@ -1,8 +1,14 @@
+- Handle no dates in event page
+- Add nice from name when sending email  i.e. beer-time-tube@convenely.com -> Beer time tube via Convenely
+- Change from address when adding to an event
+
 - Fix empty dates in email template
 - Add subject when empty RE: Strom day
-- Swap email template around
 - Add attendee in info panel
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page
   - Create welcome email
 - Add helper 'Tap/click again mark as free'
+
+Done
+----
