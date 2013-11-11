@@ -124,4 +124,24 @@ Availability by Convenely.com Learn more<http://convenely.com/#howdoesitwork>\n\
 
 validate(mail.firstResponse(m), "Monday it good for me.");
 
+m = "From phone\n\
+\n\
+On 8 Nov 2013, at 18:18, Simon Hutton via Convenely <\n\
+new-style-from-train@convenely.com> wrote:\n\
+\n\
+ Demystifying Email Design    New style from train      Simon Hutton\n\
+wrote:  This is my message, waiting to get off train. That's when it's\n\
+stopped\n\
+of course!\n\
+\n\
+Simon      View Event Online\n\
+><http://mandrillapp.com/track/click.php?u=30104851&id=30d3e34e8ad34aa6b289663c41197a17&url=http%3A%2F%2Fconvenely.com%2Fevent%2Fz4NAD&url_id=9a63983b5c9ed6348dbb99d41bb966065385f314>\n\
+\n\\n\
+*Did you know* you can update your availability by replying to this email?\n\
+\n\\n\
+Reply with when you're free; 'I can do next Monday', 'Any day next week is\n\
+good apart from Friday' and we'll update the event and let everyone know.\n\
+\n\
+";
 
+validate(mail.firstResponse(m), "From phone");

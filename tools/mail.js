@@ -7,8 +7,8 @@ var mandrillApiKey = 'ZghEsfeVFCfYT5zLpmRX2Q';
 
 function firstResponse(fullMessage) {
 
-	logger.info("Getting first response:");
-	logger.info(fullMessage);
+	// logger.info("Getting first response:");
+	// logger.info(fullMessage);
 
 	var outlookMatch = /^.*On.*(\r\n|\n)*wrote:$/m;
 	var regex1 = /From:.*@convenely.*$/m;
@@ -16,6 +16,7 @@ function firstResponse(fullMessage) {
 	var regex3 = /(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@convenely.com\s+wrote:/m;
 	var regex4 = /-+original\s+message-+\s*$/m;
 	var regex5 = /from:\s*$/m;
+	var regex6 = /.*\n?.*@convenely.com>.*\n?.*wrote:/m;
 
 	var regexMatchs = [];
  
@@ -25,6 +26,7 @@ function firstResponse(fullMessage) {
 	regexMatchs.push(regex3);
 	regexMatchs.push(regex4);
 	regexMatchs.push(regex5);
+	regexMatchs.push(regex6);
  
 	for (var i=0; i < regexMatchs.length; i++){
 		var matches = fullMessage.split(regexMatchs[i]);
@@ -34,8 +36,8 @@ function firstResponse(fullMessage) {
 		}
 	}
 
-	logger.info("Got:");
-	logger.info(fullMessage);
+	// logger.info("Got:");
+	// logger.info(fullMessage);
  
 	return fullMessage;
 }
