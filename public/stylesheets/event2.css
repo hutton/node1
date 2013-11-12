@@ -1,4 +1,5 @@
 body{padding-top:0px;padding-bottom:40px;font-size:21px;font-family:'Open Sans',sans-serif;color:#808080;min-height:800px;}
+.table>tbody>tr>td{border:none;padding:0px;}
 a{color:#4ad16c;cursor:pointer;}
 a:hover{color:#4ad16c;text-decoration:none;}
 a:active{color:#4ad16c;text-decoration:none;}
@@ -19,6 +20,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .navbar-fixed-bottom{border-top:1px solid #e8e8e8;background:#f8f8f8;}
 .title-button-container{position:absolute;height:0px;right:0px;overflow:visible;}
 #show-info{position:relative;right:8px;top:12px;padding:4px;}
+.show-info-rotate{-webkit-transform:rotate(51deg);-moz-transform:rotate(51deg);-o-transform:rotate(51deg);-ms-transform:rotate(51deg);transform:rotate(51deg);}
 .title{text-align:center;padding-top:12px;margin-left:auto;margin-right:auto;}
 #email-group{top:20px;font-size:21px;position:relative;}
 #add-attendee{color:#4ad16c;margin-left:7px;}

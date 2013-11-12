@@ -1,3 +1,6 @@
+
+@import "elements.less";
+
 @free-color: #4AD16C;
 @font-size: 21px;
 @divider-color: #e8e8e8;
@@ -15,6 +18,11 @@ body{
 	color: #808080;
 
 	min-height: 800px;
+}
+
+.table > tbody > tr > td{
+	border: none;
+	padding: 0px;
 }
 
 a{
@@ -134,6 +142,10 @@ a:active{
 	right: 8px;
 	top: 12px;
 	padding: 4px;
+}
+
+.show-info-rotate{
+	.rotation(51deg);
 }
 
 .title{
