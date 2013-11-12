@@ -1,9 +1,13 @@
-- Handle no dates in event page
-- Nice tick <span style="font-family: Arial Unicode MS, Lucida Grande">
-    &#10003; &#10004;
-</span>
-- Re-order 'did-you-know'
-- Add nice from name when sending email  i.e. beer-time-tube@convenely.com -> Beer time tube via Convenely
+- Move date into into table
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-bottom: 5px solid black;
+}
+- Use font awesome
 - Change from address when adding to an event (bug)
 
 - Fix empty dates in email template
@@ -16,3 +20,8 @@
 
 Done
 ----
+
+- Handle no dates in event page
+- Nice tick
+- Re-order 'did-you-know'
+- Add nice from name when sending email  i.e. beer-time-tube@convenely.com -> Beer time tube via Convenely
