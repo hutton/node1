@@ -58,34 +58,60 @@ window.EventApp = Backbone.View.extend({
 
 	eventTableClicked: function(event){
 		if ($(event.target).parents("td.date-cell").length === 0){
-			$(".selected-row").remove();
+			this.removeSelectedRow();
 			$(".selected").removeClass('selected');
 		}
 	},
 
 	updateSelectedItem: function(choiceModel, selectedRow){
 		var dateText = this.buildDateText(choiceModel);
-		var footerText = this.buildAttendeeText(choiceModel);
+		var attendeeText = this.buildAttendeeText(choiceModel);
 
 		if (!selectedRow.next().hasClass("selected-row")){
-			$(".selected-row").remove();
+			this.removeSelectedRow();
 
-			selectedRow.after(this.selectedRowTemplate());
+			this.showSelectedRowAfter(selectedRow, {dateText: dateText, attendeeText: attendeeText});
+		} else {
+			var footerDateEl = $(".info-row-date");
+			var footerTextEl = $(".info-row-text");
+
+			footerDateEl.fadeOut(100, function(){
+				footerDateEl.html(dateText);
+				footerDateEl.fadeIn(100);
+			});
+
+			footerTextEl.fadeOut(100, function(){
+				footerTextEl.html(attendeeText);
+				footerTextEl.fadeIn(100);
+			});
 		}
+	},
 
-		var footerEl = $(".footer");
+	showSelectedRowAfter: function(selectedRow, templateValues){
+		selectedRow.after(this.selectedRowTemplate(templateValues));
 
-		var footerDateEl = $(".footer-date");
+		selectedRow.next()
+			.find('td')
+			.wrapInner('<div style="display: none;" />')
+			.parent()
+			.find('td > div')
+			.slideDown(200, function(){
 
-		var footerTextEl = $(".footer-text");
+			var $set = $(this);
+			$set.replaceWith($set.contents());
 
-		footerEl.fadeOut(100, function(){
-			footerDateEl.html(dateText);
+			});
+	},
 
-			footerTextEl.html(footerText);
-
-			footerEl.fadeIn(100);
-		});
+	removeSelectedRow: function(){
+		$('.selected-row')
+			.find('td')
+			.wrapInner('<div style="display: block;" />')
+			.parent()
+			.find('td > div')
+			.slideUp(200, function(){
+			$(this).parent().parent().remove();
+			});
 	},
 
 	buildAttendeeText: function(choiceModel){

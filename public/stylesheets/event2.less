@@ -8,6 +8,7 @@
 @month-divider-color: #e8e8e8;
 @selected-color: #c0c0c0;
 @weekend-color: #c8c8c8;
+@light-background-color: #f8f8f8;
 
 body{
 	padding-top: 0px;
@@ -96,14 +97,14 @@ a:active{
 .navbar-inner{
 	border-color: @divider-color;
 	min-height: 50px;
-	background: #f8f8f8;
+	background: @light-background-color;
 }
 
 .navbar-fixed-top .navbar-inner, 
 .navbar-fixed-bottom .navbar-inner, 
 .navbar-static-top .navbar-inner{
 	box-shadow: none;
-	background: #f8f8f8;
+	background: @light-background-color;
 }
 
 .event-container{
@@ -118,7 +119,7 @@ a:active{
 }
 
 .navbar-fixed-top .navbar-inner{
-	background: #f8f8f8;
+	background: @light-background-color;
 }
 
 .navbar-inner{
@@ -127,12 +128,12 @@ a:active{
 
 .navbar-fixed-top{
 	border-bottom: 1px solid @divider-color;
-	background: #f8f8f8;
+	background: @light-background-color;
 }
 
 .navbar-fixed-bottom{
 	border-top: 1px solid @divider-color;
-	background: #f8f8f8;
+	background: @light-background-color;
 }
 
 .title-button-container{
@@ -214,6 +215,10 @@ a:active{
 	height: 60px;
 }
 
+.event-table tr.selected-row{
+	height: auto;
+}
+
 .event-table td{
 	text-align: center;
 	position: relative;
@@ -262,21 +267,18 @@ a:active{
 	opacity: 1.0;
 }
 
-.selected-arrow{
-}
-
 .event-table td>div.selected>div:nth-of-type(3){
-	width: 0; 
-	height: 0; 
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	
-	border-bottom: 12px solid @selected-color;
+    width: 20px;
+    height: 20px; 
+    background: @light-background-color;
+    border-right:1px solid @divider-color;
+    border-top:1px solid @divider-color;
+    -moz-transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
 
 	position: relative;
 	top: 14px;
 	margin: 0px auto;
-	border-radius: 0px;
 }
 
 .event-table td>div.selected> .pie:before,
@@ -285,7 +287,7 @@ a:active{
 }
 
 .selected-row{
-	background: #f8f8f8;
+	background: @light-background-color;
 	border-top: 1px solid @divider-color;
 	border-bottom: 1px solid @divider-color;
 
@@ -297,20 +299,24 @@ a:active{
 	position: relative;
 }
 
+.event-table tr.selected-row > td{
+	padding: 0px;
+}
+
 .event-table tr.selected-row > td > div{
 	width: auto;
 	height: auto;
 }
 
-.footer-date{
-	margin-top: 6px;
+.info-row-date{
+	margin-top: 10px;
 
 	font-weight: lighter;
 	color: #c0c0c0;
 }
 
-.footer-text {
-	margin: 2px 0px;
+.info-row-text {
+	margin: 4px 0px 10px 0px;
 }
 
 

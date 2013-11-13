@@ -184,7 +184,7 @@ window.ChoicesView = Backbone.View.extend({
 		this.$el.find(".this-month")[0].scrollIntoView(true);
 
 		var body = $("body");
-		body.scrollTop(body.scrollTop() + 1);
+		body.scrollTop(body.scrollTop() + 5);
 
 		return this;
 	},
