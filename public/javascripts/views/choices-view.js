@@ -11,6 +11,8 @@ window.ChoiceView = Backbone.View.extend({
 
 	pie: null,
 
+	className: "date-cell",
+
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
 
@@ -90,7 +92,9 @@ window.ChoiceView = Backbone.View.extend({
 			target.addClass('selected');
 		}
 
-		App.updateSelectedText(this.model);
+		var selectedRow = target.parents("tr");
+
+		App.updateSelectedItem(this.model, selectedRow);
 	},
 
 	toggleFree: function(){

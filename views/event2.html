@@ -10,6 +10,7 @@
 
   <!-- Le styles -->
   <link href="/stylesheets/bootstrap-3.css" rel="stylesheet">
+  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
 
 
   <link href="/stylesheets/event2.css" rel="stylesheet">
@@ -32,7 +33,7 @@
         <div class="fixed-width">
           <div class="title-button-container">
 
-           <a class="tiile-button" id="show-info"><span class="glyphicon glyphicon-chevron-right"></span></a>
+           <a class="tiile-button" id="show-info"><span class="fa fa-chevron-right"></span></a>
          </div>
          <div class="title"></div>
          <div class="row">
@@ -103,7 +104,7 @@
           <@= date.getDate() @>
         </div>
       </div>
-      <div></div>
+      <div class="selected-arrow"></div>
     </div>
   </script>
 
@@ -114,6 +115,20 @@
           <@= month @>
         </div>
       <@ } @>
+    </td>
+  </script>
+
+  <script type="text/template" id="selected-row-template">
+    <tr class="selected-row">
+      <div>
+      content
+        <td colspan="7">
+          <div class="footer-date">
+          </div>
+          <div class="footer-text">
+          </div>
+        </td>
+      </div>
     </td>
   </script>
 

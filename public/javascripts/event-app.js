@@ -27,17 +27,17 @@ window.EventApp = Backbone.View.extend({
 	el: $("body"),
 
 	events: {
-		"click #show-info":				"infoClicked"
+		"click #show-info":				"infoClicked",
+		"click .event-table":			"eventTableClicked",
+		"click":			"eventTableClicked"
 	},
 
-	footerEl: $(".footer"),
-
-	footerDateEl: $(".footer-date"),
-
-	footerTextEl: $(".footer-text"),
+	selectedRowTemplate: _.template($('#selected-row-template').html()),
 
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
+
+		this.$el.find("#show-info > span").toggleClass("show-info-rotate");
 	},
 
 	render: function(){
@@ -56,28 +56,39 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find("#email-group").attr("href", "mailto:" + this.model.get("id") + "@convenely.com");
 	},
 
-	updateSelectedText: function(choiceModel){
-		var that = this;
-		var mom = moment(choiceModel.get("date"));
+	eventTableClicked: function(event){
+		if ($(event.target).parents("td.date-cell").length === 0){
+			$(".selected-row").remove();
+			$(".selected").removeClass('selected');
+		}
+	},
 
-		var today = new Date();
-    	today.setHours(0, 0, 0, 0);
-		var diff = moment(today).diff(mom, 'days');
+	updateSelectedItem: function(choiceModel, selectedRow){
+		var dateText = this.buildDateText(choiceModel);
+		var footerText = this.buildAttendeeText(choiceModel);
 
-		$(".navbar-fixed-bottom").show();
+		if (!selectedRow.next().hasClass("selected-row")){
+			$(".selected-row").remove();
 
-		var dateTex = "";
-
-		if (diff == 0){
-			dateText = "Today";
-		} else if (diff == -1){
-			dateText = "Tomorrow";
-		} else if (diff == 1){
-			dateText = "Yesterday";
-		} else {
-			dateText = mom.format("dddd D MMMM");
+			selectedRow.after(this.selectedRowTemplate());
 		}
 
+		var footerEl = $(".footer");
+
+		var footerDateEl = $(".footer-date");
+
+		var footerTextEl = $(".footer-text");
+
+		footerEl.fadeOut(100, function(){
+			footerDateEl.html(dateText);
+
+			footerTextEl.html(footerText);
+
+			footerEl.fadeIn(100);
+		});
+	},
+
+	buildAttendeeText: function(choiceModel){
 		var footerText = "";
 		var currentAttendeeId = window.App.currentAttendee.get("_id");
 		var freeAttendees = choiceModel.get("free");
@@ -89,27 +100,45 @@ window.EventApp = Backbone.View.extend({
 			} else if (freeAttendees.length - 1 == App.attendees.length) {
 				footerText = "<strong>Everyone</string> except you is free.";
 			} else {
-				footerText = this.buildAttendeeNameText(freeAttendees);
+				footerText = this.defaultAttendeeText(freeAttendees);
 			}
 		} else {
 			// You're free
 			if (freeAttendees.length == App.attendees.length){
 				footerText = "<strong>Everyone</strong> can make it.";
 			} else {
-				footerText = this.buildAttendeeNameText(freeAttendees);
+				footerText = this.defaultAttendeeText(freeAttendees);
 			}
 		}
 
-		this.footerEl.fadeOut(100, function(){
-			that.footerDateEl.html(dateText);
-
-			that.footerTextEl.html(footerText);
-
-			that.footerEl.fadeIn(100);
-		});
+		return footerText;
 	},
 
-	buildAttendeeNameText: function(freeAttendees){
+	buildDateText: function(choiceModel){
+		var mom = moment(choiceModel.get("date"));
+
+		var today = new Date();
+		today.setHours(0, 0, 0, 0);
+		var diff = moment(today).diff(mom, 'days');
+
+		// $(".navbar-fixed-bottom").show();
+
+		var dateText = "";
+
+		if (diff == 0){
+			dateText = "Today";
+		} else if (diff == -1){
+			dateText = "Tomorrow";
+		} else if (diff == 1){
+			dateText = "Yesterday";
+		} else {
+			dateText = mom.format("dddd D MMMM");
+		}
+
+		return dateText;
+	},
+
+	defaultAttendeeText: function(freeAttendees){
 		var prettyNames = [];
 		var meFound = false;
 		var that = this;
