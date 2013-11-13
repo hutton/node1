@@ -23,3 +23,19 @@ $('#my_table > tbody > tr.my_row')
   $set.replaceWith($set.contents());
 
  });
+
+
+
+
+.container {
+    position: relative;
+    top: 10px;
+    left: 27px;
+    width: 10px;
+    height: 10px; 
+    background: #f0f0f0;
+    border-right:1px solid #CAD5E0;
+    border-top:1px solid #CAD5E0;
+    -moz-transform:rotate(-45deg);
+    -webkit-transform:rotate(-45deg);
+}
