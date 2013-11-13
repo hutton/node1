@@ -7,7 +7,6 @@
 	
 	border-bottom: 5px solid black;
 }
-- Use font awesome
 - Change from address when adding to an event (bug)
 
 - Fix empty dates in email template
@@ -25,3 +24,4 @@ Done
 - Nice tick
 - Re-order 'did-you-know'
 - Add nice from name when sending email  i.e. beer-time-tube@convenely.com -> Beer time tube via Convenely
+- Use font awesome
