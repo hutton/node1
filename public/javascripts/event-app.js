@@ -110,7 +110,7 @@ window.EventApp = Backbone.View.extend({
 			.parent()
 			.find('td > div')
 			.slideUp(200, function(){
-			$(this).parent().parent().remove();
+			$('.selected-row').remove();
 			});
 	},
 
