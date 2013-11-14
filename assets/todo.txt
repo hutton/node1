@@ -2,7 +2,7 @@
 - Improve mailto mailto:info@example.com?subject=email%20subject&body=these%20mailto%0Alinks%20are%0Acool
 - Add to email template "Convenely help's groups of people find the best day for an event. Learn more."
 - Show "Let everyone know you've made updates" in footer
-- Click header to show/hide info panel
+- Click header to show/hide info panel & change title green
 - Change from address when adding to an event (bug)
 
 - Add subject when empty RE: Strom day
