@@ -1,17 +1,10 @@
-- Move date into into table
-.arrow-up {
-	width: 0; 
-	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	
-	border-bottom: 5px solid black;
-}
+- Add attendee feature in info panel
+- Improve mailto mailto:info@example.com?subject=email%20subject&body=these%20mailto%0Alinks%20are%0Acool
+- Show "Let everyone know you've made updates" in footer
+- Click header to show/hide info panel
 - Change from address when adding to an event (bug)
 
-- Fix empty dates in email template
 - Add subject when empty RE: Strom day
-- Add attendee in info panel
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page
   - Create welcome email
@@ -20,6 +13,8 @@
 Done
 ----
 
+- Fix empty dates in email template
+- Move date into into table
 - Handle no dates in event page
 - Nice tick
 - Re-order 'did-you-know'
