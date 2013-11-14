@@ -89,13 +89,13 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 
-						calendar.addAttendee(message, fromName);
+						calendar.addAttendeeMessage(message, fromName);
 
 						updateCalendarCallback(calendar);
 					} else if (subject.toLowerCase() == "remove"){
 						logger.info("Removing attendee from event");
 
-						calendar.removeAttendee(message);
+						calendar.removeAttendeeMessage(message);
 
 						updateCalendarCallback(calendar);
 					} else {

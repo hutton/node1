@@ -184,6 +184,16 @@ CalendarSchema.statics.findCalendar = function(id, callback){
 
 CalendarSchema.statics.findCalendarByAttendeeId = function(id, callback){
 	Calendar.findOne({"attendees.attendeeId": id}, function(err, calendar){
+		if (err){
+			logger.error(err);
+
+			callback(err, null, null);
+			return;
+		} else if (calendar === null){
+			callback(err, null, null);
+			return;
+		}
+
 		// find attendee
 		var attendee = _.find(calendar.attendees, function(attendee){
 			return attendee.attendeeId == id;
@@ -328,7 +338,7 @@ CalendarSchema.methods.getAttendeeFromAddress = function(address){
 	});
 };
 
-CalendarSchema.methods.addAttendee = function(message, fromName){
+CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
 	var splitMessage = getEmailAddressesAndBody(message);
 
 	var attendeeAddresses = splitMessage[0];
@@ -364,7 +374,29 @@ CalendarSchema.methods.addAttendee = function(message, fromName){
 	});
 };
 
-CalendarSchema.methods.removeAttendee = function(message){
+CalendarSchema.methods.addAttendee = function(address, fromName){
+	var calendar = this;
+
+	var attendee = new Attendee({
+			name: "",
+			email: address,
+			attendeeId: makeId(5)
+		});
+
+	calendar.attendees.push(attendee);
+
+	calendar.save(function(err, calendar){
+		if (err){
+			logger.error("Failed to add attendee calendar: " + err);
+		} else {
+			Mail.sendMailToAttendee(calendar, attendee, calendar.name, "You've been added to the '" + calendar.name + "' email list.\n\nReply to this email with when you're available.", fromName);
+
+			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
+		}
+	});
+};
+
+CalendarSchema.methods.removeAttendeeMessage = function(message){
 	var splitMessage = getEmailAddressesAndBody(message);
 
 	var attendeeAddresses = splitMessage[0];

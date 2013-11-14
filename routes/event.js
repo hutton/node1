@@ -79,6 +79,30 @@ function updateChoice(req, res){
 	});
 }
 
+
+function addAttendee(req, res){
+	Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+		if (err){
+			logger.error("Error finding calendar " + req.route.params[0]);
+			logger.error("Error:" + err);
+
+			res.status(404);
+		} else if (!calendar){
+			logger.error("Could not find calendar " + req.route.params[0]);
+
+			res.status(404);
+		} else {
+			var newAttendeeEmail = req.body.email;
+
+			logger.info("Adding '" + newAttendeeEmail + "'' to: " + calendar.name);
+
+			calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
+
+			res.send(200);
+		}
+	});
+}
+
 exports.view = function(req, res){
 	renderEvent(req, res);
 };
@@ -86,3 +110,8 @@ exports.view = function(req, res){
 exports.updateChoice = function(req, res){
 	updateChoice(req, res);
 };
+
+exports.addAttendee = function(req, res){
+	addAttendee(req, res);
+};
+

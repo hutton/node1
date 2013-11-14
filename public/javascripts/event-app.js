@@ -28,6 +28,7 @@ window.EventApp = Backbone.View.extend({
 
 	events: {
 		"click #show-info":				"infoClicked",
+		"click .title":  				"infoClicked",
 		"click .event-table":			"eventTableClicked",
 		"click":						"eventTableClicked",
 		"click #add-attendee": 			"addAttendeeClicked", 
@@ -64,12 +65,6 @@ window.EventApp = Backbone.View.extend({
 			this.removeSelectedRow();
 			$(".selected").removeClass('selected');
 		}
-
-		// if (this.$el.find(".info").is(':visible')){
-		// 	this.$el.find(".info").slideUp("fast");
-
-		// 	this.$el.find("#show-info > span").removeClass("show-info-rotate");
-		// }
 	},
 
 	updateSelectedItem: function(choiceModel, selectedRow){
@@ -226,7 +221,9 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	addAttendeeLinkClicked: function(){
-		
+		var newAttendeeEmail = this.$el.find('#add-attendee-email-input').val();
+
+		$.post("/event/" + window.location.toString().slice(-5) + "/add/", { email: newAttendeeEmail } );
 	},
 
 	addAttendeeCancelClicked: function(){

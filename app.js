@@ -81,6 +81,7 @@ var winstonStream = {
  //app.get('/event', routes.event);
  app.get('/event/*', events.view);
  app.post('/event/*/choice', events.updateChoice);
+ app.post('/event/*/add', events.addAttendee);
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
  app.post('/mail', mail.receive);

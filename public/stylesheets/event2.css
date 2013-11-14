@@ -37,6 +37,10 @@ a:active {
   color: #4ad16c;
   text-decoration: none;
 }
+.span-link {
+  color: #4ad16c;
+  cursor: pointer;
+}
 .cancel-link {
   color: #c0c0c0;
 }
@@ -143,6 +147,7 @@ a:active {
   transform: rotate(90deg);
 }
 .title {
+  color: #4ad16c;
   text-align: center;
   padding-top: 12px;
   margin-left: auto;
@@ -163,11 +168,11 @@ a:active {
   cursor: pointer;
 }
 #add-attendee-email-input {
-  max-width: 350px;
+  max-width: 400px;
   margin: 0px auto;
 }
 .add-attendee-button-container {
-  max-width: 350px;
+  max-width: 400px;
   margin: 3px auto;
 }
 #add-attendee-link {
