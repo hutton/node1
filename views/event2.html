@@ -43,10 +43,12 @@
               <span class="attendees"></span><span id="add-attendee">Add +</span>
             </div>
             <div class="center">
-              <a id="email-group">Email Group ></a>
+              <a id="email-group">Email Group <span class="fa fa-chevron-right"></span></a>
               <div class="add-attendee-panel" style="display: none;">
-                <div>Add Attendee</div>
-                <input></input>
+                <input type="email" class="form-control" id="add-attendee-email-input" placeholder="Enter email"></input>
+                <div class="add-attendee-button-container">
+                  <a id="add-attendee-link" href="#">Add Attendee</a><a id="add-attendee-cancel-link" href="#" class="cancel-link">Cancel</a>
+                </div>
               </div>
             </div>
           </div>
@@ -121,7 +123,6 @@
   <script type="text/template" id="selected-row-template">
     <tr class="selected-row">
       <div>
-      content
         <td colspan="7">
           <div class="info-row-date">
             <@= dateText @>

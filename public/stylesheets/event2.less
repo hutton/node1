@@ -46,6 +46,15 @@ a:active{
 	text-decoration: none;
 }
 
+.cancel-link{
+	color: @selected-color;
+}
+
+.cancel-link:hover{
+	color: @selected-color;
+}
+
+
 .center{
 	text-align: center;
 	margin-left: auto;
@@ -171,9 +180,12 @@ a:active{
 
 
 #email-group{
-	top: 20px;	
-	font-size: @font-size;
+	top: 15px;	
 	position: relative;
+}
+
+.add-attendee-panel{
+	margin: 10px;
 }
 
 #add-attendee{
@@ -183,6 +195,24 @@ a:active{
 
 #add-attendee:hover{
 	cursor: pointer;
+}
+
+#add-attendee-email-input{
+	max-width: 350px;
+	margin: 0px auto;
+}
+
+.add-attendee-button-container{
+	max-width: 350px; 
+	margin: 3px auto;
+}
+
+#add-attendee-link{
+	float: left;
+}
+
+#add-attendee-cancel-link{
+	float: right;
 }
 
 .days-table{
@@ -273,8 +303,8 @@ a:active{
     background: @light-background-color;
     border-right:1px solid @divider-color;
     border-top:1px solid @divider-color;
-    -moz-transform:rotate(-45deg);
-    -webkit-transform:rotate(-45deg);
+    .rotation(-45deg);
+    border-radius: 0px;
 
 	position: relative;
 	top: 14px;
@@ -317,6 +347,7 @@ a:active{
 
 .info-row-text {
 	margin: 4px 0px 10px 0px;
+	padding: 0px 10px;
 }
 
 

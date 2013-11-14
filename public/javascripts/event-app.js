@@ -29,7 +29,10 @@ window.EventApp = Backbone.View.extend({
 	events: {
 		"click #show-info":				"infoClicked",
 		"click .event-table":			"eventTableClicked",
-		"click":			"eventTableClicked"
+		"click":						"eventTableClicked",
+		"click #add-attendee": 			"addAttendeeClicked", 
+		"click #add-attendee-link": 	"addAttendeeLinkClicked",
+		"click #add-attendee-cancel-link": "addAttendeeCancelClicked"
 	},
 
 	selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -61,6 +64,12 @@ window.EventApp = Backbone.View.extend({
 			this.removeSelectedRow();
 			$(".selected").removeClass('selected');
 		}
+
+		// if (this.$el.find(".info").is(':visible')){
+		// 	this.$el.find(".info").slideUp("fast");
+
+		// 	this.$el.find("#show-info > span").removeClass("show-info-rotate");
+		// }
 	},
 
 	updateSelectedItem: function(choiceModel, selectedRow){
@@ -104,13 +113,15 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	removeSelectedRow: function(){
-		$('.selected-row')
+		var allSelectedRows = $('.selected-row');
+
+		allSelectedRows
 			.find('td')
 			.wrapInner('<div style="display: block;" />')
 			.parent()
 			.find('td > div')
 			.slideUp(200, function(){
-			$('.selected-row').remove();
+			allSelectedRows.remove();
 			});
 	},
 
@@ -206,5 +217,23 @@ window.EventApp = Backbone.View.extend({
 		}
 
 		return text;
+	},
+
+	addAttendeeClicked: function(){
+		this.$el.find('#add-attendee').hide();
+		this.$el.find('#email-group').hide();
+		this.$el.find('.add-attendee-panel').show();
+	},
+
+	addAttendeeLinkClicked: function(){
+		
+	},
+
+	addAttendeeCancelClicked: function(){
+		this.$el.find('#add-attendee').show();
+		this.$el.find('#email-group').show();
+		this.$el.find('.add-attendee-panel').hide();
+
+		this.$el.find('#add-attendee-email-input').val('');
 	}
 });
