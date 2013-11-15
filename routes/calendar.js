@@ -79,6 +79,7 @@ function renderCalendar(req, res, format){
 					calendar: calendar,
 					choices: sortedChoices,
 					attendees: calendar.attendees,
+					fromName: "From name",
 					message: ''
 				});
 			} else if (format === 'html'){
@@ -88,6 +89,7 @@ function renderCalendar(req, res, format){
 					choices: sortedChoices,
 					attendees: calendar.attendees,
 					message: 'this is the message',
+					fromName: "From name",
 					subject: 'the subject'
 				});
 			}

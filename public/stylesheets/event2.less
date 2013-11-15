@@ -204,6 +204,11 @@ a:active{
 	margin: 10px;
 }
 
+.add-attendee-message{
+	display: none;
+	font-size: 14px;
+}
+
 #add-attendee{
 	color: @free-color;
 	margin-left: 7px;
@@ -213,9 +218,13 @@ a:active{
 	cursor: pointer;
 }
 
-#add-attendee-email-input{
+.add-attendee-email-input-container{
 	max-width: 400px;
 	margin: 0px auto;
+}
+
+#add-attendee-email-input{
+	width: 100%;
 }
 
 .add-attendee-button-container{
@@ -231,13 +240,16 @@ a:active{
 	float: right;
 }
 
-.add-attendee-email-spinner{
-	display: none;
+.add-attendee-email-spinner-container{
+	height: 0px;
 	float: right;	
 	position: relative;
-	top: -30px;
-	width: 0px;
-	right: 27px;
+	top: 6px;
+	right: 7px;
+}
+
+.add-attendee-email-spinner{
+	display: none;
 	font-size: 22px;
 }
 

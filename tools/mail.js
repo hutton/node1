@@ -99,7 +99,8 @@ function sendMail(calendar, subject, message, fromName){
 			choices: sortedChoices,
 			attendees: calendar.attendees,
 			message: message,
-			subject: subject
+			subject: subject,
+			fromName: fromName
 		}, function(err, html){
 
 			if (err){
@@ -174,7 +175,8 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 		choices: sortedChoices,
 		attendees: calendar.attendees,
 		message: message,
-		subject: subject
+		subject: subject,
+		fromName: fromName
 	}, function(err, html){
 
 		if (err){

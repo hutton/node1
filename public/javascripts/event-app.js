@@ -57,7 +57,7 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find(".attendees").html(nameList);
 
-		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com&subject=RE: " + this.model.get("name");
+		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE: " + this.model.get("name");
 
 		mailTo = mailTo.replace(/ /g, "%20");
 
@@ -230,6 +230,9 @@ window.EventApp = Backbone.View.extend({
 		var container = this.$el.find('.add-attendee-panel');
 		var spinner = this.$el.find('.add-attendee-email-spinner');
 
+		this.$el.find(".add-attendee-message").hide();
+		this.$el.find(".add-attendee-message").text("");
+
 		container.addClass('disabled');
 		spinner.show();
 
@@ -238,14 +241,19 @@ window.EventApp = Backbone.View.extend({
 				email: newAttendeeEmail
 			},
 			function(data){
-				container.removeClass('disabled');
-				spinner.hide();
-
 				that.attendees.add(data);
 
 				that.render();
 			}
-		);
+		)
+		.fail(function() {
+			that.$el.find(".add-attendee-message").slideDown('fast');
+			that.$el.find(".add-attendee-message").text("Whao! Something didn't quite work there. Reload and try again?!");
+		})
+		.always(function() {
+			container.removeClass('disabled');
+			spinner.hide();
+		});
 	},
 
 	addAttendeeCancelClicked: function(){
@@ -254,5 +262,8 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find('.add-attendee-panel').hide();
 
 		this.$el.find('#add-attendee-email-input').val('');
+
+		this.$el.find(".add-attendee-message").hide();
+		this.$el.find(".add-attendee-message").text("");
 	}
 });
