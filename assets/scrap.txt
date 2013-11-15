@@ -1,41 +1,21 @@
-SlideUp:
-
-$('#my_table > tbody > tr.my_row')
- .find('td')
- .wrapInner('<div style="display: block;" />')
- .parent()
- .find('td > div')
- .slideUp(700, function(){
-
-  $(this).parent().parent().remove();
-
- });
-SlideDown:
-
-$('#my_table > tbody > tr.my_row')
- .find('td')
- .wrapInner('<div style="display: none;" />')
- .parent()
- .find('td > div')
- .slideDown(700, function(){
-
-  var $set = $(this);
-  $set.replaceWith($set.contents());
-
- });
-
-
-
-
-.container {
-    position: relative;
-    top: 10px;
-    left: 27px;
-    width: 10px;
-    height: 10px; 
-    background: #f0f0f0;
-    border-right:1px solid #CAD5E0;
-    border-top:1px solid #CAD5E0;
-    -moz-transform:rotate(-45deg);
-    -webkit-transform:rotate(-45deg);
-}
+// Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+var jqxhr = $.post( "example.php", function() {
+  alert( "success" );
+})
+  .done(function() {
+    alert( "second success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "finished" );
+});
+ 
+// Perform other work here ...
+ 
+// Set another completion function for the request above
+jqxhr.always(function() {
+  alert( "second finished" );
+});
