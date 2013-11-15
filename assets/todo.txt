@@ -1,3 +1,4 @@
+- Blah  Blah wrote: text is wrong
 - Add attendee feature in info panel
 - Improve mailto mailto:info@example.com?subject=email%20subject&body=these%20mailto%0Alinks%20are%0Acool
 - Add to email template "Convenely help's groups of people find the best day for an event. Learn more."
