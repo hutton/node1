@@ -57,7 +57,11 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find(".attendees").html(nameList);
 
-		this.$el.find("#email-group").attr("href", "mailto:" + this.model.get("id") + "@convenely.com");
+		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com&subject=RE: " + this.model.get("name");
+
+		mailTo = mailTo.replace(/ /g, "%20");
+
+		this.$el.find("#email-group").attr("href", mailTo);
 	},
 
 	eventTableClicked: function(event){
@@ -79,7 +83,7 @@ window.EventApp = Backbone.View.extend({
 			var footerDateEl = $(".info-row-date");
 			var footerTextEl = $(".info-row-text");
 
-			footerDateEl.fadeOut(100, function(){
+				footerDateEl.fadeOut(100, function(){
 				footerDateEl.html(dateText);
 				footerDateEl.fadeIn(100);
 			});
@@ -221,9 +225,27 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	addAttendeeLinkClicked: function(){
+		var that = this;
 		var newAttendeeEmail = this.$el.find('#add-attendee-email-input').val();
+		var container = this.$el.find('.add-attendee-panel');
+		var spinner = this.$el.find('.add-attendee-email-spinner');
 
-		$.post("/event/" + window.location.toString().slice(-5) + "/add/", { email: newAttendeeEmail } );
+		container.addClass('disabled');
+		spinner.show();
+
+		$.post("/event/" + window.location.toString().slice(-5) + "/add/",
+			{
+				email: newAttendeeEmail
+			},
+			function(data){
+				container.removeClass('disabled');
+				spinner.hide();
+
+				that.attendees.add(data);
+
+				that.render();
+			}
+		);
 	},
 
 	addAttendeeCancelClicked: function(){

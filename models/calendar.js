@@ -394,6 +394,12 @@ CalendarSchema.methods.addAttendee = function(address, fromName){
 			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
 		}
 	});
+
+	return {
+		_id: attendee._id,
+		prettyName: attendee.name || attendee.email,
+		me: false
+	};
 };
 
 CalendarSchema.methods.removeAttendeeMessage = function(message){

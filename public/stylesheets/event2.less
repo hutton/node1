@@ -78,6 +78,12 @@ a:active{
 	position: relative;
 }
 
+.disabled{
+	opacity: 0.5;
+}
+
+/**********************************************************************************/
+
 .info{
 	max-width: 570px;
 	margin-left: auto;
@@ -181,6 +187,10 @@ a:active{
 	margin-right: auto;
 }
 
+.title:hover{
+	cursor: pointer;
+}
+
 .tiile-button{
 }
 
@@ -219,6 +229,16 @@ a:active{
 
 #add-attendee-cancel-link{
 	float: right;
+}
+
+.add-attendee-email-spinner{
+	display: none;
+	float: right;	
+	position: relative;
+	top: -30px;
+	width: 0px;
+	right: 27px;
+	font-size: 22px;
 }
 
 .days-table{
@@ -337,6 +357,7 @@ a:active{
 
 .event-table tr.selected-row > td{
 	padding: 0px;
+	width: 100%;
 }
 
 .event-table tr.selected-row > td > div{

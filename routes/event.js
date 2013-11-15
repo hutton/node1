@@ -96,9 +96,9 @@ function addAttendee(req, res){
 
 			logger.info("Adding '" + newAttendeeEmail + "'' to: " + calendar.name);
 
-			calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
+			var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
 
-			res.send(200);
+			res.send(200, newAttendee);
 		}
 	});
 }
