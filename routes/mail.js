@@ -109,7 +109,7 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 							dates[0],
 							dates[1]);
 
-						Mail.sendMail(calendar, subject, message, fromName);
+						Mail.sendMail(calendar, subject, message, fromAttendee.name || fromAttendee.email);
 
 						updateCalendarCallback(calendar);
 					}
