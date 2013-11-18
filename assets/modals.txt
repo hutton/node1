@@ -1,0 +1,17 @@
+
+Welcome.
+
+Tap a date to see who's free.
+
+Tap it again to toogle whether you are free.
+
+
+
+
+Welcome.
+
+Tap a date to see who's free.
+
+Tap it again to toogle whether you're free.
+
+Then enter your email address to share your changes with everyone.
