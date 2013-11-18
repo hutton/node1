@@ -130,7 +130,7 @@ window.EventApp = Backbone.View.extend({
 		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
 			// You're not free
 			if (_.isUndefined(freeAttendees) || freeAttendees.length === 0){
-				footerText = "<strong>Nobody</strong> free yet.";
+				footerText = "<strong>Nobody</strong> is free yet.";
 			} else if (freeAttendees.length - 1 == App.attendees.length) {
 				footerText = "<strong>Everyone</string> except you is free.";
 			} else {
