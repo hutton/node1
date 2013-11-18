@@ -1,5 +1,4 @@
 
-
 Your own email group
 --------------------
 Every event on Convenely has it's own email group.  Use it to contact everyone invited to the event.
@@ -16,10 +15,3 @@ Our
 
 
 
-Welcome.
-
-Tap a date to see who's free.
-
-Tap it again to toogle whether you are free.
-
-That's it!
