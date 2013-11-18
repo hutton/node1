@@ -114,6 +114,8 @@ window.ChoiceView = Backbone.View.extend({
 		this.updateFreeCounter(true);
 
 		this.model.save();
+
+		$(".navbar-fixed-bottom").show();
 	},
 
 	calcDegrees: function(total, count){

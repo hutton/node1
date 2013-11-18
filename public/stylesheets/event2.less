@@ -26,6 +26,10 @@ body{
 	padding: 0px;
 }
 
+.navbar{
+	min-height: 0px;
+}
+
 .event-table > tbody > tr > td{
 	padding: 14px 0px 14px 0px;
 }
@@ -246,11 +250,21 @@ a:active{
 	position: relative;
 	top: 6px;
 	right: 7px;
+	font-size: 22px;
 }
 
 .add-attendee-email-spinner{
 	display: none;
-	font-size: 22px;
+}
+
+.add-attendee-email-validation{
+	opacity: 0.15;
+	color: #808080;
+}
+
+.add-attendee-email-validation-valid{
+	color: @free-color;
+	opacity: 1;
 }
 
 .days-table{
@@ -437,4 +451,10 @@ a:active{
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.footer{
+	text-align: center;
+	margin: 8px 10px 10px 10px;
+	font-size: 16px;
 }

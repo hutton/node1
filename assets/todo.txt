@@ -1,5 +1,6 @@
 - Don't show dates prior to today in email
-- Add attendee feature in info panel  fa-spin
+- Add attendee feature in info panel 
+	- Validate email 
 - Show "Let everyone know you've made updates" in footer
 - Change from address when adding to an event (bug)
 

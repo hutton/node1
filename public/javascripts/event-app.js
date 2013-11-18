@@ -33,7 +33,8 @@ window.EventApp = Backbone.View.extend({
 		"click":						"eventTableClicked",
 		"click #add-attendee": 			"addAttendeeClicked", 
 		"click #add-attendee-link": 	"addAttendeeLinkClicked",
-		"click #add-attendee-cancel-link": "addAttendeeCancelClicked"
+		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
+		"keyup #add-attendee-email-input": "addAttendeeInputChanged"
 	},
 
 	selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -62,6 +63,10 @@ window.EventApp = Backbone.View.extend({
 		mailTo = mailTo.replace(/ /g, "%20");
 
 		this.$el.find("#email-group").attr("href", mailTo);
+
+		mailTo = mailTo + " - Update";
+
+		this.$el.find("#changes-made-email-link").attr("href", mailTo);
 	},
 
 	eventTableClicked: function(event){
@@ -80,18 +85,11 @@ window.EventApp = Backbone.View.extend({
 
 			this.showSelectedRowAfter(selectedRow, {dateText: dateText, attendeeText: attendeeText});
 		} else {
-			var footerDateEl = $(".info-row-date");
-			var footerTextEl = $(".info-row-text");
+			var footerDateEl = this.$el.find(".info-row-date");
+			var footerTextEl = this.$el.find(".info-row-text");
 
-				footerDateEl.fadeOut(100, function(){
-				footerDateEl.html(dateText);
-				footerDateEl.fadeIn(100);
-			});
-
-			footerTextEl.fadeOut(100, function(){
-				footerTextEl.html(attendeeText);
-				footerTextEl.fadeIn(100);
-			});
+			footerDateEl.html(dateText);
+			footerTextEl.html(attendeeText);
 		}
 	},
 
@@ -231,6 +229,7 @@ window.EventApp = Backbone.View.extend({
 		var spinner = this.$el.find('.add-attendee-email-spinner');
 
 		this.$el.find(".add-attendee-message").hide();
+		this.$el.find('.add-attendee-email-validation').hide();
 		this.$el.find(".add-attendee-message").text("");
 
 		container.addClass('disabled');
@@ -251,6 +250,7 @@ window.EventApp = Backbone.View.extend({
 			that.$el.find(".add-attendee-message").text("Whao! Something didn't quite work there. Reload and try again?!");
 		})
 		.always(function() {
+			this.$el.find('.add-attendee-email-validation').show();
 			container.removeClass('disabled');
 			spinner.hide();
 		});
@@ -265,5 +265,21 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find(".add-attendee-message").hide();
 		this.$el.find(".add-attendee-message").text("");
+	},
+
+	addAttendeeInputChanged: function(){
+		var email = this.$el.find('#add-attendee-email-input').val();
+		var check = this.$el.find('.add-attendee-email-validation');
+
+		//var re = /([a-zA-Z0-9\._-])+@([a-zA-Z0-9\._-])+/;
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+		var matches = email.match(re);
+
+		if (!_.isUndefined(matches) && matches !== null){
+			check.addClass('add-attendee-email-validation-valid');
+		} else {
+			check.removeClass('add-attendee-email-validation-valid');
+		}
 	}
 });
