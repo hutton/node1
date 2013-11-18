@@ -1,7 +1,9 @@
 - Don't show dates prior to today in email
-- Add attendee feature in info panel 
-	- Validate email 
+- Shade-out dates in the past
+	- text-decoration: line-through;
+	- opacity: 0.4;
 - Show "Let everyone know you've made updates" in footer
+	- Keep track of updates
 - Change from address when adding to an event (bug)
 
 - Add subject when empty RE: Strom day
@@ -12,6 +14,8 @@
 
 Done
 ----
+- Add attendee feature in info panel 
+	- Validate email 
 - Add to email template "Convenely help's groups of people find the best day for an event. Learn more."
 - Blah  Blah wrote: text is wrong
 - Improve mailto mailto:info@example.com?subject=email%20subject&body=these%20mailto%0Alinks%20are%0Acool
