@@ -4,12 +4,12 @@
 	- opacity: 0.4;
 - Show "Let everyone know you've made updates" in footer
 	- Keep track of updates
-- Change from address when adding to an event (bug)
-
-- Add subject when empty RE: Strom day
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page
   - Create welcome email
+
+- Change from address when adding to an event (bug)
+- Add subject when empty RE: Strom day
 - Add helper 'Tap/click again mark as free'
 
 Done
