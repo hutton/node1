@@ -1,8 +1,10 @@
+- Don't allow add of invalid email addresses
 - Don't show dates prior to today in email
 - Shade-out dates in the past
 	- text-decoration: line-through;
 	- opacity: 0.4;
 - Show "Let everyone know you've made updates" in footer
+	- Spacing
 	- Keep track of updates
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page
