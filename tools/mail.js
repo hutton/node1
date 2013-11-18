@@ -77,8 +77,10 @@ function sendMail(calendar, subject, message, fromName){
 		return choice.date;
 	});
 
+	var today = moment();
+
 	sortedChoices = _.filter(sortedChoices, function(choice){
-		return choice.free.length > 0;
+		return choice.free.length > 0 && !today.isAfter(choice.date);
 	});
 
 	message = message.replace(/\n/g, '<br />');
@@ -157,8 +159,10 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 		return choice.date;
 	});
 
+	var today = moment();
+
 	sortedChoices = _.filter(sortedChoices, function(choice){
-		return choice.free.length > 0;
+		return choice.free.length > 0 && !today.isAfter(choice.date);
 	});
 
 	message = message.replace(/\n/g, '<br />');

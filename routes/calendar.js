@@ -1,4 +1,4 @@
- 
+
 /*
  * GET users listing.
  */
@@ -67,8 +67,10 @@ function renderCalendar(req, res, format){
 				return choice.date;
 			});
 
+			var today = moment();
+
 			sortedChoices = _.filter(sortedChoices, function(choice){
-				return choice.free.length > 0;
+				return choice.free.length > 0 && !today.isAfter(choice.date);
 			});
 
 			var attendee = calendar.attendees[0];

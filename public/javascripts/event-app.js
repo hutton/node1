@@ -130,7 +130,7 @@ window.EventApp = Backbone.View.extend({
 		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
 			// You're not free
 			if (_.isUndefined(freeAttendees) || freeAttendees.length === 0){
-				footerText = "<strong>Nobody</strong> has marked this as free yet.";
+				footerText = "<strong>Nobody</strong> free yet.";
 			} else if (freeAttendees.length - 1 == App.attendees.length) {
 				footerText = "<strong>Everyone</string> except you is free.";
 			} else {
@@ -192,7 +192,7 @@ window.EventApp = Backbone.View.extend({
 		var text = "";
 
 		if (meFound && prettyNames.length === 0){
-			text = "Only <strong>you</strong> are free so far.";
+			text = "Just <strong>you</strong> are free so far.";
 		} else if (!meFound && prettyNames.length === 1){
 			text = "Only " + prettyNames[0] + " is free so far.";
 		} else if (meFound){
@@ -224,6 +224,13 @@ window.EventApp = Backbone.View.extend({
 
 	addAttendeeLinkClicked: function(){
 		var that = this;
+
+		if (!this.isAddAttendeeEmailAddressValid()){
+			that.$el.find(".add-attendee-message").slideDown('fast');
+			that.$el.find(".add-attendee-message").text("Invalid email address.");
+			return;
+		}
+
 		var newAttendeeEmail = this.$el.find('#add-attendee-email-input').val();
 		var container = this.$el.find('.add-attendee-panel');
 		var spinner = this.$el.find('.add-attendee-email-spinner');
@@ -243,6 +250,9 @@ window.EventApp = Backbone.View.extend({
 				that.attendees.add(data);
 
 				that.render();
+
+				that.$el.find('#add-attendee-email-input').val('');
+				that.addAttendeeInputChanged();
 			}
 		)
 		.fail(function() {
@@ -250,7 +260,7 @@ window.EventApp = Backbone.View.extend({
 			that.$el.find(".add-attendee-message").text("Whao! Something didn't quite work there. Reload and try again?!");
 		})
 		.always(function() {
-			this.$el.find('.add-attendee-email-validation').show();
+			that.$el.find('.add-attendee-email-validation').show();
 			container.removeClass('disabled');
 			spinner.hide();
 		});
@@ -265,21 +275,30 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find(".add-attendee-message").hide();
 		this.$el.find(".add-attendee-message").text("");
+		this.$el.find('.add-attendee-email-validation').removeClass('add-attendee-email-validation-valid');
 	},
 
 	addAttendeeInputChanged: function(){
-		var email = this.$el.find('#add-attendee-email-input').val();
 		var check = this.$el.find('.add-attendee-email-validation');
+		var addAttendeeMessage = this.$el.find('.add-attendee-message');
 
-		//var re = /([a-zA-Z0-9\._-])+@([a-zA-Z0-9\._-])+/;
+		if (this.isAddAttendeeEmailAddressValid()){
+			check.addClass('add-attendee-email-validation-valid');
+			addAttendeeMessage.slideUp('fast');
+			addAttendeeMessage.text("");
+		} else {
+			check.removeClass('add-attendee-email-validation-valid');
+		}
+	},
+
+	isAddAttendeeEmailAddressValid: function(){
+		var email = this.$el.find('#add-attendee-email-input').val();
+
+			//var re = /([a-zA-Z0-9\._-])+@([a-zA-Z0-9\._-])+/;
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 		var matches = email.match(re);
 
-		if (!_.isUndefined(matches) && matches !== null){
-			check.addClass('add-attendee-email-validation-valid');
-		} else {
-			check.removeClass('add-attendee-email-validation-valid');
-		}
+		return !_.isUndefined(matches) && matches !== null;
 	}
 });

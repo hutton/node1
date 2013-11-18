@@ -23,12 +23,6 @@ window.ChoiceView = Backbone.View.extend({
 		return this;
 	},
 
-	setToday: function(){
-		var target = this.$el.find("div:first");
-
-		target.addClass("today");
-	},
-
 	updateFreeCounter: function(animate){
 		if (this.model.has("free")){
 			var freeDates = this.model.get("free");
@@ -152,6 +146,7 @@ window.ChoicesView = Backbone.View.extend({
 
 		var row = null;
 		var todayAdded = false;
+		var inPast = true;
 
 		_(this._choiceViews).each(function(choice) {
 			var date = choice.model.get("date");
@@ -180,6 +175,14 @@ window.ChoicesView = Backbone.View.extend({
 				target.addClass("today");
 
 				todayAdded = true;
+			}
+
+			if (inPast){
+				if (that.today < date || sameDay(that.today, date)){
+					inPast = false;
+				} else {
+					choice.$el.find("div:first").addClass("past");
+				}
 			}
 		});
 
