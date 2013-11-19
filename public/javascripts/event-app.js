@@ -39,6 +39,10 @@ window.EventApp = Backbone.View.extend({
 
 	selectedRowTemplate: _.template($('#selected-row-template').html()),
 
+	isFree: [],
+
+	wasFree: [],
+
 	infoClicked: function(){
 		this.$el.find(".info").slideToggle("fast");
 
@@ -63,10 +67,6 @@ window.EventApp = Backbone.View.extend({
 		mailTo = mailTo.replace(/ /g, "%20");
 
 		this.$el.find("#email-group").attr("href", mailTo);
-
-		mailTo = mailTo + " - Update";
-
-		this.$el.find("#changes-made-email-link").attr("href", mailTo);
 	},
 
 	eventTableClicked: function(event){
@@ -300,5 +300,19 @@ window.EventApp = Backbone.View.extend({
 		var matches = email.match(re);
 
 		return !_.isUndefined(matches) && matches !== null;
+	},
+
+	changesMadeLinkkeyEl: $("#changes-made-email-link"),
+
+	footerEl: $(".navbar-fixed-bottom"),
+
+	updateTellEveryoneLink: function(){
+		if (this.isFree.length > 0 || this.wasFree.length > 0){
+			var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE: " + this.model.get("name");
+
+			this.changesMadeLinkkeyEl.attr("href", mailTo);
+
+			this.footerEl.show();
+		}
 	}
 });

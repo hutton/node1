@@ -93,23 +93,28 @@ window.ChoiceView = Backbone.View.extend({
 
 	toggleFree: function(){
 		var currentAttendeeId = window.App.currentAttendee.get("_id");
-		var freeDates = this.model.get("free");
+		var freeAttendees = this.model.get("free");
 
-		if (_.isUndefined(freeDates) || freeDates.indexOf(currentAttendeeId) == -1){
-			if (_.isUndefined(freeDates)){
+		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
+			if (_.isUndefined(freeAttendees)){
 				this.model.set("free", [currentAttendeeId]);
 			} else {
-				freeDates.push(currentAttendeeId);
+				freeAttendees.push(currentAttendeeId);
 			}
+
+			
+			window.App.isFree.push(this.model.get("date"));
 		} else {
-			freeDates.removeElement(currentAttendeeId);
+			freeAttendees.removeElement(currentAttendeeId);
+
+			window.App.wasFree.push(this.model.get("date"));
 		}
 
 		this.updateFreeCounter(true);
 
 		this.model.save();
 
-		$(".navbar-fixed-bottom").show();
+		window.App.updateTellEveryoneLink();
 	},
 
 	calcDegrees: function(total, count){
