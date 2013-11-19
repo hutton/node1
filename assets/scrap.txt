@@ -1,21 +1,55 @@
-// Assign handlers immediately after making the request,
-// and remember the jqxhr object for this request
-var jqxhr = $.post( "example.php", function() {
-  alert( "success" );
-})
-  .done(function() {
-    alert( "second success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "finished" );
-});
- 
-// Perform other work here ...
- 
-// Set another completion function for the request above
-jqxhr.always(function() {
-  alert( "second finished" );
-});
+var _ = require("./underscore.js");
+var moment = require("./moment.js");
+
+function daysFromToday(days){
+	return new Date(new Date().getTime() + (24 * 60 * 60 * 1000 * days));
+}
+
+
+var isFree = [daysFromToday(10)];
+var wasFree = [daysFromToday(4), daysFromToday(5), daysFromToday(2)];
+
+console.log(isFree);
+console.log(wasFree);
+
+function formatUpdatedDays(isFree, wasFree){
+	if (isFree.length > 0){
+		if (wasFree.length > 0) {
+			return "I'm now free on " + buildDatesString(isFree) + " but I'm no longer free on " + buildDatesString(wasFree) + ".";
+		} else {
+			return "I'm now free on " + buildDatesString(isFree) + ".";
+		}
+	} else if (wasFree.length > 0){
+		return "I'm no longer free on " + buildDatesString(wasFree) + ".";
+	}
+
+	return "";
+}
+
+function buildDatesString(dates){
+	var text = "";
+
+	var dates = dates.sort(function(date1, date2){
+		return date1 > date2;
+	});
+
+	var datesFormatted = _.map(dates, function(date){
+		return moment(date).format("dddd Do MMMM");
+	})
+
+	if (datesFormatted.length > 0){
+		if (datesFormatted.length == 1){
+			text = text + datesFormatted[0];
+		} else {
+			text = text + datesFormatted.slice(0, -1).join(", ") + " and " + datesFormatted[datesFormatted.length - 1];
+		}
+	}
+
+	return text;
+}
+
+console.log(formatUpdatedDays(isFree, wasFree));
+console.log(formatUpdatedDays([], wasFree));
+console.log(encodeURIComponent(formatUpdatedDays(isFree, [])));
+
+
