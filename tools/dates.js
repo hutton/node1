@@ -1,5 +1,15 @@
 var sugar = require("sugar");
 
+function sameDay(date1, date2){
+	if (date1.getDate() == date2.getDate() &&
+		date1.getMonth() == date2.getMonth() &&
+		date1.getFullYear() == date2.getFullYear()){
+		return true;
+	}
+
+	return false;
+}
+
 function getNextDays(startDate, count){
 	var result = [];
 
@@ -60,5 +70,6 @@ function getNext(day){
 module.exports = {
 	getNextDays: getNextDays,
 	getThisWeekDays: getThisWeekDays,
-	getNext: getNext
+	getNext: getNext,
+	sameDay: sameDay
 }

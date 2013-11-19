@@ -2,6 +2,7 @@ var _ = require("underscore");
 var moment = require("moment");
 var logger = require("./logger");
 var mandrill = require('mandrill-api/mandrill');
+var datesHelper = require("./dates");
 
 var mandrillApiKey = 'ZghEsfeVFCfYT5zLpmRX2Q';
 
@@ -77,10 +78,10 @@ function sendMail(calendar, subject, message, fromName){
 		return choice.date;
 	});
 
-	var today = moment();
+	var today = new Date();
 
 	sortedChoices = _.filter(sortedChoices, function(choice){
-		return choice.free.length > 0 && !today.isAfter(choice.date);
+		return choice.free.length > 0 && (today < choice.date || datesHelper.sameDay(today, choice.date));
 	});
 
 	message = message.replace(/\n/g, '<br />');
@@ -159,10 +160,10 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 		return choice.date;
 	});
 
-	var today = moment();
+	var today = new Date();
 
 	sortedChoices = _.filter(sortedChoices, function(choice){
-		return choice.free.length > 0 && !today.isAfter(choice.date);
+		return choice.free.length > 0 && (today < choice.date || datesHelper.sameDay(today, choice.date));
 	});
 
 	message = message.replace(/\n/g, '<br />');

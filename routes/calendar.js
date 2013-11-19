@@ -10,6 +10,8 @@ var moment = require("moment");
 var mongoose = require("mongoose");
 var _ = require("underscore");
 var logger = require("../tools/logger");
+var datesHelper = require("../tools/dates");
+
 
  function makeid(length)
  {
@@ -67,10 +69,11 @@ function renderCalendar(req, res, format){
 				return choice.date;
 			});
 
-			var today = moment();
+			var mo = moment();
+			var today = new Date();
 
 			sortedChoices = _.filter(sortedChoices, function(choice){
-				return choice.free.length > 0 && !today.isAfter(choice.date);
+				return choice.free.length > 0 && (today < choice.date || datesHelper.sameDay(today, choice.date));
 			});
 
 			var attendee = calendar.attendees[0];
