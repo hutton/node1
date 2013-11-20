@@ -9,17 +9,20 @@
   <meta name="description" content="Simple Scheduling Over Email" />
 
   <!-- Le styles -->
+<!--   
   <link href="/stylesheets/bootstrap-3.css" rel="stylesheet">
   <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
 
 
   <link href="/stylesheets/event2.css" rel="stylesheet">
   <link href="/stylesheets/pie.css" rel="stylesheet">
+-->
+<link href="/stylesheets/all.css" rel="stylesheet">
 
-  <!--link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"-->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<!--link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
@@ -80,10 +83,10 @@
      <div id="top-row-spacer"></div>
      <div class="row">
        <table class="table event-table">
-      </table>
-    </div>
-  </div>
-  <div class="navbar navbar-fixed-bottom" style="display: none;">
+       </table>
+     </div>
+   </div>
+   <div class="navbar navbar-fixed-bottom" style="display: none;">
     <div class="fixed-width">
       <div class="footer">
         <a id="changes-made-email-link"><span class="fa fa-envelope-o"> </span> Tell everyone about your changes <span class="fa fa-chevron-right"></span></a>
@@ -99,17 +102,33 @@
           <h4 class="modal-title">Welcome</h4>
         </div>
         <div class="modal-body">
-          <ul>
-            <li>
+          <p>
             Tap a date to see who's free.
-            </li>
-            <li>
+            <div class="single-date-container">
+              <div class="pie big" data-start="0" data-value="210"></div>
+              <div class="unknown">
+                <div class="content">
+                  20
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </p>
+          <p>
             Tap it again to toogle whether you're free.
-            </li>
-            <li>
-            Then enter your email address to share your changes with everyone.
-            </li>
-          </ul>
+            <div class="single-date-container">
+              <div class="pie big" data-start="0" data-value="210"></div>
+              <div class="free">
+                <div class="content">
+                  20
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </p>
+          <p>
+            Enter your email address to share your changes with everyone.
+          </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -118,7 +137,7 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
-  <!--script>
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -126,45 +145,46 @@
 
   ga('create', 'UA-42036841-1', 'convenely.com');
   ga('send', 'pageview');
-</script-->
+  </script>
 
   <script type="text/template" id="choice-template">
-    <div>
-      <div class="pie" data-start="0" data-value="0"></div>
-      <div class="unknown">
-        <div class="content">
-          <@= date.getDate() @>
-        </div>
-      </div>
-      <div></div>
-    </div>
+  <div>
+  <div class="pie" data-start="0" data-value="0"></div>
+  <div class="unknown">
+  <div class="content">
+  <@= date.getDate() @>
+  </div>
+  </div>
+  <div></div>
+  </div>
   </script>
 
   <script type="text/template" id="month-title-template">
-    <td class="first-seven">
-      <@ if (showTitle){ @>
-        <div class="month">
-          <@= month @>
-        </div>
-      <@ } @>
+  <td class="first-seven">
+  <@ if (showTitle){ @>
+    <div class="month">
+    <@= month @>
+    </div>
+    <@ } @>
     </td>
-  </script>
+    </script>
 
-  <script type="text/template" id="selected-row-template">
+    <script type="text/template" id="selected-row-template">
     <tr class="selected-row">
-      <div>
-        <td colspan="7">
-          <div class="info-row-date">
-            <@= dateText @>
-          </div>
-          <div class="info-row-text">
-            <@= attendeeText @>
-          </div>
-        </td>
-      </div>
+    <div>
+    <td colspan="7">
+    <div class="info-row-date">
+    <@= dateText @>
+    </div>
+    <div class="info-row-text">
+    <@= attendeeText @>
+    </div>
     </td>
-  </script>
+    </div>
+    </td>
+    </script>
 
+  <!--
   <script src="/javascripts/jquery-1.8.2.min.js"></script>
   
   <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
@@ -183,17 +203,20 @@
   <script src="/javascripts/views/choices-view.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
+-->
 
-  <script>
-    $(document).ready(function(){
-      FastClick.attach(document.body);
+<script src="/javascripts/all-ck.js"></script>
 
-      window.App = new EventApp();
+<script>
+$(document).ready(function(){
+  FastClick.attach(document.body);
 
-      window.App.loadBootstrapData(<%= choices %>, <%= attendees %>, <%= calendar %>);
-    });
+  window.App = new EventApp();
 
-  </script>
+  window.App.loadBootstrapData(<%= choices %>, <%= attendees %>, <%= calendar %>);
+});
+
+</script>
 
 </body>
 </html>

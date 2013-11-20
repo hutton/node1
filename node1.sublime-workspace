@@ -4,6 +4,158 @@
 		"selected_items":
 		[
 			[
+				"li",
+				"line-height"
+			],
+			[
+				"boot",
+				"bootstrap-3"
+			],
+			[
+				"ca",
+				"calendar"
+			],
+			[
+				"at",
+				"attendee"
+			],
+			[
+				"for",
+				"formatUpdatedDays"
+			],
+			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"in",
+				"inPast"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"ad",
+				"add-attendee"
+			],
+			[
+				"ch",
+				"check"
+			],
+			[
+				"from",
+				"fromAttendee"
+			],
+			[
+				"slide",
+				"slideDown"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"fro",
+				"fromName"
+			],
+			[
+				"new",
+				"newAttendee"
+			],
+			[
+				"cal",
+				"calendar"
+			],
+			[
+				"selec",
+				"selected-color"
+			],
+			[
+				"sli",
+				"slideUp"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"att",
+				"attendees"
+			],
+			[
+				"show",
+				"showSelectedRowAfter"
+			],
+			[
+				"sel",
+				"selectedRow"
+			],
+			[
+				"selected",
+				"selected-row"
+			],
+			[
+				"remo",
+				"removeSelectedRow"
+			],
+			[
+				"chi",
+				"choiceModel"
+			],
+			[
+				"bui",
+				"buildAttendeeText"
+			],
+			[
+				"foo",
+				"footerText"
+			],
+			[
+				"choi",
+				"choiceModel"
+			],
+			[
+				"get",
+				"getDateText"
+			],
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"man",
+				"mandrillApiKey"
+			],
+			[
+				"me",
+				"message"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"m",
+				"mandrill_event"
+			],
+			[
+				"p",
+				"parsed"
+			],
+			[
+				"IN",
+				"inline-block"
+			],
+			[
 				"sub",
 				"subject"
 			],
@@ -12,40 +164,8 @@
 				"choice"
 			],
 			[
-				"ma",
-				"margin-top"
-			],
-			[
-				"pa",
-				"padding-top"
-			],
-			[
-				"li",
-				"lighter"
-			],
-			[
-				"font",
-				"font-weight"
-			],
-			[
 				"pre",
 				"prettyNames"
-			],
-			[
-				"me",
-				"meFound"
-			],
-			[
-				"at",
-				"attendee"
-			],
-			[
-				"fo",
-				"footerText"
-			],
-			[
-				"ch",
-				"choiceModel"
 			],
 			[
 				"date",
@@ -60,24 +180,12 @@
 				"today"
 			],
 			[
-				"get",
-				"getDate"
-			],
-			[
 				"sho",
 				"showTitleAt"
 			],
 			[
-				"in",
-				"itemsInserted"
-			],
-			[
 				"sh",
 				"showTitleAt"
-			],
-			[
-				"new",
-				"newItem"
 			],
 			[
 				"as",
@@ -102,10 +210,6 @@
 			[
 				"bo",
 				"bootstrappedCalendar"
-			],
-			[
-				"ca",
-				"Calendar"
 			],
 			[
 				"an",
@@ -140,10 +244,6 @@
 				"busyDate"
 			],
 			[
-				"att",
-				"attendeeEventId"
-			],
-			[
 				"toggle",
 				"toggleFree"
 			],
@@ -172,10 +272,6 @@
 				"early"
 			],
 			[
-				"bor",
-				"border-bottom"
-			],
-			[
 				"mari",
 				"margin-right"
 			],
@@ -194,10 +290,6 @@
 			[
 				"bot",
 				"border-top"
-			],
-			[
-				"from",
-				"fromPlaceholder"
 			],
 			[
 				"atte",
@@ -220,24 +312,12 @@
 				"return"
 			],
 			[
-				"cal",
-				"calendar"
-			],
-			[
 				"attend",
 				"attendee"
 			],
 			[
-				"fro",
-				"fromPlaceholder"
-			],
-			[
 				"sa",
 				"saveSelection"
-			],
-			[
-				"for",
-				"formatText"
 			],
 			[
 				"marg",
@@ -292,10 +372,6 @@
 				"dateInner"
 			],
 			[
-				"ad",
-				"addToList"
-			],
-			[
 				"bus",
 				"busyDates"
 			],
@@ -330,14 +406,6 @@
 			[
 				"hea",
 				"header-title"
-			],
-			[
-				"fon",
-				"font-size"
-			],
-			[
-				"te",
-				"text-align"
 			],
 			[
 				"he",
@@ -384,10 +452,6 @@
 				"freeDates"
 			],
 			[
-				"p",
-				"push"
-			],
-			[
 				"b",
 				"blankMatches"
 			],
@@ -406,10 +470,6 @@
 			[
 				"fou",
 				"foundChoice"
-			],
-			[
-				"choi",
-				"choices"
 			],
 			[
 				"up",
@@ -454,22 +514,6 @@
 			[
 				"send",
 				"sendGridUser"
-			],
-			[
-				"ar",
-				"attendeeAddresses"
-			],
-			[
-				"Ca",
-				"Calendar"
-			],
-			[
-				"newn",
-				"newAttendee"
-			],
-			[
-				"di",
-				"display"
 			]
 		]
 	},
@@ -479,9 +523,21 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 203.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
 			[
 				"conver",
 				"Indentation: Convert to Tabs"
@@ -507,19 +563,7 @@
 				"Indentation: Convert to Tabs"
 			],
 			[
-				"rein",
-				"Indentation: Reindent Lines"
-			],
-			[
 				"inden",
-				"Indentation: Reindent Lines"
-			],
-			[
-				"ind",
-				"Indentation: Reindent Lines"
-			],
-			[
-				"inde",
 				"Indentation: Reindent Lines"
 			],
 			[
@@ -591,7 +635,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 516.0
+		"width": 561.0
 	},
 	"console":
 	{
@@ -608,38 +652,53 @@
 	},
 	"file_history":
 	[
+		"/Users/simonhutton/Source/node1/assets/todo.txt",
+		"/Users/simonhutton/Source/node1/node_modules/mongoose/lib/schema/array.js",
+		"/Users/simonhutton/Source/node1/models/attendee.js",
+		"/Users/simonhutton/Source/node1/models/calendar.js",
+		"/Users/simonhutton/Source/node1/routes/event.js",
+		"/Users/simonhutton/Source/node1/public/javascripts/views/choices-view.js",
+		"/Users/simonhutton/Source/node1/routes/mail.js",
+		"/Users/simonhutton/Source/node1/assets/scrap.txt",
+		"/Users/simonhutton/Source/node1/public/javascripts/all.js",
+		"/Users/simonhutton/Source/node1/views/event2.html",
+		"/Users/simonhutton/Source/node1/public/javascripts/event-app.js",
+		"/Users/simonhutton/Source/node1/public/stylesheets/event2.less",
+		"/Users/simonhutton/Source/node1/public/stylesheets/all.less",
+		"/Users/simonhutton/Source/node1/public/stylesheets/all.css",
+		"/Users/simonhutton/Source/node1/tools/mail.js",
+		"/Users/simonhutton/Source/node1/routes/calendar.js",
+		"/Users/simonhutton/Source/node1/views/email-template.html",
+		"/Users/simonhutton/Source/node1/public/javascripts/highlight.js",
+		"/Users/simonhutton/Source/node1/public/javascripts/helper.js",
+		"/Users/simonhutton/Source/node1/tools/dates.js",
+		"/Users/simonhutton/Source/node1/public/stylesheets/font-awesome.min.css",
+		"/Users/simonhutton/Source/node1/public/stylesheets/elements.less",
+		"/Users/simonhutton/Source/node1/public/stylesheets/pie.less",
+		"/Users/simonhutton/Source/node1/app.js",
+		"/Users/simonhutton/Source/node1/public/javascripts/rangy-selectionsaverestore.js",
+		"/Users/simonhutton/Source/node1/views/email2.html",
+		"/Users/simonhutton/Source/node1/tools/mail-spec.js",
+		"/Users/simonhutton/Source/node1/views/responsive_view.html",
+		"/Users/simonhutton/Source/node1/views/templates.html",
+		"/Users/simonhutton/Source/node1/public/stylesheets/bootstrap-responsive.css",
+		"/Users/simonhutton/Source/node1/routes/index.js",
+		"/Users/simonhutton/Source/node1/views/event2_static.html",
+		"/Users/simonhutton/Source/node1/views/email.html",
+		"/Users/simonhutton/Source/node1/assets/mandrill-mail.txt",
 		"/Users/simonhutton/Source/node1/public/javascripts/models/choices-model.js",
 		"/Users/simonhutton/Source/node1/assets/terminal start.txt",
 		"/Users/simonhutton/Source/node1/public/javascripts/models/calendar-model.js",
-		"/Users/simonhutton/Source/node1/routes/event.js",
 		"/Users/simonhutton/Source/node1/public/javascripts/models/choice-model.js",
-		"/Users/simonhutton/Source/node1/public/javascripts/helper.js",
 		"/Users/simonhutton/Source/node1/assets/selection text",
-		"/Users/simonhutton/Source/node1/public/javascripts/event-app.js",
-		"/Users/simonhutton/Source/node1/views/event2.html",
-		"/Users/simonhutton/Source/node1/public/javascripts/views/choices-view.js",
-		"/Users/simonhutton/Source/node1/public/stylesheets/event2.less",
-		"/Users/simonhutton/Source/node1/views/email.html",
-		"/Users/simonhutton/Source/node1/models/calendar.js",
-		"/Users/simonhutton/Source/node1/routes/calendar.js",
-		"/Users/simonhutton/Source/node1/views/responsive_view.html",
 		"/Users/simonhutton/Source/node1/todo.txt",
-		"/Users/simonhutton/Source/node1/assets/todo.txt",
-		"/Users/simonhutton/Source/node1/tools/mail.js",
 		"/Users/simonhutton/Source/node1/assets/start-email.txt",
 		"/Users/simonhutton/Source/node1/tools/nlp.js",
 		"/Users/simonhutton/Source/node1/tools/nlp-spec.js",
 		"/Users/simonhutton/Source/node1/node_modules/express/node_modules/connect/lib-cov/middleware/session/store.js",
-		"/Users/simonhutton/Source/node1/views/templates.html",
-		"/Users/simonhutton/Source/node1/app.js",
-		"/Users/simonhutton/Source/node1/views/event2_static.html",
-		"/Users/simonhutton/Source/node1/public/stylesheets/elements.less",
-		"/Users/simonhutton/Source/node1/public/stylesheets/pie.less",
 		"/Users/simonhutton/Source/node1/assets/expand-dates.js",
 		"/Users/simonhutton/Source/node1/public/javascripts/views/info-panel.js",
-		"/Users/simonhutton/Source/node1/routes/index.js",
 		"/Users/simonhutton/Source/node1/views/event.html",
-		"/Users/simonhutton/Source/node1/tools/dates.js",
 		"/Users/simonhutton/Source/node1/views/index.html",
 		"/Users/simonhutton/Source/node1/assets/sidebar-email-template/stylesheets/email.css",
 		"/Users/simonhutton/Source/node1/views/email_old.html",
@@ -651,26 +710,20 @@
 		"/Users/simonhutton/Source/node1/public/stylesheets/event2.less.LOCAL.59274.less",
 		"/Library/~:bin:git-diff-cmd.sh",
 		"/Users/simonhutton/Source/node1/public/javascripts/index.js",
-		"/Users/simonhutton/Source/node1/models/attendee.js",
 		"/Users/simonhutton/Source/node1/node_modules/mongoose/node_modules/mongodb/lib/mongodb/collection.js",
-		"/Users/simonhutton/Source/node1/routes/mail.js",
 		"/Users/simonhutton/Source/node1/views/highlight-demo.html",
 		"/Users/simonhutton/Source/node1/public/stylesheets/index.less",
 		"/Users/simonhutton/Source/node1/node_modules/mongoose/lib/collection.js",
-		"/Users/simonhutton/Source/node1/public/javascripts/highlight.js",
 		"/Users/simonhutton/Source/node1/assets/regex",
 		"/Users/simonhutton/Source/node1/node_modules/sendgrid/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mimelib/node_modules/encoding/node_modules/iconv-lite/encodings/table/gbk.js",
 		"/Users/simonhutton/Source/node1/node_modules/sendgrid/node_modules/step/test/groupTest.js",
 		"/Users/simonhutton/Source/node1/iisnode_old.yml",
 		"/Users/simonhutton/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/simonhutton/Source/node1/public/javascripts/rangy-selectionsaverestore.js",
 		"/Users/simonhutton/Library/Application Support/Sublime Text 2/Packages/User/Package Control.sublime-settings",
 		"/Users/simonhutton/Source/node1/views/help.html",
-		"/Users/simonhutton/Source/node1/public/stylesheets/bootstrap-responsive.css",
 		"/Users/simonhutton/Source/node1/node_modules/less-middleware/node_modules/less/benchmark/benchmark.less",
 		"/Users/simonhutton/Source/node1/assets/index design.txt",
 		"/Users/simonhutton/Source/node1/assets/mock-email.html",
-		"/Users/simonhutton/Source/node1/tools/mail-spec.js",
 		"/Users/simonhutton/Source/node1/assets/pitch.txt",
 		"/Users/simonhutton/Documents/scrap",
 		"/Users/simonhutton/Source/node1/tools/nlp-data/Classifications",
@@ -724,6 +777,8 @@
 		"height": 95.0,
 		"where_history":
 		[
+			"/Users/simonhutton/Source/node1/",
+			"/Users/simonhutton/Source/node1/views",
 			"",
 			"/Users/simonhutton/Source/node1/node_modules",
 			"-*/Users/simonhutton/Source/node1/node_modules/*.*",
@@ -741,6 +796,112 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"font-awesome.min.css",
+			"\"></script>",
+			"  <script src=\"/javascripts/",
+			"p>",
+			"attendee",
+			"findCalendarByAttendeeId",
+			"new Calen",
+			"new Cal",
+			"attendeeId",
+			"encodeURIComponent",
+			"- update",
+			"mailto",
+			"changes-made-email-link",
+			"mailto",
+			"freeDates",
+			"sortedChoices = _.filter(sortedChoices, function(choice){",
+			"dates",
+			"logger",
+			"dates",
+			"sameDay",
+			"return choice.free.length > 0 && !today.isAfter(choice.date);",
+			"sameDay",
+			"today",
+			"setToday",
+			"choice.free.length > 0",
+			"toggleFree",
+			"prettyName",
+			"sendMail",
+			"fromName",
+			"2s",
+			"fromName",
+			"wrote:",
+			"mailto:",
+			"selected-ro",
+			"select",
+			"replace",
+			"email-group",
+			"fromName",
+			"sendMailToAttendee",
+			"addAttendee",
+			"updateChoice",
+			"window.location",
+			"window.",
+			"findCalendarByAttendeeId",
+			"err",
+			"addAttendeeLinkClicked",
+			"4AD16C",
+			"eventTableClicked",
+			"selected",
+			"removeSelectedRow",
+			"#f8f8f8",
+			"selectedRowTemplate",
+			"template",
+			"selectedRowTemplate",
+			"footerText",
+			"dateText",
+			"class=\"footer",
+			"showSelectedRowAfter",
+			"selected-row",
+			"selected",
+			"buildAttendeeNameText",
+			"getDateText",
+			"template",
+			"updateSelectedText",
+			"selected",
+			"elements.less",
+			"elements",
+			"scrollspy",
+			"avail-date-header",
+			"avail-address",
+			"footerDayEl",
+			"footerDateEl",
+			"footer-date",
+			"firstResponse",
+			"convenely.com",
+			"responsive_view",
+			"responsive",
+			"style",
+			" style=\"margin: 0;padding: 0;font-family: Arial, sans-serif;color: #ffffff;\"",
+			" style=\"margin: 0;padding: 4px 10px;font-family: Arial, sans-serif;\"",
+			" style=\"margin: 0;padding: 5px 5px;font-family: Arial, sans-serif;font-weight: bold;border-bottom: 1px solid #c0c0c0;\"",
+			" style=\"margin: 0;padding: 4px 0px;font-family: Arial, sans-serif;text-align: center; color: #ffffff;\"",
+			" style=\"margin: 0;padding: 0;font-family: Arial, sans-serif;color: #808080;text-decoration: none;cursor: default;\"",
+			" style=\"margin: 0;padding: 0;font-family: Arial, sans-serif;\"",
+			"F1F1F1",
+			"f1f1f1",
+			"processEmailRequest",
+			"processIncomingMandrillEmail",
+			"sendgrid",
+			"sendgrig",
+			"sender",
+			"ZghEsfeVFCfYT5zLpmRX2Q",
+			"sender",
+			"border",
+			"event2_st",
+			"processEmailRequest",
+			"res",
+			"processEmailRequest",
+			"process",
+			"ogger.",
+			"newMail",
+			"processEmailRequest",
+			"processIncomingMandrillEmail",
+			"sendGridReceive",
+			"email",
+			"processEmailRequest",
 			"isUndefined",
 			"subject",
 			"sendMail",
@@ -762,113 +923,7 @@
 			"splice",
 			"currentAttendee.get(\"_id\")",
 			"selected",
-			"2",
-			"1",
-			"indexOf",
-			"index",
-			"this.model.get(\"free\")",
-			"attendees",
-			"attendee",
-			"this.model.get(\"date\").getDate()",
-			"cons",
-			"dv",
-			"allPopulatedDates",
-			"turnMatchesIntoDates",
-			"latestDate",
-			"push",
-			"allDates",
-			"indexOf",
-			"d",
-			"output",
-			".past",
-			"sugar",
-			"var",
-			"\"sugar\"",
-			"pie ",
-			"pie",
-			"pie-",
-			"month",
-			";\n",
-			"e8e8e8",
-			"d8d8d8",
-			"a0a0a0",
-			"event_static",
-			".navbar-fixed-top",
-			"$(event.currentTarget)",
-			"toggleInfo",
-			"month",
-			"overfl",
-			"selected",
-			"free",
-			"20px",
-			"header",
-			"sidebar",
-			"e0e0e0",
-			"d0d0d0",
-			"right:",
-			"right",
-			"selected",
-			"4px",
-			"10px",
-			"selected",
-			" selected",
-			"30px",
-			"selected",
-			"red",
-			"transparent",
-			"61",
-			"230",
-			"0",
-			"8",
-			"4",
-			"100px",
-			"200px;",
-			"100px;",
-			"free",
-			"event_static",
-			"@media",
-			"initInputDivDefaultText",
-			"responsive_view",
-			"req",
-			"Collection.prototype.findOne",
-			"findOne",
-			"findCalendarByAttendeeId",
-			"isUndefined",
-			"makei",
-			"new Attendee",
-			"createCalendar",
-			"i",
-			"getEmailAddressesAndBody",
-			"sendGridReceive",
-			"start@",
-			"#([\\w])",
-			"strong",
-			"url",
-			"@",
-			"name",
-			"accent_colour",
-			"help.html",
-			"compareDates",
-			"matchDaysOfNextWeeks",
-			"extractDates",
-			"matchDaysOfNextWeeks",
-			"extractDates",
-			"matchDaysOfNextWeeks",
-			"extractDates",
-			"96",
-			"247",
-			"236,235,230",
-			"50%",
-			"242,241,237",
-			"250,250,247",
-			"container",
-			"masthead",
-			"../assets/img/examples/",
-			"sendTextMail",
-			"\\",
-			"hold your",
-			"\\n\\",
-			"\\"
+			"2"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -947,12 +1002,156 @@
 		"selected_items":
 		[
 			[
-				"tod",
-				"todo.txt"
+				"eve",
+				"public/stylesheets/event2.less"
+			],
+			[
+				"event2",
+				"views/event2.html"
+			],
+			[
+				"roumai",
+				"routes/mail.js"
+			],
+			[
+				"routeven",
+				"routes/event.js"
+			],
+			[
+				"atten",
+				"models/attendee.js"
+			],
+			[
+				"cale",
+				"models/calendar.js"
+			],
+			[
+				"scrap",
+				"assets/scrap.txt"
+			],
+			[
+				"scar",
+				"node_modules/mongoose/lib/schema/array.js"
+			],
+			[
+				"to",
+				"assets/todo.txt"
+			],
+			[
+				"even-ap",
+				"public/javascripts/event-app.js"
+			],
+			[
+				"choice",
+				"public/javascripts/views/choices-view.js"
+			],
+			[
+				"mail",
+				"tools/mail.js"
+			],
+			[
+				"eveapp",
+				"public/javascripts/event-app.js"
+			],
+			[
+				"choi",
+				"public/javascripts/views/choices-view.js"
+			],
+			[
+				"todo",
+				"assets/todo.txt"
+			],
+			[
+				"highli",
+				"public/javascripts/highlight.js"
+			],
+			[
+				"evele",
+				"public/stylesheets/event2.less"
+			],
+			[
+				"cal",
+				"models/calendar.js"
+			],
+			[
+				"scr",
+				"assets/scrap.txt"
+			],
+			[
+				"event-a",
+				"public/javascripts/event-app.js"
+			],
+			[
+				"eventles",
+				"public/stylesheets/event2.less"
+			],
+			[
+				"emai-",
+				"views/email-template.html"
+			],
+			[
+				"ma",
+				"routes/mail.js"
+			],
+			[
+				"ema",
+				"views/email-template.html"
+			],
+			[
+				"mai",
+				"routes/mail.js"
+			],
+			[
+				"eventjs",
+				"routes/event.js"
 			],
 			[
 				"calen",
 				"models/calendar.js"
+			],
+			[
+				"app.",
+				"app.js"
+			],
+			[
+				"ele",
+				"public/stylesheets/elements.less"
+			],
+			[
+				"pie",
+				"public/stylesheets/pie.less"
+			],
+			[
+				"evenapp",
+				"public/javascripts/event-app.js"
+			],
+			[
+				"choivi",
+				"public/javascripts/views/choices-view.js"
+			],
+			[
+				"emailte",
+				"views/email-template.html"
+			],
+			[
+				"email",
+				"views/email-template.html"
+			],
+			[
+				"reso",
+				"views/responsive_view.html"
+			],
+			[
+				"respo",
+				"public/stylesheets/bootstrap-responsive.css"
+			],
+			[
+				"app",
+				"app.js"
+			],
+			[
+				"tod",
+				"todo.txt"
 			],
 			[
 				"even",
@@ -971,44 +1170,20 @@
 				"tools/nlp-spec.js"
 			],
 			[
-				"eve",
-				"views/event2.html"
-			],
-			[
 				"event",
 				"node_modules/express/node_modules/connect/lib-cov/middleware/session/store.js"
-			],
-			[
-				"choice",
-				"public/javascripts/views/choices-view.js"
 			],
 			[
 				"event-p",
 				"public/javascripts/event-app.js"
 			],
 			[
-				"choi",
-				"public/javascripts/views/choices-view.js"
-			],
-			[
 				"start",
 				"assets/terminal start.txt"
 			],
 			[
-				"app",
-				"app.js"
-			],
-			[
 				"date",
 				"tools/dates.js"
-			],
-			[
-				"event2",
-				"public/stylesheets/event2.less"
-			],
-			[
-				"pie",
-				"public/stylesheets/pie.less"
 			],
 			[
 				"eveles",
@@ -1043,10 +1218,6 @@
 				"public/stylesheets/event.less"
 			],
 			[
-				"app.",
-				"app.js"
-			],
-			[
 				"index.l",
 				"public/stylesheets/index.less"
 			],
@@ -1059,24 +1230,8 @@
 				"public/javascripts/index.js"
 			],
 			[
-				"mail",
-				"views/mail.html"
-			],
-			[
 				"index.js",
 				"public/javascripts/index.js"
-			],
-			[
-				"cale",
-				"models/calendar.js"
-			],
-			[
-				"mai",
-				"routes/mail.js"
-			],
-			[
-				"atten",
-				"models/attendee.js"
 			],
 			[
 				"att",
@@ -1115,15 +1270,7 @@
 				"node_modules/less-middleware/node_modules/less/benchmark/benchmark.less"
 			],
 			[
-				"reso",
-				"views/responsive_view.html"
-			],
-			[
 				"respon",
-				"public/stylesheets/bootstrap-responsive.css"
-			],
-			[
-				"respo",
 				"public/stylesheets/bootstrap-responsive.css"
 			],
 			[
@@ -1141,10 +1288,6 @@
 			[
 				"less",
 				"public/stylesheets/index.less"
-			],
-			[
-				"cal",
-				"routes/calendar.js"
 			],
 			[
 				"class",
