@@ -1,4 +1,5 @@
 - Line height in email
+- Fix nlp for "updates" email
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page
   - Create welcome email
