@@ -1,6 +1,4 @@
-- Show "Let everyone know you've made updates" in footer
-	- Spacing
-	- Keep track of updates
+- Line height in email
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page
   - Create welcome email
@@ -11,6 +9,9 @@
 
 Done
 ----
+- Show "Let everyone know you've made updates" in footer
+	- Spacing
+	- Keep track of updates
 - Shade-out dates in the past
 	- text-decoration: line-through;
 	- opacity: 0.4;
