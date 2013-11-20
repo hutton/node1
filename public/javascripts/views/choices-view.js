@@ -92,29 +92,40 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	toggleFree: function(){
-		var currentAttendeeId = window.App.currentAttendee.get("_id");
-		var freeAttendees = this.model.get("free");
+		if (window.App.currentAttendee != null){
+			var currentAttendeeId = window.App.currentAttendee.get("_id");
+			var freeAttendees = this.model.get("free");
+			var date = this.model.get("date");
 
-		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
-			if (_.isUndefined(freeAttendees)){
-				this.model.set("free", [currentAttendeeId]);
+			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
+				if (_.isUndefined(freeAttendees)){
+					this.model.set("free", [currentAttendeeId]);
+				} else {
+					freeAttendees.push(currentAttendeeId);
+				}
+
+				if (window.App.wasFree.indexOf(date) != -1){
+					window.App.wasFree.removeElement(date);
+				} else {
+					window.App.isFree.push(this.model.get("date"));
+				}
+
 			} else {
-				freeAttendees.push(currentAttendeeId);
+				freeAttendees.removeElement(currentAttendeeId);
+
+				if (window.App.isFree.indexOf(date) != -1){
+					window.App.isFree.removeElement(date);
+				} else {
+					window.App.wasFree.push(this.model.get("date"));
+				}
 			}
 
-			
-			window.App.isFree.push(this.model.get("date"));
-		} else {
-			freeAttendees.removeElement(currentAttendeeId);
+			this.updateFreeCounter(true);
 
-			window.App.wasFree.push(this.model.get("date"));
+			this.model.save();
+
+			window.App.updateTellEveryoneLink();
 		}
-
-		this.updateFreeCounter(true);
-
-		this.model.save();
-
-		window.App.updateTellEveryoneLink();
 	},
 
 	calcDegrees: function(total, count){

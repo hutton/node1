@@ -85,7 +85,7 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 			} else {
 				var fromAttendee = calendar.getAttendeeFromAddress(from);
 
-				if (fromAttendee !== null){
+				if (fromAttendee !== null && !_.isUndefined(fromAttendee)){
 					if (subject.toLowerCase() == "add"){
 						logger.info("Adding attendee to event");
 

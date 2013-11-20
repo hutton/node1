@@ -17,6 +17,10 @@ window.EventApp = Backbone.View.extend({
 
 		this.currentAttendee = this.attendees.findWhere({me: true});
 
+		if (_.isUndefined(this.currentAttendee)){
+			this.currentAttendee = null;
+		}
+
 		this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
 
 		this.ChoicesView.render();
@@ -62,11 +66,16 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find(".attendees").html(nameList);
 
-		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE: " + this.model.get("name");
+		if (this.currentAttendee != null){
+			var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name"));
 
-		mailTo = mailTo.replace(/ /g, "%20");
+			this.$el.find("#email-group").attr("href", mailTo);
+		} else {
+			this.$el.find("#email-group").hide();
+			this.$el.find("#add-attendee").hide();
 
-		this.$el.find("#email-group").attr("href", mailTo);
+			$('#welcome-modal').modal('show');
+		}
 	},
 
 	eventTableClicked: function(event){
@@ -124,7 +133,7 @@ window.EventApp = Backbone.View.extend({
 
 	buildAttendeeText: function(choiceModel){
 		var footerText = "";
-		var currentAttendeeId = window.App.currentAttendee.get("_id");
+		var currentAttendeeId = window.App.currentAttendee != null ? window.App.currentAttendee.get("_id") : -1;
 		var freeAttendees = choiceModel.get("free");
 
 		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
@@ -308,11 +317,49 @@ window.EventApp = Backbone.View.extend({
 
 	updateTellEveryoneLink: function(){
 		if (this.isFree.length > 0 || this.wasFree.length > 0){
-			var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE: " + this.model.get("name");
+			var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
 			this.changesMadeLinkkeyEl.attr("href", mailTo);
 
 			this.footerEl.show();
+		} else {
+			this.footerEl.hide();
 		}
+	},
+
+	formatUpdatedDays: function(isFree, wasFree){
+		if (isFree.length > 0){
+			if (wasFree.length > 0) {
+				return "I'm now free on " + this.buildDatesString(isFree) + " but I'm no longer free on " + this.buildDatesString(wasFree) + ".";
+			} else {
+				return "I'm now free on " + this.buildDatesString(isFree) + ".";
+			}
+		} else if (wasFree.length > 0){
+			return "I'm no longer free on " + this.buildDatesString(wasFree) + ".";
+		}
+
+		return "";
+	},
+
+	buildDatesString: function(dates){
+		var text = "";
+
+		dates = dates.sort(function(date1, date2){
+			return date1 > date2;
+		});
+
+		var datesFormatted = _.map(dates, function(date){
+			return moment(date).format("dddd Do MMMM");
+		});
+
+		if (datesFormatted.length > 0){
+			if (datesFormatted.length == 1){
+				text = text + datesFormatted[0];
+			} else {
+				text = text + datesFormatted.slice(0, -1).join(", ") + " and " + datesFormatted[datesFormatted.length - 1];
+			}
+		}
+
+		return text;
 	}
 });

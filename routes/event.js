@@ -7,53 +7,74 @@ var mongoose = require("mongoose");
 var _ = require("underscore");
 var logger = require("../tools/logger");
 
+function showEvent(res, calendar, attendeeId){
+	_.each(calendar.choices, function(choice){
+		choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
+		choice.freeIds = _.map(choice.free, function(free){ return String(free); });
+
+		choice.columnDate = moment(choice.date).format("dddd Do MMM");
+	});
+
+	var cleanedAttendees = [];
+
+	_.each(calendar.attendees, function(att){
+		cleanedAttendees.push({
+			_id: att._id,
+			prettyName: att.name || att.email,
+			me: att._id == attendeeId
+		});
+	});
+
+	var cleanedCalendar = {
+		name: calendar.name,
+		id: calendar.id
+	};
+
+	logger.info("Showing: " + calendar.name);
+
+	var sortedChoices = _.sortBy(calendar.choices, function(choice){
+		return choice.date;
+	});
+	res.render('event2.html', {
+		choices: JSON.stringify(sortedChoices),
+		attendees: JSON.stringify(cleanedAttendees),
+		calendar: JSON.stringify(cleanedCalendar),
+	});
+}
+
 function renderEvent(req, res){
 
-	Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
-		if (err){
-			logger.error("Error finding calendar " + req.route.params[0]);
-			logger.error("Error:" + err);
+	if (req.route.params[0].length == 5){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar with attendee " + req.route.params[0]);
+				logger.error("Error:" + err);
 
-			res.send('No calendar');
-		} else if (!calendar){
-			logger.error("Could not find calendar " + req.route.params[0]);
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with attendee " + req.route.params[0]);
 
-			res.send('No calendar');
-		} else {
-			_.each(calendar.choices, function(choice){
-				choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
-				choice.freeIds = _.map(choice.free, function(free){ return String(free); });
+				res.send('No calendar');
+			} else {
+				showEvent(res, calendar, attendee._id);
+			}
+		});
+	} else if (req.route.params[0].length == 6){
+		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
+			if (err){
+				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error:" + err);
 
-				choice.columnDate = moment(choice.date).format("dddd Do MMM");
-			});
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with id " + req.route.params[0]);
 
-			var cleanedAttendees = [];
-
-			_.each(calendar.attendees, function(att){
-				cleanedAttendees.push({
-					_id: att._id,
-					prettyName: att.name || att.email,
-					me: att._id == attendee._id
-				});
-			});
-
-			var cleanedCalendar = {
-				name: calendar.name,
-				id: calendar.id
-			};
-
-			logger.info("Showing: " + calendar.name);
-
-			var sortedChoices = _.sortBy(calendar.choices, function(choice){
-				return choice.date;
-			});
-			res.render('event2.html', {
-				choices: JSON.stringify(sortedChoices),
-				attendees: JSON.stringify(cleanedAttendees),
-				calendar: JSON.stringify(cleanedCalendar),
-			});
-		}
-	});
+				res.send('No calendar');
+			} else {
+				showEvent(res, calendar, -1);
+			}
+		});
+	}
 }
 
 function updateChoice(req, res){

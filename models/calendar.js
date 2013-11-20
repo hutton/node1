@@ -24,7 +24,11 @@ var CalendarSchema = new mongoose.Schema({
 	}],
 	createdBy: { type: String, default: "" },
 	attendees: [AttendeeSchema],
-	date: { type: Date, default: Date.now }
+	date: { type: Date, default: Date.now },
+	calendarId: {
+		type: String,
+		index: true
+	}
 });
 
 function getEmailAddressesAndBody(text){
@@ -83,7 +87,8 @@ function createCalendar(subject, choices, attendees, from, callback){
 		id: id,
 		name: subject,
 		choices: choices,
-		createdBy: from
+		createdBy: from,
+		calendarId: makeId(6)
 	});
 
 	Calendar.find({id: new RegExp('^'+ newCalendar.id +'*', "i")}, 'id').exec(function(err, docs){
@@ -200,6 +205,22 @@ CalendarSchema.statics.findCalendarByAttendeeId = function(id, callback){
 		});
 
 		callback(err, calendar, attendee);
+	});
+};
+
+CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
+	Calendar.findOne({"calendarId": id}, function(err, calendar){
+		if (err){
+			logger.error(err);
+
+			callback(err, null, null);
+			return;
+		} else if (calendar === null){
+			callback(err, null, null);
+			return;
+		}
+
+		callback(err, calendar);
 	});
 };
 
