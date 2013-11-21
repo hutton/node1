@@ -208,9 +208,13 @@ a:active{
 	margin: 10px;
 }
 
-.add-attendee-message{
+.message-panel{
 	display: none;
 	font-size: 14px;
+}
+
+.add-attendee-message{
+	.message-panel;
 }
 
 #add-attendee{
@@ -222,18 +226,30 @@ a:active{
 	cursor: pointer;
 }
 
-.add-attendee-email-input-container{
+.attendee-email-input-container{
 	max-width: 400px;
 	margin: 0px auto;
 }
 
-#add-attendee-email-input{
+.add-attendee-email-input-container{
+	.attendee-email-input-container;
+}
+
+.attendee-email-input{
 	width: 100%;
 }
 
-.add-attendee-button-container{
+#add-attendee-email-input{
+	.attendee-email-input;
+}
+
+.attendee-button-container{
 	max-width: 400px; 
 	margin: 3px auto;
+}
+
+.add-attendee-button-container{
+	.attendee-button-container;
 }
 
 #add-attendee-link{
@@ -244,7 +260,7 @@ a:active{
 	float: right;
 }
 
-.add-attendee-email-spinner-container{
+.attendee-email-spinner-container{
 	height: 0px;
 	float: right;	
 	position: relative;
@@ -253,18 +269,30 @@ a:active{
 	font-size: 22px;
 }
 
+.add-attendee-email-spinner-container{
+	.attendee-email-spinner-container;
+}
+
 .add-attendee-email-spinner{
 	display: none;
 }
 
-.add-attendee-email-validation{
+.attendee-email-validation{
 	opacity: 0.15;
 	color: #808080;
 }
 
-.add-attendee-email-validation-valid{
+.attendee-email-validation-valid{
 	color: @free-color;
 	opacity: 1;
+}
+
+.add-attendee-email-validation{
+	.attendee-email-validation;
+}
+
+.add-attendee-email-validation-valid{
+	.attendee-email-validation-valid;
 }
 
 .days-table{
@@ -466,6 +494,35 @@ a:active{
 }
 
 /**************************************/
+.register-attendee-message{
+	.message-panel;
+}
+
+.register-attendee-email-spinner-container{
+	.attendee-email-spinner-container;
+}
+
+.register-attendee-email-input-container{
+	.attendee-email-input-container;
+}
+
+.register-attendee-email-validation{
+	.attendee-email-validation;
+}
+
+.register-attendee-email-validation-valid{
+	.attendee-email-validation-valid;
+}
+
+#register-attendee-email-input{
+	.attendee-email-input;
+}
+
+.register-attendee-button-container{
+	.attendee-button-container;
+}
+
+/**************************************/
 #welcome-modal{
 	font-size: 16px;
 	line-height: 1.8em;
@@ -476,8 +533,18 @@ a:active{
 	max-width: 450px;
 }
 
+.modal-header{
+	background: @light-background-color;
+}
+
 .modal-footer{
 	margin-top: 0px;
+	text-align: center;
+	padding: 15px;
+}
+
+.modal-content{
+	border-radius: 0px;
 }
 
 .single-date-container{

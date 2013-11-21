@@ -75,6 +75,8 @@ window.EventApp = Backbone.View.extend({
 			this.$el.find("#add-attendee").hide();
 
 			$('#welcome-modal').modal('show');
+
+			$('#register-footer').show();
 		}
 	},
 
@@ -163,8 +165,6 @@ window.EventApp = Backbone.View.extend({
 		var today = new Date();
 		today.setHours(0, 0, 0, 0);
 		var diff = moment(today).diff(mom, 'days');
-
-		// $(".navbar-fixed-bottom").show();
 
 		var dateText = "";
 
@@ -313,7 +313,7 @@ window.EventApp = Backbone.View.extend({
 
 	changesMadeLinkkeyEl: $("#changes-made-email-link"),
 
-	footerEl: $(".navbar-fixed-bottom"),
+	updatedFooterEl: $("#updated-footer"),
 
 	updateTellEveryoneLink: function(){
 		if (this.isFree.length > 0 || this.wasFree.length > 0){
@@ -321,9 +321,9 @@ window.EventApp = Backbone.View.extend({
 
 			this.changesMadeLinkkeyEl.attr("href", mailTo);
 
-			this.footerEl.show();
+			this.updatedFooterEl.show();
 		} else {
-			this.footerEl.hide();
+			this.updatedFooterEl.hide();
 		}
 	},
 

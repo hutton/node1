@@ -32,16 +32,23 @@ a:active{color:#4ad16c;text-decoration:none;}
 .title:hover{cursor:pointer;}
 #email-group{top:15px;position:relative;}
 .add-attendee-panel{margin:10px;}
+.message-panel{display:none;font-size:14px;}
 .add-attendee-message{display:none;font-size:14px;}
 #add-attendee{color:#4ad16c;margin-left:7px;}
 #add-attendee:hover{cursor:pointer;}
+.attendee-email-input-container{max-width:400px;margin:0px auto;}
 .add-attendee-email-input-container{max-width:400px;margin:0px auto;}
+.attendee-email-input{width:100%;}
 #add-attendee-email-input{width:100%;}
+.attendee-button-container{max-width:400px;margin:3px auto;}
 .add-attendee-button-container{max-width:400px;margin:3px auto;}
 #add-attendee-link{float:left;}
 #add-attendee-cancel-link{float:right;}
+.attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}
 .add-attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}
 .add-attendee-email-spinner{display:none;}
+.attendee-email-validation{opacity:0.15;color:#808080;}
+.attendee-email-validation-valid{color:#4ad16c;opacity:1;}
 .add-attendee-email-validation{opacity:0.15;color:#808080;}
 .add-attendee-email-validation-valid{color:#4ad16c;opacity:1;}
 .days-table{margin-top:5px;max-width:600px;margin-left:auto;margin-right:auto;font-size:9px;margin-bottom:2px;}
@@ -72,7 +79,16 @@ a:active{color:#4ad16c;text-decoration:none;}
 .free>.content{color:white;}
 .content{position:relative;top:3px;font-size:16px;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 .footer{text-align:center;margin:8px 10px 10px 10px;font-size:16px;}
+.register-attendee-message{display:none;font-size:14px;}
+.register-attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}
+.register-attendee-email-input-container{max-width:400px;margin:0px auto;}
+.register-attendee-email-validation{opacity:0.15;color:#808080;}
+.register-attendee-email-validation-valid{color:#4ad16c;opacity:1;}
+#register-attendee-email-input{width:100%;}
+.register-attendee-button-container{max-width:400px;margin:3px auto;}
 #welcome-modal{font-size:16px;line-height:1.8em;text-align:center;}
 .modal-dialog{max-width:450px;}
-.modal-footer{margin-top:0px;}
+.modal-header{background:#f8f8f8;}
+.modal-footer{margin-top:0px;text-align:center;padding:15px;}
+.modal-content{border-radius:0px;}
 .single-date-container{position:relative;margin-left:auto;margin-right:auto;width:38px;height:38px;opacity:1;text-align:center;line-height:24px;}

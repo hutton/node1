@@ -86,10 +86,29 @@
        </table>
      </div>
    </div>
-   <div class="navbar navbar-fixed-bottom" style="display: none;">
+   <div id="updated-footer" class="navbar navbar-fixed-bottom" style="display: none;">
     <div class="fixed-width">
       <div class="footer">
         <a id="changes-made-email-link"><span class="fa fa-envelope-o"> </span> Tell everyone about your changes <span class="fa fa-chevron-right"></span></a>
+      </div>
+    </div>
+  </div>
+   <div id="register-footer" class="navbar navbar-fixed-bottom" style="display: none;">
+    <div class="fixed-width">
+      <div class="footer">
+        <div>
+          <div class="register-attendee-message"></div>
+          <div class="register-attendee-email-input-container">
+            <div class="register-attendee-email-spinner-container">
+              <span class="register-attendee-email-spinner fa fa-spinner fa-spin" style="display: none;"></span>
+              <span class="register-attendee-email-validation fa fa-check"></span>
+            </div>
+            <input type="email" class="form-control" id="register-attendee-email-input" placeholder="Enter email"></input>
+          </div>
+          <div class="register-attendee-button-container">
+            <span class="span-link" id="register-attendee-link">Add To Event</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -131,7 +150,7 @@
           </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <a data-dismiss="modal">Get Started <span class="fa fa-chevron-right"></span></a>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
