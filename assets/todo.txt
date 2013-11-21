@@ -1,3 +1,5 @@
+- Show home icon
+- Show first and highlight current attendee in attendee list
 - Line height in email
 - Fix nlp for "updates" email
 - Make event page work with no current attendee
