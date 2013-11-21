@@ -7554,10 +7554,12 @@ a:active {
 .attendee-email-input-container {
   max-width: 400px;
   margin: 0px auto;
+  line-height: 25px;
 }
 .add-attendee-email-input-container {
   max-width: 400px;
   margin: 0px auto;
+  line-height: 25px;
 }
 .attendee-email-input {
   width: 100%;
@@ -7791,7 +7793,7 @@ a:active {
 }
 .footer {
   text-align: center;
-  margin: 8px 10px 10px 10px;
+  margin: 20px 10px 2px 10px;
   font-size: 16px;
 }
 /**************************************/
@@ -7810,6 +7812,7 @@ a:active {
 .register-attendee-email-input-container {
   max-width: 400px;
   margin: 0px auto;
+  line-height: 25px;
 }
 .register-attendee-email-validation {
   opacity: 0.15;
@@ -7842,6 +7845,7 @@ a:active {
   margin-top: 0px;
   text-align: center;
   padding: 15px;
+  background: #f8f8f8;
 }
 .modal-content {
   border-radius: 0px;

@@ -92,10 +92,11 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	toggleFree: function(){
+		var date = this.model.get("date");
+
 		if (window.App.currentAttendee != null){
 			var currentAttendeeId = window.App.currentAttendee.get("_id");
 			var freeAttendees = this.model.get("free");
-			var date = this.model.get("date");
 
 			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
 				if (_.isUndefined(freeAttendees)){
@@ -125,6 +126,14 @@ window.ChoiceView = Backbone.View.extend({
 			this.model.save();
 
 			window.App.updateTellEveryoneLink();
+		} else {
+			if (window.App.isFree.indexOf(date) != -1){
+				window.App.isFree.removeElement(date);
+			} else {
+				window.App.isFree.push(this.model.get("date"));
+			}
+
+			window.App.updateRegisterLink();
 		}
 	},
 

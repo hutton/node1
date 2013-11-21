@@ -1,5 +1,4 @@
 - Move footer items to header
-- Modal footer should be shaded
 - Show home icon
 - First time visit modal
 - Make event page work with no current attendee
@@ -15,6 +14,7 @@
 
 Done
 ----
+- Modal footer should be shaded
 - Show "Let everyone know you've made updates" in footer
 	- Spacing
 	- Keep track of updates
