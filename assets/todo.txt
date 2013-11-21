@@ -1,3 +1,4 @@
+- Modal footer should be shaded
 - Show home icon
 - Show first and highlight current attendee in attendee list
 - Line height in email
