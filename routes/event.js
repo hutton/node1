@@ -102,26 +102,62 @@ function updateChoice(req, res){
 
 
 function addAttendee(req, res){
-	Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
-		if (err){
-			logger.error("Error finding calendar " + req.route.params[0]);
-			logger.error("Error:" + err);
+	if (req.route.params[0].length == 5){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar " + req.route.params[0]);
+				logger.error("Error:" + err);
 
-			res.status(404);
-		} else if (!calendar){
-			logger.error("Could not find calendar " + req.route.params[0]);
+				res.status(404);
+			} else if (!calendar){
+				logger.error("Could not find calendar " + req.route.params[0]);
 
-			res.status(404);
-		} else {
-			var newAttendeeEmail = req.body.email;
+				res.status(404);
+			} else {
+				var newAttendeeEmail = req.body.email;
 
-			logger.info("Adding '" + newAttendeeEmail + "'' to: " + calendar.name);
+				logger.info("Adding '" + newAttendeeEmail + "'' to: " + calendar.name);
 
-			var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
+				var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
 
-			res.send(200, newAttendee);
-		}
-	});
+				res.send(200, 
+					{
+						_id: newAttendee._id,
+						prettyName: newAttendee.name || newAttendee.email,
+						me: false
+					});
+			}
+		});
+	} else if (req.route.params[0].length == 6){
+		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
+			if (err){
+				logger.error("Error finding calendar " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+			} else if (!calendar){
+				logger.error("Could not find calendar " + req.route.params[0]);
+
+				res.status(404);
+			} else {
+				var newAttendeeEmail = req.body.email;
+
+				logger.info("Registering '" + newAttendeeEmail + "'' to: " + calendar.name);
+
+				var newAttendee = calendar.addAttendee(newAttendeeEmail, "");
+
+				calendar.updateCalendar(newAttendee, req.route.params[1], req.body.isFree);
+
+				res.send(200, 
+					{
+						_id: newAttendee._id,
+						prettyName: newAttendee.name || newAttendee.email,
+						me: false,
+						hash: newAttendee.attendeeId
+					});
+			}
+		});
+	}
 }
 
 exports.view = function(req, res){

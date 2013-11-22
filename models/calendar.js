@@ -416,11 +416,7 @@ CalendarSchema.methods.addAttendee = function(address, fromName){
 		}
 	});
 
-	return {
-		_id: attendee._id,
-		prettyName: attendee.name || attendee.email,
-		me: false
-	};
+	return attendee;
 };
 
 CalendarSchema.methods.removeAttendeeMessage = function(message){

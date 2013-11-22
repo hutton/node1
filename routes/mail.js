@@ -166,10 +166,10 @@ exports.receive = function(req, res){
 	parsed.subject = req.body.subject;
 
 	processEmailRequest(parsed, function(newCalendar){
-		res.redirect('/calendar/' + newCalendar.id);
+		res.redirect('/event/' + newCalendar.calendarId);
 	},
 	function(calendar){
-		res.redirect('/calendar/' + calendar.id);
+		res.redirect('/event/' + newCalendar.calendarId);
 	},
 	function(message){
 		logger.info(req.body);

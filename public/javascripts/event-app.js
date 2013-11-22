@@ -320,17 +320,13 @@ window.EventApp = Backbone.View.extend({
 		container.addClass('disabled');
 		spinner.show();
 
-		$.post("/event/" + window.location.toString().slice(-5) + "/add/",
+		$.post("/event/" + window.location.toString().slice(-6) + "/add/",
 			{
-				email: newAttendeeEmail
+				email: newAttendeeEmail,
+				isFree: this.isFree
 			},
 			function(data){
-				that.attendees.add(data);
-
-				that.render();
-
-				that.$el.find('#register-attendee-email-input').val('');
-				that.registerAttendeeInputChanged();
+				window.location.href = data.hash;
 			}
 		)
 		.fail(function() {
