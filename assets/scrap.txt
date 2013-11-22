@@ -1,5 +1,44 @@
 res.cookie('rememberme', 'yes', { maxAge: 900000, httpOnly: false});
 
-success: function(response){
-                        window.location.href = response.redirect;
-                    }
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title></title> 
+	
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+	<style type="text/css">
+		.d1{
+			position: relative;
+			left: 10px;
+			top: 0px;
+			display: inline-block;
+			transition: all 1s ease-in-out;
+			/*transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		function toggle(){
+			$('div').css({ "left": "100px", "top": "100px", "-webkit-transform": "scale(0.5,0.5)" });
+
+			$('div').show();
+
+			// $('div').css({ "left": "0px", "top": "0px" });
+
+			$("div").removeAttr("style")
+		}
+
+		$(document).ready(function(){	
+			setInterval(function(){
+				toggle();
+			},1000);
+
+		});
+	</script>
+	</head> 
+<body> 
+	<div class="d1" style="display: none;">hello</div>
+</body>
+</html>
