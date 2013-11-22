@@ -369,6 +369,8 @@ window.EventApp = Backbone.View.extend({
 
 	registerFooterEl: $("#register-footer"),
 
+	titleMailEl: $("#title-mail"),
+
 	updateTellEveryoneLink: function(){
 		if (this.isFree.length > 0 || this.wasFree.length > 0){
 			var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
@@ -376,6 +378,34 @@ window.EventApp = Backbone.View.extend({
 			this.changesMadeLinkkeyEl.attr("href", mailTo);
 
 			this.updatedFooterEl.slideDown('fast');
+
+			if (!this.titleMailEl.is(':visible')){
+				this.titleMailEl.show();
+
+				var targetOffset = this.$el.find('#changes-made-email-link > .fa-envelope-o').offset();
+				var sourceOffset = this.titleMailEl.find('.fa-envelope-o').offset();
+
+				this.titleMailEl.hide();
+
+				var newTop = (targetOffset.top - sourceOffset.top) + 6;
+				var newLeft = (targetOffset.left - sourceOffset.left) + 8;
+
+				var that = this;
+
+				this.titleMailEl.css({ "left": newLeft + "px", "top": newTop + "px", "-webkit-transform": "scale(0.7,0.7)" });
+
+
+				_.delay(function(){
+
+					that.titleMailEl.show();
+
+				_.delay(function(){
+
+					that.titleMailEl.removeAttr("style");
+			}, 10);
+			}, 10);
+
+			}
 		} else {
 			this.updatedFooterEl.slideUp('fast');
 		}

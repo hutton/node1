@@ -7519,6 +7519,7 @@ a:active {
   top: 6px;
   width: 0px;
   padding: 4px;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .show-info-rotate {
   -webkit-transform: rotate(90deg);
