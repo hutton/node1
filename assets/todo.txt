@@ -1,11 +1,9 @@
-- Move footer items to header
-- Show home icon
-- First time visit modal
-- Make event page work with no current attendee
-  - Enter email to save, post and redirect to own page
-  - Create welcome email
+- Update email link when nothing selected
+	- Tell everyone about your changes
+	- Email changes to everyone
+- New homepage
+- Move email code out of models
 - Show first and highlight current attendee in attendee list
-- Line height in email
 - Fix nlp for "updates" email
 
 - Change from address when adding to an event (bug)
@@ -14,6 +12,12 @@
 
 Done
 ----
+- Line height in email
+- Make event page work with no current attendee
+  - Enter email to save, post and redirect to own page
+  - Create welcome email
+- First time visit modal
+- Move footer items to header
 - Modal footer should be shaded
 - Show "Let everyone know you've made updates" in footer
 	- Spacing
