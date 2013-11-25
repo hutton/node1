@@ -1,27 +1,52 @@
+Simple Scheduling Over Email
+Create an email list that keeps track of when people are free to help with scheduling events.
+
+Simple Group Scheduling
+Simple Group Scheduling with Email
+Simple Group Scheduling over email
+
+
+Spend less time organising your friends and more time with them.
+
+Schedule with ease
+Convenely is a simple and clever way to schedule meeting up with friends
+to help you spend less time organising them & more time with them.
+
+
+~~~~~
+Good day. Every day.
+Any.do is here to help you manage life in a simple clever & fun way.
+
+Enjoy the time of your life
+Cal is a new calendar for your everyday life. With a beautiful design and an intuitive interface, your days will become easier to manage.
+
+Put email in its place 
+~~~~~
+
 Your own email group
 --------------------
 Every event on Convenely has it's own email group (e.g. poker-night@convenely.com), use it to contact everyone invited to the event.
 
-
 No logins, No passwords
 -----------------------
-There's no accouts to create or passwords to remember, just enter your email address and away you go!
+There's no accouts to create or passwords to remember, just enter your email address and away you go.
 
 Beautifully simple interface
 ----------------------------
-Our simple mobile web interface is 
-
+See everyone's availability and update your own from our super slick web interface.
 
 Inteligent email
 ----------------
-
+Update your availability by emailing your event 
 
 Completely Free
 ---------------
+Nothing to pay and no ads
 
 
 Minimal setup
 -------------
 It takes just seconds to create your event, enter an email address and name for what you're arranging and away you go.
+
 
 
