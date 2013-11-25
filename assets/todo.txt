@@ -1,3 +1,4 @@
+- Invert "View Event Online >" link
 - Update email link when nothing selected
 	- Tell everyone about your changes
 	- Email changes to everyone
