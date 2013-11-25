@@ -19,7 +19,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .navbar-inner{border-color:#e8e8e8;min-height:50px;background:#f8f8f8;}
 .navbar-fixed-top .navbar-inner,.navbar-fixed-bottom .navbar-inner,.navbar-static-top .navbar-inner{box-shadow:none;background:#f8f8f8;}
 .event-container{max-width:600px;margin-left:auto;margin-right:auto;min-height:800px;}
-#top-row-spacer{height:59px;}
+#top-row-spacer{height:60px;}
 .navbar-fixed-top .navbar-inner{background:#f8f8f8;}
 .navbar-inner{border:none;}
 .navbar-fixed-top{border-bottom:1px solid #e8e8e8;background:#f8f8f8;}
@@ -27,11 +27,10 @@ a:active{color:#4ad16c;text-decoration:none;}
 .title-button-container{position:absolute;height:0px;right:0px;overflow:visible;}
 #show-info{position:relative;right:8px;top:12px;padding:4px;}
 #show-info>span{-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
-#title-mail{position:relative;float:left;left:8px;top:6px;width:0px;padding:4px;transition:all 1s ease-in-out;}
+#title-mail{position:relative;float:left;left:12px;top:10px;width:0px;transition:all 0.4s ease-in-out;}
 .show-info-rotate{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg);}
 .title{color:#4ad16c;text-align:center;padding-top:12px;margin-left:auto;margin-right:auto;}
 .title:hover{cursor:pointer;}
-#email-group{top:15px;position:relative;}
 .add-attendee-panel{margin:10px;}
 .message-panel{display:none;font-size:14px;}
 .add-attendee-message{display:none;font-size:14px;}
@@ -43,8 +42,8 @@ a:active{color:#4ad16c;text-decoration:none;}
 #add-attendee-email-input{width:100%;}
 .attendee-button-container{max-width:400px;margin:3px auto;}
 .add-attendee-button-container{max-width:400px;margin:3px auto;}
-#add-attendee-link{float:left;}
-#add-attendee-cancel-link{float:right;}
+#add-attendee-link{float:right;}
+#add-attendee-cancel-link{float:left;}
 .attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}
 .add-attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}
 .add-attendee-email-spinner{display:none;}

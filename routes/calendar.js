@@ -93,7 +93,7 @@ function renderCalendar(req, res, format){
 					calendar: calendar,
 					choices: sortedChoices,
 					attendees: calendar.attendees,
-					message: 'this is the message',
+					message: 'this is the message loren ipsum',
 					fromName: "From name",
 					subject: 'the subject'
 				});
