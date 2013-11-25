@@ -1,4 +1,5 @@
 - Invert "View Event Online >" link
+- Remove date line from popup
 - Update email link when nothing selected
 	- Tell everyone about your changes
 	- Email changes to everyone
