@@ -1,8 +1,3 @@
-- Invert "View Event Online >" link
-- Remove date line from popup
-- Update email link when nothing selected
-	- Tell everyone about your changes
-	- Email changes to everyone
 - New homepage
 - Move email code out of models
 - Show first and highlight current attendee in attendee list
@@ -14,6 +9,13 @@
 
 Done
 ----
+- Remove date line from popup
+- Update email link when nothing selected
+	- Tell everyone about your changes
+	- Tell everyone of your changes
+	- Notify everyone of your changes
+	- Email changes to everyone
+- Invert "View Event Online >" link
 - Line height in email
 - Make event page work with no current attendee
   - Enter email to save, post and redirect to own page

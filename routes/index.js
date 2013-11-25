@@ -7,6 +7,10 @@ exports.index = function(req, res){
   res.render('index.html');
 };
 
+exports.index2 = function(req, res){
+  res.render('index2.html');
+};
+
 exports.help = function(req, res){
   res.render('help.html');
 };

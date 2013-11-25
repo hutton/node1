@@ -83,18 +83,18 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	updateSelectedItem: function(choiceModel, selectedRow){
-		var dateText = this.buildDateText(choiceModel);
+		//var dateText = this.buildDateText(choiceModel);
 		var attendeeText = this.buildAttendeeText(choiceModel);
 
 		if (!selectedRow.next().hasClass("selected-row")){
 			this.removeSelectedRow();
 
-			this.showSelectedRowAfter(selectedRow, {dateText: dateText, attendeeText: attendeeText});
+			this.showSelectedRowAfter(selectedRow, {attendeeText: attendeeText});
 		} else {
-			var footerDateEl = this.$el.find(".info-row-date");
+			// var footerDateEl = this.$el.find(".info-row-date");
 			var footerTextEl = this.$el.find(".info-row-text");
 
-			footerDateEl.html(dateText);
+			// footerDateEl.html(dateText);
 			footerTextEl.html(attendeeText);
 		}
 	},
@@ -389,7 +389,7 @@ window.EventApp = Backbone.View.extend({
 
 				_.delay(function(){
 					that.swtichUpdateAttendeesLink();
-				}, 4000);
+				}, 2500);
 			}
 		}
 	},
@@ -411,6 +411,8 @@ window.EventApp = Backbone.View.extend({
 
 		_.delay(function(){
 			that.titleMailEl.show();
+
+			that.$el.find('#changes-made-banner > .fa-envelope-o').hide();
 
 			that.updatedFooterEl.slideUp('fast');
 

@@ -74,6 +74,7 @@ var winstonStream = {
  });
 
  app.get('/', routes.index);
+ app.get('/home2', routes.index2);
  app.get('/help', routes.help);
  app.get('/users', user.list);
  app.get('/new', calendar.new);

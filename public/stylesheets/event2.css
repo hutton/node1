@@ -71,7 +71,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .event-table tr.selected-row>td{padding:0px;width:100%;}
 .event-table tr.selected-row>td>div{width:auto;height:auto;}
 .info-row-date{margin-top:10px;font-weight:lighter;color:#c0c0c0;}
-.info-row-text{margin:4px 0px 10px 0px;padding:0px 10px;}
+.info-row-text{margin:10px 0px 10px 0px;padding:0px 10px;}
 .inner{top:5px;width:28px;height:28px;margin-left:auto;margin-right:auto;border-radius:100px;position:relative;}
 .free{top:5px;width:28px;height:28px;margin-left:auto;margin-right:auto;border-radius:100px;position:relative;background:#4ad16c;}
 .busy{top:5px;width:28px;height:28px;margin-left:auto;margin-right:auto;border-radius:100px;position:relative;background:#fe673b;}
