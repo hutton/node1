@@ -10,20 +10,40 @@
 /* Globals */
 
 body{
+	font-family: 'Gill Sans', 'Gill Sans MT', Corbel, Tahoma, sans-serif;
 }
 
 a{
 	color: @free-color;
 }
 
+a:hover{
+	color: @free-color;
+	cursor: pointer;
+}
+
 /* Bootstrap */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+	font-family: 'Gill Sans', 'Gill Sans MT', Corbel, Tahoma, sans-serif;
+}
+
+h1{
+	font-size: 42px;
+}
+
+.container{
+	max-width: 968px
+}
+
 .navbar{
 	background: @light-background-color;
 	border-bottom: solid 1px @divider-color;
+	margin-bottom: 0px;
 }
 
 .navbar-brand{
 	color: @free-color;
+	font-size: 26px;
 }
 
 .brand{
@@ -33,17 +53,28 @@ a{
 .jumbotron{
 	background: white;
 	font-size: 15px;
+	padding: 10px;
 }
 
 .jumbotron h1{
-	margin-top: 40px;
-	margin-bottom: 20px;
+	margin-top: 50px;
+	margin-bottom: 30px;
 }
 
 .jumbotron p{
 	font-size: 21px;
+	line-height: 1.6em;
 }
 
+.jumbotron form{
+	margin-top: 30px;
+}
+
+.form-group{
+	max-width: 360px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 /* Homepage */
 
@@ -52,6 +83,11 @@ a{
 	border-top: solid 1px @divider-color;
 }
 
-.features .row{
+.features .row > div{
 	margin-top: 40px;
+}
+
+.submit-container{
+	font-size: 26px;
+	text-align: center;
 }
