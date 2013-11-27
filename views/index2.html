@@ -30,10 +30,9 @@
           <div class="navbar-header">
             <span class="navbar-brand">Convenely</span>
           </div>
-          <div class="navbar-collapse  collapse">
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">About</a></li>
+              <li><a href="mailto:help@convenely.com">Contact</a></li>
             </ul>
           </div><!--/.navbar-collapse -->
         </div>
@@ -48,8 +47,9 @@
             </div>
             <div class="col-md-6">
               <form role="form" action="/create" method="post">
+                <h3>Create your event now for free!</h3>
                 <div class="form-group">
-                  <label for="event-name">Event Name</label>
+                  <label for="event-name">Your Event Name</label>
                   <input type="text" required class="form-control" id="event-name" name="event" placeholder="e.g. Poker night, Leaving drinks">
                 </div>
                 <div class="form-group">
@@ -83,17 +83,17 @@
               <p>There's no accouts to create or passwords to remember, just enter your email address and away you go.</p>
            </div>
             <div class="col-sm-4">
-              <h3>Beautifully simple interface</h3>
+              <h3><span class="fa fa-eye"></span> Beautifully simple</h3>
               <p>See everyone's availability and update your own from our super slick web interface.</p>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-4">
-              <h3><span class="fa fa-lock"></span> Inteligent email</h3>
+              <h3><span class="fa fa-cogs"></span> Inteligent email</h3>
               <p>Update your availability by emailing your event </p>
             </div>
             <div class="col-sm-4">
-              <h3><span class="fa fa-lock"></span> Completely Free</h3>
+              <h3><span class="fa fa-money"></span> Completely free</h3>
               <p>Nothing to pay and no ads</p>
            </div>
             <div class="col-sm-4">
@@ -104,5 +104,8 @@
         </div>
       </div>
 
+      <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
+      <script src="/javascripts/transition.js"></script>
+      <script src="/javascripts/collapse.js"></script>
     </body>
   </html>

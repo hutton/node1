@@ -84,6 +84,10 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 }
+form > h3 {
+  text-align: center;
+  color: #4ad16c;
+}
 /* Homepage */
 .features {
   background: #f8f8f8;
