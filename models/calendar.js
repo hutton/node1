@@ -31,34 +31,6 @@ var CalendarSchema = new mongoose.Schema({
 	}
 });
 
-function getEmailAddressesAndBody(text){
-	var body = text;
- 
-	var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
- 
-	var result = text.match(re);
- 
-	if (result === null){
-		return [[],body];
-	}
- 
-	if (result.length > 0){
-		var startIndex = body.indexOf(result[0]);
- 
-		if (startIndex != -1){
-			body = body.substr(0,startIndex);
-		}
-
-		for (var i=0; i < result.length; i++) {
-			result[i] = result[i].trim().toLowerCase();
-			result[i] = result[i].replace(/[^a-z0-9 @.-]/ig, '');
-		}
-
-	}
- 
-	return [result, body];
-}
-
 function createDates(numberOfDays){
 	var now = new Date();
 
@@ -135,7 +107,7 @@ function makeId(length)
     return text;
 }
 
-CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, message, callback){
+CalendarSchema.statics.newCalendar = function(from, fromName, subject, message, callback){
 	var dates =  createDates(0);
 
 	var choices = _.map(dates, function(date){
@@ -148,10 +120,9 @@ CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, messa
 		};
 	});
 
-	var splitMessage = getEmailAddressesAndBody(message);
+	var splitMessage = Mail.getEmailAddressesAndBody(message);
 
 	var attendeeAddresses = splitMessage[0];
-	var body = splitMessage[1];
 	var name = "";
 
 	attendeeAddresses.push(from);
@@ -173,8 +144,6 @@ CalendarSchema.statics.newCalendar = function(to, from, fromName, subject, messa
 	});
 
 	createCalendar(subject, choices, attendees, from, function(newCalendar){
-		Mail.sendMail(newCalendar, subject, body, fromName);
-
 		logger.info("Calendar saved: " + newCalendar.id);
 
 		callback(newCalendar);
@@ -360,7 +329,7 @@ CalendarSchema.methods.getAttendeeFromAddress = function(address){
 };
 
 CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
-	var splitMessage = getEmailAddressesAndBody(message);
+	var splitMessage = Mail.getEmailAddressesAndBody(message);
 
 	var attendeeAddresses = splitMessage[0];
 	var name = "";
@@ -420,7 +389,7 @@ CalendarSchema.methods.addAttendee = function(address, fromName){
 };
 
 CalendarSchema.methods.removeAttendeeMessage = function(message){
-	var splitMessage = getEmailAddressesAndBody(message);
+	var splitMessage = Mail.getEmailAddressesAndBody(message);
 
 	var attendeeAddresses = splitMessage[0];
 	var name = "";

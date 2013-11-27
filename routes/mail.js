@@ -61,7 +61,12 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 	logger.info("Mail message: " + message);
 
 	if (startsWith(to, "start-betalist@")){
-		var newCalendar = Calendar.newCalendar(to, from, fromName, subject, message, function(newCalendar){
+		var newCalendar = Calendar.newCalendar(from, fromName, subject, message, function(newCalendar){
+
+			var splitMessage = Mail.getEmailAddressesAndBody(message);
+
+			Mail.sendMail(newCalendar, subject, splitMessage[1], fromName);
+
 			createCalendarCallback(newCalendar);
 		});
 	} else if (startsWith(to, "start@")){

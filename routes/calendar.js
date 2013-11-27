@@ -104,9 +104,9 @@ function renderCalendar(req, res, format){
 
 exports.viewText = function(req, res){
 	renderCalendar(req, res, "text");
-}
+};
 
 exports.view = function(req, res){
 	renderCalendar(req, res, "html");
-}
+};
 

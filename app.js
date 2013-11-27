@@ -75,11 +75,13 @@ var winstonStream = {
 
  app.get('/', routes.index);
  app.get('/home2', routes.index2);
+ app.post('/create', events.create);
+
  app.get('/help', routes.help);
  app.get('/users', user.list);
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
- //app.get('/event', routes.event);
+ 
  app.get('/event/*', events.view);
  app.post('/event/*/choice', events.updateChoice);
  app.post('/event/*/add', events.addAttendee);

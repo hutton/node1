@@ -371,11 +371,11 @@ window.EventApp = Backbone.View.extend({
 	switchedUpdateAttendeesLink: false,
 
 	updateTellEveryoneLink: function(){
+		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
+
+		this.changesMadeLinkkeyEl.attr("href", mailTo);
+
 		if (this.isFree.length > 0 || this.wasFree.length > 0){
-			var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
-
-			this.changesMadeLinkkeyEl.attr("href", mailTo);
-
 			if (!this.switchedUpdateAttendeesLink){
 				this.updatedFooterEl.slideDown('fast');
 

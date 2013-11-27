@@ -6,6 +6,34 @@ var datesHelper = require("./dates");
 
 var mandrillApiKey = 'ZghEsfeVFCfYT5zLpmRX2Q';
 
+function getEmailAddressesAndBody(text){
+	var body = text;
+ 
+	var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/g;
+ 
+	var result = text.match(re);
+ 
+	if (result === null){
+		return [[],body];
+	}
+ 
+	if (result.length > 0){
+		var startIndex = body.indexOf(result[0]);
+ 
+		if (startIndex != -1){
+			body = body.substr(0,startIndex);
+		}
+
+		for (var i=0; i < result.length; i++) {
+			result[i] = result[i].trim().toLowerCase();
+			result[i] = result[i].replace(/[^a-z0-9 @.-]/ig, '');
+		}
+
+	}
+ 
+	return [result, body];
+}
+
 function firstResponse(fullMessage) {
 
 	// logger.info("Getting first response:");
@@ -503,5 +531,6 @@ module.exports = {
 	sendWereInBetaEmail: sendWereInBetaEmail,
 	sendCouldntFindCalendarEmail: sendCouldntFindCalendarEmail,
 	sendCouldntFindYouInCalendarEmail: sendCouldntFindYouInCalendarEmail,
-	sendMailToAttendee: sendMailToAttendee
+	sendMailToAttendee: sendMailToAttendee,
+	getEmailAddressesAndBody: getEmailAddressesAndBody
 }

@@ -7,6 +7,22 @@ var mongoose = require("mongoose");
 var _ = require("underscore");
 var logger = require("../tools/logger");
 
+function createEvent(req, res){
+	logger.info("Create event");
+
+	var creatorEmail = req.body.email;
+	var eventName = req.body.event;
+	var attendeesText = req.body.attendees || "";
+
+	logger.info("Creator: " + creatorEmail + " Event Name: " + eventName + " Attendees Text: " + attendeesText);
+
+	Calendar.newCalendar(creatorEmail, "", eventName, attendeesText, function(newCalendar){
+		var attendee = newCalendar.getAttendeeFromAddress(creatorEmail);
+
+		res.redirect('/event/' + attendee.attendeeId);
+	});
+}
+
 function showEvent(res, calendar, attendeeId){
 	_.each(calendar.choices, function(choice){
 		choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
@@ -171,4 +187,9 @@ exports.updateChoice = function(req, res){
 exports.addAttendee = function(req, res){
 	addAttendee(req, res);
 };
+
+exports.create = function(req, res){
+	createEvent(req, res);
+};
+
 

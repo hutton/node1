@@ -1,8 +1,10 @@
-body{font-family:'Gill Sans','Gill Sans MT',Corbel,Tahoma,sans-serif;}
+body{font-family:'Open Sans',sans-serif;}
 a{color:#4ad16c;}
 a:hover{color:#4ad16c;cursor:pointer;}
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:'Gill Sans','Gill Sans MT',Corbel,Tahoma,sans-serif;}
-h1{font-size:42px;}
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:'Open Sans',sans-serif;}
+h1{font-size:50px;}
+.btn{-webkit-border-radius:0px;-moz-border-radius:0px;border-radius:0px;}
+.btn-success{background:#4ad16c;border-color:#4ad16c;}
 .container{max-width:968px;}
 .navbar{background:#f8f8f8;border-bottom:solid 1px #e8e8e8;margin-bottom:0px;}
 .navbar-brand{color:#4ad16c;font-size:26px;}
@@ -12,6 +14,6 @@ h1{font-size:42px;}
 .jumbotron p{font-size:21px;line-height:1.6em;}
 .jumbotron form{margin-top:30px;}
 .form-group{max-width:360px;margin-left:auto;margin-right:auto;}
-.features{background:#f8f8f8;border-top:solid 1px #e8e8e8;}
+.features{background:#f8f8f8;border-top:solid 1px #e8e8e8;padding-bottom:100px;}
 .features .row>div{margin-top:40px;}
 .submit-container{font-size:26px;text-align:center;}
