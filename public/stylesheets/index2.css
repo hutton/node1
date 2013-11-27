@@ -2,7 +2,7 @@ body{font-family:'Open Sans',sans-serif;}
 a{color:#4ad16c;}
 a:hover{color:#4ad16c;cursor:pointer;}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:'Open Sans',sans-serif;}
-h1{font-size:50px;}
+h1{font-size:60px;}
 .btn{-webkit-border-radius:0px;-moz-border-radius:0px;border-radius:0px;}
 .btn-success{background:#4ad16c;border-color:#4ad16c;}
 .container{max-width:968px;}
