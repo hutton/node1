@@ -25,29 +25,19 @@ Put email in its place
 ~~~~~
 
 Your own email group
---------------------
-Every event on Convenely has it's own email group (e.g. poker-night@convenely.com), use it to contact everyone invited to the event.
+Every event on Convenely has its own email group (e.g. poker-night@convenely.com), use it to contact everyone invited to the event.
 
-No logins, No passwords
------------------------
-There's no accouts to create or passwords to remember, just enter your email address and away you go.
+ No logins, No passwords
+There are no accounts to create or passwords to remember, just enter your email address and away you go.
 
-Beautifully simple interface
-----------------------------
-See everyone's availability and update your own from our super slick web interface.
+ Beautifully simple
+See everyone's availability and update your own from our beautiful responsive web interface.
 
-Inteligent email
-----------------
-Update your availability by emailing your event 
+ Intelligent email
+Send an email to the event's group address to update your availability i.e. "I can do Monday or Wednesday next week".
 
-Completely Free
----------------
-Nothing to pay and no ads
+ Completely free
+Convenely is completely free and we don't show ads.
 
-
-Minimal setup
--------------
-It takes just seconds to create your event, enter an email address and name for what you're arranging and away you go.
-
-
-
+ Minimal setup
+It takes just seconds to create your event, enter your email address and a name for what you're arranging and that's it.
