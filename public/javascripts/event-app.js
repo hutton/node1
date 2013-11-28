@@ -32,14 +32,14 @@ window.EventApp = Backbone.View.extend({
 
 	events: {
 		"click #show-info":				"infoClicked",
-		"click .title":  				"infoClicked",
+		"click .title":					"infoClicked",
 		"click .event-table":			"eventTableClicked",
 		"click":						"eventTableClicked",
-		"click #add-attendee": 			"addAttendeeClicked", 
-		"click #add-attendee-link": 	"addAttendeeLinkClicked",
+		"click #add-attendee":			"addAttendeeClicked",
+		"click #add-attendee-link":		"addAttendeeLinkClicked",
 		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
 		"keyup #add-attendee-email-input": "addAttendeeInputChanged",
-		"click #register-attendee-link": 	"registerAttendeeLinkClicked",
+		"click #register-attendee-link": "registerAttendeeLinkClicked",
 		"keyup #register-attendee-email-input": "registerAttendeeInputChanged"
 	},
 
@@ -58,10 +58,13 @@ window.EventApp = Backbone.View.extend({
 	render: function(){
 		this.$el.find(".title").html(this.model.get("name"));
 
-		var names = this.attendees.pluck("prettyName");
-		var nameList = "";
-		_.each(names, function(name){
-			nameList = nameList + name + ", ";
+		var nameList = "";	
+		_.each(this.attendees.models, function(model){
+			if (model.get("me")){
+				nameList = "<strong>" + model.get("prettyName") + "</strong>, " + nameList;
+			} else {
+				nameList = nameList + model.get("prettyName") + ", ";
+			}
 		});
 
 		nameList = nameList.slice(0, -2);

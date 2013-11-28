@@ -53,12 +53,21 @@ h1 {
 }
 .navbar {
   background: #f8f8f8;
-  border-bottom: solid 1px #e8e8e8;
   margin-bottom: 0px;
 }
-.navbar-brand {
+.navbar-default .navbar-brand {
   color: #4ad16c;
   font-size: 26px;
+}
+.navbar-default .navbar-brand:hover {
+  color: #4ad16c;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #4ad16c;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #4ad16c;
+  cursor: pointer;
 }
 .brand {
   color: #4ad16c;

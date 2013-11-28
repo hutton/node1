@@ -51,14 +51,28 @@ h1{
 
 .navbar{
 	background: @light-background-color;
-	border-bottom: solid 1px @divider-color;
+//	border-bottom: solid 1px @divider-color;
 	margin-bottom: 0px;
 }
 
-.navbar-brand{
+.navbar-default .navbar-brand{
 	color: @free-color;
 	font-size: 26px;
 }
+
+.navbar-default .navbar-brand:hover{
+	color: @free-color;
+}
+
+.navbar-default .navbar-nav > li > a{
+	color: @free-color;	
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+	color: @free-color;
+	cursor: pointer;
+}
+
 
 .brand{
 	color: @free-color;	

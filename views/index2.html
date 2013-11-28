@@ -25,27 +25,35 @@
       <link rel="shortcut icon" href="/images/favicon.png">
     </head>
     <body>
-      <div class="navbar">
+
+      <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-          <div class="navbar-header">
-            <span class="navbar-brand">Convenely</span>
-          </div>
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="mailto:help@convenely.com">Contact</a></li>
-            </ul>
-          </div><!--/.navbar-collapse -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">Convenely</span>
         </div>
-      </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="mailto:help@convenely.com">Contact</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+        </div>
+      </nav>
 
       <div class="jumbotron">
         <div class="container">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-6">
               <h1>Get it together</h1>
               <p>Convenely is a simple and effective way to schedule meeting up with friends, spend less time organising them & more time with them.</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
               <form role="form" action="/create" method="post">
                 <h3>Create your event now for free!</h3>
                 <div class="form-group">
@@ -75,37 +83,36 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-4">
-              <h3><span class="fa fa-envelope-o"></span> Your own email group</h3>
+              <h3><i class="fa fa-envelope-o"></i> Your own email group</h3>
               <p>Every event on Convenely has it's own email group (e.g. poker-night@convenely.com), use it to contact everyone invited to the event.</p>
             </div>
             <div class="col-sm-4">
-              <h3><span class="fa fa-lock"></span> No logins, No passwords</h3>
+              <h3><i class="fa fa-lock"></i> No logins, No passwords</h3>
               <p>There's no accouts to create or passwords to remember, just enter your email address and away you go.</p>
            </div>
             <div class="col-sm-4">
-              <h3><span class="fa fa-eye"></span> Beautifully simple</h3>
+              <h3><i class="fa fa-eye"></i> Beautifully simple</h3>
               <p>See everyone's availability and update your own from our super slick web interface.</p>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-4">
-              <h3><span class="fa fa-cogs"></span> Inteligent email</h3>
+              <h3><i class="fa fa-cogs"></i> Inteligent email</h3>
               <p>Update your availability by emailing your event </p>
             </div>
             <div class="col-sm-4">
-              <h3><span class="fa fa-money"></span> Completely free</h3>
+              <h3><i class="fa fa-money"></i> Completely free</h3>
               <p>Nothing to pay and no ads</p>
            </div>
             <div class="col-sm-4">
-              <h3><span class="fa fa-wrench"></span> Minimal setup</h3>
+              <h3><i class="fa fa-wrench"></i> Minimal setup</h3>
               <p>It takes just seconds to create your event, enter an email address and name for what you're arranging and away you go.</p>
             </div>
           </div>
         </div>
       </div>
 
+      <script src="/javascripts/jquery-1.8.2.min.js"></script>
       <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
-      <script src="/javascripts/transition.js"></script>
-      <script src="/javascripts/collapse.js"></script>
     </body>
   </html>
