@@ -1,18 +1,42 @@
-Someone else added you to an event
-----------------------------------
+--- When creating an event through homepage ---
 Hi,
 
-Dave Davey (dave.davey@gmail.com) has invited you to the Convenely event "Poker night".
+Thanks for creating the 'Poker night' event with Convenely.
 
-Show which days are best for you by visiting the event page from the link below.  You can also use this email group (poker-night@convenely.com) to send a message to everyone invited to the event.
+Visit the event from the link below where you can update your availability and add attendees.  You can also add attendees directly from the 'Invite attendee' link below.
+
+Contact everyone participating in the event with the email group poker-night@convenely.com.
 
 
-You've just created an event
-----------------------------
+--- When clicking 'Invite attendee' ---
+Subject: Poker night
+
+I'm trying to get a few people together for 'Poker night'.
+
+Follow the link below to join the event and show which days work for you.
+
+http://convenely.com/event/aesrfs
+
+--- When adding yourself to an event ---
 Hi,
 
-Thanks for using Convenely to plan your event "Poker night".  
+You've joined the 'Poker night' event on Convenely.
 
-Everyone you invited will receive an email telling them how to participate in the event.
+Keep track of when everyone is available by visiting the event from the link below.
 
-You can show which days are best for you and invite other people from the event page at the link below.  You can also use this email group (poker-night@convenely.com) to send a message to everyone invited to the event.
+Contact everyone participating in the event with the email group poker-night@convenely.com.
+
+
+--- Someone else added you to an event ---
+Hi,
+
+Dave Davey (dave.davey@gmail.com) has invited you to the 'Poker night' event on Convenely.
+
+Visit the event from the link below where you can update your availability.
+
+Contact everyone participating in the event with the email group poker-night@convenely.com.
+
+--------------
+--- Footer ---
+--------------
+Unsubscribe - remove me from this event
