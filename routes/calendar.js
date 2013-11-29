@@ -11,6 +11,7 @@ var mongoose = require("mongoose");
 var _ = require("underscore");
 var logger = require("../tools/logger");
 var datesHelper = require("../tools/dates");
+var Mail = require("../tools/mail");
 
 
  function makeid(length)
@@ -55,49 +56,8 @@ function renderCalendar(req, res, format){
 
 			res.send('No calendar');
 		} else {
-			_.each(calendar.choices, function(choice){
-				choice.columnDate = moment(choice.date).format("dddd D MMMM");
-			});
 
-			_.each(calendar.attendees, function(attendee){
-				attendee.prettyName = attendee.name || attendee.email;
-			});
-
-			logger.info("Showing: " + calendar.name);
-
-			var sortedChoices = _.sortBy(calendar.choices, function(choice){
-				return choice.date;
-			});
-
-			var mo = moment();
-			var today = new Date();
-
-			sortedChoices = _.filter(sortedChoices, function(choice){
-				return choice.free.length > 0 && (today < choice.date || datesHelper.sameDay(today, choice.date));
-			});
-
-			var attendee = calendar.attendees[0];
-
-			if (format === "text"){
-				res.render('calendar_view.txt', {
-					attendee: attendee,
-					calendar: calendar,
-					choices: sortedChoices,
-					attendees: calendar.attendees,
-					fromName: "From name",
-					message: ''
-				});
-			} else if (format === 'html'){
-				res.render('email-template.html', {
-					attendee: attendee,
-					calendar: calendar,
-					choices: sortedChoices,
-					attendees: calendar.attendees,
-					message: 'this is the message loren ipsum',
-					fromName: "From name",
-					subject: 'the subject'
-				});
-			}
+			Mail.renderEmail(calendar, format, res);
 		}
 	});
 }

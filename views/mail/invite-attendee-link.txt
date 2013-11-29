@@ -1,0 +1,5 @@
+I'm trying to get a few people together for '<%= calendar.name %>'.
+
+Follow the link below to join the event and show which days work for you.
+
+http://convenely.com/event/<%= calendar.calendarId %>

@@ -1,0 +1,7 @@
+Hi,
+
+Thanks for creating the '<%= calendar.name %>' event with Convenely.
+
+Visit the event from the link below where you can update your availability and add attendees.  You can also add attendees directly from the 'Invite attendee' link below.
+
+Contact everyone participating in the event with the email group <%= calendar.id %>@convenely.com.

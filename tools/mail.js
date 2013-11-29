@@ -77,7 +77,7 @@ function getEmailAddresses(text){
 	var result = text.match(re);
 
 	if (result == null){
-		return []
+		return [];
 	}
 	
 	return text.match(re);
@@ -93,11 +93,7 @@ function getEmailName(text){
 	return result[0].replace(/\"/g,'').trim();
 }
 
-function sendMail(calendar, subject, message, fromName){
-	logger.info("Sending mail to group: " + calendar.id );
-
-	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
-
+function buildSortedChoices(calendar){
 	_.each(calendar.choices, function(choice){
 		choice.columnDate = moment(choice.date).format("dddd D MMMM");
 	});
@@ -111,6 +107,54 @@ function sendMail(calendar, subject, message, fromName){
 	sortedChoices = _.filter(sortedChoices, function(choice){
 		return choice.free.length > 0 && (today < choice.date || datesHelper.sameDay(today, choice.date));
 	});
+
+	return sortedChoices;
+}
+
+function renderEmail(calendar, format, res){
+	var sortedChoices = buildSortedChoices(calendar);
+
+	var message = "This is the message";
+
+	message = message.replace(/\n/g, '<br />');
+
+	_.each(calendar.attendees, function(attendee){
+		attendee.prettyName = attendee.name || attendee.email;
+	});
+
+	var attendee = calendar.attendees[0];
+
+	buildNewAttendeeMailToLink(calendar, function(newAttendeeLink){
+		if (format === "text"){
+			res.render('calendar_view.txt', {
+				attendee: attendee,
+				calendar: calendar,
+				choices: sortedChoices,
+				attendees: calendar.attendees,
+				fromName: "From name",
+				message: ''
+			});
+		} else if (format === 'html'){
+			res.render('email-template.html', {
+				attendee: attendee,
+				calendar: calendar,
+				choices: sortedChoices,
+				attendees: calendar.attendees,
+				message: 'this is the message loren ipsum',
+				fromName: "",
+				newAttendeeMailTo: newAttendeeLink,
+				subject: 'the subject'
+			});
+		}
+	});
+}
+
+function sendMail(calendar, subject, message, fromName){
+	logger.info("Sending mail to group: " + calendar.id );
+
+	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
+
+	var sortedChoices = buildSortedChoices(calendar);
 
 	message = message.replace(/\n/g, '<br />');
 
@@ -131,6 +175,7 @@ function sendMail(calendar, subject, message, fromName){
 			attendees: calendar.attendees,
 			message: message,
 			subject: subject,
+			newAttendeeMailTo: buildNewAttendeeMailToLink(calendar),
 			fromName: fromName
 		}, function(err, html){
 
@@ -180,19 +225,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 
 	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
 
-	_.each(calendar.choices, function(choice){
-		choice.columnDate = moment(choice.date).format("dddd D MMMM");
-	});
-
-	var sortedChoices = _.sortBy(calendar.choices, function(choice){
-		return choice.date;
-	});
-
-	var today = new Date();
-
-	sortedChoices = _.filter(sortedChoices, function(choice){
-		return choice.free.length > 0 && (today < choice.date || datesHelper.sameDay(today, choice.date));
-	});
+	var sortedChoices = buildSortedChoices(calendar);
 
 	message = message.replace(/\n/g, '<br />');
 
@@ -208,6 +241,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 		choices: sortedChoices,
 		attendees: calendar.attendees,
 		message: message,
+		newAttendeeMailTo: buildNewAttendeeMailToLink(calendar),
 		subject: subject,
 		fromName: fromName
 	}, function(err, html){
@@ -251,6 +285,16 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 			logger.error("Failed to send email to: " + toAttendee.email);
 			logger.error(e);
 		}
+	});
+}
+
+function buildNewAttendeeMailToLink(calendar, callback){
+	global.app.render('mail/invite-attendee-link.txt', {
+		calendar: calendar
+	}, function(err, body){
+		var link = "mailto:" + calendar.id + "@convenely.com?subject=" + calendar.name + "&body=" + encodeURIComponent(body);
+
+		callback(link);
 	});
 }
 
@@ -532,5 +576,6 @@ module.exports = {
 	sendCouldntFindCalendarEmail: sendCouldntFindCalendarEmail,
 	sendCouldntFindYouInCalendarEmail: sendCouldntFindYouInCalendarEmail,
 	sendMailToAttendee: sendMailToAttendee,
-	getEmailAddressesAndBody: getEmailAddressesAndBody
+	getEmailAddressesAndBody: getEmailAddressesAndBody,
+	renderEmail: renderEmail
 }

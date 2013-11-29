@@ -60,6 +60,11 @@
 		background: #4ad16c;	
 	}
 
+	.new-attendee{
+		padding: 4px 10px;
+		background: #c0c0c0;	
+	}
+
 	.event-link{
 		color: white;
 		text-decoration: none;
@@ -125,12 +130,14 @@
 		<tr bgcolor="#FFFFFF">
 			<td>
 				<table class="full-width message-table" align="center" border="0" cellpadding="0" width="100%" cellspacing="0" style="border-collapse: collapse;">
+					<% if (fromName != ""){ %>
 					<tr>
 						<td class="message-title">
 
 							<%= fromName %> wrote:
 						</td>
 					</tr>
+					<% } %>
 					<tr>
 						<td class="message-content">
 							<%= message %>
@@ -149,12 +156,12 @@
 							<table style="margin-left: auto; margin-right: auto;">
 								<tbody>
 									<tr>
-										<td class="event-link-cell">
-											<a class="event-link" href="http://convenely.com/event/<%= calendar.calendarId %>">New Attendees</a>
+										<td class="new-attendee">
+											<a class="event-link" href="<%= newAttendeeMailTo %>">Invite attendee</a>
 										</td>
 										<td width="20"></td>
 										<td class="event-link-cell">
-											<a class="event-link" href="http://convenely.com/event/<%= attendee.attendeeId %>">View Event ></a>
+											<a class="event-link" href="http://convenely.com/event/<%= attendee.attendeeId %>">View event ></a>
 										</td>
 									</tr>
 								</tbody>

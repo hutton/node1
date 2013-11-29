@@ -6,6 +6,7 @@ var moment = require("moment");
 var mongoose = require("mongoose");
 var _ = require("underscore");
 var logger = require("../tools/logger");
+var Mail = require("../tools/mail");
 
 function createEvent(req, res){
 	logger.info("Create event");
@@ -19,7 +20,15 @@ function createEvent(req, res){
 	Calendar.newCalendar(creatorEmail, "", eventName, attendeesText, function(newCalendar){
 		var attendee = newCalendar.getAttendeeFromAddress(creatorEmail);
 
-		res.redirect('/event/' + attendee.attendeeId);
+		global.app.render('mail/created-from-homepage.txt', {
+			calendar: newCalendar
+		}, function(err, message){
+			logger.info("New calendar " + newCalendar.calendarId + " created.");
+
+			Mail.sendMailToAttendee(newCalendar, attendee, newCalendar.name, message, "");
+
+			res.redirect('/event/' + attendee.attendeeId);
+		});
 	});
 }
 
@@ -135,6 +144,12 @@ function addAttendee(req, res){
 				logger.info("Adding '" + newAttendeeEmail + "'' to: " + calendar.name);
 
 				var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
+
+				global.app.render('mail/adding-yourself-to-event.txt', {
+					calendar: calendar
+				}, function(err, message){
+					Mail.sendMailToAttendee(calendar, newAttendee, newCalendar.name, message, "");
+				});
 
 				res.send(200, 
 					{
