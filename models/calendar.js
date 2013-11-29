@@ -89,6 +89,8 @@ function createCalendar(subject, choices, attendees, from, callback){
 				logger.error("Failed to create calendar: " + err);
 			} else {
 				logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+
+				Mail.sendTextMail(global.app.ourEmail, global.app.ourEmail ,"New calender: " + calendar.name, "New calendar created http://convenely.com/event/" + calendar.calendarId);
 			}
 		});
 
@@ -379,8 +381,6 @@ CalendarSchema.methods.addAttendee = function(address, fromName){
 		if (err){
 			logger.error("Failed to add attendee calendar: " + err);
 		} else {
-			Mail.sendMailToAttendee(calendar, attendee, calendar.name, "You've been added to the '" + calendar.name + "' email list.\n\nReply to this email with when you're available.", fromName);
-
 			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
 		}
 	});

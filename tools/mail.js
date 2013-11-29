@@ -266,20 +266,20 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 					}]};
 
 
-				if (toAttendee.name != null && toAttendee.name != ""){
+				if (toAttendee.name !== null && toAttendee.name !== ""){
 					message.to.name = toAttendee.name;
 				}
 
-				if (fromName != ""){
+				if (fromName !== ""){
 					message.from_name = fromName + " via Convenely";
 				}
 
 				mandrill_client.messages.send({"message": message}, function(result) {
 						logger.info('Email sent to: ' + toAttendee.email);
-					    logger.info(result);
+						logger.info(result);
 					}, function(e) {
 
-					    logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+						logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
 
 						logger.error('Failed sending email to: ' + toAttendee.email);
 					});
@@ -295,7 +295,7 @@ function buildNewAttendeeMailToLink(calendar, callback){
 	global.app.render('mail/invite-attendee-link.txt', {
 		calendar: calendar
 	}, function(err, body){
-		var link = "mailto:" + calendar.id + "@convenely.com?subject=" + calendar.name + "&body=" + encodeURIComponent(body);
+		var link = "mailto:?subject=" + calendar.name + "&body=" + encodeURIComponent(body);
 
 		callback(link);
 	});
@@ -311,7 +311,7 @@ Simon\n\
 \n\
 ";
 
-	sendTextMail(to, "simon@convenely.com" ,"Hold your horses!", message);
+	sendTextMail(to, global.app.ourEmail ,"Hold your horses!", message);
 }
 
 function sendCouldntFindCalendarEmail(to, missingCalendarEmail){
@@ -323,7 +323,7 @@ Simon\n\
 \n\
 ";
 
-	sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't find the event you were looking for.", message);
+	sendTextMail(to, global.app.ourEmail ,"Sorry, we couldn't find the event you were looking for.", message);
 }
 
 
@@ -336,7 +336,7 @@ Simon\n\
 \n\
 ";
 
-	sendTextMail(to, "simon@convenely.com" ,"Sorry, we couldn't update your event.", message);
+	sendTextMail(to, global.app.ourEmail ,"Sorry, we couldn't update your event.", message);
 }
 
 function sendTextMail(to, from, subject, text){

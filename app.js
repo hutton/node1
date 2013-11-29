@@ -96,6 +96,8 @@ var winstonStream = {
  app.get('/calendar/*', calendar.view);
  app.get('/calendar-text/*', calendar.viewText);
 
+ app.ourEmail = "convenely@gmail.com";
+
  global.app = app;
  
  http.createServer(app).listen(app.get('port'), function(){

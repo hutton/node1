@@ -1,0 +1,7 @@
+Hi,
+
+<%= fromAttendee.fullName %> has invited you to the '<%= calendar.name %>' event on Convenely.
+
+Visit the event from the link below where you can update your availability.
+
+Contact everyone participating in the event with the email group <%= calendar.id %>@convenely.com.

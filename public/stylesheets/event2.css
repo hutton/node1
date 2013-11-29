@@ -78,7 +78,8 @@ a:active{color:#4ad16c;text-decoration:none;}
 .unknown{top:5px;width:28px;height:28px;margin-left:auto;margin-right:auto;border-radius:100px;position:relative;background:#ffffff;}
 .free>.content{color:white;}
 .content{position:relative;top:3px;font-size:16px;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
-.footer{text-align:center;margin:20px 10px 2px 10px;font-size:16px;}
+.footer{text-align:center;font-size:16px;height:0px;position:relative;top:10px;}
+#changes-made-banner{padding:4px 2px;background:white;}
 .register-attendee-message{display:none;font-size:14px;}
 .register-attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}
 .register-attendee-email-input-container{max-width:400px;margin:0px auto;line-height:25px;}

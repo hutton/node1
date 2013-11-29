@@ -145,8 +145,9 @@ function addAttendee(req, res){
 
 				var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
 
-				global.app.render('mail/adding-yourself-to-event.txt', {
-					calendar: calendar
+				global.app.render('mail/someone-added-you-to-event.txt', {
+					calendar: calendar,
+					fromAttendee: attendee
 				}, function(err, message){
 					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 				});
@@ -176,6 +177,12 @@ function addAttendee(req, res){
 				logger.info("Registering '" + newAttendeeEmail + "'' to: " + calendar.name);
 
 				var newAttendee = calendar.addAttendee(newAttendeeEmail, "");
+
+				global.app.render('mail/adding-yourself-to-event.txt', {
+					calendar: calendar
+				}, function(err, message){
+					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
+				});
 
 				calendar.updateCalendar(newAttendee, req.route.params[1], req.body.isFree);
 

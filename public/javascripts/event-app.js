@@ -380,11 +380,11 @@ window.EventApp = Backbone.View.extend({
 
 		if (this.isFree.length > 0 || this.wasFree.length > 0){
 			if (!this.switchedUpdateAttendeesLink){
-				this.updatedFooterEl.slideDown('fast');
+				this.updatedFooterEl.show();
 
-				var adjustHeight = 44 + this.topRowSpacerEl.height();
+				// var adjustHeight = 44 + this.topRowSpacerEl.height();
 
-				this.topRowSpacerEl.animate({height: adjustHeight}, 200);
+				// this.topRowSpacerEl.animate({height: adjustHeight}, 200);
 
 				this.switchedUpdateAttendeesLink = true;
 
