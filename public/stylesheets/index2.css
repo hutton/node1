@@ -1,24 +1,118 @@
-body{font-family:'Open Sans',sans-serif;}
-a{color:#4ad16c;}
-a:hover{color:#4ad16c;cursor:pointer;}
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:'Open Sans',sans-serif;}
-h1{font-size:60px;}
-.btn{-webkit-border-radius:0px;-moz-border-radius:0px;border-radius:0px;}
-.btn-success{background:#4ad16c;border-color:#4ad16c;}
-.container{max-width:968px;}
-.navbar{background:#f8f8f8;margin-bottom:0px;}
-.navbar-default .navbar-brand{color:#4ad16c;font-size:26px;}
-.navbar-default .navbar-brand:hover{color:#4ad16c;}
-.navbar-default .navbar-nav>li>a{color:#4ad16c;}
-.navbar-default .navbar-nav>li>a:hover{color:#4ad16c;cursor:pointer;}
-.brand{color:#4ad16c;}
-.jumbotron{background:white;font-size:15px;margin-top:10px;padding:10px;}
-.jumbotron h1{margin-top:20px;margin-bottom:30px;}
-.jumbotron p{font-size:21px;line-height:1.6em;margin-bottom:30px;}
-.jumbotron form{margin-top:30px;}
-.jumbotron img{margin-left:auto;margin-right:auto;}
-.form-group{max-width:360px;margin-left:auto;margin-right:auto;}
-form>h3{text-align:center;color:#4ad16c;}
-.features{background:#f8f8f8;border-top:solid 1px #e8e8e8;padding-bottom:100px;}
-.features .row>div{margin-top:40px;}
-.submit-container{font-size:26px;text-align:center;}
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
+/* Globals */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+a {
+  color: #4ad16c;
+}
+a:hover {
+  color: #4ad16c;
+  cursor: pointer;
+}
+/* Bootstrap */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  font-size: 60px;
+}
+.btn {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.btn-success {
+  background: #4ad16c;
+  border-color: #4ad16c;
+}
+.container {
+  max-width: 968px;
+}
+.navbar {
+  background: #f8f8f8;
+  margin-bottom: 0px;
+}
+.navbar-default .navbar-brand {
+  color: #4ad16c;
+  font-size: 26px;
+}
+.navbar-default .navbar-brand:hover {
+  color: #4ad16c;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #4ad16c;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #4ad16c;
+  cursor: pointer;
+}
+.brand {
+  color: #4ad16c;
+}
+.jumbotron {
+  background: white;
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 10px;
+}
+.jumbotron h1 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.jumbotron p {
+  font-size: 21px;
+  line-height: 1.6em;
+  margin-bottom: 30px;
+}
+.jumbotron form {
+  margin-top: 30px;
+}
+.jumbotron img {
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-group {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+form > h3 {
+  text-align: center;
+  color: #4ad16c;
+}
+/* Homepage */
+.features {
+  background: #f8f8f8;
+  border-top: solid 1px #e8e8e8;
+  padding-bottom: 100px;
+}
+.features .row > div {
+  margin-top: 40px;
+}
+.submit-container {
+  font-size: 26px;
+  text-align: center;
+}

@@ -148,7 +148,7 @@ function addAttendee(req, res){
 				global.app.render('mail/adding-yourself-to-event.txt', {
 					calendar: calendar
 				}, function(err, message){
-					Mail.sendMailToAttendee(calendar, newAttendee, newCalendar.name, message, "");
+					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 				});
 
 				res.send(200, 
