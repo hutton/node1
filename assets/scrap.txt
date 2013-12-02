@@ -1,44 +1,27 @@
 res.cookie('rememberme', 'yes', { maxAge: 900000, httpOnly: false});
 
-<!DOCTYPE html> 
-<html> 
-	<head> 
-	<title></title> 
-	
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-	<style type="text/css">
-		.d1{
-			position: relative;
-			left: 10px;
-			top: 0px;
-			display: inline-block;
-			transition: all 1s ease-in-out;
-			/*transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
-		}
 
-	</style>
+Get it together.
+Meeting up with friends is a great joy, trying to get them organised is a pain in the ass.
 
-	<script type="text/javascript">
-		function toggle(){
-			$('div').css({ "left": "100px", "top": "100px", "-webkit-transform": "scale(0.5,0.5)" });
+Convenely takes the pain out of getting friends togther with 
 
-			$('div').show();
 
-			// $('div').css({ "left": "0px", "top": "0px" });
+Simple, keeps out the way, email
 
-			$("div").removeAttr("style")
-		}
+-> Got any suggestions?
+-> Please let us know.
 
-		$(document).ready(function(){	
-			setInterval(function(){
-				toggle();
-			},1000);
 
-		});
-	</script>
-	</head> 
-<body> 
-	<div class="d1" style="display: none;">hello</div>
-</body>
-</html>
+It all ends with email
+
+
+Frequently Asked Questions.
+
+How do I add people to an event?
+
+Can anyone add people to an event?
+Yes.  Anyone who is part of an event can add people to it.  
+
+How do I remove people from an event?
