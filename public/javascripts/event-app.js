@@ -75,6 +75,8 @@ window.EventApp = Backbone.View.extend({
 			this.$el.find("#add-attendee").hide();
 
 			$('#welcome-modal').modal('show');
+
+			this.registerFooterEl.slideDown('fast');
 		}
 	},
 
@@ -423,14 +425,6 @@ window.EventApp = Backbone.View.extend({
 				that.titleMailEl.removeAttr("style");
 			}, 10);
 		}, 10);
-	},
-
-	updateRegisterLink: function(){
-		if (this.isFree.length > 0 || this.wasFree.length > 0){
-			this.registerFooterEl.slideDown('fast');
-		} else {
-			this.registerFooterEl.slideUp('fast');
-		}
 	},
 
 	formatUpdatedDays: function(isFree, wasFree){

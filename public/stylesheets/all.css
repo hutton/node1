@@ -7803,6 +7803,11 @@ a:active {
   position: relative;
   top: 10px;
 }
+#register-footer {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+}
 #changes-made-banner {
   padding: 4px 2px;
   background: white;

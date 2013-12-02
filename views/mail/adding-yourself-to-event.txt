@@ -2,6 +2,4 @@ Hi,
 
 You've joined the '<%= calendar.name %>' event on Convenely.
 
-Keep track of when everyone is available by visiting the event from the link below.
-
 Contact everyone participating in the event with the email group <%= calendar.id %>@convenely.com.

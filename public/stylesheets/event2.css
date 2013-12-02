@@ -79,6 +79,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .free>.content{color:white;}
 .content{position:relative;top:3px;font-size:16px;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 .footer{text-align:center;font-size:16px;height:0px;position:relative;top:10px;}
+#register-footer{margin-top:10px;text-align:center;font-size:16px;}
 #changes-made-banner{padding:4px 2px;background:white;}
 .register-attendee-message{display:none;font-size:14px;}
 .register-attendee-email-spinner-container{height:0px;float:right;position:relative;top:6px;right:7px;font-size:22px;}

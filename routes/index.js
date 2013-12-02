@@ -15,6 +15,10 @@ exports.help = function(req, res){
   res.render('help.html');
 };
 
+exports.about = function(req, res){
+  res.render('about.html');
+};
+
 // exports.event = function(req, res){
 //   res.render('event_static.html');
 // };

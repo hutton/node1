@@ -116,3 +116,10 @@ form > h3 {
   font-size: 26px;
   text-align: center;
 }
+.invalid {
+  border-color: red;
+}
+/* About */
+.about {
+  margin: 10px;
+}

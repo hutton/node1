@@ -174,6 +174,13 @@ validate("I can do next week except Thursday and Friday",
 
 
 
+
+
+// I'm now free on Friday 13th December and Thursday 12th December but
+// I'm no longer free on Friday 6th December, Thursday 5th December and
+// Sunday 1st December.
+
+
 // // Simple dates e.g. 1st, 22nd 
 // validateExtractText([
 // 	{ match: "21st", date: Date.future("21st"), index: 0 },
