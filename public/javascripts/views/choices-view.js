@@ -16,6 +16,8 @@ window.ChoiceView = Backbone.View.extend({
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
 
+		this.$el.attr("width", "1");
+
 		this.pie = this.$el.find(".pie");
 
 		this.updateFreeCounter(false);

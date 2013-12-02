@@ -1,8 +1,9 @@
 - Stop jank on show details
 - Opacity on let people know
 - About page
-- Fix nlp for "updates" email
 - Fix hit targets on header
+- Help banner for all events
+- Fix nlp for "updates" email
 
 - Change from address when adding to an event (bug)
 - Add subject when empty RE: Strom day
