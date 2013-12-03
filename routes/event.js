@@ -60,10 +60,14 @@ function showEvent(res, calendar, attendeeId){
 	var sortedChoices = _.sortBy(calendar.choices, function(choice){
 		return choice.date;
 	});
+
+	res.cookie(calendar.calendarId, 'yes', { maxAge: 900000, httpOnly: false});
+
 	res.render('event2.html', {
 		choices: JSON.stringify(sortedChoices),
 		attendees: JSON.stringify(cleanedAttendees),
 		calendar: JSON.stringify(cleanedCalendar),
+		name: calendar.name,
 	});
 }
 

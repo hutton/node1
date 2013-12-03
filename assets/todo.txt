@@ -1,5 +1,3 @@
-- Stop jank on show details
-- Opacity on let people know
 - About page
 - Fix hit targets on header
 - Help banner for all events
@@ -11,6 +9,8 @@
 
 Done
 ----
+- Stop jank on show details
+- Opacity on let people know
 - New homepage
 - Move email code out of models
 - Show first and highlight current attendee in attendee list

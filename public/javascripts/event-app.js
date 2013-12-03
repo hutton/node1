@@ -74,9 +74,11 @@ window.EventApp = Backbone.View.extend({
 		if (this.currentAttendee === null){
 			this.$el.find("#add-attendee").hide();
 
-			$('#welcome-modal').modal('show');
+			$('#register-modal').modal('show');
 
 			this.registerFooterEl.slideDown('fast');
+		} else {
+			$('#welcome-modal').modal('show');				
 		}
 	},
 
@@ -121,7 +123,7 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	removeSelectedRow: function(){
-		var allSelectedRows = $('.selected-row');
+		var allSelectedRows = $('#selected-row');
 
 		allSelectedRows
 			.find('td')
@@ -394,7 +396,7 @@ window.EventApp = Backbone.View.extend({
 
 				_.delay(function(){
 					that.swtichUpdateAttendeesLink();
-				}, 2500);
+				}, 2000);
 			}
 		}
 	},

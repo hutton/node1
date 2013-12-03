@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Convenely</title>
+  <title>Convenely - <%= name %></title>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
@@ -120,9 +120,40 @@
         </div>
         <div class="modal-body">
           <p>
-            Tap a date to see who's free,
+            Tap a date to see who's free,<br/>
+            tap it again to toogle whether you're free.
+            <div class="single-date-container">
+              <div class="pie big" data-start="0" data-value="210"></div>
+              <div class="free">
+                <div class="content">
+                  20
+                </div>
+              </div>
+              <div></div>
+            </div>
           </p>
           <p>
+            Then let everyone know you've made changes.<br/>
+            <i class="fa fa-envelope-o"></i>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a data-dismiss="modal">Get Started <i class="fa fa-chevron-right"></i></a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Welcome to Convenely</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            Tap a date to see who's free,<br/>
             tap it again to toogle whether you're free.
             <div class="single-date-container">
               <div class="pie big" data-start="0" data-value="210"></div>
@@ -178,13 +209,13 @@
   </script>
 
   <script type="text/template" id="selected-row-template">
-    <tr class="selected-row">
+    <tr class="selected-row" id="selected-row">
         <td colspan="7" width="7">
           <div class="info-row-text">
             <@= attendeeText @>
           </div>
         </td>
-    </td>
+    </tr>
   </script>
  
   <script src="/javascripts/jquery-1.8.2.min.js"></script>
