@@ -61,6 +61,7 @@
          <div class="row">
           <div class="info" style="display: none;">
             <h2>Attendees</h2>
+            <a href="/"><i id="info-home" class="fa fa-home"></i></a>
             <div>
               <span class="attendees"></span><span id="add-attendee">Add <i class="fa fa-plus-circle"></i></span>
             </div>
@@ -245,6 +246,8 @@ $(document).ready(function(){
   FastClick.attach(document.body);
 
   window.App = new EventApp();
+
+  window.App.showWelcome = <%= showWelcome %>;
 
   window.App.loadBootstrapData(<%= choices %>, <%= attendees %>, <%= calendar %>);
 });

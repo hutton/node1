@@ -78,7 +78,9 @@ window.EventApp = Backbone.View.extend({
 
 			this.registerFooterEl.slideDown('fast');
 		} else {
-			$('#welcome-modal').modal('show');				
+			if (this.showWelcome){
+				$('#welcome-modal').modal('show');
+			}
 		}
 	},
 

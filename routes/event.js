@@ -32,7 +32,7 @@ function createEvent(req, res){
 	});
 }
 
-function showEvent(res, calendar, attendeeId){
+function showEvent(req, res, calendar, attendeeId){
 	_.each(calendar.choices, function(choice){
 		choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
 		choice.freeIds = _.map(choice.free, function(free){ return String(free); });
@@ -61,13 +61,19 @@ function showEvent(res, calendar, attendeeId){
 		return choice.date;
 	});
 
-	res.cookie(calendar.calendarId, 'yes', { maxAge: 900000, httpOnly: false});
+	var showWelcome = false;
+
+	if (_.isUndefined(req.cookies[calendar.calendarId])){
+		res.cookie(calendar.calendarId, 'yes', { maxAge: 900000, httpOnly: false});
+		showWelcome = true;
+	}
 
 	res.render('event2.html', {
 		choices: JSON.stringify(sortedChoices),
 		attendees: JSON.stringify(cleanedAttendees),
 		calendar: JSON.stringify(cleanedCalendar),
 		name: calendar.name,
+		showWelcome: showWelcome
 	});
 }
 
@@ -85,7 +91,7 @@ function renderEvent(req, res){
 
 				res.send('No calendar');
 			} else {
-				showEvent(res, calendar, attendee._id);
+				showEvent(req, res, calendar, attendee._id);
 			}
 		});
 	} else if (req.route.params[0].length == 6){
@@ -100,7 +106,7 @@ function renderEvent(req, res){
 
 				res.send('No calendar');
 			} else {
-				showEvent(res, calendar, -1);
+				showEvent(req, res, calendar, -1);
 			}
 		});
 	}

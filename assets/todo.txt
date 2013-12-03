@@ -1,6 +1,4 @@
 - About page
-- Fix hit targets on header
-- Help banner for all events
 - Fix nlp for "updates" email
 
 - Change from address when adding to an event (bug)
@@ -9,6 +7,8 @@
 
 Done
 ----
+- Fix hit targets on header
+- Help banner for all events
 - Stop jank on show details
 - Opacity on let people know
 - New homepage

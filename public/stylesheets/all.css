@@ -7456,6 +7456,13 @@ a:active {
   margin-right: auto;
   display: block;
 }
+#info-home {
+  float: right;
+  position: relative;
+  top: -24px;
+  font-size: 21px;
+  color: #4ad16c;
+}
 .table td {
   padding: 8px 0px;
   border-top: none;
