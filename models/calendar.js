@@ -401,29 +401,7 @@ CalendarSchema.methods.removeAttendeeMessage = function(message){
 		var attendee = calendar.getAttendeeFromAddress(attendeeAddress);
 
 		if (attendee !== null){
-			_.each(calendar.choices, function(choice){
-				for (var i = 0; i < choice.busy.length; i++){
-					if ( choice.busy[i].equals(attendee._id)){
-						choice.busy.splice(i,1);
-						break;
-					}
-				}
-
-				for (var j = 0; j < choice.free.length; j++){
-					if ( choice.free[j].equals(attendee._id)){
-						choice.free.splice(j,1);
-						break;
-					}
-				}
-
-				if (choice.busy.length === 0 && choice.free.length === 0){
-					calendar.choices.splice(calendar.choices.indexOf(choice),1);
-				}
-			});
-
-			var i = calendar.attendees.indexOf(attendee);
-
-			calendar.attendees.splice(i,1);
+			removeAttendeeAvailabiltyFromCalendar(calendar, attendee);
 		}
 	});
 
@@ -431,10 +409,53 @@ CalendarSchema.methods.removeAttendeeMessage = function(message){
 		if (err){
 			logger.error("Failed to create calendar: " + err);
 		} else {
-			logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+			logger.info("Removed attendees Calendar " + calendar.name + "(" + calendar.id + ") saved.");
 		}
 	});
 };
+
+CalendarSchema.methods.removeAttendee = function(attendee){
+	var name = "";
+	var calendar = this;
+
+	if (attendee !== null){
+		removeAttendeeAvailabiltyFromCalendar(calendar, attendee);
+	}
+
+	calendar.save(function(err, calendar){
+		if (err){
+			logger.error("Failed to create calendar: " + err);
+		} else {
+			logger.info("Removed '" + attendee.email + "'' Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+		}
+	});
+};
+
+function removeAttendeeAvailabiltyFromCalendar(calendar, attendee){
+	_.each(calendar.choices, function(choice){
+		for (var i = 0; i < choice.busy.length; i++){
+			if ( choice.busy[i].equals(attendee._id)){
+				choice.busy.splice(i,1);
+				break;
+			}
+		}
+
+		for (var j = 0; j < choice.free.length; j++){
+			if ( choice.free[j].equals(attendee._id)){
+				choice.free.splice(j,1);
+				break;
+			}
+		}
+
+		if (choice.busy.length === 0 && choice.free.length === 0){
+			calendar.choices.splice(calendar.choices.indexOf(choice),1);
+		}
+	});
+
+	var i = calendar.attendees.indexOf(attendee);
+
+	calendar.attendees.splice(i,1);
+}
 
 var Calendar = mongoose.model('Calendar', CalendarSchema);
 

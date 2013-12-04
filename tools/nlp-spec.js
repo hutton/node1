@@ -173,6 +173,17 @@ validate("I can do next week except Thursday and Friday",
 	]);
 
 
+validate("I'm now free on Friday 13th December and Thursday 12th December", 
+	[
+		[],
+		[Date.future("13th"),Date.future("12th")]
+	]);
+
+validate("I'm now free on Friday 13th December and Thursday 12th December but I'm no longer free on Friday 6th December, Thursday 5th December and Sunday 1st December", 
+	[
+		[Date.future("6th"),Date.future("5th"),Date.future("1st")],
+		[Date.future("13th"),Date.future("12th")]
+	]);
 
 
 

@@ -103,6 +103,12 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 						calendar.removeAttendeeMessage(message);
 
 						updateCalendarCallback(calendar);
+					} else if (subject.toLowerCase() == "unsubscribe"){
+						logger.info("Removing attendee from event");
+
+						calendar.removeAttendee(fromAttendee);
+
+						updateCalendarCallback(calendar);
 					} else {
 						if (fromAttendee.name === ""){
 							fromAttendee.name = fromName;
@@ -110,9 +116,10 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 
 						var dates = Nlp.processBody(message);
 
-						calendar.updateCalendar(fromAttendee,
-							dates[0],
-							dates[1]);
+						// Don't update the calendar
+						// calendar.updateCalendar(fromAttendee,
+						// 	dates[0],
+						// 	dates[1]);
 
 						Mail.sendMail(calendar, subject, message, fromAttendee.name || fromAttendee.email);
 
@@ -174,7 +181,7 @@ exports.receive = function(req, res){
 		res.redirect('/event/' + newCalendar.calendarId);
 	},
 	function(calendar){
-		res.redirect('/event/' + newCalendar.calendarId);
+		res.redirect('/event/' + calendar.calendarId);
 	},
 	function(message){
 		logger.info(req.body);

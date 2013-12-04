@@ -124,6 +124,8 @@ function renderEmail(calendar, format, res){
 
 	var attendee = calendar.attendees[0];
 
+	var unsubscribeLink = buildUnsubscribeLink(calendar);
+
 	buildNewAttendeeMailToLink(calendar, function(newAttendeeLink){
 		if (format === "text"){
 			res.render('calendar_view.txt', {
@@ -143,7 +145,8 @@ function renderEmail(calendar, format, res){
 				message: 'this is the message loren ipsum',
 				fromName: "",
 				newAttendeeMailTo: newAttendeeLink,
-				subject: 'the subject'
+				subject: 'the subject',
+				unsubscribeLink: unsubscribeLink
 			});
 		}
 	});
@@ -152,72 +155,8 @@ function renderEmail(calendar, format, res){
 function sendMail(calendar, subject, message, fromName){
 	logger.info("Sending mail to group: " + calendar.id );
 
-	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
-
-	var sortedChoices = buildSortedChoices(calendar);
-
-	message = message.replace(/\n/g, '<br />');
-
-	if (_.isUndefined(subject) || subject.length === 0){
-		subject = "RE: " + calendar.name;
-	}
-
 	_.each(calendar.attendees, function(attendee){
-		attendee.prettyName = attendee.name || attendee.email;
-	});
-
-	_.each(calendar.attendees, function(attendee){
-		buildNewAttendeeMailToLink(calendar, function(newAttendeeLink){
-			global.app.render('email-template.html', {
-				attendee: attendee,
-				calendar: calendar,
-				choices: sortedChoices,
-				attendees: calendar.attendees,
-				message: message,
-				subject: subject,
-				newAttendeeMailTo: newAttendeeLink,
-				fromName: fromName
-			}, function(err, html){
-
-				if (err){
-					logger.info(err);
-				}
-
-				logger.info("Sending mail to: " + attendee.email );
-
-				try{
-					var message = {
-						"html": html,
-						"subject": subject,
-						"from_email": calendar.id + "@convenely.com",
-						"to": [{
-							"email": attendee.email,
-							"type": "to"
-						}]};
-
-					if (attendee.name !== null && attendee.name != ""){
-						message.to.name = attendee.name;
-					}
-
-					if (fromName !== ""){
-						message.from_name = fromName + " via Convenely";
-					}
-
-					mandrill_client.messages.send({"message": message}, function(result) {
-							logger.info('Email sent to: ' + attendee.email);
-						    logger.info(result);
-						}, function(e) {
-
-						    logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-
-							logger.info('Failed sending email to: ' + attendee.email);
-						});
-				} catch (e){
-					logger.error("Failed to send email to: " + mail.to);
-					logger.error(e);
-				}
-			});
-		});
+		sendMailToAttendee(calendar, attendee, subject, message, fromName);
 	});
 }
 
@@ -234,7 +173,13 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 		attendee.prettyName = attendee.name || attendee.email;
 	});
 
+	if (_.isUndefined(subject) || subject.length === 0){
+		subject = "RE: " + calendar.name;
+	}
+
 	toAttendee.prettyName = toAttendee.name || toAttendee.email;
+
+	var unsubscribeLink = buildUnsubscribeLink(calendar);
 
 	buildNewAttendeeMailToLink(calendar, function(newAttendeeLink){
 		global.app.render('email-template.html', {
@@ -245,7 +190,8 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 			message: message,
 			newAttendeeMailTo: newAttendeeLink,
 			subject: subject,
-			fromName: fromName
+			fromName: fromName,
+			unsubscribeLink: unsubscribeLink
 		}, function(err, html){
 
 			if (err){
@@ -299,6 +245,12 @@ function buildNewAttendeeMailToLink(calendar, callback){
 
 		callback(link);
 	});
+}
+
+function buildUnsubscribeLink(calendar){
+	var body = "Please remove me from the '" + calendar.name + "' event."
+
+	return "mailto:" + calendar.id + "@convenely.com?subject=Unsubscribe&body=" + encodeURIComponent(body);
 }
 
 function sendWereInBetaEmail(to){

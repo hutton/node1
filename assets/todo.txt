@@ -1,3 +1,4 @@
+- Hit target on home
 - About page
 - Fix nlp for "updates" email
 
