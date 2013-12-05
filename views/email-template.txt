@@ -1,0 +1,7 @@
+<% if (fromName != ""){ %><%= fromName %> wrote:<% } %>
+
+<%= message %>
+
+
+View the event online here:
+http://convenely.com/event/<%= attendee.attendeeId %>

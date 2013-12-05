@@ -128,13 +128,10 @@ function renderEmail(calendar, format, res){
 
 	buildNewAttendeeMailToLink(calendar, function(newAttendeeLink){
 		if (format === "text"){
-			res.render('calendar_view.txt', {
+			res.render('email-template.txt', {
 				attendee: attendee,
-				calendar: calendar,
-				choices: sortedChoices,
-				attendees: calendar.attendees,
 				fromName: "From name",
-				message: ''
+				message: 'this is the message loren ipsum'
 			});
 		} else if (format === 'html'){
 			res.render('email-template.html', {
@@ -143,7 +140,7 @@ function renderEmail(calendar, format, res){
 				choices: sortedChoices,
 				attendees: calendar.attendees,
 				message: 'this is the message loren ipsum',
-				fromName: "",
+				fromName: "From name",
 				newAttendeeMailTo: newAttendeeLink,
 				subject: 'the subject',
 				unsubscribeLink: unsubscribeLink
@@ -182,7 +179,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 	var unsubscribeLink = buildUnsubscribeLink(calendar);
 
 	buildNewAttendeeMailToLink(calendar, function(newAttendeeLink){
-		global.app.render('email-template.html', {
+		var templateValues = {
 			attendee: toAttendee,
 			calendar: calendar,
 			choices: sortedChoices,
@@ -192,47 +189,57 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 			subject: subject,
 			fromName: fromName,
 			unsubscribeLink: unsubscribeLink
-		}, function(err, html){
+		};
 
+		global.app.render('email-template.html', templateValues, function(err, html){
 			if (err){
-				logger.info(err);
+				logger.error("Failed to render html email");
+				logger.error(err);
 			}
 
-			logger.info("Sending mail to: " + toAttendee.email );
-
-			try{
-
-				var message = {
-					"html": html,
-					"subject": subject,
-					"from_email": calendar.id + "@convenely.com",
-					"to": [{
-						"email": toAttendee.email,
-						"type": "to"
-					}]};
-
-
-				if (toAttendee.name !== null && toAttendee.name !== ""){
-					message.to.name = toAttendee.name;
+			global.app.render('email-template.txt', templateValues, function(err, text){
+				
+				if (err){
+					logger.error("Failed to render text email");
+					logger.error(err);
 				}
 
-				if (fromName !== ""){
-					message.from_name = fromName + " via Convenely";
+				logger.info("Sending mail to: " + toAttendee.email );
+
+				try{
+
+					var message = {
+						"text": text,
+						"html": html,
+						"subject": subject,
+						"from_email": calendar.id + "@convenely.com",
+						"to": [{
+							"email": toAttendee.email,
+							"type": "to"
+						}]};
+
+					if (toAttendee.name !== null && toAttendee.name !== ""){
+						message.to.name = toAttendee.name;
+					}
+
+					if (fromName !== ""){
+						message.from_name = fromName + " via Convenely";
+					}
+
+					mandrill_client.messages.send({"message": message}, function(result) {
+							logger.info('Email sent to: ' + toAttendee.email);
+							logger.info(result);
+						}, function(e) {
+
+							logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+
+							logger.error('Failed sending email to: ' + toAttendee.email);
+						});
+				} catch (e){
+					logger.error("Failed to send email to: " + toAttendee.email);
+					logger.error(e);
 				}
-
-				mandrill_client.messages.send({"message": message}, function(result) {
-						logger.info('Email sent to: ' + toAttendee.email);
-						logger.info(result);
-					}, function(e) {
-
-						logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-
-						logger.error('Failed sending email to: ' + toAttendee.email);
-					});
-			} catch (e){
-				logger.error("Failed to send email to: " + toAttendee.email);
-				logger.error(e);
-			}
+			});
 		});
 	});
 }

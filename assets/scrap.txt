@@ -3,8 +3,9 @@ res.cookie('rememberme', 'yes', { maxAge: 900000, httpOnly: false});
 
 
 Get it together.
-Meeting up with friends is a great joy, trying to get them organised is a pain in the ass.
+Meeting up with friends is a great joy, trying to get them organised can be a pain in the ass.
 
+We believe with the right tools
 Convenely takes the pain out of getting friends togther with 
 
 
@@ -20,8 +21,10 @@ It all ends with email
 Frequently Asked Questions.
 
 How do I add people to an event?
+Either click the 'Invite attendee' link in any event email or click the title on your event page then click 'Add' at the end of the attendee list.
 
 Can anyone add people to an event?
 Yes.  Anyone who is part of an event can add people to it.  
 
 How do I remove people from an event?
+Anyone can remove themselves from an event by clicking 'Unsubscribe' at the bottom of any email.  If you want to remove someone else send an email to your event's email address with 'Remove' as the subject and the email address of the person you want to remove in the message.

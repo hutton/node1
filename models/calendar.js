@@ -432,7 +432,10 @@ CalendarSchema.methods.removeAttendee = function(attendee){
 };
 
 function removeAttendeeAvailabiltyFromCalendar(calendar, attendee){
-	_.each(calendar.choices, function(choice){
+
+	for (var c = 0; c < calendar.choices.length; c++){
+		var choice = calendar.choices[c];
+
 		for (var i = 0; i < choice.busy.length; i++){
 			if ( choice.busy[i].equals(attendee._id)){
 				choice.busy.splice(i,1);
@@ -448,13 +451,14 @@ function removeAttendeeAvailabiltyFromCalendar(calendar, attendee){
 		}
 
 		if (choice.busy.length === 0 && choice.free.length === 0){
-			calendar.choices.splice(calendar.choices.indexOf(choice),1);
+			calendar.choices.splice(c,1);
+			c--;
 		}
-	});
+	}
 
-	var i = calendar.attendees.indexOf(attendee);
+	var a = calendar.attendees.indexOf(attendee);
 
-	calendar.attendees.splice(i,1);
+	calendar.attendees.splice(a,1);
 }
 
 var Calendar = mongoose.model('Calendar', CalendarSchema);
