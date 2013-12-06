@@ -150,22 +150,20 @@ CalendarSchema.statics.newCalendar = function(from, fromName, subject, message, 
 	createCalendar(subject, choices, from, function(newCalendar){
 		logger.info("Calendar saved: " + newCalendar.id);
 
-		var attendees = _.map(attendeeAddresses, function(address){
+		_.each(attendeeAddresses, function(address){
 			name = "";
 
 			if (address == from){
 				name = fromName;
 			}
 
-			return new Attendee({
+			var newAttendee = new Attendee({
 				name: name,
 				email: address,
-				attendeeId: newCalendar.calendarId + makeId(3)
+				attendeeId: newCalendar.calendarId + findNewAttendeeId(newCalendar)
 			});
-		});
 
-		_.each(attendees, function(attendee){
-			newCalendar.attendees.push(attendee);
+			newCalendar.attendees.push(newAttendee);
 		});
 
 		newCalendar.save(function(err, calendar){
@@ -370,15 +368,15 @@ CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
 	var attendees = _.map(attendeeAddresses, function(address){
 		name = "";
 
-		return new Attendee({
+		var newAttendee = new Attendee({
 			name: name,
 			email: address,
-			attendeeId: calendar.calendarId + makeId(3)
+			attendeeId: calendar.calendarId + findNewAttendeeId(calendar)
 		});
-	});
 
-	_.each(attendees, function(attendee){
-		calendar.attendees.push(attendee);
+		calendar.attendees.push(newAttendee);
+
+		return newAttendee;
 	});
 
 	calendar.save(function(err, calendar){
@@ -394,27 +392,31 @@ CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
 	});
 };
 
+function findNewAttendeeId(calendar){
+	var matches = true;
+	var tryId;
+
+	while (matches){
+		matches = false;
+		tryId = makeId(3);
+
+		_.each(calendar.attendees, function(attendee){
+			if (attendee.attendeeId == tryId){
+				matches = true;
+			}
+		});
+	}
+
+	return tryId;
+}
+
 CalendarSchema.methods.addAttendee = function(address, fromName){
 	var calendar = this;
-
-	var matches = false;
-	var tryId = makeId(3);
-
-	// while (matches){
-	// 	matches = false;
-	// 	tryId = makeId(3);
-
-	// 	_.each(calendar.attendees, function(attendee){
-	// 		if (attendee.attendeeId == tryId){
-	// 			matches = true;
-	// 		}
-	// 	});
-	// }
 
 	var attendee = new Attendee({
 			name: "",
 			email: address,
-			attendeeId: calendar.calendarId + makeId(3)
+			attendeeId: calendar.calendarId + findNewAttendeeId(calendar)
 		});
 
 	calendar.attendees.push(attendee);

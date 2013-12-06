@@ -135,7 +135,7 @@ window.ChoiceView = Backbone.View.extend({
 				window.App.isFree.push(this.model.get("date"));
 			}
 
-			window.App.updateRegisterLink();
+			// window.App.updateRegisterLink();
 		}
 	},
 

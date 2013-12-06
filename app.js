@@ -4,6 +4,7 @@
 
  
  var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
+ var webAppDebug = process.env.WEBAPP_DEBUG;
 
  var express = require('express')
  , routes = require('./routes')
@@ -20,6 +21,10 @@
 
  if (_.isUndefined(connectionString)){
 	connectionString = 'mongodb://localhost:27017/test';
+ }
+
+if (_.isUndefined(webAppDebug)){
+	webAppDebug = false;
  }
 
  var app = express();
@@ -98,6 +103,7 @@ var winstonStream = {
  app.get('/calendar-text/*', calendar.viewText);
 
  app.ourEmail = "convenely@gmail.com";
+ app.webAppDebug = webAppDebug;
 
  global.app = app;
  

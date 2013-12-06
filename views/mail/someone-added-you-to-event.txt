@@ -1,6 +1,6 @@
 Hi,
 
-<%= fromAttendee.fullName %> has invited you to the '<%= calendar.name %>' event on Convenely.
+<%= inviter %> has invited you to the '<%= calendar.name %>' event on Convenely.
 
 Visit the event from the link below where you can update your availability.
 

@@ -24,6 +24,10 @@ window.EventApp = Backbone.View.extend({
 
 		this.ChoicesView.render();
 
+		var pathNames = window.location.pathname.split( '/' );
+
+		this.currentId = pathNames[pathNames.length - 1];
+
 		this.render();
 	},
 
@@ -254,7 +258,7 @@ window.EventApp = Backbone.View.extend({
 		container.addClass('disabled');
 		spinner.show();
 
-		$.post("/event/" + window.location.toString().slice(-9) + "/add/",
+		$.post("/event/" + this.currentId + "/add/",
 			{
 				email: newAttendeeEmail
 			},
@@ -323,7 +327,7 @@ window.EventApp = Backbone.View.extend({
 		container.addClass('disabled');
 		spinner.show();
 
-		$.post("/event/" + window.location.toString().slice(-6) + "/add/",
+		$.post("/event/" + this.currentId + "/add/",
 			{
 				email: newAttendeeEmail,
 				isFree: this.isFree

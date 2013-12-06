@@ -1,13 +1,18 @@
-- Hit target on home
-- About page
-- Fix nlp for "updates" email
+CalendarId 5 attendeeId + 3
 
+- Fix nlp for "updates" email
 - Change from address when adding to an event (bug)
 - Add subject when empty RE: Strom day
 - Add helper 'Tap/click again mark as free'
 
 Done
 ----
+- Release / debug versions
+- id clash for new attendees
+- Blank name appearing in welcome email
+- Better parsing of id from urls
+- Hit target on home
+- About page
 - Fix hit targets on header
 - Help banner for all events
 - Stop jank on show details

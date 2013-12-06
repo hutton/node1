@@ -68,6 +68,7 @@ function showEvent(req, res, calendar, attendeeId){
 	}
 
 	res.render('event2.html', {
+		webAppDebug: global.app.webAppDebug,
 		choices: JSON.stringify(sortedChoices),
 		attendees: JSON.stringify(cleanedAttendees),
 		calendar: JSON.stringify(cleanedCalendar),
@@ -157,9 +158,15 @@ function addAttendee(req, res){
 
 				var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
 
+				var inviter = attendee.email;
+
+				if (attendee.name !== null || attendee.name !== ""){
+					inviter = attendee.name + " (" + attendee.email + ")";
+				}
+
 				global.app.render('mail/someone-added-you-to-event.txt', {
 					calendar: calendar,
-					fromAttendee: attendee
+					inviter: inviter
 				}, function(err, message){
 					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 				});
