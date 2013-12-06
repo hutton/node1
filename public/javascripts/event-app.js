@@ -1,4 +1,3 @@
-
 window.EventApp = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
@@ -255,7 +254,7 @@ window.EventApp = Backbone.View.extend({
 		container.addClass('disabled');
 		spinner.show();
 
-		$.post("/event/" + window.location.toString().slice(-5) + "/add/",
+		$.post("/event/" + window.location.toString().slice(-9) + "/add/",
 			{
 				email: newAttendeeEmail
 			},
