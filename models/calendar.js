@@ -51,7 +51,25 @@ function saveCallback(err){
 	}
 }
 
-function createCalendar(subject, choices, attendees, from, callback){
+var f = 4;
+
+function findNewCalendarId(callback){
+	var tryId = makeId(6);
+
+	Calendar.findOne({"calendarId": tryId}, function(err, calendar){
+		console.log(calendar);
+		if (err){
+			logger.error(err);
+			return;
+		} else if (calendar === null){
+			callback(tryId);
+		} else {
+			findNewCalendarId(callback);
+		}
+	});
+}
+
+function createCalendar(subject, choices, from, callback){
 	// Need to check for dups
 	var id = subject.replace(/ /g,"-").toLowerCase();
 
@@ -59,42 +77,40 @@ function createCalendar(subject, choices, attendees, from, callback){
 		id: id,
 		name: subject,
 		choices: choices,
-		createdBy: from,
-		calendarId: makeId(6)
+		createdBy: from
 	});
 
-	Calendar.find({id: new RegExp('^'+ newCalendar.id +'*', "i")}, 'id').exec(function(err, docs){
-		var originalId = newCalendar.id;
-		var tryId = originalId;
-		var count = 1;
+	findNewCalendarId(function(newId){
+		Calendar.find({id: new RegExp('^'+ newCalendar.id +'*', "i")}, 'id').exec(function(err, docs){
+			var originalId = newCalendar.id;
+			var tryId = originalId;
+			var count = 1;
 
-		while (true){
-			var found = _.find(docs, function(doc){ return doc.id == tryId; });
+			while (true){
+				var found = _.find(docs, function(doc){ return doc.id == tryId; });
 
-			if (found === null || _.isUndefined(found)){
-				break;
-			} else {
-				tryId = originalId + count++;
+				if (found === null || _.isUndefined(found)){
+					break;
+				} else {
+					tryId = originalId + count++;
+				}
 			}
-		}
 
-		newCalendar.id = tryId;
+			newCalendar.calendarId = newId;
+			newCalendar.id = tryId;
 
-		_.each(attendees, function(attendee){
-			newCalendar.attendees.push(attendee);
+			newCalendar.save(function(err, calendar){
+				if (err){
+					logger.error("Failed to create calendar: " + err);
+				} else {
+					logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
+
+					Mail.sendTextMail(global.app.ourEmail, global.app.ourEmail ,"New calender: " + calendar.name, "New calendar created http://convenely.com/event/" + calendar.calendarId);
+				}
+			});
+
+			callback(newCalendar);
 		});
-
-		newCalendar.save(function(err, calendar){
-			if (err){
-				logger.error("Failed to create calendar: " + err);
-			} else {
-				logger.info("New Calendar " + calendar.name + "(" + calendar.id + ") saved.");
-
-				Mail.sendTextMail(global.app.ourEmail, global.app.ourEmail ,"New calender: " + calendar.name, "New calendar created http://convenely.com/event/" + calendar.calendarId);
-			}
-		});
-
-		callback(newCalendar);
 	});
 }
 
@@ -131,24 +147,36 @@ CalendarSchema.statics.newCalendar = function(from, fromName, subject, message, 
 
 	attendeeAddresses = _.uniq(attendeeAddresses);
 
-	var attendees = _.map(attendeeAddresses, function(address){
-		name = "";
-
-		if (address == from){
-			name = fromName;
-		}
-
-		return new Attendee({
-			name: name,
-			email: address,
-			attendeeId: makeId(5)
-		});
-	});
-
-	createCalendar(subject, choices, attendees, from, function(newCalendar){
+	createCalendar(subject, choices, from, function(newCalendar){
 		logger.info("Calendar saved: " + newCalendar.id);
 
-		callback(newCalendar);
+		var attendees = _.map(attendeeAddresses, function(address){
+			name = "";
+
+			if (address == from){
+				name = fromName;
+			}
+
+			return new Attendee({
+				name: name,
+				email: address,
+				attendeeId: newCalendar.calendarId + makeId(3)
+			});
+		});
+
+		_.each(attendees, function(attendee){
+			newCalendar.attendees.push(attendee);
+		});
+
+		newCalendar.save(function(err, calendar){
+			if (err){
+				logger.error("Failed to save calendar: " + err);
+			} else {
+				logger.info("Attendees added to new calendar " + calendar.name + "(" + calendar.id + ") saved.");
+			};
+
+			callback(newCalendar);
+		});
 	});
 };
 
@@ -345,7 +373,7 @@ CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
 		return new Attendee({
 			name: name,
 			email: address,
-			attendeeId: makeId(5)
+			attendeeId: calendar.calendarId + makeId(3)
 		});
 	});
 
@@ -369,10 +397,24 @@ CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
 CalendarSchema.methods.addAttendee = function(address, fromName){
 	var calendar = this;
 
+	var matches = false;
+	var tryId = makeId(3);
+
+	// while (matches){
+	// 	matches = false;
+	// 	tryId = makeId(3);
+
+	// 	_.each(calendar.attendees, function(attendee){
+	// 		if (attendee.attendeeId == tryId){
+	// 			matches = true;
+	// 		}
+	// 	});
+	// }
+
 	var attendee = new Attendee({
 			name: "",
 			email: address,
-			attendeeId: makeId(5)
+			attendeeId: calendar.calendarId + makeId(3)
 		});
 
 	calendar.attendees.push(attendee);

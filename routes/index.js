@@ -4,11 +4,11 @@
  */
 
 exports.index = function(req, res){
-  res.render('index.html');
+  res.render('index2.html');
 };
 
 exports.index2 = function(req, res){
-  res.render('index2.html');
+  res.render('index.html');
 };
 
 exports.help = function(req, res){

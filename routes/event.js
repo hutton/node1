@@ -79,7 +79,7 @@ function showEvent(req, res, calendar, attendeeId){
 
 function renderEvent(req, res){
 
-	if (req.route.params[0].length == 5){
+	if (req.route.params[0].length == 9 || req.route.params[0].length == 5){
 		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
 				logger.error("Error finding calendar with attendee " + req.route.params[0]);
@@ -109,6 +109,9 @@ function renderEvent(req, res){
 				showEvent(req, res, calendar, -1);
 			}
 		});
+	} else {
+		res.status(404);
+		res.send("We can't find the event you're looking for.")
 	}
 }
 
