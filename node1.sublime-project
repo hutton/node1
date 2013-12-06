@@ -2,7 +2,9 @@
 	"folders":
 	[
 		{
-			"path": "/Users/simonhutton/Source/node1"
+			"path": "/Users/simonhutton/Source/node1",
+           	"folder_exclude_patterns": ["node_modules"],
+           	"file_exclude_patterns": ["*.sublime-workspace"]
 		}
 	]
 }

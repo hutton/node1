@@ -171,7 +171,7 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 	});
 
 	if (_.isUndefined(subject) || subject.length === 0){
-		subject = "RE: " + calendar.name;
+		subject = "Re: " + calendar.name;
 	}
 
 	toAttendee.prettyName = toAttendee.name || toAttendee.email;
