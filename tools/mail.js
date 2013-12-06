@@ -212,7 +212,6 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 						"text": text,
 						"html": html,
 						"subject": subject,
-						"from_name": subject + " - Convenely",
 						"from_email": calendar.id + "@convenely.com",
 						"to": [{
 							"email": toAttendee.email,
