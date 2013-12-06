@@ -1,4 +1,3 @@
-
 require("../models/attendee");
 var Calendar = require("../models/calendar").Calendar;
 
@@ -140,7 +139,7 @@ function updateChoice(req, res){
 
 
 function addAttendee(req, res){
-	if (req.route.params[0].length == 5){
+	if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
 		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
 				logger.error("Error finding calendar " + req.route.params[0]);
