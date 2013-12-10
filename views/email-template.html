@@ -104,12 +104,11 @@
 		padding: 0px 5px;
 	}
 
-	.avail-status{
-		padding: 4px 0px;
-		text-align: center; 
-		color: #51da73;
-		font-weight: bold;
-	}
+ 	.avail-status{
+		padding: 4px 5px;
+ 		text-align: center; 
+		color: #ffffff;
+ 	}
 
 	.unsubscribe{
 		color: #c0c0c0;
@@ -197,7 +196,7 @@
 										<td colspan="2" class="avail-address">
 											<a class="none-link" href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).prettyName %></a>
 										</td>
-										<td width="40" class="avail-status">Free</td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span fgColor="#ffffff">&#10003;</span> Free </td>
 										<td width="5"></td>
 									</tr>
 									<% }); %>

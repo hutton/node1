@@ -17,16 +17,33 @@ function createEvent(req, res){
 	logger.info("Creator: " + creatorEmail + " Event Name: " + eventName + " Attendees Text: " + attendeesText);
 
 	Calendar.newCalendar(creatorEmail, "", eventName, attendeesText, function(newCalendar){
-		var attendee = newCalendar.getAttendeeFromAddress(creatorEmail);
+		var creatorAttendee = newCalendar.getAttendeeFromAddress(creatorEmail);
 
 		global.app.render('mail/created-from-homepage.txt', {
 			calendar: newCalendar
 		}, function(err, message){
 			logger.info("New calendar " + newCalendar.calendarId + " created.");
 
-			Mail.sendMailToAttendee(newCalendar, attendee, newCalendar.name, message, "");
+			Mail.sendMailToAttendee(newCalendar, creatorAttendee, newCalendar.name, message, "");
 
-			res.redirect('/event/' + attendee.attendeeId);
+			res.redirect('/event/' + creatorAttendee.attendeeId);
+		});
+
+		var inviter = creatorAttendee.email;
+
+		if (creatorAttendee.name !== null || creatorAttendee.name !== ""){
+			inviter = creatorAttendee.name + " (" + creatorAttendee.email + ")";
+		}
+
+		_.each(newCalendar.attendees, function(attendee){
+			if (attendee != creatorAttendee){
+				global.app.render('mail/someone-added-you-to-event.txt', {
+					calendar: newCalendar,
+					inviter: inviter
+				}, function(err, message){
+					Mail.sendMailToAttendee(newCalendar, attendee, newCalendar.name, message, "");
+				});
+			}
 		});
 	});
 }

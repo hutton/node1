@@ -71,7 +71,10 @@ function findNewCalendarId(callback){
 
 function createCalendar(subject, choices, from, callback){
 	// Need to check for dups
-	var id = subject.replace(/ /g,"-").toLowerCase();
+	var id = subject.toLowerCase();
+
+	id = id.replace(/[&@£$%^*+= ]/g,"-");
+	id = id.replace(/[!'"(){}]/g,"");
 
 	var newCalendar = new Calendar({
 		id: id,

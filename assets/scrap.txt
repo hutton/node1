@@ -1,3 +1,4 @@
 
 We just wanted to let you know that Convenely has launched and you can try it right now for free.  In case you've forgotten, Convenely is a super easy way to arrange meeting up with friends.  
-Create an event
+
+When you create an event with Convenely we create a email group (e.g. poker-night@convenely.com) which
