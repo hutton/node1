@@ -1,5 +1,6 @@
-CalendarId 5 attendeeId + 3
 
+
+- CalendarId 5 attendeeId + 3
 - Fix nlp for "updates" email
 - Change from address when adding to an event (bug)
 - Add subject when empty RE: Strom day
@@ -7,6 +8,9 @@ CalendarId 5 attendeeId + 3
 
 Done
 ----
+- Don't get other pretty name attendee list
+- When invite from homepage others don't get an email
+- Invert free colors on email?
 - Release / debug versions
 - id clash for new attendees
 - Blank name appearing in welcome email

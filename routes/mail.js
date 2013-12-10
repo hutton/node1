@@ -114,12 +114,14 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 							fromAttendee.name = fromName;
 						}
 
-						var dates = Nlp.processBody(message);
-
 						// Don't update the calendar
+						// var dates = Nlp.processBody(message);
+
 						// calendar.updateCalendar(fromAttendee,
 						// 	dates[0],
 						// 	dates[1]);
+
+						calendar.updateCalendar(fromAttendee,[],[]);
 
 						Mail.sendMail(calendar, subject, message, fromAttendee.name || fromAttendee.email);
 

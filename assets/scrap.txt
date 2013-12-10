@@ -1,18 +1,3 @@
-http://css-tricks.com/example/index.html
 
-window.location.protocol = "http"
-window.location.host = "css-tricks.com"
-window.location.pathname = "example/index.html"
-
-
-
-var url = "http://convenely.com/event/jORg4xpI9";
-var pathname = "event/jORg4xpI9";
-var pathNames = pathname.split( '/' );
-
-console.log(pathNames[pathNames.length - 1]);
-console.log(url.slice(-9));
-
-
-h2 on about 34px
-
+We just wanted to let you know that Convenely has launched and you can try it right now for free.  In case you've forgotten, Convenely is a super easy way to arrange meeting up with friends.  
+Create an event
