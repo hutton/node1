@@ -54,6 +54,8 @@ function showEvent(req, res, calendar, attendeeId){
 		choice.freeIds = _.map(choice.free, function(free){ return String(free); });
 
 		choice.columnDate = moment(choice.date).format("dddd Do MMM");
+
+		choice.date.setHours(0,0,0,0);
 	});
 
 	var cleanedAttendees = [];
