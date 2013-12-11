@@ -31,7 +31,7 @@ function createEvent(req, res){
 
 		var inviter = creatorAttendee.email;
 
-		if (creatorAttendee.name !== null || creatorAttendee.name !== ""){
+		if (creatorAttendee.name !== null && creatorAttendee.name !== ""){
 			inviter = creatorAttendee.name + " (" + creatorAttendee.email + ")";
 		}
 
@@ -177,7 +177,7 @@ function addAttendee(req, res){
 
 				var inviter = attendee.email;
 
-				if (attendee.name !== null || attendee.name !== ""){
+				if (attendee.name !== null && attendee.name !== ""){
 					inviter = attendee.name + " (" + attendee.email + ")";
 				}
 
