@@ -164,8 +164,6 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 
 	var sortedChoices = buildSortedChoices(calendar);
 
-	message = message.replace(/\n/g, '<br />');
-
 	_.each(calendar.attendees, function(attendee){
 		attendee.prettyName = attendee.name || attendee.email;
 	});
@@ -191,16 +189,18 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 			unsubscribeLink: unsubscribeLink
 		};
 
-		global.app.render('email-template.html', templateValues, function(err, html){
+		global.app.render('email-template.txt', templateValues, function(err, text){
+			
 			if (err){
-				logger.error("Failed to render html email");
+				logger.error("Failed to render text email");
 				logger.error(err);
 			}
 
-			global.app.render('email-template.txt', templateValues, function(err, text){
-				
+			templateValues['message'] = message.replace(/\n/g, '<br />');
+
+			global.app.render('email-template.html', templateValues, function(err, html){
 				if (err){
-					logger.error("Failed to render text email");
+					logger.error("Failed to render html email");
 					logger.error(err);
 				}
 
@@ -232,8 +232,8 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 						}, function(e) {
 
 							logger.error('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-
 							logger.error('Failed sending email to: ' + toAttendee.email);
+							logger.error(message);
 						});
 				} catch (e){
 					logger.error("Failed to send email to: " + toAttendee.email);

@@ -69,12 +69,19 @@ function findNewCalendarId(callback){
 	});
 }
 
+function makeValidCalendarId(name){
+	name = name.replace(/[+| ]/g,"-");
+	name = name.replace(/[^a-zA-Z0-9_-]/g, "");
+	name = name.replace(/-+/g, "-");
+
+	return name;
+}
+
 function createCalendar(subject, choices, from, callback){
 	// Need to check for dups
 	var id = subject.toLowerCase();
 
-	id = id.replace(/[&@£$%^*+= ]/g,"-");
-	id = id.replace(/[!'"(){}]/g,"");
+	id = makeValidCalendarId(id);
 
 	var newCalendar = new Calendar({
 		id: id,
