@@ -215,7 +215,9 @@ window.ChoicesView = Backbone.View.extend({
 
 		this.$el.append($("<tr class='selected-row'><td colspan='7' width='7'></td></tr>"));
 
-		this.$el.find(".today")[0].scrollIntoView(true);
+		if (this.$el.find(".today").length > 0){
+			this.$el.find(".today")[0].scrollIntoView(true);
+		}
 
 		var body = $("body");
 		body.scrollTop(body.scrollTop() - 70);
