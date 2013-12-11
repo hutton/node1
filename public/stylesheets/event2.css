@@ -30,7 +30,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 #show-info>span{-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
 #title-mail{position:absolute;float:left;top:4px;transition:all 0.4s ease-in-out;padding:6px 14px;}
 .show-info-rotate{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg);}
-.title{color:#4ad16c;text-align:center;padding-top:12px;margin-left:auto;margin-right:auto;}
+.title{color:#4ad16c;text-align:center;padding-top:12px;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;}
 .title:hover{cursor:pointer;}
 .add-attendee-panel{margin:10px;}
 .message-panel{display:none;font-size:14px;}

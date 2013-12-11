@@ -1,7 +1,9 @@
 var _ = require("underscore");
 // var sugar = require("sugar");
 
-var input = [{"date":"2013-10-06T23:00:00.000Z","_id":"524da47e9041416f3d000003","free":["524d1cbe8940237b33000005"],"busy":[]},{"date":"2013-10-08T23:00:00.000Z","_id":"524da47e9041416f3d000004","free":["524d1cbe8940237b33000005"],"busy":[]},{"date":"2013-10-16T23:00:00.000Z","_id":"52564efe1e28d04774000003","free":["524d1cbe8940237b33000005"],"busy":[]}];
+var input = [{"date":"2013-10-06T00:00:00.000Z","_id":"524da47e9041416f3d000003","free":["524d1cbe8940237b33000005"],"busy":[]},{"date":"2013-10-08T23:00:00.000Z","_id":"524da47e9041416f3d000004","free":["524d1cbe8940237b33000005"],"busy":[]},{"date":"2013-10-16T23:00:00.000Z","_id":"52564efe1e28d04774000003","free":["524d1cbe8940237b33000005"],"busy":[]}];
+
+//var input = [{"date":"2014-02-06T00:00:00.000Z","_id":"524da47e9041416f3d000003","free":["524d1cbe8940237b33000005"],"busy":[]}];
 
 function tomorrow(date){
 	var newDate = new Date(date);
@@ -23,9 +25,9 @@ var processedInput = _.map(input, function(choice){
 	return {date: new Date(choice.date), _id: choice._id, free: choice.free};
 });
 
-allPopulatedDates = _.map(processedInput, function(choice){ return choice.date.toISOString();});
+allPopulatedDates = _.map(processedInput, function(choice){ return choice.date.toDateString();});
 
-var earliestDate = processedInput[0].date;
+var earliestDate = new Date();
 var latestDate = processedInput[0].date;
 
 for (var i = 1; i < processedInput.length; i++){
@@ -40,12 +42,9 @@ for (var i = 1; i < processedInput.length; i++){
 
 var dates = [];
 
-var early = new Date(earliestDate);
-var latest = new Date(latestDate);
-
 var previousMondayHit = false;
 
-var startOfMonth = new Date(early.getFullYear(), early.getMonth(), 1);
+var startOfMonth = new Date(earliestDate.getFullYear(), earliestDate.getMonth(), 1);
 
 var startDate = new Date(startOfMonth);
 
@@ -60,12 +59,15 @@ var minChoices = 90;
 var passedLatest = false;
 var passedLatestAndMonthEnd = false;
 
+console.log(allPopulatedDates);
+console.log(current.toDateString());
+
 while (maxChoices-- > 0){
-	if (allPopulatedDates.indexOf(current.toISOString()) == -1){
+	if (allPopulatedDates.indexOf(current.toDateString()) == -1){
 		processedInput.push({date: current});
 	}
 
-	if (!passedLatest && current > latest){
+	if (!passedLatest && current > latestDate){
 		passedLatest = true;
 	}
 
