@@ -92,7 +92,7 @@ function expandDates(input){
 	var passedLatestAndMonthEnd = false;
 
 	while (maxChoices-- > 0){
-		if (allPopulatedDates.indexOf(current.toISOString()) == -1){
+		if (allPopulatedDates.indexOf(current.toISOString().slice(0,-13) + "00:00:00.000Z") == -1){
 			processedInput.push({date: current});
 		}
 
