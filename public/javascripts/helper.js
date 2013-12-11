@@ -84,6 +84,8 @@ function expandDates(input){
 
 	var current = startDate;
 
+	current.setHours(0,0,0,0);
+
 	var maxChoices = 365;
 	var minChoices = 90;
 	var passedLatest = false;
@@ -99,6 +101,8 @@ function expandDates(input){
 		}
 
 		current = tomorrow(current);
+
+		current.setHours(0,0,0,0);
 
 		if ( !passedLatestAndMonthEnd && passedLatest && processedInput.length > minChoices && current.getDate() === 1){
 			passedLatestAndMonthEnd = true;
