@@ -7363,6 +7363,18 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 body {
   padding-top: 0px;
   padding-bottom: 40px;
@@ -7828,26 +7840,10 @@ a:active {
   display: none;
   font-size: 14px;
 }
-.register-attendee-email-spinner-container {
-  height: 0px;
-  float: right;
-  position: relative;
-  top: 6px;
-  right: 7px;
-  font-size: 22px;
-}
 .register-attendee-email-input-container {
   max-width: 400px;
   margin: 0px auto;
   line-height: 25px;
-}
-.register-attendee-email-validation {
-  opacity: 0.15;
-  color: #808080;
-}
-.register-attendee-email-validation-valid {
-  color: #4ad16c;
-  opacity: 1;
 }
 #register-attendee-email-input {
   width: 100%;
@@ -7855,6 +7851,8 @@ a:active {
 .register-attendee-button-container {
   max-width: 400px;
   margin: 3px auto;
+  border: none;
+  background: none;
 }
 /**************************************/
 .modal {
@@ -7896,18 +7894,6 @@ a:active {
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 .pie {
   position: absolute;
   left: 19px;

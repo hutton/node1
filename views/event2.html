@@ -40,19 +40,15 @@
          <div class="row">
            <div id="register-footer" style="display: none;">
             <div>
-              <div>
+              <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
                 <div class="register-attendee-message"></div>
                 <div class="register-attendee-email-input-container">
-                  <div class="register-attendee-email-spinner-container">
-                    <span class="register-attendee-email-spinner fa fa-spinner fa-spin" style="display: none;"></span>
-                    <i class="register-attendee-email-validation fa fa-check"></i>
-                  </div>
-                  <input type="email" class="form-control" id="register-attendee-email-input" placeholder="Enter email"></input>
+                  <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Enter email"></input>
                 </div>
-                <div class="register-attendee-button-container">
+                <button type="submit" class="register-attendee-button-container">
                   <span class="span-link" id="register-attendee-link">Add to event and save changes <i class="fa fa-chevron-right"></i></span>
-                </div>
-              </div>
+                </button>
+              </form>
             </div>
           </div>
 

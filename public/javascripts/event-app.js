@@ -42,8 +42,7 @@ window.EventApp = Backbone.View.extend({
 		"click #add-attendee-link":		"addAttendeeLinkClicked",
 		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
 		"keyup #add-attendee-email-input": "addAttendeeInputChanged",
-		"click #register-attendee-link": "registerAttendeeLinkClicked",
-		"keyup #register-attendee-email-input": "registerAttendeeInputChanged"
+		"keyup #register-attendee-email-input": "registerAttendeeInputChanged",
 	},
 
 	selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -85,6 +84,8 @@ window.EventApp = Backbone.View.extend({
 				$('#welcome-modal').modal('show');
 			}
 		}
+
+		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 	},
 
 	eventTableClicked: function(event){
@@ -307,59 +308,14 @@ window.EventApp = Backbone.View.extend({
 		}
 	},
 
-	registerAttendeeLinkClicked: function(){
-		var that = this;
+	registerAttendeeInputChanged: function(event){
+		if (event.which != 13){
+			var message = $(".register-attendee-message");
 
-		if (!this.isEmailAddressValid(this.$el.find('#register-attendee-email-input').val())){
-			that.$el.find(".register-attendee-message").slideDown('fast');
-			that.$el.find(".register-attendee-message").text("Invalid email address.");
-			return;
-		}
-
-		var newAttendeeEmail = this.$el.find('#register-attendee-email-input').val();
-		var container = this.$el.find('.register-attendee-panel');
-		var spinner = this.$el.find('.register-attendee-email-spinner');
-
-		this.$el.find(".register-attendee-message").hide();
-		this.$el.find('.register-attendee-email-validation').hide();
-		this.$el.find(".register-attendee-message").text("");
-
-		container.addClass('disabled');
-		spinner.show();
-
-		$.post("/event/" + this.currentId + "/add/",
-			{
-				email: newAttendeeEmail,
-				isFree: this.isFree
-			},
-			function(data){
-				window.location.href = data.hash;
-			}
-		)
-		.fail(function() {
-			that.$el.find(".register-attendee-message").slideDown('fast');
-			that.$el.find(".register-attendee-message").text("Whao! Something didn't quite work there. Reload and try again?!");
-		})
-		.always(function() {
-			that.$el.find('.register-attendee-email-validation').show();
-			container.removeClass('disabled');
-			spinner.hide();
-		});
-	},
-
-	registerAttendeeInputChanged: function(){
-		var check = this.$el.find('.register-attendee-email-validation');
-		var addAttendeeMessage = this.$el.find('.register-attendee-message');
-
-		if (this.isEmailAddressValid(this.$el.find('#register-attendee-email-input').val())){
-			check.addClass('register-attendee-email-validation-valid');
-			addAttendeeMessage.slideUp('fast');
-			addAttendeeMessage.text("");
-		} else {
-			check.removeClass('register-attendee-email-validation-valid');
+			message.html("");
+			messages.slideUp('fast');
 		}
 	},
-
 
 	isEmailAddressValid: function(email){
 			//var re = /([a-zA-Z0-9\._-])+@([a-zA-Z0-9\._-])+/;
@@ -468,5 +424,26 @@ window.EventApp = Backbone.View.extend({
 		}
 
 		return text;
+	},
+
+
+	validateEmail: function(){
+		var email = $("#register-attendee-email-input");
+
+		var message = $(".register-attendee-message");
+
+		if (email.val() === null || email.val() === ""){
+			message.html("Please enter your email address");
+			message.slideDown('fast');
+
+			return false;
+		}
+
+		if (!this.isEmailAddressValid(email.val())){
+			message.html("Please enter a valid email address");
+			message.slideDown('fast');
+
+			return false;
+		}
 	}
 });
