@@ -224,13 +224,7 @@ function addAttendee(req, res){
 
 				calendar.updateCalendar(newAttendee, req.route.params[1], req.body.isFree);
 
-				res.send(200, 
-					{
-						_id: newAttendee._id,
-						prettyName: newAttendee.name || newAttendee.email,
-						me: false,
-						hash: newAttendee.attendeeId
-					});
+				res.redirect('/event/' + newAttendee.attendeeId);
 			}
 		});
 	}

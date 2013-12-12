@@ -46,14 +46,12 @@ function expandDates(input){
 		return {date: new Date(choice.date), _id: choice._id, free: choice.free};
 	});
 
-	allPopulatedDates = _.map(processedInput, function(choice){ return choice.date.toISOString();});
-
+	allPopulatedDates = _.map(processedInput, function(choice){ return choice.date.toDateString();});
 
 	var earliestDate = new Date();
 	var latestDate = new Date();
 
 	if (input.length > 0){
-		earliestDate = processedInput[0].date;
 		latestDate = processedInput[0].date;
 	}
 
@@ -72,7 +70,7 @@ function expandDates(input){
 	var early = new Date(earliestDate);
 	var latest = new Date(latestDate);
 
-	var previousMondayHit = false;
+	latest.setDate(latest.getDate() + 7);
 
 	var startOfMonth = new Date(early.getFullYear(), early.getMonth(), 1);
 
@@ -84,30 +82,29 @@ function expandDates(input){
 
 	var current = startDate;
 
-	current.setHours(0,0,0,0);
-
 	var maxChoices = 365;
 	var minChoices = 90;
 	var passedLatest = false;
 	var passedLatestAndMonthEnd = false;
 
 	while (maxChoices-- > 0){
-		if (allPopulatedDates.indexOf(current.toISOString().slice(0,-13) + "00:00:00.000Z") == -1){
+		if (allPopulatedDates.indexOf(current.toDateString()) == -1){
 			processedInput.push({date: current});
 		}
 
+		// Make sure we've got pasted the latest day
 		if (!passedLatest && current > latest){
 			passedLatest = true;
 		}
 
 		current = tomorrow(current);
 
-		current.setHours(0,0,0,0);
-
+		// Make sure we've finished off the current month
 		if ( !passedLatestAndMonthEnd && passedLatest && processedInput.length > minChoices && current.getDate() === 1){
 			passedLatestAndMonthEnd = true;
 		}
 
+		// Make sure we finish on a Sunday
 		if (passedLatestAndMonthEnd && current.getDay() === 1){
 			break;
 		}
