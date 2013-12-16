@@ -455,13 +455,5 @@ window.EventApp = Backbone.View.extend({
 
 			return false;
 		}
-	},
-
-	startScroll: function(){
-		console.log("Start scroll");
-	},
-
-	stopScroll: function(){
-		console.log("Stop scroll");
 	}
 });
