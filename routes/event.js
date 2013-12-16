@@ -82,7 +82,7 @@ function showEvent(req, res, calendar, attendeeId){
 	var showWelcome = false;
 
 	if (_.isUndefined(req.cookies[calendar.calendarId])){
-		res.cookie(calendar.calendarId, 'yes', { maxAge: 900000, httpOnly: false});
+		res.cookie(calendar.calendarId, 'yes', { httpOnly: false});
 		showWelcome = true;
 	}
 

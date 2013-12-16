@@ -42,7 +42,7 @@ window.EventApp = Backbone.View.extend({
 		"click #add-attendee-link":		"addAttendeeLinkClicked",
 		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
 		"keyup #add-attendee-email-input": "addAttendeeInputChanged",
-		"keyup #register-attendee-email-input": "registerAttendeeInputChanged",
+		"keyup #register-attendee-email-input": "registerAttendeeInputChanged"
 	},
 
 	selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -57,7 +57,11 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find("#show-info > span").toggleClass("show-info-rotate");
 	},
 
+	topNavBarEl: $(".navbar-fixed-top"),
+
 	render: function(){
+		var that = this;
+
 		this.$el.find(".title").html(this.model.get("name"));
 
 		var nameList = "";	
@@ -86,6 +90,13 @@ window.EventApp = Backbone.View.extend({
 		}
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
+
+		$(window).on("scrollstart", function(){
+			that.topNavBarEl.addClass("faded");
+		});
+		$(window).on("scrollstop", function(){
+			that.topNavBarEl.removeClass("faded");
+		});
 	},
 
 	eventTableClicked: function(event){
@@ -426,7 +437,6 @@ window.EventApp = Backbone.View.extend({
 		return text;
 	},
 
-
 	validateEmail: function(){
 		var email = $("#register-attendee-email-input");
 
@@ -445,5 +455,13 @@ window.EventApp = Backbone.View.extend({
 
 			return false;
 		}
+	},
+
+	startScroll: function(){
+		console.log("Start scroll");
+	},
+
+	stopScroll: function(){
+		console.log("Stop scroll");
 	}
 });

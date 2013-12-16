@@ -1,16 +1,16 @@
 
 
 
-// @codekit-prepend "jquery.js";
+// @codekit-prepend "tp/jquery-1.8.2.min.js";
 
-// @codekit-prepend "jquery-1.8.2.min.js";
-  
+// @codekit-prepend "tp/tp.helper.js";
+
 // @codekit-prepend "bootstrap/bootstrap.min.js";
-// @codekit-prepend "fastclick.js";
+// @codekit-prepend "tp/fastclick.js";
 
-// @codekit-prepend "underscore-min.js";
-// @codekit-prepend "moment.js";
-// @codekit-prepend "backbone-min.js";
+// @codekit-prepend "tp/underscore-min.js";
+// @codekit-prepend "tp/moment.js";
+// @codekit-prepend "tp/backbone-min.js";
 
 // @codekit-prepend "helper.js";
   
@@ -21,4 +21,3 @@
 // @codekit-prepend "views/choices-view.js";
 
 // @codekit-prepend "event-app.js";
-
