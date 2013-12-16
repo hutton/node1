@@ -1,12 +1,39 @@
-Hi,
+/*!
+ * jquery.unevent.js 0.2
+ * https://github.com/yckart/jquery.unevent.js
+ *
+ * Copyright (c) 2013 Yannick Albert (http://yckart.com)
+ * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php).
+ * 2013/07/26
+**/
+;(function ($) {
+    var on = $.fn.on, timer;
+    $.fn.on = function () {
+        var args = Array.apply(null, arguments);
+        var last = args[args.length - 1];
 
-We just wanted to let you know that Convenely has launched and you can try it right now for free!
+        if (isNaN(last) || (last === 1 && args.pop())) return on.apply(this, args);
 
-In case you've forgotten Convenely is a super easy way to arrange meeting up with friends.  
+        var delay = args.pop();
+        var fn = args.pop();
 
-As well as the beautifully simple shared calendar every event on Convenely has it's own mailing list which anyone invited to the event can use to stay up to date.
+        args.push(function () {
+            var self = this, params = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                fn.apply(self, params);
+            }, delay);
+        });
 
-Getting your friends organised has never been easier so give it a try.
+        return on.apply(this, args);
+    };
+}(this.jQuery || this.Zepto));
 
-Thanks
-Simon
+
+
+$(window).on('scroll', function(e) {
+    console.log(e.type + '-event was 250ms not triggered');
+}, 250);
+
+
+$(window).bind('touchmove', foo);
