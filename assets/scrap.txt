@@ -34,3 +34,6 @@
 $(window).on('scroll', function(e) {
     console.log(e.type + '-event was 250ms not triggered');
 }, 250);
+
+
+$(window).bind('touchmove', foo);
