@@ -87,7 +87,7 @@ a:active{
 }
 
 .faded{
-	opacity: 0.4;
+	opacity: 0.2;
 }
 
 @media screen and (min-width: 768px){
@@ -187,7 +187,6 @@ a:active{
 .navbar-fixed-top{
 	border-bottom: 1px solid @divider-color;
 	background: @light-background-color;
-	.transition-duration(0.2s);
 }
 
 .navbar-fixed-bottom{
@@ -476,19 +475,6 @@ a:active{
 	height: auto;
 }
 
-.info-row-date{
-	margin-top: 10px;
-
-	font-weight: lighter;
-	color: #c0c0c0;
-}
-
-.info-row-text {
-	margin: 10px 0px 10px 0px;
-	padding: 0px 10px;
-}
-
-
 .inner{
 	top: 5px;
 	width: 28px;
@@ -569,6 +555,33 @@ a:active{
 	border: none;
 	background: none;
 }
+
+/********** nfo-row *******************/
+.info-row{
+
+}
+
+.info-row-date{
+	float: left;
+	display: none;
+}
+
+.info-row-text {
+	padding: 20px 10px;
+}
+
+.info-row-selector{
+	float: left;
+	background: #f1f1f1;
+	color: @weekend-color;
+	padding: 20px 20px;
+}
+
+.info-row-selector-free{
+	background: @free-color;
+	color: white;
+}
+
 
 /**************************************/
 .modal{

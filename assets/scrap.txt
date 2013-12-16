@@ -37,3 +37,9 @@ $(window).on('scroll', function(e) {
 
 
 $(window).bind('touchmove', foo);
+
+Day and date(?)
+who is/isn't free
+switch your status
+email 
+

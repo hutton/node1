@@ -7435,7 +7435,7 @@ a:active {
   opacity: 0.5;
 }
 .faded {
-  opacity: 0.4;
+  opacity: 0.2;
 }
 @media screen and (min-width: 768px) {
   .inline-text-desktop {
@@ -7515,11 +7515,6 @@ a:active {
 .navbar-fixed-top {
   border-bottom: 1px solid #e8e8e8;
   background: #f8f8f8;
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transform-duration: 0.2s;
-  -ms-transform-duration: 0.2s;
-  transition-duration: 0.2s;
 }
 .navbar-fixed-bottom {
   border-top: 1px solid #e8e8e8;
@@ -7765,15 +7760,6 @@ a:active {
   width: auto;
   height: auto;
 }
-.info-row-date {
-  margin-top: 10px;
-  font-weight: lighter;
-  color: #c0c0c0;
-}
-.info-row-text {
-  margin: 10px 0px 10px 0px;
-  padding: 0px 10px;
-}
 .inner {
   top: 5px;
   width: 28px;
@@ -7861,6 +7847,24 @@ a:active {
   margin: 3px auto;
   border: none;
   background: none;
+}
+/********** nfo-row *******************/
+.info-row-date {
+  float: left;
+  display: none;
+}
+.info-row-text {
+  padding: 20px 10px;
+}
+.info-row-selector {
+  float: left;
+  background: #f1f1f1;
+  color: #c8c8c8;
+  padding: 20px 20px;
+}
+.info-row-selector-free {
+  background: #4ad16c;
+  color: white;
 }
 /**************************************/
 .modal {

@@ -38,7 +38,7 @@ window.EventApp = Backbone.View.extend({
 		"click .title":					"infoClicked",
 		"click .event-table":			"eventTableClicked",
 		"click":						"eventTableClicked",
-		"click #add-attendee":			"addAttendeeClicked",
+//		"click #add-attendee":			"addAttendeeClicked",
 		"click #add-attendee-link":		"addAttendeeLinkClicked",
 		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
 		"keyup #add-attendee-email-input": "addAttendeeInputChanged",
@@ -91,7 +91,7 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
-		$(window).on("scrollstart", function(){
+		$(window).on("scrollstart touchmove", function(){
 			that.topNavBarEl.addClass("faded");
 		});
 		$(window).on("scrollstop", function(){

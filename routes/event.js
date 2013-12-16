@@ -86,13 +86,20 @@ function showEvent(req, res, calendar, attendeeId){
 		showWelcome = true;
 	}
 
-	res.render('event2.html', {
-		webAppDebug: global.app.webAppDebug,
-		choices: JSON.stringify(sortedChoices),
-		attendees: JSON.stringify(cleanedAttendees),
-		calendar: JSON.stringify(cleanedCalendar),
-		name: calendar.name,
-		showWelcome: showWelcome
+	global.app.render('mail/invite-attendee-link.txt', {
+		calendar: calendar
+	}, function(err, body){
+		var inviteEmailLink = "mailto:?subject=" + calendar.name + "&body=" + encodeURIComponent(body);
+
+		res.render('event2.html', {
+			webAppDebug: global.app.webAppDebug,
+			choices: JSON.stringify(sortedChoices),
+			attendees: JSON.stringify(cleanedAttendees),
+			calendar: JSON.stringify(cleanedCalendar),
+			name: calendar.name,
+			showWelcome: showWelcome,
+			inviteEmailLink: inviteEmailLink
+		});
 	});
 }
 
