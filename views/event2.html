@@ -211,12 +211,11 @@
             <div class="info-row-selector">
             Tap if<br/>free
             </div>
-            <div class="info-row-date">
-              <div>Wednesday 18</div>
-              <div>December 2013</div>
+            <div class="info-row-selector-free <@ if(isFree){ @> info-row-selector-free-show <@ } @>">
+            Free
             </div>
-            <div class="info-row-text">
-              <div>4 of 6 people are free.</div>
+            <div class="info-row-text-container">
+              <div class="info-row-text"><@= attendeeText @></div>
               <a href="<%= inviteEmailLink %>">Invite people <span class="fa fa-chevron-right"></span></a>
             </div>
           </div>
@@ -242,6 +241,7 @@
   <script src="/javascripts/models/calendar-model.js"></script>
 
   <script src="/javascripts/views/choices-view.js"></script>
+  <script src="/javascripts/views/info-row-view.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
   <% } else { %>

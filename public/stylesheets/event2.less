@@ -558,6 +558,8 @@ a:active{
 
 /********** nfo-row *******************/
 .info-row{
+	position: relative;
+	overflow: hidden;
 
 }
 
@@ -566,21 +568,32 @@ a:active{
 	display: none;
 }
 
-.info-row-text {
+.info-row-text-container {
 	padding: 20px 10px;
 }
 
 .info-row-selector{
+	width: 75px;
+	height: 65px;
+	text-align: center;
+
 	float: left;
 	background: #f1f1f1;
 	color: @weekend-color;
-	padding: 20px 20px;
 }
 
 .info-row-selector-free{
+	.info-row-selector;
 	background: @free-color;
 	color: white;
+	position: absolute;
+	left: -75px;
 }
+
+.info-row-selector-free-show{
+	left: 0px;
+}
+
 
 
 /**************************************/
