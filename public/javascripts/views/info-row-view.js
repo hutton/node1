@@ -29,7 +29,7 @@ window.InfoRowView = Backbone.View.extend({
 		this.model = model;
 
 		// Add listeners to model
-	}
+	},
 
 	update: function(model, selectedRow){
 		this.updateModel(model);
