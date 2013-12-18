@@ -60,6 +60,8 @@ window.InfoRowView = Backbone.View.extend({
 			this.setElement(selectedRow);
 			
 			this.render();
+		} else {
+			this.modelChanged();
 		}
 	},
 
@@ -120,7 +122,12 @@ window.InfoRowView = Backbone.View.extend({
 		var currentAttendeeId = window.App.currentAttendee != null ? window.App.currentAttendee.get("_id") : -1;
 		var freeAttendees = choiceModel.get("free");
 
-		footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
+		if (_.isUndefined(freeAttendees)){
+			footerText = "0 of " + App.attendees.length + " people are free";
+
+		} else {
+			footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
+		}
 
 		return footerText;
 	},
