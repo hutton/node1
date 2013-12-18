@@ -74,6 +74,12 @@ window.InfoRowView = Backbone.View.extend({
 
 		this.$el.after(this.template(templateValues));
 
+		this.unbindEvents();
+
+		this.infoRowEl = this.$el.next().find('.info-row');
+
+		this.bindEvents();
+
 		this.$el.next()
 			.find('td')
 			.wrapInner('<div style="display: none;" />')
@@ -82,12 +88,6 @@ window.InfoRowView = Backbone.View.extend({
 			.slideDown(200, function(){
 				var $set = $(this);
 				$set.replaceWith($set.contents());
-				
-				that.unbindEvents();
-
-				that.infoRowEl = $('.info-row');
-
-				that.bindEvents();
 			});
 	},
 
