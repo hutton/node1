@@ -1,6 +1,9 @@
 - Closing info panel
 - Show changes when not registered
 - Update info bar text
+- Speed up pie animation
+- Speed up nav hide, delay re-show
+
 
 - CalendarId 5 attendeeId + 3
 - Fix nlp for "updates" email
