@@ -98,11 +98,11 @@ window.ChoiceView = Backbone.View.extend({
 			$(".selected").removeClass('selected');
 
 			target.addClass('selected');
+
+			var selectedRow = target.parents("tr");
+
+			App.updateSelectedItem(this.model, selectedRow);
 		}
-
-		var selectedRow = target.parents("tr");
-
-		App.updateSelectedItem(this.model, selectedRow);
 	},
 
 	calcDegrees: function(total, count){

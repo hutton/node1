@@ -58,6 +58,8 @@ window.EventApp = Backbone.View.extend({
 
 	topNavBarEl: $(".navbar-fixed-top"),
 
+	scrollStarted: false,
+
 	render: function(){
 		var that = this;
 
@@ -91,9 +93,14 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
 		$(window).on("scrollstart touchmove", function(){
-			that.topNavBarEl.addClass("faded");
+
+			if (!this.scrollStarted){
+				this.scrollStarted = true;
+				that.topNavBarEl.addClass("faded");
+			}
 		});
 		$(window).on("scrollstop", function(){
+			this.scrollStarted = false;
 			that.topNavBarEl.removeClass("faded");
 		});
 	},
