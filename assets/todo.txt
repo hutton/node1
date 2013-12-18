@@ -1,5 +1,6 @@
 - Closing info panel
 - Show changes when not registered
+- Update info bar text
 
 - CalendarId 5 attendeeId + 3
 - Fix nlp for "updates" email
