@@ -232,8 +232,11 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 };
 
 CalendarSchema.methods.findChoiceByDate = function(date){
+	
+	var dateString = date.toDateString();
+	
 	return _.find(this.choices, function(choice){
-		if (moment(choice.date).diff(moment(date), "days") === 0){
+		if (dateString == choice.date.toDateString()){
 			return choice;
 		}
 	});
