@@ -36,7 +36,7 @@ window.EventApp = Backbone.View.extend({
 	events: {
 		"click #show-info":				"infoClicked",
 		"click .title":					"infoClicked",
-//		"click":						"eventTableClicked",
+		"click":						"eventTableClicked",
 //		"click #add-attendee":			"addAttendeeClicked",
 		"click #add-attendee-link":		"addAttendeeLinkClicked",
 		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
@@ -92,23 +92,33 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
-		$(window).on("scrollstart touchmove", function(){
+		_.delay(function(){
+			$(window).on("scrollstart touchmove", function(){
 
-			if (!this.scrollStarted){
-				this.scrollStarted = true;
-				that.topNavBarEl.addClass("faded");
-			}
-		});
-		$(window).on("scrollstop", function(){
-			this.scrollStarted = false;
-			that.topNavBarEl.removeClass("faded");
-		});
+				if (!this.scrollStarted){
+					this.scrollStarted = true;
+					that.topNavBarEl.addClass("faded");
+				}
+			});
+			$(window).on("scrollstop", function(){
+				this.scrollStarted = false;
+				_.delay(function(){
+					that.topNavBarEl.removeClass("faded");
+				}, 250);
+			});
+		}, 1000);
 	},
 
 	eventTableClicked: function(event){
-		if ($(event.target).parents("td.date-cell").length === 0){
-			this.removeSelectedRow();
-			$(".selected").removeClass('selected');
+		var target = $(event.target);
+
+		if (target.parents("td.date-cell").length === 0 &&
+			target.parents(".info-row").length === 0){
+
+			if (this.infoRowView !== null){
+				this.infoRowView.removeSelectedRow();
+				$(".selected").removeClass('selected');
+			}
 		}
 	},
 

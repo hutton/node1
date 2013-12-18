@@ -242,6 +242,7 @@ CalendarSchema.methods.findChoiceByDate = function(date){
 	});
 };
 
+
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
 	var self = this;
 

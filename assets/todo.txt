@@ -1,5 +1,6 @@
+- Update info bar text
 
-
+- Closing info panel
 - CalendarId 5 attendeeId + 3
 - Fix nlp for "updates" email
 - Change from address when adding to an event (bug)
@@ -8,6 +9,9 @@
 
 Done
 ----
+- Speed up nav hide, delay re-show
+- Change Add+ to Invite+
+- Speed up pie animation
 - Don't get other pretty name attendee list
 - When invite from homepage others don't get an email
 - Invert free colors on email?

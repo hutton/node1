@@ -229,7 +229,9 @@ function addAttendee(req, res){
 					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 				});
 
-				calendar.updateCalendar(newAttendee, req.route.params[1], req.body.isFree);
+				console.log(req.body.isFree);
+
+				calendar.updateCalendar(newAttendee, [], req.body.isFree);
 
 				res.redirect('/event/' + newAttendee.attendeeId);
 			}

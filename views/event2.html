@@ -44,6 +44,7 @@
                 <div class="register-attendee-message"></div>
                 <div class="register-attendee-email-input-container">
                   <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Your email"></input>
+                  <input id="register-free-dates" type="hidden" name="isFree"/>
                 </div>
                 <button type="submit" class="register-attendee-button-container">
                   <span class="span-link" id="register-attendee-link">Add to event and save changes <i class="fa fa-chevron-right"></i></span>
@@ -58,7 +59,7 @@
             <h2>Attendees</h2>
             <a href="/"><i id="info-home" class="fa fa-home"></i></a>
             <div>
-              <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Add <i class="fa fa-plus-circle"></i></a>
+              <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
             </div>
             <div class="center">
               <div class="add-attendee-panel" style="display: none;">
@@ -220,7 +221,7 @@
             </div>
             <div class="info-row-text-container">
               <div class="info-row-text"><@= attendeeText @></div>
-              <a href="<%= inviteEmailLink %>">Invite people <span class="fa fa-chevron-right"></span></a>
+              <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
             </div>
           </div>
         </td>

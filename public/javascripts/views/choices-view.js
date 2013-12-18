@@ -58,7 +58,7 @@ window.ChoiceView = Backbone.View.extend({
 				}
 			}
 
-			if (window.App.currentAttendee !== null && freeDates.indexOf(window.App.currentAttendee.get("_id")) != -1){
+			if (this.model.isFree() || this.model.pretendFree){
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
 		}
@@ -85,7 +85,7 @@ window.ChoiceView = Backbone.View.extend({
 				this.pie.removeClass("big");
 			}
 
-			_.delay(this.animatePie, 15);
+			_.delay(this.animatePie, 10);
 		}
 	},
 

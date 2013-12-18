@@ -41,7 +41,7 @@ window.InfoRowView = Backbone.View.extend({
 
 		footerTextEl.html(attendeeText);
 
-		if (this.model.isFree()){
+		if (this.model.isFree() || this.model.pretendFree){
 			this.infoRowEl.find('.info-row-selector-free').addClass('info-row-selector-free-show');
 		} else {
 			this.infoRowEl.find('.info-row-selector-free').removeClass('info-row-selector-free-show');
@@ -122,11 +122,15 @@ window.InfoRowView = Backbone.View.extend({
 		var currentAttendeeId = window.App.currentAttendee != null ? window.App.currentAttendee.get("_id") : -1;
 		var freeAttendees = choiceModel.get("free");
 
-		if (_.isUndefined(freeAttendees)){
-			footerText = "0 of " + App.attendees.length + " people are free";
-
+		if (currentAttendeeId !== -1 && App.attendees.length === 1){
+			footerText = "Only you are invited";
 		} else {
-			footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
+			if (_.isUndefined(freeAttendees)){
+				footerText = "0 of " + App.attendees.length + " people are free";
+
+			} else {
+				footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
+			}
 		}
 
 		return footerText;

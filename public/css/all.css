@@ -7515,11 +7515,11 @@ a:active {
 .navbar-fixed-top {
   border-bottom: 1px solid #e8e8e8;
   background: #f8f8f8;
-  -moz-transition-duration: 0.4s;
-  -webkit-transition-duration: 0.4s;
-  -o-transform-duration: 0.4s;
-  -ms-transform-duration: 0.4s;
-  transition-duration: 0.4s;
+  -moz-transition-duration: 0.25s;
+  -webkit-transition-duration: 0.25s;
+  -o-transform-duration: 0.25s;
+  -ms-transform-duration: 0.25s;
+  transition-duration: 0.25s;
 }
 .navbar-fixed-bottom {
   border-top: 1px solid #e8e8e8;
