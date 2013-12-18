@@ -236,7 +236,7 @@ CalendarSchema.methods.findChoiceByDate = function(date){
 	var dateString = new Date(date).toDateString();
 	
 	return _.find(this.choices, function(choice){
-		if (dateString == choice.date.toDateString()){
+		if (dateString === choice.date.toDateString()){
 			return choice;
 		}
 	});
