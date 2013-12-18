@@ -340,7 +340,20 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 		}
 	} else {
 		if (isFree){
-			foundChoice.free.push(attendee._id);
+			var isFound = false;
+			
+			for (var i = 0; i < foundChoice.free.length; i++){
+				if ( foundChoice.free[i].equals(attendee._id)){
+					isFound = true;
+					break;
+				}
+			}
+			
+			// Don't want to add it twice!
+			if (!isFound){
+				foundChoice.free.push(attendee._id);	
+			}
+			
 		} else {
 			for (var i = 0; i < foundChoice.free.length; i++){
 				if ( foundChoice.free[i].equals(attendee._id)){
