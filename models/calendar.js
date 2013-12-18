@@ -233,7 +233,7 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 
 CalendarSchema.methods.findChoiceByDate = function(date){
 	
-	var dateString = date.toDateString();
+	var dateString = new Date(date).toDateString();
 	
 	return _.find(this.choices, function(choice){
 		if (dateString == choice.date.toDateString()){
