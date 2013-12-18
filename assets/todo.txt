@@ -3,6 +3,7 @@
 - Update info bar text
 - Speed up pie animation
 - Speed up nav hide, delay re-show
+- Change Add+ to Invite+
 
 
 - CalendarId 5 attendeeId + 3
