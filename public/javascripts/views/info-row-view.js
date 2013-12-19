@@ -48,20 +48,20 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	buildTemplateValues: function(){
-		// var freeAttendees = this.model.get("free");
+		var freeAttendees = this.model.get("free");
 
-		// var free = [];
-		// var busy = [];
+		var free = [];
+		var busy = [];
 
-		// _.each(this.attendees, function(att){
-		// 	var attendee = freeAttendees.findWhere(att._id);
+		_.each(this.attendees.models, function(att){
+			var found = freeAttendees.indexOf(att.get('_id'));
 
-		// 	if (!_.isUndefined(attendee)){
-		// 		free.push(att);
-		// 	} else {
-		// 		busy.push(att);
-		// 	}
-		// });
+			if (found != -1){
+				free.push(att);
+			} else {
+				busy.push(att);
+			}
+		});
 
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
