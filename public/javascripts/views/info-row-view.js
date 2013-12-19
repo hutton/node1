@@ -12,6 +12,7 @@ window.InfoRowView = Backbone.View.extend({
 	template: _.template($('#selected-row-template').html()),
 
 	events: {
+		"click info-row-details-link": "showDetails"
 	},
 
 	initialise: function(){
@@ -19,9 +20,7 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	render: function(){
-		var attendeeText = this.buildAttendeeText(this.model);
-
-		this.showSelectedRowAfter({attendeeText: attendeeText, isFree: this.model.isFree()});
+		this.showSelectedRowAfter(this.buildTemplateValues());
 
 		return this;
 	},
@@ -35,11 +34,11 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	modelChanged: function(){
-		var attendeeText = this.buildAttendeeText(this.model);
+		var values = this.buildTemplateValues();
 
 		var footerTextEl = this.infoRowEl.find(".info-row-text");
 
-		footerTextEl.html(attendeeText);
+		footerTextEl.html(values.attendeeText);
 
 		if (this.model.isFree() || this.model.pretendFree){
 			this.infoRowEl.find('.info-row-selector-free').addClass('info-row-selector-free-show');
@@ -48,10 +47,32 @@ window.InfoRowView = Backbone.View.extend({
 		}
 	},
 
+	buildTemplateValues: function(){
+		// var freeAttendees = this.model.get("free");
+
+		// var free = [];
+		// var busy = [];
+
+		// _.each(this.attendees, function(att){
+		// 	var attendee = freeAttendees.findWhere(att._id);
+
+		// 	if (!_.isUndefined(attendee)){
+		// 		free.push(att);
+		// 	} else {
+		// 		busy.push(att);
+		// 	}
+		// });
+
+		return {
+			attendeeText: this.buildAttendeeText(this.model),
+			isFree: this.model.isFree(),
+			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
+
+		};
+	},
+
 	update: function(model, selectedRow){
 		this.updateModel(model);
-
-		var attendeeText = this.buildAttendeeText(this.model);
 
 		if (!selectedRow.next().hasClass("selected-row")){
 			// On a different row
@@ -116,13 +137,11 @@ window.InfoRowView = Backbone.View.extend({
 			});
 	},
 
-
 	buildAttendeeText: function(choiceModel){
 		var footerText = "";
-		var currentAttendeeId = window.App.currentAttendee != null ? window.App.currentAttendee.get("_id") : -1;
 		var freeAttendees = choiceModel.get("free");
 
-		if (currentAttendeeId !== -1 && App.attendees.length === 1){
+		if (window.App.currentAttendeeId !== -1 && App.attendees.length === 1){
 			footerText = "Only you are invited";
 		} else {
 			if (_.isUndefined(freeAttendees)){

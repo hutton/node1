@@ -234,12 +234,16 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 CalendarSchema.methods.findChoiceByDate = function(date){
 	
 	var dateString = new Date(date).toDateString();
-	
-	return _.find(this.choices, function(choice){
-		if (dateString === choice.date.toDateString()){
-			return choice;
-		}
-	});
+
+	if (dateString !== "Invalid Date"){
+		return _.find(this.choices, function(choice){
+			if (dateString === choice.date.toDateString()){
+				return choice;
+			}
+		});
+	}
+
+	return null;
 };
 
 

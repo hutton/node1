@@ -82,7 +82,7 @@ function showEvent(req, res, calendar, attendeeId){
 	var showWelcome = false;
 
 	if (_.isUndefined(req.cookies[calendar.calendarId])){
-		res.cookie(calendar.calendarId, 'yes', { httpOnly: false});
+		res.cookie(calendar.calendarId, 'yes', { httpOnly: false, path: req.url });
 		showWelcome = true;
 	}
 
@@ -229,9 +229,7 @@ function addAttendee(req, res){
 					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 				});
 
-				console.log(req.body.isFree);
-
-				calendar.updateCalendar(newAttendee, [], req.body.isFree);
+				calendar.updateCalendar(newAttendee, [], req.body.isFree.split(','));
 
 				res.redirect('/event/' + newAttendee.attendeeId);
 			}

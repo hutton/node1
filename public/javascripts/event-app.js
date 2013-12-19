@@ -16,6 +16,8 @@ window.EventApp = Backbone.View.extend({
 
 		this.currentAttendee = this.attendees.findWhere({me: true});
 
+		this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
+
 		if (_.isUndefined(this.currentAttendee)){
 			this.currentAttendee = null;
 		}

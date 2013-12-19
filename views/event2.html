@@ -221,7 +221,12 @@
             </div>
             <div class="info-row-text-container">
               <div class="info-row-text"><@= attendeeText @></div>
-              <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
+              <@ if(showInvite){ @>
+                <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
+              <@ } else { @>
+                <span id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span>
+
+              <@ } @>
             </div>
           </div>
         </td>

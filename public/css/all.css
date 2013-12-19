@@ -7904,6 +7904,9 @@ a:active {
 .info-row-selector-free-show {
   left: 0px;
 }
+#info-row-details-link {
+  color: #4ad16c;
+}
 /**************************************/
 .modal {
   font-size: 16px;
