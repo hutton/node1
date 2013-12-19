@@ -1,4 +1,58 @@
-Not registered - always show 'n of m'
+  <style type="text/css">
+    .info-row-selector > div, .info-row-selector-free > div{
+      position: relative;
+      top: 50%;
+      margin-top: -20px;
+    }
 
-Only you are attendee - "You are the only attendee \n Invite others >"
-Otherwise - 'n of m \n Details >'
+    .info-row-selector, .info-row-selector-free{
+      position: absolute;
+      height: 100%;
+    }
+
+    #info-row-details-link{
+      margin-top: 10px;
+      
+    }
+
+    .info-row-text-container{
+      margin-left: 80px;
+      padding: 15px;
+    }
+
+    .info-row-names{
+      text-align: left;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+  </style>
+  
+    <script type="text/template" id="selected-row-template">
+    <tr class="selected-row" id="selected-row">
+        <td colspan="7" width="7">
+          <div class="info-row">
+            <div class="info-row-selector">
+              <div>
+              Tap if<br/>free
+              </div>
+            </div>
+            <div class="info-row-selector-free <@ if(isFree){ @> info-row-selector-free-show <@ } @>">
+              <div>
+              Free
+              </div>
+            </div>
+            <div class="info-row-text-container">
+              <div class="info-row-text"><@= attendeeText @></div>
+              <@ if(showInvite){ @>
+                <a href="mailto:?subject=Nodups2&body=Hi%2C%0D%0A%0D%0AI'm%20trying%20to%20arrange%20'Nodups2'.%0D%0A%0D%0AFollow%20the%20link%20below%20to%20join%20the%20event%20and%20show%20which%20days%20work%20for%20you.%0D%0A%0D%0Ahttp%3A%2F%2Fconvenely.com%2Fevent%2F3Saavn%0D">Invite others <span class="fa fa-chevron-right"></span></a>
+              <@ } else { @>
+                <div class="info-row-names"><strong>dave@gmail.com, peter.robinson@hotmail.co.uk</strong>, dawn_morning@hello.com</div>
+                <span id="info-row-details-link">Hide <span class="fa fa-chevron-right"></span></span>
+              <@ } @>
+            </div>
+          </div>
+        </td>
+    </tr>
+  </script>
+ 
