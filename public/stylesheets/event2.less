@@ -571,12 +571,14 @@ a:active{
 }
 
 .info-row-text-container {
-	padding: 15px 10px;
+	margin-left: 80px;
+	padding: 15px;
 }
 
 .info-row-selector{
 	width: 80px;
-	height: 75px;
+	position: absolute;
+	height: 100%;
 	text-align: center;
 
 	float: left;
@@ -585,8 +587,13 @@ a:active{
 	.transition-duration(0.2s);
 }
 
+.info-row-selector > div, .info-row-selector-free > div{
+	position: relative;
+	top: 50%;
+}
+
 .info-row-selector > div{
-	margin-top: 15px;
+	margin-top: -20px;
 }
 
 .info-row-selector-free{
@@ -598,7 +605,7 @@ a:active{
 }
 
 .info-row-selector-free > div{
-	margin-top: 25px;
+	margin-top: -15px;
 }
 
 .info-row-selector-free-show{
@@ -606,10 +613,27 @@ a:active{
 }
 
 #info-row-details-link{
+	position: relative;
+	top: 4px;
 	color: @free-color;
 }
 
+#info-row-hide-details-link{
+	position: relative;
+	top: 4px;
+	color: @free-color;
+}
 
+.info-row-names{
+	text-align: left;
+	margin-top: 10px;
+	font-size: 14px;
+	color: #d0d0d0;
+}
+
+.info-row-names > strong{
+	color: #a0a0a0;
+}
 
 /**************************************/
 .modal{

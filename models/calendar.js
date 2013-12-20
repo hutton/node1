@@ -237,7 +237,7 @@ CalendarSchema.methods.findChoiceByDate = function(date){
 
 	if (dateString !== "Invalid Date"){
 		return _.find(this.choices, function(choice){
-			if (dateString === choice.date.toDateString()){
+			if (choice.date !== null && dateString === choice.date.toDateString()){
 				return choice;
 			}
 		});

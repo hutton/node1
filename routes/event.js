@@ -49,13 +49,19 @@ function createEvent(req, res){
 }
 
 function showEvent(req, res, calendar, attendeeId){
+	var choices = [];
+
 	_.each(calendar.choices, function(choice){
-		choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
-		choice.freeIds = _.map(choice.free, function(free){ return String(free); });
+		if (choice.date !== null){
+			choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
+			choice.freeIds = _.map(choice.free, function(free){ return String(free); });
 
-		choice.columnDate = moment(choice.date).format("dddd Do MMM");
+			choice.columnDate = moment(choice.date).format("dddd Do MMM");
 
-		choice.date.setHours(0,0,0,0);
+			choice.date.setHours(0,0,0,0);
+
+			choices.push(choice);
+		}
 	});
 
 	var cleanedAttendees = [];
@@ -75,14 +81,15 @@ function showEvent(req, res, calendar, attendeeId){
 
 	logger.info("Showing: " + calendar.name);
 
-	var sortedChoices = _.sortBy(calendar.choices, function(choice){
+	var sortedChoices = _.sortBy(choices, function(choice){
 		return choice.date;
 	});
 
 	var showWelcome = false;
 
 	if (_.isUndefined(req.cookies[calendar.calendarId])){
-		res.cookie(calendar.calendarId, 'yes', { httpOnly: false, path: req.url });
+		res.setHeader("Set-Cookie", calendar.calendarId + "=yes; Path=" + req.url + "; Expires=Fri, 31-Dec-2020 23:59:59 GMT");
+
 		showWelcome = true;
 	}
 

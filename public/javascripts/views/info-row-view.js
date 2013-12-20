@@ -12,8 +12,9 @@ window.InfoRowView = Backbone.View.extend({
 	template: _.template($('#selected-row-template').html()),
 
 	events: {
-		"click info-row-details-link": "showDetails"
 	},
+
+	showingDetails: false,
 
 	initialise: function(){
 		_.bindAll(this);
@@ -45,10 +46,12 @@ window.InfoRowView = Backbone.View.extend({
 		} else {
 			this.infoRowEl.find('.info-row-selector-free').removeClass('info-row-selector-free-show');
 		}
+
+		this.infoRowEl.find('.info-row-names').html("<strong>" + values.freeNames + "</strong>" + values.notFreeNames);
 	},
 
 	buildTemplateValues: function(){
-		var freeAttendees = this.model.get("free");
+		var freeAttendees = this.model.get("free") || [];
 
 		var free = [];
 		var busy = [];
@@ -57,17 +60,25 @@ window.InfoRowView = Backbone.View.extend({
 			var found = freeAttendees.indexOf(att.get('_id'));
 
 			if (found != -1){
-				free.push(att);
+				free.push(att.get('prettyName'));
 			} else {
-				busy.push(att);
+				busy.push(att.get('prettyName'));
 			}
 		});
+
+		freeNamesText = free.join(', ');
+
+		if (free.length > 0){
+			freeNamesText = freeNamesText + ", ";
+		}
 
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
 			isFree: this.model.isFree(),
 			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
-
+			showDetails: this.showingDetails,
+			freeNames: freeNamesText,
+			notFreeNames: busy.join(', '),
 		};
 	},
 
@@ -84,6 +95,22 @@ window.InfoRowView = Backbone.View.extend({
 		} else {
 			this.modelChanged();
 		}
+	},
+
+	showDetails: function(){
+		this.infoRowEl.find('#info-row-details-link').hide();
+		this.infoRowEl.find('#info-row-hide-details-link').show();
+		this.infoRowEl.find('.info-row-names').slideDown('fast');
+
+		this.showingDetails = true;
+	},
+
+	hideDetails: function(){
+		this.infoRowEl.find('#info-row-details-link').show();
+		this.infoRowEl.find('#info-row-hide-details-link').hide();
+		this.infoRowEl.find('.info-row-names').slideUp('fast');
+
+		this.showingDetails = false;
 	},
 
 	setAsFree: function(){
@@ -116,12 +143,18 @@ window.InfoRowView = Backbone.View.extend({
 		if (this.infoRowEl !== null && !_.isUndefined(this.infoRowEl) ){
 			this.infoRowEl.find('.info-row-selector').off('click', this.setAsFree);	
 			this.infoRowEl.find('.info-row-selector-free').off('click', this.setAsFree);
+
+			this.infoRowEl.find('#info-row-details-link').off('click', this.showDetails);
+			this.infoRowEl.find('#info-row-hide-details-link').off('click', this.hideDetails);
 		}
 	},
 
 	bindEvents: function(){
 		this.infoRowEl.find('.info-row-selector').on('click', this.setAsFree);
 		this.infoRowEl.find('.info-row-selector-free').on('click', this.setAsFree);
+
+		this.infoRowEl.find('#info-row-details-link').on('click', this.showDetails);
+		this.infoRowEl.find('#info-row-hide-details-link').on('click', this.hideDetails);
 	},
 
 	removeSelectedRow: function(){

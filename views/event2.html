@@ -211,7 +211,7 @@
           <div class="info-row">
             <div class="info-row-selector">
               <div>
-              Tap if<br/>free
+              <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> if<br/>free
               </div>
             </div>
             <div class="info-row-selector-free <@ if(isFree){ @> info-row-selector-free-show <@ } @>">
@@ -224,8 +224,9 @@
               <@ if(showInvite){ @>
                 <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
               <@ } else { @>
-                <span id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span>
-
+                <div <@ if(!showDetails){ @>style="display: none;"<@ } @> class="info-row-names"><strong><@= freeNames @></strong><@= notFreeNames @></div>
+                <span <@ if(!showDetails){ @>style="display: none;"<@ } @> id="info-row-hide-details-link">Hide</span>
+                <span <@ if(showDetails){ @>style="display: none;"<@ } @> id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span>
               <@ } @>
             </div>
           </div>
