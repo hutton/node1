@@ -1,11 +1,8 @@
 
-
-
 // @codekit-prepend "tp/jquery-1.8.2.min.js";
-
 // @codekit-prepend "tp/tp.helper.js";
-
 // @codekit-prepend "bootstrap/bootstrap.min.js";
+
 // @codekit-prepend "tp/fastclick.js";
 
 // @codekit-prepend "tp/underscore-min.js";
