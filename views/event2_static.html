@@ -1,580 +1,254 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Convenely</title>
+  <title>Convenely - Football</title>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
   <meta name="description" content="Simple Scheduling Over Email" />
 
-  <!-- Le styles -->
-  <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+  
+  <link href="/stylesheets/bootstrap-3.css" rel="stylesheet">
+  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+
   <link href="/stylesheets/event2.css" rel="stylesheet">
   <link href="/stylesheets/pie.css" rel="stylesheet">
+  
 
-  <!--link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"-->
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<!--link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
 
-      <link rel="shortcut icon" href="/images/favicon.png">
-    </head>
-
+  <link rel="shortcut icon" href="/images/favicon.png">
+</head>
     <body>
 
       <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner fixed-width">
+        <div class="fixed-width">
+           <a class="tiile-button changes-made-email-link" id="title-mail" style="display: none;"><i class="fa fa-envelope-o"></i></a>
           <div class="title-button-container">
-           <a class="tiile-button" id="show-info">Info</a>
+           <a class="tiile-button" id="show-info"><span class="fa fa-chevron-right"></span></a>
          </div>
-         <div class="title">Lorem Ipsum</div>
+         <div class="title"></div>
+         <div class="row">
+           <div id="register-footer" style="display: none;">
+            <div>
+              <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
+                <div class="register-attendee-message"></div>
+                <div class="register-attendee-email-input-container">
+                  <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Enter email"></input>
+                </div>
+                <button type="submit" class="register-attendee-button-container">
+                  <span class="span-link" id="register-attendee-link">Add to event and save changes <i class="fa fa-chevron-right"></i></span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+         </div>
          <div class="row">
           <div class="info" style="display: none;">
             <h2>Attendees</h2>
-            <div>Jake, Derik, Mandella, Jude, Tessa, Sidney, Abraham, Terry</div>
-            <a id="email-group">Email Group ></a>
+            <a href="/"><i id="info-home" class="fa fa-home"></i></a>
+            <div>
+              <span class="attendees"></span><span id="add-attendee">Add <i class="fa fa-plus-circle"></i></span>
+            </div>
+            <div class="center">
+              <div class="add-attendee-panel" style="display: none;">
+                <div class="add-attendee-message"></div>
+                <div class="add-attendee-email-input-container">
+                  <div class="add-attendee-email-spinner-container">
+                    <i class="add-attendee-email-spinner fa fa-spinner fa-spin"></i>
+                    <i class="add-attendee-email-validation fa fa-check"></i>
+                  </div>
+                  <input type="email" class="form-control" id="add-attendee-email-input" placeholder="Enter email"></input>
+                </div>
+                <div class="add-attendee-button-container">
+                  <span class="span-link" id="add-attendee-link">Add Attendee</span>
+                  <span id="add-attendee-cancel-link" class="cancel-link">Cancel</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row">
           <table class="table days-table">
             <tr>
-              <td>MON</td>
-              <td>TUE</td>
-              <td>WED</td>
-              <td>THU</td>
-              <td>FRI</td>
-              <td>SAT</td>
-              <td>SUN</td>
+              <td>M</td>
+              <td>T</td>
+              <td>W</td>
+              <td>T</td>
+              <td>F</td>
+              <td>S</td>
+              <td>S</td>
             </tr>
           </table>
         </div>
-        <div class="row">
-          <div class="month-label-container">
-            <div class="month-label">March</div>
-          </div>
+       <div id="updated-footer" style="display: none;">
+        <div class="footer">
+          <a id="changes-made-banner" class="changes-made-email-link"><i class="fa fa-envelope-o"> </i> Notify everyone of changes <i class="fa fa-chevron-right"></i></a>
         </div>
       </div>
+      </div>
     </div>
+
     <div class="event-container">
      <div id="top-row-spacer"></div>
      <div class="row">
        <table class="table event-table">
-        <tr>
-          <td>
-            <div>
-              <div class="pie big" data-start="0" data-value="200"></div>
-              <div class="unknown">
-                <div class="content">
-                  19
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
+       </table>
+     </div>
+   </div>
+
+  <div class="modal fade" id="welcome-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Welcome to Convenely</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> a date to see who's free,<br/>
+            <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> it again to toogle whether you're free.
+            <div class="single-date-container">
+              <div class="pie big" data-start="0" data-value="210"></div>
+              <div class="free">
                 <div class="content">
                   20
                 </div>
               </div>
               <div></div>
             </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  21
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="40"></div>
+          </p>
+          <p>
+            Then let everyone know you've made changes.<br/>
+            <i class="fa fa-envelope-o"></i>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a data-dismiss="modal">Get Started <i class="fa fa-chevron-right"></i></a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Welcome to Convenely</h4>
+        </div>
+        <div class="modal-body">
+          <p>
+            <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> a date to see who's free,<br/>
+            <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> it again to toogle whether you're free.
+            <div class="single-date-container">
+              <div class="pie big" data-start="0" data-value="210"></div>
               <div class="free">
-                <div class="content">
-                  22
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="150"></div>
-              <div class="unknown">
-                <div class="content">
-                  23
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie big" data-start="0" data-value="260"></div>
-              <div class="unknown">
-                <div class="content">
-                  24
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  25
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  26
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie big" data-start="0" data-value="260"></div>
-              <div class="unknown">
-                <div class="content">
-                  27
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="40"></div>
-              <div class="free">
-                <div class="content">
-                  28
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  29
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td class="first">
-            <div>
-              <div class="pie" data-start="0" data-value="150"></div>
-              <div class="unknown">
-                <div class="content">
-                  1
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td class="first-seven">
-            <div>
-              <div class="pie big" data-start="0" data-value="0"></div>
-              <div class="free">
-                <div class="content">
-                  2
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td class="first-seven">
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  3
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="first-seven">
-            <div>
-              <div class="pie" data-start="0" data-value="30"></div>
-              <div class="free">
-                <div class="content">
-                  4
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td class="first-seven">
-            <div>
-              <div class="pie" data-start="0" data-value="60"></div>
-              <div class="free">
-                <div class="content">
-                  5
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td class="first-seven">
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  6
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td class="first-seven">
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  7
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="150"></div>
-              <div class="unknown">
-                <div class="content">
-                  8
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie big" data-start="0" data-value="260"></div>
-              <div class="free">
-                <div class="content">
-                  9
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  10
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  11
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="60"></div>
-              <div class="unknown">
-                <div class="content">
-                  12
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  13
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="50"></div>
-              <div class="free">
-                <div class="content">
-                  14
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  15
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="30"></div>
-              <div class="unknown">
-                <div class="content">
-                  16
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  17
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  18
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  19
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
                 <div class="content">
                   20
                 </div>
               </div>
               <div></div>
             </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="50"></div>
-              <div class="free">
-                <div class="content">
-                  21
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  22
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="30"></div>
-              <div class="unknown">
-                <div class="content">
-                  23
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  24
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  25
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  26
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="50"></div>
-              <div class="unknown">
-                <div class="content">
-                  27
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="free">
-                <div class="content">
-                  28
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="unknown">
-                <div class="content">
-                  29
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="0"></div>
-              <div class="free">
-                <div class="content">
-                  30
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-          <td>
-            <div>
-              <div class="pie" data-start="0" data-value="00"></div>
-              <div class="unknown">
-                <div class="content">
-                  31
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="navbar navbar-fixed-bottom">
-    <div class="navbar-inner">
-      <!--div class="footer-text">
-        Tap once to highlight a date<br/>
-        tap again to show your availability.
-      </div-->
-      <div class="footer-text">
-        <strong>Dave</strong>, <strong>Terry</strong>, <strong>Sidney</strong> and <strong>yourself</strong> can all make it.
-      </div>
-    </div>
-  </div>
-
-  <script src="/javascripts/jquery-1.8.2.min.js"></script>
-  
-  <script src="/javascripts/bootstrap/bootstrap-scrollspy.js"></script>
-  <script src="/javascripts/bootstrap/bootstrap-tooltip.js"></script>
-  <script src="/javascripts/bootstrap/bootstrap-button.js"></script>
-
-  <script src="/javascripts/fastclick.js"></script>
-
-  <script src="/javascripts/underscore-min.js"></script>
-  <script src="/javascripts/backbone-min.js"></script>
-
-  <script src="/javascripts/event-app.js"></script>
+          </p>
+          <p>
+            Enter your email address to share your changes with everyone.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a data-dismiss="modal">Get Started <i class="fa fa-chevron-right"></i></a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-42036841-1', 'convenely.com');
-  ga('send', 'pageview');
+    ga('create', 'UA-42036841-1', 'convenely.com');
+    ga('send', 'pageview');
+    </script>
+
+  <script type="text/template" id="choice-template">
+    <div>
+      <div class="pie" data-start="0" data-value="0"></div>
+        <div class="unknown">
+          <div class="content">
+          <@= date.getDate() @>
+          </div>
+        </div>
+      <div></div>
+    </div>
   </script>
 
-</body>
+  <script type="text/template" id="month-title-template">
+  <td class="first-seven">
+    <@ if (showTitle){ @>
+    <div class="month">
+      <@= month @>
+    </div>
+    <@ } @>
+  </td>
+  </script>
+
+  <script type="text/template" id="selected-row-template">
+    <tr class="selected-row" id="selected-row">
+        <td colspan="7" width="7">
+          <div class="info-row">
+            <div>Wednesday 18
+            </div>
+            <@= attendeeText @>
+          </div>
+        </td>
+    </tr>
+  </script>
+ 
+  
+  <script src="/javascripts/tp/jquery-1.8.2.min.js"></script>
+  <script src="/javascripts/tp/tp.helper.js"></script>
+  <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
+ 
+  <script src="/javascripts/tp/fastclick.js"></script>
+
+  <script src="/javascripts/tp/underscore-min.js"></script>
+  <script src="/javascripts/tp/moment.js"></script>
+  <script src="/javascripts/tp/backbone-min.js"></script>
+
+  <script src="/javascripts/helper.js"></script>
+  
+  <script src="/javascripts/models/choice-model.js"></script>
+  <script src="/javascripts/models/choices-model.js"></script>
+  <script src="/javascripts/models/calendar-model.js"></script>
+
+  <script src="/javascripts/views/choices-view.js"></script>
+
+  <script src="/javascripts/event-app.js"></script>
+  
+
+<script>
+$(document).ready(function(){
+  FastClick.attach(document.body);
+
+  window.App = new EventApp();
+
+  window.App.showWelcome = false;
+
+  window.App.loadBootstrapData([{"date":"2013-12-18T00:00:00.000Z","_id":"52aabe339ec63a6b1800000c","free":["52aabdfa9ec63a6b18000008"],"busy":[]},{"date":"2013-12-19T00:00:00.000Z","_id":"52aabe379ec63a6b1800000d","free":["52aabe109ec63a6b1800000a"],"busy":[]},{"date":"2013-12-20T00:00:00.000Z","_id":"52aabe3e9ec63a6b1800000f","free":["52aabe2e9ec63a6b1800000b"],"busy":[]},{"_id":"52aabe029ec63a6b18000009","date":"2013-12-25T00:00:00.000Z","free":["52aabdfa9ec63a6b18000008","52aabe2e9ec63a6b1800000b","52aabe109ec63a6b1800000a"],"busy":[]},{"_id":"52aec4c3dfceae1044000003","date":"2013-12-26T00:00:00.000Z","free":["52aabe2e9ec63a6b1800000b"],"busy":[]},{"date":"2013-12-27T00:00:00.000Z","_id":"52aabe399ec63a6b1800000e","free":["52aabe109ec63a6b1800000a"],"busy":[]}], [{"_id":"52aabdfa9ec63a6b18000008","prettyName":"1@gmail.com","me":false},{"_id":"52aabe109ec63a6b1800000a","prettyName":"2@gmail.com","me":true},{"_id":"52aabe2e9ec63a6b1800000b","prettyName":"3@gmail.com","me":false}], {"name":"Football","id":"football"});
+});
+
+</script>
+
 </body>
 </html>

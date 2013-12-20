@@ -1,6 +1,8 @@
 window.ChoiceView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+
+		this.listenTo(this.model, "change", this.modelChanged);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -16,16 +18,29 @@ window.ChoiceView = Backbone.View.extend({
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
 
-		this.$el.attr("width", "1");
-
 		this.pie = this.$el.find(".pie");
 
-		this.updateFreeCounter(false);
+		this.updateView(false);
 
 		return this;
 	},
 
-	updateFreeCounter: function(animate){
+	modelChanged: function(){
+		this.updateView(true);
+	},
+
+	updateView: function(animate){
+		var target = $(this.$el).find("div:first");
+
+		if (target.hasClass('selected')){
+			target.find('div:nth-of-type(2)').toggleClass('free');
+			target.find('div:nth-of-type(2)').toggleClass('unknown');
+		} else {
+			$(".selected").removeClass('selected');
+
+			target.addClass('selected');
+		}
+
 		if (this.model.has("free")){
 			var freeDates = this.model.get("free");
 
@@ -43,7 +58,7 @@ window.ChoiceView = Backbone.View.extend({
 				}
 			}
 
-			if (window.App.currentAttendee !== null && freeDates.indexOf(window.App.currentAttendee.get("_id")) != -1){
+			if (this.model.isFree() || this.model.pretendFree){
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
 		}
@@ -70,7 +85,7 @@ window.ChoiceView = Backbone.View.extend({
 				this.pie.removeClass("big");
 			}
 
-			_.delay(this.animatePie, 15);
+			_.delay(this.animatePie, 10);
 		}
 	},
 
@@ -78,64 +93,15 @@ window.ChoiceView = Backbone.View.extend({
 		var target = $(this.$el).find("div:first");
 
 		if (target.hasClass('selected')){
-			target.find('div:nth-of-type(2)').toggleClass('free');
-			target.find('div:nth-of-type(2)').toggleClass('unknown');
-
-			this.toggleFree();
+			this.model.toggleFree();
 		} else {
 			$(".selected").removeClass('selected');
 
 			target.addClass('selected');
-		}
 
-		var selectedRow = target.parents("tr");
+			var selectedRow = target.parents("tr");
 
-		App.updateSelectedItem(this.model, selectedRow);
-	},
-
-	toggleFree: function(){
-		var date = this.model.get("date");
-
-		if (window.App.currentAttendee != null){
-			var currentAttendeeId = window.App.currentAttendee.get("_id");
-			var freeAttendees = this.model.get("free");
-
-			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
-				if (_.isUndefined(freeAttendees)){
-					this.model.set("free", [currentAttendeeId]);
-				} else {
-					freeAttendees.push(currentAttendeeId);
-				}
-
-				if (window.App.wasFree.indexOf(date) != -1){
-					window.App.wasFree.removeElement(date);
-				} else {
-					window.App.isFree.push(this.model.get("date"));
-				}
-
-			} else {
-				freeAttendees.removeElement(currentAttendeeId);
-
-				if (window.App.isFree.indexOf(date) != -1){
-					window.App.isFree.removeElement(date);
-				} else {
-					window.App.wasFree.push(this.model.get("date"));
-				}
-			}
-
-			this.updateFreeCounter(true);
-
-			this.model.save();
-
-			window.App.updateTellEveryoneLink();
-		} else {
-			if (window.App.isFree.indexOf(date) != -1){
-				window.App.isFree.removeElement(date);
-			} else {
-				window.App.isFree.push(this.model.get("date"));
-			}
-
-			// window.App.updateRegisterLink();
+			App.updateSelectedItem(this.model, selectedRow);
 		}
 	},
 

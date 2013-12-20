@@ -86,6 +86,10 @@ a:active{
 	opacity: 0.5;
 }
 
+.faded{
+	opacity: 0.0;
+}
+
 @media screen and (min-width: 768px){
 	.inline-text-desktop{
 		display: inline-block;
@@ -183,6 +187,8 @@ a:active{
 .navbar-fixed-top{
 	border-bottom: 1px solid @divider-color;
 	background: @light-background-color;
+
+	.transition-duration(0.25s);
 }
 
 .navbar-fixed-bottom{
@@ -471,19 +477,6 @@ a:active{
 	height: auto;
 }
 
-.info-row-date{
-	margin-top: 10px;
-
-	font-weight: lighter;
-	color: #c0c0c0;
-}
-
-.info-row-text {
-	margin: 10px 0px 10px 0px;
-	padding: 0px 10px;
-}
-
-
 .inner{
 	top: 5px;
 	width: 28px;
@@ -563,6 +556,83 @@ a:active{
 	.attendee-button-container;
 	border: none;
 	background: none;
+}
+
+/********** nfo-row *******************/
+.info-row{
+	position: relative;
+	overflow: hidden;
+
+}
+
+.info-row-date{
+	float: left;
+	display: none;
+}
+
+.info-row-text-container {
+	margin-left: 80px;
+	padding: 15px;
+}
+
+.info-row-selector{
+	width: 80px;
+	position: absolute;
+	height: 100%;
+	text-align: center;
+
+	float: left;
+	background: #f1f1f1;
+	color: @weekend-color;
+	.transition-duration(0.2s);
+}
+
+.info-row-selector > div, .info-row-selector-free > div{
+	position: relative;
+	top: 50%;
+}
+
+.info-row-selector > div{
+	margin-top: -20px;
+}
+
+.info-row-selector-free{
+	.info-row-selector;
+	background: @free-color;
+	color: white;
+	position: absolute;
+	left: -80px;
+}
+
+.info-row-selector-free > div{
+	margin-top: -15px;
+}
+
+.info-row-selector-free-show{
+	left: 0px;
+}
+
+#info-row-details-link{
+	position: relative;
+	top: 4px;
+	color: @free-color;
+}
+
+#info-row-hide-details-link{
+	position: relative;
+	top: 4px;
+	color: @free-color;
+}
+
+.info-row-names{
+	text-align: left;
+	margin-top: 10px;
+	font-size: 14px;
+	color: #d0d0d0;
+}
+
+.info-row-names > strong{
+	color: #a0a0a0;
 }
 
 /**************************************/

@@ -43,7 +43,8 @@
               <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
                 <div class="register-attendee-message"></div>
                 <div class="register-attendee-email-input-container">
-                  <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Enter email"></input>
+                  <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Your email"></input>
+                  <input id="register-free-dates" type="hidden" name="isFree"/>
                 </div>
                 <button type="submit" class="register-attendee-button-container">
                   <span class="span-link" id="register-attendee-link">Add to event and save changes <i class="fa fa-chevron-right"></i></span>
@@ -58,7 +59,7 @@
             <h2>Attendees</h2>
             <a href="/"><i id="info-home" class="fa fa-home"></i></a>
             <div>
-              <span class="attendees"></span><span id="add-attendee">Add <i class="fa fa-plus-circle"></i></span>
+              <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
             </div>
             <div class="center">
               <div class="add-attendee-panel" style="display: none;">
@@ -207,22 +208,42 @@
   <script type="text/template" id="selected-row-template">
     <tr class="selected-row" id="selected-row">
         <td colspan="7" width="7">
-          <div class="info-row-text">
-            <@= attendeeText @>
+          <div class="info-row">
+            <div class="info-row-selector">
+              <div>
+              <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> if<br/>free
+              </div>
+            </div>
+            <div class="info-row-selector-free <@ if(isFree){ @> info-row-selector-free-show <@ } @>">
+              <div>
+              Free
+              </div>
+            </div>
+            <div class="info-row-text-container">
+              <div class="info-row-text"><@= attendeeText @></div>
+              <@ if(showInvite){ @>
+                <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
+              <@ } else { @>
+                <div <@ if(!showDetails){ @>style="display: none;"<@ } @> class="info-row-names"><strong><@= freeNames @></strong><@= notFreeNames @></div>
+                <span <@ if(!showDetails){ @>style="display: none;"<@ } @> id="info-row-hide-details-link">Hide</span>
+                <span <@ if(showDetails){ @>style="display: none;"<@ } @> id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span>
+              <@ } @>
+            </div>
           </div>
         </td>
     </tr>
   </script>
  
   <% if (webAppDebug) { %>
-  <script src="/javascripts/jquery-1.8.2.min.js"></script>
+  <script src="/javascripts/tp/jquery-1.8.2.min.js"></script>
+  <script src="/javascripts/tp/tp.helper.js"></script>
   <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
  
-  <script src="/javascripts/fastclick.js"></script>
+  <script src="/javascripts/tp/fastclick.js"></script>
 
-  <script src="/javascripts/underscore-min.js"></script>
-  <script src="/javascripts/moment.js"></script>
-  <script src="/javascripts/backbone-min.js"></script>
+  <script src="/javascripts/tp/underscore-min.js"></script>
+  <script src="/javascripts/tp/moment.js"></script>
+  <script src="/javascripts/tp/backbone-min.js"></script>
 
   <script src="/javascripts/helper.js"></script>
   
@@ -231,6 +252,7 @@
   <script src="/javascripts/models/calendar-model.js"></script>
 
   <script src="/javascripts/views/choices-view.js"></script>
+  <script src="/javascripts/views/info-row-view.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
   <% } else { %>

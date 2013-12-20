@@ -94,11 +94,16 @@ function getEmailName(text){
 }
 
 function buildSortedChoices(calendar){
+	var choices = [];
+
 	_.each(calendar.choices, function(choice){
-		choice.columnDate = moment(choice.date).format("dddd D MMMM");
+		if (choice.date !== null){
+			choice.columnDate = moment(choice.date).format("dddd D MMMM");
+			choices.push(choice);
+		}
 	});
 
-	var sortedChoices = _.sortBy(calendar.choices, function(choice){
+	var sortedChoices = _.sortBy(choices, function(choice){
 		return choice.date;
 	});
 

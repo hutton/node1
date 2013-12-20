@@ -232,12 +232,20 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 };
 
 CalendarSchema.methods.findChoiceByDate = function(date){
-	return _.find(this.choices, function(choice){
-		if (moment(choice.date).diff(moment(date), "days") === 0){
-			return choice;
-		}
-	});
+	
+	var dateString = new Date(date).toDateString();
+
+	if (dateString !== "Invalid Date"){
+		return _.find(this.choices, function(choice){
+			if (choice.date !== null && dateString === choice.date.toDateString()){
+				return choice;
+			}
+		});
+	}
+
+	return null;
 };
+
 
 CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates){
 	var self = this;
@@ -337,7 +345,20 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 		}
 	} else {
 		if (isFree){
-			foundChoice.free.push(attendee._id);
+			var isFound = false;
+			
+			for (var i = 0; i < foundChoice.free.length; i++){
+				if ( foundChoice.free[i].equals(attendee._id)){
+					isFound = true;
+					break;
+				}
+			}
+			
+			// Don't want to add it twice!
+			if (!isFound){
+				foundChoice.free.push(attendee._id);	
+			}
+			
 		} else {
 			for (var i = 0; i < foundChoice.free.length; i++){
 				if ( foundChoice.free[i].equals(attendee._id)){
