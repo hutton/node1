@@ -3,6 +3,7 @@
 - Show notify icon directly in header
 - Show best options
 - Show date line in details
+- Show best dates on scroll
 
 Done
 ----
