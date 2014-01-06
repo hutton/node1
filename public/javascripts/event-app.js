@@ -104,9 +104,7 @@ window.EventApp = Backbone.View.extend({
 			});
 			$(window).on("scrollstop", function(){
 				this.scrollStarted = false;
-				_.delay(function(){
-					that.topNavBarEl.removeClass("faded");
-				}, 250);
+				that.topNavBarEl.removeClass("faded");
 			});
 		}, 1000);
 	},

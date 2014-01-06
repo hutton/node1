@@ -48,6 +48,51 @@ function createEvent(req, res){
 	});
 }
 
+function example(req, res){
+	var calendar = {
+		"calendarId" : "example",
+		"id" : "example",
+		"name" : "Party",
+		"date" : Date( 1386785723893 ),
+		"attendees" : [
+			{
+				"_id" : "A01",
+				"attendeeId" : "exampleA01",
+				"email" : "dave@gmail.com",
+				"name" : "Dave"
+			},
+			{
+				"_id" : "A02",
+				"attendeeId" : "exampleA02",
+				"email" : "mary@gmail.com",
+				"name" : "Mary"
+			}
+		],
+		"createdBy" : "1@gmail.com",
+		"choices" : [
+			{
+				"date" : new Date(moment().add('days', 2)),
+				"_id" : "c001",
+				"free" : [
+					"A01",
+					"A02"
+					],
+				"busy" : []
+			},
+			{
+				"_id" : "c002",
+				"busy" : [],
+				"date" : new Date(moment().add('days', 6)),
+				"free" : [
+					"A02"
+				]
+			}
+		]
+	};
+
+	showEvent(req, res, calendar, "A01");
+}
+
 function showEvent(req, res, calendar, attendeeId){
 	var choices = [];
 
@@ -111,7 +156,6 @@ function showEvent(req, res, calendar, attendeeId){
 }
 
 function renderEvent(req, res){
-
 	if (req.route.params[0].length == 9 || req.route.params[0].length == 5){
 		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
@@ -149,28 +193,31 @@ function renderEvent(req, res){
 }
 
 function updateChoice(req, res){
-	Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
-		if (err){
-			logger.error("Error finding calendar " + req.route.params[0]);
-			logger.error("Error:" + err);
+	if (req.route.params[0] == "example"){
+		res.send(200);		
+	} else {
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar " + req.route.params[0]);
+				logger.error("Error:" + err);
 
-			res.status(404);
-		} else if (!calendar){
-			logger.error("Could not find calendar " + req.route.params[0]);
+				res.send(404);
+			} else if (!calendar){
+				logger.error("Could not find calendar " + req.route.params[0]);
 
-			res.status(404);
-		} else {
-			logger.info("Updating: " + calendar.name);
+				res.send(404);
+			} else {
+				logger.info("Updating: " + calendar.name);
 
-			var postedChoice = req.body;
+				var postedChoice = req.body;
 
-			calendar.updateChoice(attendee, postedChoice.date, postedChoice.free);
+				calendar.updateChoice(attendee, postedChoice.date, postedChoice.free);
 
-			res.send(200);
-		}
-	});
+				res.send(200);
+			}
+		});
+	}
 }
-
 
 function addAttendee(req, res){
 	if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
@@ -243,6 +290,10 @@ function addAttendee(req, res){
 		});
 	}
 }
+
+exports.example = function(req, res){
+	example(req, res);
+};
 
 exports.view = function(req, res){
 	renderEvent(req, res);
