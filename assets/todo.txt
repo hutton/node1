@@ -1,4 +1,5 @@
 - Build example page
+- Fix trailing coma when everyone free
 - Fix about/contact on homepage
 - Stop hiding header on scroll
 - Show notify icon directly in header
