@@ -94,19 +94,19 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
-		_.delay(function(){
-			$(window).on("scrollstart touchmove", function(){
+		// _.delay(function(){
+		// 	$(window).on("scrollstart touchmove", function(){
 
-				if (!this.scrollStarted){
-					this.scrollStarted = true;
-					that.topNavBarEl.addClass("faded");
-				}
-			});
-			$(window).on("scrollstop", function(){
-				this.scrollStarted = false;
-				that.topNavBarEl.removeClass("faded");
-			});
-		}, 1000);
+		// 		if (!this.scrollStarted){
+		// 			this.scrollStarted = true;
+		// 			that.topNavBarEl.addClass("faded");
+		// 		}
+		// 	});
+		// 	$(window).on("scrollstop", function(){
+		// 		this.scrollStarted = false;
+		// 		that.topNavBarEl.removeClass("faded");
+		// 	});
+		// }, 1000);
 	},
 
 	eventTableClicked: function(event){
