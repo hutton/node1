@@ -7731,7 +7731,7 @@ a:active {
 .event-table td > div.selected > div:nth-of-type(3) {
   width: 20px;
   height: 20px;
-  background: #f1f1f1;
+  background: #f8f8f8;
   border-right: 1px solid #e8e8e8;
   border-top: 1px solid #e8e8e8;
   -webkit-transform: rotate(-45deg);
