@@ -94,6 +94,8 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
+		this.updateTellEveryoneLink();
+		
 		// _.delay(function(){
 		// 	$(window).on("scrollstart touchmove", function(){
 
@@ -246,23 +248,19 @@ window.EventApp = Backbone.View.extend({
 
 		this.changesMadeLinkkeyEl.attr("href", mailTo);
 
-		if (this.isFree.length > 0 || this.wasFree.length > 0){
-			if (!this.switchedUpdateAttendeesLink){
-				this.updatedFooterEl.show();
+		// if (this.isFree.length > 0 || this.wasFree.length > 0){
+		// 	if (!this.switchedUpdateAttendeesLink){
+				// this.updatedFooterEl.show();
 
-				// var adjustHeight = 44 + this.topRowSpacerEl.height();
+				// this.switchedUpdateAttendeesLink = true;
 
-				// this.topRowSpacerEl.animate({height: adjustHeight}, 200);
+				// var that = this;
 
-				this.switchedUpdateAttendeesLink = true;
-
-				var that = this;
-
-				_.delay(function(){
-					that.swtichUpdateAttendeesLink();
-				}, 2000);
-			}
-		}
+				// _.delay(function(){
+				// 	that.swtichUpdateAttendeesLink();
+				// }, 2000);
+		// 	}
+		// }
 	},
 
 	swtichUpdateAttendeesLink: function(){

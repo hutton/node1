@@ -102,7 +102,6 @@ function example(req, res){
 		"choices" : [
 			{
 				"date" : new Date(moment().add('days', 0)),
-				"_id" : "c001",
 				"free" : [
 					"A02",
 					"A03"
@@ -110,11 +109,9 @@ function example(req, res){
 				"busy" : []
 			},
 			{
-				"_id" : "c002",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 1)),
 				"free" : [
-					"A01",
 					"A02",
 					"A04",
 					"A05",
@@ -122,36 +119,12 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c003",
-				"busy" : [],
-				"date" : new Date(moment().add('days', 2)),
-				"free" : [
-					"A01",
-					"A02",
-					"A03",
-					"A04",
-					"A05",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"_id" : "c004",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 3)),
 				"free" : [
-					"A02",
-					"A03",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"_id" : "c005",
-				"busy" : [],
-				"date" : new Date(moment().add('days', 4)),
-				"free" : [
 					"A01",
+					"A02",
+					"A06",
 					"A07"
 				]
 			},
@@ -186,7 +159,12 @@ function example(req, res){
 				"busy" : [],
 				"date" : new Date(moment().add('days', 8)),
 				"free" : [
+					"A01",
 					"A02",
+					"A03",
+					"A04",
+					"A05",
+					"A06",
 					"A07"
 				]
 			},
@@ -208,18 +186,6 @@ function example(req, res){
 			},
 			{
 				"busy" : [],
-				"date" : new Date(moment().add('days', 12)),
-				"free" : [
-					"A02",
-					"A03",
-					"A04",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"_id" : "c010",
-				"busy" : [],
 				"date" : new Date(moment().add('days', 14)),
 				"free" : [
 					"A01",
@@ -229,7 +195,6 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c011",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 17)),
 				"free" : [
@@ -240,16 +205,6 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c012",
-				"busy" : [],
-				"date" : new Date(moment().add('days', 18)),
-				"free" : [
-					"A01",
-					"A06"
-				]
-			},
-			{
-				"_id" : "c013",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 21)),
 				"free" : [
@@ -262,7 +217,6 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c014",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 23)),
 				"free" : [
@@ -272,17 +226,15 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c015",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 26)),
 				"free" : [
-					"A01"
+					"A05"
 				]
 			},
 			{
-				"_id" : "c016",
 				"busy" : [],
-				"date" : new Date(moment().add('days', 27)),
+				"date" : new Date(moment().add('days', 28)),
 				"free" : [
 					"A01",
 					"A05",
@@ -290,7 +242,6 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c017",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 30)),
 				"free" : [
@@ -298,17 +249,15 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c018",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 32)),
 				"free" : [
-					"A01",
+					"A04",
 					"A02",
 					"A03"
 				]
 			},
 			{
-				"_id" : "c019",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 34)),
 				"free" : [
@@ -316,7 +265,6 @@ function example(req, res){
 				]
 			},
 			{
-				"_id" : "c020",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 37)),
 				"free" : [

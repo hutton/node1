@@ -1,14 +1,14 @@
 - Build example page
-- Fix trailing coma when everyone free
-- Fix about/contact on homepage
-- Stop hiding header on scroll
-- Show notify icon directly in header
 - Show best options
 - Show date line in details
 - Show best dates on scroll
 
 Done
 ----
+- Stop hiding header on scroll
+- Show notify icon directly in header
+- Fix trailing coma when everyone free
+- Fix about/contact on homepage
 - Change from address when adding to an event (bug)
 - Add subject when empty RE: Strom day
 - Add helper 'Tap/click again mark as free'

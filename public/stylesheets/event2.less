@@ -431,11 +431,10 @@ a:active{
 	opacity: 1.0;
 }
 
-
 .event-table td>div.selected>div:nth-of-type(3){
     width: 20px;
     height: 20px; 
-    background: @light-background-color;
+    background: #f1f1f1;
     border-right:1px solid @divider-color;
     border-top:1px solid @divider-color;
     .rotation(-45deg);
@@ -565,9 +564,19 @@ a:active{
 
 }
 
+.info-row > div{
+	position: relative;
+}
+
 .info-row-date{
-	float: left;
-	display: none;
+	font-size: 12px;
+	background: #f1f1f1;
+	padding-left: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: #a0a0a0;
+	text-align: left;
+	border-bottom: 1px #e8e8e8 solid;
 }
 
 .info-row-text-container {

@@ -68,9 +68,13 @@ window.InfoRowView = Backbone.View.extend({
 
 		freeNamesText = free.join(', ');
 
-		if (free.length > 0){
+		if (busy.length > 0){
 			freeNamesText = freeNamesText + ", ";
 		}
+
+		var date = this.model.get('date');
+
+		var dateText = moment(date).format("dddd D MMMM");
 
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
@@ -78,6 +82,7 @@ window.InfoRowView = Backbone.View.extend({
 			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
 			showDetails: this.showingDetails,
 			freeNames: freeNamesText,
+			date: dateText,
 			notFreeNames: busy.join(', '),
 		};
 	},
