@@ -125,7 +125,7 @@ window.InfoRowView = Backbone.View.extend({
 			event.target.id !== "info-row-details-link"){
 
 			$(".selected").removeClass('selected');
-		
+
 			this.removeSelectedRow();
 		}
 	},
@@ -160,7 +160,7 @@ window.InfoRowView = Backbone.View.extend({
 		if (this.infoRowEl !== null && !_.isUndefined(this.infoRowEl) ){
 			this.infoRowEl.find('.info-row-text-container').off('click', this.panelClicked);
 
-			this.infoRowEl.find('.info-row-selector').off('click', this.setAsFree);	
+			this.infoRowEl.find('.info-row-selector').off('click', this.setAsFree);
 			this.infoRowEl.find('.info-row-selector-free').off('click', this.setAsFree);
 
 			this.infoRowEl.find('#info-row-details-link').off('click', this.showDetails);

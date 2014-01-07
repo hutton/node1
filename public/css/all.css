@@ -7924,11 +7924,13 @@ a:active {
   position: relative;
   top: 4px;
   color: #4ad16c;
+  padding: 6px;
 }
 #info-row-hide-details-link {
   position: relative;
   top: 4px;
   color: #4ad16c;
+  padding: 6px;
 }
 .info-row-names {
   text-align: left;
