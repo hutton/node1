@@ -24,7 +24,7 @@
  }
 
 if (_.isUndefined(webAppDebug)){
-	webAppDebug = true;
+	webAppDebug = false;
  }
 
  var app = express();
