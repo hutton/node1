@@ -1,13 +1,16 @@
-
-
-- CalendarId 5 attendeeId + 3
-- Fix nlp for "updates" email
-- Change from address when adding to an event (bug)
-- Add subject when empty RE: Strom day
-- Add helper 'Tap/click again mark as free'
+- Show best options
 
 Done
 ----
+- Build example page
+- Stop hiding header on scroll
+- Show notify icon directly in header
+- Fix trailing coma when everyone free
+- Fix about/contact on homepage
+- Change from address when adding to an event (bug)
+- Add subject when empty RE: Strom day
+- Add helper 'Tap/click again mark as free'
+- CalendarId 5 attendeeId + 3
 - Closing info panel
 - Show changes when not registered
 - Update info bar text

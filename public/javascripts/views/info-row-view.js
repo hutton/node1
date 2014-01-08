@@ -68,9 +68,13 @@ window.InfoRowView = Backbone.View.extend({
 
 		freeNamesText = free.join(', ');
 
-		if (free.length > 0){
+		if (busy.length > 0 && free.length > 0){
 			freeNamesText = freeNamesText + ", ";
 		}
+
+		var date = this.model.get('date');
+
+		var dateText = moment(date).format("dddd D MMMM");
 
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
@@ -78,6 +82,7 @@ window.InfoRowView = Backbone.View.extend({
 			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
 			showDetails: this.showingDetails,
 			freeNames: freeNamesText,
+			date: dateText,
 			notFreeNames: busy.join(', '),
 		};
 	},
@@ -113,6 +118,18 @@ window.InfoRowView = Backbone.View.extend({
 		this.showingDetails = false;
 	},
 
+	panelClicked: function(event){
+		var target = $(event.target);
+
+		if (event.target.id !== "info-row-hide-details-link" &&
+			event.target.id !== "info-row-details-link"){
+
+			$(".selected").removeClass('selected');
+
+			this.removeSelectedRow();
+		}
+	},
+
 	setAsFree: function(){
 		this.model.toggleFree();
 	},
@@ -141,7 +158,9 @@ window.InfoRowView = Backbone.View.extend({
 
 	unbindEvents: function(){
 		if (this.infoRowEl !== null && !_.isUndefined(this.infoRowEl) ){
-			this.infoRowEl.find('.info-row-selector').off('click', this.setAsFree);	
+			this.infoRowEl.find('.info-row-text-container').off('click', this.panelClicked);
+
+			this.infoRowEl.find('.info-row-selector').off('click', this.setAsFree);
 			this.infoRowEl.find('.info-row-selector-free').off('click', this.setAsFree);
 
 			this.infoRowEl.find('#info-row-details-link').off('click', this.showDetails);
@@ -150,6 +169,8 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	bindEvents: function(){
+		this.infoRowEl.find('.info-row-text-container').on('click', this.panelClicked);
+
 		this.infoRowEl.find('.info-row-selector').on('click', this.setAsFree);
 		this.infoRowEl.find('.info-row-selector-free').on('click', this.setAsFree);
 

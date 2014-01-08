@@ -94,21 +94,21 @@ window.EventApp = Backbone.View.extend({
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
-		_.delay(function(){
-			$(window).on("scrollstart touchmove", function(){
+		this.updateTellEveryoneLink();
+		
+		// _.delay(function(){
+		// 	$(window).on("scrollstart touchmove", function(){
 
-				if (!this.scrollStarted){
-					this.scrollStarted = true;
-					that.topNavBarEl.addClass("faded");
-				}
-			});
-			$(window).on("scrollstop", function(){
-				this.scrollStarted = false;
-				_.delay(function(){
-					that.topNavBarEl.removeClass("faded");
-				}, 250);
-			});
-		}, 1000);
+		// 		if (!this.scrollStarted){
+		// 			this.scrollStarted = true;
+		// 			that.topNavBarEl.addClass("faded");
+		// 		}
+		// 	});
+		// 	$(window).on("scrollstop", function(){
+		// 		this.scrollStarted = false;
+		// 		that.topNavBarEl.removeClass("faded");
+		// 	});
+		// }, 1000);
 	},
 
 	eventTableClicked: function(event){
@@ -248,23 +248,19 @@ window.EventApp = Backbone.View.extend({
 
 		this.changesMadeLinkkeyEl.attr("href", mailTo);
 
-		if (this.isFree.length > 0 || this.wasFree.length > 0){
-			if (!this.switchedUpdateAttendeesLink){
-				this.updatedFooterEl.show();
+		// if (this.isFree.length > 0 || this.wasFree.length > 0){
+		// 	if (!this.switchedUpdateAttendeesLink){
+				// this.updatedFooterEl.show();
 
-				// var adjustHeight = 44 + this.topRowSpacerEl.height();
+				// this.switchedUpdateAttendeesLink = true;
 
-				// this.topRowSpacerEl.animate({height: adjustHeight}, 200);
+				// var that = this;
 
-				this.switchedUpdateAttendeesLink = true;
-
-				var that = this;
-
-				_.delay(function(){
-					that.swtichUpdateAttendeesLink();
-				}, 2000);
-			}
-		}
+				// _.delay(function(){
+				// 	that.swtichUpdateAttendeesLink();
+				// }, 2000);
+		// 	}
+		// }
 	},
 
 	swtichUpdateAttendeesLink: function(){

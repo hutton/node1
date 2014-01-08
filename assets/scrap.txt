@@ -1,4 +1,9 @@
-Not registered - always show 'n of m'
+Hi Ian,
 
-Only you are attendee - "You are the only attendee \n Invite others >"
-Otherwise - 'n of m \n Details >'
+I hope you're still finding Meetifyr useful and it's not giving you any problems.
+
+I have been working on a successor to Meetifyr and would really appreciate your thoughts on it.  Convenely aims to solve the same problem has been built to work well on mobile devices and tablets
+
+The main difference is that all attendees have to register and 
+
+
