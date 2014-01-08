@@ -1,10 +1,8 @@
-- Build example page
 - Show best options
-- Show date line in details
-- Show best dates on scroll
 
 Done
 ----
+- Build example page
 - Stop hiding header on scroll
 - Show notify icon directly in header
 - Fix trailing coma when everyone free
