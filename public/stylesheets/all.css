@@ -7363,6 +7363,18 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 body {
   padding-top: 0px;
   padding-bottom: 40px;
@@ -7700,7 +7712,7 @@ a:active {
   opacity: 1;
   cursor: pointer;
 }
-.event-table td > div.today > div:nth-of-type(3) {
+.today {
   background: #c0c0c0;
   position: relative;
   top: 12px;
@@ -7716,7 +7728,7 @@ a:active {
 .event-table td > div.selected {
   opacity: 1.0;
 }
-.event-table td > div.selected > div:nth-of-type(3) {
+.selected-pointer {
   width: 20px;
   height: 20px;
   background: #f8f8f8;
@@ -7823,6 +7835,7 @@ a:active {
   background: rgba(255, 255, 255, 0.75);
 }
 /**************************************/
+/**************************************/
 .register-attendee-message {
   display: none;
   font-size: 14px;
@@ -7846,9 +7859,18 @@ a:active {
   position: relative;
   overflow: hidden;
 }
+.info-row > div {
+  position: relative;
+}
 .info-row-date {
-  float: left;
-  display: none;
+  font-size: 12px;
+  background: #f1f1f1;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #a0a0a0;
+  text-align: left;
+  border-bottom: 1px #e8e8e8 solid;
 }
 .info-row-text-container {
   margin-left: 80px;
@@ -7903,11 +7925,13 @@ a:active {
   position: relative;
   top: 4px;
   color: #4ad16c;
+  padding: 6px;
 }
 #info-row-hide-details-link {
   position: relative;
   top: 4px;
   color: #4ad16c;
+  padding: 6px;
 }
 .info-row-names {
   text-align: left;
@@ -7958,18 +7982,6 @@ a:active {
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 .pie {
   position: absolute;
   left: 19px;

@@ -124,8 +124,6 @@ window.InfoRowView = Backbone.View.extend({
 		if (event.target.id !== "info-row-hide-details-link" &&
 			event.target.id !== "info-row-details-link"){
 
-			$(".selected").removeClass('selected');
-
 			this.removeSelectedRow();
 		}
 	},
@@ -179,6 +177,10 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	removeSelectedRow: function(){
+		$(".selected").find(".selected-pointer").remove();
+
+		$(".selected").removeClass('selected');
+
 		var allSelectedRows = $('#selected-row');
 
 		allSelectedRows

@@ -1,4 +1,6 @@
+- Contact Meetifyr user
 - Show best options
+- Allow selection of date range
 
 Done
 ----

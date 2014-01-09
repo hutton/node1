@@ -347,11 +347,11 @@ a:active {
   opacity: 1;
   cursor: pointer;
 }
-.event-table td > div.today > div:nth-of-type(3) {
+.today {
   background: #c0c0c0;
-  position: relative;
-  top: 12px;
-  margin: 0px auto;
+  position: absolute;
+  top: 37px;
+  left: 15px;
   width: 8px;
   height: 8px;
   border-radius: 10px;
@@ -363,7 +363,7 @@ a:active {
 .event-table td > div.selected {
   opacity: 1.0;
 }
-.event-table td > div.selected > div:nth-of-type(3) {
+.selected-pointer {
   width: 20px;
   height: 20px;
   background: #f8f8f8;
@@ -469,6 +469,7 @@ a:active {
   padding: 4px 10px;
   background: rgba(255, 255, 255, 0.75);
 }
+/**************************************/
 /**************************************/
 .register-attendee-message {
   display: none;

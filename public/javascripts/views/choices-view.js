@@ -35,10 +35,6 @@ window.ChoiceView = Backbone.View.extend({
 		if (target.hasClass('selected')){
 			target.find('div:nth-of-type(2)').toggleClass('free');
 			target.find('div:nth-of-type(2)').toggleClass('unknown');
-		} else {
-			$(".selected").removeClass('selected');
-
-			target.addClass('selected');
 		}
 
 		if (this.model.has("free")){
@@ -95,9 +91,13 @@ window.ChoiceView = Backbone.View.extend({
 		if (target.hasClass('selected')){
 			this.model.toggleFree();
 		} else {
+			$(".selected").find(".selected-pointer").remove();
+
 			$(".selected").removeClass('selected');
 
 			target.addClass('selected');
+
+			target.append("<div class='selected-pointer'></div>");
 
 			var selectedRow = target.parents("tr");
 
@@ -163,9 +163,7 @@ window.ChoicesView = Backbone.View.extend({
 			}
 
 			if (!todayAdded && sameDay(that.today, date)){
-				var target = choice.$el.find("div:first");
-
-				target.addClass("today");
+				choice.$el.find("div").first().append("<div class='today'></div>");
 
 				todayAdded = true;
 			}
@@ -186,7 +184,8 @@ window.ChoicesView = Backbone.View.extend({
 		}
 
 		var body = $("body");
-		body.scrollTop(body.scrollTop() - 70);
+
+		body.scrollTop(body.scrollTop() - 112);
 
 		return this;
 	},

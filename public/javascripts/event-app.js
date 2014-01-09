@@ -95,7 +95,7 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
 		this.updateTellEveryoneLink();
-		
+
 		// _.delay(function(){
 		// 	$(window).on("scrollstart touchmove", function(){
 
@@ -119,7 +119,6 @@ window.EventApp = Backbone.View.extend({
 
 			if (this.infoRowView !== null){
 				this.infoRowView.removeSelectedRow();
-				$(".selected").removeClass('selected');
 			}
 		}
 	},
