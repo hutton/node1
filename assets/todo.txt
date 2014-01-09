@@ -1,5 +1,5 @@
 - Show best options
-
+- Lighten calendar c0 & d8
 Done
 ----
 - Build example page
