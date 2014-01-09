@@ -1,5 +1,7 @@
 - Show best options
 - Lighten calendar c0 & d8
+- Give month some color
+
 Done
 ----
 - Build example page
