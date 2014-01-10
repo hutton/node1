@@ -650,14 +650,43 @@ a:active{
 }
 
 /**************************************/
-.event-table td > div.first-choice{
+.event-table td > div.choice-pointer{
+	opacity: 0.0;
+	.transition-duration(0.25s);
+}
+
+.event-table td > div.choice-pointer-show{
+	opacity: 1.0;
+}
+
+.event-table td > div.first-choice-container{
 	position: absolute;
 	text-align: center;
+	width: 100%;
+	height: auto;
+	z-index: 100;
+	top: -35px;
+	font-size: 12px;
+}
+
+.first-choice-text{
 	background: @free-color;
 	color: white;
 	padding: 4px 10px;
-	width: inherit;
-	height: inherit;
+	z-index: 101;
+	width: 60px;
+	margin: 0 auto;
+}
+
+.first-choice-pointer{
+	margin: 0 auto;
+	position: relative;
+	top: -5px;
+	z-index: 99;
+	background: @free-color;
+    .rotation(-45deg);
+    width: 10px;
+    height: 10px;
 }
 
 /**************************************/

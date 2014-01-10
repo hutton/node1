@@ -101,6 +101,10 @@ window.ChoiceView = Backbone.View.extend({
 		} else {
 			var selectedRow = target.parents("tr");
 
+			$(".selected").find(".selected-pointer").remove();
+
+			$(".selected").removeClass('selected');
+
 			App.updateSelectedItem(this.model, selectedRow);
 
 			target.addClass('selected');

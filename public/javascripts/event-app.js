@@ -98,19 +98,23 @@ window.EventApp = Backbone.View.extend({
 
 		this.showBestChoices();
 
-		// _.delay(function(){
-		// 	$(window).on("scrollstart touchmove", function(){
+		_.delay(function(){
+			$(window).on("scrollstart touchmove", function(){
 
-		// 		if (!this.scrollStarted){
-		// 			this.scrollStarted = true;
-		// 			that.topNavBarEl.addClass("faded");
-		// 		}
-		// 	});
-		// 	$(window).on("scrollstop", function(){
-		// 		this.scrollStarted = false;
-		// 		that.topNavBarEl.removeClass("faded");
-		// 	});
-		// }, 1000);
+				if (!this.scrollStarted){
+					this.scrollStarted = true;
+					$('.choice-pointer').addClass('choice-pointer-show');
+
+					// that.topNavBarEl.addClass("faded");
+				}
+			});
+			$(window).on("scrollstop", function(){
+				this.scrollStarted = false;
+				//that.topNavBarEl.removeClass("faded");
+				$('.choice-pointer').removeClass('choice-pointer-show');
+
+			});
+		}, 1000);
 	},
 
 	eventTableClicked: function(event){
@@ -133,10 +137,6 @@ window.EventApp = Backbone.View.extend({
 		} else {
 			this.infoRowView.update(choiceModel, selectedRow);
 		}
-
-		//var dateText = this.buildDateText(choiceModel);
-		// var attendeeText = this.buildAttendeeText(choiceModel);
-
 	},
 
 	addAttendeeClicked: function(){
@@ -361,8 +361,8 @@ window.EventApp = Backbone.View.extend({
 			}
 		});
 
-		// if (bestModel !== null){
-		// 	bestModel.set('first-choice', true);
-		// }
+		if (bestModel !== null){
+			bestModel.set('first-choice', true);
+		}
 	}
 });

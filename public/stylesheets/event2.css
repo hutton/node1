@@ -577,14 +577,47 @@ a:active {
   color: #a0a0a0;
 }
 /**************************************/
-.event-table td > div.first-choice {
+.event-table td > div.choice-pointer {
+  opacity: 0.0;
+  -moz-transition-duration: 0.25s;
+  -webkit-transition-duration: 0.25s;
+  -o-transform-duration: 0.25s;
+  -ms-transform-duration: 0.25s;
+  transition-duration: 0.25s;
+}
+.event-table td > div.choice-pointer-show {
+  opacity: 1.0;
+}
+.event-table td > div.first-choice-container {
   position: absolute;
   text-align: center;
+  width: 100%;
+  height: auto;
+  z-index: 100;
+  top: -35px;
+  font-size: 12px;
+}
+.first-choice-text {
   background: #4ad16c;
   color: white;
   padding: 4px 10px;
-  width: inherit;
-  height: inherit;
+  z-index: 101;
+  width: 60px;
+  margin: 0 auto;
+}
+.first-choice-pointer {
+  margin: 0 auto;
+  position: relative;
+  top: -5px;
+  z-index: 99;
+  background: #4ad16c;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  width: 10px;
+  height: 10px;
 }
 /**************************************/
 .modal {
