@@ -7,7 +7,8 @@
 
 @month-divider-color: #e8e8e8;
 @selected-color: #c0c0c0;
-@weekend-color: #c8c8c8;
+@date-color: #c0c0c0;
+@weekend-color: #d0d0d0;
 @light-background-color: #f8f8f8;
 
 body{
@@ -358,7 +359,7 @@ a:active{
 }
 
 .month{
-	color: #a0a0a0;
+	color: @free-color;
 	top: 8px;
 	left: 10px;
 }
@@ -374,7 +375,7 @@ a:active{
 .event-table td{
 	text-align: center;
 	position: relative;
-	color: #a0a0a0;
+	color: @date-color;
 
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -423,8 +424,7 @@ a:active{
 }
 
 .event-table td>div.past{
-	opacity: 0.4;
-	text-decoration: line-through;
+	opacity: 0.5;
 }
 
 .event-table td>div.selected{
@@ -647,6 +647,17 @@ a:active{
 
 .info-row-names > strong{
 	color: #a0a0a0;
+}
+
+/**************************************/
+.event-table td > div.first-choice{
+	position: absolute;
+	text-align: center;
+	background: @free-color;
+	color: white;
+	padding: 4px 10px;
+	width: inherit;
+	height: inherit;
 }
 
 /**************************************/

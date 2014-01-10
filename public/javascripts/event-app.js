@@ -96,6 +96,8 @@ window.EventApp = Backbone.View.extend({
 
 		this.updateTellEveryoneLink();
 
+		this.showBestChoices();
+
 		// _.delay(function(){
 		// 	$(window).on("scrollstart touchmove", function(){
 
@@ -344,5 +346,23 @@ window.EventApp = Backbone.View.extend({
 
 			return false;
 		}
+	},
+
+	showBestChoices: function(){
+		var bestModel;
+		var bestCount = 0;
+
+		_.each(this.choices.models, function(model){
+			if (model.has('free')){
+				if (model.get('free').length > bestCount){
+					bestCount = model.get('free').length;
+					bestModel = model;
+				}
+			}
+		});
+
+		// if (bestModel !== null){
+		// 	bestModel.set('first-choice', true);
+		// }
 	}
 });

@@ -7,6 +7,8 @@ window.ChoiceView = Backbone.View.extend({
 
 	template: _.template($('#choice-template').html()),
 
+	firstChoiceTemplate: _.template($('#first-choice-template').html()),
+
 	events: {
 		"click div:first":	"dayClicked"
 	},
@@ -58,6 +60,12 @@ window.ChoiceView = Backbone.View.extend({
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
 		}
+
+		if (this.model.has("first-choice")){
+			if (this.model.get("first-choice")){
+				this.$el.append(this.firstChoiceTemplate());
+			}
+		}
 	},
 
 	animatePie: function(){
@@ -91,17 +99,13 @@ window.ChoiceView = Backbone.View.extend({
 		if (target.hasClass('selected')){
 			this.model.toggleFree();
 		} else {
-			$(".selected").find(".selected-pointer").remove();
+			var selectedRow = target.parents("tr");
 
-			$(".selected").removeClass('selected');
+			App.updateSelectedItem(this.model, selectedRow);
 
 			target.addClass('selected');
 
 			target.append("<div class='selected-pointer'></div>");
-
-			var selectedRow = target.parents("tr");
-
-			App.updateSelectedItem(this.model, selectedRow);
 		}
 	},
 
