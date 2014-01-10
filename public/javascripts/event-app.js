@@ -111,7 +111,10 @@ window.EventApp = Backbone.View.extend({
 			$(window).on("scrollstop", function(){
 				this.scrollStarted = false;
 				//that.topNavBarEl.removeClass("faded");
-				$('.choice-pointer').removeClass('choice-pointer-show');
+
+				_.delay(function(){
+					$('.choice-pointer').removeClass('choice-pointer-show');
+				}, 400);
 
 			});
 		}, 1000);
