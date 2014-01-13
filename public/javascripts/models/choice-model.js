@@ -63,6 +63,8 @@ window.ChoiceModel = Backbone.Model.extend({
 			this.save();
 
 			window.App.updateTellEveryoneLink();
+
+			window.App.showBestChoices();
 		} else {
 			if (window.App.isFree.indexOf(date) != -1){
 				window.App.isFree.removeElement(date);

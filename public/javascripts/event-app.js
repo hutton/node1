@@ -370,6 +370,10 @@ window.EventApp = Backbone.View.extend({
 					secondBestCount = model.get('free').length;
 					secondBestModel = model;
 				}
+
+				if (model.has('top-choice')){
+					model.set('top-choice', 0);
+				}
 			}
 		});
 
