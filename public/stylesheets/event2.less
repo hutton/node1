@@ -447,7 +447,7 @@ a:active{
 
 .event-table td>div.selected> .pie:before,
 .event-table td>div.selected> .pie:after{
-	background: @selected-color;
+	background: #9BE6AF;
 }
 
 #selected-row{
@@ -650,22 +650,22 @@ a:active{
 }
 
 /**************************************/
-.event-table td > div.choice-pointer{
-	opacity: 0.0;
-	.transition-duration(0.25s);
+.event-table td > div > div.choice-pointer{
+	display: none;
 }
 
-.event-table td > div.choice-pointer-show{
-	opacity: 1.0;
+.event-table td > div > div.choice-pointer-show{
+	display: block;
 }
 
-.event-table td > div.first-choice-container{
+.event-table td > div > div.first-choice-container{
 	position: absolute;
 	text-align: center;
 	width: 100%;
 	height: auto;
 	z-index: 100;
-	top: -35px;
+	top: -50px;
+	left: -11px;
 	font-size: 12px;
 }
 
@@ -682,6 +682,7 @@ a:active{
 	margin: 0 auto;
 	position: relative;
 	top: -5px;
+	left: 11px;
 	z-index: 99;
 	background: @free-color;
     .rotation(-45deg);

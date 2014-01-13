@@ -80,7 +80,7 @@ window.InfoRowView = Backbone.View.extend({
 			attendeeText: this.buildAttendeeText(this.model),
 			isFree: this.model.isFree(),
 			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
-			showDetails: this.showingDetails,
+			showDetails: true, //this.showingDetails,
 			freeNames: freeNamesText,
 			date: dateText,
 			notFreeNames: busy.join(', '),

@@ -63,7 +63,7 @@ window.ChoiceView = Backbone.View.extend({
 
 		if (this.model.has("first-choice")){
 			if (this.model.get("first-choice")){
-				this.$el.append(this.firstChoiceTemplate());
+				this.$el.find('.date-cell-container').append(this.firstChoiceTemplate());
 			}
 		}
 	},
