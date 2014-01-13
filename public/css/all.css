@@ -7745,7 +7745,7 @@ a:active {
 }
 .event-table td > div.selected > .pie:before,
 .event-table td > div.selected > .pie:after {
-  background: #9BE6AF;
+  background: #d5d5d5;
 }
 #selected-row {
   border-top: 1px solid #e8e8e8;
@@ -7942,44 +7942,26 @@ a:active {
   color: #a0a0a0;
 }
 /**************************************/
-.event-table td > div > div.choice-pointer {
-  display: none;
-}
-.event-table td > div > div.choice-pointer-show {
-  display: block;
-}
 .event-table td > div > div.first-choice-container {
   position: absolute;
   text-align: center;
   width: 100%;
   height: auto;
   z-index: 100;
-  top: -50px;
-  left: -11px;
+  top: 27px;
+  left: -14px;
   font-size: 12px;
 }
 .first-choice-text {
-  background: #4ad16c;
+  background: crimson;
+  border-radius: 10px;
+  width: 18px;
+  height: 18px;
   color: white;
-  padding: 4px 10px;
   z-index: 101;
-  width: 60px;
   margin: 0 auto;
-}
-.first-choice-pointer {
-  margin: 0 auto;
-  position: relative;
-  top: -5px;
-  left: 11px;
-  z-index: 99;
-  background: #4ad16c;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  width: 10px;
-  height: 10px;
+  padding-top: 1px;
+  line-height: 1.4;
 }
 /**************************************/
 .modal {
@@ -8093,7 +8075,7 @@ a:active {
 */
 .pie:nth-of-type(1):BEFORE,
 .pie:nth-of-type(1):AFTER {
-  background: #bbebc8;
+  background: #d5d5d5;
 }
 .pie:nth-of-type(2):AFTER,
 .pie:nth-of-type(2):BEFORE {

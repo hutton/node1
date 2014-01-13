@@ -61,9 +61,9 @@ window.ChoiceView = Backbone.View.extend({
 			}
 		}
 
-		if (this.model.has("first-choice")){
-			if (this.model.get("first-choice")){
-				this.$el.find('.date-cell-container').append(this.firstChoiceTemplate());
+		if (this.model.has("top-choice")){
+			if (this.model.get("top-choice") > 0){
+				this.$el.find('.date-cell-container').append(this.firstChoiceTemplate({choice: this.model.get("top-choice")}));
 			}
 		}
 	},

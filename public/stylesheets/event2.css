@@ -68,7 +68,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .event-table td>div.past{opacity:0.5;}
 .event-table td>div.selected{opacity:1.0;}
 .selected-pointer{width:20px;height:20px;background:#f8f8f8;border-right:1px solid #e8e8e8;border-top:1px solid #e8e8e8;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);border-radius:0px;position:relative;top:14px;margin:0px auto;}
-.event-table td>div.selected>.pie:before,.event-table td>div.selected>.pie:after{background:#9BE6AF;}
+.event-table td>div.selected>.pie:before,.event-table td>div.selected>.pie:after{background:#d5d5d5;}
 #selected-row{border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;background:#f8f8f8;line-height:1.3em;font-size:16px;margin:4px 12px 7px 12px;text-align:center;}
 .event-table tr.selected-row>td{padding:0px;width:100%;}
 .event-table tr.selected-row>td>div{width:auto;height:auto;}
@@ -99,11 +99,8 @@ a:active{color:#4ad16c;text-decoration:none;}
 #info-row-hide-details-link{position:relative;top:4px;color:#4ad16c;padding:6px;}
 .info-row-names{text-align:left;margin-top:10px;font-size:14px;color:#d0d0d0;}
 .info-row-names>strong{color:#a0a0a0;}
-.event-table td>div>div.choice-pointer{display:none;}
-.event-table td>div>div.choice-pointer-show{display:block;}
-.event-table td>div>div.first-choice-container{position:absolute;text-align:center;width:100%;height:auto;z-index:100;top:-50px;left:-11px;font-size:12px;}
-.first-choice-text{background:#4ad16c;color:white;padding:4px 10px;z-index:101;width:60px;margin:0 auto;}
-.first-choice-pointer{margin:0 auto;position:relative;top:-5px;left:11px;z-index:99;background:#4ad16c;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);width:10px;height:10px;}
+.event-table td>div>div.first-choice-container{position:absolute;text-align:center;width:100%;height:auto;z-index:100;top:27px;left:-14px;font-size:12px;}
+.first-choice-text{background:crimson;border-radius:10px;width:18px;height:18px;color:white;z-index:101;margin:0 auto;padding-top:1px;line-height:1.4;}
 .modal{font-size:16px;line-height:1.8em;text-align:center;}
 .modal i{color:#4ad16c;font-size:21px;}
 .modal-dialog{max-width:450px;}

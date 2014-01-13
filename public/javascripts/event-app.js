@@ -98,26 +98,26 @@ window.EventApp = Backbone.View.extend({
 
 		this.showBestChoices();
 
-		_.delay(function(){
-			$(window).on("scrollstart touchmove", function(){
+		// _.delay(function(){
+		// 	$(window).on("scrollstart touchmove", function(){
 
-				if (!this.scrollStarted){
-					this.scrollStarted = true;
-					$('.choice-pointer').addClass('choice-pointer-show');
+		// 		if (!this.scrollStarted){
+		// 			this.scrollStarted = true;
+		// 			// $('.choice-pointer').addClass('choice-pointer-show');
 
-					// that.topNavBarEl.addClass("faded");
-				}
-			});
-			$(window).on("scrollstop", function(){
-				this.scrollStarted = false;
-				//that.topNavBarEl.removeClass("faded");
+		// 			// that.topNavBarEl.addClass("faded");
+		// 		}
+		// 	});
+		// 	$(window).on("scrollstop", function(){
+		// 		this.scrollStarted = false;
+		// 		//that.topNavBarEl.removeClass("faded");
 
-				_.delay(function(){
-					$('.choice-pointer').removeClass('choice-pointer-show');
-				}, 400);
+		// 		_.delay(function(){
+		// 			// $('.choice-pointer').removeClass('choice-pointer-show');
+		// 		}, 400);
 
-			});
-		}, 1000);
+		// 	});
+		// }, 1000);
 	},
 
 	eventTableClicked: function(event){
@@ -355,17 +355,30 @@ window.EventApp = Backbone.View.extend({
 		var bestModel;
 		var bestCount = 0;
 
+		var secondBestModel;
+		var secondBestCount = 0;
+
 		_.each(this.choices.models, function(model){
 			if (model.has('free')){
 				if (model.get('free').length > bestCount){
+					secondBestCount = bestCount;
+					secondBestModel = bestModel;
+
 					bestCount = model.get('free').length;
 					bestModel = model;
+				} else if (model.get('free').length > secondBestCount){
+					secondBestCount = model.get('free').length;
+					secondBestModel = model;
 				}
 			}
 		});
 
 		if (bestModel !== null){
-			bestModel.set('first-choice', true);
+			bestModel.set('top-choice', 1);
+		}
+
+		if (secondBestModel !== null){
+			secondBestModel.set('top-choice', 2);
 		}
 	}
 });
