@@ -77,7 +77,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .busy{top:5px;width:28px;height:28px;margin-left:auto;margin-right:auto;border-radius:100px;position:relative;background:#fe673b;}
 .unknown{top:5px;width:28px;height:28px;margin-left:auto;margin-right:auto;border-radius:100px;position:relative;background:#ffffff;}
 .free>.content{color:white;}
-.content{position:relative;top:3px;font-size:16px;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+.content{position:relative;top:3px;font-size:16px;line-height:1.4em;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 .footer{text-align:center;font-size:16px;height:0px;position:relative;top:10px;}
 #register-footer{margin:10px 10px 0px 10px;text-align:center;font-size:16px;}
 #changes-made-banner{padding:4px 10px;background:rgba(255, 255, 255, 0.75);}

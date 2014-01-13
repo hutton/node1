@@ -7363,18 +7363,6 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 body {
   padding-top: 0px;
   padding-bottom: 40px;
@@ -7810,6 +7798,7 @@ a:active {
   position: relative;
   top: 3px;
   font-size: 16px;
+  line-height: 1.4em;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -8003,6 +7992,18 @@ a:active {
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 /*#DCE0DC;*/
 .pie {
   position: absolute;
