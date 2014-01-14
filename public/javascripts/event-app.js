@@ -358,17 +358,31 @@ window.EventApp = Backbone.View.extend({
 		var secondBestModel;
 		var secondBestCount = 0;
 
+		var thirdBestModel;
+		var thirdBestCount = 0;
+
 		_.each(this.choices.models, function(model){
 			if (model.has('free')){
-				if (model.get('free').length > bestCount){
+				var freeCount = model.get('free').length;
+
+				if (freeCount > bestCount){
+					thirdBestCount = secondBestCount;
+					thirdBestModel = secondBestModel;
+
 					secondBestCount = bestCount;
 					secondBestModel = bestModel;
 
-					bestCount = model.get('free').length;
+					bestCount = freeCount;
 					bestModel = model;
-				} else if (model.get('free').length > secondBestCount){
-					secondBestCount = model.get('free').length;
+				} else if (freeCount > secondBestCount){
+					thirdBestCount = secondBestCount;
+					thirdBestModel = secondBestModel;
+
+					secondBestCount = freeCount;
 					secondBestModel = model;
+				} else if (freeCount > thirdBestCount){
+					thirdBestCount = freeCount;
+					thirdBestModel = model;
 				}
 
 				if (model.has('top-choice')){
@@ -383,6 +397,10 @@ window.EventApp = Backbone.View.extend({
 
 		if (secondBestModel !== null){
 			secondBestModel.set('top-choice', 2);
+		}
+
+		if (thirdBestModel !== null){
+			thirdBestModel.set('top-choice', 3);
 		}
 	}
 });
