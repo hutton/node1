@@ -477,18 +477,12 @@ a:active{
 }
 
 .inner{
-	top: 5px;
-	width: 28px;
-	height: 28px;
-	margin-left: auto;
-	margin-right: auto;
-	border-radius: 100px;
 	position: relative;
 }
 
 .free{
 	.inner;
-	background: @free-color;
+	color: @free-color;
 }
 
 .busy{
@@ -498,7 +492,7 @@ a:active{
 
 .unknown{
 	.inner;
-	background: #ffffff;
+	color: #404040;
 }
 
 .free > .content {
@@ -540,6 +534,17 @@ a:active{
 
 /**************************************/
 
+.event-table{
+	border-collapse: inherit;
+	border-spacing: 4px;
+}
+
+.date-cell{
+	background: #c0c0c0;
+}
+
+.date-cell-container{
+}
 
 
 /**************************************/

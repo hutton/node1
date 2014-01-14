@@ -51,9 +51,13 @@ window.ChoiceView = Backbone.View.extend({
 				}
 			}
 
+			this.$el.attr("style", "opacity: " + (this.targetDeg / 360) + ";");
+
 			if (this.model.isFree() || this.model.pretendFree){
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
+		} else {
+			this.$el.attr("style", "opacity: 0.1;");
 		}
 
 		if (this.model.isFree()){
@@ -64,7 +68,7 @@ window.ChoiceView = Backbone.View.extend({
 			target.find('div:nth-of-type(2)').addClass('unknown');
 		}
 
-		if (this.model.has("top-choice")){
+		if (false /*this.model.has("top-choice")*/){
 			if (this.$el.find('.top-choice-text').length === 0){
 				if (this.model.get("top-choice") > 0){
 					this.$el.find('.date-cell-container').append(this.firstChoiceTemplate({choice: this.model.get("top-choice")}));
