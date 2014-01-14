@@ -7363,6 +7363,18 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 body {
   padding-top: 0px;
   padding-bottom: 40px;
@@ -7446,7 +7458,7 @@ a:active {
   max-width: 570px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 16px;
+  font-size: 14px;
   padding: 25px 10px;
   line-height: 1.6em;
 }
@@ -7931,17 +7943,11 @@ a:active {
   color: #a0a0a0;
 }
 /**************************************/
-.event-table td > div > div.first-choice-container {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  height: auto;
-  z-index: 100;
-  top: 27px;
-  left: -14px;
+.top-choice-text {
   font-size: 12px;
-}
-.first-choice-text {
+  position: absolute;
+  top: 27px;
+  left: -7px;
   background: crimson;
   border-radius: 10px;
   width: 18px;
@@ -7951,6 +7957,18 @@ a:active {
   margin: 0 auto;
   padding-top: 1px;
   line-height: 1.4;
+}
+.info-row-top-choice {
+  text-align: left;
+}
+.info-row-top-choice > div {
+  background: crimson;
+  color: white;
+  padding: 2px 8px;
+  font-size: 12px;
+  display: inline-block;
+  position: relative;
+  top: -5px;
 }
 /**************************************/
 .modal {
@@ -7992,18 +8010,6 @@ a:active {
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 /*#DCE0DC;*/
 .pie {
   position: absolute;

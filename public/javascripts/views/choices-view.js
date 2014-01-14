@@ -34,11 +34,6 @@ window.ChoiceView = Backbone.View.extend({
 	updateView: function(animate){
 		var target = $(this.$el).find("div:first");
 
-		if (target.hasClass('selected')){
-			target.find('div:nth-of-type(2)').toggleClass('free');
-			target.find('div:nth-of-type(2)').toggleClass('unknown');
-		}
-
 		if (this.model.has("free")){
 			var freeDates = this.model.get("free");
 
@@ -61,11 +56,25 @@ window.ChoiceView = Backbone.View.extend({
 			}
 		}
 
+		if (this.model.isFree()){
+			target.find('div:nth-of-type(2)').addClass('free');
+			target.find('div:nth-of-type(2)').removeClass('unknown');
+		} else {
+			target.find('div:nth-of-type(2)').removeClass('free');
+			target.find('div:nth-of-type(2)').addClass('unknown');
+		}
+
 		if (this.model.has("top-choice")){
-			if (this.model.get("top-choice") > 0){
-				this.$el.find('.date-cell-container').append(this.firstChoiceTemplate({choice: this.model.get("top-choice")}));
+			if (this.$el.find('.top-choice-text').length === 0){
+				if (this.model.get("top-choice") > 0){
+					this.$el.find('.date-cell-container').append(this.firstChoiceTemplate({choice: this.model.get("top-choice")}));
+				}
 			} else {
-				
+				if (this.model.get("top-choice") > 0){
+					this.$el.find('.top-choice-text').html(this.model.get("top-choice"));
+				} else {
+					this.$el.find('.top-choice-text').remove();
+				}
 			}
 		}
 	},

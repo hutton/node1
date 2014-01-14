@@ -220,6 +220,11 @@
                 </div>
               </div>
               <div class="info-row-text-container">
+                <div class="info-row-top-choice" <@ if (!showTopChoice){ @>style="display: none;"<@ } @>>
+                  <div>
+                  <@= topChoiceText @>
+                  </div>
+                </div>
                 <div class="info-row-text"><@= attendeeText @></div>
                 <@ if(showInvite){ @>
                   <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
@@ -236,8 +241,8 @@
   </script>
 
   <script type="text/template" id="first-choice-template">
-    <div class="first-choice-container choice-pointer">
-      <div class="first-choice-text"><@= choice @></div>
+    <div class="top-choice-text">
+      <@= choice @>
     </div>
   </script>
  

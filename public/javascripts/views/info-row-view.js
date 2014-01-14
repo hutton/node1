@@ -48,6 +48,13 @@ window.InfoRowView = Backbone.View.extend({
 		}
 
 		this.infoRowEl.find('.info-row-names').html("<strong>" + values.freeNames + "</strong>" + values.notFreeNames);
+
+		if (values.showTopChoice){
+			this.infoRowEl.find('.info-row-top-choice').show();
+			this.infoRowEl.find('.info-row-top-choice > div').html(values.topChoiceText);
+		} else {
+			this.infoRowEl.find('.info-row-top-choice').hide();
+		}
 	},
 
 	buildTemplateValues: function(){
@@ -76,6 +83,22 @@ window.InfoRowView = Backbone.View.extend({
 
 		var dateText = moment(date).format("dddd D MMMM");
 
+		var topChoice = 0;
+
+		if (this.model.has('top-choice')){
+			topChoice = this.model.get('top-choice');
+
+			if (topChoice === 1){
+				topChoiceText = "Top choice";
+			} else if (topChoice === 2){
+				topChoiceText = "2nd choice";
+			} else if (topChoice === 3){
+				topChoiceText = "3rd choice";
+			} 
+		}
+
+		var showTopChoice = topChoice > 0;
+
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
 			isFree: this.model.isFree(),
@@ -84,6 +107,8 @@ window.InfoRowView = Backbone.View.extend({
 			freeNames: freeNamesText,
 			date: dateText,
 			notFreeNames: busy.join(', '),
+			showTopChoice: showTopChoice,
+			topChoiceText: topChoiceText
 		};
 	},
 

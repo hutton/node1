@@ -122,8 +122,10 @@ function example(req, res){
 				"busy" : [],
 				"date" : new Date(moment().add('days', 3)),
 				"free" : [
-					"A01",
 					"A02",
+					"A03",
+					"A04",
+					"A05",
 					"A06",
 					"A07"
 				]
