@@ -1,9 +1,9 @@
-- Show best options
-- Allow selection of date range
 - Add description
+- Allow selection of date range
 
 Done
 ----
+- Show best options
 - Contact Meetifyr user
 - Build example page
 - Stop hiding header on scroll
