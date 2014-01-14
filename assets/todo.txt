@@ -1,9 +1,10 @@
-- Contact Meetifyr user
 - Show best options
 - Allow selection of date range
+- Add description
 
 Done
 ----
+- Contact Meetifyr user
 - Build example page
 - Stop hiding header on scroll
 - Show notify icon directly in header
