@@ -7713,13 +7713,6 @@ a:active {
 .event-table td > div.past {
   opacity: 0.5;
 }
-.event-table td > div.selected {
-  opacity: 1.0;
-}
-.event-table td > div.selected > .pie:before,
-.event-table td > div.selected > .pie:after {
-  background: #d5d5d5;
-}
 #selected-row {
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
@@ -7891,6 +7884,7 @@ a:active {
   padding: 15px;
 }
 .info-row-selector {
+  font-size: 14px;
   width: 80px;
   position: absolute;
   height: 100%;
@@ -7913,6 +7907,7 @@ a:active {
   margin-top: -20px;
 }
 .info-row-selector-free {
+  font-size: 14px;
   width: 80px;
   height: 100%;
   text-align: center;
