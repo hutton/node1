@@ -84,6 +84,7 @@ window.InfoRowView = Backbone.View.extend({
 		var dateText = moment(date).format("dddd D MMMM");
 
 		var topChoice = 0;
+		var topChoiceText = "";
 
 		if (this.model.has('top-choice')){
 			topChoice = this.model.get('top-choice');
@@ -202,8 +203,6 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	removeSelectedRow: function(){
-		$(".selected").find(".selected-pointer").remove();
-
 		$(".selected").removeClass('selected');
 
 		var allSelectedRows = $('#selected-row');

@@ -98,6 +98,12 @@ window.EventApp = Backbone.View.extend({
 
 		this.showBestChoices();
 
+		this.onResizeWindow();
+
+		$(window).resize(function(){
+			that.onResizeWindow();
+		});
+
 		// _.delay(function(){
 		// 	$(window).on("scrollstart touchmove", function(){
 
@@ -120,10 +126,17 @@ window.EventApp = Backbone.View.extend({
 		// }, 1000);
 	},
 
+	onResizeWindow: function(){
+		var size = $(".event-table td").first().width();
+
+	  	$(".event-table td").height(size);
+	},
+
 	eventTableClicked: function(event){
 		var target = $(event.target);
 
-		if (target.parents("td.date-cell").length === 0 &&
+		if (event.target.className !== "date-cell" &&
+		 	target.parents("td.date-cell").length === 0 &&
 			target.parents(".info-row").length === 0){
 
 			if (this.infoRowView !== null){

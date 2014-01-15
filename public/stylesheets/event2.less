@@ -22,19 +22,9 @@ body{
 	min-height: 800px;
 }
 
-.table > tbody > tr > td{
-	border: none;
-	padding: 0px;
-}
-
 .navbar{
 	min-height: 0px;
 }
-
-.event-table > tbody > tr > td{
-	padding: 14px 0px 14px 0px;
-}
-
 
 a{
 	color: @free-color;
@@ -431,20 +421,6 @@ a:active{
 	opacity: 1.0;
 }
 
-.selected-pointer{
-    width: 20px;
-    height: 20px; 
-    background: @light-background-color;
-    border-right:1px solid @divider-color;
-    border-top:1px solid @divider-color;
-    .rotation(-45deg);
-    border-radius: 0px;
-
-	position: relative;
-	top: 14px;
-	margin: 0px auto;
-}
-
 .event-table td>div.selected> .pie:before,
 .event-table td>div.selected> .pie:after{
 	background: #d5d5d5;
@@ -478,10 +454,13 @@ a:active{
 
 .inner{
 	position: relative;
+	top: 50%;
+	font-weight: bold;
 }
 
 .free{
 	.inner;
+	opacity: 0.6;
 	color: @free-color;
 }
 
@@ -492,6 +471,7 @@ a:active{
 
 .unknown{
 	.inner;
+	opacity: 0.3;
 	color: #404040;
 }
 
@@ -532,18 +512,33 @@ a:active{
 	background: rgba(255, 255, 255, 0.75);
 }
 
-/**************************************/
+/************ blocks **************/
+
+.event-table tr > td{
+	padding: 0px !important;
+}
+
 
 .event-table{
-	border-collapse: inherit;
-	border-spacing: 4px;
+	border-collapse: collapse;
+	border-spacing: 0px;
 }
 
-.date-cell{
+.event-table tr > td.date-cell{
 	background: #c0c0c0;
+	border: solid white 6px;
 }
 
-.date-cell-container{
+@media screen and (min-width: 450px){
+	.date-cell-container{
+		font-size: 26px;
+	}
+}
+
+@media screen and (max-width: 450px){
+	.date-cell-container{
+		font-size: 20px;
+	}
 }
 
 

@@ -10,7 +10,7 @@ window.ChoiceView = Backbone.View.extend({
 	firstChoiceTemplate: _.template($('#first-choice-template').html()),
 
 	events: {
-		"click div:first":	"dayClicked"
+		"click":	"dayClicked"
 	},
 
 	pie: null,
@@ -51,13 +51,17 @@ window.ChoiceView = Backbone.View.extend({
 				}
 			}
 
-			this.$el.attr("style", "opacity: " + (this.targetDeg / 360) + ";");
+			var targetbackground = this.calcBackground(window.App.attendees.length, freeDates.length);
+
+			this.$el.attr("style", "background: " + targetbackground + ";");
 
 			if (this.model.isFree() || this.model.pretendFree){
 				this.$el.find(".unknown").addClass("free").removeClass("unknown");
 			}
 		} else {
-			this.$el.attr("style", "opacity: 0.1;");
+			var targetbackground = this.calcBackground(window.App.attendees.length, 0);
+
+			this.$el.attr("style", "background: " + targetbackground + ";");
 		}
 
 		if (this.model.isFree()){
@@ -116,20 +120,32 @@ window.ChoiceView = Backbone.View.extend({
 		} else {
 			var selectedRow = target.parents("tr");
 
-			$(".selected").find(".selected-pointer").remove();
-
 			$(".selected").removeClass('selected');
 
 			App.updateSelectedItem(this.model, selectedRow);
 
 			target.addClass('selected');
-
-			target.append("<div class='selected-pointer'></div>");
 		}
 	},
 
 	calcDegrees: function(total, count){
 		return Math.round((count / total) * 36) * 10;
+	},
+
+	calcBackground: function(total, count){
+		var emptyColor = 246;
+		var fullColor = 210;
+
+		var diff = emptyColor - fullColor;
+
+		var target = emptyColor - ((count / total) * diff);
+
+		target = Math.round(target);
+
+		var targetHex = target.toString(16);
+
+		return "#" + targetHex + targetHex + targetHex;
+
 	}
 });
 
