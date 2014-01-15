@@ -7659,17 +7659,19 @@ a:active {
   padding: 0px 0px;
   width: 30px;
 }
+.days-table > tbody > tr > td {
+  border: none;
+  padding: 0px;
+}
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7) {
   color: #d0d0d0;
 }
 .month {
   color: #4ad16c;
-  top: 8px;
+  top: 50%;
   left: 10px;
-}
-.event-table tr {
-  height: 60px;
+  position: relative;
 }
 .event-table tr.selected-row {
   height: auto;
@@ -7701,18 +7703,12 @@ a:active {
   margin-left: auto;
   margin-right: auto;
   width: 38px;
-  height: 38px;
+  height: 100%;
   opacity: 1;
   cursor: pointer;
 }
 .today {
-  background: #c0c0c0;
-  position: absolute;
-  top: 37px;
-  left: 15px;
-  width: 8px;
-  height: 8px;
-  border-radius: 10px;
+  text-decoration: underline;
 }
 .event-table td > div.past {
   opacity: 0.5;
@@ -7745,29 +7741,50 @@ a:active {
   position: relative;
   top: 50%;
   font-weight: bold;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .free {
   position: relative;
   top: 50%;
   font-weight: bold;
-  opacity: 0.6;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  opacity: 0.9;
   color: #4ad16c;
 }
 .busy {
   position: relative;
   top: 50%;
   font-weight: bold;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background: #fe673b;
 }
 .unknown {
   position: relative;
   top: 50%;
   font-weight: bold;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   opacity: 0.3;
-  color: #404040;
-}
-.free > .content {
-  color: white;
+  color: #808080;
 }
 .content {
   position: relative;
@@ -7809,14 +7826,27 @@ a:active {
   background: #c0c0c0;
   border: solid white 6px;
 }
+.event-table tr > td.first-seven {
+  border: solid white 6px;
+}
 @media screen and (min-width: 450px) {
-  .date-cell-container {
+  .event-table tr > td {
     font-size: 26px;
+  }
+  .free,
+  .unknown,
+  .month {
+    margin-top: -19px;
   }
 }
 @media screen and (max-width: 450px) {
-  .date-cell-container {
+  .event-table tr > td {
     font-size: 20px;
+  }
+  .free,
+  .unknown,
+  .month {
+    margin-top: -13px;
   }
 }
 /**************************************/

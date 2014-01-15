@@ -343,6 +343,11 @@ a:active{
 	width: 30px;
 }
 
+.days-table > tbody > tr > td{
+	border: none;
+	padding: 0px;
+}
+
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7){
 	color: @weekend-color;
@@ -350,12 +355,12 @@ a:active{
 
 .month{
 	color: @free-color;
-	top: 8px;
+	top: 50%;
 	left: 10px;
+	position: relative;
 }
 
 .event-table tr{
-	height: 60px;
 }
 
 .event-table tr.selected-row{
@@ -398,19 +403,13 @@ a:active{
 	margin-left: auto;
 	margin-right: auto;
 	width: 38px;
-	height: 38px;
+	height: 100%;
 	opacity: 1;
 	cursor: pointer;
 }
 
 .today{
-	background: @selected-color;
-	position: absolute;
-	top: 37px;
-	left: 15px;
-	width: 8px;
-	height: 8px;
-	border-radius: 10px;
+	text-decoration: underline;
 }
 
 .event-table td>div.past{
@@ -456,11 +455,18 @@ a:active{
 	position: relative;
 	top: 50%;
 	font-weight: bold;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .free{
 	.inner;
-	opacity: 0.6;
+	opacity: 0.9;
 	color: @free-color;
 }
 
@@ -472,11 +478,7 @@ a:active{
 .unknown{
 	.inner;
 	opacity: 0.3;
-	color: #404040;
-}
-
-.free > .content {
-	color: white;
+	color: #808080;
 }
 
 .content {
@@ -529,15 +531,27 @@ a:active{
 	border: solid white 6px;
 }
 
+.event-table tr > td.first-seven{
+	border: solid white 6px;
+}
+
 @media screen and (min-width: 450px){
-	.date-cell-container{
+	.event-table tr > td{
 		font-size: 26px;
+	}
+
+	.free, .unknown, .month{
+		margin-top: -19px;
 	}
 }
 
 @media screen and (max-width: 450px){
-	.date-cell-container{
+	.event-table tr > td{
 		font-size: 20px;
+	}
+
+	.free, .unknown, .month{
+		margin-top: -13px;
 	}
 }
 

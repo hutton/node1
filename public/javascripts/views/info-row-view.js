@@ -108,7 +108,7 @@ window.InfoRowView = Backbone.View.extend({
 			freeNames: freeNamesText,
 			date: dateText,
 			notFreeNames: busy.join(', '),
-			showTopChoice: showTopChoice,
+			showTopChoice: false,  //showTopChoice,
 			topChoiceText: topChoiceText
 		};
 	},

@@ -13,14 +13,10 @@ window.ChoiceView = Backbone.View.extend({
 		"click":	"dayClicked"
 	},
 
-	pie: null,
-
 	className: "date-cell",
 
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
-
-		this.pie = this.$el.find(".pie");
 
 		this.updateView(false);
 
@@ -39,25 +35,9 @@ window.ChoiceView = Backbone.View.extend({
 
 			this.targetDeg = this.calcDegrees(window.App.attendees.length, freeDates.length);
 
-			if (animate){
-				this.animatePie();
-			} else {
-				this.pie.attr("data-value", this.targetDeg);
-
-				if (this.targetDeg >= 180){
-					this.pie.addClass("big");
-				} else {
-					this.pie.removeClass("big");
-				}
-			}
-
 			var targetbackground = this.calcBackground(window.App.attendees.length, freeDates.length);
 
-			this.$el.attr("style", "background: " + targetbackground + ";");
-
-			if (this.model.isFree() || this.model.pretendFree){
-				this.$el.find(".unknown").addClass("free").removeClass("unknown");
-			}
+			this.$el.attr("style", "background-color: " + targetbackground + ";");
 		} else {
 			var targetbackground = this.calcBackground(window.App.attendees.length, 0);
 
@@ -65,11 +45,11 @@ window.ChoiceView = Backbone.View.extend({
 		}
 
 		if (this.model.isFree()){
-			target.find('div:nth-of-type(2)').addClass('free');
-			target.find('div:nth-of-type(2)').removeClass('unknown');
+			target.find('div:nth-of-type(1)').addClass('free');
+			target.find('div:nth-of-type(1)').removeClass('unknown');
 		} else {
-			target.find('div:nth-of-type(2)').removeClass('free');
-			target.find('div:nth-of-type(2)').addClass('unknown');
+			target.find('div:nth-of-type(1)').removeClass('free');
+			target.find('div:nth-of-type(1)').addClass('unknown');
 		}
 
 		if (false /*this.model.has("top-choice")*/){
@@ -84,31 +64,6 @@ window.ChoiceView = Backbone.View.extend({
 					this.$el.find('.top-choice-text').remove();
 				}
 			}
-		}
-	},
-
-	animatePie: function(){
-		var current = parseInt(this.pie.attr("data-value"));
-		var change = 0;
-
-		if (current < this.targetDeg){
-			change = 10;
-		}
-
-		if (current > this.targetDeg){
-			change = -10;
-		}
-
-		if (change !== 0){
-			this.pie.attr("data-value", current + change);
-
-			if (current + change >= 180){
-				this.pie.addClass("big");
-			} else {
-				this.pie.removeClass("big");
-			}
-
-			_.delay(this.animatePie, 10);
 		}
 	},
 
@@ -133,8 +88,8 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	calcBackground: function(total, count){
-		var emptyColor = 246;
-		var fullColor = 210;
+		var emptyColor = 250;
+		var fullColor = 215;
 
 		var diff = emptyColor - fullColor;
 
@@ -202,7 +157,7 @@ window.ChoicesView = Backbone.View.extend({
 			}
 
 			if (!todayAdded && sameDay(that.today, date)){
-				choice.$el.find("div").first().append("<div class='today'></div>");
+				choice.$el.addClass('today');
 
 				todayAdded = true;
 			}
