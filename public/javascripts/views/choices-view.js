@@ -69,6 +69,8 @@ window.ChoiceView = Backbone.View.extend({
 		if (target.hasClass('selected')){
 			this.model.toggleFree();
 		} else {
+			// $(".date-cell").attr("style", "opacity: 0.8;");
+
 			var selectedRow = target.parents("tr");
 
 			$(".selected").removeClass('selected');

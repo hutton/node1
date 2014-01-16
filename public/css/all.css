@@ -7818,7 +7818,6 @@ a:active {
   border-spacing: 0px;
 }
 .event-table tr > td.date-cell {
-  background: #c0c0c0;
   border: solid white 6px;
   position: relative;
   overflow: hidden;
