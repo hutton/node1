@@ -129,14 +129,13 @@ window.EventApp = Backbone.View.extend({
 	onResizeWindow: function(){
 		var size = $(".event-table .date-cell").first().width();
 
-	  	$(".event-table td").height(size);
-	  	$(".event-table td > .date-cell-container").height(size);
+	  	$(".event-table tr").height(size + 12);
 	},
 
 	eventTableClicked: function(event){
 		var target = $(event.target);
 
-		if (event.target.className !== "date-cell" &&
+		if ( !$(event.target).hasClass("date-cell") &&
 		 	target.parents("td.date-cell").length === 0 &&
 			target.parents(".info-row").length === 0){
 

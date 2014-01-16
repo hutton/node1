@@ -303,7 +303,9 @@ a:active {
   color: #d0d0d0;
 }
 .month {
+  height: 100%;
   position: relative;
+  width: 38px;
 }
 .month > div {
   position: relative;
@@ -336,7 +338,7 @@ a:active {
 .event-table td:nth-of-type(7) {
   color: #d0d0d0;
 }
-.event-table td > div {
+.date-cell-container {
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -414,14 +416,6 @@ a:active {
   opacity: 0.3;
   color: #808080;
 }
-.today .free {
-  opacity: 0.9;
-  border-bottom: 3px solid #4ad16c;
-}
-.today .unknown {
-  opacity: 0.3;
-  border-bottom: 3px solid #808080;
-}
 .content {
   position: relative;
   top: 3px;
@@ -461,6 +455,25 @@ a:active {
 .event-table tr > td.date-cell {
   background: #c0c0c0;
   border: solid white 6px;
+  position: relative;
+  overflow: hidden;
+}
+.free-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #4ad16c;
+  top: -10px;
+  left: -10px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.today .unknown {
+  color: #4ad16c;
+  opacity: 0.9;
 }
 .event-table tr > td.first-seven {
   border: solid white 6px;
@@ -472,7 +485,7 @@ a:active {
   .free,
   .unknown,
   .month {
-    margin-top: -19px;
+    margin-top: -11px;
   }
 }
 @media screen and (max-width: 450px) {
@@ -482,7 +495,7 @@ a:active {
   .free,
   .unknown,
   .month {
-    margin-top: -13px;
+    margin-top: -6px;
   }
 }
 /**************************************/
@@ -508,6 +521,8 @@ a:active {
 .info-row {
   position: relative;
   overflow: hidden;
+  border-left: 3px transparent solid;
+  border-right: 3px transparent solid;
 }
 .info-row > div {
   position: relative;

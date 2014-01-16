@@ -43,11 +43,9 @@ window.ChoiceView = Backbone.View.extend({
 		}
 
 		if (this.model.isFree()){
-			target.find('div:nth-of-type(1)').addClass('free');
-			target.find('div:nth-of-type(1)').removeClass('unknown');
+			this.$el.find('.free-marker').show();
 		} else {
-			target.find('div:nth-of-type(1)').removeClass('free');
-			target.find('div:nth-of-type(1)').addClass('unknown');
+			this.$el.find('.free-marker').hide();
 		}
 
 		if (false /*this.model.has("top-choice")*/){
