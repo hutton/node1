@@ -354,10 +354,15 @@ a:active{
 }
 
 .month{
+	position: relative;
+}
+
+.month > div{
+	position: relative;
 	color: @free-color;
 	top: 50%;
 	left: 10px;
-	position: relative;
+
 }
 
 .event-table tr{
@@ -406,10 +411,6 @@ a:active{
 	height: 100%;
 	opacity: 1;
 	cursor: pointer;
-}
-
-.today{
-	text-decoration: underline;
 }
 
 .event-table td>div.past{
@@ -472,6 +473,16 @@ a:active{
 	color: #808080;
 }
 
+.today .free{
+	opacity: 0.9;
+	border-bottom: 3px solid @free-color;
+}
+
+.today .unknown{
+	opacity: 0.3;
+	border-bottom: 3px solid #808080;
+}
+
 .content {
 	position: relative;
 	top: 3px;
@@ -524,6 +535,9 @@ a:active{
 
 .event-table tr > td.first-seven{
 	border: solid white 6px;
+}
+
+.event-table td > div.date-cell-container{
 }
 
 @media screen and (min-width: 450px){
@@ -594,7 +608,7 @@ a:active{
 }
 
 .info-row-selector{
-	font-size: 14px;
+	font-size: 80%;
 
 	width: 80px;
 	position: absolute;
@@ -613,7 +627,7 @@ a:active{
 }
 
 .info-row-selector > div{
-	margin-top: -20px;
+	margin-top: -28px;
 }
 
 .info-row-selector-free{
@@ -625,7 +639,7 @@ a:active{
 }
 
 .info-row-selector-free > div{
-	margin-top: -15px;
+	margin-top: -18px;
 }
 
 .info-row-selector-free-show{

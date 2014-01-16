@@ -33,8 +33,6 @@ window.ChoiceView = Backbone.View.extend({
 		if (this.model.has("free")){
 			var freeDates = this.model.get("free");
 
-			this.targetDeg = this.calcDegrees(window.App.attendees.length, freeDates.length);
-
 			var targetbackground = this.calcBackground(window.App.attendees.length, freeDates.length);
 
 			this.$el.attr("style", "background-color: " + targetbackground + ";");
