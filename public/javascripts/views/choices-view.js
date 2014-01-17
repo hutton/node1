@@ -69,14 +69,14 @@ window.ChoiceView = Backbone.View.extend({
 		if (target.hasClass('selected')){
 			this.model.toggleFree();
 		} else {
-			// $(".date-cell").attr("style", "opacity: 0.8;");
+			$(".selected").removeClass('selected');
+			$(".cell-selected").removeClass('cell-selected');
 
 			var selectedRow = target.parents("tr");
 
-			$(".selected").removeClass('selected');
-
 			App.updateSelectedItem(this.model, selectedRow);
 
+			this.$el.addClass('cell-selected');
 			target.addClass('selected');
 		}
 	},

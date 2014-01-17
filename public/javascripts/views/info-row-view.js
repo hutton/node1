@@ -204,6 +204,7 @@ window.InfoRowView = Backbone.View.extend({
 
 	removeSelectedRow: function(){
 		$(".selected").removeClass('selected');
+		$(".cell-selected").removeClass('cell-selected');
 
 		var allSelectedRows = $('#selected-row');
 
