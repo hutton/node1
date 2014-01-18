@@ -24,6 +24,10 @@ body{
 	min-height: 800px;
 }
 
+.table > tbody > tr > td{
+	border: none;
+}
+
 .navbar{
 	min-height: 0px;
 }
@@ -389,15 +393,6 @@ a:active{
 	user-select: none;
 }
 
-.event-table td.first{
-	border-left: 1px solid @month-divider-color;
-	border-top: 1px solid @month-divider-color;
-}
-
-.event-table td.first-seven{
-	border-top: 1px solid @month-divider-color;
-}
-
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7){
 	color: @weekend-color;
@@ -523,6 +518,7 @@ a:active{
 }
 
 .event-table tr > td.date-cell{
+	border-top: solid white 6px;
 	border: solid white 6px;
 	position: relative;
 	overflow: hidden;
@@ -766,3 +762,42 @@ a:active{
 	text-align: center;
 	line-height: 24px;
 }
+
+/************* panel **************/
+
+@media screen and (min-width: 900px){
+	.main-info-panel-container{
+		display: block;
+	}
+}
+
+@media screen and (max-width: 900px){
+	.main-info-panel-container{
+		display: none;
+	}
+}
+
+
+.side-info-panel-container{
+	top: 140px;
+
+	position: fixed;
+	width: 100%;
+}
+
+.side-info-panel-container > div{
+
+	position: relative;
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.side-info-panel{
+	background: #f4f4f4;
+	width: 200px;
+	position: relative;
+	left: 600px;
+	min-height: 300px;
+}
+

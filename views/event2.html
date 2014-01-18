@@ -245,6 +245,16 @@
       <@= choice @>
     </div>
   </script>
+
+  <script type="text/template" id="side-info-panel-template">
+     <div class="side-info-panel-container">
+    <div>
+      <div class="side-info-panel">
+      Info Panel
+      </div>
+    </div>
+  </div>
+  </script>
  
   <% if (webAppDebug) { %>
   <script src="/javascripts/tp/jquery-1.8.2.min.js"></script>
@@ -265,6 +275,7 @@
 
   <script src="/javascripts/views/choices-view.js"></script>
   <script src="/javascripts/views/info-row-view.js"></script>
+  <script src="/javascripts/views/side-info-panel.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
   <% } else { %>

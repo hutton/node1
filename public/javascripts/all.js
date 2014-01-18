@@ -17,5 +17,6 @@
 
 // @codekit-prepend "views/choices-view.js";
 // @codekit-prepend "views/info-row-view.js";
+// @codekit-prepend "views/side-info-panel.js";
 
 // @codekit-prepend "event-app.js";
