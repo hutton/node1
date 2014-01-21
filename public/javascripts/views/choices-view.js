@@ -68,7 +68,9 @@ window.ChoiceView = Backbone.View.extend({
 	dayClicked: function(event){
 		var target = $(this.$el).find("div:first");
 
-		if (target.hasClass('selected')){
+
+
+		if (target.hasClass('selected') || $('.side-info-panel-container').is(':visible')){
 			this.model.toggleFree();
 		} else {
 			$(".selected").removeClass('selected');
@@ -104,11 +106,15 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	mouseEnter: function(){
-		App.SideInfoPanel.updateModel(this.model);
+		if (App.SideInfoPanel !== null){
+			App.SideInfoPanel.updateModel(this.model);
+		}
 	},
 
 	mouseLeave: function(){
-		App.SideInfoPanel.updateModel(null);
+		if (App.SideInfoPanel !== null){
+			// App.SideInfoPanel.updateModel(null);
+		}
 	}
 });
 
@@ -174,7 +180,7 @@ window.ChoicesView = Backbone.View.extend({
 				if (that.today < date || sameDay(that.today, date)){
 					inPast = false;
 				} else {
-					choice.$el.find("div:first").addClass("past");
+					choice.$el.addClass("past");
 				}
 			}
 		});

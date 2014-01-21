@@ -404,8 +404,9 @@ a:active{
 	cursor: pointer;
 }
 
-.event-table td>div.past{
-	opacity: 0.5;
+.past{
+	opacity: 0.4;
+	background: white !important;
 }
 
 #selected-row{
@@ -758,13 +759,13 @@ a:active{
 /************* panel **************/
 
 @media screen and (min-width: 900px){
-	.main-info-panel-container{
+	.side-info-panel-container{
 		display: block;
 	}
 }
 
 @media screen and (max-width: 900px){
-	.main-info-panel-container{
+	.side-info-panel-container{
 		display: none;
 	}
 }
@@ -786,15 +787,37 @@ a:active{
 }
 
 .side-info-panel{
-	background: #f4f4f4;
+	background: #fafafa;
 	width: 200px;
 	position: relative;
 	left: 600px;
 	min-height: 300px;
-	padding: 10px;
+	color: @selected-color;
 }
 
 .side-info-date{
 	text-align: center;
+	padding: 10px;
+}
+
+.side-info-panel ul{
+	list-style: none;
+	padding: 0px;
+	font-size: 80%;
+}
+
+.side-info-panel li{
+	height: 30px;
+	padding-left: 4px;
+}
+
+.side-info-free{
+	background: @free-color;
+	float: right;
+	font-size: 70%;
+	text-align: center;
+	padding: 2px 10px;
+	color: white;
+	height: 100%;
 }
 

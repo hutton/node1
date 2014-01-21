@@ -7702,8 +7702,9 @@ a:active {
   opacity: 1;
   cursor: pointer;
 }
-.event-table td > div.past {
-  opacity: 0.5;
+.past {
+  opacity: 0.4;
+  background: white !important;
 }
 #selected-row {
   border-top: 1px solid #e8e8e8;
@@ -8037,12 +8038,12 @@ a:active {
 }
 /************* panel **************/
 @media screen and (min-width: 900px) {
-  .main-info-panel-container {
+  .side-info-panel-container {
     display: block;
   }
 }
 @media screen and (max-width: 900px) {
-  .main-info-panel-container {
+  .side-info-panel-container {
     display: none;
   }
 }
@@ -8058,15 +8059,34 @@ a:active {
   margin-right: auto;
 }
 .side-info-panel {
-  background: #f4f4f4;
+  background: #fafafa;
   width: 200px;
   position: relative;
   left: 600px;
   min-height: 300px;
-  padding: 10px;
+  color: #c0c0c0;
 }
 .side-info-date {
   text-align: center;
+  padding: 10px;
+}
+.side-info-panel ul {
+  list-style: none;
+  padding: 0px;
+  font-size: 80%;
+}
+.side-info-panel li {
+  height: 30px;
+  padding-left: 4px;
+}
+.side-info-free {
+  background: #4ad16c;
+  float: right;
+  font-size: 70%;
+  text-align: center;
+  padding: 2px 10px;
+  color: white;
+  height: 100%;
 }
 /* 
   make each pie piece a rectangle twice as high as it is wide.

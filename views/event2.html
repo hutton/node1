@@ -242,13 +242,19 @@
   </script>
 
   <script type="text/template" id="side-info-panel-template">
-     <div class="side-info-panel-container">
-    <div>
-      <div class="side-info-panel">
-        <div class="side-info-date"></div>
+    <div class="side-info-panel-container">
+      <div>
+        <div class="side-info-panel">
+          <div class="side-info-date"></div>
+            <ul>
+              <@ _.each(attendees, function(attendee){ @>
+                <li><@= attendee.get('prettyName') @><div class="side-info-free">Free</div></li>
+              <@ }); @>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </script>
  
   <% if (webAppDebug) { %>
