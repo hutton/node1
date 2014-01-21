@@ -18,6 +18,8 @@ window.ChoiceView = Backbone.View.extend({
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
 
+		this.$el.hover(this.mouseEnter, this.mouseLeave);		
+
 		this.updateView(false);
 
 		return this;
@@ -99,6 +101,14 @@ window.ChoiceView = Backbone.View.extend({
 
 		return "#" + targetHex + targetHex + targetHex;
 
+	},
+
+	mouseEnter: function(){
+		App.SideInfoPanel.updateModel(this.model);
+	},
+
+	mouseLeave: function(){
+		App.SideInfoPanel.updateModel(null);
 	}
 });
 

@@ -26,6 +26,8 @@ window.EventApp = Backbone.View.extend({
 
 		this.ChoicesView.render();
 
+		this.SideInfoPanel = new SideInfoPanel();
+
 		var pathNames = window.location.pathname.split( '/' );
 
 		this.currentId = pathNames[pathNames.length - 1];
@@ -152,81 +154,6 @@ window.EventApp = Backbone.View.extend({
 			this.infoRowView = new InfoRowView({model: choiceModel, el: selectedRow});
 		} else {
 			this.infoRowView.update(choiceModel, selectedRow);
-		}
-	},
-
-	addAttendeeClicked: function(){
-		this.$el.find('#add-attendee').hide();
-		this.$el.find('#email-group').hide();
-		this.$el.find('.add-attendee-panel').show();
-	},
-
-	addAttendeeLinkClicked: function(){
-		var that = this;
-
-		if (!this.isEmailAddressValid(this.$el.find('#add-attendee-email-input').val())){
-			that.$el.find(".add-attendee-message").slideDown('fast');
-			that.$el.find(".add-attendee-message").text("Invalid email address.");
-			return;
-		}
-
-		var newAttendeeEmail = this.$el.find('#add-attendee-email-input').val();
-		var container = this.$el.find('.add-attendee-panel');
-		var spinner = this.$el.find('.add-attendee-email-spinner');
-
-		this.$el.find(".add-attendee-message").hide();
-		this.$el.find('.add-attendee-email-validation').hide();
-		this.$el.find(".add-attendee-message").text("");
-
-		container.addClass('disabled');
-		spinner.show();
-
-		$.post("/event/" + this.currentId + "/add/",
-			{
-				email: newAttendeeEmail
-			},
-			function(data){
-				that.attendees.add(data);
-
-				that.render();
-
-				that.$el.find('#add-attendee-email-input').val('');
-				that.addAttendeeInputChanged();
-			}
-		)
-		.fail(function() {
-			that.$el.find(".add-attendee-message").slideDown('fast');
-			that.$el.find(".add-attendee-message").text("Whao! Something didn't quite work there. Reload and try again?!");
-		})
-		.always(function() {
-			that.$el.find('.add-attendee-email-validation').show();
-			container.removeClass('disabled');
-			spinner.hide();
-		});
-	},
-
-	addAttendeeCancelClicked: function(){
-		this.$el.find('#add-attendee').show();
-		this.$el.find('#email-group').show();
-		this.$el.find('.add-attendee-panel').hide();
-
-		this.$el.find('#add-attendee-email-input').val('');
-
-		this.$el.find(".add-attendee-message").hide();
-		this.$el.find(".add-attendee-message").text("");
-		this.$el.find('.add-attendee-email-validation').removeClass('add-attendee-email-validation-valid');
-	},
-
-	addAttendeeInputChanged: function(){
-		var check = this.$el.find('.add-attendee-email-validation');
-		var addAttendeeMessage = this.$el.find('.add-attendee-message');
-
-		if (this.isEmailAddressValid(this.$el.find('#add-attendee-email-input').val())){
-			check.addClass('add-attendee-email-validation-valid');
-			addAttendeeMessage.slideUp('fast');
-			addAttendeeMessage.text("");
-		} else {
-			check.removeClass('add-attendee-email-validation-valid');
 		}
 	},
 

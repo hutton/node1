@@ -243,12 +243,6 @@ a:active {
   max-width: 400px;
   margin: 3px auto;
 }
-#add-attendee-link {
-  float: right;
-}
-#add-attendee-cancel-link {
-  float: left;
-}
 .attendee-email-spinner-container {
   height: 0px;
   float: right;
@@ -704,4 +698,8 @@ a:active {
   position: relative;
   left: 600px;
   min-height: 300px;
+  padding: 10px;
+}
+.side-info-date {
+  text-align: center;
 }
