@@ -292,13 +292,13 @@ window.EventApp = Backbone.View.extend({
 	},
 
 	showBestChoices: function(){
-		var bestModel;
+		var bestModel = null;
 		var bestCount = 0;
 
-		var secondBestModel;
+		var secondBestModel = null;
 		var secondBestCount = 0;
 
-		var thirdBestModel;
+		var thirdBestModel = null;
 		var thirdBestCount = 0;
 
 		_.each(this.choices.models, function(model){
