@@ -248,7 +248,7 @@
           <div class="side-info-date"></div>
             <ul>
               <@ _.each(attendees, function(attendee){ @>
-                <li><@= attendee.get('prettyName') @><div class="side-info-free">Free</div></li>
+                <li><div class="side-info-name"><@= attendee.get('prettyName') @></div><div class="side-info-free">Free</div></li>
               <@ }); @>
             </ul>
           </div>

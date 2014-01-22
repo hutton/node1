@@ -758,13 +758,13 @@ a:active{
 
 /************* panel **************/
 
-@media screen and (min-width: 900px){
+@media screen and (min-width: 980px){
 	.side-info-panel-container{
 		display: block;
 	}
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 980px){
 	.side-info-panel-container{
 		display: none;
 	}
@@ -787,37 +787,45 @@ a:active{
 }
 
 .side-info-panel{
-	background: #fafafa;
-	width: 200px;
+	background: white;
+	width: 230px;
 	position: relative;
 	left: 600px;
 	min-height: 300px;
 	color: @selected-color;
+	padding-left: 10px;
+	font-weight: 200;
 }
 
 .side-info-date{
-	text-align: center;
-	padding: 10px;
+	margin-bottom: 10px;
 }
 
 .side-info-panel ul{
 	list-style: none;
 	padding: 0px;
 	font-size: 80%;
+	line-height: 1.8em;
 }
 
 .side-info-panel li{
 	height: 30px;
-	padding-left: 4px;
+}
+
+.side-info-name{
+	max-width: 160px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline-block;
+
 }
 
 .side-info-free{
 	background: @free-color;
 	float: right;
-	font-size: 70%;
 	text-align: center;
-	padding: 2px 10px;
+	padding: 0px 10px;
 	color: white;
-	height: 100%;
 }
 

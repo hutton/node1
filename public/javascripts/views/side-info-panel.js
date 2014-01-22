@@ -29,7 +29,7 @@ window.SideInfoPanel = Backbone.View.extend({
 			var free = [];
 			var busy = [];
 
-			_.each(this.attendees.models, function(att){
+			_.each(App.attendees.models, function(att){
 				var found = freeAttendees.indexOf(att.get('_id'));
 
 				if (found != -1){
@@ -39,9 +39,14 @@ window.SideInfoPanel = Backbone.View.extend({
 				}
 			});
 
-			this.sideInfoAttendees.find('.side-info-free').hide();
+			this.sideInfoAttendees.each(function(index){
+				var el = $(this);
 
-			_.each(free, function(freeAttendee){
+				if (free.indexOf(el.find('.side-info-name').text()) !== -1){
+					el.find('.side-info-free').show();
+				} else {
+					el.find('.side-info-free').hide();
+				}
 
 			});
 
@@ -61,5 +66,10 @@ window.SideInfoPanel = Backbone.View.extend({
 		}
 
 		this.render();
+	},
+
+	modelChanged: function(){
+		this.render();
 	}
+
 });

@@ -113,7 +113,7 @@ window.ChoiceView = Backbone.View.extend({
 
 	mouseLeave: function(){
 		if (App.SideInfoPanel !== null){
-			// App.SideInfoPanel.updateModel(null);
+			App.SideInfoPanel.updateModel(null);
 		}
 	}
 });
