@@ -43,9 +43,9 @@ window.SideInfoPanel = Backbone.View.extend({
 				var el = $(this);
 
 				if (free.indexOf(el.find('.side-info-name').text()) !== -1){
-					el.find('.side-info-free').show();
+					el.addClass('side-info-free');
 				} else {
-					el.find('.side-info-free').hide();
+					el.removeClass('side-info-free');
 				}
 
 			});

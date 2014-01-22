@@ -12,6 +12,24 @@
 @light-background-color: #f8f8f8;
 @event-table-content-width: 38px;
 
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/opensans-light.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(/fonts/opensans.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/fonts/opensans-bold.woff) format('woff');
+}
 
 body{
 	padding-top: 0px;
@@ -331,7 +349,7 @@ a:active{
 	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
-	font-size: 9px;
+	font-size: 0.45em;
 	margin-bottom: 2px;
 }
 
@@ -416,7 +434,6 @@ a:active{
 	background: @light-background-color;
 
 	line-height: 1.3em;
-	font-size: 16px;
 	margin: 4px 12px 7px 12px;
 
 	text-align: center;
@@ -438,7 +455,6 @@ a:active{
 .inner{
 	position: relative;
 	top: 50%;
-	font-weight: bold;
 
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -468,7 +484,6 @@ a:active{
 .content {
 	position: relative;
 	top: 3px;
-	font-size: 16px;
 	line-height: 1.4em;
 
 	-webkit-touch-callout: none;
@@ -481,7 +496,6 @@ a:active{
 
 .footer{
 	text-align: center;
-	font-size: 16px;
 	height: 0px;
 	position: relative;
 	top: 10px;
@@ -550,8 +564,12 @@ a:active{
 
 
 @media screen and (min-width: 450px){
+	.event-table tr > td.date-cell{
+		font-size: 1.2em;
+	}
+
 	.event-table tr > td{
-		font-size: 26px;
+		font-size: 1em;
 	}
 
 	.free, .unknown, .month{
@@ -560,8 +578,12 @@ a:active{
 }
 
 @media screen and (max-width: 450px){
+	.event-table tr > td.date-cell{
+		font-size: 0.9em;
+	}
+
 	.event-table tr > td{
-		font-size: 20px;
+		font-size: 1em;
 	}
 
 	.free, .unknown, .month{
@@ -788,17 +810,20 @@ a:active{
 
 .side-info-panel{
 	background: white;
-	width: 230px;
+	max-width: 230px;
 	position: relative;
 	left: 600px;
-	min-height: 300px;
 	color: @selected-color;
-	padding-left: 10px;
 	font-weight: 200;
+	display: inline-block;
+	background: #f1f1f1;
 }
 
 .side-info-date{
-	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 0px 16px; 
+	text-align: center;
 }
 
 .side-info-panel ul{
@@ -806,6 +831,7 @@ a:active{
 	padding: 0px;
 	font-size: 80%;
 	line-height: 1.8em;
+	margin-bottom: 0px;
 }
 
 .side-info-panel li{
@@ -813,19 +839,15 @@ a:active{
 }
 
 .side-info-name{
-	max-width: 160px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	display: inline-block;
-
+	padding: 0px 16px; 
+	text-align: center;
 }
 
 .side-info-free{
 	background: @free-color;
-	float: right;
-	text-align: center;
-	padding: 0px 10px;
 	color: white;
 }
 
