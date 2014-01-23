@@ -82,5 +82,26 @@ window.ChoiceModel = Backbone.Model.extend({
 
 			$('#register-free-dates').val(window.App.isFree);
 		}
+	},
+
+	calcBackground: function(){
+		var freeDates = 0;
+		var emptyColor = 250;
+		var fullColor = 215;
+		var total = window.App.attendees.length;
+
+		if (this.has("free")){
+			freeDates = this.get("free").length;
+		}
+
+		var diff = emptyColor - fullColor;
+
+		var target = emptyColor - ((freeDates / total) * diff);
+
+		target = Math.round(target);
+
+		var targetHex = target.toString(16);
+
+		return "#" + targetHex + targetHex + targetHex;
 	}
 });

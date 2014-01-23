@@ -7504,6 +7504,8 @@ a:active {
   margin-left: auto;
   margin-right: auto;
   min-height: 800px;
+  background: white;
+  z-index: 101;
 }
 #top-row-spacer {
   height: 60px;
@@ -7971,7 +7973,7 @@ a:active {
 .info-row-names {
   text-align: left;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 0.65em;
   color: #d0d0d0;
 }
 .info-row-names > strong {
@@ -8055,7 +8057,9 @@ a:active {
 .side-info-panel-container {
   top: 140px;
   position: fixed;
+  background: transparent;
   width: 100%;
+  pointer-events: none;
 }
 .side-info-panel-container > div {
   position: relative;

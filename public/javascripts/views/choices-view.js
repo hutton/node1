@@ -32,17 +32,7 @@ window.ChoiceView = Backbone.View.extend({
 	updateView: function(animate){
 		var target = $(this.$el).find("div:first");
 
-		if (this.model.has("free")){
-			var freeDates = this.model.get("free");
-
-			var targetbackground = this.calcBackground(window.App.attendees.length, freeDates.length);
-
-			this.$el.attr("style", "background-color: " + targetbackground + ";");
-		} else {
-			var targetbackground = this.calcBackground(window.App.attendees.length, 0);
-
-			this.$el.attr("style", "background: " + targetbackground + ";");
-		}
+		this.$el.attr("style", "background: " + this.model.calcBackground() + ";");
 
 		if (this.model.isFree()){
 			this.$el.find('.free-marker').show();
@@ -68,8 +58,6 @@ window.ChoiceView = Backbone.View.extend({
 	dayClicked: function(event){
 		var target = $(this.$el).find("div:first");
 
-
-
 		if (target.hasClass('selected') || $('.side-info-panel-container').is(':visible')){
 			this.model.toggleFree();
 		} else {
@@ -89,22 +77,6 @@ window.ChoiceView = Backbone.View.extend({
 		return Math.round((count / total) * 36) * 10;
 	},
 
-	calcBackground: function(total, count){
-		var emptyColor = 250;
-		var fullColor = 215;
-
-		var diff = emptyColor - fullColor;
-
-		var target = emptyColor - ((count / total) * diff);
-
-		target = Math.round(target);
-
-		var targetHex = target.toString(16);
-
-		return "#" + targetHex + targetHex + targetHex;
-
-	},
-
 	mouseEnter: function(){
 		if (App.SideInfoPanel !== null){
 			App.SideInfoPanel.updateModel(this.model);
@@ -113,7 +85,7 @@ window.ChoiceView = Backbone.View.extend({
 
 	mouseLeave: function(){
 		if (App.SideInfoPanel !== null){
-			//App.SideInfoPanel.updateModel(null);
+			App.SideInfoPanel.updateModel(null);
 		}
 	}
 });
@@ -191,9 +163,9 @@ window.ChoicesView = Backbone.View.extend({
 			this.$el.find(".today")[0].scrollIntoView(true);
 		}
 
-		var body = $("body");
+		var body = $("event-container");
 
-		body.scrollTop(body.scrollTop() - 112);
+		body.scrollTop(body.scrollTop() - 212);
 
 		return this;
 	},

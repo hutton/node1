@@ -4,7 +4,7 @@ window.SideInfoPanel = Backbone.View.extend({
 
 		this.$el.html(this.template({attendees: App.attendees.models}));
 
-		$('.navbar-fixed-top').after(this.$el);
+		$('.event-container').after(this.$el);
 
 		this.$el.hide();
 
@@ -49,6 +49,8 @@ window.SideInfoPanel = Backbone.View.extend({
 				}
 
 			});
+
+			//this.$el.find('.side-info-panel').attr("style", "background: " + this.model.calcBackground() + ";");
 
 			this.$el.show();
 		}
