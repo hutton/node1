@@ -87,7 +87,7 @@ window.ChoiceModel = Backbone.Model.extend({
 	calcBackground: function(){
 		var freeDates = 0;
 		var emptyColor = 250;
-		var fullColor = 215;
+		var fullColor = 220;
 		var total = window.App.attendees.length;
 
 		if (this.has("free")){

@@ -574,6 +574,10 @@ a:active{
 		font-size: 1em;
 	}
 
+	.info-row-text-container{
+		font-size: 0.9em;
+	}
+
 	.free, .unknown, .month{
 		margin-top: -11px;
 	}
@@ -586,6 +590,10 @@ a:active{
 
 	.event-table tr > td{
 		font-size: 1em;
+	}
+
+	.info-row-text-container{
+		font-size: 0.8em;
 	}
 
 	.free, .unknown, .month{
@@ -697,12 +705,13 @@ a:active{
 .info-row-names{
 	text-align: left;
 	margin-top: 10px;
-	font-size: 0.65em;
+	font-size: 0.85em;
 	color: #d0d0d0;
 }
 
 .info-row-names > strong{
-	color: #a0a0a0;
+	color: @free-color;
+	font-weight: normal;
 }
 
 /**************************************/
@@ -816,20 +825,21 @@ a:active{
 
 .side-info-panel{
 	background: white;
-	max-width: 230px;
+	width: 200px;
 	position: relative;
 	left: 600px;
 	color: @selected-color;
 	font-weight: 200;
 	display: inline-block;
-	background: #f1f1f1;
+	background: #f8f8f8;
+	text-align: center;
+	pointer-events: all;
 }
 
 .side-info-date{
 	margin-top: 10px;
 	margin-bottom: 20px;
 	padding: 0px 16px; 
-	text-align: center;
 }
 
 .side-info-panel ul{
@@ -849,7 +859,6 @@ a:active{
 	white-space: nowrap;
 	overflow: hidden;
 	padding: 0px 16px; 
-	text-align: center;
 }
 
 .side-info-free{
@@ -857,3 +866,7 @@ a:active{
 	color: white;
 }
 
+.side-info-invite{
+	font-size: 0.8em;
+	margin: 20px 10px;
+}

@@ -248,6 +248,12 @@
                 <li><div class="side-info-name"><@= attendee.get('prettyName') @></div></li>
               <@ }); @>
             </ul>
+            <div class="side-info-invite">
+              Click dates to show when you're free<br/> <!-- ' -->
+              <br/>
+              Only you are invited<br/>
+              <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
+            </div>
           </div>
         </div>
       </div>

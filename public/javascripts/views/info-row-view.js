@@ -236,32 +236,6 @@ window.InfoRowView = Backbone.View.extend({
 		return footerText;
 	},
 
-	buildAttendeeTextOld: function(choiceModel){
-		var footerText = "";
-		var currentAttendeeId = window.App.currentAttendee != null ? window.App.currentAttendee.get("_id") : -1;
-		var freeAttendees = choiceModel.get("free");
-
-		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
-			// You're not free
-			if (_.isUndefined(freeAttendees) || freeAttendees.length === 0){
-				footerText = "<strong>Nobody</strong> is free yet.";
-			} else if (freeAttendees.length - 1 == App.attendees.length) {
-				footerText = "<strong>Everyone</string> except you is free.";
-			} else {
-				footerText = this.defaultAttendeeText(freeAttendees);
-			}
-		} else {
-			// You're free
-			if (freeAttendees.length == App.attendees.length){
-				footerText = "<strong>Everyone</strong> can make it.";
-			} else {
-				footerText = this.defaultAttendeeText(freeAttendees);
-			}
-		}
-
-		return footerText;
-	},
-
 	buildDateText: function(choiceModel){
 		var mom = moment(choiceModel.get("date"));
 

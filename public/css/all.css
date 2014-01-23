@@ -7363,6 +7363,18 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -7849,6 +7861,9 @@ a:active {
   .event-table tr > td {
     font-size: 1em;
   }
+  .info-row-text-container {
+    font-size: 0.9em;
+  }
   .free,
   .unknown,
   .month {
@@ -7861,6 +7876,9 @@ a:active {
   }
   .event-table tr > td {
     font-size: 1em;
+  }
+  .info-row-text-container {
+    font-size: 0.8em;
   }
   .free,
   .unknown,
@@ -7973,11 +7991,12 @@ a:active {
 .info-row-names {
   text-align: left;
   margin-top: 10px;
-  font-size: 0.65em;
+  font-size: 0.85em;
   color: #d0d0d0;
 }
 .info-row-names > strong {
-  color: #a0a0a0;
+  color: #4ad16c;
+  font-weight: normal;
 }
 /**************************************/
 .top-choice-text {
@@ -8069,19 +8088,20 @@ a:active {
 }
 .side-info-panel {
   background: white;
-  max-width: 230px;
+  width: 200px;
   position: relative;
   left: 600px;
   color: #c0c0c0;
   font-weight: 200;
   display: inline-block;
-  background: #f1f1f1;
+  background: #f8f8f8;
+  text-align: center;
+  pointer-events: all;
 }
 .side-info-date {
   margin-top: 10px;
   margin-bottom: 20px;
   padding: 0px 16px;
-  text-align: center;
 }
 .side-info-panel ul {
   list-style: none;
@@ -8098,29 +8118,20 @@ a:active {
   white-space: nowrap;
   overflow: hidden;
   padding: 0px 16px;
-  text-align: center;
 }
 .side-info-free {
   background: #4ad16c;
   color: white;
+}
+.side-info-invite {
+  font-size: 0.8em;
+  margin: 20px 10px;
 }
 /* 
   make each pie piece a rectangle twice as high as it is wide.
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 /*#DCE0DC;*/
 .pie {
   position: absolute;
