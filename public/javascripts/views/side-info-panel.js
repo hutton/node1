@@ -8,6 +8,8 @@ window.SideInfoPanel = Backbone.View.extend({
 
 		this.sideInfoDate = this.$el.find('.side-info-date');
 
+		this.sideInfoPanel = this.$el.find('.side-info-panel');
+
 		this.sideInfoAttendees = this.$el.find('li');
 
 		this.sideInfoList = this.$el.find('ul');
@@ -31,7 +33,7 @@ window.SideInfoPanel = Backbone.View.extend({
 	events: {
 	},
 
-	render: function(){
+	updateInPlace: function(){
 		if (this.model === null && App.attendees.length > 1){
 			this.$el.hide();
 		} else {
@@ -73,6 +75,8 @@ window.SideInfoPanel = Backbone.View.extend({
 	},
 
 	updateModel: function(model){
+		var that = this;
+
 		if (this.model !== null){
 			this.stopListening(this.model);
 		}
@@ -83,11 +87,19 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.listenTo(this.model, "change", this.modelChanged);
 		}
 
-		this.render();
+		this.sideInfoPanel.addClass("side-info-panel-hiding");
+
+		_.delay(function(){
+			that.updateInPlace();
+
+			_.delay(function(){
+				that.sideInfoPanel.removeClass("side-info-panel-hiding");
+			}, 100);
+		}, 100);
 	},
 
 	modelChanged: function(){
-		this.render();
+		this.updateInPlace();
 	}
 
 });

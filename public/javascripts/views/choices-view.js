@@ -34,7 +34,7 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.$el.attr("style", "background: " + this.model.calcBackground() + ";");
 
-		if (this.model.isFree()){
+		if (this.model.isFree() || this.model.pretendFree){
 			this.$el.find('.free-marker').show();
 		} else {
 			this.$el.find('.free-marker').hide();

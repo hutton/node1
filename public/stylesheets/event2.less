@@ -204,8 +204,6 @@ a:active{
 .navbar-fixed-top{
 	border-bottom: 1px solid @divider-color;
 	background: @light-background-color;
-
-	.transition-duration(0.25s);
 }
 
 .navbar-fixed-bottom{
@@ -834,6 +832,19 @@ a:active{
 	background: #f8f8f8;
 	text-align: center;
 	pointer-events: all;
+	.transition-duration(0.1s);
+}
+
+.side-info-panel-hiding{
+	opacity: -1.0;
+	.scale(0.0);
+	.translate(0px, -8px);
+}
+
+.side-info-panel-showing{
+	opacity: 0.0;
+	.scale(0.5);
+	.translate(0px, -50px);
 }
 
 .side-info-date{

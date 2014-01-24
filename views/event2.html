@@ -221,7 +221,7 @@
                 <@ if(showInvite){ @>
                   <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
                 <@ } else { @>
-                  <div <@ if(!showDetails){ @>style="display: none;"<@ } @> class="info-row-names"><strong><@= freeNames @></strong><@= notFreeNames @></div>
+                  <div <@ if(!showDetails){ @>style="display: none;"<@ } @> class="info-row-names"><@= attendeeNamesText @></div>
                   <!--span <@ if(!showDetails){ @>style="display: none;"<@ } @> id="info-row-hide-details-link">Hide</span>
                   <span <@ if(showDetails){ @>style="display: none;"<@ } @> id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span-->
                 <@ } @>

@@ -47,7 +47,7 @@ window.InfoRowView = Backbone.View.extend({
 			this.infoRowEl.find('.info-row-selector-free').removeClass('info-row-selector-free-show');
 		}
 
-		this.infoRowEl.find('.info-row-names').html("<strong>" + values.freeNames + "</strong>" + values.notFreeNames);
+		this.infoRowEl.find('.info-row-names').html(values.attendeeNamesText);
 
 		if (values.showTopChoice){
 			this.infoRowEl.find('.info-row-top-choice').show();
@@ -59,25 +59,17 @@ window.InfoRowView = Backbone.View.extend({
 
 	buildTemplateValues: function(){
 		var freeAttendees = this.model.get("free") || [];
-
-		var free = [];
-		var busy = [];
+		var attendeeNamesText = "";
 
 		_.each(this.attendees.models, function(att){
 			var found = freeAttendees.indexOf(att.get('_id'));
 
 			if (found != -1){
-				free.push(att.get('prettyName'));
+				attendeeNamesText = attendeeNamesText + "<strong>" + att.get('prettyName') + "</strong>, ";
 			} else {
-				busy.push(att.get('prettyName'));
+				attendeeNamesText = attendeeNamesText + att.get('prettyName') + ", ";
 			}
 		});
-
-		freeNamesText = free.join(', ');
-
-		if (busy.length > 0 && free.length > 0){
-			freeNamesText = freeNamesText + ", ";
-		}
 
 		var date = this.model.get('date');
 
@@ -105,9 +97,8 @@ window.InfoRowView = Backbone.View.extend({
 			isFree: this.model.isFree(),
 			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
 			showDetails: true, //this.showingDetails,
-			freeNames: freeNamesText,
+			attendeeNamesText: attendeeNamesText,
 			date: dateText,
-			notFreeNames: busy.join(', '),
 			showTopChoice: false,  //showTopChoice,
 			topChoiceText: topChoiceText
 		};

@@ -7531,11 +7531,6 @@ a:active {
 .navbar-fixed-top {
   border-bottom: 1px solid #e8e8e8;
   background: #f8f8f8;
-  -moz-transition-duration: 0.25s;
-  -webkit-transition-duration: 0.25s;
-  -o-transform-duration: 0.25s;
-  -ms-transform-duration: 0.25s;
-  transition-duration: 0.25s;
 }
 .navbar-fixed-bottom {
   border-top: 1px solid #e8e8e8;
@@ -8097,6 +8092,37 @@ a:active {
   background: #f8f8f8;
   text-align: center;
   pointer-events: all;
+  -moz-transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  -o-transform-duration: 0.1s;
+  -ms-transform-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.side-info-panel-hiding {
+  opacity: -1;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -moz-transform: translate(0px, -8px);
+  -webkit-transform: translate(0px, -8px);
+  -o-transform: translate(0px, -8px);
+  -ms-transform: translate(0px, -8px);
+  transform: translate(0px, -8px);
+}
+.side-info-panel-showing {
+  opacity: 0.0;
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+  -moz-transform: translate(0px, -50px);
+  -webkit-transform: translate(0px, -50px);
+  -o-transform: translate(0px, -50px);
+  -ms-transform: translate(0px, -50px);
+  transform: translate(0px, -50px);
 }
 .side-info-date {
   margin-top: 10px;
