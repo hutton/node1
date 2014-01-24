@@ -146,22 +146,29 @@ function processIncomingMandrillEmail(mandrill_event){
 		return null;
 	}
 
-	var parsed = {};
-
-	parsed.to = mandrill_event.msg.to[0][0];
-	parsed.fromName = mandrill_event.msg.from_name;
-	parsed.from = mandrill_event.msg.from_email;
-	parsed.subject = mandrill_event.msg.subject;
-
-	if (_.has(mandrill_event.msg, "text") && mandrill_event.msg.text !== null){
-		parsed.message = Mail.firstResponse(mandrill_event.msg.text);
-	} else if (_.has(mandrill_event.msg, "html") && mandrill_event.msg.html !== null){
-		var message = Mail.htmlMailToText(mandrill_event.msg.html);
-
-		parsed.message = Mail.firstResponse(message);
+	try{
+		var parsed = {};
+	
+		parsed.to = mandrill_event.msg.to[0][0];
+		parsed.fromName = mandrill_event.msg.from_name;
+		parsed.from = mandrill_event.msg.from_email;
+		parsed.subject = mandrill_event.msg.subject;
+	
+		if (_.has(mandrill_event.msg, "text") && mandrill_event.msg.text !== null){
+			parsed.message = Mail.firstResponse(mandrill_event.msg.text);
+		} else if (_.has(mandrill_event.msg, "html") && mandrill_event.msg.html !== null){
+			var message = Mail.htmlMailToText(mandrill_event.msg.html);
+	
+			parsed.message = Mail.firstResponse(message);
+		}
+	
+		return parsed;
+	} catch(err){
+		logger.error("Mandrill event not as expected");
+		logger.error("Mandrill event:" + mandrill_event);
+		
+		return null;
 	}
-
-	return parsed;
 }
 
 exports.show = function(req, res){
