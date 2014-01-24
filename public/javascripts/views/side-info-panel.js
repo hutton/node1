@@ -87,15 +87,7 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.listenTo(this.model, "change", this.modelChanged);
 		}
 
-		this.sideInfoPanel.addClass("side-info-panel-hiding");
-
-		_.delay(function(){
-			that.updateInPlace();
-
-			_.delay(function(){
-				that.sideInfoPanel.removeClass("side-info-panel-hiding");
-			}, 100);
-		}, 100);
+		that.updateInPlace();
 	},
 
 	modelChanged: function(){
