@@ -217,6 +217,8 @@ exports.mandrillReceive = function(req, res){
 
 					res.send( 200 );
 				});
+		} else {
+			res.send( 200 );
 		}
 	});
 };
