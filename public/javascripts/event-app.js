@@ -130,7 +130,9 @@ window.EventApp = Backbone.View.extend({
 
 	onResizeWindow: function(){
 		var size = $(".event-table .date-cell").first().width();
-	  	$(".event-table tr").height(size + 12);
+
+	  	$(".event-table tr > td > .date-cell-container").height(size - 6);
+	  	$(".event-table tr > td > .month").height(size - 6);
 
 		var windowSize = Math.min($("body").first().width(), 600);
 	  	$(".info-row-names").width(windowSize - 120);

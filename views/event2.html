@@ -96,6 +96,15 @@
      <div id="top-row-spacer"></div>
      <div class="row">
        <table class="table event-table">
+            <colgroup>
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+            </colgroup>
        </table>
      </div>
    </div>
@@ -176,7 +185,7 @@
     </script>
 
   <script type="text/template" id="choice-template">
-    <div class="date-cell-container">
+    <div class="date-cell-container" style="background: #ffffff; height: 86px;">
       <div class="unknown">
           <@= date.getDate() @>
       </div>
@@ -251,7 +260,6 @@
             <div class="side-info-invite">
               Click dates to show when you're free<br/> <!-- ' -->
               <br/>
-              Only you are invited<br/>
               <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
             </div>
           </div>

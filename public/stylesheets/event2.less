@@ -12,6 +12,7 @@
 @light-background-color: #f8f8f8;
 @event-table-content-width: 38px;
 
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -44,6 +45,8 @@ body{
 
 .table > tbody > tr > td{
 	border: none;
+	border-top: none;
+	border-bottom: none;
 }
 
 .navbar{
@@ -413,10 +416,11 @@ a:active{
 }
 
 .date-cell-container{
+	border: solid white 3px;
+
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
-	width: @event-table-content-width;
 	height: 100%;
 	opacity: 1;
 	cursor: pointer;
@@ -428,9 +432,6 @@ a:active{
 }
 
 #selected-row{
-	border-top: 1px solid @divider-color;
-	border-bottom: 1px solid @divider-color;
-
 	background: @light-background-color;
 
 	line-height: 1.3em;
@@ -525,19 +526,20 @@ a:active{
 }
 
 .event-table tr > td.date-cell{
-	border-top: solid white 6px;
-	border: solid white 6px;
 	position: relative;
 	overflow: hidden;
+	height: 100%;
 }
 
 .free-marker{
 	position: absolute;
-	width: 20px;
-	height: 20px;
-	background: @free-color;
-	top: -10px;
-	left: -10px;
+	width: 0px;
+	height: 0px;
+	border-top: 10px transparent solid;
+	border-bottom: 10px transparent solid;
+	border-right: 10px @free-color solid;
+	top: -3px;
+	left: 2px;
 	.rotation(45deg);
 }
 
@@ -547,13 +549,12 @@ a:active{
 }
 
 .event-table tr > td.first-seven{
-	border: solid white 6px;
 }
 
 .event-table td > div.date-cell-container{
 }
 
-.cell-selected{
+.cell-selected > div.date-cell-container{
 	background: rgba(74, 209, 108, 0.6) !important;
 }
 
@@ -577,7 +578,7 @@ a:active{
 	}
 
 	.free, .unknown, .month{
-		margin-top: -11px;
+		margin-top: -18px;
 	}
 }
 
@@ -595,7 +596,7 @@ a:active{
 	}
 
 	.free, .unknown, .month{
-		margin-top: -6px;
+		margin-top: -12px;
 	}
 }
 
@@ -623,8 +624,7 @@ a:active{
 .info-row{
 	position: relative;
 	overflow: hidden;
-	border-left: 3px transparent solid;
-	border-right: 3px transparent solid;
+	border: 3px white solid;
 }
 
 .info-row > div{
@@ -639,7 +639,6 @@ a:active{
 	padding-bottom: 2px;
 	color: #a0a0a0;
 	text-align: left;
-	border-bottom: 1px #e8e8e8 solid;
 }
 
 .info-row-text-container {

@@ -30,9 +30,9 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	updateView: function(animate){
-		var target = $(this.$el).find("div:first");
+		var target = this.$el.find(".date-cell-container");
 
-		this.$el.attr("style", "background: " + this.model.calcBackground() + ";");
+		target.css("background-color", this.model.calcBackground());
 
 		if (this.model.isFree() || this.model.pretendFree){
 			this.$el.find('.free-marker').show();
@@ -115,7 +115,7 @@ window.ChoicesView = Backbone.View.extend({
 	render: function(){
 		var that = this;
 
-		$(this.el).empty();
+		// $(this.el).empty();
 
 		var row = null;
 		var todayAdded = false;
