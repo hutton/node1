@@ -133,7 +133,7 @@ function buildTopThreeChoices(calendar){
 			choice.free.length > 0 && 
 			(today < choice.date || datesHelper.sameDay(today, choice.date))){
 
-			choice.columnDate = moment(choice.date).format("dddd D MMMM");
+			choice.columnDate = moment(choice.date).format("dddd Do MMMM");
 
 			var freeCount = choice.free.length;
 

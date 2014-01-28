@@ -16,6 +16,8 @@ window.SideInfoPanel = Backbone.View.extend({
 
 		this.sideInfoInvite = this.$el.find('.side-info-invite');
 
+		this.sideInfoContainer = this.$el.find('.side-info-panel-container');
+
 		if (App.attendees.length <= 1){
 			this.sideInfoList.hide();
 			this.sideInfoInvite.show();
@@ -68,6 +70,12 @@ window.SideInfoPanel = Backbone.View.extend({
 			}
 
 			this.$el.show();
+
+			if (this.sideInfoContainer.is(':visible')){
+				if (App.infoRowView !== null){
+					App.infoRowView.removeSelectedRow();
+				}
+			}
 		}
 	},
 
@@ -90,5 +98,4 @@ window.SideInfoPanel = Backbone.View.extend({
 	modelChanged: function(){
 		this.updateInPlace();
 	}
-
 });

@@ -333,7 +333,7 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 
 	var foundChoice = this.findChoiceByDate(date);
 
-	if (_.isUndefined(foundChoice) || foundChoice == null){
+	if (_.isUndefined(foundChoice) || foundChoice === null){
 		if (isFree){
 			var newChoice = {
 						date: date,
@@ -356,7 +356,7 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 			
 			// Don't want to add it twice!
 			if (!isFound){
-				foundChoice.free.push(attendee._id);	
+				foundChoice.free.push(attendee._id);
 			}
 			
 		} else {

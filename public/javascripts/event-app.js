@@ -195,20 +195,6 @@ window.EventApp = Backbone.View.extend({
 		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
 		this.changesMadeLinkkeyEl.attr("href", mailTo);
-
-		// if (this.isFree.length > 0 || this.wasFree.length > 0){
-		// 	if (!this.switchedUpdateAttendeesLink){
-				// this.updatedFooterEl.show();
-
-				// this.switchedUpdateAttendeesLink = true;
-
-				// var that = this;
-
-				// _.delay(function(){
-				// 	that.swtichUpdateAttendeesLink();
-				// }, 2000);
-		// 	}
-		// }
 	},
 
 	swtichUpdateAttendeesLink: function(){
