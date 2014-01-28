@@ -116,8 +116,59 @@ function buildSortedChoices(calendar){
 	return sortedChoices;
 }
 
+function buildTopThreeChoices(calendar){
+	var bestModel = null;
+	var bestCount = 0;
+
+	var secondBestModel = null;
+	var secondBestCount = 0;
+
+	var thirdBestModel = null;
+	var thirdBestCount = 0;
+
+	var today = new Date();
+
+	_.each(calendar.choices, function(choice){
+		if (choice.date !== null && 
+			choice.free.length > 0 && 
+			(today < choice.date || datesHelper.sameDay(today, choice.date))){
+
+			choice.columnDate = moment(choice.date).format("dddd D MMMM");
+
+			var freeCount = choice.free.length;
+
+			if (freeCount > bestCount){
+				thirdBestCount = secondBestCount;
+				thirdBestModel = secondBestModel;
+
+				secondBestCount = bestCount;
+				secondBestModel = bestModel;
+
+				bestCount = freeCount;
+				bestModel = choice;
+			} else if (freeCount > secondBestCount){
+				thirdBestCount = secondBestCount;
+				thirdBestModel = secondBestModel;
+
+				secondBestCount = freeCount;
+				secondBestModel = choice;
+			} else if (freeCount > thirdBestCount){
+				thirdBestCount = freeCount;
+				thirdBestModel = choice;
+			}
+		}
+	});
+
+	return [bestModel, secondBestModel, thirdBestModel];
+}
+
+
 function renderEmail(calendar, format, res){
-	var sortedChoices = buildSortedChoices(calendar);
+	var sortedChoices = [];
+
+	if (calendar.attendees.length > 1){
+		sortedChoices = buildTopThreeChoices(calendar);
+	}
 
 	var message = "This is the message";
 

@@ -12,6 +12,7 @@
 @light-background-color: #f8f8f8;
 @event-table-content-width: 38px;
 
+@divider-gap: 3px;
 
 @font-face {
   font-family: 'Open Sans';
@@ -416,8 +417,9 @@ a:active{
 }
 
 .date-cell-container{
-	border: solid white 3px;
+	border: solid white @divider-gap;
 
+	//font-weight: bold;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;

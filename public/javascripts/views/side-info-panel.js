@@ -67,9 +67,6 @@ window.SideInfoPanel = Backbone.View.extend({
 				});
 			}
 
-
-			//this.$el.find('.side-info-panel').attr("style", "background: " + this.model.calcBackground() + ";");
-
 			this.$el.show();
 		}
 	},
