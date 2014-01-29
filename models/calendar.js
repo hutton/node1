@@ -232,7 +232,6 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 };
 
 CalendarSchema.methods.findChoiceByDate = function(date){
-	
 	var dateString = new Date(date).toDateString();
 
 	if (dateString !== "Invalid Date"){
@@ -328,7 +327,71 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 	});
 };
 
+CalendarSchema.methods.checkForDuplicateChoices = function(){
+
+	// var sortedChoices = _.sortBy(this.choices, function(choice){
+	// 	return choice.date;
+	// });
+
+	// var prevDate = null;
+
+	// _.each(sortedChoices, function(choice){
+	// 	if (choice.date !== null && choice.date.toDateString() === prevDate){
+
+	// 		var frees = [];
+
+			
+
+	// 		frees = _.unique(_.flatten(frees));
+
+	// 		console.log(this.choices.length);
+
+	// 		_.each(foundChoices, function(choice){
+	// 			that.choices.removeElement(choice);	
+	// 		})
+
+	// 		console.log(this.choices.length);
+
+
+	// 	}
+	// });
+
+
+	// var dateString = new Date(date).toDateString();
+
+	// var foundChoices = _.filter(this.choices, function(choice){
+	// 	if (choice.date !== null){
+	// 		return choice.date.toDateString() == dateString;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// });
+
+	// if (foundChoices.length > 1){
+	// 	logger.error('Found ' + foundChoices.length + ' choices for ' + date);
+
+	// 	var frees = [];
+
+	// 	_.each(this.choices, function(choice){
+	// 		frees.push(choice.free);
+	// 	});
+
+	// 	frees = _.unique(_.flatten(frees));
+
+	// 	console.log(this.choices.length);
+
+	// 	_.each(foundChoices, function(choice){
+	// 		that.choices.removeElement(choice);	
+	// 	})
+
+	// 	console.log(this.choices.length);
+	// }
+
+}
+
 CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
+	var that = this;
+
 	var isFree = freeAttendees.indexOf(attendee._id.toString()) != -1;
 
 	var foundChoice = this.findChoiceByDate(date);

@@ -92,14 +92,6 @@ function showEvent(req, res, calendar, attendeeId){
 		return choice.date;
 	});
 
-	var showWelcome = false;
-
-	if (_.isUndefined(req.cookies[calendar.calendarId]) && calendar.calendarId !== 'example'){
-		res.setHeader("Set-Cookie", calendar.calendarId + "=yes; Path=" + req.url + "; Expires=Fri, 31-Dec-2020 23:59:59 GMT");
-
-		showWelcome = true;
-	}
-
 	global.app.render('mail/invite-attendee-link.txt', {
 		calendar: calendar
 	}, function(err, body){
@@ -111,7 +103,6 @@ function showEvent(req, res, calendar, attendeeId){
 			attendees: JSON.stringify(cleanedAttendees),
 			calendar: JSON.stringify(cleanedCalendar),
 			name: calendar.name,
-			showWelcome: showWelcome,
 			inviteEmailLink: inviteEmailLink
 		});
 	});

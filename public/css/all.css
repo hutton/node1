@@ -7363,6 +7363,18 @@ td.visible-print {
 .fa-plus-square-o:before {
   content: "\f196";
 }
+/*---------------------------------------------------
+    LESS Elements 0.6
+  ---------------------------------------------------
+    A set of useful LESS mixins by Dmitry Fadeyev
+    Special thanks for mixin suggestions to:
+      Kris Van Herzeele,
+      Benoit Adam,
+      Portenart Emile-Victor,
+      Ryan Faerman
+
+    More info at: http://lesselements.com
+-----------------------------------------------------*/
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -7767,8 +7779,7 @@ a:active {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  opacity: 0.3;
-  color: #808080;
+  color: #000000;
 }
 .content {
   position: relative;
@@ -7826,7 +7837,7 @@ a:active {
 }
 .today .unknown {
   color: #4ad16c;
-  opacity: 0.9;
+  opacity: 0.9 !important;
 }
 .cell-selected > div.date-cell-container {
   background: rgba(74, 209, 108, 0.6) !important;
@@ -8137,18 +8148,6 @@ a:active {
   move the transform origin to the middle of the left side.
   Also ensure that overflow is set to hidden.
 */
-/*---------------------------------------------------
-    LESS Elements 0.6
-  ---------------------------------------------------
-    A set of useful LESS mixins by Dmitry Fadeyev
-    Special thanks for mixin suggestions to:
-      Kris Van Herzeele,
-      Benoit Adam,
-      Portenart Emile-Victor,
-      Ryan Faerman
-
-    More info at: http://lesselements.com
------------------------------------------------------*/
 /*#DCE0DC;*/
 .pie {
   position: absolute;

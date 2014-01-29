@@ -33,6 +33,7 @@ window.ChoiceView = Backbone.View.extend({
 		var target = this.$el.find(".date-cell-container");
 
 		target.css("background-color", this.model.calcBackground());
+		target.find("div.unknown").css("opacity", this.model.calcForegroundOpacity());
 
 		if (this.model.isFree() || this.model.pretendFree){
 			this.$el.find('.free-marker').show();

@@ -86,22 +86,52 @@ window.ChoiceModel = Backbone.Model.extend({
 
 	calcBackground: function(){
 		var freeDates = 0;
-		var emptyColor = 250;
-		var fullColor = 220;
+
+		var redStart = 246;
+		var greenStart = 249;
+		var blueStart = 246;
+
+		var redEnd = 214;
+		var greenEnd = 218;
+		var blueEnd = 210;
+
 		var total = window.App.attendees.length;
 
 		if (this.has("free")){
 			freeDates = this.get("free").length;
 		}
 
-		var diff = emptyColor - fullColor;
+		var percent = (freeDates / total);
 
-		var target = emptyColor - ((freeDates / total) * diff);
+		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
+	},
+
+	calcForegroundOpacity: function(){
+		var freeDates = 0;
+
+		var start = 0.12;
+		var end = 0.27;
+
+		var total = window.App.attendees.length;
+
+		if (this.has("free")){
+			freeDates = this.get("free").length;
+		}
+
+		var percent = (freeDates / total);
+
+		var diff = start - end;
+
+		return start - (percent * diff);
+	},
+
+	interpolate: function(start, end, percent){
+		var diff = start - end;
+
+		var target = start - (percent * diff);
 
 		target = Math.round(target);
 
-		var targetHex = target.toString(16);
-
-		return "#" + targetHex + targetHex + targetHex;
+		return target;
 	}
 });

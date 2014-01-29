@@ -35,6 +35,17 @@ var winstonStream = {
 	}
 };
  
+
+Array.prototype.removeElement = function(element) {
+	var index = this.indexOf(element);
+ 
+	while (index !== -1){
+		this.splice(index, 1);
+		index = this.indexOf(element);
+	}
+};
+
+ 
  app.configure(function(){
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');

@@ -85,13 +85,8 @@ window.EventApp = Backbone.View.extend({
 		if (this.currentAttendee === null){
 			this.$el.find("#add-attendee").hide();
 
-			$('#register-modal').modal('show');
-
 			this.registerFooterEl.slideDown('fast');
 		} else {
-			if (this.showWelcome){
-				$('#welcome-modal').modal('show');
-			}
 		}
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
