@@ -218,7 +218,11 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 
 	var mandrill_client = new mandrill.Mandrill(mandrillApiKey);
 
-	var sortedChoices = buildSortedChoices(calendar);
+	var sortedChoices = [];
+
+	if (calendar.attendees.length > 1){
+		sortedChoices = buildTopThreeChoices(calendar);
+	}
 
 	_.each(calendar.attendees, function(attendee){
 		attendee.prettyName = attendee.name || attendee.email;
