@@ -4,8 +4,8 @@ var moment = require("moment");
 function getExample(){
 	return {
 		"calendarId" : "example",
-		"id" : "example",
-		"name" : "Bowling Night",
+		"id" : "office-drinks",
+		"name" : "Office drinks",
 		"date" : new Date(moment()),
 		"attendees" : [
 			{

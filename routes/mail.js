@@ -60,19 +60,16 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 	logger.info("Mail subject: " + subject);
 	logger.info("Mail message: " + message);
 
-	if (startsWith(to, "start-betalist@")){
+	if (startsWith(to, "start-betalist@") || startsWith(to, "start@")){
 		var newCalendar = Calendar.newCalendar(from, fromName, subject, message, function(newCalendar){
-
 			var splitMessage = Mail.getEmailAddressesAndBody(message);
 
 			Mail.sendMail(newCalendar, subject, splitMessage[1], fromName);
 
 			createCalendarCallback(newCalendar);
 		});
-	} else if (startsWith(to, "start@")){
-		Mail.sendWereInBetaEmail(from);
-
-		error( 'Trying to start event with ' + to);
+	} else if (startsWith(to, "office-drinks@")){
+		error( 'Someone mailed ' + to);
 	} else {
 		var localEmail = getLocalPartOfEmail(to);
 

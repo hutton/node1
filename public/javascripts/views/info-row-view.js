@@ -71,6 +71,8 @@ window.InfoRowView = Backbone.View.extend({
 			}
 		});
 
+		attendeeNamesText = attendeeNamesText.slice(0,-2);
+
 		var date = this.model.get('date');
 
 		var dateText = moment(date).format("dddd D MMMM");

@@ -87,13 +87,13 @@ window.ChoiceModel = Backbone.Model.extend({
 	calcBackground: function(){
 		var freeDates = 0;
 
-		var redStart = 246;
-		var greenStart = 249;
-		var blueStart = 246;
+		var redStart = 236;
+		var greenStart = 239;
+		var blueStart = 236;
 
-		var redEnd = 214;
-		var greenEnd = 218;
-		var blueEnd = 210;
+		var redEnd = 204;
+		var greenEnd = 208;
+		var blueEnd = 200;
 
 		var total = window.App.attendees.length;
 
@@ -109,8 +109,8 @@ window.ChoiceModel = Backbone.Model.extend({
 	calcForegroundOpacity: function(){
 		var freeDates = 0;
 
-		var start = 0.12;
-		var end = 0.27;
+		var start = 0.22;
+		var end = 0.37;
 
 		var total = window.App.attendees.length;
 

@@ -211,6 +211,8 @@ CalendarSchema.statics.findCalendarByAttendeeId = function(id, callback){
 			return attendee.attendeeId == id;
 		});
 
+		calendar.checkForDuplicateChoices();
+
 		callback(err, calendar, attendee);
 	});
 };
@@ -226,6 +228,8 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 			callback(err, null, null);
 			return;
 		}
+
+		calendar.checkForDuplicateChoices();
 
 		callback(err, calendar);
 	});
@@ -328,66 +332,54 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 };
 
 CalendarSchema.methods.checkForDuplicateChoices = function(){
+	var that = this;
 
-	// var sortedChoices = _.sortBy(this.choices, function(choice){
-	// 	return choice.date;
-	// });
+	var sortedChoices = _.sortBy(this.choices, function(choice){
+		return choice.date;
+	});
 
-	// var prevDate = null;
+	var prevDate = null;
+	var prevChoice = null;
 
-	// _.each(sortedChoices, function(choice){
-	// 	if (choice.date !== null && choice.date.toDateString() === prevDate){
+	var dupFound = false;
 
-	// 		var frees = [];
+	_.each(sortedChoices, function(choice){
+		if (choice.date !== null ){
+			var choiceDate = choice.date.toDateString();
 
-			
+			if (choiceDate === prevDate){
+				dupFound = true;
 
-	// 		frees = _.unique(_.flatten(frees));
+				logger.error("Found duplicate date (" + choiceDate + ") for calendar " + that.name );
+				logger.error("Choice    : " + choice );
+				logger.error("PrevChoice: " + prevChoice );
 
-	// 		console.log(this.choices.length);
+				_.each(choice.free, function(free){
+					prevChoice.free.push(free);
+				});
 
-	// 		_.each(foundChoices, function(choice){
-	// 			that.choices.removeElement(choice);	
-	// 		})
+				prevChoice.free = _.unique(prevChoice.free);
 
-	// 		console.log(this.choices.length);
+				that.choices.removeElement(choice);
 
+				logger.error("Merged choice: " + prevChoice );
+			}
 
-	// 	}
-	// });
+			prevDate = choiceDate;
+			prevChoice = choice;
+		}
+	});
 
-
-	// var dateString = new Date(date).toDateString();
-
-	// var foundChoices = _.filter(this.choices, function(choice){
-	// 	if (choice.date !== null){
-	// 		return choice.date.toDateString() == dateString;
-	// 	} else {
-	// 		return false;
-	// 	}
-	// });
-
-	// if (foundChoices.length > 1){
-	// 	logger.error('Found ' + foundChoices.length + ' choices for ' + date);
-
-	// 	var frees = [];
-
-	// 	_.each(this.choices, function(choice){
-	// 		frees.push(choice.free);
-	// 	});
-
-	// 	frees = _.unique(_.flatten(frees));
-
-	// 	console.log(this.choices.length);
-
-	// 	_.each(foundChoices, function(choice){
-	// 		that.choices.removeElement(choice);	
-	// 	})
-
-	// 	console.log(this.choices.length);
-	// }
-
-}
+	if (dupFound){
+		this.save(function(err){
+			if (err){
+				logger.error(err);
+			} else {
+				logger.info("Calendar saved");
+			}
+		});
+	}
+};
 
 CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 	var that = this;
