@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 - Show best options
 - Lighten calendar c0 & d8
 - Give month some color
+=======
+- Add description
+- Allow selection of date range
+>>>>>>> block-spike
 
 Done
 ----
+- Show best options
+- Contact Meetifyr user
 - Build example page
 - Stop hiding header on scroll
 - Show notify icon directly in header
