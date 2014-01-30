@@ -1,5 +1,5 @@
 
-// @codekit-prepend "tp/jquery-1.8.2.min.js";
+// @codekit-prepend "tp/jquery-2.0.3.min.js";
 // @codekit-prepend "tp/tp.helper.js";
 // @codekit-prepend "bootstrap/bootstrap.min.js";
 
@@ -17,5 +17,6 @@
 
 // @codekit-prepend "views/choices-view.js";
 // @codekit-prepend "views/info-row-view.js";
+// @codekit-prepend "views/side-info-panel.js";
 
 // @codekit-prepend "event-app.js";

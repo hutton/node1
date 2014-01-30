@@ -1,9 +1,12 @@
 Hi Ian,
 
-I hope you're still finding Meetifyr useful and it's not giving you any problems.
+I hope you're still finding Meetifyr useful and it's not giving you any problems.  I've been working on a successor to Meetifyr and would really appreciate your thoughts on it.  
 
-I have been working on a successor to Meetifyr and would really appreciate your thoughts on it.  Convenely aims to solve the same problem has been built to work well on mobile devices and tablets
+Convenely has a been built from the ground up to work well on mobile devices and tablets but the main difference is that every event has it's own email address (i.e. bowling-night@convenely.com) which can be used to contact everyone invited to the event.
 
-The main difference is that all attendees have to register and 
+Visit http://convenely.com to take a look and let me know what you think.
 
+Many thanks
+Simon
 
+P.S. Meetifyr is not going anywhere, it look's after itself and I have no plans to do anything with it.

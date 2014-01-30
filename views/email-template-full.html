@@ -79,19 +79,24 @@
 		text-align: left;
 	}
 
-	.top-three-title{
-		color: #a0a0a0;
+	.avail-table{
+		margin: 0px 0px;
+		padding: 0;
+		font-size: 12px;
+		color: #808080;
+		width: 100%;
+
 	}
 
-	.avail-table{
-		margin: 0px auto;
-		padding: 0;
-		color: #a0a0a0;
+	.avail-date-header{
+		padding: 5px 5px;
+		font-weight: bold;
+		border-bottom: 1px solid #c0c0c0;
 	}
 
 	.none-link{
-		color: #a0a0a0;
-		text-decoration: none;
+		color: #808080
+		;text-decoration: none;
 		cursor: default;
 	}
 
@@ -171,13 +176,6 @@
 					</tr>
 					<tr height="10"></tr>
 					<% if ( choices.length > 0 ){ %>
-					<tr height="10"></tr>
-					<tr>
-						<td class="top-three-title center">
-							These dates are looking good so far:
-						</td>
-					</tr>
-					<tr height="5"></tr>
 					<tr>
 						<td>
 							<table class="avail-table" border="0" cellspacing="0">
@@ -186,14 +184,22 @@
 									<% _.each(choices, function(choice) { %> 
 
 									<tr>
-										<td>
+										<td width="5"></td>
+										<td colspan="4" class="avail-date-header">
 											<a href="#" class="none-link"><%= choice.columnDate %></a>
 										</td>
-										<td width="50"></td>
-										<td>
-											<%= choice.free.length %> of <%= attendees.length %> free
-										</td>
+										<td width="5"></td>
 									</tr>
+									<% _.each(choice.free, function(free) { %> 
+									<tr>
+										<td width="5"></td>
+										<td colspan="2" class="avail-address">
+											<a class="none-link" href="#"><%= _.find(attendees, function(attendee){ return String(attendee._id) === String(free); }).prettyName %></a>
+										</td>
+										<td width="50" class="avail-status" bgcolor="#51da73"><span fgColor="#ffffff">&#10003;</span> Free </td>
+										<td width="5"></td>
+									</tr>
+									<% }); %>
 
 									<tr colspan="3" height="10"></tr>
 									<% }); %>
@@ -201,6 +207,7 @@
 							</table>
 						</td>
 					</tr>
+					<tr height="30"></tr>
 					<% } %>
 					<!-- tr>
 						<td class="did-you-know center">

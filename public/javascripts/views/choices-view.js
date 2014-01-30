@@ -7,18 +7,18 @@ window.ChoiceView = Backbone.View.extend({
 
 	template: _.template($('#choice-template').html()),
 
-	events: {
-		"click div:first":	"dayClicked"
-	},
+	firstChoiceTemplate: _.template($('#first-choice-template').html()),
 
-	pie: null,
+	events: {
+		"click":	"dayClicked"
+	},
 
 	className: "date-cell",
 
 	render: function(){
 		this.$el.html(this.template(this.model.attributes));
 
-		this.pie = this.$el.find(".pie");
+		this.$el.hover(this.mouseEnter, this.mouseLeave);		
 
 		this.updateView(false);
 
@@ -30,83 +30,64 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	updateView: function(animate){
-		var target = $(this.$el).find("div:first");
+		var target = this.$el.find(".date-cell-container");
 
-		if (target.hasClass('selected')){
-			target.find('div:nth-of-type(2)').toggleClass('free');
-			target.find('div:nth-of-type(2)').toggleClass('unknown');
+		target.css("background-color", this.model.calcBackground());
+		target.find("div.unknown").css("opacity", this.model.calcForegroundOpacity());
+
+		if (this.model.isFree() || this.model.pretendFree){
+			this.$el.find('.free-marker').show();
 		} else {
-			$(".selected").removeClass('selected');
-
-			target.addClass('selected');
+			this.$el.find('.free-marker').hide();
 		}
 
-		if (this.model.has("free")){
-			var freeDates = this.model.get("free");
-
-			this.targetDeg = this.calcDegrees(window.App.attendees.length, freeDates.length);
-
-			if (animate){
-				this.animatePie();
+		if (false /*this.model.has("top-choice")*/){
+			if (this.$el.find('.top-choice-text').length === 0){
+				if (this.model.get("top-choice") > 0){
+					this.$el.find('.date-cell-container').append(this.firstChoiceTemplate({choice: this.model.get("top-choice")}));
+				}
 			} else {
-				this.pie.attr("data-value", this.targetDeg);
-
-				if (this.targetDeg >= 180){
-					this.pie.addClass("big");
+				if (this.model.get("top-choice") > 0){
+					this.$el.find('.top-choice-text').html(this.model.get("top-choice"));
 				} else {
-					this.pie.removeClass("big");
+					this.$el.find('.top-choice-text').remove();
 				}
 			}
-
-			if (this.model.isFree() || this.model.pretendFree){
-				this.$el.find(".unknown").addClass("free").removeClass("unknown");
-			}
-		}
-	},
-
-	animatePie: function(){
-		var current = parseInt(this.pie.attr("data-value"));
-		var change = 0;
-
-		if (current < this.targetDeg){
-			change = 10;
-		}
-
-		if (current > this.targetDeg){
-			change = -10;
-		}
-
-		if (change !== 0){
-			this.pie.attr("data-value", current + change);
-
-			if (current + change >= 180){
-				this.pie.addClass("big");
-			} else {
-				this.pie.removeClass("big");
-			}
-
-			_.delay(this.animatePie, 10);
 		}
 	},
 
 	dayClicked: function(event){
 		var target = $(this.$el).find("div:first");
 
-		if (target.hasClass('selected')){
+		if (target.hasClass('selected') || $('.side-info-panel-container').is(':visible')){
 			this.model.toggleFree();
 		} else {
 			$(".selected").removeClass('selected');
-
-			target.addClass('selected');
+			$(".cell-selected").removeClass('cell-selected');
 
 			var selectedRow = target.parents("tr");
 
 			App.updateSelectedItem(this.model, selectedRow);
+
+			this.$el.addClass('cell-selected');
+			target.addClass('selected');
 		}
 	},
 
 	calcDegrees: function(total, count){
 		return Math.round((count / total) * 36) * 10;
+	},
+
+	mouseEnter: function(){
+		if (App.SideInfoPanel !== null){
+			App.SideInfoPanel.updateModel(this.model);
+		}
+	},
+
+	mouseLeave: function(){
+		if (App.SideInfoPanel !== null){
+			App.SideInfoPanel.updateModel(null);
+		}
 	}
 });
 
@@ -135,7 +116,7 @@ window.ChoicesView = Backbone.View.extend({
 	render: function(){
 		var that = this;
 
-		$(this.el).empty();
+		// $(this.el).empty();
 
 		var row = null;
 		var todayAdded = false;
@@ -163,9 +144,7 @@ window.ChoicesView = Backbone.View.extend({
 			}
 
 			if (!todayAdded && sameDay(that.today, date)){
-				var target = choice.$el.find("div:first");
-
-				target.addClass("today");
+				choice.$el.addClass('today');
 
 				todayAdded = true;
 			}
@@ -174,7 +153,7 @@ window.ChoicesView = Backbone.View.extend({
 				if (that.today < date || sameDay(that.today, date)){
 					inPast = false;
 				} else {
-					choice.$el.find("div:first").addClass("past");
+					choice.$el.addClass("past");
 				}
 			}
 		});
@@ -185,8 +164,9 @@ window.ChoicesView = Backbone.View.extend({
 			this.$el.find(".today")[0].scrollIntoView(true);
 		}
 
-		var body = $("body");
-		body.scrollTop(body.scrollTop() - 70);
+		var body = $("event-container");
+
+		body.scrollTop(body.scrollTop() - 212);
 
 		return this;
 	},

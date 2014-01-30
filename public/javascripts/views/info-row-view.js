@@ -47,43 +47,62 @@ window.InfoRowView = Backbone.View.extend({
 			this.infoRowEl.find('.info-row-selector-free').removeClass('info-row-selector-free-show');
 		}
 
-		this.infoRowEl.find('.info-row-names').html("<strong>" + values.freeNames + "</strong>" + values.notFreeNames);
+		this.infoRowEl.find('.info-row-names').html(values.attendeeNamesText);
+
+		if (values.showTopChoice){
+			this.infoRowEl.find('.info-row-top-choice').show();
+			this.infoRowEl.find('.info-row-top-choice > div').html(values.topChoiceText);
+		} else {
+			this.infoRowEl.find('.info-row-top-choice').hide();
+		}
 	},
 
 	buildTemplateValues: function(){
 		var freeAttendees = this.model.get("free") || [];
-
-		var free = [];
-		var busy = [];
+		var attendeeNamesText = "";
 
 		_.each(this.attendees.models, function(att){
 			var found = freeAttendees.indexOf(att.get('_id'));
 
 			if (found != -1){
-				free.push(att.get('prettyName'));
+				attendeeNamesText = attendeeNamesText + "<strong>" + att.get('prettyName') + "</strong>, ";
 			} else {
-				busy.push(att.get('prettyName'));
+				attendeeNamesText = attendeeNamesText + att.get('prettyName') + ", ";
 			}
 		});
 
-		freeNamesText = free.join(', ');
-
-		if (busy.length > 0 && free.length > 0){
-			freeNamesText = freeNamesText + ", ";
-		}
+		attendeeNamesText = attendeeNamesText.slice(0,-2);
 
 		var date = this.model.get('date');
 
 		var dateText = moment(date).format("dddd D MMMM");
 
+		var topChoice = 0;
+		var topChoiceText = "";
+
+		if (this.model.has('top-choice')){
+			topChoice = this.model.get('top-choice');
+
+			if (topChoice === 1){
+				topChoiceText = "Top choice";
+			} else if (topChoice === 2){
+				topChoiceText = "2nd choice";
+			} else if (topChoice === 3){
+				topChoiceText = "3rd choice";
+			} 
+		}
+
+		var showTopChoice = topChoice > 0;
+
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
 			isFree: this.model.isFree(),
 			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
-			showDetails: this.showingDetails,
-			freeNames: freeNamesText,
+			showDetails: true, //this.showingDetails,
+			attendeeNamesText: attendeeNamesText,
 			date: dateText,
-			notFreeNames: busy.join(', '),
+			showTopChoice: false,  //showTopChoice,
+			topChoiceText: topChoiceText
 		};
 	},
 
@@ -124,8 +143,6 @@ window.InfoRowView = Backbone.View.extend({
 		if (event.target.id !== "info-row-hide-details-link" &&
 			event.target.id !== "info-row-details-link"){
 
-			$(".selected").removeClass('selected');
-
 			this.removeSelectedRow();
 		}
 	},
@@ -138,6 +155,9 @@ window.InfoRowView = Backbone.View.extend({
 		var that = this;
 
 		this.$el.after(this.template(templateValues));
+
+		var windowSize = Math.min($("body").first().width(), 600);
+	  	$(".info-row-names").width(windowSize - 120);
 
 		this.unbindEvents();
 
@@ -179,6 +199,9 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	removeSelectedRow: function(){
+		$(".selected").removeClass('selected');
+		$(".cell-selected").removeClass('cell-selected');
+
 		var allSelectedRows = $('#selected-row');
 
 		allSelectedRows
@@ -203,32 +226,6 @@ window.InfoRowView = Backbone.View.extend({
 
 			} else {
 				footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
-			}
-		}
-
-		return footerText;
-	},
-
-	buildAttendeeTextOld: function(choiceModel){
-		var footerText = "";
-		var currentAttendeeId = window.App.currentAttendee != null ? window.App.currentAttendee.get("_id") : -1;
-		var freeAttendees = choiceModel.get("free");
-
-		if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
-			// You're not free
-			if (_.isUndefined(freeAttendees) || freeAttendees.length === 0){
-				footerText = "<strong>Nobody</strong> is free yet.";
-			} else if (freeAttendees.length - 1 == App.attendees.length) {
-				footerText = "<strong>Everyone</string> except you is free.";
-			} else {
-				footerText = this.defaultAttendeeText(freeAttendees);
-			}
-		} else {
-			// You're free
-			if (freeAttendees.length == App.attendees.length){
-				footerText = "<strong>Everyone</strong> can make it.";
-			} else {
-				footerText = this.defaultAttendeeText(freeAttendees);
 			}
 		}
 

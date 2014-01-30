@@ -12,7 +12,7 @@ var _ = require("underscore");
 var logger = require("../tools/logger");
 var datesHelper = require("../tools/dates");
 var Mail = require("../tools/mail");
-
+var Example = require("../tools/example");
 
  function makeid(length)
  {
@@ -45,21 +45,32 @@ var Mail = require("../tools/mail");
 };
 
 function renderCalendar(req, res, format){
-	Calendar.findCalendar(req.route.params[0], function(err, calendar){
-		if (err){
-			logger.error("Error finding calendar " + req.route.params[0]);
-			logger.error("Error:" + err);
+	if (req.route.params[0].length == 9 || req.route.params[0].length == 5){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar with attendee " + req.route.params[0]);
+				logger.error("Error:" + err);
 
-			res.send('No calendar');
-		} else if (!calendar){
-			logger.error("Could not find calendar " + req.route.params[0]);
+				res.status(404);
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with attendee " + req.route.params[0]);
 
-			res.send('No calendar');
-		} else {
+				res.status(404);
+				res.send('No calendar');
+			} else {
+				Mail.renderEmail(calendar, format, res);
+			}
+		});
+	} else if (req.route.params[0] == 'example') {
+		var calendar = Example.getExample();
 
-			Mail.renderEmail(calendar, format, res);
-		}
-	});
+		Mail.renderEmail(calendar, format, res);
+	}
+	else {
+		res.status(404);
+		res.send("We can't find the event you're looking for.")
+	}
 }
 
 exports.viewText = function(req, res){

@@ -7375,6 +7375,24 @@ td.visible-print {
 
     More info at: http://lesselements.com
 -----------------------------------------------------*/
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/opensans-light.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(/fonts/opensans.woff) format('woff');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/fonts/opensans-bold.woff) format('woff');
+}
 body {
   padding-top: 0px;
   padding-bottom: 40px;
@@ -7385,13 +7403,11 @@ body {
 }
 .table > tbody > tr > td {
   border: none;
-  padding: 0px;
+  border-top: none;
+  border-bottom: none;
 }
 .navbar {
   min-height: 0px;
-}
-.event-table > tbody > tr > td {
-  padding: 14px 0px 14px 0px;
 }
 a {
   color: #4ad16c;
@@ -7458,7 +7474,7 @@ a:active {
   max-width: 570px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 16px;
+  font-size: 14px;
   padding: 25px 10px;
   line-height: 1.6em;
 }
@@ -7502,6 +7518,8 @@ a:active {
   margin-left: auto;
   margin-right: auto;
   min-height: 800px;
+  background: white;
+  z-index: 101;
 }
 #top-row-spacer {
   height: 60px;
@@ -7515,11 +7533,6 @@ a:active {
 .navbar-fixed-top {
   border-bottom: 1px solid #e8e8e8;
   background: #f8f8f8;
-  -moz-transition-duration: 0.25s;
-  -webkit-transition-duration: 0.25s;
-  -o-transform-duration: 0.25s;
-  -ms-transform-duration: 0.25s;
-  transition-duration: 0.25s;
 }
 .navbar-fixed-bottom {
   border-top: 1px solid #e8e8e8;
@@ -7612,12 +7625,6 @@ a:active {
   max-width: 400px;
   margin: 3px auto;
 }
-#add-attendee-link {
-  float: right;
-}
-#add-attendee-cancel-link {
-  float: left;
-}
 .attendee-email-spinner-container {
   height: 0px;
   float: right;
@@ -7658,7 +7665,7 @@ a:active {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 9px;
+  font-size: 0.45em;
   margin-bottom: 2px;
 }
 .days-table td {
@@ -7666,17 +7673,24 @@ a:active {
   padding: 0px 0px;
   width: 30px;
 }
+.days-table > tbody > tr > td {
+  border: none;
+  padding: 0px;
+}
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7) {
-  color: #c8c8c8;
+  color: #d0d0d0;
 }
 .month {
-  color: #a0a0a0;
-  top: 8px;
-  left: 10px;
+  height: 100%;
+  position: relative;
+  width: 38px;
 }
-.event-table tr {
-  height: 60px;
+.month > div {
+  position: relative;
+  color: #4ad16c;
+  top: 50%;
+  left: 10px;
 }
 .event-table tr.selected-row {
   height: auto;
@@ -7684,7 +7698,7 @@ a:active {
 .event-table td {
   text-align: center;
   position: relative;
-  color: #a0a0a0;
+  color: #c0c0c0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -7692,68 +7706,26 @@ a:active {
   -ms-user-select: none;
   user-select: none;
 }
-.event-table td.first {
-  border-left: 1px solid #e8e8e8;
-  border-top: 1px solid #e8e8e8;
-}
-.event-table td.first-seven {
-  border-top: 1px solid #e8e8e8;
-}
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7) {
-  color: #c8c8c8;
+  color: #d0d0d0;
 }
-.event-table td > div {
+.date-cell-container {
+  border: solid #ffffff 3px;
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  width: 38px;
-  height: 38px;
+  height: 100%;
   opacity: 1;
   cursor: pointer;
 }
-.event-table td > div.today > div:nth-of-type(3) {
-  background: #c0c0c0;
-  position: relative;
-  top: 12px;
-  margin: 0px auto;
-  width: 8px;
-  height: 8px;
-  border-radius: 10px;
-}
-.event-table td > div.past {
+.past {
   opacity: 0.4;
-  text-decoration: line-through;
-}
-.event-table td > div.selected {
-  opacity: 1.0;
-}
-.event-table td > div.selected > div:nth-of-type(3) {
-  width: 20px;
-  height: 20px;
-  background: #f8f8f8;
-  border-right: 1px solid #e8e8e8;
-  border-top: 1px solid #e8e8e8;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  border-radius: 0px;
-  position: relative;
-  top: 14px;
-  margin: 0px auto;
-}
-.event-table td > div.selected > .pie:before,
-.event-table td > div.selected > .pie:after {
-  background: #c0c0c0;
+  background: white !important;
 }
 #selected-row {
-  border-top: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
   background: #f8f8f8;
   line-height: 1.3em;
-  font-size: 16px;
   margin: 4px 12px 7px 12px;
   text-align: center;
 }
@@ -7766,51 +7738,53 @@ a:active {
   height: auto;
 }
 .inner {
-  top: 5px;
-  width: 28px;
-  height: 28px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 100px;
   position: relative;
+  top: 50%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .free {
-  top: 5px;
-  width: 28px;
-  height: 28px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 100px;
   position: relative;
-  background: #4ad16c;
+  top: 50%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  opacity: 0.9;
+  color: #4ad16c;
 }
 .busy {
-  top: 5px;
-  width: 28px;
-  height: 28px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 100px;
   position: relative;
+  top: 50%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background: #fe673b;
 }
 .unknown {
-  top: 5px;
-  width: 28px;
-  height: 28px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 100px;
   position: relative;
-  background: #ffffff;
-}
-.free > .content {
-  color: white;
+  top: 50%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #000000;
 }
 .content {
   position: relative;
   top: 3px;
-  font-size: 16px;
+  line-height: 1.4em;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -7820,7 +7794,6 @@ a:active {
 }
 .footer {
   text-align: center;
-  font-size: 16px;
   height: 0px;
   position: relative;
   top: 10px;
@@ -7833,6 +7806,77 @@ a:active {
 #changes-made-banner {
   padding: 4px 10px;
   background: rgba(255, 255, 255, 0.75);
+}
+/************ blocks **************/
+.event-table tr > td {
+  padding: 0px !important;
+}
+.event-table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+.event-table tr > td.date-cell {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.free-marker {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-top: 10px transparent solid;
+  border-bottom: 10px transparent solid;
+  border-right: 10px #4ad16c solid;
+  top: -6px;
+  left: -1px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.today .unknown {
+  color: #4ad16c;
+  opacity: 0.9 !important;
+}
+.cell-selected > div.date-cell-container {
+  background: rgba(74, 209, 108, 0.6) !important;
+}
+.cell-selected .unknown {
+  color: white !important;
+  opacity: 1.0  !important;
+}
+@media screen and (min-width: 450px) {
+  .event-table tr > td.date-cell {
+    font-size: 1.2em;
+  }
+  .event-table tr > td {
+    font-size: 1em;
+  }
+  .info-row-text-container {
+    font-size: 0.9em;
+  }
+  .free,
+  .unknown,
+  .month {
+    margin-top: -18px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .event-table tr > td.date-cell {
+    font-size: 0.9em;
+  }
+  .event-table tr > td {
+    font-size: 1em;
+  }
+  .info-row-text-container {
+    font-size: 0.8em;
+  }
+  .free,
+  .unknown,
+  .month {
+    margin-top: -12px;
+  }
 }
 /**************************************/
 .register-attendee-message {
@@ -7857,6 +7901,7 @@ a:active {
 .info-row {
   position: relative;
   overflow: hidden;
+  border: 3px white solid;
 }
 .info-row > div {
   position: relative;
@@ -7869,20 +7914,20 @@ a:active {
   padding-bottom: 2px;
   color: #a0a0a0;
   text-align: left;
-  border-bottom: 1px #e8e8e8 solid;
 }
 .info-row-text-container {
   margin-left: 80px;
   padding: 15px;
 }
 .info-row-selector {
+  font-size: 80%;
   width: 80px;
   position: absolute;
   height: 100%;
   text-align: center;
   float: left;
   background: #f1f1f1;
-  color: #c8c8c8;
+  color: #d0d0d0;
   -moz-transition-duration: 0.2s;
   -webkit-transition-duration: 0.2s;
   -o-transform-duration: 0.2s;
@@ -7895,15 +7940,16 @@ a:active {
   top: 50%;
 }
 .info-row-selector > div {
-  margin-top: -20px;
+  margin-top: -28px;
 }
 .info-row-selector-free {
+  font-size: 80%;
   width: 80px;
   height: 100%;
   text-align: center;
   float: left;
   background: #f1f1f1;
-  color: #c8c8c8;
+  color: #d0d0d0;
   -moz-transition-duration: 0.2s;
   -webkit-transition-duration: 0.2s;
   -o-transform-duration: 0.2s;
@@ -7915,7 +7961,7 @@ a:active {
   left: -80px;
 }
 .info-row-selector-free > div {
-  margin-top: -15px;
+  margin-top: -18px;
 }
 .info-row-selector-free-show {
   left: 0px;
@@ -7935,11 +7981,42 @@ a:active {
 .info-row-names {
   text-align: left;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 0.85em;
   color: #d0d0d0;
+  word-wrap: break-word;
 }
 .info-row-names > strong {
-  color: #a0a0a0;
+  color: #4ad16c;
+  font-weight: normal;
+}
+/**************************************/
+.top-choice-text {
+  font-size: 12px;
+  position: absolute;
+  top: 27px;
+  left: -7px;
+  background: crimson;
+  border-radius: 10px;
+  width: 18px;
+  height: 18px;
+  color: white;
+  z-index: 101;
+  margin: 0 auto;
+  padding-top: 1px;
+  line-height: 1.4;
+}
+.info-row-top-choice {
+  text-align: left;
+}
+.info-row-top-choice > div {
+  background: crimson;
+  color: white;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  position: relative;
+  top: -5px;
 }
 /**************************************/
 .modal {
@@ -7976,372 +8053,93 @@ a:active {
   text-align: center;
   line-height: 24px;
 }
-/* 
-  make each pie piece a rectangle twice as high as it is wide.
-  move the transform origin to the middle of the left side.
-  Also ensure that overflow is set to hidden.
-*/
-.pie {
-  position: absolute;
-  left: 19px;
-  width: 19px;
-  height: 38px;
+/************* panel **************/
+@media screen and (min-width: 980px) {
+  .side-info-panel-container {
+    display: block;
+  }
+}
+@media screen and (max-width: 980px) {
+  .side-info-panel-container {
+    display: none;
+  }
+}
+.side-info-panel-container {
+  top: 140px;
+  position: fixed;
+  background: transparent;
+  width: 100%;
+  pointer-events: none;
+}
+.side-info-panel-container > div {
+  position: relative;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.side-info-panel {
+  background: white;
+  width: 200px;
+  position: relative;
+  left: 600px;
+  color: #c0c0c0;
+  font-weight: 200;
+  display: inline-block;
+  text-align: center;
+  pointer-events: all;
+}
+.side-info-panel-hiding > .side-info-date {
+  opacity: -1;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -moz-transform: translate(0px, -8px);
+  -webkit-transform: translate(0px, -8px);
+  -o-transform: translate(0px, -8px);
+  -ms-transform: translate(0px, -8px);
+  transform: translate(0px, -8px);
+}
+.side-info-panel-showing {
+  opacity: 0.0;
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+  -moz-transform: translate(0px, -50px);
+  -webkit-transform: translate(0px, -50px);
+  -o-transform: translate(0px, -50px);
+  -ms-transform: translate(0px, -50px);
+  transform: translate(0px, -50px);
+}
+.side-info-date {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+}
+.side-info-panel ul {
+  list-style: none;
+  padding: 0px;
+  font-size: 80%;
+  line-height: 1.8em;
+  margin-bottom: 0px;
+}
+.side-info-panel li {
+  height: 30px;
+}
+.side-info-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
-  -moz-transform-origin: left center;
-  -ms-transform-origin: left center;
-  -o-transform-origin: left center;
-  -webkit-transform-origin: left center;
-  transform-origin: left center;
+  padding: 0px 16px;
 }
-/*
-  unless the piece represents more than 50% of the whole chart.
-  then make it a square, and ensure the transform origin is
-  back in the center.
-
-  NOTE: since this is only ever a single piece, you could
-  move this to a piece specific rule and remove the extra class
-*/
-.pie.big {
-  width: 38px;
-  height: 38px;
-  left: 0px;
-  -moz-transform-origin: center center;
-  -ms-transform-origin: center center;
-  -o-transform-origin: center center;
-  -webkit-transform-origin: center center;
-  transform-origin: center center;
+.side-info-free {
+  background: #4ad16c;
+  color: white;
 }
-/*
-  this is the actual visible part of the pie. 
-  Give it the same dimensions as the regular piece.
-  Use border radius make it a half circle.
-  move transform origin to the middle of the right side.
-  Push it out to the left of the containing box.
-*/
-.pie:BEFORE {
-  content: "";
-  position: absolute;
-  width: 19px;
-  height: 38px;
-  left: -19px;
-  border-radius: 19px 0 0 19px;
-  -moz-transform-origin: right center;
-  -ms-transform-origin: right center;
-  -o-transform-origin: right center;
-  -webkit-transform-origin: right center;
-  transform-origin: right center;
+.side-info-invite {
+  font-size: 0.8em;
+  margin: 20px 10px;
 }
-/* if it's part of a big piece, bring it back into the square */
-.pie.big:BEFORE {
-  left: 0px;
-}
-/* 
-  big pieces will also need a second semicircle, pointed in the
-  opposite direction to hide the first part behind.
-*/
-.pie.big:AFTER {
-  content: "";
-  position: absolute;
-  width: 19px;
-  height: 38px;
-  left: 19px;
-  border-radius: 0 19px 19px 0;
-}
-/*
-  add colour to each piece.
-*/
-.pie:nth-of-type(1):BEFORE,
-.pie:nth-of-type(1):AFTER {
-  background: #DCE0DC;
-}
-.pie:nth-of-type(2):AFTER,
-.pie:nth-of-type(2):BEFORE {
-  background-color: green;
-}
-.pie:nth-of-type(3):AFTER,
-.pie:nth-of-type(3):BEFORE {
-  background-color: red;
-}
-.pie:nth-of-type(4):AFTER,
-.pie:nth-of-type(4):BEFORE {
-  background-color: orange;
-}
-.unknown > .pie:nth-of-type(1):BEFORE,
-.unknown > .pie:nth-of-type(1):AFTER {
-  background: rgba(0, 0, 0, 0.1);
-}
-/*
-  now rotate each piece based on their cumulative starting
-  position
-*/
-/*
-  and rotate the amount of the pie that's showing.
-
-  NOTE: add an extra degree to all but the final piece, 
-  to fill in unsightly gaps.
-*/
-.pie[data-value="10"]:BEFORE {
-  -webkit-transform: rotate(11deg);
-  -moz-transform: rotate(11deg);
-  -o-transform: rotate(11deg);
-  -ms-transform: rotate(11deg);
-  transform: rotate(11deg);
-}
-.pie[data-value="20"]:BEFORE {
-  -webkit-transform: rotate(21deg);
-  -moz-transform: rotate(21deg);
-  -o-transform: rotate(21deg);
-  -ms-transform: rotate(21deg);
-  transform: rotate(21deg);
-}
-.pie[data-value="30"]:BEFORE {
-  -webkit-transform: rotate(31deg);
-  -moz-transform: rotate(31deg);
-  -o-transform: rotate(31deg);
-  -ms-transform: rotate(31deg);
-  transform: rotate(31deg);
-}
-.pie[data-value="40"]:BEFORE {
-  -webkit-transform: rotate(41deg);
-  -moz-transform: rotate(41deg);
-  -o-transform: rotate(41deg);
-  -ms-transform: rotate(41deg);
-  transform: rotate(41deg);
-}
-.pie[data-value="50"]:BEFORE {
-  -webkit-transform: rotate(51deg);
-  -moz-transform: rotate(51deg);
-  -o-transform: rotate(51deg);
-  -ms-transform: rotate(51deg);
-  transform: rotate(51deg);
-}
-.pie[data-value="60"]:BEFORE {
-  -webkit-transform: rotate(61deg);
-  -moz-transform: rotate(61deg);
-  -o-transform: rotate(61deg);
-  -ms-transform: rotate(61deg);
-  transform: rotate(61deg);
-}
-.pie[data-value="70"]:BEFORE {
-  -webkit-transform: rotate(71deg);
-  -moz-transform: rotate(71deg);
-  -o-transform: rotate(71deg);
-  -ms-transform: rotate(71deg);
-  transform: rotate(71deg);
-}
-.pie[data-value="80"]:BEFORE {
-  -webkit-transform: rotate(81deg);
-  -moz-transform: rotate(81deg);
-  -o-transform: rotate(81deg);
-  -ms-transform: rotate(81deg);
-  transform: rotate(81deg);
-}
-.pie[data-value="90"]:BEFORE {
-  -webkit-transform: rotate(91deg);
-  -moz-transform: rotate(91deg);
-  -o-transform: rotate(91deg);
-  -ms-transform: rotate(91deg);
-  transform: rotate(91deg);
-}
-.pie[data-value="100"]:BEFORE {
-  -webkit-transform: rotate(101deg);
-  -moz-transform: rotate(101deg);
-  -o-transform: rotate(101deg);
-  -ms-transform: rotate(101deg);
-  transform: rotate(101deg);
-}
-.pie[data-value="110"]:BEFORE {
-  -webkit-transform: rotate(111deg);
-  -moz-transform: rotate(111deg);
-  -o-transform: rotate(111deg);
-  -ms-transform: rotate(111deg);
-  transform: rotate(111deg);
-}
-.pie[data-value="120"]:BEFORE {
-  -webkit-transform: rotate(121deg);
-  -moz-transform: rotate(121deg);
-  -o-transform: rotate(121deg);
-  -ms-transform: rotate(121deg);
-  transform: rotate(121deg);
-}
-.pie[data-value="130"]:BEFORE {
-  -webkit-transform: rotate(131deg);
-  -moz-transform: rotate(131deg);
-  -o-transform: rotate(131deg);
-  -ms-transform: rotate(131deg);
-  transform: rotate(131deg);
-}
-.pie[data-value="140"]:BEFORE {
-  -webkit-transform: rotate(141deg);
-  -moz-transform: rotate(141deg);
-  -o-transform: rotate(141deg);
-  -ms-transform: rotate(141deg);
-  transform: rotate(141deg);
-}
-.pie[data-value="150"]:BEFORE {
-  -webkit-transform: rotate(151deg);
-  -moz-transform: rotate(151deg);
-  -o-transform: rotate(151deg);
-  -ms-transform: rotate(151deg);
-  transform: rotate(151deg);
-}
-.pie[data-value="160"]:BEFORE {
-  -webkit-transform: rotate(161deg);
-  -moz-transform: rotate(161deg);
-  -o-transform: rotate(161deg);
-  -ms-transform: rotate(161deg);
-  transform: rotate(161deg);
-}
-.pie[data-value="170"]:BEFORE {
-  -webkit-transform: rotate(171deg);
-  -moz-transform: rotate(171deg);
-  -o-transform: rotate(171deg);
-  -ms-transform: rotate(171deg);
-  transform: rotate(171deg);
-}
-.pie[data-value="180"]:BEFORE {
-  -webkit-transform: rotate(181deg);
-  -moz-transform: rotate(181deg);
-  -o-transform: rotate(181deg);
-  -ms-transform: rotate(181deg);
-  transform: rotate(181deg);
-}
-.pie[data-value="190"]:BEFORE {
-  -webkit-transform: rotate(191deg);
-  -moz-transform: rotate(191deg);
-  -o-transform: rotate(191deg);
-  -ms-transform: rotate(191deg);
-  transform: rotate(191deg);
-}
-.pie[data-value="200"]:BEFORE {
-  -webkit-transform: rotate(201deg);
-  -moz-transform: rotate(201deg);
-  -o-transform: rotate(201deg);
-  -ms-transform: rotate(201deg);
-  transform: rotate(201deg);
-}
-.pie[data-value="210"]:BEFORE {
-  -webkit-transform: rotate(211deg);
-  -moz-transform: rotate(211deg);
-  -o-transform: rotate(211deg);
-  -ms-transform: rotate(211deg);
-  transform: rotate(211deg);
-}
-.pie[data-value="220"]:BEFORE {
-  -webkit-transform: rotate(221deg);
-  -moz-transform: rotate(221deg);
-  -o-transform: rotate(221deg);
-  -ms-transform: rotate(221deg);
-  transform: rotate(221deg);
-}
-.pie[data-value="230"]:BEFORE {
-  -webkit-transform: rotate(231deg);
-  -moz-transform: rotate(231deg);
-  -o-transform: rotate(231deg);
-  -ms-transform: rotate(231deg);
-  transform: rotate(231deg);
-}
-.pie[data-value="240"]:BEFORE {
-  -webkit-transform: rotate(241deg);
-  -moz-transform: rotate(241deg);
-  -o-transform: rotate(241deg);
-  -ms-transform: rotate(241deg);
-  transform: rotate(241deg);
-}
-.pie[data-value="250"]:BEFORE {
-  -webkit-transform: rotate(251deg);
-  -moz-transform: rotate(251deg);
-  -o-transform: rotate(251deg);
-  -ms-transform: rotate(251deg);
-  transform: rotate(251deg);
-}
-.pie[data-value="260"]:BEFORE {
-  -webkit-transform: rotate(261deg);
-  -moz-transform: rotate(261deg);
-  -o-transform: rotate(261deg);
-  -ms-transform: rotate(261deg);
-  transform: rotate(261deg);
-}
-.pie[data-value="270"]:BEFORE {
-  -webkit-transform: rotate(271deg);
-  -moz-transform: rotate(271deg);
-  -o-transform: rotate(271deg);
-  -ms-transform: rotate(271deg);
-  transform: rotate(271deg);
-}
-.pie[data-value="280"]:BEFORE {
-  -webkit-transform: rotate(281deg);
-  -moz-transform: rotate(281deg);
-  -o-transform: rotate(281deg);
-  -ms-transform: rotate(281deg);
-  transform: rotate(281deg);
-}
-.pie[data-value="290"]:BEFORE {
-  -webkit-transform: rotate(291deg);
-  -moz-transform: rotate(291deg);
-  -o-transform: rotate(291deg);
-  -ms-transform: rotate(291deg);
-  transform: rotate(291deg);
-}
-.pie[data-value="300"]:BEFORE {
-  -webkit-transform: rotate(301deg);
-  -moz-transform: rotate(301deg);
-  -o-transform: rotate(301deg);
-  -ms-transform: rotate(301deg);
-  transform: rotate(301deg);
-}
-.pie[data-value="310"]:BEFORE {
-  -webkit-transform: rotate(311deg);
-  -moz-transform: rotate(311deg);
-  -o-transform: rotate(311deg);
-  -ms-transform: rotate(311deg);
-  transform: rotate(311deg);
-}
-.pie[data-value="320"]:BEFORE {
-  -webkit-transform: rotate(321deg);
-  -moz-transform: rotate(321deg);
-  -o-transform: rotate(321deg);
-  -ms-transform: rotate(321deg);
-  transform: rotate(321deg);
-}
-.pie[data-value="330"]:BEFORE {
-  -webkit-transform: rotate(331deg);
-  -moz-transform: rotate(331deg);
-  -o-transform: rotate(331deg);
-  -ms-transform: rotate(331deg);
-  transform: rotate(331deg);
-}
-.pie[data-value="340"]:BEFORE {
-  -webkit-transform: rotate(341deg);
-  -moz-transform: rotate(341deg);
-  -o-transform: rotate(341deg);
-  -ms-transform: rotate(341deg);
-  transform: rotate(341deg);
-}
-.pie[data-value="350"]:BEFORE {
-  -webkit-transform: rotate(351deg);
-  -moz-transform: rotate(351deg);
-  -o-transform: rotate(351deg);
-  -ms-transform: rotate(351deg);
-  transform: rotate(351deg);
-}
-.pie[data-value="360"]:BEFORE {
-  -webkit-transform: rotate(361deg);
-  -moz-transform: rotate(361deg);
-  -o-transform: rotate(361deg);
-  -ms-transform: rotate(361deg);
-  transform: rotate(361deg);
-}
-/*
-NOTE: you could also apply custom classes (i.e. .s0 .v30)
-but if the CSS3 attr() function proposal ever gets implemented,
-then all the above custom piece rules could be replaced with
-the following:
-
-.pie[data-start] {
-   transform:rotate(attr(data-start,deg,0);
-}
-.pie[data-value]:BEFORE {
-   transform:rotate(attr(data-value,deg,0);
-}
-*/

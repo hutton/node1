@@ -211,6 +211,8 @@ CalendarSchema.statics.findCalendarByAttendeeId = function(id, callback){
 			return attendee.attendeeId == id;
 		});
 
+		calendar.checkForDuplicateChoices();
+
 		callback(err, calendar, attendee);
 	});
 };
@@ -227,12 +229,13 @@ CalendarSchema.statics.findCalendarByCalendarId = function(id, callback){
 			return;
 		}
 
+		calendar.checkForDuplicateChoices();
+
 		callback(err, calendar);
 	});
 };
 
 CalendarSchema.methods.findChoiceByDate = function(date){
-	
 	var dateString = new Date(date).toDateString();
 
 	if (dateString !== "Invalid Date"){
@@ -328,12 +331,64 @@ CalendarSchema.methods.updateCalendar = function(attendee, busyDates, freeDates)
 	});
 };
 
+CalendarSchema.methods.checkForDuplicateChoices = function(){
+	var that = this;
+
+	var sortedChoices = _.sortBy(this.choices, function(choice){
+		return choice.date;
+	});
+
+	var prevDate = null;
+	var prevChoice = null;
+
+	var dupFound = false;
+
+	_.each(sortedChoices, function(choice){
+		if (choice.date !== null ){
+			var choiceDate = choice.date.toDateString();
+
+			if (choiceDate === prevDate){
+				dupFound = true;
+
+				logger.error("Found duplicate date (" + choiceDate + ") for calendar " + that.name );
+				logger.error("Choice    : " + choice );
+				logger.error("PrevChoice: " + prevChoice );
+
+				_.each(choice.free, function(free){
+					prevChoice.free.push(free);
+				});
+
+				prevChoice.free = _.unique(prevChoice.free);
+
+				that.choices.removeElement(choice);
+
+				logger.error("Merged choice: " + prevChoice );
+			}
+
+			prevDate = choiceDate;
+			prevChoice = choice;
+		}
+	});
+
+	if (dupFound){
+		this.save(function(err){
+			if (err){
+				logger.error(err);
+			} else {
+				logger.info("Calendar saved");
+			}
+		});
+	}
+};
+
 CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
+	var that = this;
+
 	var isFree = freeAttendees.indexOf(attendee._id.toString()) != -1;
 
 	var foundChoice = this.findChoiceByDate(date);
 
-	if (_.isUndefined(foundChoice) || foundChoice == null){
+	if (_.isUndefined(foundChoice) || foundChoice === null){
 		if (isFree){
 			var newChoice = {
 						date: date,
@@ -356,7 +411,7 @@ CalendarSchema.methods.updateChoice = function(attendee, date, freeAttendees){
 			
 			// Don't want to add it twice!
 			if (!isFound){
-				foundChoice.free.push(attendee._id);	
+				foundChoice.free.push(attendee._id);
 			}
 			
 		} else {

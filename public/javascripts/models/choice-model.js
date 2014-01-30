@@ -63,6 +63,8 @@ window.ChoiceModel = Backbone.Model.extend({
 			this.save();
 
 			window.App.updateTellEveryoneLink();
+
+			window.App.showBestChoices();
 		} else {
 			if (window.App.isFree.indexOf(date) != -1){
 				window.App.isFree.removeElement(date);
@@ -80,5 +82,56 @@ window.ChoiceModel = Backbone.Model.extend({
 
 			$('#register-free-dates').val(window.App.isFree);
 		}
+	},
+
+	calcBackground: function(){
+		var freeDates = 0;
+
+		var redStart = 236;
+		var greenStart = 239;
+		var blueStart = 236;
+
+		var redEnd = 204;
+		var greenEnd = 208;
+		var blueEnd = 200;
+
+		var total = window.App.attendees.length;
+
+		if (this.has("free")){
+			freeDates = this.get("free").length;
+		}
+
+		var percent = (freeDates / total);
+
+		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
+	},
+
+	calcForegroundOpacity: function(){
+		var freeDates = 0;
+
+		var start = 0.22;
+		var end = 0.37;
+
+		var total = window.App.attendees.length;
+
+		if (this.has("free")){
+			freeDates = this.get("free").length;
+		}
+
+		var percent = (freeDates / total);
+
+		var diff = start - end;
+
+		return start - (percent * diff);
+	},
+
+	interpolate: function(start, end, percent){
+		var diff = start - end;
+
+		var target = start - (percent * diff);
+
+		target = Math.round(target);
+
+		return target;
 	}
 });

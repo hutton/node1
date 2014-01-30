@@ -82,8 +82,8 @@ function expandDates(input){
 
 	var current = startDate;
 
-	var maxChoices = 365;
-	var minChoices = 90;
+	var maxChoices = 750;
+	var minChoices = 365;
 	var passedLatest = false;
 	var passedLatestAndMonthEnd = false;
 

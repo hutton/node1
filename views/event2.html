@@ -18,9 +18,6 @@
   <link href="/stylesheets/all.css" rel="stylesheet">
   <% } %>
 
-<!--link href="/stylesheets/bootstrap-responsive.css" rel="stylesheet"-->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -92,11 +89,6 @@
             </tr>
           </table>
         </div>
-       <!--div id="updated-footer" style="display: none;">
-        <div class="footer">
-          <a id="changes-made-banner" class="changes-made-email-link"><i class="fa fa-envelope-o"> </i> Notify everyone of changes <i class="fa fa-chevron-right"></i></a>
-        </div>
-      </div-->
       </div>
     </div>
 
@@ -104,74 +96,18 @@
      <div id="top-row-spacer"></div>
      <div class="row">
        <table class="table event-table">
+            <colgroup>
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+              <col width="14.2%">
+            </colgroup>
        </table>
      </div>
    </div>
-
-  <div class="modal fade" id="welcome-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Welcome to Convenely</h4>
-        </div>
-        <div class="modal-body">
-          <p>
-            <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> a date to see who's free,<br/>
-            <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> it again to toogle whether you're free.
-            <div class="single-date-container">
-              <div class="pie big" data-start="0" data-value="210"></div>
-              <div class="free">
-                <div class="content">
-                  20
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </p>
-          <p>
-            Then let everyone know you've made changes.<br/>
-            <i class="fa fa-envelope-o"></i>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a data-dismiss="modal">Get Started <i class="fa fa-chevron-right"></i></a>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-  <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Welcome to Convenely</h4>
-        </div>
-        <div class="modal-body">
-          <p>
-            <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> a date to see who's free,<br/>
-            <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> it again to toogle whether you're free.
-            <div class="single-date-container">
-              <div class="pie big" data-start="0" data-value="210"></div>
-              <div class="free">
-                <div class="content">
-                  20
-                </div>
-              </div>
-              <div></div>
-            </div>
-          </p>
-          <p>
-            Enter your email address to share your changes with everyone.
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a data-dismiss="modal">Get Started <i class="fa fa-chevron-right"></i></a>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -184,14 +120,11 @@
     </script>
 
   <script type="text/template" id="choice-template">
-    <div>
-      <div class="pie" data-start="0" data-value="0"></div>
-        <div class="unknown">
-          <div class="content">
+    <div class="date-cell-container" style="background: #ffffff; height: 86px;">
+      <div class="unknown">
           <@= date.getDate() @>
-          </div>
-        </div>
-      <div></div>
+      </div>
+      <div class="free-marker"></div>
     </div>
   </script>
 
@@ -199,7 +132,9 @@
   <td class="first-seven">
     <@ if (showTitle){ @>
     <div class="month">
+      <div>
       <@= month @>
+      </div>
     </div>
     <@ } @>
   </td>
@@ -221,13 +156,18 @@
                 </div>
               </div>
               <div class="info-row-text-container">
+                <div class="info-row-top-choice" <@ if (!showTopChoice){ @>style="display: none;"<@ } @>>
+                  <div>
+                  <@= topChoiceText @>
+                  </div>
+                </div>
                 <div class="info-row-text"><@= attendeeText @></div>
                 <@ if(showInvite){ @>
                   <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
                 <@ } else { @>
-                  <div <@ if(!showDetails){ @>style="display: none;"<@ } @> class="info-row-names"><strong><@= freeNames @></strong><@= notFreeNames @></div>
-                  <span <@ if(!showDetails){ @>style="display: none;"<@ } @> id="info-row-hide-details-link">Hide</span>
-                  <span <@ if(showDetails){ @>style="display: none;"<@ } @> id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span>
+                  <div <@ if(!showDetails){ @>style="display: none;"<@ } @> class="info-row-names"><@= attendeeNamesText @></div>
+                  <!--span <@ if(!showDetails){ @>style="display: none;"<@ } @> id="info-row-hide-details-link">Hide</span>
+                  <span <@ if(showDetails){ @>style="display: none;"<@ } @> id="info-row-details-link">Details <span class="fa fa-chevron-right"></span></span-->
                 <@ } @>
               </div>
             </div>
@@ -235,9 +175,36 @@
         </td>
     </tr>
   </script>
+
+  <script type="text/template" id="first-choice-template">
+    <div class="top-choice-text">
+      <@= choice @>
+    </div>
+  </script>
+
+  <script type="text/template" id="side-info-panel-template">
+    <div class="side-info-panel-container">
+      <div>
+        <div class="side-info-panel">
+          <div class="side-info-date"></div>
+            <ul>
+              <@ _.each(attendees, function(attendee){ @>
+                <li><div class="side-info-name"><@= attendee.get('prettyName') @></div></li>
+              <@ }); @>
+            </ul>
+            <div class="side-info-invite">
+              Click dates to show when you're free<br/> <!-- ' -->
+              <br/>
+              <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
  
   <% if (webAppDebug) { %>
-  <script src="/javascripts/tp/jquery-1.8.2.min.js"></script>
+  <script src="/javascripts/tp/jquery-2.0.3.min.js"></script>
   <script src="/javascripts/tp/tp.helper.js"></script>
   <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
  
@@ -255,6 +222,7 @@
 
   <script src="/javascripts/views/choices-view.js"></script>
   <script src="/javascripts/views/info-row-view.js"></script>
+  <script src="/javascripts/views/side-info-panel.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
   <% } else { %>
@@ -266,8 +234,6 @@ $(document).ready(function(){
   FastClick.attach(document.body);
 
   window.App = new EventApp();
-
-  window.App.showWelcome = <%= showWelcome %>;
 
   window.App.loadBootstrapData(<%= choices %>, <%= attendees %>, <%= calendar %>);
 });
