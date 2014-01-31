@@ -97,8 +97,10 @@ window.EventApp = Backbone.View.extend({
 
 		this.onResizeWindow();
 
+		var throttled = _.throttle(that.onResizeWindow, 100);
+
 		$(window).resize(function(){
-			that.onResizeWindow();
+			throttled();
 		});
 
 		// _.delay(function(){
@@ -125,12 +127,12 @@ window.EventApp = Backbone.View.extend({
 
 	onResizeWindow: function(){
 		var size = $(".event-table .date-cell").first().width();
-
-	  	$(".event-table tr > td > .date-cell-container").height(size - 6);
-	  	$(".event-table tr > td > .month").height(size - 6);
+		
+		$(".event-table tr > td > .date-cell-container").height(size - 6);
+		$(".event-table tr > td > .month").height(size - 6);
 
 		var windowSize = Math.min($("body").first().width(), 600);
-	  	$(".info-row-names").width(windowSize - 120);
+		$(".info-row-names").width(windowSize - 120);
 	},
 
 	eventTableClicked: function(event){
