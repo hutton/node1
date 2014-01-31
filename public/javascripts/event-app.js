@@ -127,12 +127,19 @@ window.EventApp = Backbone.View.extend({
 
 	onResizeWindow: function(){
 		var size = $(".event-table .date-cell").first().width();
-		
-		$(".event-table tr > td > .date-cell-container").height(size - 6);
-		$(".event-table tr > td > .month").height(size - 6);
-
 		var windowSize = Math.min($("body").first().width(), 600);
-		$(".info-row-names").width(windowSize - 120);
+		
+		var table = $(".event-table");
+		var parent = table.parent();
+		 
+		table.detach();
+		 
+		table.find("tr > td > .date-cell-container").height(size - 6);
+		table.find("tr > td > .month").height(size - 6);
+
+		table.find(".info-row-names").width(windowSize - 120);
+		 
+		parent.append( table );
 	},
 
 	eventTableClicked: function(event){
