@@ -1,14 +1,13 @@
-<<<<<<< HEAD
-- Show best options
-- Lighten calendar c0 & d8
-- Give month some color
+- Speed up rotate on iPhone
+- Background image
 =======
 - Add description
 - Allow selection of date range
->>>>>>> block-spike
 
 Done
 ----
+- Show best options
+- Give month some color
 - Show best options
 - Contact Meetifyr user
 - Build example page
