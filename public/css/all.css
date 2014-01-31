@@ -7716,7 +7716,7 @@ a:active {
   margin-right: 3px;
   margin-bottom: 3px;
   height: 100%;
-  opacity: 0.8;
+  opacity: 0.9;
   cursor: pointer;
 }
 .past {
@@ -8044,7 +8044,7 @@ a:active {
   margin-right: auto;
 }
 .side-info-panel {
-  background: white;
+  margin-left: 3px;
   width: 200px;
   position: relative;
   left: 600px;
