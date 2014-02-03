@@ -85,8 +85,11 @@ window.EventApp = Backbone.View.extend({
 		if (this.currentAttendee === null){
 			this.$el.find("#add-attendee").hide();
 
-			this.registerFooterEl.slideDown('fast');
+			this.registerFooterEl.slideDown('fast', function(){
+				that.$el.find("#top-row-spacer").height(that.$el.find(".navbar-fixed-top").height());	
+			});
 		} else {
+			this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
 		}
 
 		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
@@ -137,7 +140,7 @@ window.EventApp = Backbone.View.extend({
 		table.find("tr > td > .date-cell-container").height(size - 6);
 		table.find("tr > td > .month").height(size - 6);
 
-		table.find(".info-row-names").width(windowSize - 120);
+		table.find(".info-row-names").width(windowSize - 132);
 		 
 		parent.append( table );
 	},

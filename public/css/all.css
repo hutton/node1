@@ -7513,6 +7513,10 @@ a:active {
   box-shadow: none;
   background: #f8f8f8;
 }
+.event-container-margin {
+  margin-left: 6px;
+  margin-right: 6px;
+}
 .event-container {
   max-width: 600px;
   margin-left: auto;
@@ -7720,7 +7724,11 @@ a:active {
   cursor: pointer;
 }
 .past {
-  opacity: 0.3;
+  opacity: 0.4;
+}
+.past > .date-cell-container {
+  border: 1px solid #d0d0d0;
+  background: transparent !important;
 }
 .event-table tr.selected-row > td {
   padding: 0px;

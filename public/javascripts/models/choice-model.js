@@ -106,6 +106,30 @@ window.ChoiceModel = Backbone.Model.extend({
 		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
 	},
 
+	calcBorder: function(){
+		var freeDates = 0;
+
+		var darkerThanBackground = 10;
+
+		var redStart = 236 - darkerThanBackground;
+		var greenStart = 239 - darkerThanBackground;
+		var blueStart = 236 - darkerThanBackground;
+
+		var redEnd = 204 - darkerThanBackground;
+		var greenEnd = 208 - darkerThanBackground;
+		var blueEnd = 200 - darkerThanBackground;
+
+		var total = window.App.attendees.length;
+
+		if (this.has("free")){
+			freeDates = this.get("free").length;
+		}
+
+		var percent = (freeDates / total);
+
+		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
+	},
+
 	calcForegroundOpacity: function(){
 		var freeDates = 0;
 

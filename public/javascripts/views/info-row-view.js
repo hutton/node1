@@ -157,7 +157,7 @@ window.InfoRowView = Backbone.View.extend({
 		this.$el.after(this.template(templateValues));
 
 		var windowSize = Math.min($("body").first().width(), 600);
-	  	$(".info-row-names").width(windowSize - 120);
+	  	$(".info-row-names").width(windowSize - 132);
 
 		this.unbindEvents();
 

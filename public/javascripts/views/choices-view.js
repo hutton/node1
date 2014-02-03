@@ -33,6 +33,7 @@ window.ChoiceView = Backbone.View.extend({
 		var target = this.$el.find(".date-cell-container");
 
 		target.css("background-color", this.model.calcBackground());
+//		target.css("border-color", this.model.calcBorder());
 		target.find("div.unknown").css("opacity", this.model.calcForegroundOpacity());
 
 		if (this.model.isFree() || this.model.pretendFree){
@@ -164,9 +165,9 @@ window.ChoicesView = Backbone.View.extend({
 			this.$el.find(".today")[0].scrollIntoView(true);
 		}
 
-		var body = $("event-container");
+		var body = $("body");
 
-		body.scrollTop(body.scrollTop() - 212);
+		body.scrollTop(body.scrollTop() - 112);
 
 		return this;
 	},

@@ -39,34 +39,36 @@ window.SideInfoPanel = Backbone.View.extend({
 		if (this.model === null && App.attendees.length > 1){
 			this.$el.hide();
 		} else {
-			this.sideInfoDate.html(moment(this.model.get('date')).format("dddd <br/> Do MMMM"));
+			if (this.model !== null){
+				this.sideInfoDate.html(moment(this.model.get('date')).format("dddd <br/> Do MMMM"));
 
-			if (App.attendees.length > 1){
-				var freeAttendees = this.model.get("free") || [];
+				if (App.attendees.length > 1){
+					var freeAttendees = this.model.get("free") || [];
 
-				var free = [];
-				var busy = [];
+					var free = [];
+					var busy = [];
 
-				_.each(App.attendees.models, function(att){
-					var found = freeAttendees.indexOf(att.get('_id'));
+					_.each(App.attendees.models, function(att){
+						var found = freeAttendees.indexOf(att.get('_id'));
 
-					if (found != -1){
-						free.push(att.get('prettyName'));
-					} else {
-						busy.push(att.get('prettyName'));
-					}
-				});
+						if (found != -1){
+							free.push(att.get('prettyName'));
+						} else {
+							busy.push(att.get('prettyName'));
+						}
+					});
 
-				this.sideInfoAttendees.each(function(index){
-					var el = $(this);
+					this.sideInfoAttendees.each(function(index){
+						var el = $(this);
 
-					if (free.indexOf(el.find('.side-info-name').text()) !== -1){
-						el.addClass('side-info-free');
-					} else {
-						el.removeClass('side-info-free');
-					}
+						if (free.indexOf(el.find('.side-info-name').text()) !== -1){
+							el.addClass('side-info-free');
+						} else {
+							el.removeClass('side-info-free');
+						}
 
-				});
+					});
+				}
 			}
 
 			this.$el.show();
