@@ -32,10 +32,10 @@ window.SideInfoPanel = Backbone.View.extend({
 	events: {
 	},
 
-	updateInPlace: function(dateGreater){
+	updateInPlace: function(dateGreater, showSidePanel){
 		var that = this;
 
-		if (this.model === null && App.attendees.length > 1){
+		if (!showSidePanel && App.attendees.length > 1){
 			this.$el.hide();
 		} else {
 			if (this.model !== null){
@@ -54,14 +54,14 @@ window.SideInfoPanel = Backbone.View.extend({
 						this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
 						_.delay(function(){
 							that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
-						}, 10);
+						}, 20);
 						oldDatePanel.addClass(outClass);
 
 						_.delay(function(){
 							oldDatePanel.remove();
 						}, 300);
 					}
-					
+
 					var freeAttendees = this.model.get("free") || [];
 
 					var free = [];
@@ -107,11 +107,17 @@ window.SideInfoPanel = Backbone.View.extend({
 		if (this.model !== null && !_.isUndefined(this.model)){
 			this.stopListening(this.model);
 
-			if (this.model !== model){
-				if (this.model.get('date') > model.get('date')){
-					dateGreater = 1;
-				} else {
-					dateGreater = -1;
+			if (model === null){
+				that.updateInPlace(0);				
+
+				return;
+			} else {
+				if (this.model !== model){
+					if (this.model.get('date') > model.get('date')){
+						dateGreater = 1;
+					} else {
+						dateGreater = -1;
+					}
 				}
 			}
 		}
@@ -122,10 +128,10 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.listenTo(this.model, "change", this.modelChanged);
 		}
 
-		that.updateInPlace(dateGreater);
+		that.updateInPlace(dateGreater, model !== null);
 	},
 
 	modelChanged: function(){
-		this.updateInPlace(0);
+		this.updateInPlace(0, false);
 	}
 });
