@@ -85,9 +85,7 @@ window.EventApp = Backbone.View.extend({
 		if (this.currentAttendee === null){
 			this.$el.find("#add-attendee").hide();
 
-			this.registerFooterEl.slideDown('fast', function(){
-				that.$el.find("#top-row-spacer").height(that.$el.find(".navbar-fixed-top").height());	
-			});
+			this.$el.find('.navbar-fixed-bottom').show();
 		} else {
 			this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
 		}

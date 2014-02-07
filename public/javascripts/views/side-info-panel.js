@@ -39,29 +39,29 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.$el.hide();
 		} else {
 			if (this.model !== null){
-				if (dateGreater !== 0){
-					var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
-
-					var inClass = 'side-info-date-greater';
-					var outClass = 'side-info-date-less';
-
-					if (dateGreater > 0){
-						inClass = 'side-info-date-less';
-						outClass = 'side-info-date-greater';
-					}
-
-					this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
-					_.delay(function(){
-						that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
-					}, 10);
-					oldDatePanel.addClass(outClass);
-
-					_.delay(function(){
-						oldDatePanel.remove();
-					}, 300);
-				}
-
 				if (App.attendees.length > 1){
+					if (dateGreater !== 0){
+						var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
+
+						var inClass = 'side-info-date-greater';
+						var outClass = 'side-info-date-less';
+
+						if (dateGreater > 0){
+							inClass = 'side-info-date-less';
+							outClass = 'side-info-date-greater';
+						}
+
+						this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
+						_.delay(function(){
+							that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
+						}, 10);
+						oldDatePanel.addClass(outClass);
+
+						_.delay(function(){
+							oldDatePanel.remove();
+						}, 300);
+					}
+					
 					var freeAttendees = this.model.get("free") || [];
 
 					var free = [];
