@@ -727,8 +727,28 @@ a:active {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 6px;
+  position: absolute;
+  width: 200px;
+  left: 0px;
+  opacity: 1.0;
+  transition-timing-function: ease-out;
+  -moz-transition-duration: 0.25s;
+  -webkit-transition-duration: 0.25s;
+  -o-transform-duration: 0.25s;
+  -ms-transform-duration: 0.25s;
+  transition-duration: 0.25s;
+  pointer-events: none;
+}
+.side-info-date-less {
+  opacity: 0.0;
+  left: -100px;
+}
+.side-info-date-greater {
+  opacity: 0.0;
+  left: 100px;
 }
 .side-info-panel ul {
+  margin-top: 80px;
   list-style: none;
   padding: 0px;
   font-size: 80%;

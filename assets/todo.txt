@@ -1,11 +1,18 @@
-- Speed up rotate on iPhone
-- Background image
+- Move register to footer
+- Animate date change in direction of change
+- Show top choices of left
+- Animate top chioces changing
+- Animate toggle of available
+
+
 =======
 - Add description
 - Allow selection of date range
 
 Done
 ----
+- Speed up rotate on iPhone
+- Background image
 - Show best options
 - Give month some color
 - Show best options

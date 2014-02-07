@@ -45,7 +45,7 @@
                   <input id="register-free-dates" type="hidden" name="isFree"/>
                 </div>
                 <button type="submit" class="register-attendee-button-container">
-                  <span class="span-link" id="register-attendee-link">Add to event and save changes <i class="fa fa-chevron-right"></i></span>
+                  <span class="span-link" id="register-attendee-link">Save changes <i class="fa fa-chevron-right"></i></span>
                 </button>
               </form>
             </div>
@@ -189,7 +189,6 @@
     <div class="side-info-panel-container">
       <div>
         <div class="side-info-panel">
-          <div class="side-info-date"></div>
             <ul>
               <@ _.each(attendees, function(attendee){ @>
                 <li><div class="side-info-name"><@= attendee.get('prettyName') @></div></li>

@@ -6,8 +6,6 @@ window.SideInfoPanel = Backbone.View.extend({
 
 		$('.event-container').after(this.$el);
 
-		this.sideInfoDate = this.$el.find('.side-info-date');
-
 		this.sideInfoPanel = this.$el.find('.side-info-panel');
 
 		this.sideInfoAttendees = this.$el.find('li');
@@ -21,7 +19,6 @@ window.SideInfoPanel = Backbone.View.extend({
 		if (App.attendees.length <= 1){
 			this.sideInfoList.hide();
 			this.sideInfoInvite.show();
-			this.sideInfoDate.hide();
 		} else {
 			this.sideInfoList.show();
 			this.sideInfoInvite.hide();
@@ -35,12 +32,34 @@ window.SideInfoPanel = Backbone.View.extend({
 	events: {
 	},
 
-	updateInPlace: function(){
+	updateInPlace: function(dateGreater){
+		var that = this;
+
 		if (this.model === null && App.attendees.length > 1){
 			this.$el.hide();
 		} else {
 			if (this.model !== null){
-				this.sideInfoDate.html(moment(this.model.get('date')).format("dddd <br/> Do MMMM"));
+				if (dateGreater !== 0){
+					var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
+
+					var inClass = 'side-info-date-greater';
+					var outClass = 'side-info-date-less';
+
+					if (dateGreater > 0){
+						inClass = 'side-info-date-less';
+						outClass = 'side-info-date-greater';
+					}
+
+					this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
+					_.delay(function(){
+						that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
+					}, 10);
+					oldDatePanel.addClass(outClass);
+
+					_.delay(function(){
+						oldDatePanel.remove();
+					}, 300);
+				}
 
 				if (App.attendees.length > 1){
 					var freeAttendees = this.model.get("free") || [];
@@ -83,9 +102,18 @@ window.SideInfoPanel = Backbone.View.extend({
 
 	updateModel: function(model){
 		var that = this;
+		var dateGreater = 0;
 
-		if (this.model !== null){
+		if (this.model !== null && !_.isUndefined(this.model)){
 			this.stopListening(this.model);
+
+			if (this.model !== model){
+				if (this.model.get('date') > model.get('date')){
+					dateGreater = 1;
+				} else {
+					dateGreater = -1;
+				}
+			}
 		}
 
 		this.model = model;
@@ -94,10 +122,10 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.listenTo(this.model, "change", this.modelChanged);
 		}
 
-		that.updateInPlace();
+		that.updateInPlace(dateGreater);
 	},
 
 	modelChanged: function(){
-		this.updateInPlace();
+		this.updateInPlace(0);
 	}
 });
