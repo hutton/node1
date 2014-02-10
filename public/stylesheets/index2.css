@@ -25,7 +25,7 @@ form>h3{text-align:center;color:#4ad16c;font-weight:200;}
 .features{background:#f8f8f8;border-top:solid 1px #e8e8e8;padding-bottom:100px;}
 .features .fa{float:left;font-size:26px;position:absolute;left:15px;top:0px;color:#4ad16c;}
 .features h3{margin-top:0px;}
-.features .col-sm-4{padding-left:50px;position:relative;}
+.features .col-sm-4{padding-left:50px;position:relative;line-height:1.8em;}
 .features .row>div{margin-top:40px;}
 .submit-container{font-size:26px;text-align:center;}
 .invalid{border-color:red;}
