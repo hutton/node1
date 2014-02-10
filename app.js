@@ -57,7 +57,7 @@ Array.prototype.removeElement = function(element) {
 	app.use(express.methodOverride());
 	app.use(express.cookieParser());
 	app.use(app.router);
-	app.use(require('less-middleware')({ src: __dirname + '/public' }));
+	//app.use(require('less-middleware')({ src: __dirname + '/public' }));
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
 
