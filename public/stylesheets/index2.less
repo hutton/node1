@@ -11,6 +11,13 @@
 
 /* Globals */
 
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/opensans-light.woff) format('woff');
+}
+
 body{
 	//font-family: 'Gill Sans', 'Gill Sans MT', Corbel, Tahoma, sans-serif;
 	font-family: 'Open Sans', sans-serif;
@@ -152,8 +159,29 @@ form > h3{
 	padding-bottom: 100px;
 }
 
+.features .fa{
+	float: left;
+	font-size: 26px;
+	position: absolute;
+	left: 15px;
+	top: 0px;
+	color: @free-color;
+}
+
+.features h3{
+	margin-top: 0px;
+}
+
+.features .col-sm-4{
+	padding-left: 50px;
+	position: relative;
+}
+
 .features .row > div{
 	margin-top: 40px;
+}
+
+.feature-text{
 }
 
 .submit-container{

@@ -32,35 +32,36 @@ window.SideInfoPanel = Backbone.View.extend({
 	events: {
 	},
 
-	updateInPlace: function(dateGreater, showSidePanel){
+	updateInPlace: function(dateGreater){
 		var that = this;
 
-		if (!showSidePanel && App.attendees.length > 1){
-			this.$el.hide();
+		if (this.model === null && App.attendees.length > 1){
+			_.delay(function(){
+				this.$el.hide();
+			}, 100);
 		} else {
 			if (this.model !== null){
 				if (App.attendees.length > 1){
-					if (dateGreater !== 0){
-						var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
+					var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
 
-						var inClass = 'side-info-date-greater';
-						var outClass = 'side-info-date-less';
+					var inClass = 'side-info-date-greater';
+					var outClass = 'side-info-date-less';
 
-						if (dateGreater > 0){
-							inClass = 'side-info-date-less';
-							outClass = 'side-info-date-greater';
-						}
-
-						this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
-						_.delay(function(){
-							that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
-						}, 20);
-						oldDatePanel.addClass(outClass);
-
-						_.delay(function(){
-							oldDatePanel.remove();
-						}, 300);
+					if (dateGreater){
+						inClass = 'side-info-date-less';
+						outClass = 'side-info-date-greater';
 					}
+
+					this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
+					_.delay(function(){
+						that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
+					}, 20);
+
+					oldDatePanel.addClass(outClass);
+
+					_.delay(function(){
+						oldDatePanel.remove();
+					}, 300);
 
 					var freeAttendees = this.model.get("free") || [];
 
@@ -100,27 +101,26 @@ window.SideInfoPanel = Backbone.View.extend({
 		}
 	},
 
+	prevDate: null,
+
 	updateModel: function(model){
 		var that = this;
-		var dateGreater = 0;
+		var dateGreater = true;
 
 		if (this.model !== null && !_.isUndefined(this.model)){
 			this.stopListening(this.model);
+		}
 
-			if (model === null){
-				that.updateInPlace(0);				
-
-				return;
-			} else {
-				if (this.model !== model){
-					if (this.model.get('date') > model.get('date')){
-						dateGreater = 1;
-					} else {
-						dateGreater = -1;
-					}
-				}
+		if (this.prevDate !== null && model !== null){
+			if (this.prevDate < model.get('date')){
+				dateGreater = false;
 			}
 		}
+
+		if (model !== null){
+			this.prevDate = model.get('date');
+		}
+
 
 		this.model = model;
 
@@ -128,10 +128,10 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.listenTo(this.model, "change", this.modelChanged);
 		}
 
-		that.updateInPlace(dateGreater, model !== null);
+		that.updateInPlace(dateGreater);
 	},
 
 	modelChanged: function(){
-		this.updateInPlace(0, false);
+		this.updateInPlace(0);
 	}
 });

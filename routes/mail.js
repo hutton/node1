@@ -61,13 +61,14 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 	logger.info("Mail message: " + message);
 
 	if (startsWith(to, "start-betalist@") || startsWith(to, "start@")){
-		var newCalendar = Calendar.newCalendar(from, fromName, subject, message, function(newCalendar){
-			var splitMessage = Mail.getEmailAddressesAndBody(message);
+		// var newCalendar = Calendar.newCalendar(from, fromName, subject, message, function(newCalendar){
+		// 	var splitMessage = Mail.getEmailAddressesAndBody(message);
 
-			Mail.sendMail(newCalendar, subject, splitMessage[1], fromName);
+		// 	Mail.sendMail(newCalendar, subject, splitMessage[1], fromName);
 
-			createCalendarCallback(newCalendar);
-		});
+		// 	createCalendarCallback(newCalendar);
+		// });
+		error( 'Someone mailed ' + to);
 	} else if (startsWith(to, "office-drinks@")){
 		error( 'Someone mailed ' + to);
 	} else {
