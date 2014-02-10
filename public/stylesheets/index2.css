@@ -1,4 +1,4 @@
-@font-face{font-family:'Open Sans';font-style:normal;font-weight:300;src:local('Open Sans Light'),local('OpenSans-Light'),url(/fonts/opensans-light.woff) format('woff');}body{font-family:'Open Sans',sans-serif;}
+@font-face{font-family:'Open Sans';font-style:normal;font-weight:300;src:local('Open Sans Light'),local('OpenSans-Light'),url(/fonts/opensans-light.wof) format('woff');}body{font-family:'Open Sans',sans-serif;}
 a{color:#4ad16c;}
 a:hover{color:#4ad16c;cursor:pointer;}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:'Open Sans',sans-serif;}
