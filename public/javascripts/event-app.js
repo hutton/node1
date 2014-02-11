@@ -28,6 +28,14 @@ window.EventApp = Backbone.View.extend({
 
 		this.SideInfoPanel = new SideInfoPanel();
 
+		this.TopChoicesModel = new Backbone.Model({
+			one: null,
+			two: null,
+			three: null
+		});
+
+		this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
+
 		var pathNames = window.location.pathname.split( '/' );
 
 		this.currentId = pathNames[pathNames.length - 1];
@@ -337,5 +345,7 @@ window.EventApp = Backbone.View.extend({
 		if (thirdBestModel !== null){
 			thirdBestModel.set('top-choice', 3);
 		}
+
+		this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
 	}
 });

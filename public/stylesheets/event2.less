@@ -237,7 +237,6 @@ a:active{
 
 #show-info > span{
 	.transition-duration(0.2s);
-
 }
 
 #title-mail{
@@ -824,19 +823,7 @@ a:active{
 	display: inline-block;
 	text-align: center;
 	pointer-events: all;
-
-}
-
-.side-info-panel-hiding > .side-info-date{
-	opacity: -1.0;
-	.scale(0.0);
-	.translate(0px, -8px);
-}
-
-.side-info-panel-showing{
-	opacity: 0.0;
-	.scale(0.5);
-	.translate(0px, -50px);
+	position: absolute;
 }
 
 .side-info-date{
@@ -891,3 +878,63 @@ a:active{
 	font-size: 0.8em;
 	margin: 20px 10px;
 }
+
+.side-info-panel-left{
+	margin-right: 3px;
+	width: 200px;
+	position: relative;
+	right: 600px;
+	color: @selected-color;
+	font-weight: 200;
+	display: inline-block;
+	text-align: center;
+	pointer-events: all;
+	position: absolute;
+}
+
+.side-info-panel-left{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 6px;
+
+}
+
+.side-info-panel-left-container{
+	position: relative;
+}
+
+.side-info-panel-left-title{
+	margin-top: 14px;
+}
+
+.top-choice-item{
+	.transition-duration(0.4s);
+	position: absolute;
+	font-size: 80%;
+	width: 200px;
+	text-align: center;
+	left: 0px;
+	top: 200px;
+	opacity: 0.0;
+}
+
+.top-choice-one{
+	top: 25px;
+	opacity: 1.0;
+}
+
+.top-choice-two{
+	top: 85px;
+	opacity: 1.0;
+}
+
+.top-choice-three{
+	top: 145px;
+	opacity: 1.0;
+}
+
+.top-choice-hiding{
+	left: -100px;
+	opacity: 0.0;
+}
+
