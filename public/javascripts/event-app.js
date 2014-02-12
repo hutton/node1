@@ -53,7 +53,9 @@ window.EventApp = Backbone.View.extend({
 		"click #add-attendee-link":		"addAttendeeLinkClicked",
 		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
 		"keyup #add-attendee-email-input": "addAttendeeInputChanged",
-		"keyup #register-attendee-email-input": "registerAttendeeInputChanged"
+		"keyup #register-attendee-email-input": "registerAttendeeInputChanged",
+		"click .mode-switch-calender": 	"switchToCalendar",
+		"click .mode-switch-attendees": 	"switchToAttendees",
 	},
 
 	selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -93,7 +95,7 @@ window.EventApp = Backbone.View.extend({
 		if (this.currentAttendee === null){
 			this.$el.find("#add-attendee").hide();
 
-			this.$el.find('.navbar-fixed-bottom').show();
+			this.$el.find('#register-footer').show();
 		} else {
 			this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
 		}
@@ -347,5 +349,20 @@ window.EventApp = Backbone.View.extend({
 		}
 
 		this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
+	},
+
+	switchToCalendar: function(){
+		this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
+		this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
+
+		this.ChoicesView.active(true);
+	},
+
+	switchToAttendees: function(){
+		this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
+		this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
+
+		this.ChoicesView.active(false);
+		
 	}
 });

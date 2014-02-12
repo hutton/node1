@@ -108,11 +108,22 @@ window.ChoicesView = Backbone.View.extend({
 		});
 	},
 
-	el: $(".event-table"),
+	el: $(".event-container-margin"),
+
+	tableEl: $(".event-container-margin .event-table"),
 
 	monthTitleTemplate: _.template($('#month-title-template').html()),
 
 	today: new Date(),
+
+	active: function(isActive){
+		if (isActive){
+			//this.$el
+
+		} else {
+			this.$el.detach();
+		}
+	},
 
 	render: function(){
 		var that = this;
@@ -127,9 +138,9 @@ window.ChoicesView = Backbone.View.extend({
 			var date = choice.model.get("date");
 
 			if (date.getDay() == 1){
-				that.$el.append($("<tr></tr>"));
+				that.tableEl.append($("<tr></tr>"));
 
-				row = that.$el.find("tr:last");
+				row = that.tableEl.find("tr:last");
 
 				rowItemCount = 0;
 			}
@@ -159,10 +170,10 @@ window.ChoicesView = Backbone.View.extend({
 			}
 		});
 
-		this.$el.append($("<tr class='selected-row'><td colspan='7' width='7'></td></tr>"));
+		this.tableEl.append($("<tr class='selected-row'><td colspan='7' width='7'></td></tr>"));
 
-		if (this.$el.find(".today").length > 0){
-			this.$el.find(".today")[0].scrollIntoView(true);
+		if (this.tableEl.find(".today").length > 0){
+			this.tableEl.find(".today")[0].scrollIntoView(true);
 		}
 
 		var body = $("body");
@@ -200,9 +211,9 @@ window.ChoicesView = Backbone.View.extend({
 			itemsInserted++;
 
 			if (itemsInserted == 7 - rowItemCount){
-				this.$el.append($("<tr></tr>"));
+				this.tableEl.append($("<tr></tr>"));
 
-				row = this.$el.find("tr:last");
+				row = this.tableEl.find("tr:last");
 			}
 		}
 
