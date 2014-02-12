@@ -36,11 +36,11 @@ window.TopChoicesPanel = Backbone.View.extend({
 		var three = this.model.get('three');
 
 		if (one === null){
-			this.$el.hide();
+			this.$el.fadeOut('fast');
 			return;
 		}
 
-		this.$el.show();
+		this.$el.fadeIn('fast');
 
 		var currentOneEl = this.itemsContainerEl.find('.top-choice-one');
 		var currentTwoEl = this.itemsContainerEl.find('.top-choice-two');
@@ -55,13 +55,7 @@ window.TopChoicesPanel = Backbone.View.extend({
 				} else {
 					this.createItem(one, 'top-choice-one');
 				}
-
-				if (this.oneModel !== two && this.oneModel !== three){
-					this.removeItem(currentOneEl);
-				}
 			}
-		} else {
-			this.removeItem(currentOneEl);
 		}
 
 		if (two !== null){
@@ -73,13 +67,7 @@ window.TopChoicesPanel = Backbone.View.extend({
 				} else {
 					this.createItem(two, 'top-choice-two');
 				}
-
-				if (this.twoModel !== one && this.twoModel !== three){
-					this.removeItem(currentTwoEl);
-				}
 			}
-		} else {
-			this.removeItem(currentTwoEl);
 		}
 
 		if (three !== null){
@@ -91,12 +79,18 @@ window.TopChoicesPanel = Backbone.View.extend({
 				} else {
 					this.createItem(three, 'top-choice-three');
 				}
-
-				if (this.threeModel !== one && this.threeModel !== two){
-					this.removeItem(currentThreeEl);
-				}
 			}
-		} else {
+		}
+
+		if (this.oneModel !== one && this.oneModel !== two && this.oneModel !== three){
+			this.removeItem(currentOneEl);
+		}
+
+		if (this.twoModel !== one && this.twoModel !== two && this.twoModel !== three){
+			this.removeItem(currentTwoEl);
+		}
+
+		if (this.threeModel !== one && this.threeModel !== two && this.threeModel !== three){
 			this.removeItem(currentThreeEl);
 		}
 
