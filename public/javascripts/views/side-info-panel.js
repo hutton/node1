@@ -23,7 +23,7 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.sideInfoList.show();
 			this.sideInfoInvite.hide();
 
-			this.$el.hide();
+			this.sideInfoPanel.hide();
 		}
 	},
 
@@ -36,32 +36,32 @@ window.SideInfoPanel = Backbone.View.extend({
 		var that = this;
 
 		if (this.model === null && App.attendees.length > 1){
-			_.delay(function(){
-				this.$el.hide();
-			}, 100);
+			this.sideInfoPanel.hide();
 		} else {
 			if (this.model !== null){
 				if (App.attendees.length > 1){
-					var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
+					if (dateGreater !== 0){
+						var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
 
-					var inClass = 'side-info-date-greater';
-					var outClass = 'side-info-date-less';
+						var inClass = 'side-info-date-greater';
+						var outClass = 'side-info-date-less';
 
-					if (dateGreater){
-						inClass = 'side-info-date-less';
-						outClass = 'side-info-date-greater';
+						if (dateGreater < 0){
+							inClass = 'side-info-date-less';
+							outClass = 'side-info-date-greater';
+						}
+
+						this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
+						_.delay(function(){
+							that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
+						}, 20);
+
+						oldDatePanel.addClass(outClass);
+
+						_.delay(function(){
+							oldDatePanel.remove();
+						}, 300);
 					}
-
-					this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
-					_.delay(function(){
-						that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
-					}, 20);
-
-					oldDatePanel.addClass(outClass);
-
-					_.delay(function(){
-						oldDatePanel.remove();
-					}, 300);
 
 					var freeAttendees = this.model.get("free") || [];
 
@@ -86,12 +86,11 @@ window.SideInfoPanel = Backbone.View.extend({
 						} else {
 							el.removeClass('side-info-free');
 						}
-
 					});
 				}
 			}
 
-			this.$el.show();
+			this.sideInfoPanel.show();
 
 			if (this.sideInfoContainer.is(':visible')){
 				if (App.infoRowView !== null){
@@ -105,15 +104,17 @@ window.SideInfoPanel = Backbone.View.extend({
 
 	updateModel: function(model){
 		var that = this;
-		var dateGreater = true;
+		var dateGreater = 0;
 
 		if (this.model !== null && !_.isUndefined(this.model)){
 			this.stopListening(this.model);
 		}
 
 		if (this.prevDate !== null && model !== null){
-			if (this.prevDate < model.get('date')){
-				dateGreater = false;
+			if (this.prevDate > model.get('date')){
+				dateGreater = 1;
+			} else if (this.prevDate < model.get('date')){
+				dateGreater = -1;
 			}
 		}
 
@@ -121,14 +122,21 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.prevDate = model.get('date');
 		}
 
-
 		this.model = model;
 
 		if (this.model !== null){
 			this.listenTo(this.model, "change", this.modelChanged);
 		}
 
-		that.updateInPlace(dateGreater);
+		if (this.model === null){
+			_.delay(function(){
+				if (that.model === null){
+					that.updateInPlace(dateGreater);					
+				}
+			}, 500);
+		} else {
+			that.updateInPlace(dateGreater);
+		}
 	},
 
 	modelChanged: function(){

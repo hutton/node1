@@ -192,20 +192,37 @@
     <div class="side-info-panel-container">
       <div>
         <div class="side-info-panel">
-            <ul>
-              <@ _.each(attendees, function(attendee){ @>
-                <li><div class="side-info-name"><@= attendee.get('prettyName') @></div></li>
-              <@ }); @>
-            </ul>
-            <div class="side-info-invite">
-              Click dates to show when you're free<br/> <!-- ' -->
-              <br/>
-              <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
-            </div>
+          <ul>
+            <@ _.each(attendees, function(attendee){ @>
+              <li><div class="side-info-name"><@= attendee.get('prettyName') @></div></li>
+            <@ }); @>
+          </ul>
+          <div class="side-info-invite">
+            Click dates to show when you're free<br/> <!-- ' -->
+            <br/>
+            <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
           </div>
         </div>
       </div>
     </div>
+  </script>
+
+  <script type="text/template" id="top-choices-template">
+    <div class="side-info-panel-container">
+      <div>
+        <div class="side-info-panel-left">
+          <div class="side-info-panel-left-title">
+          Top Choices
+          </div>
+          <div class="side-info-panel-left-container">
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/template" id="top-choices-item-template">
+      <div class="top-choice-item"><@= date @></div>
   </script>
  
   <% if (webAppDebug) { %>
@@ -228,6 +245,7 @@
   <script src="/javascripts/views/choices-view.js"></script>
   <script src="/javascripts/views/info-row-view.js"></script>
   <script src="/javascripts/views/side-info-panel.js"></script>
+  <script src="/javascripts/views/top-choices-panel.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
   <% } else { %>
