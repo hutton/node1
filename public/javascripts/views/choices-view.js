@@ -109,7 +109,7 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	el: $(".event-container-margin"),
-
+	
 	tableEl: $(".event-container-margin .event-table"),
 
 	monthTitleTemplate: _.template($('#month-title-template').html()),
@@ -118,10 +118,13 @@ window.ChoicesView = Backbone.View.extend({
 
 	active: function(isActive){
 		if (isActive){
-			//this.$el
+			$('body').append(this.$el);
+
+			$('.days-table').show();
 
 		} else {
 			this.$el.detach();
+			$('.days-table').hide();
 		}
 	},
 

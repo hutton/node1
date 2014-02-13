@@ -26,6 +26,8 @@ window.EventApp = Backbone.View.extend({
 
 		this.ChoicesView.render();
 
+		this.AttendeesView = new AttendeesView({collection: this.choices});
+
 		this.SideInfoPanel = new SideInfoPanel();
 
 		this.TopChoicesModel = new Backbone.Model({
@@ -356,6 +358,7 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
 
 		this.ChoicesView.active(true);
+		this.AttendeesView.active(false);
 	},
 
 	switchToAttendees: function(){
@@ -363,6 +366,6 @@ window.EventApp = Backbone.View.extend({
 		this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
 
 		this.ChoicesView.active(false);
-		
+		this.AttendeesView.active(true);
 	}
 });

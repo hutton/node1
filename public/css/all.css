@@ -7582,6 +7582,7 @@ a:active {
   padding-right: 25px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 8px;
 }
 .title:hover {
   cursor: pointer;
@@ -7664,7 +7665,6 @@ a:active {
   opacity: 1;
 }
 .days-table {
-  margin-top: 5px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -8199,4 +8199,82 @@ a:active {
 .mode-switch-selected {
   color: white;
   background: #4ad16c;
+}
+/*********** Attendee view ****************/
+.attendees-container-margin {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+.attendees-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.attendees-name-list-container {
+  margin-top: 100px;
+  float: left;
+  width: 160px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.attendees-choices-list-container {
+  margin-top: 100px;
+  width: 100%;
+}
+.attendees-padding {
+  padding-left: 160px;
+}
+.attendees-choices-list-content {
+  width: 100%;
+  overflow: auto;
+}
+.attendees-choice {
+  float: left;
+}
+.attendees-name-list {
+  list-style: none;
+}
+.attendees-name-list,
+.attendees-choice {
+  list-style: none;
+}
+.attendees-table-item {
+  width: 70px;
+  height: 34px;
+}
+.attendees-name-list > li {
+  width: 70px;
+  height: 34px;
+  width: 160px;
+  padding: 4px;
+  font-size: 80%;
+  text-align: right;
+  color: #c0c0c0;
+}
+ul.attendees-name-list {
+  margin: 0px;
+  padding: 0px;
+}
+ul.attendees-choice {
+  margin: 0px;
+  padding: 0px;
+}
+.attendees-choice > li {
+  width: 70px;
+  height: 34px;
+  color: #c0c0c0;
+}
+.attendees-choice > li:nth-child(even) {
+  background: #f8f8f8;
+}
+.attendees-choice-date {
+  width: 70px;
+  height: 34px;
+  text-align: center;
+  font-size: 80%;
+}
+.attendee-free {
+  background: #4ad16c !important;
 }

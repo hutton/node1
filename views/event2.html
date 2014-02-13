@@ -235,7 +235,42 @@
   <script type="text/template" id="top-choices-item-template">
       <div class="top-choice-item"><@= date @></div>
   </script>
- 
+
+  <script type="text/template" id="attendees-view-template">
+    <div class="attendees-container-margin">
+      <div class="attendees-container">
+       <div class="row">
+         <div class="attendees-name-list-container">
+           <ul class="attendees-name-list">
+            <li></li>
+            <@ _.each(attendees, function(attendee){ @>
+              <li><div><@= attendee.get('prettyName') @></div></li>
+            <@ }); @>
+          </ul>
+        </div>
+        <div class="attendees-choices-list-container">
+          <div class="attendees-padding">
+            <div class="attendees-choices-list-content">
+              <table>
+                <tr class="attendees-choices-row"></tr>
+              </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+  </script>
+
+  <script type="text/template" id="attendees-choice-view-template">
+    <ul class="attendees-choice">
+      <li class="attendees-choice-date"><@= moment(choice.get('date')).format("ddd D") @></li>
+      <@ _.each(attendees, function(attendee){ @>
+      <li <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>><div></div></li>
+      <@ }); @>
+    </ul>
+  </script>
+
   <% if (webAppDebug) { %>
   <script src="/javascripts/tp/jquery-2.0.3.min.js"></script>
   <script src="/javascripts/tp/tp.helper.js"></script>
@@ -257,6 +292,7 @@
   <script src="/javascripts/views/info-row-view.js"></script>
   <script src="/javascripts/views/side-info-panel.js"></script>
   <script src="/javascripts/views/top-choices-panel.js"></script>
+  <script src="/javascripts/views/attendees-view.js"></script>
 
   <script src="/javascripts/event-app.js"></script>
   <% } else { %>

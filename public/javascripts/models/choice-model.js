@@ -26,6 +26,20 @@ window.ChoiceModel = Backbone.Model.extend({
 		return false;
 	},
 
+	isAttendeeFree: function(attendeeId){
+		if (attendeeId !== null){
+			var freeAttendees = this.get("free");
+
+			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(attendeeId) == -1){
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		return false;
+	},
+
 	toggleFree: function(){
 		var date = this.get("date");
 		var freeAttendees = this.get("free");
