@@ -132,7 +132,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .mode-switch-attendees{border:solid 2px #4ad16c;margin:0px;font-size:75%;color:#4ad16c;padding:1px 25px;cursor:pointer;}
 .mode-switch-selected{color:white;background:#4ad16c;}
 .attendees-container-margin{margin-left:6px;margin-right:6px;}
-.attendees-container{max-width:1200px;margin-left:auto;margin-right:auto;position:relative;margin-bottom:40px;}
+.attendees-container{max-width:1200px;margin-left:auto;margin-right:auto;position:relative;margin-bottom:40px;margin-top:10px;}
 .attendees-name-list-container{float:left;width:160px;position:absolute;top:0px;left:0px;}
 .attendees-choices-list-container{width:100%;}
 .attendees-padding{padding-left:160px;}
@@ -144,6 +144,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .attendees-name-list>li{width:70px;height:34px;width:160px;padding:4px;font-size:80%;text-align:right;color:#c0c0c0;}
 ul.attendees-name-list{margin:0px;padding:0px;}
 ul.attendees-choice{margin:0px;padding:0px;}
+.attendees-choices-row>td{padding:0px;margin:0px;}
 .attendees-choice>li{width:70px;height:34px;}
 .attendees-choice>li:nth-child(odd){background:#f8f8f8;}
 .attendees-choice-month{color:#4ad16c;background:transparent !important;}

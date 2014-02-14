@@ -8210,6 +8210,7 @@ a:active {
   margin-right: auto;
   position: relative;
   margin-bottom: 40px;
+  margin-top: 10px;
 }
 .attendees-name-list-container {
   float: left;
@@ -8258,6 +8259,10 @@ ul.attendees-name-list {
 ul.attendees-choice {
   margin: 0px;
   padding: 0px;
+}
+.attendees-choices-row > td {
+  padding: 0px;
+  margin: 0px;
 }
 .attendees-choice > li {
   width: 70px;

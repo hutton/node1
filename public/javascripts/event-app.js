@@ -103,7 +103,7 @@ window.EventApp = Backbone.View.extend({
 
             this.$el.find('#register-footer').show();
         } else {
-            this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
+            this.recalcTopSpacer();
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
@@ -157,15 +157,34 @@ window.EventApp = Backbone.View.extend({
         table.find(".info-row-names").width(windowSize - 132);
          
         parent.append( table );
+
+        var width = $(window).width();
+        var height = $(window).height();
+
+        if (height < 600 || width < 400){
+            this.showFooter(false);
+        } else {
+            this.showFooter(true);
+        }
+
+        if (height < 400){
+            this.showHeader(false);
+        } else {
+            this.showHeader(true);
+        }
     },
 
     checkOrientation: function(){
         if(window.orientation !== this.previousOrientation){
             this.previousOrientation = window.orientation;
             
-            this.trigger('orientation', window.orientation);
+            if (window.orientation === 0 || window.orientation === 180){
+                this.switchToCalendar();
+            } else {
+                this.switchToAttendees();
+            }
 
-            alert("orientation changed");
+            // this.trigger('orientation', window.orientation);
         }
     },
 
@@ -377,12 +396,40 @@ window.EventApp = Backbone.View.extend({
         this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
     },
 
+    recalcTopSpacer: function(){
+        if (this.$el.find(".navbar-fixed-top").is(':visible')){
+            this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
+        } else {
+            this.$el.find("#top-row-spacer").height(0);
+        }
+    },
+
+    showFooter: function(show){
+        if (show){
+            this.$el.find('.navbar-fixed-bottom').show();
+        } else {
+            this.$el.find('.navbar-fixed-bottom').hide();
+        }
+    },
+
+    showHeader: function(show){
+        if (show){
+            this.$el.find('.navbar-fixed-top').show();
+        } else {
+            this.$el.find('.navbar-fixed-top').hide();
+        }
+
+        this.recalcTopSpacer();
+    },
+
     switchToCalendar: function(){
         this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
 
         this.ChoicesView.active(true);
         this.AttendeesView.active(false);
+
+        this.onResizeWindow();
     },
 
     switchToAttendees: function(){
