@@ -1,3 +1,12 @@
 If orientation changes switch mode
-If height < 600 hide header
+
+Or:0 W < 500 hide footer
+Or:90 H < 500 hide header and footer
+
+If width < 500 hide footer
+
+If height < 600 hide footer
 If orientation has changed and height < 600 hide footer
+
+
+320x240, 480x320 (iPhone), 568x320 (5), 800x480, 960x480, 1024x800, and 1024x768.
