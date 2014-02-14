@@ -1,12 +1,10 @@
 If orientation changes switch mode
 
-Or:0 W < 500 hide footer
-Or:90 H < 500 hide header and footer
+height < 600 || width < 400 hide footer
+height < 400 hide header
 
-If width < 500 hide footer
 
-If height < 600 hide footer
-If orientation has changed and height < 600 hide footer
-
+$( window ).width()
+$( window ).height()
 
 320x240, 480x320 (iPhone), 568x320 (5), 800x480, 960x480, 1024x800, and 1024x768.
