@@ -1,7 +1,11 @@
-- Move register to footer
-- Animate date change in direction of change
-- Show top choices of left
-- Animate top chioces changing
+- Apply header/footer hiding strategy
+- Attendee view: highlight weekends
+- Look at iPad touch events
+- Attendee view: slide month along
+- Attendee view: allow updating
+- Attendee view: allow new attendee updating
+- Attendee view: center vertically
+
 - Animate toggle of available
 
 
@@ -11,6 +15,10 @@
 
 Done
 ----
+- Move register to footer
+- Animate date change in direction of change
+- Show top choices of left
+- Animate top chioces changing
 - Speed up rotate on iPhone
 - Background image
 - Show best options
