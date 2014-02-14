@@ -116,13 +116,20 @@ window.ChoicesView = Backbone.View.extend({
 
 	today: new Date(),
 
+	currentScroll: null,
+
 	active: function(isActive){
 		if (isActive){
 			$('body').append(this.$el);
 
 			$('.days-table').show();
 
+			if (this.currentScroll !== null){
+				$('body').scrollTop(this.currentScroll);
+			}
+
 		} else {
+			this.currentScroll = $('body').scrollTop();
 			this.$el.detach();
 			$('.days-table').hide();
 		}

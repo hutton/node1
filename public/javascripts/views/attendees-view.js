@@ -9,20 +9,33 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	render: function(){
-		var newElement = this.template({attendees: App.attendees.models, choices: this.collection});
+		var newElement = $(this.template({attendees: App.attendees.models, choices: this.collection}));
 
-		$('body').append(newElement);
+		var newElementRow = newElement.find('.attendees-choices-row');
 
-		this.setElement($('.attendees-container-margin').first());
+		var choices = _.filter(this.collection.models, function(choice){
+			return choice.get('date') >= App.today;
+		});
 
-		var newElementRow = this.$el.find('.attendees-choices-row');
+		_.each(choices, function(choice){
+			if (choice.get('date').getDate() == 1){
+				choice.showMonth = true;
+			} else {
+				choice.showMonth = false;
+			}
+		});
 
-		_.each(this.collection.models, function(choice){
+		choices[0].showMonth = true;
+
+		_.each(choices, function(choice){
 			var newAttendeeView = new AttendeeView({model: choice});
 
 			newElementRow.append(newAttendeeView.$el);
 		});
 
+		$('body').append(newElement);
+
+		this.setElement($('.attendees-container-margin').first());
 
 		this.rendered = true;
 	},
@@ -39,6 +52,8 @@ window.AttendeesView = Backbone.View.extend({
 			}
 
 			$('.days-table').hide();
+
+			$('body').scrollTop(0);
 		} else {
 			this.$el.detach();
 			$('.days-table').show();

@@ -41,7 +41,6 @@ body{
 	font-family: 'Open Sans Light', sans-serif;
 	color: #808080;
 
-	min-height: 800px;
 }
 
 .table > tbody > tr > td{
@@ -985,10 +984,10 @@ a:active{
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+	margin-bottom: 40px;
 }
 
 .attendees-name-list-container {
-	margin-top: 100px;
     float: left;
     width: @name-panel-width;
     position: absolute;
@@ -997,7 +996,6 @@ a:active{
 }
 
 .attendees-choices-list-container {
-	margin-top: 100px;
     width:100%;
 }
 
@@ -1049,17 +1047,23 @@ ul.attendees-choice{
 
 .attendees-choice > li{
 	.attendees-table-item;
-	color: @date-color;
 }
 
-.attendees-choice > li:nth-child(even){
+.attendees-choice > li:nth-child(odd){
 	background: #f8f8f8;	
+}
+
+.attendees-choice-month{
+	color: @free-color;
+	background: transparent !important;
 }
 
 .attendees-choice-date{
 	.attendees-table-item;
 	text-align: center;
 	font-size: 80%;
+	color: @date-color;
+	background: transparent !important;
 }
 
 .attendee-free{
