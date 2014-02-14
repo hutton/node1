@@ -160,8 +160,8 @@ window.EventApp = Backbone.View.extend({
     },
 
     checkOrientation: function(){
-        if(window.orientation !== previousOrientation){
-            previousOrientation = window.orientation;
+        if(window.orientation !== this.previousOrientation){
+            this.previousOrientation = window.orientation;
             
             this.trigger('orientation', window.orientation);
 
@@ -170,7 +170,7 @@ window.EventApp = Backbone.View.extend({
     },
 
     checkForOrientationChange: function(){
-        var previousOrientation = window.orientation;
+        this.previousOrientation = window.orientation;
 
         window.addEventListener("resize", this.checkOrientation, false);
         window.addEventListener("orientationchange", this.checkOrientation, false);
