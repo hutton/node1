@@ -114,7 +114,7 @@ window.EventApp = Backbone.View.extend({
 
         this.onResizeWindow();
 
-        var throttled = _.throttle(that.onResizeWindow, 100);
+        var throttled = _.debounce(that.onResizeWindow, 200);
 
         $(window).resize(function(){
             throttled();
@@ -167,7 +167,7 @@ window.EventApp = Backbone.View.extend({
             this.showFooter(true);
         }
 
-        if (height < 400){
+        if (height < 350){
             this.showHeader(false);
         } else {
             this.showHeader(true);
