@@ -143,6 +143,8 @@ window.EventApp = Backbone.View.extend({
     },
 
     onResizeWindow: function(){
+        console.log("Resize");
+
         var size = $(".event-table .date-cell").first().width();
         var windowSize = Math.min($("body").first().width(), 600);
         
@@ -177,7 +179,10 @@ window.EventApp = Backbone.View.extend({
     checkOrientation: function(){
         if(window.orientation !== this.previousOrientation){
             this.previousOrientation = window.orientation;
-            
+
+            console.log("Orientation Changed");
+
+
             if (window.orientation === 0 || window.orientation === 180){
                 this.switchToCalendar();
             } else {
@@ -195,7 +200,7 @@ window.EventApp = Backbone.View.extend({
         window.addEventListener("orientationchange", this.checkOrientation, false);
 
         // (optional) Android doesn't always fire orientationChange on 180 degree turns
-        setInterval(this.checkOrientation, 2000);
+        //setInterval(this.checkOrientation, 2000);
     },
 
     eventTableClicked: function(event){
