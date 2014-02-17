@@ -114,7 +114,7 @@ window.EventApp = Backbone.View.extend({
 
         this.onResizeWindow();
 
-        var throttled = _.debounce(that.onResizeWindow, 200);
+        var throttled = _.debounce(that.onResizeWindow, 2000);
 
         $(window).resize(function(){
             throttled();
