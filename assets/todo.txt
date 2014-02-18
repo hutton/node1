@@ -1,7 +1,9 @@
-- Apply header/footer hiding strategy
-- Attendee view: highlight weekends
+- Only 6 months future dates
+- AV highlight weekends
+- AV throttle left scroll
 - Look at iPad touch events
-- Attendee view: slide month along
+- AV attendee name overflow
+- AV table fitting behind attendees
 - Attendee view: allow updating
 - Attendee view: allow new attendee updating
 - Attendee view: center vertically
@@ -15,6 +17,8 @@
 
 Done
 ----
+- Attendee view: slide month along
+- Apply header/footer hiding strategy
 - Move register to footer
 - Animate date change in direction of change
 - Show top choices of left
