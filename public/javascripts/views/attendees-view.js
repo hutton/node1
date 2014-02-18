@@ -99,11 +99,40 @@ window.AttendeesView = Backbone.View.extend({
 
 	onScroll: function(event){
 		console.log("scroll");
-		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();
 
-		_.each(this.monthStartChoices, function(attendeeView){
-			attendeeView.adjustMonth(scrollLeft);
-		});
+		this.checkScrollPosition();
+	},
+
+	scrollPosition: 0,
+
+	scrollNotChangedCount: 0,
+
+	checkScrollPosition: function(){
+		var that = this;
+
+		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();		
+
+		console.log("Checking changed");
+
+		if (scrollLeft !== this.scrollPosition){
+			this.scrollNotChangedCount = 60;
+
+			this.scrollPosition = scrollLeft;
+
+			console.log("Position changed");
+
+			_.each(this.monthStartChoices, function(attendeeView){
+				attendeeView.adjustMonth(scrollLeft);
+			});
+
+			_.delay(that.checkScrollPosition, 30);
+		} else {
+			if (this.scrollNotChangedCount > 0){
+				_.delay(that.checkScrollPosition, 30);
+			}
+
+			this.scrollNotChangedCount--;
+		}
 	}
 });
 
@@ -112,6 +141,8 @@ window.AttendeeView = Backbone.View.extend({
 		_.bindAll(this);
 
 		this.render();
+
+		this.listenTo(this.model, "change", this.modelChanged);
 	},
 
 	itemWidth: 70,
@@ -134,4 +165,21 @@ window.AttendeeView = Backbone.View.extend({
 	render: function(){
 		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model}));
 	},
+
+	modelChanged: function(){
+		var that = this;
+		var attendeeCount = 2;
+
+		var items = this.$el.find('li');
+
+		items.removeClass('attendee-free');
+
+		_.each(App.attendees.models, function(attendee){
+			if (that.model.isAttendeeFree(attendee.get("_id"))){
+				$(items[attendeeCount]).find('div').addClass('attendee-free');
+			}
+
+			attendeeCount++;
+		});
+	}
 });

@@ -8284,7 +8284,15 @@ ul.attendees-choice {
   font-size: 80%;
   color: #c0c0c0;
   background: transparent !important;
+  padding-top: 4px;
+}
+.attendees-choice-date-weekend {
+  background: #f8f8f8 !important;
+}
+.attendees-choice > li > div {
+  width: 100%;
+  height: 100%;
 }
 .attendee-free {
-  background: #4ad16c !important;
+  background: #4ad16c;
 }

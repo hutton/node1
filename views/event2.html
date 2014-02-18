@@ -267,9 +267,9 @@
   <script type="text/template" id="attendees-choice-view-template">
     <ul class="attendees-choice">
       <li class="attendees-choice-month"><@ if (choice.showMonth ) {@> <@= moment(choice.get('date')).format("MMMM") @><@ } @></li>
-      <li class="attendees-choice-date"><@= moment(choice.get('date')).format("ddd D") @></li>
+      <li class="attendees-choice-date<@ if (choice.get('date').getDay() === 0 || choice.get('date').getDay() === 6) {@> attendees-choice-date-weekend<@ } @>"><@= moment(choice.get('date')).format("ddd D") @></li>
       <@ _.each(attendees, function(attendee){ @>
-      <li <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>><div></div></li>
+      <li><div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>></div></li>
       <@ }); @>
     </ul>
   </script>

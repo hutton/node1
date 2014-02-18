@@ -148,5 +148,7 @@ ul.attendees-choice{margin:0px;padding:0px;}
 .attendees-choice>li{width:70px;height:34px;}
 .attendees-choice>li:nth-child(odd){background:#f8f8f8;}
 .attendees-choice-month{color:#4ad16c;background:transparent !important;position:relative;}
-.attendees-choice-date{width:70px;height:34px;text-align:center;font-size:80%;color:#c0c0c0;background:transparent !important;}
-.attendee-free{background:#4ad16c !important;}
+.attendees-choice-date{width:70px;height:34px;text-align:center;font-size:80%;color:#c0c0c0;background:transparent !important;padding-top:4px;}
+.attendees-choice-date-weekend{background:#f8f8f8 !important;}
+.attendees-choice>li>div{width:100%;height:100%;}
+.attendee-free{background:#4ad16c;}
