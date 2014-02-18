@@ -114,10 +114,10 @@ window.EventApp = Backbone.View.extend({
 
         this.onResizeWindow();
 
-        var throttled = _.debounce(that.onResizeWindow, 2000);
+        var throttledResize = _.debounce(that.onResizeWindow, 200);
 
         $(window).resize(function(){
-            throttled();
+            throttledResize();
         });
 
         // _.delay(function(){
@@ -145,20 +145,8 @@ window.EventApp = Backbone.View.extend({
     onResizeWindow: function(){
         console.log("Resize");
 
-        var size = $(".event-table .date-cell").first().width();
-        var windowSize = Math.min($("body").first().width(), 600);
-        
-        var table = $(".event-table");
-        var parent = table.parent();
-         
-        table.detach();
-         
-        table.find("tr > td > .date-cell-container").height(size - 6);
-        table.find("tr > td > .month").height(size - 6);
-
-        table.find(".info-row-names").width(windowSize - 132);
-         
-        parent.append( table );
+        this.ChoicesView.resize();
+        this.AttendeesView.resize();
 
         var width = $(window).width();
         var height = $(window).height();
@@ -433,8 +421,6 @@ window.EventApp = Backbone.View.extend({
 
         this.ChoicesView.active(true);
         this.AttendeesView.active(false);
-
-        this.onResizeWindow();
     },
 
     switchToAttendees: function(){

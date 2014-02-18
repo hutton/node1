@@ -8275,6 +8275,7 @@ ul.attendees-choice {
 .attendees-choice-month {
   color: #4ad16c;
   background: transparent !important;
+  position: relative;
 }
 .attendees-choice-date {
   width: 70px;

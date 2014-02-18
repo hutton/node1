@@ -118,7 +118,12 @@ window.ChoicesView = Backbone.View.extend({
 
 	currentScroll: null,
 
+	isActive: true,
+
 	active: function(isActive){
+
+		this.isActive = isActive;
+
 		if (isActive){
 			$('body').append(this.$el);
 
@@ -137,8 +142,6 @@ window.ChoicesView = Backbone.View.extend({
 
 	render: function(){
 		var that = this;
-
-		// $(this.el).empty();
 
 		var row = null;
 		var todayAdded = false;
@@ -191,6 +194,26 @@ window.ChoicesView = Backbone.View.extend({
 		body.scrollTop(body.scrollTop() - 112);
 
 		return this;
+	},
+
+	resize: function(){
+		if (this.isActive){
+			console.log("Resize - Calendar");
+
+			var size = $(".event-table .date-cell").first().width();
+			var windowSize = Math.min($("body").first().width(), 600);
+			
+			var parent = this.tableEl.parent();
+			 
+			this.tableEl.detach();
+			 
+			this.tableEl.find("tr > td > .date-cell-container").height(size - 6);
+			this.tableEl.find("tr > td > .month").height(size - 6);
+
+			this.tableEl.find(".info-row-names").width(windowSize - 132);
+			 
+			parent.append(this.tableEl);
+		}
 	},
 
 	insertMonthTitle: function(rowItemCount, row, month){
