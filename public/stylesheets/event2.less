@@ -972,7 +972,7 @@ a:active{
 
 @name-panel-width: 160px;
 @item-height: 34px;
-@item-width: 70px;
+@item-width: 80px;
 
 .attendees-container-margin{
 	margin-left: 6px;
@@ -1069,6 +1069,7 @@ ul.attendees-choice{
 
 .attendees-choice-month{
 	color: @free-color;
+	border: none !important;
 	background: transparent !important;
 	position: relative;
 }
@@ -1076,14 +1077,24 @@ ul.attendees-choice{
 .attendees-choice-date{
 	.attendees-table-item;
 	text-align: center;
-	font-size: 80%;
+	font-size: 70%;
 	color: @date-color;
 	background: transparent !important;
 	padding-top: 4px;
 }
 
 .attendees-choice-date-weekend{
-	background: #f8f8f8 !important;
+	margin: 0px 0px;
+}
+
+ul.attendees-choice-date-sat > li{
+	border-left: 1px #e8e8e8 solid;
+//	margin-left: 20px;
+}
+
+ul.attendees-choice-date-sun > li{
+	border-right: 1px #e8e8e8 solid;
+//	margin-right: 20px;
 }
 
 .attendees-choice > li > div{

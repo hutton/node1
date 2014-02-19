@@ -141,15 +141,17 @@ a:active{color:#4ad16c;text-decoration:none;}
 .attendees-choice{float:left;}
 .attendees-name-list{list-style:none;}
 .attendees-name-list,.attendees-choice{list-style:none;}
-.attendees-table-item{width:70px;height:34px;}
-.attendees-name-list>li{width:70px;height:34px;width:160px;padding:4px;font-size:80%;text-align:right;color:#c0c0c0;}
+.attendees-table-item{width:80px;height:34px;}
+.attendees-name-list>li{width:80px;height:34px;width:160px;padding:4px;font-size:80%;text-align:right;color:#c0c0c0;}
 ul.attendees-name-list{margin:0px;padding:0px;}
 ul.attendees-choice{margin:0px;padding:0px;}
 .attendees-choices-row>td{padding:0px;margin:0px;}
-.attendees-choice>li{width:70px;height:34px;}
+.attendees-choice>li{width:80px;height:34px;}
 .attendees-choice>li:nth-child(odd){background:#f8f8f8;}
-.attendees-choice-month{color:#4ad16c;background:transparent !important;position:relative;}
-.attendees-choice-date{width:70px;height:34px;text-align:center;font-size:80%;color:#c0c0c0;background:transparent !important;padding-top:4px;}
-.attendees-choice-date-weekend{background:#f8f8f8 !important;}
+.attendees-choice-month{color:#4ad16c;border:none !important;background:transparent !important;position:relative;}
+.attendees-choice-date{width:80px;height:34px;text-align:center;font-size:70%;color:#c0c0c0;background:transparent !important;padding-top:4px;}
+.attendees-choice-date-weekend{margin:0px 0px;}
+ul.attendees-choice-date-sat>li{border-left:1px #e8e8e8 solid;}
+ul.attendees-choice-date-sun>li{border-right:1px #e8e8e8 solid;}
 .attendees-choice>li>div{width:100%;height:100%;}
 .attendee-free{background:#4ad16c;}

@@ -66,11 +66,30 @@ window.AttendeesView = Backbone.View.extend({
 
 		this.attendeesChoiceListContainerEl.on("scroll", this.onScroll);
 
+		this.resize();
+
 		this.rendered = true;
 	},
 
 	resize: function(){
 		if (this.isActive){
+			var totalHeight = $(window).height();
+
+			$('.navbar').each(function(){
+				if ($(this).is(':visible')){
+					totalHeight -= $(this).height();
+				}
+			});
+
+			totalHeight -= 70;
+
+			var tableHeight = this.$el.height();
+
+			if (totalHeight > tableHeight){
+				this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px'); 
+			} else {
+				this.$el.attr('style', null); 
+			}
 		}
 	},
 
@@ -102,16 +121,12 @@ window.AttendeesView = Backbone.View.extend({
 
 	scrollPosition: 0,
 
-	scrollNotChangedCount: 0,
-
 	checkScrollPosition: function(){
 		var that = this;
 
 		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();		
 
 		if (scrollLeft !== this.scrollPosition){
-			this.scrollNotChangedCount = 60;
-
 			this.scrollPosition = scrollLeft;
 
 			_.each(this.monthStartChoices, function(attendeeView){
@@ -119,12 +134,6 @@ window.AttendeesView = Backbone.View.extend({
 			});
 
 			_.delay(that.checkScrollPosition, 30);
-		} else {
-			if (this.scrollNotChangedCount > 0){
-				_.delay(that.checkScrollPosition, 30);
-			}
-
-			this.scrollNotChangedCount--;
 		}
 	}
 });
@@ -138,7 +147,7 @@ window.AttendeeView = Backbone.View.extend({
 		this.listenTo(this.model, "change", this.modelChanged);
 	},
 
-	itemWidth: 70,
+	itemWidth: 80,
 
 	template: _.template($('#attendees-choice-view-template').html()),
 
@@ -148,21 +157,20 @@ window.AttendeeView = Backbone.View.extend({
 	tagName: "td",
 
 	adjustMonth: function(scrollLeft){
-		if (scrollLeft < this.model.daysIn * this.itemWidth){
-			this.$el.find('.attendees-choice-month').attr("style", "left: 0px");			
-			this.$el.find('.attendees-choice-month').show();
-		} else if (scrollLeft > (this.model.lastDay -2) * this.itemWidth){
-			this.$el.find('.attendees-choice-month').hide();
+		if (scrollLeft < (this.model.daysIn - 1) * this.itemWidth){
+			this.monthLabelEl.show();
 		} else { // if (scrollLeft > this.model.daysIn * this.itemWidth && scrollLeft < (this.model.lastDay -2) * this.itemWidth){
 
-			$('.attendees-choices-month-container').html(this.$el.find('.attendees-choice-month').html());
+			$('.attendees-choices-month-container').html(this.monthLabelEl.html());
 
-			this.$el.find('.attendees-choice-month').hide();
+			this.monthLabelEl.hide();
 		}
 	},
 
 	render: function(){
 		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model}));
+
+		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},
 
 	modelChanged: function(){
