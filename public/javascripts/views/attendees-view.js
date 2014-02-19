@@ -71,7 +71,6 @@ window.AttendeesView = Backbone.View.extend({
 
 	resize: function(){
 		if (this.isActive){
-			console.log("Resize - Attendees");
 		}
 	},
 
@@ -98,8 +97,6 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	onScroll: function(event){
-		console.log("scroll");
-
 		this.checkScrollPosition();
 	},
 
@@ -112,14 +109,10 @@ window.AttendeesView = Backbone.View.extend({
 
 		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();		
 
-		console.log("Checking changed");
-
 		if (scrollLeft !== this.scrollPosition){
 			this.scrollNotChangedCount = 60;
 
 			this.scrollPosition = scrollLeft;
-
-			console.log("Position changed");
 
 			_.each(this.monthStartChoices, function(attendeeView){
 				attendeeView.adjustMonth(scrollLeft);
@@ -155,10 +148,16 @@ window.AttendeeView = Backbone.View.extend({
 	tagName: "td",
 
 	adjustMonth: function(scrollLeft){
-		if (scrollLeft > this.model.daysIn * this.itemWidth && scrollLeft < (this.model.lastDay -2) * this.itemWidth){
-			var moveLeft = scrollLeft - (this.model.daysIn * this.itemWidth);
+		if (scrollLeft < this.model.daysIn * this.itemWidth){
+			this.$el.find('.attendees-choice-month').attr("style", "left: 0px");			
+			this.$el.find('.attendees-choice-month').show();
+		} else if (scrollLeft > (this.model.lastDay -2) * this.itemWidth){
+			this.$el.find('.attendees-choice-month').hide();
+		} else { // if (scrollLeft > this.model.daysIn * this.itemWidth && scrollLeft < (this.model.lastDay -2) * this.itemWidth){
 
-			this.$el.find('.attendees-choice-month').attr("style", "left: " + moveLeft + "px");
+			$('.attendees-choices-month-container').html(this.$el.find('.attendees-choice-month').html());
+
+			this.$el.find('.attendees-choice-month').hide();
 		}
 	},
 
@@ -168,15 +167,17 @@ window.AttendeeView = Backbone.View.extend({
 
 	modelChanged: function(){
 		var that = this;
-		var attendeeCount = 2;
+		var attendeeCount = 0;
 
-		var items = this.$el.find('li');
+		var items = this.$el.find('li > div');
 
 		items.removeClass('attendee-free');
 
+		console.log("Attendees - model changed");
+
 		_.each(App.attendees.models, function(attendee){
 			if (that.model.isAttendeeFree(attendee.get("_id"))){
-				$(items[attendeeCount]).find('div').addClass('attendee-free');
+				$(items[attendeeCount]).addClass('attendee-free');
 			}
 
 			attendeeCount++;

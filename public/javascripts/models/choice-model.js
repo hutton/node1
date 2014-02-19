@@ -171,5 +171,12 @@ window.ChoiceModel = Backbone.Model.extend({
 		target = Math.round(target);
 
 		return target;
+	},
+
+	setTopChoice: function(value){
+        if (!this.has('top-choice') ||
+            (this.has('top-choice') && this.get('top-choice') !== value)){
+            this.set('top-choice', value);
+        }
 	}
 });

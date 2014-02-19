@@ -198,8 +198,6 @@ window.ChoicesView = Backbone.View.extend({
 
 	resize: function(){
 		if (this.isActive){
-			console.log("Resize - Calendar");
-
 			var size = $(".event-table .date-cell").first().width();
 			var windowSize = Math.min($("body").first().width(), 600);
 			

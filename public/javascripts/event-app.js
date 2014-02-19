@@ -143,8 +143,6 @@ window.EventApp = Backbone.View.extend({
     },
 
     onResizeWindow: function(){
-        console.log("Resize");
-
         this.ChoicesView.resize();
         this.AttendeesView.resize();
 
@@ -167,9 +165,6 @@ window.EventApp = Backbone.View.extend({
     checkOrientation: function(){
         if(window.orientation !== this.previousOrientation){
             this.previousOrientation = window.orientation;
-
-            console.log("Orientation Changed");
-
 
             if (window.orientation === 0 || window.orientation === 180){
                 this.switchToCalendar();
@@ -344,6 +339,8 @@ window.EventApp = Backbone.View.extend({
         var thirdBestModel = null;
         var thirdBestCount = 0;
 
+        var modelsWithTopChoice = [];
+
         _.each(this.choices.models, function(model){
             if (model.has('free')){
                 var freeCount = model.get('free').length;
@@ -369,22 +366,28 @@ window.EventApp = Backbone.View.extend({
                 }
 
                 if (model.has('top-choice')){
-                    model.set('top-choice', 0);
+                    modelsWithTopChoice.push(model);
                 }
             }
         });
 
         if (bestModel !== null){
-            bestModel.set('top-choice', 1);
+            bestModel.setTopChoice(1);
         }
 
         if (secondBestModel !== null){
-            secondBestModel.set('top-choice', 2);
+            secondBestModel.setTopChoice(2);
         }
 
         if (thirdBestModel !== null){
-            thirdBestModel.set('top-choice', 3);
+            thirdBestModel.setTopChoice(3);
         }
+
+        _.each(modelsWithTopChoice, function(model){
+            if (model !== bestModel && model !== secondBestModel && model !== thirdBestModel){
+                model.unset('top-choice');
+            }
+        });
 
         this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
     },

@@ -136,7 +136,8 @@ a:active{color:#4ad16c;text-decoration:none;}
 .attendees-name-list-container{float:left;width:160px;position:absolute;top:0px;left:0px;}
 .attendees-choices-list-container{width:100%;}
 .attendees-padding{padding-left:160px;}
-.attendees-choices-list-content{width:100%;overflow:auto;-webkit-overflow-scrolling:touch;}
+.attendees-choices-list-content{width:100%;overflow:auto;-webkit-overflow-scrolling:touch;position:relative;}
+.attendees-choices-month-container{position:absolute;left:160px;color:#4ad16c;}
 .attendees-choice{float:left;}
 .attendees-name-list{list-style:none;}
 .attendees-name-list,.attendees-choice{list-style:none;}
