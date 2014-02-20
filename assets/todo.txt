@@ -1,10 +1,11 @@
 - Look at iPad touch events
-- AV attendee name overflow
 - AV table fitting behind attendees
 - Attendee view: allow updating
 - Attendee view: allow new attendee updating
-- Attendee view: center vertically
+- AV show top choices
 
+- Hover top choice show in calendar
+- Click top choice to bring into view
 - Animate toggle of available
 
 
@@ -14,6 +15,8 @@
 
 Done
 ----
+- Attendee view: center vertically
+- AV attendee name overflow
 - Only 6 months future dates
 - AV highlight weekends
 - AV throttle left scroll
