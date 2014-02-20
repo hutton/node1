@@ -1,8 +1,7 @@
 - Look at iPad touch events
-- AV table fitting behind attendees
 - Attendee view: allow updating
-- Attendee view: allow new attendee updating
 - AV show top choices
+- Attendee view: allow new attendee updating
 
 - Hover top choice show in calendar
 - Click top choice to bring into view
