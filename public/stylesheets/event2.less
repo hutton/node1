@@ -1016,6 +1016,7 @@ a:active{
 	position: absolute;
 	left: 160px;
 	color: @free-color;
+	z-index: 100;
 }
 
 .attendees-choice{
@@ -1034,6 +1035,7 @@ a:active{
 .attendees-table-item{
 	width: @item-width;
 	height: @item-height;
+	margin-bottom: 1px;	
 }
 
 .attendees-name-list > li{
@@ -1054,6 +1056,14 @@ a:active{
 ul.attendees-name-list{
 	margin: 0px;
 	padding: 0px;
+}
+
+.attendees-name-me{
+	height: 70px !important;
+}
+
+.attendees-name-me > div{
+	margin-top: 20px;
 }
 
 ul.attendees-choice{
@@ -1090,16 +1100,12 @@ ul.attendees-choice{
 	padding-top: 4px;
 }
 
-.attendees-choice-date-weekend{
-	background: rgba(0,0,0,0.04);
+.attendees-choice-date-weekend > .attendees-choice-date{
+	background: rgba(0,0,0,0.04) !important;
 }
 
 .attendees-choice-date{
 	border: none;
-}
-
-ul.attendees-choice-date-sat > .attendees-choice-date{
-	border-left: @cell-border;
 }
 
 .attendees-choice > li > div{
@@ -1109,8 +1115,24 @@ ul.attendees-choice-date-sat > .attendees-choice-date{
 
 .attendee-free{
 	background: @free-color;
+	color: rgba(0,0,0,0.3);
 }
 
-.att-ch{
-	border-left: @cell-border;	
+.attendees-choice > li.att-ch{
+	border-left: @cell-border;
+}
+
+.attendees-choice > li.att-ch-me{
+	text-align: center;
+	color: rgba(0,0,0,0.05);
+	height: 70px;
+}
+
+.att-ch > div > i{
+	display: none;
+}
+
+.att-ch-me > div > i{
+	display: inline-block;
+	margin-top: 24px;
 }

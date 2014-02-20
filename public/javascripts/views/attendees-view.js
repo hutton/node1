@@ -152,6 +152,7 @@ window.AttendeeView = Backbone.View.extend({
 	template: _.template($('#attendees-choice-view-template').html()),
 
 	events: {
+		"click .att-ch-me": "choiceClicked"
 	},
 
 	tagName: "td",
@@ -190,5 +191,9 @@ window.AttendeeView = Backbone.View.extend({
 
 			attendeeCount++;
 		});
+	},
+
+	choiceClicked: function(){
+		this.model.toggleFree();
 	}
 });

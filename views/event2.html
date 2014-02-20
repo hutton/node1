@@ -246,7 +246,7 @@
             <li></li>
             <li></li>
             <@ _.each(attendees, function(attendee){ @>
-              <li><div><@= attendee.get('prettyName') @></div></li>
+              <li class="<@ if (attendee.get('me')) {@>attendees-name-me<@ } @>"><div><@= attendee.get('prettyName') @></div></li>
             <@ }); @>
           </ul>
         </div>
@@ -266,7 +266,7 @@
   </script>
 
   <script type="text/template" id="attendees-choice-view-template">
-    <ul class="attendees-choice <@ if (choice.get('date').getDay() === 6) {@>attendees-choice-date-sat<@ } @> <@ if (choice.get('date').getDay() === 1) {@> attendees-choice-date-sat<@ } @> <@ if (choice.get('date').getDay() === 6 || choice.get('date').getDay() === 0) {@>attendees-choice-date-weekend<@ } @> ">
+    <ul class="attendees-choice <@ if (choice.get('date').getDay() === 6 || choice.get('date').getDay() === 0) {@>attendees-choice-date-weekend<@ } @> ">
       <li class="attendees-choice-month">
         <div>
           <@ if (choice.showMonth ) {@> <@= moment(choice.get('date')).format("MMMM") @><@ } @>
@@ -274,7 +274,7 @@
       </li>
       <li class="attendees-choice-date"><@= moment(choice.get('date')).format("ddd Do") @></li>
       <@ _.each(attendees, function(attendee){ @>
-      <li class="att-ch <@ if (attendee.get('me')) {@>att-ch-me<@ } @>"><div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>></div></li>
+      <li class="att-ch <@ if (attendee.get('me')) {@>att-ch-me<@ } @>"><div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>><i class="fa fa-check"></i></div></li>
       <@ }); @>
     </ul>
   </script>

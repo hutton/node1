@@ -10,7 +10,7 @@ window.ChoiceView = Backbone.View.extend({
 	firstChoiceTemplate: _.template($('#first-choice-template').html()),
 
 	events: {
-		"click":	"dayClicked"
+	"click":	"dayClicked"
 	},
 
 	className: "date-cell",

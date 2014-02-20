@@ -10,6 +10,11 @@ window.EventApp = Backbone.View.extend({
 
         this.attendees = new Backbone.Collection;
 
+        this.attendees.comparator = function(model){
+
+            return !model.get('me');
+        };
+
         this.attendees.reset(bootstrappedAttendees);
 
         this.model = new CalendarModel(bootstrappedCalendar);
