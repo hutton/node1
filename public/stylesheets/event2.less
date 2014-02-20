@@ -973,6 +973,7 @@ a:active{
 @name-panel-width: 160px;
 @item-height: 34px;
 @item-width: 80px;
+@cell-border: 1px rgba(0,0,0,0.06) solid;
 
 .attendees-container-margin{
 	margin-left: 6px;
@@ -1044,6 +1045,12 @@ a:active{
 	color: @date-color;
 }
 
+.attendees-name-list > li > div{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 ul.attendees-name-list{
 	margin: 0px;
 	padding: 0px;
@@ -1070,31 +1077,29 @@ ul.attendees-choice{
 .attendees-choice-month{
 	color: @free-color;
 	border: none !important;
-	background: transparent !important;
+	background: white !important;
 	position: relative;
 }
 
 .attendees-choice-date{
 	.attendees-table-item;
 	text-align: center;
-	font-size: 70%;
+	font-size: 65%;
 	color: @date-color;
 	background: transparent !important;
 	padding-top: 4px;
 }
 
 .attendees-choice-date-weekend{
-	margin: 0px 0px;
+	background: rgba(0,0,0,0.04);
 }
 
-ul.attendees-choice-date-sat > li{
-	border-left: 1px #e8e8e8 solid;
-//	margin-left: 20px;
+.attendees-choice-date{
+	border: none;
 }
 
-ul.attendees-choice-date-sun > li{
-	border-right: 1px #e8e8e8 solid;
-//	margin-right: 20px;
+ul.attendees-choice-date-sat > .attendees-choice-date{
+	border-left: @cell-border;
 }
 
 .attendees-choice > li > div{
@@ -1106,3 +1111,6 @@ ul.attendees-choice-date-sun > li{
 	background: @free-color;
 }
 
+.att-ch{
+	border-left: @cell-border;	
+}

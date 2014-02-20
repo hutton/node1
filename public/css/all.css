@@ -8259,6 +8259,11 @@ a:active {
   text-align: right;
   color: #c0c0c0;
 }
+.attendees-name-list > li > div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 ul.attendees-name-list {
   margin: 0px;
   padding: 0px;
@@ -8281,26 +8286,26 @@ ul.attendees-choice {
 .attendees-choice-month {
   color: #4ad16c;
   border: none !important;
-  background: transparent !important;
+  background: white !important;
   position: relative;
 }
 .attendees-choice-date {
   width: 80px;
   height: 34px;
   text-align: center;
-  font-size: 70%;
+  font-size: 65%;
   color: #c0c0c0;
   background: transparent !important;
   padding-top: 4px;
 }
 .attendees-choice-date-weekend {
-  margin: 0px 0px;
+  background: rgba(0, 0, 0, 0.04);
 }
-ul.attendees-choice-date-sat > li {
-  border-left: 1px #e8e8e8 solid;
+.attendees-choice-date {
+  border: none;
 }
-ul.attendees-choice-date-sun > li {
-  border-right: 1px #e8e8e8 solid;
+ul.attendees-choice-date-sat > .attendees-choice-date {
+  border-left: 1px rgba(0, 0, 0, 0.06) solid;
 }
 .attendees-choice > li > div {
   width: 100%;
@@ -8308,4 +8313,7 @@ ul.attendees-choice-date-sun > li {
 }
 .attendee-free {
   background: #4ad16c;
+}
+.att-ch {
+  border-left: 1px rgba(0, 0, 0, 0.06) solid;
 }

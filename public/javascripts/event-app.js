@@ -149,7 +149,7 @@ window.EventApp = Backbone.View.extend({
         var width = $(window).width();
         var height = $(window).height();
 
-        if (height < 600 || width < 400){
+        if (height < 400 || width < 400){
             this.showFooter(false);
         } else {
             this.showFooter(true);

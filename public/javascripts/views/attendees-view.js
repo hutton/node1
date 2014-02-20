@@ -175,7 +175,7 @@ window.AttendeeView = Backbone.View.extend({
 
 	modelChanged: function(){
 		var that = this;
-		var attendeeCount = 0;
+		var attendeeCount = 1;
 
 		var items = this.$el.find('li > div');
 

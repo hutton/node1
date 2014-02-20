@@ -1,6 +1,3 @@
-- Only 6 months future dates
-- AV highlight weekends
-- AV throttle left scroll
 - Look at iPad touch events
 - AV attendee name overflow
 - AV table fitting behind attendees
@@ -17,6 +14,9 @@
 
 Done
 ----
+- Only 6 months future dates
+- AV highlight weekends
+- AV throttle left scroll
 - Attendee view: slide month along
 - Apply header/footer hiding strategy
 - Move register to footer
