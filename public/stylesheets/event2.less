@@ -999,6 +999,7 @@ a:active{
 
 .attendees-choices-list-container {
     width:100%;
+    position: relative;
 }
 
 .attendees-padding {
@@ -1007,9 +1008,11 @@ a:active{
 
 .attendees-choices-list-content {
     width:100%;
-    overflow:auto;
+    overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     position: relative;
+
 }
 
 .attendees-choices-month-container{
@@ -1036,6 +1039,7 @@ a:active{
 	width: @item-width;
 	height: @item-height;
 	margin-bottom: 1px;	
+	margin-right: 1px;	
 }
 
 .attendees-name-list > li{
@@ -1097,7 +1101,7 @@ ul.attendees-choice{
 	font-size: 65%;
 	color: @date-color;
 	background: transparent !important;
-	padding-top: 4px;
+	padding-top: 6px;
 }
 
 .attendees-choice-date-weekend > .attendees-choice-date{
@@ -1119,7 +1123,7 @@ ul.attendees-choice{
 }
 
 .attendees-choice > li.att-ch{
-	border-left: @cell-border;
+//	border-left: @cell-border;
 }
 
 .attendees-choice > li.att-ch-me{
@@ -1135,4 +1139,26 @@ ul.attendees-choice{
 .att-ch-me > div > i{
 	display: inline-block;
 	margin-top: 24px;
+}
+
+.attendees-choices-top{
+	width: 92px;
+	position: absolute;
+	top: 30px;
+	margin-top: -6;
+	margin-left: -6;
+
+	display: none;
+}
+
+.attendees-choices-top-one{
+	border: 2px solid rgba(0,0,0,0.3);
+}
+
+.attendees-choices-top-two{
+	border: 2px solid rgba(0,0,0,0.2);
+}
+
+.attendees-choices-top-three{
+	border: 2px solid rgba(0,0,0,0.1);
 }

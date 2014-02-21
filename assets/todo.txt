@@ -1,6 +1,5 @@
-- Look at iPad touch events
-- Attendee view: allow updating
 - AV show top choices
+- Cut off old dates
 - Attendee view: allow new attendee updating
 
 - Hover top choice show in calendar
@@ -14,6 +13,9 @@
 
 Done
 ----
+- Tidy attendees template
+- Look at iPad touch events
+- Attendee view: allow updating
 - Attendee view: center vertically
 - AV attendee name overflow
 - Only 6 months future dates

@@ -60,6 +60,8 @@ window.AttendeesView = Backbone.View.extend({
 
 		$('body').append(newElement);
 
+		newElement.find('.attendees-choices-top').height(newElement.height());
+
 		this.setElement($('.attendees-container-margin').first());
 
 		this.attendeesChoiceListContainerEl = $(".attendees-choices-list-content");

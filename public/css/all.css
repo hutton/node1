@@ -8221,13 +8221,15 @@ a:active {
 }
 .attendees-choices-list-container {
   width: 100%;
+  position: relative;
 }
 .attendees-padding {
   padding-left: 160px;
 }
 .attendees-choices-list-content {
   width: 100%;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
@@ -8251,11 +8253,13 @@ a:active {
   width: 80px;
   height: 34px;
   margin-bottom: 1px;
+  margin-right: 1px;
 }
 .attendees-name-list > li {
   width: 80px;
   height: 34px;
   margin-bottom: 1px;
+  margin-right: 1px;
   width: 160px;
   padding: 4px;
   font-size: 80%;
@@ -8289,6 +8293,7 @@ ul.attendees-choice {
   width: 80px;
   height: 34px;
   margin-bottom: 1px;
+  margin-right: 1px;
 }
 .attendees-choice > li:nth-child(odd) {
   background: #f8f8f8;
@@ -8303,11 +8308,12 @@ ul.attendees-choice {
   width: 80px;
   height: 34px;
   margin-bottom: 1px;
+  margin-right: 1px;
   text-align: center;
   font-size: 65%;
   color: #c0c0c0;
   background: transparent !important;
-  padding-top: 4px;
+  padding-top: 6px;
 }
 .attendees-choice-date-weekend > .attendees-choice-date {
   background: rgba(0, 0, 0, 0.04) !important;
@@ -8323,9 +8329,6 @@ ul.attendees-choice {
   background: #4ad16c;
   color: rgba(0, 0, 0, 0.3);
 }
-.attendees-choice > li.att-ch {
-  border-left: 1px rgba(0, 0, 0, 0.06) solid;
-}
 .attendees-choice > li.att-ch-me {
   text-align: center;
   color: rgba(0, 0, 0, 0.05);
@@ -8337,4 +8340,21 @@ ul.attendees-choice {
 .att-ch-me > div > i {
   display: inline-block;
   margin-top: 24px;
+}
+.attendees-choices-top {
+  width: 92px;
+  position: absolute;
+  top: 30px;
+  margin-top: -6;
+  margin-left: -6;
+  display: none;
+}
+.attendees-choices-top-one {
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+.attendees-choices-top-two {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.attendees-choices-top-three {
+  border: 2px solid rgba(0, 0, 0, 0.1);
 }

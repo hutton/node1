@@ -10,7 +10,8 @@ window.ChoiceView = Backbone.View.extend({
 	firstChoiceTemplate: _.template($('#first-choice-template').html()),
 
 	events: {
-	"click":	"dayClicked"
+		"click":		"dayClicked",
+		"touchstart": 	"touchStart"
 	},
 
 	className: "date-cell",
@@ -57,10 +58,22 @@ window.ChoiceView = Backbone.View.extend({
 		}
 	},
 
+	touchStarted: false,
+
+	touchStart: function(event){
+		var that = this;
+
+		this.touchStarted = true;
+
+		_.delay(function(){
+			that.touchStarted = false;
+		}, 500);
+	},
+
 	dayClicked: function(event){
 		var target = $(this.$el).find("div:first");
 
-		if (target.hasClass('selected') || $('.side-info-panel-container').is(':visible')){
+		if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
 			this.model.toggleFree();
 		} else {
 			$(".selected").removeClass('selected');
@@ -80,13 +93,13 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	mouseEnter: function(){
-		if (App.SideInfoPanel !== null){
+		if (App.SideInfoPanel !== null && !this.touchStarted){
 			App.SideInfoPanel.updateModel(this.model);
 		}
 	},
 
 	mouseLeave: function(){
-		if (App.SideInfoPanel !== null){
+		if (App.SideInfoPanel !== null && !this.touchStarted){
 			App.SideInfoPanel.updateModel(null);
 		}
 	}
