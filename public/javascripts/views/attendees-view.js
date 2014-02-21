@@ -1,6 +1,8 @@
 window.AttendeesView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+
+		this.listenTo(this.model, "change", this.topChoiceModelChanged);
 	},
 
 	template: _.template($('#attendees-view-template').html()),
@@ -20,17 +22,17 @@ window.AttendeesView = Backbone.View.extend({
 
 		var newElementRow = newElement.find('.attendees-choices-row');
 
-		var choices = _.filter(this.collection.models, function(choice){
+		this.usedChoices = _.filter(this.collection.models, function(choice){
 			return choice.get('date') >= App.today;
 		});
 
 		var daysPassed = 0;
-		var prevMonthChoice = choices[0];
+		var prevMonthChoice = this.usedChoices[0];
 
 		prevMonthChoice.showMonth = true;
 		prevMonthChoice.daysIn = 0;
 
-		_.each(choices, function(choice){
+		_.each(this.usedChoices, function(choice){
 			if (choice.get('date').getDate() == 1){
 				prevMonthChoice.lastDay = daysPassed;
 
@@ -44,11 +46,11 @@ window.AttendeesView = Backbone.View.extend({
 			daysPassed++;
 		});
 
-		choices[0].showMonth = true;
+		this.usedChoices[0].showMonth = true;
 
 		prevMonthChoice.lastDay = daysPassed;
 
-		_.each(choices, function(choice){
+		_.each(this.usedChoices, function(choice){
 			var newAttendeeView = new AttendeeView({model: choice});
 
 			newElementRow.append(newAttendeeView.$el);
@@ -60,13 +62,19 @@ window.AttendeesView = Backbone.View.extend({
 
 		$('body').append(newElement);
 
-		newElement.find('.attendees-choices-top').height(newElement.height());
+		newElement.find('.attendees-choices-top').height(newElement.height() - 45);
 
 		this.setElement($('.attendees-container-margin').first());
 
 		this.attendeesChoiceListContainerEl = $(".attendees-choices-list-content");
 
+		this.topChoiceOneEl = this.$el.find(".attendees-choices-top-one");
+		this.topChoiceTwoEl = this.$el.find(".attendees-choices-top-two");
+		this.topChoiceThreeEl = this.$el.find(".attendees-choices-top-three");
+
 		this.attendeesChoiceListContainerEl.on("scroll", this.onScroll);
+
+		this.topChoiceModelChanged();
 
 		this.resize();
 
@@ -137,6 +145,34 @@ window.AttendeesView = Backbone.View.extend({
 
 			_.delay(that.checkScrollPosition, 30);
 		}
+	},
+
+	topChoiceModelChanged: function(){
+		this.updateTopChoice(this.topChoiceOneEl, 'one');
+		this.updateTopChoice(this.topChoiceTwoEl, 'two');
+		this.updateTopChoice(this.topChoiceThreeEl, 'three');
+	},
+
+	updateTopChoice: function(element, field){
+		if (!_.isUndefined(element)){
+			if (this.model.has(field)){
+				element.show();
+
+				var model = this.model.get(field);
+
+				var index = this.usedChoices.indexOf(model);
+
+				this.animateTopChoiceTo(index, element);
+			} else {
+				element.hide();
+			}
+		}
+	},
+
+	animateTopChoiceTo: function(index, element){
+		var toValue = index * 81;
+
+		element.animate({left: toValue}, 400);
 	}
 });
 

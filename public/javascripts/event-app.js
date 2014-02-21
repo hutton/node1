@@ -31,8 +31,6 @@ window.EventApp = Backbone.View.extend({
 
         this.ChoicesView.render();
 
-        this.AttendeesView = new AttendeesView({collection: this.choices});
-
         this.SideInfoPanel = new SideInfoPanel();
 
         this.TopChoicesModel = new Backbone.Model({
@@ -42,6 +40,8 @@ window.EventApp = Backbone.View.extend({
         });
 
         this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
+
+        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
         var pathNames = window.location.pathname.split( '/' );
 

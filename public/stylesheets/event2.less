@@ -1006,6 +1006,10 @@ a:active{
     padding-left: @name-panel-width;
 }
 
+.attendees-choices-list-content > table{
+	margin-bottom: 10px;
+}
+
 .attendees-choices-list-content {
     width:100%;
     overflow-x: auto;
@@ -1132,10 +1136,6 @@ ul.attendees-choice{
 	height: 70px;
 }
 
-.att-ch > div > i{
-	display: none;
-}
-
 .att-ch-me > div > i{
 	display: inline-block;
 	margin-top: 24px;
@@ -1145,20 +1145,22 @@ ul.attendees-choice{
 	width: 92px;
 	position: absolute;
 	top: 30px;
-	margin-top: -6;
-	margin-left: -6;
+	margin-left: -6px;
+	z-index: 100;
+	border-width: 4px;
+	border-style: solid;
 
-	display: none;
+	pointer-events: none;
 }
 
 .attendees-choices-top-one{
-	border: 2px solid rgba(0,0,0,0.3);
+	border-color: rgba(0,0,0,0.14);
 }
 
 .attendees-choices-top-two{
-	border: 2px solid rgba(0,0,0,0.2);
+	border-color: rgba(0,0,0,0.08);
 }
 
 .attendees-choices-top-three{
-	border: 2px solid rgba(0,0,0,0.1);
+	border-color: rgba(0,0,0,0.06);
 }
