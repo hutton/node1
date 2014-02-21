@@ -1,4 +1,6 @@
 - AV show top choices
+- Add ticks to calendar view
+- Narrow margins of mobile calendar view
 - Cut off old dates
 - Attendee view: allow new attendee updating
 
