@@ -258,7 +258,11 @@ window.ChoicesView = Backbone.View.extend({
 			 
 			parent.append(this.tableEl);
 
-			this.$el.find(".calendar-choices-top").width(size).height(size);
+			var topChoiceSize = size - 2;
+
+			this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
+
+			App.realignAdorners();
 		}
 	},
 
