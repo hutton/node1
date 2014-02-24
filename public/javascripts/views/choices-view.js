@@ -3,6 +3,7 @@ window.ChoiceView = Backbone.View.extend({
 		_.bindAll(this);
 
 		this.listenTo(this.model, "change", this.modelChanged);
+		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -23,11 +24,15 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.updateView(false);
 
+		this.updateTopChoices(false);
+
 		return this;
 	},
 
 	modelChanged: function(){
 		this.updateView(true);
+
+		this.updateTopChoices(true);
 	},
 
 	updateView: function(animate){
@@ -54,6 +59,34 @@ window.ChoiceView = Backbone.View.extend({
 				} else {
 					this.$el.find('.top-choice-text').remove();
 				}
+			}
+		}
+	},
+
+	adornersRespositioned: function(){
+		this.updateTopChoices(false);
+	},
+
+	updateTopChoices: function(animate){
+		if (this.model.has('top-choice')){
+			var place = this.model.get('top-choice');
+
+			var classSuffix;
+
+			if (place === 1){
+				classSuffix = "one";
+			} else if (place === 2){
+				classSuffix = "two";
+			} else if (place === 3){
+				classSuffix = "three";
+			}
+
+			var position = this.$el.position();
+
+			if (animate){
+				$(".calendar-choices-top-" + classSuffix).animate({left: position.left, top: position.top}, 400);
+			} else {
+				$(".calendar-choices-top-" + classSuffix).animate({left: position.left, top: position.top}, 0);
 			}
 		}
 	},
@@ -224,6 +257,8 @@ window.ChoicesView = Backbone.View.extend({
 			this.tableEl.find(".info-row-names").width(windowSize - 132);
 			 
 			parent.append(this.tableEl);
+
+			this.$el.find(".calendar-choices-top").width(size).height(size);
 		}
 	},
 

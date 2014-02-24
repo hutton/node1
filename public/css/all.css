@@ -7522,6 +7522,7 @@ a:active {
   margin-right: auto;
   min-height: 800px;
   z-index: 101;
+  position: relative;
 }
 #top-row-spacer {
   height: 60px;
@@ -8341,6 +8342,7 @@ ul.attendees-choice {
   display: inline-block;
   margin-top: 24px;
 }
+/************ Top choice markers **************/
 .attendees-choices-top {
   width: 92px;
   position: absolute;
@@ -8358,5 +8360,23 @@ ul.attendees-choice {
   border-color: rgba(0, 0, 0, 0.08);
 }
 .attendees-choices-top-three {
+  border-color: rgba(0, 0, 0, 0.06);
+}
+.calendar-choices-top {
+  position: absolute;
+  margin-left: -4px;
+  margin-top: -4px;
+  z-index: 100;
+  border-width: 4px;
+  border-style: solid;
+  pointer-events: none;
+}
+.calendar-choices-top-one {
+  border-color: rgba(0, 0, 0, 0.14);
+}
+.calendar-choices-top-two {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+.calendar-choices-top-three {
   border-color: rgba(0, 0, 0, 0.06);
 }

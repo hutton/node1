@@ -147,6 +147,20 @@ window.EventApp = Backbone.View.extend({
         // }, 1000);
     },
 
+    realignAdorners: function(){
+        if (this.TopChoicesModel.has("one")){
+            this.TopChoicesModel.get("one").trigger("repositioned");
+        }
+
+        if (this.TopChoicesModel.has("two")){
+            this.TopChoicesModel.get("two").trigger("repositioned");
+        }
+
+        if (this.TopChoicesModel.has("three")){
+            this.TopChoicesModel.get("three").trigger("repositioned");
+        }
+    },
+
     onResizeWindow: function(){
         this.ChoicesView.resize();
         this.AttendeesView.resize();

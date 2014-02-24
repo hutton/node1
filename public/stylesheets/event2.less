@@ -195,6 +195,8 @@ a:active{
 	min-height: 800px;
 	// background: white;
 	z-index: 101;
+
+	position: relative;
 }
 
 #top-row-spacer{
@@ -1141,6 +1143,8 @@ ul.attendees-choice{
 	margin-top: 24px;
 }
 
+
+/************ Top choice markers **************/
 .attendees-choices-top{
 	width: 92px;
 	position: absolute;
@@ -1164,3 +1168,27 @@ ul.attendees-choice{
 .attendees-choices-top-three{
 	border-color: rgba(0,0,0,0.06);
 }
+
+.calendar-choices-top{
+	position: absolute;
+	margin-left: -4px;
+	margin-top: -4px;
+	z-index: 100;
+	border-width: 4px;
+	border-style: solid;
+
+	pointer-events: none;
+}
+
+.calendar-choices-top-one{
+	.attendees-choices-top-one;
+}
+
+.calendar-choices-top-two{
+	.attendees-choices-top-two;
+}
+
+.calendar-choices-top-three{
+	.attendees-choices-top-three;
+}
+

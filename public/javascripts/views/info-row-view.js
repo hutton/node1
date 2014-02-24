@@ -157,7 +157,7 @@ window.InfoRowView = Backbone.View.extend({
 		this.$el.after(this.template(templateValues));
 
 		var windowSize = Math.min($("body").first().width(), 600);
-	  	$(".info-row-names").width(windowSize - 132);
+		$(".info-row-names").width(windowSize - 132);
 
 		this.unbindEvents();
 
@@ -165,15 +165,7 @@ window.InfoRowView = Backbone.View.extend({
 
 		this.bindEvents();
 
-		this.$el.next()
-			.find('td')
-			.wrapInner('<div style="display: none;" />')
-			.parent()
-			.find('td > div')
-			.slideDown(200, function(){
-				var $set = $(this);
-				$set.replaceWith($set.contents());
-			});
+		App.realignAdorners();
 	},
 
 	unbindEvents: function(){
@@ -204,14 +196,9 @@ window.InfoRowView = Backbone.View.extend({
 
 		var allSelectedRows = $('#selected-row');
 
-		allSelectedRows
-			.find('td')
-			.wrapInner('<div style="display: block;" />')
-			.parent()
-			.find('td > div')
-			.slideUp(200, function(){
-			allSelectedRows.remove();
-			});
+		allSelectedRows.remove();
+
+		App.realignAdorners();
 	},
 
 	buildAttendeeText: function(choiceModel){
