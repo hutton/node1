@@ -1,10 +1,21 @@
-If orientation changes switch mode
+div{
+    width: 80px;
+    height: 80px;
+    border: 4px solid rgba(0,0,0,0.2);
+    position: relative;
+    text-align: right;
+    font-size: 10px;
+}
 
-height < 600 || width < 400 hide footer
-height < 400 hide header
-
-
-$( window ).width()
-$( window ).height()
-
-320x240, 480x320 (iPhone), 568x320 (5), 800x480, 960x480, 1024x800, and 1024x768.
+div:after{
+    position: absolute;
+    content: "";
+    right: 0px;
+    
+    width: 0; 
+	height: 0; 
+	border-bottom: 25px solid transparent;
+	border-left: 25px solid transparent;
+	
+	border-top: 25px solid rgba(0,0,0,0.2);
+}
