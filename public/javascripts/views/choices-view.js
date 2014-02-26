@@ -24,7 +24,7 @@ window.ChoiceView = Backbone.View.extend({
 			choices = this.model.get('choices');
 		}
 
-		this.$el.html(this.template({ date: this.model.get('date'), choices: choices } ));
+		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability() } ));
 
 		this.$el.hover(this.mouseEnter, this.mouseLeave);		
 
@@ -54,19 +54,16 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.find('.free-marker').removeClass('free');
 		}
 
-		if (false /*this.model.has("top-choice")*/){
-			if (this.$el.find('.top-choice-text').length === 0){
-				if (this.model.get("top-choice") > 0){
-					this.$el.find('.date-cell-container').append(this.firstChoiceTemplate({choice: this.model.get("top-choice")}));
-				}
+		var availList = this.model.getAttendeeAvailability();
+
+		this.$el.find(".markers-container li").each(function(index, element){
+			if (availList[index]){
+				$(this).addClass("a");
 			} else {
-				if (this.model.get("top-choice") > 0){
-					this.$el.find('.top-choice-text').html(this.model.get("top-choice"));
-				} else {
-					this.$el.find('.top-choice-text').remove();
-				}
+				$(this).removeClass("a");
 			}
-		}
+		});
+
 	},
 
 	adornersRespositioned: function(){

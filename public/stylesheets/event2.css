@@ -74,13 +74,15 @@ a:active{color:#4ad16c;text-decoration:none;}
 .event-table{border-collapse:collapse;border-spacing:0px;}
 .event-table tr>td.date-cell{position:relative;overflow:hidden;height:100%;}
 .free-marker{display:none;position:absolute;color:#4ad16c;top:50%;text-align:center;font-size:130%;width:100%;}
-.free{display:block;}
-.markers-container>ul{margin:0px;padding:0px;}
-.markers-container li{float:left;height:4px;width:4px;color:#4ad16c;border-radius:4px;}
+.free{display:none;}
+.markers-container{position:absolute;bottom:0px;margin:2px;}
+.markers-container>ul{margin:2px;padding:0;list-style-type:none;list-style-image:none;}
+.markers-container li{float:left;margin:0px 2px 2px 0px;background:#e0e0e0;width:7px;height:7px;border-radius:5px;}
+.markers-container li.a{background:#4ad16c;}
 .today .date-text{color:#4ad16c;opacity:0.9 !important;}
 .cell-selected>div.date-cell-container{background:rgba(74, 209, 108, 0.7) !important;}
 .cell-selected .date-text{color:white !important;opacity:1.0 !important;}
-@media screen and (min-width:450px){.event-table tr>td.date-cell{font-size:100%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.9em;} .month{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .free-marker{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);}}@media screen and (max-width:450px){.event-table tr>td.date-cell{font-size:60%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.8em;} .month{-moz-transform:translate(0px, -12px);-webkit-transform:translate(0px, -12px);-o-transform:translate(0px, -12px);-ms-transform:translate(0px, -12px);transform:translate(0px, -12px);} .free-marker{-moz-transform:translate(0px, -10px);-webkit-transform:translate(0px, -10px);-o-transform:translate(0px, -10px);-ms-transform:translate(0px, -10px);transform:translate(0px, -10px);} .date-text{top:-1px;left:-2px;}}.register-attendee-message{display:none;font-size:14px;}
+@media screen and (min-width:450px){.event-table tr>td.date-cell{font-size:100%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.9em;} .month{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .free-marker{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .markers-container li{margin:0px 2px 2px 0px;width:7px;height:7px;}}@media screen and (max-width:450px){.event-table tr>td.date-cell{font-size:60%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.8em;} .month{-moz-transform:translate(0px, -12px);-webkit-transform:translate(0px, -12px);-o-transform:translate(0px, -12px);-ms-transform:translate(0px, -12px);transform:translate(0px, -12px);} .free-marker{-moz-transform:translate(0px, -10px);-webkit-transform:translate(0px, -10px);-o-transform:translate(0px, -10px);-ms-transform:translate(0px, -10px);transform:translate(0px, -10px);} .date-text{top:-1px;left:-2px;} .markers-container li{margin:0px 1px 1px 0px;width:4px;height:4px;}}.register-attendee-message{display:none;font-size:14px;}
 .register-attendee-email-input-container{max-width:400px;margin:0px auto;line-height:25px;}
 #register-attendee-email-input{width:100%;}
 .register-attendee-button-container{max-width:400px;margin:3px auto;border:none;background:none;}
@@ -169,6 +171,6 @@ ul.attendees-choice{margin:0px;padding:0px;}
 .attendees-choices-top-two{z-index:20;}
 .attendees-choices-top-three{z-index:10;}
 .attendees-choices-top>div{left:0px;top:-2px;position:relative;}
-.calendar-choices-top{position:absolute;margin-left:-1px;margin-top:-1px;z-index:100;border-width:2px;border-style:solid;pointer-events:none;color:white;text-align:right;font-size:55%;border-color:#4ad16c;}
+.calendar-choices-top{position:absolute;margin-left:-1px;margin-top:3px;z-index:100;pointer-events:none;color:white;text-align:right;font-size:55%;}
 .calendar-choices-top:before{position:absolute;content:"";right:0px;width:0;height:0;border-bottom:20px solid transparent;border-left:20px solid transparent;z-index:-1;border-top:20px solid #4ad16c;}
 .calendar-choices-top>div{left:0px;top:-2px;position:relative;}

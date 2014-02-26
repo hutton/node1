@@ -146,13 +146,17 @@
           <@= date.getDate() @>
       </div>
       <div class="free-marker"><i class="fa fa-check"></i></div>
-      <!--div class="markers-container">
+      <div class="markers-container">
         <ul>
-          <@ _.each(choices, function(choice){ @>
+          <@ _.each(availList, function(isAvailable){ @>
+            <@ if (isAvailable) { @>
+            <li class="a"></li>
+            <@ } else { @>
             <li></li>
+            <@ } @>
           <@ }); @>
         </ul>
-      </div-->
+      </div>
     </div>
   </script>
 

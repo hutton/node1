@@ -7798,18 +7798,29 @@ a:active {
   width: 100%;
 }
 .free {
-  display: block;
+  display: none;
+}
+.markers-container {
+  position: absolute;
+  bottom: 0px;
+  margin: 2px;
 }
 .markers-container > ul {
-  margin: 0px;
-  padding: 0px;
+  margin: 2px;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
 }
 .markers-container li {
   float: left;
-  height: 4px;
-  width: 4px;
-  color: #4ad16c;
-  border-radius: 4px;
+  margin: 0px 2px 2px 0px;
+  background: #e0e0e0;
+  width: 7px;
+  height: 7px;
+  border-radius: 5px;
+}
+.markers-container li.a {
+  background: #4ad16c;
 }
 .today .date-text {
   color: #4ad16c;
@@ -7846,6 +7857,11 @@ a:active {
     -ms-transform: translate(0px, -18px);
     transform: translate(0px, -18px);
   }
+  .markers-container li {
+    margin: 0px 2px 2px 0px;
+    width: 7px;
+    height: 7px;
+  }
 }
 @media screen and (max-width: 450px) {
   .event-table tr > td.date-cell {
@@ -7874,6 +7890,11 @@ a:active {
   .date-text {
     top: -1px;
     left: -2px;
+  }
+  .markers-container li {
+    margin: 0px 1px 1px 0px;
+    width: 4px;
+    height: 4px;
   }
 }
 /**************************************/
@@ -8411,15 +8432,12 @@ ul.attendees-choice {
 .calendar-choices-top {
   position: absolute;
   margin-left: -1px;
-  margin-top: -1px;
+  margin-top: 3px;
   z-index: 100;
-  border-width: 2px;
-  border-style: solid;
   pointer-events: none;
   color: white;
   text-align: right;
   font-size: 55%;
-  border-color: #4ad16c;
 }
 .calendar-choices-top:before {
   position: absolute;

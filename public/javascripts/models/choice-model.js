@@ -178,5 +178,20 @@ window.ChoiceModel = Backbone.Model.extend({
             (this.has('top-choice') && this.get('top-choice') !== value)){
             this.set('top-choice', value);
         }
+	},
+
+	getAttendeeAvailability: function(){
+		var that = this;
+		var list = [];
+
+		_.each(App.attendees.models, function(attendee){
+			if (that.isAttendeeFree(attendee.get("_id"))){
+				list.push(true);
+			} else {
+				list.push(false);
+			}
+		});
+
+		return list;
 	}
 });
