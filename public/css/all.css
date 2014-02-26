@@ -7699,7 +7699,7 @@ a:active {
   height: auto;
 }
 .event-table td {
-  text-align: center;
+  text-align: left;
   position: relative;
   color: #c0c0c0;
   -webkit-touch-callout: none;
@@ -7738,9 +7738,9 @@ a:active {
   width: auto;
   height: auto;
 }
-.unknown {
-  position: relative;
-  top: 50%;
+.date-text {
+  margin-left: 5px;
+  position: absolute;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -7789,26 +7789,42 @@ a:active {
   height: 100%;
 }
 .free-marker {
+  display: none;
   position: absolute;
   color: #4ad16c;
-  font-size: 80%;
-  bottom: -3px;
-  right: 2px;
+  top: 50%;
+  text-align: center;
+  font-size: 130%;
+  width: 100%;
 }
-.today .unknown {
+.free {
+  display: block;
+}
+.markers-container > ul {
+  margin: 0px;
+  padding: 0px;
+}
+.markers-container li {
+  float: left;
+  height: 4px;
+  width: 4px;
+  color: #4ad16c;
+  border-radius: 4px;
+}
+.today .date-text {
   color: #4ad16c;
   opacity: 0.9 !important;
 }
 .cell-selected > div.date-cell-container {
   background: rgba(74, 209, 108, 0.7) !important;
 }
-.cell-selected .unknown {
+.cell-selected .date-text {
   color: white !important;
   opacity: 1.0  !important;
 }
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
-    font-size: 1.2em;
+    font-size: 100%;
   }
   .event-table tr > td {
     font-size: 1em;
@@ -7816,8 +7832,14 @@ a:active {
   .info-row-text-container {
     font-size: 0.9em;
   }
-  .unknown,
   .month {
+    -moz-transform: translate(0px, -18px);
+    -webkit-transform: translate(0px, -18px);
+    -o-transform: translate(0px, -18px);
+    -ms-transform: translate(0px, -18px);
+    transform: translate(0px, -18px);
+  }
+  .free-marker {
     -moz-transform: translate(0px, -18px);
     -webkit-transform: translate(0px, -18px);
     -o-transform: translate(0px, -18px);
@@ -7827,7 +7849,7 @@ a:active {
 }
 @media screen and (max-width: 450px) {
   .event-table tr > td.date-cell {
-    font-size: 0.9em;
+    font-size: 60%;
   }
   .event-table tr > td {
     font-size: 1em;
@@ -7835,13 +7857,23 @@ a:active {
   .info-row-text-container {
     font-size: 0.8em;
   }
-  .unknown,
   .month {
     -moz-transform: translate(0px, -12px);
     -webkit-transform: translate(0px, -12px);
     -o-transform: translate(0px, -12px);
     -ms-transform: translate(0px, -12px);
     transform: translate(0px, -12px);
+  }
+  .free-marker {
+    -moz-transform: translate(0px, -10px);
+    -webkit-transform: translate(0px, -10px);
+    -o-transform: translate(0px, -10px);
+    -ms-transform: translate(0px, -10px);
+    transform: translate(0px, -10px);
+  }
+  .date-text {
+    top: -1px;
+    left: -2px;
   }
 }
 /**************************************/
@@ -7881,6 +7913,7 @@ a:active {
   text-align: left;
 }
 .info-row-text-container {
+  text-align: center;
   margin-left: 80px;
   padding: 15px;
   background: #f8f8f8;
@@ -7921,6 +7954,7 @@ a:active {
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
+  font-size: 100%;
   background: #4ad16c;
   color: white;
   position: absolute;

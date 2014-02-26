@@ -142,10 +142,17 @@
 
   <script type="text/template" id="choice-template">
     <div class="date-cell-container" style="background: #ffffff;">
-      <div class="unknown">
+      <div class="date-text">
           <@= date.getDate() @>
       </div>
       <div class="free-marker"><i class="fa fa-check"></i></div>
+      <!--div class="markers-container">
+        <ul>
+          <@ _.each(choices, function(choice){ @>
+            <li></li>
+          <@ }); @>
+        </ul>
+      </div-->
     </div>
   </script>
 
@@ -173,7 +180,7 @@
               </div>
               <div class="info-row-selector-free <@ if(isFree){ @> info-row-selector-free-show <@ } @>">
                 <div>
-                Free
+                <i class="fa fa-check"></i>
                 </div>
               </div>
               <div class="info-row-text-container">

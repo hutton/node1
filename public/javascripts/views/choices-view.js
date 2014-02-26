@@ -18,7 +18,13 @@ window.ChoiceView = Backbone.View.extend({
 	className: "date-cell",
 
 	render: function(){
-		this.$el.html(this.template(this.model.attributes));
+		var choices = [];
+
+		if (this.model.has('choices')){
+			choices = this.model.get('choices');
+		}
+
+		this.$el.html(this.template({ date: this.model.get('date'), choices: choices } ));
 
 		this.$el.hover(this.mouseEnter, this.mouseLeave);		
 
@@ -40,12 +46,12 @@ window.ChoiceView = Backbone.View.extend({
 
 		target.css("background-color", this.model.calcBackground());
 		target.css("border-color", this.model.calcBorder());
-		target.find("div.unknown").css("opacity", this.model.calcForegroundOpacity());
+		target.find("div.date-text").css("opacity", this.model.calcForegroundOpacity());
 
 		if (this.model.isFree() || this.model.pretendFree){
-			this.$el.find('.free-marker').show();
+			this.$el.find('.free-marker').addClass('free');
 		} else {
-			this.$el.find('.free-marker').hide();
+			this.$el.find('.free-marker').removeClass('free');
 		}
 
 		if (false /*this.model.has("top-choice")*/){

@@ -400,7 +400,7 @@ a:active{
 }
 
 .event-table td{
-	text-align: center;
+	text-align: left;
 	position: relative;
 	color: @date-color;
 
@@ -417,8 +417,8 @@ a:active{
 	color: @weekend-color;
 }
 
-.event-table td:nth-of-type(6) .unknown,
-.event-table td:nth-of-type(7) .unknown{
+.event-table td:nth-of-type(6) .date-text,
+.event-table td:nth-of-type(7) .date-text{
 }
 
 .date-cell-container{
@@ -459,9 +459,10 @@ a:active{
 	height: auto;
 }
 
-.unknown{
-	position: relative;
-	top: 50%;
+.date-text{
+	margin-left: 5px;
+
+	position: absolute;
 
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -523,16 +524,41 @@ a:active{
 }
 
 .free-marker{
+	display: none;
+
 	position: absolute;
-	color: @free-color;
+	color: @free-color;	
 
-	font-size: 80%;
+	top: 50%;
 
-	bottom: -3px;
-	right: 2px;
+	text-align: center;
+
+	font-size: 130%;
+	width: 100%;
 }
 
-.today .unknown{
+.free{
+	display: block;
+}
+
+.markers-container{
+
+}
+
+.markers-container > ul{
+	margin: 0px;
+	padding: 0px;
+}
+
+.markers-container li{
+	float: left;
+	height: 4px;
+	width: 4px;
+	color: @free-color;
+	border-radius: 4px;
+}
+
+.today .date-text{
 	color: @free-color;
 	opacity: 0.9 !important;
 }
@@ -547,7 +573,7 @@ a:active{
 	background: rgba(74, 209, 108, 0.7) !important;
 }
 
-.cell-selected .unknown{
+.cell-selected .date-text{
 	color: white !important;
 	opacity: 1.0  !important;
 }
@@ -555,7 +581,7 @@ a:active{
 
 @media screen and (min-width: 450px){
 	.event-table tr > td.date-cell{
-		font-size: 1.2em;
+		font-size: 100%;
 	}
 
 	.event-table tr > td{
@@ -566,15 +592,18 @@ a:active{
 		font-size: 0.9em;
 	}
 
-	.unknown, .month{
+	.month{
 		.translate(0px, -18px);
-		// margin-top: -18px;
+	}
+
+	.free-marker{
+		.translate(0px, -18px);
 	}
 }
 
 @media screen and (max-width: 450px){
 	.event-table tr > td.date-cell{
-		font-size: 0.9em;
+		font-size: 60%;
 	}
 
 	.event-table tr > td{
@@ -585,9 +614,17 @@ a:active{
 		font-size: 0.8em;
 	}
 
-	.unknown, .month{
+	.month{
 		.translate(0px, -12px);
-		//margin-top: -12px;
+	}
+
+	.free-marker{
+		.translate(0px, -10px);
+	}
+
+	.date-text{
+		top: -1px;
+		left: -2px;
 	}
 }
 
@@ -632,6 +669,7 @@ a:active{
 }
 
 .info-row-text-container {
+	text-align: center;
 	margin-left: 80px;
 	padding: 15px;
 	background: @light-background-color;
@@ -662,6 +700,8 @@ a:active{
 
 .info-row-selector-free{
 	.info-row-selector;
+	font-size: 100%;
+
 	background: @free-color;
 	color: white;
 	position: absolute;
