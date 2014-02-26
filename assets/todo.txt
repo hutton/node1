@@ -1,5 +1,5 @@
-- AV show top choices
-- Add ticks to calendar view
+- Narrow names on attendee view
+- Add blank row between months in calendar view
 - Narrow margins of mobile calendar view
 - Cut off old dates
 - Attendee view: allow new attendee updating
@@ -15,6 +15,8 @@
 
 Done
 ----
+- AV show top choices
+- Add ticks to calendar view
 - Tidy attendees template
 - Look at iPad touch events
 - Attendee view: allow updating
