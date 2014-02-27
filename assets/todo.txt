@@ -1,12 +1,12 @@
+- Add name
+- Hide calendar view top choices when not set
+- Change name style in calendar view
 - Narrow names on attendee view
-- Add blank row between months in calendar view
-- Narrow margins of mobile calendar view
 - Cut off old dates
 - Attendee view: allow new attendee updating
 
 - Hover top choice show in calendar
 - Click top choice to bring into view
-- Animate toggle of available
 
 
 =======
@@ -15,6 +15,8 @@
 
 Done
 ----
+- Add blank row between months in calendar view
+- Narrow margins of mobile calendar view
 - AV show top choices
 - Add ticks to calendar view
 - Tidy attendees template
