@@ -12,7 +12,7 @@ window.ChoiceModel = Backbone.Model.extend({
 	pretendFree: false,
 
 	isFree: function(){
-		if (window.App.currentAttendee != null){
+		if (window.App.currentAttendee !== null){
 			var currentAttendeeId = window.App.currentAttendee.get("_id");
 			var freeAttendees = this.get("free");
 
@@ -96,81 +96,6 @@ window.ChoiceModel = Backbone.Model.extend({
 
 			$('#register-free-dates').val(window.App.isFree);
 		}
-	},
-
-	calcBackground: function(){
-		var freeDates = 0;
-
-		var redStart = 236;
-		var greenStart = 239;
-		var blueStart = 236;
-
-		var redEnd = 204;
-		var greenEnd = 208;
-		var blueEnd = 200;
-
-		var total = window.App.attendees.length;
-
-		if (this.has("free")){
-			freeDates = this.get("free").length;
-		}
-
-		var percent = (freeDates / total);
-
-		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
-	},
-
-	calcBorder: function(){
-		var freeDates = 0;
-
-		var darkerThanBackground = 10;
-
-		var redStart = 236 - darkerThanBackground;
-		var greenStart = 239 - darkerThanBackground;
-		var blueStart = 236 - darkerThanBackground;
-
-		var redEnd = 204 - darkerThanBackground;
-		var greenEnd = 208 - darkerThanBackground;
-		var blueEnd = 200 - darkerThanBackground;
-
-		var total = window.App.attendees.length;
-
-		if (this.has("free")){
-			freeDates = this.get("free").length;
-		}
-
-		var percent = (freeDates / total);
-
-		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
-	},
-
-	calcForegroundOpacity: function(){
-		var freeDates = 0;
-
-		var start = 0.22;
-		var end = 0.37;
-
-		var total = window.App.attendees.length;
-
-		if (this.has("free")){
-			freeDates = this.get("free").length;
-		}
-
-		var percent = (freeDates / total);
-
-		var diff = start - end;
-
-		return start - (percent * diff);
-	},
-
-	interpolate: function(start, end, percent){
-		var diff = start - end;
-
-		var target = start - (percent * diff);
-
-		target = Math.round(target);
-
-		return target;
 	},
 
 	setTopChoice: function(value){

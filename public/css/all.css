@@ -7668,7 +7668,7 @@ a:active {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 0.45em;
+  font-size: 46%;
   margin-bottom: 2px;
 }
 .days-table td {
@@ -7714,11 +7714,8 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
+  background: #ecefec;
   position: relative;
-  margin-top: 3px;
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-bottom: 3px;
   height: 100%;
   opacity: 0.9;
   cursor: pointer;
@@ -7748,6 +7745,7 @@ a:active {
   -ms-user-select: none;
   user-select: none;
   color: #000000;
+  opacity: 0.22;
 }
 .content {
   position: relative;
@@ -7803,7 +7801,6 @@ a:active {
 .markers-container {
   position: absolute;
   bottom: 0px;
-  margin: 2px;
 }
 .markers-container > ul {
   margin: 2px;
@@ -7857,10 +7854,23 @@ a:active {
     -ms-transform: translate(0px, -18px);
     transform: translate(0px, -18px);
   }
+  .markers-container {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+  }
   .markers-container li {
     margin: 0px 2px 2px 0px;
     width: 7px;
     height: 7px;
+  }
+  .date-cell-container {
+    margin: 3px;
+  }
+  .calendar-choices-top {
+    margin-left: -1px;
+    margin-top: 3px;
   }
 }
 @media screen and (max-width: 450px) {
@@ -7891,10 +7901,23 @@ a:active {
     top: -1px;
     left: -2px;
   }
+  .markers-container {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 1px;
+    margin-left: 1px;
+  }
   .markers-container li {
     margin: 0px 1px 1px 0px;
     width: 4px;
     height: 4px;
+  }
+  .date-cell-container {
+    margin: 2px;
+  }
+  .calendar-choices-top {
+    margin-left: 0px;
+    margin-top: 2px;
   }
 }
 /**************************************/
@@ -8002,6 +8025,7 @@ a:active {
 .info-row-names {
   text-align: left;
   margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 0.85em;
   color: #d0d0d0;
   word-wrap: break-word;
@@ -8262,7 +8286,7 @@ a:active {
 }
 .attendees-name-list-container {
   float: left;
-  width: 160px;
+  width: 130px;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -8272,7 +8296,7 @@ a:active {
   position: relative;
 }
 .attendees-padding {
-  padding-left: 160px;
+  padding-left: 130px;
 }
 .attendees-choices-list-content > table {
   margin-bottom: 10px;
@@ -8286,7 +8310,7 @@ a:active {
 }
 .attendees-choices-month-container {
   position: absolute;
-  left: 160px;
+  left: 130px;
   color: #4ad16c;
   z-index: 100;
 }
@@ -8311,9 +8335,9 @@ a:active {
   height: 34px;
   margin-bottom: 1px;
   margin-right: 1px;
-  width: 160px;
+  width: 130px;
   padding: 4px;
-  font-size: 80%;
+  font-size: 70%;
   text-align: right;
   color: #c0c0c0;
 }
@@ -8431,13 +8455,11 @@ ul.attendees-choice {
 }
 .calendar-choices-top {
   position: absolute;
-  margin-left: -1px;
-  margin-top: 3px;
   z-index: 100;
   pointer-events: none;
   color: white;
   text-align: right;
-  font-size: 55%;
+  font-size: 45%;
 }
 .calendar-choices-top:before {
   position: absolute;
@@ -8445,13 +8467,13 @@ ul.attendees-choice {
   right: 0px;
   width: 0;
   height: 0;
-  border-bottom: 20px solid transparent;
-  border-left: 20px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-left: 18px solid transparent;
   z-index: -1;
-  border-top: 20px solid #4ad16c;
+  border-top: 18px solid #4ad16c;
 }
 .calendar-choices-top > div {
-  left: 0px;
-  top: -2px;
+  left: -2px;
+  top: 0px;
   position: relative;
 }

@@ -207,13 +207,6 @@ window.InfoRowView = Backbone.View.extend({
 
 		if (window.App.currentAttendeeId !== -1 && App.attendees.length === 1){
 			footerText = "Only you are invited";
-		} else {
-			if (_.isUndefined(freeAttendees)){
-				footerText = "0 of " + App.attendees.length + " people are free";
-
-			} else {
-				footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
-			}
 		}
 
 		return footerText;

@@ -44,9 +44,9 @@ window.ChoiceView = Backbone.View.extend({
 	updateView: function(animate){
 		var target = this.$el.find(".date-cell-container");
 
-		target.css("background-color", this.model.calcBackground());
-		target.css("border-color", this.model.calcBorder());
-		target.find("div.date-text").css("opacity", this.model.calcForegroundOpacity());
+		// target.css("background-color", this.model.calcBackground());
+		// target.css("border-color", this.model.calcBorder());
+		// target.find("div.date-text").css("opacity", this.model.calcForegroundOpacity());
 
 		if (this.model.isFree() || this.model.pretendFree){
 			this.$el.find('.free-marker').addClass('free');
@@ -277,17 +277,10 @@ window.ChoicesView = Backbone.View.extend({
 
 		var itemsInserted = 0;
 
-		if (rowItemCount > 3){
-			showTitleAt = 7 - rowItemCount;
-		}
+		showTitleAt = 7 - rowItemCount;
 
-		while (itemsInserted < 7){
+		while (itemsInserted < 14){
 			var newItem = $(this.monthTitleTemplate({month: month, showTitle: itemsInserted == showTitleAt}));
-
-			if (first){
-				newItem.removeClass("first-seven").addClass("first");
-				first = false;
-			}
 
 			if (moment().format("MMMM") == month){
 				newItem.addClass("this-month");
@@ -296,7 +289,7 @@ window.ChoicesView = Backbone.View.extend({
 			row.append(newItem);
 			itemsInserted++;
 
-			if (itemsInserted == 7 - rowItemCount){
+			if (itemsInserted == 7 - rowItemCount || itemsInserted == 14 - rowItemCount){
 				this.tableEl.append($("<tr></tr>"));
 
 				row = this.tableEl.find("tr:last");
