@@ -25,6 +25,7 @@ window.EventApp = Backbone.View.extend({
 
         if (_.isUndefined(this.currentAttendee)){
             this.currentAttendee = null;
+            this.attendees.add({"prettyName": "You", "_id": null}, {"at": 0});
         }
 
         this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
@@ -39,7 +40,7 @@ window.EventApp = Backbone.View.extend({
             three: null
         });
 
-        this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
+        // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
 
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
@@ -392,14 +393,23 @@ window.EventApp = Backbone.View.extend({
 
         if (bestModel !== null){
             bestModel.setTopChoice(1);
+            $('.calendar-choices-top-one').show();
+        } else {
+            $('.calendar-choices-top-one').hide();
         }
 
         if (secondBestModel !== null){
             secondBestModel.setTopChoice(2);
+            $('.calendar-choices-top-two').show();
+        } else {
+            $('.calendar-choices-top-two').hide();
         }
 
         if (thirdBestModel !== null){
             thirdBestModel.setTopChoice(3);
+            $('.calendar-choices-top-three').show();
+        } else {
+            $('.calendar-choices-top-three').hide();
         }
 
         _.each(modelsWithTopChoice, function(model){

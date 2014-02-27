@@ -8123,14 +8123,13 @@ a:active {
   margin-right: auto;
 }
 .side-info-panel {
-  margin-left: 3px;
+  margin-left: 20px;
   width: 200px;
   position: relative;
   left: 600px;
   color: #c0c0c0;
   font-weight: 200;
   display: inline-block;
-  text-align: center;
   pointer-events: all;
   position: absolute;
 }
@@ -8138,8 +8137,8 @@ a:active {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 6px;
+  padding-left: 11px;
   position: absolute;
-  width: 200px;
   left: 0px;
   opacity: 1.0;
   -moz-transition-duration: 0.25s;
@@ -8172,11 +8171,29 @@ a:active {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding: 0px 16px;
+}
+.side-info-name-marker {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 10px;
+  background: #c0c0c0;
+  margin-right: 4px;
+  opacity: 0.0;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+  position: relative;
+  top: -2px;
 }
 .side-info-free {
+  color: #4ad16c;
+}
+.side-info-free .side-info-name-marker {
   background: #4ad16c;
-  color: white;
+  opacity: 1.0;
 }
 .side-info-invite {
   font-size: 0.8em;
@@ -8204,6 +8221,7 @@ a:active {
 }
 .side-info-panel-left-title {
   margin-top: 14px;
+  color: #4ad16c;
 }
 .top-choice-item {
   -moz-transition-duration: 0.4s;

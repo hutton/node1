@@ -81,9 +81,9 @@
     <div class="event-container-margin">
       <div class="event-container">
        <div class="row">
-          <div class="calendar-choices-top calendar-choices-top-one"><div>1</div></div>
-          <div class="calendar-choices-top calendar-choices-top-two"><div>2</div></div>
-          <div class="calendar-choices-top calendar-choices-top-three"><div>3</div></div>
+          <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
+          <div class="calendar-choices-top calendar-choices-top-two" style="display: none;"><div>2</div></div>
+          <div class="calendar-choices-top calendar-choices-top-three" style="display: none;"><div>3</div></div>
          <table class="table event-table">
               <colgroup>
                 <col width="14.2%">
@@ -220,7 +220,7 @@
         <div class="side-info-panel">
           <ul>
             <@ _.each(attendees, function(attendee){ @>
-              <li><div class="side-info-name"><@= attendee.get('prettyName') @></div></li>
+              <li><div class="side-info-name"><div class="side-info-name-marker"></div><@= attendee.get('prettyName') @></div></li>
             <@ }); @>
           </ul>
           <div class="side-info-invite">

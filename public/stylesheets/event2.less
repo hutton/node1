@@ -898,14 +898,13 @@ a:active{
 }
 
 .side-info-panel{
-	margin-left: 3px;
+	margin-left: 20px;
 	width: 200px;
 	position: relative;
 	left: 600px;
 	color: @selected-color;
 	font-weight: 200;
 	display: inline-block;
-	text-align: center;
 	pointer-events: all;
 	position: absolute;
 }
@@ -914,11 +913,10 @@ a:active{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-bottom: 6px;
+	padding-left: 11px;
 	position: absolute;
-	width: 200px;
 	left: 0px;
 	opacity: 1.0;
-	//transition-timing-function: ease-out;
 	.transition-duration(0.25s);
 	pointer-events: none;
 }
@@ -950,12 +948,28 @@ a:active{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	padding: 0px 16px; 
+}
+
+.side-info-name-marker{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 10px;
+	background: @selected-color;
+	margin-right: 4px;
+	opacity: 0.0;
+	.transition-duration(0.2s);
+	position: relative;
+	top: -2px;
 }
 
 .side-info-free{
+	color: @free-color;
+}
+
+.side-info-free .side-info-name-marker{
 	background: @free-color;
-	color: white;
+	opacity: 1.0;
 }
 
 .side-info-invite{
@@ -989,6 +1003,7 @@ a:active{
 
 .side-info-panel-left-title{
 	margin-top: 14px;
+	color: @free-color;
 }
 
 .top-choice-item{
