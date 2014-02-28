@@ -346,32 +346,36 @@ window.EventApp = Backbone.View.extend({
         var modelsWithTopChoice = [];
 
         _.each(this.choices.models, function(model){
-            if (model.has('free') || model.pretendFree){
-                var freeCount = model.get('free').length + (model.pretendFree ? 1 : 0);
+            var freeCount = 0;
+            
+            if (model.has('free')){
+                freeCount += model.get('free').length;
+            }
+            
+            freeCount += (model.pretendFree ? 1 : 0);
 
-                if (freeCount > bestCount){
-                    thirdBestCount = secondBestCount;
-                    thirdBestModel = secondBestModel;
+            if (freeCount > bestCount){
+                thirdBestCount = secondBestCount;
+                thirdBestModel = secondBestModel;
 
-                    secondBestCount = bestCount;
-                    secondBestModel = bestModel;
+                secondBestCount = bestCount;
+                secondBestModel = bestModel;
 
-                    bestCount = freeCount;
-                    bestModel = model;
-                } else if (freeCount > secondBestCount){
-                    thirdBestCount = secondBestCount;
-                    thirdBestModel = secondBestModel;
+                bestCount = freeCount;
+                bestModel = model;
+            } else if (freeCount > secondBestCount){
+                thirdBestCount = secondBestCount;
+                thirdBestModel = secondBestModel;
 
-                    secondBestCount = freeCount;
-                    secondBestModel = model;
-                } else if (freeCount > thirdBestCount){
-                    thirdBestCount = freeCount;
-                    thirdBestModel = model;
-                }
+                secondBestCount = freeCount;
+                secondBestModel = model;
+            } else if (freeCount > thirdBestCount){
+                thirdBestCount = freeCount;
+                thirdBestModel = model;
+            }
 
-                if (model.has('top-choice')){
-                    modelsWithTopChoice.push(model);
-                }
+            if (model.has('top-choice')){
+                modelsWithTopChoice.push(model);
             }
         });
 
