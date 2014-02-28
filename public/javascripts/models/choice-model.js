@@ -12,21 +12,22 @@ window.ChoiceModel = Backbone.Model.extend({
 	pretendFree: false,
 
 	isFree: function(){
-		if (window.App.currentAttendee !== null){
+		if (window.App.newMode){
+			return this.pretendFree;
+		} else {
 			var currentAttendeeId = window.App.currentAttendee.get("_id");
-			var freeAttendees = this.get("free");
 
-			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
-				return false;
-			} else {
-				return true;
-			}
+			return this.isAttendeeFree(currentAttendeeId);
 		}
 
 		return false;
 	},
 
 	isAttendeeFree: function(attendeeId){
+		if (attendeeId === "new"){
+			return this.pretendFree;
+		}
+
 		if (attendeeId !== null){
 			var freeAttendees = this.get("free");
 
@@ -44,7 +45,7 @@ window.ChoiceModel = Backbone.Model.extend({
 		var date = this.get("date");
 		var freeAttendees = this.get("free");
 
-		if (window.App.currentAttendee != null){
+		if (!window.App.newMode){
 			var currentAttendeeId = window.App.currentAttendee.get("_id");
 
 			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
@@ -77,8 +78,6 @@ window.ChoiceModel = Backbone.Model.extend({
 			this.save();
 
 			window.App.updateTellEveryoneLink();
-
-			window.App.showBestChoices();
 		} else {
 			if (window.App.isFree.indexOf(date) != -1){
 				window.App.isFree.removeElement(date);
@@ -96,6 +95,8 @@ window.ChoiceModel = Backbone.Model.extend({
 
 			$('#register-free-dates').val(window.App.isFree);
 		}
+
+		window.App.showBestChoices();
 	},
 
 	setTopChoice: function(value){

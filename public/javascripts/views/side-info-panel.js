@@ -63,15 +63,11 @@ window.SideInfoPanel = Backbone.View.extend({
 						}, 300);
 					}
 
-					var freeAttendees = this.model.get("free") || [];
-
 					var free = [];
 					var busy = [];
 
 					_.each(App.attendees.models, function(att){
-						var found = freeAttendees.indexOf(att.get('_id'));
-
-						if (found != -1){
+						if (that.model.isAttendeeFree(att.get('_id'))){
 							free.push(att.get('prettyName'));
 						} else {
 							busy.push(att.get('prettyName'));

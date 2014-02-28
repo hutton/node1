@@ -58,13 +58,12 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	buildTemplateValues: function(){
+		var that = this;
 		var freeAttendees = this.model.get("free") || [];
 		var attendeeNamesText = "";
 
 		_.each(this.attendees.models, function(att){
-			var found = freeAttendees.indexOf(att.get('_id'));
-
-			if (found != -1){
+			if (that.model.isAttendeeFree(att.get('_id'))){
 				attendeeNamesText = attendeeNamesText + "<strong>" + att.get('prettyName') + "</strong>, ";
 			} else {
 				attendeeNamesText = attendeeNamesText + att.get('prettyName') + ", ";
@@ -97,7 +96,7 @@ window.InfoRowView = Backbone.View.extend({
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
 			isFree: this.model.isFree(),
-			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
+			showInvite: !window.App.newMode && App.attendees.length === 1,
 			showDetails: true, //this.showingDetails,
 			attendeeNamesText: attendeeNamesText,
 			date: dateText,
@@ -205,7 +204,7 @@ window.InfoRowView = Backbone.View.extend({
 		var footerText = "";
 		var freeAttendees = choiceModel.get("free");
 
-		if (window.App.currentAttendeeId !== -1 && App.attendees.length === 1){
+		if (!window.App.newMode && App.attendees.length === 1){
 			footerText = "Only you are invited";
 		}
 

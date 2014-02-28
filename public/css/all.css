@@ -7983,7 +7983,7 @@ a:active {
   top: 50%;
 }
 .info-row-selector > div {
-  margin-top: -28px;
+  margin-top: -24px;
 }
 .info-row-selector-free {
   font-size: 80%;
@@ -8134,6 +8134,7 @@ a:active {
   position: absolute;
 }
 .side-info-date {
+  text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 6px;

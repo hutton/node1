@@ -25,7 +25,10 @@ window.EventApp = Backbone.View.extend({
 
         if (_.isUndefined(this.currentAttendee)){
             this.currentAttendee = null;
-            this.attendees.add({"prettyName": "You", "_id": null}, {"at": 0});
+
+            this.newMode = true;
+
+            this.attendees.add({"prettyName": "You", "_id": "new", "me" : true}, {"at": 0});
         }
 
         this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
@@ -86,6 +89,8 @@ window.EventApp = Backbone.View.extend({
 
     scrollStarted: false,
 
+    newMode: false,
+
     render: function(){
         var that = this;
 
@@ -125,27 +130,6 @@ window.EventApp = Backbone.View.extend({
         $(window).resize(function(){
             throttledResize();
         });
-
-        // _.delay(function(){
-        //  $(window).on("scrollstart touchmove", function(){
-
-        //      if (!this.scrollStarted){
-        //          this.scrollStarted = true;
-        //          // $('.choice-pointer').addClass('choice-pointer-show');
-
-        //          // that.topNavBarEl.addClass("faded");
-        //      }
-        //  });
-        //  $(window).on("scrollstop", function(){
-        //      this.scrollStarted = false;
-        //      //that.topNavBarEl.removeClass("faded");
-
-        //      _.delay(function(){
-        //          // $('.choice-pointer').removeClass('choice-pointer-show');
-        //      }, 400);
-
-        //  });
-        // }, 1000);
     },
 
     realignAdorners: function(){
@@ -362,8 +346,8 @@ window.EventApp = Backbone.View.extend({
         var modelsWithTopChoice = [];
 
         _.each(this.choices.models, function(model){
-            if (model.has('free')){
-                var freeCount = model.get('free').length;
+            if (model.has('free') || model.pretendFree){
+                var freeCount = model.get('free').length + (model.pretendFree ? 1 : 0);
 
                 if (freeCount > bestCount){
                     thirdBestCount = secondBestCount;
@@ -431,9 +415,9 @@ window.EventApp = Backbone.View.extend({
 
     showFooter: function(show){
         if (show){
-            this.$el.find('.navbar-fixed-bottom').show();
+            this.$el.find('.mode-switch-panel').show();
         } else {
-            this.$el.find('.navbar-fixed-bottom').hide();
+            this.$el.find('.mode-switch-panel').hide();
         }
     },
 
