@@ -898,7 +898,7 @@ a:active{
 }
 
 .side-info-panel{
-	margin-left: 20px;
+	text-align: center;
 	width: 200px;
 	position: relative;
 	left: 600px;
@@ -907,33 +907,32 @@ a:active{
 	display: inline-block;
 	pointer-events: all;
 	position: absolute;
+	opacity: 1.0;
+
+	.transition-duration(0.25s);
 }
 
 .side-info-date{
-	text-align: center;
+	width: 200px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	margin-bottom: 6px;
 	padding-left: 11px;
 	position: absolute;
-	left: 0px;
-	opacity: 1.0;
-	.transition-duration(0.25s);
 	pointer-events: none;
 }
 
-.side-info-date-less{
+.side-info-panel-less{
 	opacity: 0.0;
-	left: -70px;
+	left: 530px;
 }
 
-.side-info-date-greater{
+.side-info-panel-greater{
 	opacity: 0.0;
-	left: 70px;
+	left: 670px;
 }
 
 .side-info-panel ul{
-	margin-top: 80px;
+	margin-top: 85px;
 	list-style: none;
 	padding: 0px;
 	font-size: 80%;

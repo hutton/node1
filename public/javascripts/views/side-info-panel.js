@@ -2,91 +2,67 @@ window.SideInfoPanel = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
 
-		this.$el.html(this.template({attendees: App.attendees.models}));
+		this.$el.html(this.template());
 
 		$('.event-container').after(this.$el);
 
-		this.sideInfoPanel = this.$el.find('.side-info-panel');
-
-		this.sideInfoAttendees = this.$el.find('li');
-
-		this.sideInfoList = this.$el.find('ul');
-
-		this.sideInfoInvite = this.$el.find('.side-info-invite');
-
 		this.sideInfoContainer = this.$el.find('.side-info-panel-container');
 
-		if (App.attendees.length <= 1){
-			this.sideInfoList.hide();
-			this.sideInfoInvite.show();
-		} else {
-			this.sideInfoList.show();
-			this.sideInfoInvite.hide();
-
-			this.sideInfoPanel.hide();
-		}
+		this.panelContainer = this.sideInfoContainer.children().first();
 	},
 
-	template: _.template($('#side-info-panel-template').html()),
+	template: _.template($('#side-info-panel-container-template').html()),
+
+	panelTemplate: _.template($('#side-info-panel-template').html()),
 
 	events: {
 	},
 
-	updateInPlace: function(dateGreater){
+	dateChangedUpdate: function(dateGreater){
 		var that = this;
 
 		if (this.model === null && App.attendees.length > 1){
-			this.sideInfoPanel.hide();
+			this.panelContainer.hide();
 		} else {
 			if (this.model !== null){
 				if (App.attendees.length > 1){
 					if (dateGreater !== 0){
-						var oldDatePanel = this.sideInfoPanel.find('.side-info-date').first();
+						var oldPanel = this.panelContainer.find('.side-info-panel').first();
 
-						var inClass = 'side-info-date-greater';
-						var outClass = 'side-info-date-less';
+						var inClass = 'side-info-panel-greater';
+						var outClass = 'side-info-panel-less';
 
 						if (dateGreater < 0){
-							inClass = 'side-info-date-less';
-							outClass = 'side-info-date-greater';
+							inClass = 'side-info-panel-less';
+							outClass = 'side-info-panel-greater';
 						}
 
-						this.sideInfoPanel.prepend('<div class="side-info-date ' + inClass + '">' + moment(this.model.get('date')).format("dddd <br/> Do MMMM") + '</div>');
+						var showInviteLink = false;
+
+						if (App.attendees.length <= 1){
+							showInviteLink = true;
+						}
+
+						var newPanel = $(this.panelTemplate({attendees: App.attendees.models, choices: this.model, date: moment(this.model.get('date')).format("dddd <br/> Do MMMM"), showInviteLink: showInviteLink}));
+
+						newPanel.addClass(inClass);
+
+						this.panelContainer.prepend(newPanel);
+
 						_.delay(function(){
-							that.sideInfoPanel.find('.side-info-date').first().removeClass(inClass);
+							that.panelContainer.find('.side-info-panel').first().removeClass(inClass);
 						}, 20);
 
-						oldDatePanel.addClass(outClass);
+						oldPanel.addClass(outClass);
 
 						_.delay(function(){
-							oldDatePanel.remove();
+							oldPanel.remove();
 						}, 300);
 					}
-
-					var free = [];
-					var busy = [];
-
-					_.each(App.attendees.models, function(att){
-						if (that.model.isAttendeeFree(att.get('_id'))){
-							free.push(att.get('prettyName'));
-						} else {
-							busy.push(att.get('prettyName'));
-						}
-					});
-
-					this.sideInfoAttendees.each(function(index){
-						var el = $(this);
-
-						if (free.indexOf(el.find('.side-info-name').text()) !== -1){
-							el.addClass('side-info-free');
-						} else {
-							el.removeClass('side-info-free');
-						}
-					});
 				}
 			}
 
-			this.sideInfoPanel.show();
+			this.panelContainer.show();
 
 			if (this.sideInfoContainer.is(':visible')){
 				if (App.infoRowView !== null){
@@ -94,6 +70,33 @@ window.SideInfoPanel = Backbone.View.extend({
 				}
 			}
 		}
+	},
+
+	updateInPlace: function(){
+		var that = this;
+
+		var free = [];
+		var busy = [];
+
+		_.each(App.attendees.models, function(att){
+			if (that.model.isAttendeeFree(att.get('_id'))){
+				free.push(att.get('prettyName'));
+			} else {
+				busy.push(att.get('prettyName'));
+			}
+		});
+
+		var panel = this.panelContainer.find('.side-info-panel').first();
+
+		panel.each(function(index){
+			var el = $(this);
+
+			if (free.indexOf(el.find('.side-info-name').text()) !== -1){
+				el.addClass('side-info-free');
+			} else {
+				el.removeClass('side-info-free');
+			}
+		});
 	},
 
 	prevDate: null,
@@ -127,15 +130,15 @@ window.SideInfoPanel = Backbone.View.extend({
 		if (this.model === null){
 			_.delay(function(){
 				if (that.model === null){
-					that.updateInPlace(dateGreater);					
+					that.dateChangedUpdate(dateGreater);					
 				}
 			}, 500);
 		} else {
-			that.updateInPlace(dateGreater);
+			that.dateChangedUpdate(dateGreater);
 		}
 	},
 
 	modelChanged: function(){
-		this.updateInPlace(0);
+		this.updateInPlace();
 	}
 });

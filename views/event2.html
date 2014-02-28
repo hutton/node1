@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Convenely - <%= name %></title>
+  <title>Convenely | <%= name %></title>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
@@ -214,22 +214,29 @@
     </div>
   </script>
 
-  <script type="text/template" id="side-info-panel-template">
+  <script type="text/template" id="side-info-panel-container-template">
     <div class="side-info-panel-container">
       <div>
-        <div class="side-info-panel">
-          <ul>
-            <@ _.each(attendees, function(attendee){ @>
-              <li><div class="side-info-name"><div class="side-info-name-marker"></div><@= attendee.get('prettyName') @></div></li>
-            <@ }); @>
-          </ul>
-          <div class="side-info-invite">
-            Click dates to show when you're free<br/> <!-- ' -->
-            <br/>
-            <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
-          </div>
-        </div>
       </div>
+    </div>
+  </script>
+
+  <script type="text/template" id="side-info-panel-template">
+    <div class="side-info-panel">
+      <div class="side-info-date"><@= date @></div>
+      <@ if (!showInviteLink) { @>
+      <ul>
+        <@ _.each(attendees, function(attendee){ @>
+          <li><div class="side-info-name <@ if (choices.isAttendeeFree(attendee.get('_id'))) { @> side-info-free <@ } @> "><div class="side-info-name-marker"></div><@= attendee.get('prettyName') @></div></li>
+        <@ }); @>
+      </ul>
+      <@ } else { @>
+      <div class="side-info-invite">
+        Click dates to show when you're free<br/> <!-- ' -->
+        <br/>
+        <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
+      </div>
+      <@ } @>
     </div>
   </script>
 

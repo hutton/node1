@@ -1,8 +1,4 @@
-- Stop sending when can't find calendar
-- Slide names in calendar view
-- Change titles
 - Add name
-- Hide calendar view top choices when not set
 - Change name style in calendar view
 - Narrow names on attendee view
 - Cut off old dates
@@ -18,6 +14,10 @@
 
 Done
 ----
+- Hide calendar view top choices when not set
+- Slide names in calendar view
+- Change titles
+- Stop sending when can't find calendar
 - Add blank row between months in calendar view
 - Narrow margins of mobile calendar view
 - AV show top choices
