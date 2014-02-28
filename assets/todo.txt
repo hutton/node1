@@ -1,3 +1,4 @@
+- Stop sending when can't find calendar
 - Add name
 - Hide calendar view top choices when not set
 - Change name style in calendar view
