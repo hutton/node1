@@ -86,7 +86,7 @@ window.SideInfoPanel = Backbone.View.extend({
 			}
 		});
 
-		var panel = this.panelContainer.find('.side-info-panel').first();
+		var panel = this.panelContainer.find('.side-info-panel li').first();
 
 		panel.each(function(index){
 			var el = $(this);
