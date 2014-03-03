@@ -7482,7 +7482,7 @@ a:active {
   color: #606060;
   line-height: 1.3em;
   padding: 4px 0px;
-  margin: 0px;
+  margin: 6px 0px 0px 0px;
   font-weight: bold;
 }
 .info .btn {
@@ -7663,6 +7663,10 @@ a:active {
 .add-attendee-email-validation-valid {
   color: #4ad16c;
   opacity: 1;
+}
+#current-name-update {
+  float: right;
+  margin-top: 2px;
 }
 .days-table {
   max-width: 600px;
@@ -8178,12 +8182,6 @@ a:active {
   border-radius: 10px;
   background: #c0c0c0;
   margin-right: 4px;
-  opacity: 0.0;
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transform-duration: 0.2s;
-  -ms-transform-duration: 0.2s;
-  transition-duration: 0.2s;
   position: relative;
   top: -2px;
 }

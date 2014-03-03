@@ -13,7 +13,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .disabled{opacity:0.5;}
 .faded{opacity:0.0;}
 @media screen and (min-width:768px){.inline-text-desktop{display:inline-block;} .inline-text-mobile{display:none;}}@media screen and (max-width:768px){.inline-text-mobile{display:inline-block;} .inline-text-desktop{display:none;}}.info{max-width:570px;margin-left:auto;margin-right:auto;font-size:14px;padding:25px 10px;line-height:1.6em;}
-.info h2{font-size:16px;color:#606060;line-height:1.3em;padding:4px 0px;margin:0px;font-weight:bold;}
+.info h2{font-size:16px;color:#606060;line-height:1.3em;padding:4px 0px;margin:6px 0px 0px 0px;font-weight:bold;}
 .info .btn{margin-left:auto;margin-right:auto;display:block;}
 #info-home{float:right;position:relative;top:-24px;font-size:21px;color:#4ad16c;}
 .table td{padding:8px 0px;border-top:none;}
@@ -51,6 +51,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .attendee-email-validation-valid{color:#4ad16c;opacity:1;}
 .add-attendee-email-validation{opacity:0.15;color:#808080;}
 .add-attendee-email-validation-valid{color:#4ad16c;opacity:1;}
+#current-name-update{float:right;margin-top:2px;}
 .days-table{max-width:600px;margin-left:auto;margin-right:auto;font-size:46%;margin-bottom:2px;}
 .days-table td{text-align:center;padding:0px 0px;width:30px;}
 .days-table>tbody>tr>td{border:none;padding:0px;}
@@ -119,7 +120,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .side-info-panel ul{margin-top:85px;list-style:none;padding:0px;font-size:80%;line-height:1.8em;margin-bottom:0px;}
 .side-info-panel li{height:30px;}
 .side-info-name{text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
-.side-info-name-marker{display:inline-block;width:8px;height:8px;border-radius:10px;background:#c0c0c0;margin-right:4px;opacity:0.0;-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;position:relative;top:-2px;}
+.side-info-name-marker{display:inline-block;width:8px;height:8px;border-radius:10px;background:#c0c0c0;margin-right:4px;position:relative;top:-2px;}
 .side-info-free{color:#4ad16c;}
 .side-info-free .side-info-name-marker{background:#4ad16c;opacity:1.0;}
 .side-info-invite{font-size:0.8em;margin:20px 10px;}

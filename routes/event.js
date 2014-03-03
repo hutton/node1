@@ -77,7 +77,8 @@ function showEvent(req, res, calendar, attendeeId){
 		cleanedAttendees.push({
 			_id: att._id,
 			prettyName: att.name || att.email,
-			me: att._id == attendeeId
+			me: att._id == attendeeId,
+			email: att.email
 		});
 	});
 

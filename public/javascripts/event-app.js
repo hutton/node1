@@ -71,6 +71,7 @@ window.EventApp = Backbone.View.extend({
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
         "click .mode-switch-attendees":     "switchToAttendees",
+        "click #current-name-update":   "updateNameClicked", 
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -80,6 +81,8 @@ window.EventApp = Backbone.View.extend({
     wasFree: [],
 
     infoClicked: function(){
+        this.$el.find(".days-table").toggle();
+
         this.$el.find(".info").slideToggle("fast");
 
         this.$el.find("#show-info > span").toggleClass("show-info-rotate");
@@ -95,6 +98,21 @@ window.EventApp = Backbone.View.extend({
         var that = this;
 
         this.$el.find(".title").html(this.model.get("name"));
+
+        if (this.newMode){
+            this.$el.find(".current-attendee-info").hide();
+        } else {
+            this.$el.find(".current-attendee-info").show();
+
+            var email = this.currentAttendee.get("email");
+            var prettyName = this.currentAttendee.get("prettyName");
+
+            this.$el.find(".current-email").html(email);
+
+            if (email !== prettyName){
+                this.$el.find("#current-name").val(prettyName);
+            }
+        }
 
         var nameList = "";  
         _.each(this.attendees.models, function(model){
@@ -449,5 +467,9 @@ window.EventApp = Backbone.View.extend({
 
         this.ChoicesView.active(false);
         this.AttendeesView.active(true);
+    },
+
+    updateNameClicked: function(){
+        
     }
 });

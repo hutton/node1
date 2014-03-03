@@ -148,7 +148,6 @@ function getExample(){
 					"A03",
 					"A04",
 					"A05",
-					"A05",
 					"A07"
 				]
 			},
