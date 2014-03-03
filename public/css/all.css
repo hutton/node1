@@ -7665,6 +7665,8 @@ a:active {
   opacity: 1;
 }
 #current-name-update {
+  border: none;
+  background: none;
   float: right;
   margin-top: 2px;
 }
@@ -7933,6 +7935,10 @@ a:active {
   max-width: 400px;
   margin: 0px auto;
   line-height: 25px;
+}
+#register-attendee-name-input {
+  width: 100%;
+  margin-bottom: 10px;
 }
 #register-attendee-email-input {
   width: 100%;

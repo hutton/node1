@@ -70,8 +70,7 @@ window.EventApp = Backbone.View.extend({
         "keyup #add-attendee-email-input": "addAttendeeInputChanged",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
-        "click .mode-switch-attendees":     "switchToAttendees",
-        "click #current-name-update":   "updateNameClicked", 
+        "click .mode-switch-attendees":     "switchToAttendees"
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -112,6 +111,10 @@ window.EventApp = Backbone.View.extend({
             if (email !== prettyName){
                 this.$el.find("#current-name").val(prettyName);
             }
+
+            this.$el.find("#current-name-id").val(this.currentAttendee.get("_id"));
+
+            this.$el.find("#update-name-form").attr("action", "/event/" + this.currentId + "/update-name/");
         }
 
         var nameList = "";  
@@ -467,9 +470,5 @@ window.EventApp = Backbone.View.extend({
 
         this.ChoicesView.active(false);
         this.AttendeesView.active(true);
-    },
-
-    updateNameClicked: function(){
-        
     }
 });

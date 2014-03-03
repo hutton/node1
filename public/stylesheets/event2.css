@@ -51,7 +51,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .attendee-email-validation-valid{color:#4ad16c;opacity:1;}
 .add-attendee-email-validation{opacity:0.15;color:#808080;}
 .add-attendee-email-validation-valid{color:#4ad16c;opacity:1;}
-#current-name-update{float:right;margin-top:2px;}
+#current-name-update{border:none;background:none;float:right;margin-top:2px;}
 .days-table{max-width:600px;margin-left:auto;margin-right:auto;font-size:46%;margin-bottom:2px;}
 .days-table td{text-align:center;padding:0px 0px;width:30px;}
 .days-table>tbody>tr>td{border:none;padding:0px;}
@@ -85,6 +85,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .cell-selected .date-text{color:white !important;opacity:1.0 !important;}
 @media screen and (min-width:450px){.event-table tr>td.date-cell{font-size:100%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.9em;} .month{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .free-marker{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .markers-container{margin-top:0px;margin-right:0px;margin-bottom:2px;margin-left:2px;} .markers-container li{margin:0px 2px 2px 0px;width:7px;height:7px;} .date-cell-container{margin:3px;} .calendar-choices-top{margin-left:-1px;margin-top:3px;}}@media screen and (max-width:450px){.event-table tr>td.date-cell{font-size:60%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.8em;} .month{-moz-transform:translate(0px, -12px);-webkit-transform:translate(0px, -12px);-o-transform:translate(0px, -12px);-ms-transform:translate(0px, -12px);transform:translate(0px, -12px);} .free-marker{-moz-transform:translate(0px, -10px);-webkit-transform:translate(0px, -10px);-o-transform:translate(0px, -10px);-ms-transform:translate(0px, -10px);transform:translate(0px, -10px);} .date-text{top:-1px;left:-2px;} .markers-container{margin-top:0px;margin-right:0px;margin-bottom:1px;margin-left:1px;} .markers-container li{margin:0px 1px 1px 0px;width:4px;height:4px;} .date-cell-container{margin:2px;} .calendar-choices-top{margin-left:0px;margin-top:2px;}}.register-attendee-message{display:none;font-size:14px;}
 .register-attendee-email-input-container{max-width:400px;margin:0px auto;line-height:25px;}
+#register-attendee-name-input{width:100%;margin-bottom:10px;}
 #register-attendee-email-input{width:100%;}
 .register-attendee-button-container{max-width:400px;margin:3px auto;border:none;background:none;}
 .info-row{position:relative;overflow:hidden;margin:3px;}

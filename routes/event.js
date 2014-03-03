@@ -191,30 +191,31 @@ function addAttendee(req, res){
 				res.status(404);
 			} else {
 				var newAttendeeEmail = req.body.email;
+				var newAttendeeName = req.body.name;
 
 				logger.info("Adding '" + newAttendeeEmail + "'' to: " + calendar.name);
 
-				var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName);
+				var newAttendee = calendar.addAttendee(newAttendeeEmail, attendee.prettyName, newAttendeeName, function(){
+					var inviter = attendee.email;
 
-				var inviter = attendee.email;
+					if (attendee.name !== null && attendee.name !== ""){
+						inviter = attendee.name + " (" + attendee.email + ")";
+					}
 
-				if (attendee.name !== null && attendee.name !== ""){
-					inviter = attendee.name + " (" + attendee.email + ")";
-				}
-
-				global.app.render('mail/someone-added-you-to-event.txt', {
-					calendar: calendar,
-					inviter: inviter
-				}, function(err, message){
-					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
-				});
-
-				res.send(200, 
-					{
-						_id: newAttendee._id,
-						prettyName: newAttendee.name || newAttendee.email,
-						me: false
+					global.app.render('mail/someone-added-you-to-event.txt', {
+						calendar: calendar,
+						inviter: inviter
+					}, function(err, message){
+						Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 					});
+
+					res.send(200, 
+						{
+							_id: newAttendee._id,
+							prettyName: newAttendee.name || newAttendee.email,
+							me: false
+						});
+				});
 			}
 		});
 	} else if (req.route.params[0].length == 6){
@@ -230,22 +231,60 @@ function addAttendee(req, res){
 				res.status(404);
 			} else {
 				var newAttendeeEmail = req.body.email;
+				var newAttendeeName = req.body.name;
 
 				logger.info("Registering '" + newAttendeeEmail + "'' to: " + calendar.name);
 
-				var newAttendee = calendar.addAttendee(newAttendeeEmail, "");
+				var newAttendee = calendar.addAttendee(newAttendeeEmail, "", newAttendeeName, function(){
+					global.app.render('mail/adding-yourself-to-event.txt', {
+						calendar: calendar
+					}, function(err, message){
+						Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
+					});
 
-				global.app.render('mail/adding-yourself-to-event.txt', {
-					calendar: calendar
-				}, function(err, message){
-					Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
+					calendar.updateCalendar(newAttendee, [], req.body.isFree.split(','));
+
+					res.redirect('/event/' + newAttendee.attendeeId);
 				});
-
-				calendar.updateCalendar(newAttendee, [], req.body.isFree.split(','));
-
-				res.redirect('/event/' + newAttendee.attendeeId);
 			}
 		});
+	}
+}
+
+function updateAttendeeName(req, res){
+	if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+			} else if (!calendar){
+				logger.error("Could not find calendar " + req.route.params[0]);
+
+				res.status(404);
+			} else {
+				var newAttendeeName = req.body.name;
+
+				logger.info("Calendar '" + calendar.name + " updating '" + attendee.email + "' name to " + newAttendeeName);
+
+				attendee.name = newAttendeeName;
+
+				calendar.save(function(err, att){
+					if (err){
+						logger.error("Failed to save attendee name change: " + err);
+
+						res.redirect('/event/' + attendee.attendeeId);
+					} else {
+
+						res.redirect('/event/' + attendee.attendeeId);
+						logger.info("Calendar '" + calendar.name + " updated '" + attendee.email + "' name to " + newAttendeeName);
+					}
+				});
+			}
+		});
+	} else if (req.route.params[0] == "example"){
+		res.redirect('/example');
 	}
 }
 
@@ -267,6 +306,10 @@ exports.addAttendee = function(req, res){
 
 exports.create = function(req, res){
 	createEvent(req, res);
+};
+
+exports.updateAttendeeName = function(req, res){
+	updateAttendeeName(req, res);
 };
 
 
