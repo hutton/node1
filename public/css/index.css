@@ -59,7 +59,7 @@ h1 {
 }
 .navbar {
   margin-bottom: 0px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
 }
 .navbar-default {
   border: none;
@@ -81,6 +81,48 @@ h1 {
 .brand {
   color: #4ad16c;
 }
+.hero {
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+  background-image: url("../images/bk4.jpg");
+  border-bottom: solid 1px #e8e8e8;
+}
+.hero-text {
+  color: white;
+  height: 100%;
+  text-shadow: 0px 1px 1px black;
+}
+.headline {
+  position: relative;
+  top: 10%;
+  height: 0px;
+}
+.hero-text h1 {
+  font-size: 80px;
+  margin: 0px 20px;
+}
+.hero-text p {
+  font-size: 22px;
+  margin: 20px 20px;
+}
+.example-link-container {
+  text-align: center;
+  position: relative;
+  top: 75%;
+}
+.example-link-container > a {
+  font-size: 20px;
+}
+.example-link {
+  color: white;
+  text-shadow: none;
+  background: #4ad16c;
+  padding: 5px 20px;
+}
+.example-link:hover {
+  color: white;
+}
 .jumbotron {
   background: white;
   font-size: 15px;
@@ -93,10 +135,30 @@ h1 {
     padding-top: 48px;
     padding-bottom: 48px;
   }
+  .headline {
+    top: 15%;
+  }
+  .hero-text h1 {
+    font-size: 80px;
+  }
+  .hero-text p {
+    font-size: 22px;
+    margin: 20px 20px;
+  }
 }
 @media screen and (max-width: 768px) {
   .jumbotron h1 {
     text-align: center;
+  }
+  .headline {
+    top: 8%;
+  }
+  .hero-text h1 {
+    font-size: 65px;
+  }
+  .hero-text p {
+    font-size: 18px;
+    margin: 20px 20px;
   }
 }
 .jumbotron h1 {
@@ -108,47 +170,16 @@ h1 {
   line-height: 1.6em;
   margin-bottom: 30px;
 }
-.jumbotron form {
-  margin-top: 30px;
-}
 .jumbotron img {
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
 }
-.hero {
-  background-image: url("../images/bk2.jpg");
-  background-size: cover;
+.everywhere {
   text-align: center;
-  height: 800px;
 }
-.hero-text {
-  color: white;
-  position: relative;
-}
-.hero-text h1 {
-  font-size: 70px;
-  top: 30%;
-}
-.hero-text p {
-  font-size: 20px;
-  position: relative;
-  top: 50%;
-}
-.example-link-container {
-  text-align: center;
-  position: relative;
-  top: 80%;
-}
-.example-link-container > a {
-  font-size: 20px;
-}
-.example-link {
-  color: white;
-  background: #4ad16c;
-  padding: 5px 20px;
-}
-.example-link:hover {
-  color: white;
+.everywhere > h3 {
+  color: #4ad16c;
 }
 .form-group {
   max-width: 360px;

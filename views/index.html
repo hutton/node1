@@ -45,13 +45,13 @@
           </div><!--/.navbar-collapse -->
           </div>
         </nav>
-        <div class="container">
-          <div class="row hero-text">
+        <div class="row hero-text">
+            <div class="headline">
               <h1>Get it together</h1>
               <p>Convenely is a simple way to schedule meeting up with friends.</p>
-              <div class="example-link-container">
-                <a class="example-link" href="/example">See an example <span class="fa fa-chevron-right"></span></a>
-              </div>
+            </div>
+            <div class="example-link-container">
+              <a class="example-link" href="/example">See an example <span class="fa fa-chevron-right"></span></a>
             </div>
           </div>
       </div>
@@ -60,8 +60,9 @@
       <div class="jumbotron">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6">
-              <img class="img-responsive text-center" src="/img/phone-to-desktop.png" alt="On phone, tablet and desktop"/>
+            <div class="col-sm-6 everywhere">
+              <h3>Works everywhere.</h3>
+              <img class="img-responsive text-center" src="/images/all-platforms.png" alt="On phone, tablet and desktop"/>
             </div>
             <div class="col-sm-6">
               <form role="form" action="/create" method="post" onsubmit="return validateForm()">
@@ -155,6 +156,13 @@
           email.keyup(function(){
             email.removeClass("invalid");
           });
+
+          setDimensions();
+
+          //when resizing the site, we adjust the heights of the sections
+          $(window).resize(function() {
+            setDimensions();
+          }); 
         });
 
         function validateForm(){
@@ -171,6 +179,11 @@
               email.addClass("invalid");
               return false;
           }
+        }
+
+        function setDimensions(){
+          var windowsHeight = $(window).height();
+          $('.hero').css('height', windowsHeight + 'px');
         }
       </script>
     </body>
