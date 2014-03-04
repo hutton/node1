@@ -1,6 +1,7 @@
 - Toggle days-table doesn't work
 - Change background of info panel (#f0f0f0)
 - Make links in info panel bigger
+- Try fa-check-circle in side info panel
 
 =======
 - Add description
