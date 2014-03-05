@@ -7491,6 +7491,7 @@ a:active {
   display: block;
 }
 .info-links {
+  font-size: 16px;
   margin-top: 20px;
 }
 .info-links > a {
