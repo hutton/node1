@@ -12,13 +12,13 @@
 -----------------------------------------------------*/
 /* Globals */
 @font-face {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans Light';
   font-style: normal;
   font-weight: 300;
   src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/opensans-light.wof) format('woff');
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Light', sans-serif;
 }
 a {
   color: #4ad16c;
@@ -40,7 +40,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Light', sans-serif;
 }
 h1 {
   font-size: 60px;
@@ -91,6 +91,7 @@ h1 {
 .hero-text {
   color: white;
   height: 100%;
+  margin: 0px;
 }
 .headline {
   position: relative;
@@ -141,7 +142,7 @@ h1 {
     top: 20%;
   }
   .hero-text h1 {
-    font-size: 80px;
+    font-size: 90px;
   }
   .hero-text p {
     font-size: 22px;
