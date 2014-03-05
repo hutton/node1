@@ -1,6 +1,7 @@
 - Toggle days-table doesn't work
 - Change background of info panel (#f0f0f0)
-- Try fa-check-circle in side info panel
+- About style
+- iPad alignment
 
 =======
 - Add description
@@ -8,6 +9,7 @@
 
 Done
 ----
+- Try fa-check-circle in side info panel
 - Make links in info panel bigger
 - Cut off old dates
 - Attendee view: allow new attendee updating
