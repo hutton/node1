@@ -230,7 +230,7 @@
       <@ if (!showInviteLink) { @>
       <ul>
         <@ _.each(attendees, function(attendee){ @>
-          <li><div class="side-info-name <@ if (choices.isAttendeeFree(attendee.get('_id'))) { @> side-info-free <@ } @> "><div class="side-info-name-marker"></div><@= attendee.get('prettyName') @></div></li>
+          <li><div class="side-info-name <@ if (choices.isAttendeeFree(attendee.get('_id'))) { @> side-info-free <@ } @> "><@= attendee.get('prettyName') @><i class="fa fa-check-circle"></i></div></li>
         <@ }); @>
       </ul>
       <@ } else { @>

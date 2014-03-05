@@ -123,6 +123,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .side-info-panel ul{margin-top:85px;list-style:none;padding:0px;font-size:80%;line-height:1.8em;margin-bottom:0px;}
 .side-info-panel li{height:30px;}
 .side-info-name{text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.side-info-name>i{margin-left:5px;}
 .side-info-name-marker{display:inline-block;width:8px;height:8px;border-radius:10px;background:#c0c0c0;margin-right:4px;position:relative;top:-2px;}
 .side-info-free{color:#4ad16c;}
 .side-info-free .side-info-name-marker{background:#4ad16c;opacity:1.0;}

@@ -64,10 +64,6 @@ window.EventApp = Backbone.View.extend({
         "click #show-info":             "infoClicked",
         "click .title":                 "infoClicked",
         "click":                        "eventTableClicked",
-//      "click #add-attendee":          "addAttendeeClicked",
-        "click #add-attendee-link":     "addAttendeeLinkClicked",
-        "click #add-attendee-cancel-link": "addAttendeeCancelClicked",
-        "keyup #add-attendee-email-input": "addAttendeeInputChanged",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
         "click .mode-switch-attendees":     "switchToAttendees"
