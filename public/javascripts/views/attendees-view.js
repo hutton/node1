@@ -121,7 +121,6 @@ window.AttendeesView = Backbone.View.extend({
 			$('body').scrollTop(0);
 		} else {
 			this.$el.detach();
-			$('.days-table').show();
 		}
 	},
 

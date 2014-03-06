@@ -7470,12 +7470,16 @@ a:active {
 }
 /**********************************************************************************/
 .info {
-  max-width: 570px;
-  margin-left: auto;
-  margin-right: auto;
+  background: #f0f0f0;
+  border-top: 1px solid #e8e8e8;
+}
+.info > div {
   font-size: 14px;
   padding: 10px 10px 10px 10px;
   line-height: 1.6em;
+  max-width: 570px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .info h2 {
   font-size: 16px;

@@ -1,9 +1,9 @@
-- Toggle days-table doesn't work
-- Change background of info panel (#f0f0f0)
 - About style
 - iPad alignment
 
 =======
+- Toggle days-table doesn't work
+- Change background of info panel (#f0f0f0)
 - Add description
 - Allow selection of date range
 

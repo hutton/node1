@@ -75,12 +75,23 @@ window.EventApp = Backbone.View.extend({
 
     wasFree: [],
 
+    showInfo: false,
+
     infoClicked: function(){
-        this.$el.find(".days-table").toggle();
+        this.showInfo = !this.showInfo;
 
-        this.$el.find(".info").slideToggle("fast");
-
-        this.$el.find("#show-info > span").toggleClass("show-info-rotate");
+        if (this.showInfo){
+            this.$el.find(".days-table").hide();
+            this.$el.find(".info").slideDown("fast");
+            this.$el.find("#show-info > span").addClass("show-info-rotate");
+        } else {
+            if (this.ChoicesView.isActive){
+                this.$el.find(".days-table").show();
+            }
+            
+            this.$el.find(".info").slideUp("fast");
+            this.$el.find("#show-info > span").removeClass("show-info-rotate");
+        }
     },
 
     topNavBarEl: $(".navbar-fixed-top"),

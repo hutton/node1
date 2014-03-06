@@ -176,7 +176,9 @@ window.ChoicesView = Backbone.View.extend({
 		if (isActive){
 			$('body').append(this.$el);
 
-			$('.days-table').show();
+			if (!window.App.showInfo){
+				$('.days-table').show();
+			}
 
 			if (this.currentScroll !== null){
 				$('body').scrollTop(this.currentScroll);
@@ -185,7 +187,6 @@ window.ChoicesView = Backbone.View.extend({
 		} else {
 			this.currentScroll = $('body').scrollTop();
 			this.$el.detach();
-			$('.days-table').hide();
 		}
 	},
 
