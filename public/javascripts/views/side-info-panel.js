@@ -21,7 +21,7 @@ window.SideInfoPanel = Backbone.View.extend({
 	dateChangedUpdate: function(dateGreater){
 		var that = this;
 
-		if (this.model === null && App.attendees.length > 1){
+		if (this.model === null && App.attendees.length > 0){
 			this.panelContainer.hide();
 		} else {
 			if (this.model !== null){
