@@ -25,7 +25,7 @@ window.SideInfoPanel = Backbone.View.extend({
 			this.panelContainer.hide();
 		} else {
 			if (this.model !== null){
-				if (App.attendees.length > 1){
+				if (App.attendees.length > 0){
 					if (dateGreater !== 0){
 						var oldPanel = this.panelContainer.find('.side-info-panel').first();
 
