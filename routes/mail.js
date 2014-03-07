@@ -80,7 +80,8 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 				logger.error("Error: " + err);
 				error('Error finding calendar');
 			} else if (!calendar){
-				Mail.sendCouldntFindCalendarEmail(from, to);
+				// Was getting too many spam emails
+				// Mail.sendCouldntFindCalendarEmail(from, to);
 
 				logger.error("Could not find calendar " + localEmail);
 

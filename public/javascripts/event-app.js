@@ -1,351 +1,492 @@
 window.EventApp = Backbone.View.extend({
-	initialize: function(){
-		_.bindAll(this);
-	},
+    initialize: function(){
+        _.bindAll(this);
+    },
 
-	loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
-		this.choices = new ChoicesModel;
+    loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
+        this.choices = new ChoicesModel;
 
-		this.choices.reset(expandDates(bootstrapedChoices));
+        this.choices.reset(expandDates(bootstrapedChoices));
 
-		this.attendees = new Backbone.Collection;
+        this.attendees = new Backbone.Collection;
 
-		this.attendees.reset(bootstrappedAttendees);
+        this.attendees.comparator = function(model){
 
-		this.model = new CalendarModel(bootstrappedCalendar);
+            return !model.get('me');
+        };
 
-		this.currentAttendee = this.attendees.findWhere({me: true});
+        this.attendees.reset(bootstrappedAttendees);
 
-		this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
+        this.model = new CalendarModel(bootstrappedCalendar);
 
-		if (_.isUndefined(this.currentAttendee)){
-			this.currentAttendee = null;
-		}
+        this.currentAttendee = this.attendees.findWhere({me: true});
 
-		this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
+        this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
 
-		this.ChoicesView.render();
+        if (_.isUndefined(this.currentAttendee)){
+            this.currentAttendee = null;
 
-		this.SideInfoPanel = new SideInfoPanel();
+            this.newMode = true;
 
-		this.TopChoicesModel = new Backbone.Model({
-			one: null,
-			two: null,
-			three: null
-		});
+            this.attendees.add({"prettyName": "You", "_id": "new", "me" : true}, {"at": 0});
+        }
 
-		this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
+        this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
 
-		var pathNames = window.location.pathname.split( '/' );
+        this.ChoicesView.render();
 
-		this.currentId = pathNames[pathNames.length - 1];
+        this.SideInfoPanel = new SideInfoPanel();
 
-		this.render();
-	},
+        this.TopChoicesModel = new Backbone.Model({
+            one: null,
+            two: null,
+            three: null
+        });
 
-	el: $("body"),
+        // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
 
-	events: {
-		"click #show-info":				"infoClicked",
-		"click .title":					"infoClicked",
-		"click":						"eventTableClicked",
-//		"click #add-attendee":			"addAttendeeClicked",
-		"click #add-attendee-link":		"addAttendeeLinkClicked",
-		"click #add-attendee-cancel-link": "addAttendeeCancelClicked",
-		"keyup #add-attendee-email-input": "addAttendeeInputChanged",
-		"keyup #register-attendee-email-input": "registerAttendeeInputChanged"
-	},
+        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
-	selectedRowTemplate: _.template($('#selected-row-template').html()),
+        var pathNames = window.location.pathname.split( '/' );
 
-	isFree: [],
+        this.currentId = pathNames[pathNames.length - 1];
 
-	wasFree: [],
+        this.render();
 
-	infoClicked: function(){
-		this.$el.find(".info").slideToggle("fast");
+        this.checkForOrientationChange();
+    },
 
-		this.$el.find("#show-info > span").toggleClass("show-info-rotate");
-	},
+    el: $("body"),
 
-	topNavBarEl: $(".navbar-fixed-top"),
+    today: new Date(new Date().toDateString()),
 
-	scrollStarted: false,
+    events: {
+        "click #show-info":             "infoClicked",
+        "click .title":                 "infoClicked",
+        "click":                        "eventTableClicked",
+        "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
+        "click .mode-switch-calender":  "switchToCalendar",
+        "click .mode-switch-attendees":     "switchToAttendees"
+    },
 
-	render: function(){
-		var that = this;
+    selectedRowTemplate: _.template($('#selected-row-template').html()),
 
-		this.$el.find(".title").html(this.model.get("name"));
+    isFree: [],
 
-		var nameList = "";	
-		_.each(this.attendees.models, function(model){
-			if (model.get("me")){
-				nameList = "<strong>" + model.get("prettyName") + "</strong>, " + nameList;
-			} else {
-				nameList = nameList + model.get("prettyName") + ", ";
-			}
-		});
+    wasFree: [],
 
-		nameList = nameList.slice(0, -2);
+    showInfo: false,
 
-		this.$el.find(".attendees").html(nameList);
+    infoClicked: function(){
+        this.showInfo = !this.showInfo;
 
-		if (this.currentAttendee === null){
-			this.$el.find("#add-attendee").hide();
+        if (this.showInfo){
+            this.$el.find(".days-table").hide();
+            this.$el.find(".info").slideDown("fast");
+            this.$el.find("#show-info > span").addClass("show-info-rotate");
+        } else {
+            if (this.ChoicesView.isActive){
+                this.$el.find(".days-table").show();
+            }
 
-			this.$el.find('.navbar-fixed-bottom').show();
-		} else {
-			this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
-		}
+            this.$el.find(".info").slideUp("fast");
+            this.$el.find("#show-info > span").removeClass("show-info-rotate");
+        }
+    },
 
-		this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
+    topNavBarEl: $(".navbar-fixed-top"),
 
-		this.updateTellEveryoneLink();
+    scrollStarted: false,
 
-		this.showBestChoices();
+    newMode: false,
 
-		this.onResizeWindow();
+    render: function(){
+        var that = this;
 
-		var throttled = _.throttle(that.onResizeWindow, 100);
+        this.$el.find(".title").html(this.model.get("name"));
 
-		$(window).resize(function(){
-			throttled();
-		});
+        if (this.newMode){
+            this.$el.find(".current-attendee-info").hide();
+        } else {
+            this.$el.find(".current-attendee-info").show();
 
-		// _.delay(function(){
-		// 	$(window).on("scrollstart touchmove", function(){
+            var email = this.currentAttendee.get("email");
+            var prettyName = this.currentAttendee.get("prettyName");
 
-		// 		if (!this.scrollStarted){
-		// 			this.scrollStarted = true;
-		// 			// $('.choice-pointer').addClass('choice-pointer-show');
+            this.$el.find(".current-email").html(email);
 
-		// 			// that.topNavBarEl.addClass("faded");
-		// 		}
-		// 	});
-		// 	$(window).on("scrollstop", function(){
-		// 		this.scrollStarted = false;
-		// 		//that.topNavBarEl.removeClass("faded");
+            if (email !== prettyName){
+                this.$el.find("#current-name").val(prettyName);
+            }
 
-		// 		_.delay(function(){
-		// 			// $('.choice-pointer').removeClass('choice-pointer-show');
-		// 		}, 400);
+            this.$el.find("#current-name-id").val(this.currentAttendee.get("_id"));
 
-		// 	});
-		// }, 1000);
-	},
+            this.$el.find("#update-name-form").attr("action", "/event/" + this.currentId + "/update-name/");
+        }
 
-	onResizeWindow: function(){
-		var size = $(".event-table .date-cell").first().width();
-		var windowSize = Math.min($("body").first().width(), 600);
-		
-		var table = $(".event-table");
-		var parent = table.parent();
-		 
-		table.detach();
-		 
-		table.find("tr > td > .date-cell-container").height(size - 6);
-		table.find("tr > td > .month").height(size - 6);
+        var nameList = "";  
+        _.each(this.attendees.models, function(model){
+            if (model.get("me")){
+                nameList = "<strong>" + model.get("prettyName") + "</strong>, " + nameList;
+            } else {
+                nameList = nameList + model.get("prettyName") + ", ";
+            }
+        });
 
-		table.find(".info-row-names").width(windowSize - 132);
-		 
-		parent.append( table );
-	},
+        nameList = nameList.slice(0, -2);
 
-	eventTableClicked: function(event){
-		var target = $(event.target);
+        this.$el.find(".attendees").html(nameList);
 
-		if ( !$(event.target).hasClass("date-cell") &&
-		 	target.parents("td.date-cell").length === 0 &&
-			target.parents(".info-row").length === 0){
+        if (this.currentAttendee === null){
+            this.$el.find("#add-attendee").hide();
 
-			if (this.infoRowView !== null){
-				this.infoRowView.removeSelectedRow();
-			}
-		}
-	},
+            this.$el.find('#register-footer').show();
+        } else {
+            this.recalcTopSpacer();
+        }
 
-	infoRowView: null,
+        this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
-	updateSelectedItem: function(choiceModel, selectedRow){
-		if (this.infoRowView === null){
-			this.infoRowView = new InfoRowView({model: choiceModel, el: selectedRow});
-		} else {
-			this.infoRowView.update(choiceModel, selectedRow);
-		}
-	},
+        this.updateTellEveryoneLink();
 
-	registerAttendeeInputChanged: function(event){
-		if (event.which != 13){
-			var message = $(".register-attendee-message");
+        this.showBestChoices();
 
-			message.html("");
-			messages.slideUp('fast');
-		}
-	},
+        this.onResizeWindow();
 
-	isEmailAddressValid: function(email){
-			//var re = /([a-zA-Z0-9\._-])+@([a-zA-Z0-9\._-])+/;
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var throttledResize = _.debounce(that.onResizeWindow, 200);
 
-		var matches = email.match(re);
+        $(window).resize(function(){
+            throttledResize();
+        });
+    },
 
-		return !_.isUndefined(matches) && matches !== null;
-	},
+    realignAdorners: function(){
+        if (this.TopChoicesModel.has("one")){
+            this.TopChoicesModel.get("one").trigger("repositioned");
+        }
 
-	changesMadeLinkkeyEl: $(".changes-made-email-link"),
+        if (this.TopChoicesModel.has("two")){
+            this.TopChoicesModel.get("two").trigger("repositioned");
+        }
 
-	updatedFooterEl: $("#updated-footer"),
+        if (this.TopChoicesModel.has("three")){
+            this.TopChoicesModel.get("three").trigger("repositioned");
+        }
+    },
 
-	registerFooterEl: $("#register-footer"),
+    onResizeWindow: function(){
+        this.ChoicesView.resize();
+        this.AttendeesView.resize();
 
-	titleMailEl: $("#title-mail"),
+        var width = $(window).width();
+        var height = $(window).height();
 
-	topRowSpacerEl: $("#top-row-spacer"),
+        if (height < 400 || width < 400){
+            this.showFooter(false);
+        } else {
+            this.showFooter(true);
+        }
 
-	switchedUpdateAttendeesLink: false,
+        if (height < 350){
+            this.showHeader(false);
+        } else {
+            this.showHeader(true);
+        }
+    },
 
-	updateTellEveryoneLink: function(){
-		var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
+    checkOrientation: function(){
+        if(window.orientation !== this.previousOrientation){
+            this.previousOrientation = window.orientation;
 
-		this.changesMadeLinkkeyEl.attr("href", mailTo);
-	},
+            if (window.orientation === 0 || window.orientation === 180){
+                this.switchToCalendar();
+            } else {
+                this.switchToAttendees();
+            }
 
-	swtichUpdateAttendeesLink: function(){
-		this.titleMailEl.show();
+            // this.trigger('orientation', window.orientation);
+        }
+    },
 
-		var targetOffset = this.$el.find('#changes-made-banner > .fa-envelope-o').offset();
-		var sourceOffset = this.titleMailEl.find('.fa-envelope-o').offset();
+    checkForOrientationChange: function(){
+        this.previousOrientation = window.orientation;
 
-		this.titleMailEl.hide();
+        window.addEventListener("resize", this.checkOrientation, false);
+        window.addEventListener("orientationchange", this.checkOrientation, false);
 
-		var newTop = (targetOffset.top - sourceOffset.top) + 6;
-		var newLeft = (targetOffset.left - sourceOffset.left) + 8;
+        // (optional) Android doesn't always fire orientationChange on 180 degree turns
+        //setInterval(this.checkOrientation, 2000);
+    },
 
-		var that = this;
+    eventTableClicked: function(event){
+        var target = $(event.target);
 
-		this.titleMailEl.css({ "left": newLeft + "px", "top": newTop + "px", "-webkit-transform": "scale(0.7,0.7)" });
+        if ( !$(event.target).hasClass("date-cell") &&
+            target.parents("td.date-cell").length === 0 &&
+            target.parents(".info-row").length === 0){
 
-		_.delay(function(){
-			that.titleMailEl.show();
+            if (this.infoRowView !== null){
+                this.infoRowView.removeSelectedRow();
+            }
+        }
+    },
 
-			that.$el.find('#changes-made-banner > .fa-envelope-o').hide();
+    infoRowView: null,
 
-			that.updatedFooterEl.slideUp('fast');
+    updateSelectedItem: function(choiceModel, selectedRow){
+        if (this.infoRowView === null){
+            this.infoRowView = new InfoRowView({model: choiceModel, el: selectedRow});
+        } else {
+            this.infoRowView.update(choiceModel, selectedRow);
+        }
+    },
 
-			_.delay(function(){
-				that.titleMailEl.removeAttr("style");
-			}, 10);
-		}, 10);
-	},
+    registerAttendeeInputChanged: function(event){
+        if (event.which != 13){
+            var message = $(".register-attendee-message");
 
-	formatUpdatedDays: function(isFree, wasFree){
-		if (isFree.length > 0){
-			if (wasFree.length > 0) {
-				return "I'm now free on " + this.buildDatesString(isFree) + " but I'm no longer free on " + this.buildDatesString(wasFree) + ".";
-			} else {
-				return "I'm now free on " + this.buildDatesString(isFree) + ".";
-			}
-		} else if (wasFree.length > 0){
-			return "I'm no longer free on " + this.buildDatesString(wasFree) + ".";
-		}
+            message.html("");
+            messages.slideUp('fast');
+        }
+    },
 
-		return "";
-	},
+    isEmailAddressValid: function(email){
+            //var re = /([a-zA-Z0-9\._-])+@([a-zA-Z0-9\._-])+/;
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-	buildDatesString: function(dates){
-		var text = "";
+        var matches = email.match(re);
 
-		dates = dates.sort(function(date1, date2){
-			return date1 > date2;
-		});
+        return !_.isUndefined(matches) && matches !== null;
+    },
 
-		var datesFormatted = _.map(dates, function(date){
-			return moment(date).format("dddd Do MMMM");
-		});
+    changesMadeLinkkeyEl: $(".changes-made-email-link"),
 
-		if (datesFormatted.length > 0){
-			if (datesFormatted.length == 1){
-				text = text + datesFormatted[0];
-			} else {
-				text = text + datesFormatted.slice(0, -1).join(", ") + " and " + datesFormatted[datesFormatted.length - 1];
-			}
-		}
+    updatedFooterEl: $("#updated-footer"),
 
-		return text;
-	},
+    registerFooterEl: $("#register-footer"),
 
-	validateEmail: function(){
-		var email = $("#register-attendee-email-input");
+    titleMailEl: $("#title-mail"),
 
-		var message = $(".register-attendee-message");
+    topRowSpacerEl: $("#top-row-spacer"),
 
-		if (email.val() === null || email.val() === ""){
-			message.html("Please enter your email address");
-			message.slideDown('fast');
+    switchedUpdateAttendeesLink: false,
 
-			return false;
-		}
+    updateTellEveryoneLink: function(){
+        var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
-		if (!this.isEmailAddressValid(email.val())){
-			message.html("Please enter a valid email address");
-			message.slideDown('fast');
+        this.changesMadeLinkkeyEl.attr("href", mailTo);
+    },
 
-			return false;
-		}
-	},
+    swtichUpdateAttendeesLink: function(){
+        this.titleMailEl.show();
 
-	showBestChoices: function(){
-		var bestModel = null;
-		var bestCount = 0;
+        var targetOffset = this.$el.find('#changes-made-banner > .fa-envelope-o').offset();
+        var sourceOffset = this.titleMailEl.find('.fa-envelope-o').offset();
 
-		var secondBestModel = null;
-		var secondBestCount = 0;
+        this.titleMailEl.hide();
 
-		var thirdBestModel = null;
-		var thirdBestCount = 0;
+        var newTop = (targetOffset.top - sourceOffset.top) + 6;
+        var newLeft = (targetOffset.left - sourceOffset.left) + 8;
 
-		_.each(this.choices.models, function(model){
-			if (model.has('free')){
-				var freeCount = model.get('free').length;
+        var that = this;
 
-				if (freeCount > bestCount){
-					thirdBestCount = secondBestCount;
-					thirdBestModel = secondBestModel;
+        this.titleMailEl.css({ "left": newLeft + "px", "top": newTop + "px", "-webkit-transform": "scale(0.7,0.7)" });
 
-					secondBestCount = bestCount;
-					secondBestModel = bestModel;
+        _.delay(function(){
+            that.titleMailEl.show();
 
-					bestCount = freeCount;
-					bestModel = model;
-				} else if (freeCount > secondBestCount){
-					thirdBestCount = secondBestCount;
-					thirdBestModel = secondBestModel;
+            that.$el.find('#changes-made-banner > .fa-envelope-o').hide();
 
-					secondBestCount = freeCount;
-					secondBestModel = model;
-				} else if (freeCount > thirdBestCount){
-					thirdBestCount = freeCount;
-					thirdBestModel = model;
-				}
+            that.updatedFooterEl.slideUp('fast');
 
-				if (model.has('top-choice')){
-					model.set('top-choice', 0);
-				}
-			}
-		});
+            _.delay(function(){
+                that.titleMailEl.removeAttr("style");
+            }, 10);
+        }, 10);
+    },
 
-		if (bestModel !== null){
-			bestModel.set('top-choice', 1);
-		}
+    formatUpdatedDays: function(isFree, wasFree){
+        if (isFree.length > 0){
+            if (wasFree.length > 0) {
+                return "I'm now free on " + this.buildDatesString(isFree) + " but I'm no longer free on " + this.buildDatesString(wasFree) + ".";
+            } else {
+                return "I'm now free on " + this.buildDatesString(isFree) + ".";
+            }
+        } else if (wasFree.length > 0){
+            return "I'm no longer free on " + this.buildDatesString(wasFree) + ".";
+        }
 
-		if (secondBestModel !== null){
-			secondBestModel.set('top-choice', 2);
-		}
+        return "";
+    },
 
-		if (thirdBestModel !== null){
-			thirdBestModel.set('top-choice', 3);
-		}
+    buildDatesString: function(dates){
+        var text = "";
 
-		this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
-	}
+        dates = dates.sort(function(date1, date2){
+            return date1 > date2;
+        });
+
+        var datesFormatted = _.map(dates, function(date){
+            return moment(date).format("dddd Do MMMM");
+        });
+
+        if (datesFormatted.length > 0){
+            if (datesFormatted.length == 1){
+                text = text + datesFormatted[0];
+            } else {
+                text = text + datesFormatted.slice(0, -1).join(", ") + " and " + datesFormatted[datesFormatted.length - 1];
+            }
+        }
+
+        return text;
+    },
+
+    validateEmail: function(){
+        var email = $("#register-attendee-email-input");
+
+        var message = $(".register-attendee-message");
+
+        if (email.val() === null || email.val() === ""){
+            message.html("Please enter your email address");
+            message.slideDown('fast');
+
+            return false;
+        }
+
+        if (!this.isEmailAddressValid(email.val())){
+            message.html("Please enter a valid email address");
+            message.slideDown('fast');
+
+            return false;
+        }
+    },
+
+    showBestChoices: function(){
+        var that = this;
+        var bestModel = null;
+        var bestCount = 0;
+
+        var secondBestModel = null;
+        var secondBestCount = 0;
+
+        var thirdBestModel = null;
+        var thirdBestCount = 0;
+
+        var modelsWithTopChoice = [];
+
+        _.each(this.choices.models, function(model){
+            var freeCount = 0;
+            
+            if (model.has('date') && model.get('date') >= that.today){
+                if (model.has('free')){
+                    freeCount += model.get('free').length;
+                }
+                
+                freeCount += (model.pretendFree ? 1 : 0);
+
+                if (freeCount > bestCount){
+                    thirdBestCount = secondBestCount;
+                    thirdBestModel = secondBestModel;
+
+                    secondBestCount = bestCount;
+                    secondBestModel = bestModel;
+
+                    bestCount = freeCount;
+                    bestModel = model;
+                } else if (freeCount > secondBestCount){
+                    thirdBestCount = secondBestCount;
+                    thirdBestModel = secondBestModel;
+
+                    secondBestCount = freeCount;
+                    secondBestModel = model;
+                } else if (freeCount > thirdBestCount){
+                    thirdBestCount = freeCount;
+                    thirdBestModel = model;
+                }
+
+                if (model.has('top-choice')){
+                    modelsWithTopChoice.push(model);
+                }
+            }
+        });
+
+        if (bestModel !== null){
+            bestModel.setTopChoice(1);
+            $('.calendar-choices-top-one').show();
+        } else {
+            $('.calendar-choices-top-one').hide();
+        }
+
+        if (secondBestModel !== null){
+            secondBestModel.setTopChoice(2);
+            $('.calendar-choices-top-two').show();
+        } else {
+            $('.calendar-choices-top-two').hide();
+        }
+
+        if (thirdBestModel !== null){
+            thirdBestModel.setTopChoice(3);
+            $('.calendar-choices-top-three').show();
+        } else {
+            $('.calendar-choices-top-three').hide();
+        }
+
+        _.each(modelsWithTopChoice, function(model){
+            if (model !== bestModel && model !== secondBestModel && model !== thirdBestModel){
+                model.unset('top-choice');
+            }
+        });
+
+        this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
+    },
+
+    recalcTopSpacer: function(){
+        if (this.$el.find(".navbar-fixed-top").is(':visible')){
+            this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
+        } else {
+            this.$el.find("#top-row-spacer").height(0);
+        }
+    },
+
+    showFooter: function(show){
+        if (show){
+            this.$el.find('.mode-switch-panel').show();
+        } else {
+            this.$el.find('.mode-switch-panel').hide();
+        }
+    },
+
+    showHeader: function(show){
+        if (show){
+            this.$el.find('.navbar-fixed-top').show();
+        } else {
+            this.$el.find('.navbar-fixed-top').hide();
+        }
+
+        this.recalcTopSpacer();
+    },
+
+    switchToCalendar: function(){
+        if (this.showInfo){
+            this.infoClicked();
+        }
+        
+        this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
+        this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
+
+        this.ChoicesView.active(true);
+        this.AttendeesView.active(false);
+    },
+
+    switchToAttendees: function(){
+        if (this.showInfo){
+            this.infoClicked();
+        }
+
+        this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
+        this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
+
+        this.ChoicesView.active(false);
+        this.AttendeesView.active(true);
+    }
 });

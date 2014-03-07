@@ -12,11 +12,26 @@ window.ChoiceModel = Backbone.Model.extend({
 	pretendFree: false,
 
 	isFree: function(){
-		if (window.App.currentAttendee != null){
+		if (window.App.newMode){
+			return this.pretendFree;
+		} else {
 			var currentAttendeeId = window.App.currentAttendee.get("_id");
+
+			return this.isAttendeeFree(currentAttendeeId);
+		}
+
+		return false;
+	},
+
+	isAttendeeFree: function(attendeeId){
+		if (attendeeId === "new"){
+			return this.pretendFree;
+		}
+
+		if (attendeeId !== null){
 			var freeAttendees = this.get("free");
 
-			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
+			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(attendeeId) == -1){
 				return false;
 			} else {
 				return true;
@@ -30,7 +45,7 @@ window.ChoiceModel = Backbone.Model.extend({
 		var date = this.get("date");
 		var freeAttendees = this.get("free");
 
-		if (window.App.currentAttendee != null){
+		if (!window.App.newMode){
 			var currentAttendeeId = window.App.currentAttendee.get("_id");
 
 			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
@@ -63,8 +78,6 @@ window.ChoiceModel = Backbone.Model.extend({
 			this.save();
 
 			window.App.updateTellEveryoneLink();
-
-			window.App.showBestChoices();
 		} else {
 			if (window.App.isFree.indexOf(date) != -1){
 				window.App.isFree.removeElement(date);
@@ -82,80 +95,29 @@ window.ChoiceModel = Backbone.Model.extend({
 
 			$('#register-free-dates').val(window.App.isFree);
 		}
+
+		window.App.showBestChoices();
 	},
 
-	calcBackground: function(){
-		var freeDates = 0;
-
-		var redStart = 236;
-		var greenStart = 239;
-		var blueStart = 236;
-
-		var redEnd = 204;
-		var greenEnd = 208;
-		var blueEnd = 200;
-
-		var total = window.App.attendees.length;
-
-		if (this.has("free")){
-			freeDates = this.get("free").length;
-		}
-
-		var percent = (freeDates / total);
-
-		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
+	setTopChoice: function(value){
+        if (!this.has('top-choice') ||
+            (this.has('top-choice') && this.get('top-choice') !== value)){
+            this.set('top-choice', value);
+        }
 	},
 
-	calcBorder: function(){
-		var freeDates = 0;
+	getAttendeeAvailability: function(){
+		var that = this;
+		var list = [];
 
-		var darkerThanBackground = 10;
+		_.each(App.attendees.models, function(attendee){
+			if (that.isAttendeeFree(attendee.get("_id"))){
+				list.push(true);
+			} else {
+				list.push(false);
+			}
+		});
 
-		var redStart = 236 - darkerThanBackground;
-		var greenStart = 239 - darkerThanBackground;
-		var blueStart = 236 - darkerThanBackground;
-
-		var redEnd = 204 - darkerThanBackground;
-		var greenEnd = 208 - darkerThanBackground;
-		var blueEnd = 200 - darkerThanBackground;
-
-		var total = window.App.attendees.length;
-
-		if (this.has("free")){
-			freeDates = this.get("free").length;
-		}
-
-		var percent = (freeDates / total);
-
-		return "rgb(" + this.interpolate(redStart, redEnd, percent) + "," + this.interpolate(greenStart, greenEnd, percent)  + "," + this.interpolate(blueStart, blueEnd, percent) + ")";
-	},
-
-	calcForegroundOpacity: function(){
-		var freeDates = 0;
-
-		var start = 0.22;
-		var end = 0.37;
-
-		var total = window.App.attendees.length;
-
-		if (this.has("free")){
-			freeDates = this.get("free").length;
-		}
-
-		var percent = (freeDates / total);
-
-		var diff = start - end;
-
-		return start - (percent * diff);
-	},
-
-	interpolate: function(start, end, percent){
-		var diff = start - end;
-
-		var target = start - (percent * diff);
-
-		target = Math.round(target);
-
-		return target;
+		return list;
 	}
 });

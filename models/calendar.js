@@ -496,11 +496,11 @@ function findNewAttendeeId(calendar){
 	return tryId;
 }
 
-CalendarSchema.methods.addAttendee = function(address, fromName){
+CalendarSchema.methods.addAttendee = function(address, fromName, name, savedCallback){
 	var calendar = this;
 
 	var attendee = new Attendee({
-			name: "",
+			name: name,
 			email: address,
 			attendeeId: calendar.calendarId + findNewAttendeeId(calendar)
 		});
@@ -513,6 +513,8 @@ CalendarSchema.methods.addAttendee = function(address, fromName){
 		} else {
 			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
 		}
+
+		savedCallback();
 	});
 
 	return attendee;

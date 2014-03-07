@@ -58,13 +58,12 @@ window.InfoRowView = Backbone.View.extend({
 	},
 
 	buildTemplateValues: function(){
+		var that = this;
 		var freeAttendees = this.model.get("free") || [];
 		var attendeeNamesText = "";
 
 		_.each(this.attendees.models, function(att){
-			var found = freeAttendees.indexOf(att.get('_id'));
-
-			if (found != -1){
+			if (that.model.isAttendeeFree(att.get('_id'))){
 				attendeeNamesText = attendeeNamesText + "<strong>" + att.get('prettyName') + "</strong>, ";
 			} else {
 				attendeeNamesText = attendeeNamesText + att.get('prettyName') + ", ";
@@ -97,7 +96,7 @@ window.InfoRowView = Backbone.View.extend({
 		return {
 			attendeeText: this.buildAttendeeText(this.model),
 			isFree: this.model.isFree(),
-			showInvite: window.App.currentAttendeeId !== -1 && App.attendees.length === 1,
+			showInvite: !window.App.newMode && App.attendees.length === 1,
 			showDetails: true, //this.showingDetails,
 			attendeeNamesText: attendeeNamesText,
 			date: dateText,
@@ -157,7 +156,7 @@ window.InfoRowView = Backbone.View.extend({
 		this.$el.after(this.template(templateValues));
 
 		var windowSize = Math.min($("body").first().width(), 600);
-	  	$(".info-row-names").width(windowSize - 132);
+		$(".info-row-names").width(windowSize - 132);
 
 		this.unbindEvents();
 
@@ -165,15 +164,7 @@ window.InfoRowView = Backbone.View.extend({
 
 		this.bindEvents();
 
-		this.$el.next()
-			.find('td')
-			.wrapInner('<div style="display: none;" />')
-			.parent()
-			.find('td > div')
-			.slideDown(200, function(){
-				var $set = $(this);
-				$set.replaceWith($set.contents());
-			});
+		App.realignAdorners();
 	},
 
 	unbindEvents: function(){
@@ -204,29 +195,17 @@ window.InfoRowView = Backbone.View.extend({
 
 		var allSelectedRows = $('#selected-row');
 
-		allSelectedRows
-			.find('td')
-			.wrapInner('<div style="display: block;" />')
-			.parent()
-			.find('td > div')
-			.slideUp(200, function(){
-			allSelectedRows.remove();
-			});
+		allSelectedRows.remove();
+
+		App.realignAdorners();
 	},
 
 	buildAttendeeText: function(choiceModel){
 		var footerText = "";
 		var freeAttendees = choiceModel.get("free");
 
-		if (window.App.currentAttendeeId !== -1 && App.attendees.length === 1){
+		if (!window.App.newMode && App.attendees.length === 1){
 			footerText = "Only you are invited";
-		} else {
-			if (_.isUndefined(freeAttendees)){
-				footerText = "0 of " + App.attendees.length + " people are free";
-
-			} else {
-				footerText = freeAttendees.length + " of " + App.attendees.length + " people are free";
-			}
 		}
 
 		return footerText;

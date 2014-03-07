@@ -1,20 +1,81 @@
-var $table = $( "#myTable" );
-var $parent = $table.parent();
- 
-$table.detach();
- 
-// ... add lots and lots of rows to table
- 
-$parent.append( $table );
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title></title> 
+	
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
+	<style type="text/css">
+		body{
+			padding: 0px;
+			margin: 0px;
+		}
 
+		.hero{
+			padding: 0px;
+			margin: 0px;
 
+			background-image: url("bk5.jpg");
+			background-position: center center;
+			background-size: cover;
 
+			text-align: center;
+		}
 
-html { 
-  background: url(images/bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
+		.hero h2{
+			position: relative;
+			top: 20%;
+			height: 0px;
+			margin: 0px;
+		}
+
+		.hero p{
+			position: relative;
+			top: 80%;
+			height: 0px;
+			margin: 0px;
+		}
+
+		.content{
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		function setDimensions(){
+			var windowsHeight = $(window).height();
+			$('.hero').css('height', windowsHeight + 'px');
+		}
+
+		$(document).ready(function(){	
+
+			setDimensions();
+
+			//when resizing the site, we adjust the heights of the sections
+			$(window).resize(function() {
+			setDimensions();
+			});	
+	});
+	</script>
+	</head> 
+<body> 
+	<div class="hero">
+		<h2>Hello</h2>
+		<p>Some text</p>
+	</div>
+	<div class="content">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu hendrerit augue, accumsan malesuada massa. Aliquam tincidunt a urna ut imperdiet. Integer vel condimentum ipsum. Curabitur ultrices leo nec tortor pharetra rutrum. Praesent sagittis eget neque eget tincidunt. Curabitur egestas auctor nisi eu faucibus. Nulla nisi lectus, venenatis et turpis a, congue cursus ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin elementum tincidunt interdum. Praesent auctor massa ipsum, at pulvinar dui commodo tincidunt.
+
+Integer id velit ante. Sed feugiat faucibus sem, eget dapibus tellus tempor in. Praesent ut volutpat purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fringilla in mi ut consequat. Etiam leo mauris, congue iaculis dui ut, pulvinar sagittis est. Nam mollis dignissim facilisis. Nunc congue est tristique nunc interdum malesuada. Aenean vel euismod mauris.
+
+Nullam mollis, dui id pretium semper, enim erat fringilla ante, eget sollicitudin tellus purus sagittis neque. Sed at arcu vitae nisl blandit tincidunt. Phasellus at sem at enim dapibus laoreet. Mauris libero elit, eleifend sodales odio a, aliquet mattis sapien. Sed iaculis semper enim, id suscipit ipsum imperdiet non. Nulla id ante neque. Nunc sed commodo lectus. Phasellus sed orci non massa commodo egestas nec vel lorem. Fusce ut lobortis lectus. Integer eget libero vel nulla sollicitudin semper a quis ipsum.
+
+Curabitur luctus vehicula leo in adipiscing. Proin pretium sapien at neque volutpat pellentesque. Nam euismod, tortor nec consequat blandit, mi diam molestie est, nec mattis tortor lacus eu nibh. Pellentesque in bibendum ante, ut cursus mauris. In hac habitasse platea dictumst. Maecenas at sollicitudin odio. Etiam justo ligula, tempor in dapibus vestibulum, sodales vitae mi.
+
+Quisque lacus justo, sodales in velit et, ornare vestibulum orci. Nulla vulputate pulvinar dictum. Curabitur purus elit, luctus in est a, luctus imperdiet nunc. Aliquam rhoncus nulla nisl, at feugiat libero consequat sit amet. Donec eget varius sem. Integer at nisi aliquet, condimentum arcu quis, lacinia lorem. Phasellus felis libero, dictum a nunc id, tempor gravida massa.</div>
+</body>
+</html>

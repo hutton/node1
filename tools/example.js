@@ -9,12 +9,6 @@ function getExample(){
 		"date" : new Date(moment()),
 		"attendees" : [
 			{
-				"_id" : "A01",
-				"attendeeId" : "exampleA01",
-				"email" : "hbanks@warmmail.co",
-				"name" : "Hugo Banks"
-			},
-			{
 				"_id" : "A02",
 				"attendeeId" : "exampleA02",
 				"email" : "harriet.daniels@googles.con",
@@ -31,6 +25,12 @@ function getExample(){
 				"attendeeId" : "exampleA04",
 				"email" : "jhenderson@timemail.in",
 				"name" : "Julia Henderson"
+			},
+			{
+				"_id" : "A01",
+				"attendeeId" : "exampleA01",
+				"email" : "hbanks@warmmail.co",
+				"name" : "Hugo Banks"
 			},
 			{
 				"_id" : "A05",
@@ -147,7 +147,6 @@ function getExample(){
 					"A02",
 					"A03",
 					"A04",
-					"A05",
 					"A05",
 					"A07"
 				]

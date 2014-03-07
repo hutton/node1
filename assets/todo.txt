@@ -1,16 +1,44 @@
-- Move register to footer
-- Animate date change in direction of change
-- Show top choices of left
-- Animate top chioces changing
-- Animate toggle of available
-
+- About style
+- iPad alignment
+- Add attendee in attendee mode
 
 =======
+- Toggle days-table doesn't work
+- Change background of info panel (#f0f0f0)
 - Add description
 - Allow selection of date range
 
 Done
 ----
+- Try fa-check-circle in side info panel
+- Make links in info panel bigger
+- Cut off old dates
+- Attendee view: allow new attendee updating
+- Narrow names on attendee view
+- Change name style in calendar view
+- Add name
+- Hide calendar view top choices when not set
+- Slide names in calendar view
+- Change titles
+- Stop sending when can't find calendar
+- Add blank row between months in calendar view
+- Narrow margins of mobile calendar view
+- AV show top choices
+- Add ticks to calendar view
+- Tidy attendees template
+- Look at iPad touch events
+- Attendee view: allow updating
+- Attendee view: center vertically
+- AV attendee name overflow
+- Only 6 months future dates
+- AV highlight weekends
+- AV throttle left scroll
+- Attendee view: slide month along
+- Apply header/footer hiding strategy
+- Move register to footer
+- Animate date change in direction of change
+- Show top choices of left
+- Animate top chioces changing
 - Speed up rotate on iPhone
 - Background image
 - Show best options
