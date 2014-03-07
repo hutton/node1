@@ -88,7 +88,7 @@ window.EventApp = Backbone.View.extend({
             if (this.ChoicesView.isActive){
                 this.$el.find(".days-table").show();
             }
-            
+
             this.$el.find(".info").slideUp("fast");
             this.$el.find("#show-info > span").removeClass("show-info-rotate");
         }
@@ -467,6 +467,10 @@ window.EventApp = Backbone.View.extend({
     },
 
     switchToCalendar: function(){
+        if (this.showInfo){
+            this.infoClicked();
+        }
+        
         this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
 
@@ -475,6 +479,10 @@ window.EventApp = Backbone.View.extend({
     },
 
     switchToAttendees: function(){
+        if (this.showInfo){
+            this.infoClicked();
+        }
+
         this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
 

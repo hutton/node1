@@ -1,5 +1,6 @@
 - About style
 - iPad alignment
+- Add attendee in attendee mode
 
 =======
 - Toggle days-table doesn't work

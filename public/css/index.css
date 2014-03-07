@@ -95,11 +95,14 @@ h1 {
 }
 .headline {
   position: relative;
-  top: 10%;
   height: 0px;
+  -moz-transform: translate(0px, -75px);
+  -webkit-transform: translate(0px, -75px);
+  -o-transform: translate(0px, -75px);
+  -ms-transform: translate(0px, -75px);
+  transform: translate(0px, -75px);
 }
 .hero-text h1 {
-  font-size: 80px;
   margin: 0px 0px;
   display: inline-block;
   padding: 0px 30px 20px 30px;
@@ -112,7 +115,12 @@ h1 {
 .example-link-container {
   text-align: center;
   position: relative;
-  top: 75%;
+  top: 80%;
+  -moz-transform: translate(0px, -16px);
+  -webkit-transform: translate(0px, -16px);
+  -o-transform: translate(0px, -16px);
+  -ms-transform: translate(0px, -16px);
+  transform: translate(0px, -16px);
 }
 .example-link-container > a {
   font-size: 20px;
@@ -139,10 +147,10 @@ h1 {
     padding-bottom: 48px;
   }
   .headline {
-    top: 20%;
+    top: 32%;
   }
   .hero-text h1 {
-    font-size: 90px;
+    font-size: 100px;
   }
   .hero-text p {
     font-size: 22px;
@@ -154,7 +162,7 @@ h1 {
     text-align: center;
   }
   .headline {
-    top: 8%;
+    top: 24%;
   }
   .hero-text h1 {
     font-size: 65px;

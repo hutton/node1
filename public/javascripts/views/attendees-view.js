@@ -62,7 +62,7 @@ window.AttendeesView = Backbone.View.extend({
 
 		$('body').append(newElement);
 
-		newElement.find('.attendees-choices-top').height(newElement.height() - 45);
+		newElement.find('.attendees-choices-top').height($('.attendees-choices-row').height() - 35);
 
 		this.setElement($('.attendees-container-margin').first());
 
@@ -96,9 +96,9 @@ window.AttendeesView = Backbone.View.extend({
 			var tableHeight = this.$el.height();
 
 			if (totalHeight > tableHeight){
-				this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px'); 
+				this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px');
 			} else {
-				this.$el.attr('style', null); 
+				this.$el.attr('style', null);
 			}
 		}
 	},
@@ -133,7 +133,7 @@ window.AttendeesView = Backbone.View.extend({
 	checkScrollPosition: function(){
 		var that = this;
 
-		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();		
+		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();
 
 		if (scrollLeft !== this.scrollPosition){
 			this.scrollPosition = scrollLeft;
