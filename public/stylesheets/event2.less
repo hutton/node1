@@ -43,6 +43,10 @@ body{
 
 }
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+	font-family: 'Open Sans Light', sans-serif;
+}
+
 .table > tbody > tr > td{
 	border: none;
 	border-top: none;
@@ -133,21 +137,18 @@ a:active{
 
 #settings-view{
 	text-align: left;
-	border-top: 1px solid @divider-color;
 }
 
 #settings-view .modal-title{
 	text-align: center;
+	color: @free-color;
 }
 
 #settings-view > div{
 	font-size: 14px;
-	padding: 10px 10px 10px 10px;
 
 	line-height: 1.6em;
-	max-width: 570px;
-	margin-left: auto;
-	margin-right: auto;
+	max-width: 500px;
 }
 
 #settings-view h2{
@@ -275,13 +276,8 @@ a:active{
 	margin-bottom: 8px;
 }
 
-.title:hover{
-	cursor: pointer;
-}
-
 .tiile-button{
 }
-
 
 .add-attendee-panel{
 	margin: 10px;
@@ -372,6 +368,7 @@ a:active{
 	background: none;
 	float: right;
 	margin-top: 2px;
+	padding-right: 0px;
 }
 
 .days-table{

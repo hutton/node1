@@ -100,8 +100,6 @@ window.EventApp = Backbone.View.extend({
     render: function(){
         var that = this;
 
-        this.$el.find(".title").html(this.model.get("name"));
-
         if (!this.newMode){
             this.recalcTopSpacer();
         }
