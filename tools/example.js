@@ -141,6 +141,21 @@ function getExample(){
 			},
 			{
 				"busy" : [],
+				"date" : new Date(moment().add('days', 11)),
+				"free" : []
+			},
+			{
+				"busy" : [],
+				"date" : new Date(moment().add('days', 12)),
+				"free" : []
+			},
+			{
+				"busy" : [],
+				"date" : new Date(moment().add('days', 13)),
+				"free" : []
+			},
+			{
+				"busy" : [],
 				"date" : new Date(moment().add('days', 14)),
 				"free" : [
 					"A01",
@@ -150,6 +165,16 @@ function getExample(){
 					"A05",
 					"A07"
 				]
+			},
+			{
+				"busy" : [],
+				"date" : new Date(moment().add('days', 15)),
+				"free" : []
+			},
+			{
+				"busy" : [],
+				"date" : new Date(moment().add('days', 16)),
+				"free" : []
 			},
 			{
 				"busy" : [],

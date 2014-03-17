@@ -24,7 +24,7 @@ window.ChoiceView = Backbone.View.extend({
 			choices = this.model.get('choices');
 		}
 
-		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability() } ));
+		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability(), selectable: this.model.get('selectable') } ));
 
 		this.$el.hover(this.mouseEnter, this.mouseLeave);		
 
@@ -230,6 +230,10 @@ window.ChoicesView = Backbone.View.extend({
 				} else {
 					choice.$el.addClass("past");
 				}
+			}
+
+			if (!choice.model.get('selectable')){
+				choice.$el.addClass("unselectable");
 			}
 		});
 

@@ -7752,6 +7752,13 @@ a:active {
   border: 1px solid #d0d0d0;
   background: transparent !important;
 }
+.past .date-text {
+  text-decoration: line-through;
+}
+.unselectable > .date-cell-container {
+  border: 1px solid #d0d0d0;
+  background: transparent !important;
+}
 .event-table tr.selected-row > td {
   padding: 0px;
   width: 100%;
