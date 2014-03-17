@@ -1,1 +1,0 @@
-window.SettingsView=Backbone.View.extend({initialize:function(){_.bindAll(this)},el:$("#settings-view"),events:{},initialise:function(){_.bindAll(this)},show:function(){this.$el.modal({show:!0})},hide:function(){this.$el.modal({show:!1})}});
