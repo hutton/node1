@@ -47,6 +47,8 @@ window.EventApp = Backbone.View.extend({
 
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
+        this.SettingsView = new SettingsView();
+
         var pathNames = window.location.pathname.split( '/' );
 
         this.currentId = pathNames[pathNames.length - 1];
@@ -62,7 +64,6 @@ window.EventApp = Backbone.View.extend({
 
     events: {
         "click #show-info":             "infoClicked",
-        "click .title":                 "infoClicked",
         "click":                        "eventTableClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
@@ -78,18 +79,14 @@ window.EventApp = Backbone.View.extend({
     showInfo: false,
 
     infoClicked: function(){
+
+        this.SettingsView.show();
+
         this.showInfo = !this.showInfo;
 
         if (this.showInfo){
-            this.$el.find(".days-table").hide();
-            this.$el.find(".info").slideDown("fast");
             this.$el.find("#show-info > span").addClass("show-info-rotate");
         } else {
-            if (this.ChoicesView.isActive){
-                this.$el.find(".days-table").show();
-            }
-
-            this.$el.find(".info").slideUp("fast");
             this.$el.find("#show-info > span").removeClass("show-info-rotate");
         }
     },
@@ -105,47 +102,13 @@ window.EventApp = Backbone.View.extend({
 
         this.$el.find(".title").html(this.model.get("name"));
 
-        if (this.newMode){
-            this.$el.find(".current-attendee-info").hide();
-        } else {
-            this.$el.find(".current-attendee-info").show();
-
-            var email = this.currentAttendee.get("email");
-            var prettyName = this.currentAttendee.get("prettyName");
-
-            this.$el.find(".current-email").html(email);
-
-            if (email !== prettyName){
-                this.$el.find("#current-name").val(prettyName);
-            }
-
-            this.$el.find("#current-name-id").val(this.currentAttendee.get("_id"));
-
-            this.$el.find("#update-name-form").attr("action", "/event/" + this.currentId + "/update-name/");
-        }
-
-        var nameList = "";  
-        _.each(this.attendees.models, function(model){
-            if (model.get("me")){
-                nameList = "<strong>" + model.get("prettyName") + "</strong>, " + nameList;
-            } else {
-                nameList = nameList + model.get("prettyName") + ", ";
-            }
-        });
-
-        nameList = nameList.slice(0, -2);
-
-        this.$el.find(".attendees").html(nameList);
-
-        if (this.currentAttendee === null){
-            this.$el.find("#add-attendee").hide();
-
-            this.$el.find('#register-footer').show();
-        } else {
+        if (!this.newMode){
             this.recalcTopSpacer();
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
+
+        this.SettingsView.initialize();
 
         this.updateTellEveryoneLink();
 
@@ -466,11 +429,7 @@ window.EventApp = Backbone.View.extend({
         this.recalcTopSpacer();
     },
 
-    switchToCalendar: function(){
-        if (this.showInfo){
-            this.infoClicked();
-        }
-        
+    switchToCalendar: function(){        
         this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
 
@@ -479,10 +438,6 @@ window.EventApp = Backbone.View.extend({
     },
 
     switchToAttendees: function(){
-        if (this.showInfo){
-            this.infoClicked();
-        }
-
         this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
 

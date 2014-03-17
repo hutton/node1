@@ -7469,11 +7469,14 @@ a:active {
   }
 }
 /**********************************************************************************/
-.info {
-  background: #f0f0f0;
+#settings-view {
+  text-align: left;
   border-top: 1px solid #e8e8e8;
 }
-.info > div {
+#settings-view .modal-title {
+  text-align: center;
+}
+#settings-view > div {
   font-size: 14px;
   padding: 10px 10px 10px 10px;
   line-height: 1.6em;
@@ -7481,7 +7484,7 @@ a:active {
   margin-left: auto;
   margin-right: auto;
 }
-.info h2 {
+#settings-view h2 {
   font-size: 16px;
   color: #606060;
   line-height: 1.3em;
@@ -7489,7 +7492,7 @@ a:active {
   margin: 6px 0px 0px 0px;
   font-weight: bold;
 }
-.info .btn {
+#settings-view .btn {
   margin-left: auto;
   margin-right: auto;
   display: block;

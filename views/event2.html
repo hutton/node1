@@ -49,33 +49,6 @@
           </table>
         </div>
       </div>
-      <div class="info" style="display: none;">
-        <div>
-          <div class="current-attendee-info">
-            <h2>Name</h2>
-            <form id="update-name-form" method="post">
-              <div>
-                <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
-                <input type="hidden" id="current-name-id" name="_id"/></input>
-                <button type="submit" id="current-name-update">
-                  <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
-                </button>
-              </div>
-            </form>
-            <h2>Email</h2>
-            <div class="current-email"></div>
-          </div>
-          <h2>Attendees</h2>
-
-          <div>
-            <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
-          </div>
-          <div class="center info-links">
-            <a href="/"><i class="fa fa-home"></i> Convenely</a>
-            <a href="mailto:convenely@gmail.com?subject=Help"><i class="fa fa-question-circle"></i> Help</a>
-          </div>
-        </div>
-          </div>
         </div>
 
         <div id="top-row-spacer"></div>
@@ -132,6 +105,45 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="settings-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Settings</h4>
+          </div>
+          <div class="modal-body">
+        <div>
+          <div class="current-attendee-info">
+            <h2>Name</h2>
+            <form id="update-name-form" method="post">
+              <div>
+                <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
+                <input type="hidden" id="current-name-id" name="_id"/></input>
+                <button type="submit" id="current-name-update">
+                  <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
+                </button>
+              </div>
+            </form>
+            <h2>Email</h2>
+            <div class="current-email"></div>
+          </div>
+          <h2>Attendees</h2>
+
+          <div>
+            <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
+          </div>
+          <div class="center info-links">
+            <a href="/"><i class="fa fa-home"></i> Convenely</a>
+            <a href="mailto:convenely@gmail.com?subject=Help"><i class="fa fa-question-circle"></i> Help</a>
+          </div>
+        </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -337,6 +349,7 @@
         <script src="/javascripts/views/side-info-panel.js"></script>
         <script src="/javascripts/views/top-choices-panel.js"></script>
         <script src="/javascripts/views/attendees-view.js"></script>
+        <script src="/javascripts/views/settings-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
         <% } else { %>
