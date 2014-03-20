@@ -166,6 +166,10 @@ a:active{
 	display: block;
 }
 
+.settings-section{
+	margin: 10px 0px;
+}
+
 .info-links{
 	font-size: 16px;
 	margin-top: 20px;
@@ -1368,4 +1372,49 @@ ul.attendees-choice{
 	position: relative;
 }
 
+.selecting-dates-container{
+	color: @free-color;
+	font-size: 75%;
+}
+
+.selecting-dates-container .table{
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+.selecting-dates-container .table td{
+	text-align: center;
+	width: 30px;
+}
+
+#selecting-dates-save{
+	float: right;
+	cursor: pointer;
+}
+
+#selecting-dates-cancel{
+	float: right;
+	color: @selected-color;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.selecting-dates-period-conatiner{
+	margin: 16px 0px 6px 0px;
+	text-align: center;
+}
+.selecting-dates-period-conatiner > span{
+	padding: 1px 25px;
+	border-left: solid 1px @free-color;
+	border-right: solid 1px @free-color;
+	border-top: solid 2px @free-color;
+	border-bottom: solid 2px @free-color;
+	margin: 0px;
+	cursor: pointer;
+}
+
+.selecting-dates-period-conatiner > span.selected{
+	color: white;
+	background: @free-color;
+}
 

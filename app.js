@@ -103,6 +103,7 @@ Array.prototype.removeElement = function(element) {
  app.post('/event/*/choice', events.updateChoice);
  app.post('/event/*/add', events.addAttendee);
  app.post('/event/*/update-name', events.updateAttendeeName);
+ app.post('/event/*/selectableDates', events.updateSelectableDates);
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
  app.post('/mail', mail.receive);

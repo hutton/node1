@@ -146,8 +146,33 @@ function renderEvent(req, res){
 		});
 	} else {
 		res.status(404);
-		res.send("We can't find the event you're looking for.")
+		res.send("We can't find the event you're looking for.");
 	}
+}
+
+function updateSelectableDates(req, res){
+	if (req.route.params[0] == "example"){
+		res.send(200);		
+	} else {
+		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
+			if (err){
+				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with id " + req.route.params[0]);
+
+				res.status(404);
+				res.send('No calendar');
+			} else {
+				var selectableChoices = req.body;
+
+
+			}
+		});
+	}	
 }
 
 function updateChoice(req, res){
@@ -310,6 +335,10 @@ exports.create = function(req, res){
 
 exports.updateAttendeeName = function(req, res){
 	updateAttendeeName(req, res);
+};
+
+exports.updateSelectableDates = function(req, res){
+	updateSelectableDates(req, res);
 };
 
 

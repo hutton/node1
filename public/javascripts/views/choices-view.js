@@ -54,16 +54,23 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.find('.free-marker').removeClass('free');
 		}
 
-		var availList = this.model.getAttendeeAvailability();
+		if (this.model.get('selectable')){
+			this.$el.removeClass('unselectable');
+			this.$el.find('.markers-container').show();
 
-		this.$el.find(".markers-container li").each(function(index, element){
-			if (availList[index]){
-				$(this).addClass("a");
-			} else {
-				$(this).removeClass("a");
-			}
-		});
+			var availList = this.model.getAttendeeAvailability();
 
+			this.$el.find(".markers-container li").each(function(index, element){
+				if (availList[index]){
+					$(this).addClass("a");
+				} else {
+					$(this).removeClass("a");
+				}
+			});
+		} else {
+			this.$el.addClass('unselectable');
+			this.$el.find('.markers-container').hide();
+		}
 	},
 
 	adornersRespositioned: function(){
@@ -109,18 +116,29 @@ window.ChoiceView = Backbone.View.extend({
 	dayClicked: function(event){
 		var target = $(this.$el).find("div:first");
 
-		if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
-			this.model.toggleFree();
+		if (App.selectableDateMode){
+			if (this.model.get('selectable')){
+				this.model.set({'selectable': false});
+			} else {
+				this.model.set({'selectable': true});
+			}
+
 		} else {
-			$(".selected").removeClass('selected');
-			$(".cell-selected").removeClass('cell-selected');
+			if (this.model.get('selectable')){
+				if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
+					this.model.toggleFree();
+				} else {
+					$(".selected").removeClass('selected');
+					$(".cell-selected").removeClass('cell-selected');
 
-			var selectedRow = target.parents("tr");
+					var selectedRow = target.parents("tr");
 
-			App.updateSelectedItem(this.model, selectedRow);
+					App.updateSelectedItem(this.model, selectedRow);
 
-			this.$el.addClass('cell-selected');
-			target.addClass('selected');
+					this.$el.addClass('cell-selected');
+					target.addClass('selected');
+				}
+			}
 		}
 	},
 
@@ -230,10 +248,6 @@ window.ChoicesView = Backbone.View.extend({
 				} else {
 					choice.$el.addClass("past");
 				}
-			}
-
-			if (!choice.model.get('selectable')){
-				choice.$el.addClass("unselectable");
 			}
 		});
 

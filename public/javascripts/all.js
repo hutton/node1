@@ -21,5 +21,6 @@
 // @codekit-prepend "views/top-choices-panel.js";
 // @codekit-prepend "views/attendees-view.js";
 // @codekit-prepend "views/settings-view.js";
+// @codekit-prepend "views/select-dates-view.js";
 
 // @codekit-prepend "event-app.js";

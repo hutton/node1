@@ -49,6 +49,8 @@ window.EventApp = Backbone.View.extend({
 
         this.SettingsView = new SettingsView();
 
+        this.SelectDatesView = new SelectDatesView({collection: this.choices});
+
         var pathNames = window.location.pathname.split( '/' );
 
         this.currentId = pathNames[pathNames.length - 1];
@@ -96,6 +98,8 @@ window.EventApp = Backbone.View.extend({
     scrollStarted: false,
 
     newMode: false,
+
+    selectableDateMode: false,
 
     render: function(){
         var that = this;
@@ -427,7 +431,7 @@ window.EventApp = Backbone.View.extend({
         this.recalcTopSpacer();
     },
 
-    switchToCalendar: function(){        
+    switchToCalendar: function(){
         this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
 
@@ -441,5 +445,9 @@ window.EventApp = Backbone.View.extend({
 
         this.ChoicesView.active(false);
         this.AttendeesView.active(true);
+    },
+
+    setSelectableDateMode: function(){
+        this.SelectDatesView.show();
     }
 });

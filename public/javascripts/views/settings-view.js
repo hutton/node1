@@ -8,6 +8,7 @@ window.SettingsView = Backbone.View.extend({
 	el: $("#settings-view"),
 
 	events: {
+		"click #settings-update-dates": "updateSelectableDates"
 	},
 
 	render: function(){
@@ -55,6 +56,12 @@ window.SettingsView = Backbone.View.extend({
 	},
 
 	hide: function(){
-		this.$el.modal({show: false});
+		this.$el.modal('hide');
+	},
+
+	updateSelectableDates: function(){
+		window.App.setSelectableDateMode();
+
+		this.hide();
 	}
 });

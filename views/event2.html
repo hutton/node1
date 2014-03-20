@@ -35,6 +35,41 @@
            <a class="tiile-button" id="show-info"><span class="fa fa-cog"></span></a>
          </div>
          <div class="title"><%= name %></div>
+         <div class="row selecting-dates-container" style="display: none;">
+<!--           <div class="selecting-dates-period-conatiner">
+            <span class="selected">
+              2 weeks
+            </span>
+            <span>
+              4 weeks
+            </span>
+            <span>
+              2 months
+            </span>
+            <span>
+              6 months
+            </span>
+            <span>
+              All
+            </span>
+          </div>          
+          <table class="table">
+            <tr>
+              <td>M</td>
+              <td>T</td>
+              <td>W</td>
+              <td>T</td>
+              <td>F</td>
+              <td>S</td>
+              <td>S</td>
+            </tr>
+          </table>
+ -->          <div>
+            <span>Select event dates</span>
+            <span id="selecting-dates-save">Save <i class="fa fa-chevron-right"></i></span>
+            <span id="selecting-dates-cancel">Cancel</span>
+          </div>
+         </div>
          <div class="row">
           <table class="table days-table">
             <tr>
@@ -116,23 +151,31 @@
           <div class="modal-body">
         <div>
           <div class="current-attendee-info">
-            <h2>Name</h2>
-            <form id="update-name-form" method="post">
-              <div>
-                <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
-                <input type="hidden" id="current-name-id" name="_id"/></input>
-                <button type="submit" id="current-name-update">
-                  <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
-                </button>
-              </div>
-            </form>
-            <h2>Email</h2>
-            <div class="current-email"></div>
+            <div class="settings-section">
+              <h2>Name</h2>
+              <form id="update-name-form" method="post">
+                <div>
+                  <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
+                  <input type="hidden" id="current-name-id" name="_id"/></input>
+                  <button type="submit" id="current-name-update">
+                    <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="settings-section">
+              <h2>Email</h2>
+              <div class="current-email"></div>
+            </div>
           </div>
-          <h2>Attendees</h2>
-
-          <div>
-            <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
+          <div class="settings-section">
+            <h2>Attendees</h2>
+            <div>
+              <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
+            </div>
+          </div>
+          <div class="settings-section">
+            <span class="span-link" id="settings-update-dates">Update Event Dates <i class="fa fa-chevron-right"></i></span>
           </div>
           <div class="center info-links">
             <a href="/"><i class="fa fa-home"></i> Convenely</a>
@@ -161,7 +204,6 @@
         <@= date.getDate() @>
       </div>
       <div class="free-marker"><i class="fa fa-check"></i></div>
-      <@ if (selectable){ @>
       <div class="markers-container">
         <ul>
         <@ _.each(availList, function(isAvailable){ @>
@@ -173,7 +215,6 @@
         <@ }); @>
         </ul>
       </div>
-      <@ } @>
     </div>
     </script>
 
@@ -352,6 +393,7 @@
         <script src="/javascripts/views/top-choices-panel.js"></script>
         <script src="/javascripts/views/attendees-view.js"></script>
         <script src="/javascripts/views/settings-view.js"></script>
+        <script src="/javascripts/views/select-dates-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
         <% } else { %>
