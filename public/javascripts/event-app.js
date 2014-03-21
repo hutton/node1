@@ -342,7 +342,7 @@ window.EventApp = Backbone.View.extend({
         _.each(this.choices.models, function(model){
             var freeCount = 0;
             
-            if (model.has('date') && model.get('date') >= that.today){
+            if (model.isSelectable() && model.has('date') && model.get('date') >= that.today){
                 if (model.has('free')){
                     freeCount += model.get('free').length;
                 }

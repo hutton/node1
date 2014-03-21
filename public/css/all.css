@@ -7496,11 +7496,11 @@ a:active {
   max-width: 500px;
 }
 #settings-view h2 {
-  font-size: 16px;
+  font-size: 14px;
   color: #606060;
   line-height: 1.3em;
-  padding: 4px 0px;
-  margin: 6px 0px 0px 0px;
+  padding: 2px 0px;
+  margin: 0px;
   font-weight: bold;
 }
 #settings-view .btn {
@@ -7742,7 +7742,8 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
-  background: #ecefec;
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
   position: relative;
   height: 100%;
   opacity: 0.9;
@@ -7757,6 +7758,9 @@ a:active {
 }
 .past .date-text {
   text-decoration: line-through;
+}
+.unselectable {
+  opacity: 0.6;
 }
 .unselectable > .date-cell-container {
   border: 1px solid #d0d0d0;
@@ -7780,7 +7784,7 @@ a:active {
   -ms-user-select: none;
   user-select: none;
   color: #000000;
-  opacity: 0.22;
+  opacity: 0.4;
 }
 .content {
   position: relative;
@@ -8531,6 +8535,7 @@ ul.attendees-choice {
   position: relative;
 }
 .selecting-dates-container {
+  text-align: center;
   color: #4ad16c;
   font-size: 75%;
 }
@@ -8542,14 +8547,18 @@ ul.attendees-choice {
   text-align: center;
   width: 30px;
 }
+.selecting-dates-title {
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
 #selecting-dates-save {
-  float: right;
   cursor: pointer;
+  margin-top: 10px;
 }
 #selecting-dates-cancel {
-  float: right;
   color: #c0c0c0;
-  margin-right: 10px;
+  margin-top: 10px;
+  margin-right: 20px;
   cursor: pointer;
 }
 .selecting-dates-period-conatiner {

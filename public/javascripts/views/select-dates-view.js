@@ -46,9 +46,9 @@ window.SelectDatesView = Backbone.View.extend({
 		$.ajax({
 			type: "POST",
 			url: "/event/" + window.App.currentId + "/selectableDates",
-			data: data,
+			data: {dates: data},
 			success: function(){
-				
+
 			},
 			dataType: "json"
 		});

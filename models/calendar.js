@@ -19,6 +19,7 @@ var CalendarSchema = new mongoose.Schema({
 	},
 	choices: [{
 		date: Date,
+		selectable: {type: Boolean, default: true},
 		busy: [mongoose.SchemaType.ObjectId],
 		free: [mongoose.SchemaType.ObjectId]
 	}],
@@ -239,11 +240,17 @@ CalendarSchema.methods.findChoiceByDate = function(date){
 	var dateString = new Date(date).toDateString();
 
 	if (dateString !== "Invalid Date"){
-		return _.find(this.choices, function(choice){
-			if (choice.date !== null && dateString === choice.date.toDateString()){
+		var found = _.find(this.choices, function(choice){
+			if (choice.date !== null && !_.isUndefined(choice.date) && dateString === choice.date.toDateString()){
 				return choice;
 			}
 		});
+
+		if (_.isUndefined(found)){
+			return null;
+		}
+
+		return found;
 	}
 
 	return null;
@@ -474,6 +481,39 @@ CalendarSchema.methods.addAttendeeMessage = function(message, fromName){
 			});
 
 			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
+		}
+	});
+};
+
+CalendarSchema.methods.setSelectableDates = function(dates){
+	var calendar = this;
+
+	_.each(calendar.choices, function(choice){
+		choice.selectable = false;
+	});
+
+	var newChoices = [];
+
+	_.each(dates, function(date){
+		var choice = calendar.findChoiceByDate(date);
+
+		if (choice !== null){
+			choice.selectable = true;
+		} else {
+			calendar.choices.push({
+						date: date,
+						selectable: true,
+						busy: [],
+						free:[]
+					});
+		}
+	});
+
+	calendar.save(function(err, calendar){
+		if (err){
+			logger.error("Failed to set selectable dates calendar: " + err);
+		} else {
+			logger.info("Selectable dates updated for calendar " + calendar.name + "(" + calendar.id + ").");
 		}
 	});
 };

@@ -55,6 +55,7 @@ function getExample(){
 		"choices" : [
 			{
 				"date" : new Date(moment().add('days', 0)),
+				"selectable": true,
 				"free" : [
 					"A02",
 					"A03"
@@ -64,6 +65,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 1)),
+				"selectable": true,
 				"free" : [
 					"A02",
 					"A04",
@@ -73,7 +75,14 @@ function getExample(){
 			},
 			{
 				"busy" : [],
+				"date" : new Date(moment().add('days', 2)),
+				"selectable": true,
+				"free" : []
+			},
+			{
+				"busy" : [],
 				"date" : new Date(moment().add('days', 3)),
+				"selectable": true,
 				"free" : [
 					"A02",
 					"A03",
@@ -85,7 +94,14 @@ function getExample(){
 			},
 			{
 				"busy" : [],
+				"date" : new Date(moment().add('days', 4)),
+				"selectable": true,
+				"free" : []
+			},
+			{
+				"busy" : [],
 				"date" : new Date(moment().add('days', 5)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A02"
@@ -95,6 +111,7 @@ function getExample(){
 				"_id" : "c006",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 6)),
+				"selectable": true,
 				"free" : [
 					"A06"
 				]
@@ -103,6 +120,7 @@ function getExample(){
 				"_id" : "c007",
 				"busy" : [],
 				"date" : new Date(moment().add('days', 7)),
+				"selectable": true,
 				"free" : [
 					"A04",
 					"A05",
@@ -113,6 +131,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 8)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A02",
@@ -126,6 +145,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 9)),
+				"selectable": true,
 				"free" : [
 					"A06",
 					"A07"
@@ -134,6 +154,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 10)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A02"
@@ -142,21 +163,25 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 11)),
+				"selectable": true,
 				"free" : []
 			},
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 12)),
+				"selectable": true,
 				"free" : []
 			},
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 13)),
+				"selectable": true,
 				"free" : []
 			},
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 14)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A02",
@@ -169,16 +194,19 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 15)),
+				"selectable": true,
 				"free" : []
 			},
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 16)),
+				"selectable": true,
 				"free" : []
 			},
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 17)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A02",
@@ -189,6 +217,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 21)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A02",
@@ -202,6 +231,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 23)),
+				"selectable": true,
 				"free" : [
 					"A02",
 					"A05",
@@ -211,6 +241,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 26)),
+				"selectable": true,
 				"free" : [
 					"A05"
 				]
@@ -218,6 +249,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 28)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A05",
@@ -227,6 +259,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 30)),
+				"selectable": true,
 				"free" : [
 					"A03"
 				]
@@ -234,6 +267,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 32)),
+				"selectable": true,
 				"free" : [
 					"A04",
 					"A02",
@@ -243,6 +277,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 34)),
+				"selectable": true,
 				"free" : [
 					"A07"
 				]
@@ -250,6 +285,7 @@ function getExample(){
 			{
 				"busy" : [],
 				"date" : new Date(moment().add('days', 37)),
+				"selectable": true,
 				"free" : [
 					"A01",
 					"A06"

@@ -24,7 +24,7 @@ window.ChoiceView = Backbone.View.extend({
 			choices = this.model.get('choices');
 		}
 
-		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability(), selectable: this.model.get('selectable') } ));
+		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability(), selectable: this.model.isSelectable() } ));
 
 		this.$el.hover(this.mouseEnter, this.mouseLeave);		
 
@@ -54,7 +54,7 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.find('.free-marker').removeClass('free');
 		}
 
-		if (this.model.get('selectable')){
+		if (this.model.isSelectable()){
 			this.$el.removeClass('unselectable');
 			this.$el.find('.markers-container').show();
 
@@ -117,14 +117,14 @@ window.ChoiceView = Backbone.View.extend({
 		var target = $(this.$el).find("div:first");
 
 		if (App.selectableDateMode){
-			if (this.model.get('selectable')){
+			if (this.model.isSelectable()){
 				this.model.set({'selectable': false});
 			} else {
 				this.model.set({'selectable': true});
 			}
 
 		} else {
-			if (this.model.get('selectable')){
+			if (this.model.isSelectable()){
 				if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
 					this.model.toggleFree();
 				} else {

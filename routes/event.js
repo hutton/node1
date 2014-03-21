@@ -154,7 +154,7 @@ function updateSelectableDates(req, res){
 	if (req.route.params[0] == "example"){
 		res.send(200);		
 	} else {
-		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
 				logger.error("Error finding calendar with id " + req.route.params[0]);
 				logger.error("Error:" + err);
@@ -167,9 +167,11 @@ function updateSelectableDates(req, res){
 				res.status(404);
 				res.send('No calendar');
 			} else {
-				var selectableChoices = req.body;
+				var selectableChoices = JSON.parse(req.body.dates);
 
+				calendar.setSelectableDates(selectableChoices);
 
+				res.send(200);
 			}
 		});
 	}	
