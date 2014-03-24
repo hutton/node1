@@ -23,6 +23,9 @@ var CalendarSchema = new mongoose.Schema({
 		busy: [mongoose.SchemaType.ObjectId],
 		free: [mongoose.SchemaType.ObjectId]
 	}],
+	datesSelected: {type: Boolean, default: true},
+	everythingSelectable: {type: Boolean, default: true},
+
 	createdBy: { type: String, default: "" },
 	attendees: [AttendeeSchema],
 	date: { type: Date, default: Date.now },
@@ -88,7 +91,9 @@ function createCalendar(subject, choices, from, callback){
 		id: id,
 		name: subject,
 		choices: choices,
-		createdBy: from
+		createdBy: from,
+		datesSelected: false,
+		everythingSelectable: false
 	});
 
 	findNewCalendarId(function(newId){
@@ -508,6 +513,8 @@ CalendarSchema.methods.setSelectableDates = function(dates){
 					});
 		}
 	});
+
+	calendar.datesSelected = true;
 
 	calendar.save(function(err, calendar){
 		if (err){

@@ -84,7 +84,8 @@ function showEvent(req, res, calendar, attendeeId){
 
 	var cleanedCalendar = {
 		name: calendar.name,
-		id: calendar.id
+		id: calendar.id,
+		datesSelected: calendar.datesSelected
 	};
 
 	logger.info("Showing: " + calendar.name);

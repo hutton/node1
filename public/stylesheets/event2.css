@@ -193,6 +193,5 @@ ul.attendees-choice{margin:0px;padding:0px;}
 .selecting-dates-title{margin-top:10px;margin-bottom:8px;}
 #selecting-dates-save{cursor:pointer;margin-top:10px;}
 #selecting-dates-cancel{color:#c0c0c0;margin-top:10px;margin-right:20px;cursor:pointer;}
-.selecting-dates-period-conatiner{margin:16px 0px 6px 0px;text-align:center;}
-.selecting-dates-period-conatiner>span{padding:1px 25px;border-left:solid 1px #4ad16c;border-right:solid 1px #4ad16c;border-top:solid 2px #4ad16c;border-bottom:solid 2px #4ad16c;margin:0px;cursor:pointer;}
-.selecting-dates-period-conatiner>span.selected{color:white;background:#4ad16c;}
+.selecting-dates-period-conatiner{margin:6px 0px 16px 0px;text-align:center;}
+.selecting-dates-period-conatiner>span{text-decoration:underline;margin:0px 6px 0px 6px;cursor:pointer;font-size:90%;}

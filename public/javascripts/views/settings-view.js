@@ -60,7 +60,7 @@ window.SettingsView = Backbone.View.extend({
 	},
 
 	updateSelectableDates: function(){
-		window.App.setSelectableDateMode();
+		window.App.changeSelectableDates();
 
 		this.hide();
 	}

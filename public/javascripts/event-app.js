@@ -116,6 +116,10 @@ window.EventApp = Backbone.View.extend({
 
         this.showBestChoices();
 
+        if (!this.model.get('datesSelected')){
+            this.changeSelectableDates();
+        }
+
         this.onResizeWindow();
 
         var throttledResize = _.debounce(that.onResizeWindow, 200);
@@ -447,7 +451,7 @@ window.EventApp = Backbone.View.extend({
         this.AttendeesView.active(true);
     },
 
-    setSelectableDateMode: function(){
+    changeSelectableDates: function(){
         this.SelectDatesView.show();
     }
 });
