@@ -6,11 +6,11 @@ window.SelectDatesView = Backbone.View.extend({
 	el: $(".selecting-dates-container"),
 
 	events: {
-		"click #selecting-dates-cancel": 	"hide",
-		"click #selecting-dates-save": 		"save",
+		"click #selecting-dates-cancel":	"cancel",
+		"click #selecting-dates-save":		"save",
 		"click #selecting-dates-one-month": "oneMonthClicked",
-		"click #selecting-dates-two-months": 	"twoMonthsClicked",
-		"click #selecting-dates-all": 		"allClicked",
+		"click #selecting-dates-two-months":	"twoMonthsClicked",
+		"click #selecting-dates-all":		"allClicked",
 	},
 
 	render: function(){
@@ -24,13 +24,18 @@ window.SelectDatesView = Backbone.View.extend({
 	show: function(){
 		window.App.selectableDateMode = true;
 
-		this.$el.show();
+		this.$el.slideDown('fast');
 	},
 
 	hide: function(){
 		window.App.selectableDateMode = false;
 
-		this.$el.hide();
+		this.$el.slideUp('fast');
+	},
+
+	cancel: function(){
+		
+		window.location = window.location;
 	},
 
 	save: function(){

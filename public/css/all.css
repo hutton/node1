@@ -7528,13 +7528,11 @@ a:active {
 .navbar-inner {
   border-color: #e8e8e8;
   min-height: 50px;
-  background: #f8f8f8;
 }
 .navbar-fixed-top .navbar-inner,
 .navbar-fixed-bottom .navbar-inner,
 .navbar-static-top .navbar-inner {
   box-shadow: none;
-  background: #f8f8f8;
 }
 .event-container-margin {
   margin-left: 6px;
@@ -7551,15 +7549,13 @@ a:active {
 #top-row-spacer {
   height: 60px;
 }
-.navbar-fixed-top .navbar-inner {
-  background: #f8f8f8;
-}
 .navbar-inner {
   border: none;
 }
 .navbar-fixed-top {
   border-bottom: 1px solid #e8e8e8;
-  background: #f8f8f8;
+  background: #4ad16c;
+  color: #4ad16c;
 }
 .navbar-fixed-bottom {
   border-top: 1px solid #e8e8e8;
@@ -7571,11 +7567,14 @@ a:active {
   right: 0px;
   overflow: visible;
 }
+.tiile-button {
+  padding: 10px;
+  color: white;
+}
 #show-info {
   position: relative;
   right: 8px;
   top: 12px;
-  padding: 4px;
 }
 #show-info > span {
   -moz-transition-duration: 0.2s;
@@ -7587,9 +7586,7 @@ a:active {
 #title-mail {
   position: absolute;
   float: left;
-  top: 4px;
   transition: all 0.4s ease-in-out;
-  padding: 6px 14px;
 }
 .show-info-rotate {
   -webkit-transform: rotate(90deg);
@@ -7599,7 +7596,6 @@ a:active {
   transform: rotate(90deg);
 }
 .title {
-  color: #4ad16c;
   text-align: center;
   padding-top: 12px;
   padding-left: 25px;
@@ -7607,6 +7603,7 @@ a:active {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 8px;
+  color: white;
 }
 .add-attendee-panel {
   margin: 10px;
@@ -7698,6 +7695,7 @@ a:active {
   margin-right: auto;
   font-size: 46%;
   margin-bottom: 2px;
+  color: white;
 }
 .days-table td {
   text-align: center;
@@ -7710,7 +7708,7 @@ a:active {
 }
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7) {
-  color: #d0d0d0;
+  color: whitei;
 }
 .month {
   height: 100%;
@@ -8535,15 +8533,31 @@ ul.attendees-choice {
   position: relative;
 }
 .selecting-dates-container {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 200;
+  text-align: center;
+  pointer-events: none;
+}
+.selecting-dates {
+  background: #f8f8f8;
+  max-width: 580px;
   text-align: center;
   color: #4ad16c;
   font-size: 75%;
+  display: inline-block;
+  padding: 0px 20px 10px 20px;
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  pointer-events: auto;
 }
-.selecting-dates-container .table {
+.selecting-date .table {
   text-align: center;
   margin-bottom: 0px;
 }
-.selecting-dates-container .table td {
+.selecting-dates .table td {
   text-align: center;
   width: 30px;
 }

@@ -23,21 +23,21 @@ a:active{color:#4ad16c;text-decoration:none;}
 .info-links>a{margin:0px 25px;}
 .info-links>a>i{font-size:100%;}
 .table td{padding:8px 0px;border-top:none;}
-.navbar-inner{border-color:#e8e8e8;min-height:50px;background:#f8f8f8;}
-.navbar-fixed-top .navbar-inner,.navbar-fixed-bottom .navbar-inner,.navbar-static-top .navbar-inner{box-shadow:none;background:#f8f8f8;}
+.navbar-inner{border-color:#e8e8e8;min-height:50px;}
+.navbar-fixed-top .navbar-inner,.navbar-fixed-bottom .navbar-inner,.navbar-static-top .navbar-inner{box-shadow:none;}
 .event-container-margin{margin-left:6px;margin-right:6px;}
 .event-container{max-width:600px;margin-left:auto;margin-right:auto;min-height:800px;z-index:101;position:relative;}
 #top-row-spacer{height:60px;}
-.navbar-fixed-top .navbar-inner{background:#f8f8f8;}
 .navbar-inner{border:none;}
-.navbar-fixed-top{border-bottom:1px solid #e8e8e8;background:#f8f8f8;}
+.navbar-fixed-top{border-bottom:1px solid #e8e8e8;background:#4ad16c;color:#4ad16c;}
 .navbar-fixed-bottom{border-top:1px solid #e8e8e8;background:#f8f8f8;}
 .title-button-container{position:absolute;height:0px;right:0px;overflow:visible;}
-#show-info{position:relative;right:8px;top:12px;padding:4px;}
+.tiile-button{padding:10px;color:white;}
+#show-info{position:relative;right:8px;top:12px;}
 #show-info>span{-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
-#title-mail{position:absolute;float:left;top:4px;transition:all 0.4s ease-in-out;padding:6px 14px;}
+#title-mail{position:absolute;float:left;transition:all 0.4s ease-in-out;}
 .show-info-rotate{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg);}
-.title{color:#4ad16c;text-align:center;padding-top:12px;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;margin-bottom:8px;}
+.title{text-align:center;padding-top:12px;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;margin-bottom:8px;color:white;}
 .add-attendee-panel{margin:10px;}
 .message-panel{display:none;font-size:14px;}
 .add-attendee-message{display:none;font-size:14px;}
@@ -57,10 +57,10 @@ a:active{color:#4ad16c;text-decoration:none;}
 .add-attendee-email-validation{opacity:0.15;color:#808080;}
 .add-attendee-email-validation-valid{color:#4ad16c;opacity:1;}
 #current-name-update{border:none;background:none;float:right;margin-top:2px;padding-right:0px;}
-.days-table{max-width:600px;margin-left:auto;margin-right:auto;font-size:46%;margin-bottom:2px;}
+.days-table{max-width:600px;margin-left:auto;margin-right:auto;font-size:46%;margin-bottom:2px;color:white;}
 .days-table td{text-align:center;padding:0px 0px;width:30px;}
 .days-table>tbody>tr>td{border:none;padding:0px;}
-.days-table td:nth-of-type(6),.days-table td:nth-of-type(7){color:#d0d0d0;}
+.days-table td:nth-of-type(6),.days-table td:nth-of-type(7){color:whitei;}
 .month{height:100%;position:relative;width:38px;}
 .month>div{position:relative;color:#4ad16c;top:50%;left:10px;}
 .event-table tr.selected-row{height:auto;}
@@ -187,9 +187,10 @@ ul.attendees-choice{margin:0px;padding:0px;}
 .calendar-choices-top{position:absolute;z-index:100;pointer-events:none;color:white;text-align:right;font-size:45%;}
 .calendar-choices-top:before{position:absolute;content:"";right:0px;width:0;height:0;border-bottom:18px solid transparent;border-left:18px solid transparent;z-index:-1;border-top:18px solid #4ad16c;}
 .calendar-choices-top>div{left:-2px;top:0px;position:relative;}
-.selecting-dates-container{text-align:center;color:#4ad16c;font-size:75%;}
-.selecting-dates-container .table{text-align:center;margin-bottom:0px;}
-.selecting-dates-container .table td{text-align:center;width:30px;}
+.selecting-dates-container{position:fixed;top:0px;width:100%;z-index:200;text-align:center;pointer-events:none;}
+.selecting-dates{background:#f8f8f8;max-width:580px;text-align:center;color:#4ad16c;font-size:75%;display:inline-block;padding:0px 20px 10px 20px;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;pointer-events:auto;}
+.selecting-date .table{text-align:center;margin-bottom:0px;}
+.selecting-dates .table td{text-align:center;width:30px;}
 .selecting-dates-title{margin-top:10px;margin-bottom:8px;}
 #selecting-dates-save{cursor:pointer;margin-top:10px;}
 #selecting-dates-cancel{color:#c0c0c0;margin-top:10px;margin-right:20px;cursor:pointer;}

@@ -6,6 +6,8 @@ function getExample(){
 		"calendarId" : "example",
 		"id" : "office-drinks",
 		"name" : "Office drinks",
+		"datesSelected": true,
+		"everythingSelectable": false,
 		"date" : new Date(moment()),
 		"attendees" : [
 			{

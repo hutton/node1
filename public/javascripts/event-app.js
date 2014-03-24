@@ -411,9 +411,13 @@ window.EventApp = Backbone.View.extend({
 
     recalcTopSpacer: function(){
         if (this.$el.find(".navbar-fixed-top").is(':visible')){
-            this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
+            var topNavBarHeight = this.$el.find(".navbar-fixed-top").height();
+
+            this.$el.find("#top-row-spacer").height(topNavBarHeight);
+            this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
         } else {
             this.$el.find("#top-row-spacer").height(0);
+            this.$el.find(".selecting-dates-container").css("top", 0);
         }
     },
 
