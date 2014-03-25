@@ -29,15 +29,16 @@ a:active{color:#4ad16c;text-decoration:none;}
 .event-container{max-width:600px;margin-left:auto;margin-right:auto;min-height:800px;z-index:101;position:relative;}
 #top-row-spacer{height:60px;}
 .navbar-inner{border:none;}
-.navbar-fixed-top{border-bottom:1px solid #e8e8e8;background:#4ad16c;color:#4ad16c;}
+.navbar-fixed-top{background:#4ad16c;color:white;}
+.navbar-fixed-top a{color:white;}
 .navbar-fixed-bottom{border-top:1px solid #e8e8e8;background:#f8f8f8;}
 .title-button-container{position:absolute;height:0px;right:0px;overflow:visible;}
-.tiile-button{padding:10px;color:white;}
-#show-info{position:relative;right:8px;top:12px;}
+.tiile-button{padding:5px 10px 10px 10px;}
+#show-info{float:right;}
 #show-info>span{-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
 #title-mail{position:absolute;float:left;transition:all 0.4s ease-in-out;}
 .show-info-rotate{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg);}
-.title{text-align:center;padding-top:12px;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;margin-bottom:8px;color:white;}
+.title{font-weight:bold;text-align:center;padding-top:7px;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;margin-bottom:1px;color:white;}
 .add-attendee-panel{margin:10px;}
 .message-panel{display:none;font-size:14px;}
 .add-attendee-message{display:none;font-size:14px;}

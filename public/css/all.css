@@ -7553,9 +7553,11 @@ a:active {
   border: none;
 }
 .navbar-fixed-top {
-  border-bottom: 1px solid #e8e8e8;
   background: #4ad16c;
-  color: #4ad16c;
+  color: white;
+}
+.navbar-fixed-top a {
+  color: white;
 }
 .navbar-fixed-bottom {
   border-top: 1px solid #e8e8e8;
@@ -7568,13 +7570,10 @@ a:active {
   overflow: visible;
 }
 .tiile-button {
-  padding: 10px;
-  color: white;
+  padding: 5px 10px 10px 10px;
 }
 #show-info {
-  position: relative;
-  right: 8px;
-  top: 12px;
+  float: right;
 }
 #show-info > span {
   -moz-transition-duration: 0.2s;
@@ -7596,13 +7595,14 @@ a:active {
   transform: rotate(90deg);
 }
 .title {
+  font-weight: bold;
   text-align: center;
-  padding-top: 12px;
+  padding-top: 7px;
   padding-left: 25px;
   padding-right: 25px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 8px;
+  margin-bottom: 1px;
   color: white;
 }
 .add-attendee-panel {
