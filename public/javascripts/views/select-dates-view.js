@@ -25,17 +25,40 @@ window.SelectDatesView = Backbone.View.extend({
 		window.App.selectableDateMode = true;
 
 		this.$el.slideDown('fast');
+
+		this.originalSelectableChoices = this.collection.where({selectable: true});	
 	},
 
 	hide: function(){
 		window.App.selectableDateMode = false;
 
 		this.$el.slideUp('fast');
+
+		this.clearGroupSelected();
 	},
 
 	cancel: function(){
-		
-		window.location = window.location;
+		_.each(this.collection.models, function(choice){
+			if (choice.has('date')){
+				var date = choice.get('date');
+
+				if (date > window.App.today){
+					choice.set('selectable', false);
+				}
+			}
+		});
+
+		_.each(this.originalSelectableChoices, function(choice){
+			if (choice.has('date')){
+				var date = choice.get('date');
+
+				if (date > window.App.today){
+					choice.set('selectable', true);
+				}
+			}
+		});
+
+		this.hide();
 	},
 
 	save: function(){
@@ -60,25 +83,83 @@ window.SelectDatesView = Backbone.View.extend({
 		this.hide();
 	},
 
-	oneMonthClicked: function(){
-		var oneMonth = new Date(moment().add('months', 1));
+	clearGroupSelected: function(){
+		this.oneMonthSelected = false;
+		this.twoMonthsSelected = false;
+		this.allSelected = false;
 
-		this.updateSelected(oneMonth);
+		this.$el.find('span').removeClass('selected');
+	},
+
+	oneMonthSelected: false,
+	twoMonthsSelected: false,
+	allSelected: false,
+
+	oneMonthClicked: function(){
+		var el = this.$el.find('#selecting-dates-one-month');
+
+		if (this.oneMonthSelected){
+			this.updateAll(false);
+
+			el.removeClass('selected');
+		} else {
+			this.clearGroupSelected();
+
+			var oneMonth = new Date(moment().add('months', 1));
+
+			this.updateSelected(oneMonth);
+
+			el.addClass('selected');
+		}
+
+		this.oneMonthSelected = !this.oneMonthSelected;
 	},
 
 	twoMonthsClicked: function(){
-		var oneMonth = new Date(moment().add('months', 2));
+		var el = this.$el.find('#selecting-dates-two-months');
 
-		this.updateSelected(oneMonth);
+		if (this.twoMonthsSelected){
+			this.updateAll(false);
+
+			el.removeClass('selected');
+		} else {
+			this.clearGroupSelected();
+
+			var twoMonths = new Date(moment().add('months', 2));
+
+			this.updateSelected(twoMonths);
+
+			el.addClass('selected');
+		}
+
+		this.twoMonthsSelected = !this.twoMonthsSelected;
 	},
 
 	allClicked: function(){
+		var el = this.$el.find('#selecting-dates-all');
+
+		if (this.allSelected){
+			this.updateAll(false);
+
+			el.removeClass('selected');
+		} else {
+			this.clearGroupSelected();
+
+			this.updateAll(true);
+
+			el.addClass('selected');
+		}
+
+		this.allSelected = !this.allSelected;
+	},
+
+	updateAll: function(selected){
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
 				var date = choice.get('date');
 
-				if (date > window.App.today){
-					choice.set('selectable', true);
+				if (date >= window.App.today){
+					choice.set('selectable', selected);
 				}
 			}
 		});
@@ -89,7 +170,7 @@ window.SelectDatesView = Backbone.View.extend({
 			if (choice.has('date')){
 				var date = choice.get('date');
 
-				if (date > window.App.today){
+				if (date >= window.App.today){
 					if (date < endDate){
 						choice.set('selectable', true);
 					} else {

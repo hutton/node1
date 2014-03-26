@@ -8,6 +8,7 @@
 // @codekit-prepend "tp/underscore-min.js";
 // @codekit-prepend "tp/moment.js";
 // @codekit-prepend "tp/backbone-min.js";
+// @codekit-prepend "tp/sly.min.js";
 
 // @codekit-prepend "helper.js";
   
