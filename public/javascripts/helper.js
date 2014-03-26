@@ -41,7 +41,7 @@ function sameDay(date1, date2){
 	return false;
 }
 
-function expandDates(input){
+function expandDates(input, everythingSelectable){
 	var processedInput = _.map(input, function(choice){
 		return {date: new Date(choice.date), _id: choice._id, free: choice.free, selectable: choice.selectable};
 	});
@@ -89,7 +89,7 @@ function expandDates(input){
 
 	while (maxChoices-- > 0){
 		if (allPopulatedDates.indexOf(current.toDateString()) == -1){
-			processedInput.push({date: current, selectable: false});
+			processedInput.push({date: current, selectable: everythingSelectable});
 		}
 
 		// Make sure we've got pasted the latest day

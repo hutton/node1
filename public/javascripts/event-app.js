@@ -4,9 +4,11 @@ window.EventApp = Backbone.View.extend({
     },
 
     loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
+        this.model = new CalendarModel(bootstrappedCalendar);
+
         this.choices = new ChoicesModel;
 
-        this.choices.reset(expandDates(bootstrapedChoices));
+        this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
 
         this.attendees = new Backbone.Collection;
 
@@ -16,8 +18,6 @@ window.EventApp = Backbone.View.extend({
         };
 
         this.attendees.reset(bootstrappedAttendees);
-
-        this.model = new CalendarModel(bootstrappedCalendar);
 
         this.currentAttendee = this.attendees.findWhere({me: true});
 

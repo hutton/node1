@@ -31,19 +31,6 @@ window.SettingsView = Backbone.View.extend({
             this.$el.find("#update-name-form").attr("action", "/event/" + window.App.currentId + "/update-name/");
         }
 
-        var nameList = "";  
-        _.each(window.App.attendees.models, function(model){
-            if (model.get("me")){
-                nameList = "<strong>" + model.get("prettyName") + "</strong>, " + nameList;
-            } else {
-                nameList = nameList + model.get("prettyName") + ", ";
-            }
-        });
-
-        nameList = nameList.slice(0, -2);
-
-        this.$el.find(".attendees").html(nameList);
-
         if (window.App.newMode){
             this.$el.find("#add-attendee").hide();
 
