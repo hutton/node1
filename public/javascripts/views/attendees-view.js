@@ -60,7 +60,7 @@ window.AttendeesView = Backbone.View.extend({
 			}
 		});
 
-		$('body').append(newElement);
+		$('.day-view-container').append(newElement);
 
 		newElement.find('.attendees-choices-top').height($('.attendees-choices-row').height() - 35);
 
@@ -83,23 +83,23 @@ window.AttendeesView = Backbone.View.extend({
 
 	resize: function(){
 		if (this.isActive){
-			var totalHeight = $(window).height();
+			// var totalHeight = $(window).height();
 
-			$('.navbar').each(function(){
-				if ($(this).is(':visible')){
-					totalHeight -= $(this).height();
-				}
-			});
+			// $('.navbar').each(function(){
+			// 	if ($(this).is(':visible')){
+			// 		totalHeight -= $(this).height();
+			// 	}
+			// });
 
-			totalHeight -= 70;
+			// totalHeight -= 70;
 
-			var tableHeight = this.$el.height();
+			// var tableHeight = this.$el.height();
 
-			if (totalHeight > tableHeight){
-				this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px');
-			} else {
-				this.$el.attr('style', null);
-			}
+			// if (totalHeight > tableHeight){
+			// 	this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px');
+			// } else {
+			// 	this.$el.attr('style', null);
+			// }
 		}
 	},
 
@@ -113,12 +113,8 @@ window.AttendeesView = Backbone.View.extend({
 			if (!this.rendered){
 				this.render();
 			} else {
-				$('body').append(this.$el);
+				$('.day-view-container').append(this.$el);
 			}
-
-			$('.days-table').hide();
-
-			$('body').scrollTop(0);
 		} else {
 			this.$el.detach();
 		}

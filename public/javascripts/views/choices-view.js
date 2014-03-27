@@ -127,19 +127,21 @@ window.ChoiceView = Backbone.View.extend({
 
 		} else {
 			if (this.model.isSelectable()){
-				if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
-					this.model.toggleFree();
-				} else {
-					$(".selected").removeClass('selected');
-					$(".cell-selected").removeClass('cell-selected');
+				App.AttendeesView.active(true);
 
-					var selectedRow = target.parents("tr");
+				// if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
+				// 	this.model.toggleFree();
+				// } else {
+				// 	$(".selected").removeClass('selected');
+				// 	$(".cell-selected").removeClass('cell-selected');
 
-					App.updateSelectedItem(this.model, selectedRow);
+				// 	var selectedRow = target.parents("tr");
 
-					this.$el.addClass('cell-selected');
-					target.addClass('selected');
-				}
+				// 	App.updateSelectedItem(this.model, selectedRow);
+
+				// 	this.$el.addClass('cell-selected');
+				// 	target.addClass('selected');
+				// }
 			}
 		}
 	},
@@ -190,24 +192,6 @@ window.ChoicesView = Backbone.View.extend({
 	isActive: true,
 
 	active: function(isActive){
-
-		this.isActive = isActive;
-
-		if (isActive){
-			$('body').append(this.$el);
-
-			if (!window.App.showInfo){
-				$('.days-table').show();
-			}
-
-			if (this.currentScroll !== null){
-				$('body').scrollTop(this.currentScroll);
-			}
-
-		} else {
-			this.currentScroll = $('body').scrollTop();
-			this.$el.detach();
-		}
 	},
 
 	render: function(){

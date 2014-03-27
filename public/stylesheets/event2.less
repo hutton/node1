@@ -33,7 +33,12 @@
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/fonts/opensans-bold.woff) format('woff');
 }
 
+html{
+	height: 100%;
+}
+
 body{
+	height: 100%;
 	padding-top: 0px;
 	padding-bottom: 40px;
 
@@ -188,6 +193,11 @@ a:active{
 .navbar-fixed-bottom .navbar-inner, 
 .navbar-static-top .navbar-inner{
 	box-shadow: none;
+}
+
+.scrollable{
+	height: 100%;
+
 }
 
 .event-container-margin{
@@ -1062,38 +1072,6 @@ a:active{
 	opacity: 0.0;
 }
 
-/************ Mode switch ***************/
-.mode-switch-panel{
-	text-align: center;
-}
-
-.mode-switch-container{
-	margin-top: 6px;
-	margin-bottom: 10px;
-}
-
-.mode-switch-item{
-	border: solid 2px @free-color;
-	margin: 0px;
-	font-size: 75%;
-	color: @free-color;
-	padding: 1px 25px;
-	cursor: pointer;
-}
-
-.mode-switch-calender{
-	.mode-switch-item;
-}
-
-.mode-switch-attendees{
-	.mode-switch-item;
-}
-
-.mode-switch-selected{
-	color: white;
-	background: @free-color;
-}
-
 /*********** Attendee view ****************/
 
 @name-panel-width: 130px;
@@ -1107,7 +1085,7 @@ a:active{
 }
 
 .attendees-container{
-	max-width: 1200px;
+	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
@@ -1429,3 +1407,11 @@ ul.attendees-choice{
 	text-decoration: none;
 }
 
+/*************** Day view *******************/
+.day-view-container{
+	position: fixed;
+	width: 100%;
+	bottom: 0px;
+	z-index: 300;
+	background: white;
+}
