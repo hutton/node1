@@ -186,7 +186,7 @@ window.AttendeeView = Backbone.View.extend({
 	template: _.template($('#attendees-choice-view-template').html()),
 
 	events: {
-		"click .att-ch-me": "choiceClicked"
+		"click .attendees-choice-state": "choiceClicked"
 	},
 
 	tagName: "li",

@@ -301,22 +301,23 @@
         </script>
 
         <script type="text/template" id="attendees-choice-view-template">
-        <ul class="attendees-choice <@ if (choice.get('date').getDay() === 6 || choice.get('date').getDay() === 0) {@>attendees-choice-date-weekend<@ } @> ">
-        <li class="attendees-choice-date"><@= moment(choice.get('date')).format("ddd Do") @></li>
-        <@ _.each(attendees, function(attendee){ @>
-          <@ if (attendee.get('me')) {@>
-            <li class="att-ch att-ch-me">
-            <div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>><i class="fa fa-check"></i>
+        <div class="attendees-choice">
+          <div class="attendees-choice-date">
+            <div class="attendees-choice-state <@ if (choice.isFree()) { @>attendees-choice-state-free<@ } @>">
+              <i class="fa fa-check"></i>
             </div>
-            </li>
-            <@ } else { @>
-              <li class="att-ch">
-              <div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>>
+            <div class="attendees-choice-date-date"><@= moment(choice.get('date')).format("D") @></div>
+            <div class="attendees-choice-date-day"><@= moment(choice.get('date')).format("dddd") @></div>
+            <div class="attendees-choice-date-month"><@= moment(choice.get('date')).format("MMMM") @></div>
+          </div>
+          <div class="attendees-choice-container">
+          <@ _.each(attendees, function(attendee){ @>
+              <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>attendee-free<@ } @>">
+                <i class="fa fa-check-circle"></i> <@= attendee.get('prettyName') @>
               </div>
-              </li>
-              <@ } @>
-              <@ }); @>
-        </ul>
+          <@ }); @>
+          </div>
+        </div>
         </script>
 
         <% if (webAppDebug) { %>

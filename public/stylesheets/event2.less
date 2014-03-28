@@ -1076,7 +1076,7 @@ a:active{
 
 @name-panel-width: 130px;
 @item-height: 34px;
-@item-width: 80px;
+@item-width: 240px;
 @cell-border: 1px rgba(0,0,0,0.06) solid;
 
 .attendees-container-margin{
@@ -1147,41 +1147,14 @@ a:active{
 	margin-right: 1px;	
 }
 
-.attendees-name-list > li{
-	.attendees-table-item;
-	width: @name-panel-width;
-	padding: 4px;
-	font-size: 70%;
-	text-align: right;
-	color: @date-color;
-}
 
-.attendees-name-list > li > div{
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-ul.attendees-name-list{
-	margin: 0px;
-	padding: 0px;
-}
-
-.attendees-name-me{
-	height: 70px !important;
-}
-
-.attendees-name-me > div{
-	margin-top: 20px;
-}
-
-ul.attendees-choice{
+div.attendees-choice{
 	margin: 0px;
 	padding: 0px;
 	border: 2px solid transparent;
 }
 
-.active ul.attendees-choice{
+.active div.attendees-choice{
 	border: 2px solid @free-color;
 }
 
@@ -1196,23 +1169,10 @@ ul.attendees-choice{
 	float: left;
 	height: 100%;
 	margin: 0px;
-	text-align: center;
 	cursor: pointer;
 
 	padding: 0px;
 	margin: 0px;
-}
-
-.attendees-choice > li{
-	.attendees-table-item;
-}
-
-.active .attendees-choice > li{
-//	width: 200px;
-}
-
-.attendees-choice > li:nth-child(odd){
-	background: #f8f8f8;	
 }
 
 .attendees-choice-month{
@@ -1223,41 +1183,59 @@ ul.attendees-choice{
 }
 
 .attendees-choice-date{
-	.attendees-table-item;
 	background: rgba(0,0,0,0.04) !important;
-	text-align: center;
+	text-align: left;
 	font-size: 65%;
 	color: @date-color;
-	padding-top: 6px;
+
+	width: 240px;
+}
+
+.attendees-choice-state{
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	background: #f0f0f0;
+	float: right;
+	font-size: 30px;
+}
+
+.attendees-choice-state-free{
+	background: @free-color;
+	color: rgba(0,0,0,0.3);
+}
+
+.attendees-choice-date-date{
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 42px;
+}
+
+.attendees-choice-date-day{
+    height: 30px;
+    line-height: 35px;
+}
+
+.attendees-choice-date-month{
+    height: 30px;
+    line-height: 25px;
 }
 
 .attendees-choice-date{
 	border: none;
 }
 
-.attendees-choice > li > div{
-	width: 100%;
-	height: 100%;
-}
-
 .attendee-free{
-	background: @free-color;
-	color: rgba(0,0,0,0.3);
+	color: @free-color;
 }
 
-.attendees-choice > li.att-ch{
-//	border-left: @cell-border;
-}
+.attendees-choice-container{
+	padding: 10px;
+	font-size: 65%;
+	color: @date-color;
 
-.attendees-choice > li.att-ch-me{
-	text-align: center;
-	color: rgba(0,0,0,0.05);
-	height: 70px;
-}
-
-.att-ch-me > div > i{
-	display: inline-block;
-	margin-top: 24px;
 }
 
 
