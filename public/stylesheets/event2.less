@@ -1089,8 +1089,8 @@ a:active{
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
-	margin-bottom: 40px;
-	margin-top: 10px;
+
+	border-top: 1px solid @divider-color;
 }
 
 .attendees-name-list-container {
@@ -1105,10 +1105,6 @@ a:active{
 .attendees-choices-list-container {
     width:100%;
     position: relative;
-}
-
-.attendees-padding {
-    padding-left: @name-panel-width;
 }
 
 .attendees-choices-list-content > table{
@@ -1182,15 +1178,37 @@ ul.attendees-name-list{
 ul.attendees-choice{
 	margin: 0px;
 	padding: 0px;
+	border: 2px solid transparent;
 }
 
-.attendees-choices-row > td{
+.active ul.attendees-choice{
+	border: 2px solid @free-color;
+}
+
+.attendees-choices-row{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.attendees-choices-row > li{
+	float: left;
+	height: 100%;
+	margin: 0px;
+	text-align: center;
+	cursor: pointer;
+
 	padding: 0px;
 	margin: 0px;
 }
 
 .attendees-choice > li{
 	.attendees-table-item;
+}
+
+.active .attendees-choice > li{
+//	width: 200px;
 }
 
 .attendees-choice > li:nth-child(odd){
@@ -1206,15 +1224,11 @@ ul.attendees-choice{
 
 .attendees-choice-date{
 	.attendees-table-item;
+	background: rgba(0,0,0,0.04) !important;
 	text-align: center;
 	font-size: 65%;
 	color: @date-color;
-	background: transparent !important;
 	padding-top: 6px;
-}
-
-.attendees-choice-date-weekend > .attendees-choice-date{
-	background: rgba(0,0,0,0.04) !important;
 }
 
 .attendees-choice-date{

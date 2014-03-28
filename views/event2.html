@@ -72,8 +72,6 @@
       </div>
 
       <div class="scrollable">
-        <div id="top-row-spacer"></div>
-
         <div class="event-container-margin">
           <div class="event-container">
             <div class="row">
@@ -292,27 +290,9 @@
           <div class="attendees-container-margin">
             <div class="attendees-container">
               <div class="row">
-                <div class="attendees-name-list-container">
-                  <ul class="attendees-name-list">
-                    <li></li>
-                    <li></li>
-                    <@ _.each(attendees, function(attendee){ @>
-                      <li class="<@ if (attendee.get('me')) {@>attendees-name-me<@ } @>"><div><@= attendee.get('prettyName') @></div></li>
-                      <@ }); @>
-                      <li class="attendees-invite"><a href="<%= inviteEmailLink %>">Invite <i class="fa fa fa-plus-circle"></i></a></li>
-                  </ul>
-                </div>
-                <div class="attendees-choices-month-container"></div>
                 <div class="attendees-choices-list-container">
-                  <div class="attendees-padding">
-                    <div class="attendees-choices-list-content">
-                    <div class="attendees-choices-top attendees-choices-top-one"><div>1</div></div>
-                    <div class="attendees-choices-top attendees-choices-top-two"><div>2</div></div>
-                    <div class="attendees-choices-top attendees-choices-top-three"><div>3</div></div>
-                      <table>
-                        <tr class="attendees-choices-row"></tr>
-                      </table>
-                    </div>
+                  <div class="attendees-choices-list-content">
+                    <ul class="attendees-choices-row"></ul>
                   </div>
                 </div>
               </div>
@@ -322,11 +302,6 @@
 
         <script type="text/template" id="attendees-choice-view-template">
         <ul class="attendees-choice <@ if (choice.get('date').getDay() === 6 || choice.get('date').getDay() === 0) {@>attendees-choice-date-weekend<@ } @> ">
-        <li class="attendees-choice-month">
-        <div>
-        <@ if (choice.showMonth ) {@> <@= moment(choice.get('date')).format("MMMM") @><@ } @>
-        </div>
-        </li>
         <li class="attendees-choice-date"><@= moment(choice.get('date')).format("ddd Do") @></li>
         <@ _.each(attendees, function(attendee){ @>
           <@ if (attendee.get('me')) {@>
@@ -363,9 +338,6 @@
         <script src="/javascripts/models/calendar-model.js"></script>
 
         <script src="/javascripts/views/choices-view.js"></script>
-        <script src="/javascripts/views/info-row-view.js"></script>
-        <script src="/javascripts/views/side-info-panel.js"></script>
-        <script src="/javascripts/views/top-choices-panel.js"></script>
         <script src="/javascripts/views/attendees-view.js"></script>
         <script src="/javascripts/views/settings-view.js"></script>
         <script src="/javascripts/views/select-dates-view.js"></script>

@@ -8288,8 +8288,7 @@ a:active {
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  margin-bottom: 40px;
-  margin-top: 10px;
+  border-top: 1px solid #e8e8e8;
 }
 .attendees-name-list-container {
   z-index: 100;
@@ -8302,9 +8301,6 @@ a:active {
 .attendees-choices-list-container {
   width: 100%;
   position: relative;
-}
-.attendees-padding {
-  padding-left: 130px;
 }
 .attendees-choices-list-content > table {
   margin-bottom: 10px;
@@ -8367,8 +8363,22 @@ ul.attendees-name-list {
 ul.attendees-choice {
   margin: 0px;
   padding: 0px;
+  border: 2px solid transparent;
 }
-.attendees-choices-row > td {
+.active ul.attendees-choice {
+  border: 2px solid #4ad16c;
+}
+.attendees-choices-row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.attendees-choices-row > li {
+  float: left;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
   padding: 0px;
   margin: 0px;
 }
@@ -8392,14 +8402,11 @@ ul.attendees-choice {
   height: 34px;
   margin-bottom: 1px;
   margin-right: 1px;
+  background: rgba(0, 0, 0, 0.04) !important;
   text-align: center;
   font-size: 65%;
   color: #c0c0c0;
-  background: transparent !important;
   padding-top: 6px;
-}
-.attendees-choice-date-weekend > .attendees-choice-date {
-  background: rgba(0, 0, 0, 0.04) !important;
 }
 .attendees-choice-date {
   border: none;

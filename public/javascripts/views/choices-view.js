@@ -26,8 +26,6 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability(), selectable: this.model.isSelectable() } ));
 
-		this.$el.hover(this.mouseEnter, this.mouseLeave);		
-
 		this.updateView(false);
 
 		this.updateTopChoices(false);
@@ -40,6 +38,8 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.updateTopChoices(true);
 	},
+
+	isSelected: false,
 
 	updateView: function(animate){
 		var target = this.$el.find(".date-cell-container");
@@ -70,6 +70,24 @@ window.ChoiceView = Backbone.View.extend({
 		} else {
 			this.$el.addClass('unselectable');
 			this.$el.find('.markers-container').hide();
+		}
+
+		if (this.model.get('selected')){
+			if (!this.isSelected){
+				this.el.scrollIntoView();
+
+				var body = $("body");
+
+				body.scrollTop(body.scrollTop() - 112);
+			}
+
+			this.isSelected = true;
+
+			this.$el.addClass('cell-selected');
+		} else {
+			this.$el.removeClass('cell-selected');
+
+			this.isSelected = false;
 		}
 	},
 
@@ -129,6 +147,15 @@ window.ChoiceView = Backbone.View.extend({
 			if (this.model.isSelectable()){
 				App.AttendeesView.active(true);
 
+				this.isSelected = true;
+
+				if (this.model.get('selected')){
+					this.model.toggleFree();
+				}
+
+				App.setSelected(this.model);
+
+
 				// if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
 				// 	this.model.toggleFree();
 				// } else {
@@ -148,18 +175,6 @@ window.ChoiceView = Backbone.View.extend({
 
 	calcDegrees: function(total, count){
 		return Math.round((count / total) * 36) * 10;
-	},
-
-	mouseEnter: function(){
-		if (App.SideInfoPanel !== null && !this.touchStarted){
-			App.SideInfoPanel.updateModel(this.model);
-		}
-	},
-
-	mouseLeave: function(){
-		if (App.SideInfoPanel !== null && !this.touchStarted){
-			App.SideInfoPanel.updateModel(null);
-		}
 	}
 });
 

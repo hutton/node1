@@ -1,8 +1,6 @@
 window.AttendeesView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
-
-		this.listenTo(this.model, "change", this.topChoiceModelChanged);
 	},
 
 	template: _.template($('#attendees-view-template').html()),
@@ -62,23 +60,50 @@ window.AttendeesView = Backbone.View.extend({
 
 		$('.day-view-container').append(newElement);
 
-		newElement.find('.attendees-choices-top').height($('.attendees-choices-row').height() - 35);
-
 		this.setElement($('.attendees-container-margin').first());
 
 		this.attendeesChoiceListContainerEl = $(".attendees-choices-list-content");
 
-		this.topChoiceOneEl = this.$el.find(".attendees-choices-top-one");
-		this.topChoiceTwoEl = this.$el.find(".attendees-choices-top-two");
-		this.topChoiceThreeEl = this.$el.find(".attendees-choices-top-three");
-
 		this.attendeesChoiceListContainerEl.on("scroll", this.onScroll);
 
-		this.topChoiceModelChanged();
+		this.sly = new Sly(this.$el.find('.attendees-choices-list-content'),{
+			horizontal: 1,
+			itemNav: 'forceCentered',
+			smart: 1,
+			activateMiddle: 1,
+			activateOn: 'click',
+			mouseDragging: 1,
+			touchDragging: 1,
+			releaseSwing: 1,
+			startAt: 0,
+			scrollBy: 1,
+			speed: 400,
+			easing: 'easeOutExpo',
+			elasticBounds: 1,
+			dragHandle: 1,
+			dynamicHandle: 1,
+			clickBar: 1,
+		}, {
+			active: that.itemActive
+		});
+
+		this.sly.init();
 
 		this.resize();
 
 		this.rendered = true;
+	},
+
+	itemActive: function(event, index){
+		App.setSelected(this.usedChoices[index]);
+	},
+
+	setActive: function(model){
+		var index = this.usedChoices.indexOf(model);
+
+		if (index !== -1){
+			this.sly.toCenter(index);
+		}
 	},
 
 	resize: function(){
@@ -115,8 +140,12 @@ window.AttendeesView = Backbone.View.extend({
 			} else {
 				$('.day-view-container').append(this.$el);
 			}
+
+			$(".event-container").css({'padding-bottom': this.$el.height()});
 		} else {
 			this.$el.detach();
+
+			$(".event-container").css({'padding-bottom': 0});
 		}
 	},
 
@@ -140,34 +169,6 @@ window.AttendeesView = Backbone.View.extend({
 
 			_.delay(that.checkScrollPosition, 30);
 		}
-	},
-
-	topChoiceModelChanged: function(){
-		this.updateTopChoice(this.topChoiceOneEl, 'one');
-		this.updateTopChoice(this.topChoiceTwoEl, 'two');
-		this.updateTopChoice(this.topChoiceThreeEl, 'three');
-	},
-
-	updateTopChoice: function(element, field){
-		if (!_.isUndefined(element)){
-			if (this.model.has(field)){
-				element.show();
-
-				var model = this.model.get(field);
-
-				var index = this.usedChoices.indexOf(model);
-
-				this.animateTopChoiceTo(index, element);
-			} else {
-				element.hide();
-			}
-		}
-	},
-
-	animateTopChoiceTo: function(index, element){
-		var toValue = index * 81;
-
-		element.animate({left: toValue}, 400);
 	}
 });
 
@@ -188,14 +189,12 @@ window.AttendeeView = Backbone.View.extend({
 		"click .att-ch-me": "choiceClicked"
 	},
 
-	tagName: "td",
+	tagName: "li",
 
 	adjustMonth: function(scrollLeft){
 		if (scrollLeft < (this.model.daysIn - 1) * this.itemWidth){
 			this.monthLabelEl.show();
 		} else { // if (scrollLeft > this.model.daysIn * this.itemWidth && scrollLeft < (this.model.lastDay -2) * this.itemWidth){
-
-			$('.attendees-choices-month-container').html(this.monthLabelEl.html());
 
 			this.monthLabelEl.hide();
 		}
@@ -209,7 +208,7 @@ window.AttendeeView = Backbone.View.extend({
 
 	modelChanged: function(){
 		var that = this;
-		var attendeeCount = 1;
+		var attendeeCount = 0;
 
 		var items = this.$el.find('li > div');
 

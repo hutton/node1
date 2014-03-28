@@ -35,8 +35,6 @@ window.EventApp = Backbone.View.extend({
 
         this.ChoicesView.render();
 
-        this.SideInfoPanel = new SideInfoPanel();
-
         this.TopChoicesModel = new Backbone.Model({
             one: null,
             two: null,
@@ -66,7 +64,6 @@ window.EventApp = Backbone.View.extend({
 
     events: {
         "click #show-info":             "infoClicked",
-        "click":                        "eventTableClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
         "click .mode-switch-attendees":     "switchToAttendees"
@@ -187,29 +184,6 @@ window.EventApp = Backbone.View.extend({
         //setInterval(this.checkOrientation, 2000);
     },
 
-    eventTableClicked: function(event){
-        var target = $(event.target);
-
-        if ( !$(event.target).hasClass("date-cell") &&
-            target.parents("td.date-cell").length === 0 &&
-            target.parents(".info-row").length === 0){
-
-            if (this.infoRowView !== null){
-                this.infoRowView.removeSelectedRow();
-            }
-        }
-    },
-
-    infoRowView: null,
-
-    updateSelectedItem: function(choiceModel, selectedRow){
-        if (this.infoRowView === null){
-            this.infoRowView = new InfoRowView({model: choiceModel, el: selectedRow});
-        } else {
-            this.infoRowView.update(choiceModel, selectedRow);
-        }
-    },
-
     registerAttendeeInputChanged: function(event){
         if (event.which != 13){
             var message = $(".register-attendee-message");
@@ -235,8 +209,6 @@ window.EventApp = Backbone.View.extend({
     registerFooterEl: $("#register-footer"),
 
     titleMailEl: $("#title-mail"),
-
-    topRowSpacerEl: $("#top-row-spacer"),
 
     switchedUpdateAttendeesLink: false,
 
@@ -413,10 +385,11 @@ window.EventApp = Backbone.View.extend({
         if (this.$el.find(".navbar-fixed-top").is(':visible')){
             var topNavBarHeight = this.$el.find(".navbar-fixed-top").height();
 
-            this.$el.find("#top-row-spacer").height(topNavBarHeight);
+            this.$el.find(".event-container").css({'padding-top': topNavBarHeight});
+
             this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
         } else {
-            this.$el.find("#top-row-spacer").height(0);
+            this.$el.find(".event-container").css({'padding-top': 0});
             this.$el.find(".selecting-dates-container").css("top", 0);
         }
     },
@@ -457,5 +430,19 @@ window.EventApp = Backbone.View.extend({
 
     changeSelectableDates: function(){
         this.SelectDatesView.show();
+    },
+
+    selectedModel: null,
+
+    setSelected: function(model){
+        if (this.selectedModel !== null){
+            this.selectedModel.set('selected', false);
+        }
+
+        model.set('selected', true);
+
+        this.selectedModel = model;
+
+        this.AttendeesView.setActive(model);
     }
 });
