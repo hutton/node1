@@ -1,3 +1,8 @@
+
+$('html, body').animate({
+    scrollTop: $("#myDiv").offset().top
+}, 2000);
+
 <div class='container'>
     <div class='date'>18</div>
     <div class='day'>Wednesday</div>
