@@ -5,6 +5,7 @@
 - Click envelope in example show info
 - New attendee mode with hybrid view (show 'Your name')
 - Update example
+- Your Details in Settings
 - Drop attendees box on signup form
 
 
