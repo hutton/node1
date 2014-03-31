@@ -4,6 +4,7 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.listenTo(this.model, "change", this.modelChanged);
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
+		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -102,6 +103,8 @@ window.ChoiceView = Backbone.View.extend({
 		if (offset.top >= visTop && (offset.top + this.$el.height() <= visBottom)){
 		} else {
 			var itemHeight = $('.date-cell').first().height();
+
+			$('html, body').stop();
 
 			$('html, body').animate({
 				scrollTop: offset.top - (navBarHeight + itemHeight)
@@ -276,11 +279,13 @@ window.ChoicesView = Backbone.View.extend({
 			this.tableEl.find(".today")[0].scrollIntoView(true);
 		}
 
-		var body = $("body");
-
-		body.scrollTop(body.scrollTop() - 112);
-
 		return this;
+	},
+
+	scrollTotFirstChoice: function(){
+		var firstSelectableChoice = this.collection.findWhere({selectable: true});
+
+		firstSelectableChoice.trigger('ensureVisible');
 	},
 
 	resize: function(){

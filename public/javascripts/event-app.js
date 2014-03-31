@@ -56,6 +56,8 @@ window.EventApp = Backbone.View.extend({
         this.render();
 
         this.checkForOrientationChange();
+
+        this.ChoicesView.scrollTotFirstChoice();
     },
 
     el: $("body"),

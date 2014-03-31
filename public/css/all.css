@@ -7592,7 +7592,6 @@ a:active {
   transform: rotate(90deg);
 }
 .title {
-  font-weight: bold;
   text-align: center;
   padding-top: 9px;
   padding-left: 25px;
@@ -8282,22 +8281,29 @@ a:active {
 .attendees-container-margin {
   margin-left: 6px;
   margin-right: 6px;
-  height: 0px;
 }
 .attendees-container {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  height: 100%;
   border-top: 1px solid #e8e8e8;
 }
 .attendees-close {
   color: #4ad16c;
-  font-size: 20px;
+  font-size: 30px;
   position: absolute;
-  bottom: 100px;
-  left: 20px;
+  bottom: -5px;
+  left: -5px;
+  padding: 10px;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.attendees-close-hidden {
+  bottom: -50px;
 }
 .attendees-name-list-container {
   z-index: 100;
@@ -8310,11 +8316,13 @@ a:active {
 .attendees-choices-list-container {
   width: 100%;
   position: relative;
+  height: 0px;
 }
 .attendees-choices-list-content > table {
   margin-bottom: 10px;
 }
 .attendees-choices-list-content {
+  height: 100%;
   width: 100%;
   overflow-x: auto;
   overflow-y: visible;
@@ -8347,6 +8355,7 @@ div.attendees-choice {
   margin: 0px;
   padding: 0px;
   border: 2px solid transparent;
+  height: 100%;
 }
 .active div.attendees-choice {
   border: 2px solid #4ad16c;

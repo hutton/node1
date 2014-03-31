@@ -6,7 +6,8 @@ window.AttendeesView = Backbone.View.extend({
 	template: _.template($('#attendees-view-template').html()),
 
 	events: {
-		"scroll .attendees-choices-list-content" : "onScroll"
+		"scroll .attendees-choices-list-content" : "onScroll",
+		"click .attendees-close": "onClose"
 	},
 
 	isActive: false,
@@ -99,32 +100,17 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	setActive: function(model){
-		var index = this.usedChoices.indexOf(model);
+		if (this.rendered){
+			var index = this.usedChoices.indexOf(model);
 
-		if (index !== -1){
-			this.sly.toCenter(index);
+			if (index !== -1){
+				this.sly.toCenter(index);
+			}
 		}
 	},
 
 	resize: function(){
 		if (this.isActive){
-			// var totalHeight = $(window).height();
-
-			// $('.navbar').each(function(){
-			// 	if ($(this).is(':visible')){
-			// 		totalHeight -= $(this).height();
-			// 	}
-			// });
-
-			// totalHeight -= 70;
-
-			// var tableHeight = this.$el.height();
-
-			// if (totalHeight > tableHeight){
-			// 	this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px');
-			// } else {
-			// 	this.$el.attr('style', null);
-			// }
 		}
 	},
 
@@ -143,20 +129,30 @@ window.AttendeesView = Backbone.View.extend({
 	hide: function(){
 		var that = this;
 
-		this.$el.animate({height: 0}, 400, function(){
+		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 400, function(){
 			that.$el.detach();
 		});	
 	},
 
+	onClose: function(){
+		this.$el.find('.attendees-close').addClass('attendees-close-hidden');
+
+		this.hide();
+	},
+
 	setHeight: function(animate){
+		var that = this;
+
 		var windowHeight = $(window).height();
 		var navBarHeight = $('.navbar-fixed-top').height();
 
 		var itemHeight = $('.date-cell').first().height();
 
-		var maxHeight = Math.min(windowHeight - (navBarHeight + (itemHeight * 3)), 600);
+		var maxHeight = Math.min(windowHeight - (navBarHeight + (itemHeight * 3)), 420);
 
-		this.$el.animate({height: maxHeight}, 400);
+		this.$el.find('.attendees-choices-list-container').animate({height: maxHeight}, 400, function(){
+			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
+		});
 	},
 
 	active: function(isActive){
