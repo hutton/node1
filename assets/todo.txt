@@ -1,15 +1,23 @@
-- About style
-- iPad alignment
-- Add attendee in attendee mode
+- Close attendee view on select date range
+- Style attendee view
+- Add a loader
+- Handle long names better
+- Click envelope in example show info
+- New attendee mode with hybrid view (show 'Your name')
+- Update example
+
+
 
 =======
-- Toggle days-table doesn't work
-- Change background of info panel (#f0f0f0)
 - Add description
-- Allow selection of date range
 
 Done
 ----
+- Allow selection of date range
+- Change background of info panel (#f0f0f0)
+- About style
+- iPad alignment
+- Add attendee in attendee mode
 - Try fa-check-circle in side info panel
 - Make links in info panel bigger
 - Cut off old dates
