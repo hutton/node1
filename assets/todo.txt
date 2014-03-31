@@ -1,4 +1,5 @@
 - Close attendee view on select date range
+- Selected calendar choice same style as selected attendee choice
 - Style attendee view
 - Add a loader
 - Handle long names better
