@@ -1082,6 +1082,7 @@ a:active{
 .attendees-container-margin{
 	margin-left: 6px;
 	margin-right: 6px;
+	height: 0px;
 }
 
 .attendees-container{
@@ -1089,8 +1090,17 @@ a:active{
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
+	height: 100%;
 
 	border-top: 1px solid @divider-color;
+}
+
+.attendees-close{
+	color: @free-color;
+	font-size: 20px;
+	position: absolute;
+	bottom: 100px;
+	left: 20px;
 }
 
 .attendees-name-list-container {

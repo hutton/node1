@@ -77,7 +77,7 @@ window.AttendeesView = Backbone.View.extend({
 			releaseSwing: 1,
 			startAt: 0,
 			scrollBy: 1,
-			speed: 400,
+			speed: 800,
 			easing: 'easeOutExpo',
 			elasticBounds: 1,
 			dragHandle: 1,
@@ -130,6 +130,35 @@ window.AttendeesView = Backbone.View.extend({
 
 	rendered: false,
 
+	show: function(){
+		if (!this.rendered){
+			this.render();
+		}
+
+		$('.day-view-container').append(this.$el);
+
+		this.setHeight(true);
+	},
+
+	hide: function(){
+		var that = this;
+
+		this.$el.animate({height: 0}, 400, function(){
+			that.$el.detach();
+		});	
+	},
+
+	setHeight: function(animate){
+		var windowHeight = $(window).height();
+		var navBarHeight = $('.navbar-fixed-top').height();
+
+		var itemHeight = $('.date-cell').first().height();
+
+		var maxHeight = Math.min(windowHeight - (navBarHeight + (itemHeight * 3)), 600);
+
+		this.$el.animate({height: maxHeight}, 400);
+	},
+
 	active: function(isActive){
 
 		this.isActive = isActive;
@@ -140,6 +169,8 @@ window.AttendeesView = Backbone.View.extend({
 			} else {
 				$('.day-view-container').append(this.$el);
 			}
+
+
 
 			$(".event-container").css({'padding-bottom': this.$el.height()});
 		} else {
@@ -210,11 +241,19 @@ window.AttendeeView = Backbone.View.extend({
 		var that = this;
 		var attendeeCount = 0;
 
-		var items = this.$el.find('li > div');
+		var items = this.$el.find('.att-ch');
 
 		items.removeClass('attendee-free');
 
 		console.log("Attendees - model changed");
+
+		var check = this.$el.find('.attendees-choice-state');
+
+		if (this.model.isFree()){
+			check.addClass('attendees-choice-state-free');
+		} else {
+			check.removeClass('attendees-choice-state-free');
+		}
 
 		_.each(App.attendees.models, function(attendee){
 			if (that.model.isAttendeeFree(attendee.get("_id"))){

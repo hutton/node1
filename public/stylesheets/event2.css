@@ -141,8 +141,9 @@ a:active{color:#4ad16c;text-decoration:none;}
 .top-choice-two{top:85px;opacity:1.0;}
 .top-choice-three{top:145px;opacity:1.0;}
 .top-choice-hiding{left:-100px;opacity:0.0;}
-.attendees-container-margin{margin-left:6px;margin-right:6px;}
-.attendees-container{max-width:600px;margin-left:auto;margin-right:auto;position:relative;border-top:1px solid #e8e8e8;}
+.attendees-container-margin{margin-left:6px;margin-right:6px;height:0px;}
+.attendees-container{max-width:600px;margin-left:auto;margin-right:auto;position:relative;height:100%;border-top:1px solid #e8e8e8;}
+.attendees-close{color:#4ad16c;font-size:20px;position:absolute;bottom:100px;left:20px;}
 .attendees-name-list-container{z-index:100;float:left;width:130px;position:absolute;top:0px;left:0px;}
 .attendees-choices-list-container{width:100%;position:relative;}
 .attendees-choices-list-content>table{margin-bottom:10px;}

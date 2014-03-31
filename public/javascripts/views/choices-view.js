@@ -74,11 +74,8 @@ window.ChoiceView = Backbone.View.extend({
 
 		if (this.model.get('selected')){
 			if (!this.isSelected){
-				this.el.scrollIntoView();
+				this.ensureVisible();
 
-				var body = $("body");
-
-				body.scrollTop(body.scrollTop() - 112);
 			}
 
 			this.isSelected = true;
@@ -88,6 +85,27 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.removeClass('cell-selected');
 
 			this.isSelected = false;
+		}
+	},
+
+	ensureVisible: function(){
+		var height = $(window).height();
+		var scrollPos = $(window).scrollTop();
+
+		var navBarHeight = $('.navbar-fixed-top').height();
+
+		var visTop = scrollPos + navBarHeight;
+		var visBottom = scrollPos + (height - $('.day-view-container').height());
+
+		var offset = this.$el.offset();
+
+		if (offset.top >= visTop && (offset.top + this.$el.height() <= visBottom)){
+		} else {
+			var itemHeight = $('.date-cell').first().height();
+
+			$('html, body').animate({
+				scrollTop: offset.top - (navBarHeight + itemHeight)
+			}, 400);
 		}
 	},
 
@@ -145,7 +163,7 @@ window.ChoiceView = Backbone.View.extend({
 
 		} else {
 			if (this.model.isSelectable()){
-				App.AttendeesView.active(true);
+				App.AttendeesView.show();
 
 				this.isSelected = true;
 
