@@ -1,4 +1,6 @@
+- Add 'Tap if free'
 - Check signup footer
+	- 5 dates selected  Save >
 - Change settings to hamburger
 - Attendee view resize
 - Attendee view update when selectable changes
