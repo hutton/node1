@@ -88,8 +88,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .markers-container li{float:left;margin:0px 2px 2px 0px;background:#e0e0e0;width:7px;height:7px;border-radius:5px;}
 .markers-container li.a{background:#4ad16c;}
 .today .date-text{color:#4ad16c;opacity:0.9 !important;}
-.cell-selected>div.date-cell-container{background:rgba(74, 209, 108, 0.7) !important;}
-.cell-selected .date-text{color:white !important;opacity:1.0 !important;}
+.cell-selected>.date-cell-container{border:#4ad16c solid 2px;margin:2px;}
 @media screen and (min-width:450px){.event-table tr>td.date-cell{font-size:100%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.9em;} .month{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .free-marker{-moz-transform:translate(0px, -18px);-webkit-transform:translate(0px, -18px);-o-transform:translate(0px, -18px);-ms-transform:translate(0px, -18px);transform:translate(0px, -18px);} .markers-container{margin-top:0px;margin-right:0px;margin-bottom:2px;margin-left:2px;} .markers-container li{margin:0px 2px 2px 0px;width:7px;height:7px;} .date-cell-container{margin:3px;} .calendar-choices-top{margin-left:-1px;margin-top:3px;}}@media screen and (max-width:450px){.event-table tr>td.date-cell{font-size:60%;} .event-table tr>td{font-size:1em;} .info-row-text-container{font-size:0.8em;} .month{-moz-transform:translate(0px, -12px);-webkit-transform:translate(0px, -12px);-o-transform:translate(0px, -12px);-ms-transform:translate(0px, -12px);transform:translate(0px, -12px);} .free-marker{-moz-transform:translate(0px, -10px);-webkit-transform:translate(0px, -10px);-o-transform:translate(0px, -10px);-ms-transform:translate(0px, -10px);transform:translate(0px, -10px);} .date-text{top:-1px;left:-2px;} .markers-container{margin-top:0px;margin-right:0px;margin-bottom:1px;margin-left:1px;} .markers-container li{margin:0px 1px 1px 0px;width:4px;height:4px;} .date-cell-container{margin:2px;} .calendar-choices-top{margin-left:0px;margin-top:2px;}}.register-attendee-message{display:none;font-size:14px;}
 .register-attendee-email-input-container{max-width:400px;margin:0px auto;line-height:25px;}
 #register-attendee-name-input{width:100%;margin-bottom:10px;}
@@ -143,7 +142,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .top-choice-hiding{left:-100px;opacity:0.0;}
 .attendees-container-margin{margin-left:6px;margin-right:6px;}
 .attendees-container{max-width:600px;margin-left:auto;margin-right:auto;position:relative;border-top:1px solid #e8e8e8;}
-.attendees-close{color:#4ad16c;font-size:30px;position:absolute;bottom:-5px;left:-5px;padding:10px;-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
+.attendees-close{color:#4ad16c;font-size:34px;position:absolute;bottom:-5px;left:-5px;padding:10px;-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
 .attendees-close-hidden{bottom:-50px;}
 .attendees-name-list-container{z-index:100;float:left;width:130px;position:absolute;top:0px;left:0px;}
 .attendees-choices-list-container{width:100%;position:relative;height:0px;}

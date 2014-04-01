@@ -6,7 +6,6 @@ window.AttendeesView = Backbone.View.extend({
 	template: _.template($('#attendees-view-template').html()),
 
 	events: {
-		"scroll .attendees-choices-list-content" : "onScroll",
 		"click .attendees-close": "onClose"
 	},
 
@@ -65,8 +64,6 @@ window.AttendeesView = Backbone.View.extend({
 
 		this.attendeesChoiceListContainerEl = $(".attendees-choices-list-content");
 
-		this.attendeesChoiceListContainerEl.on("scroll", this.onScroll);
-
 		this.sly = new Sly(this.$el.find('.attendees-choices-list-content'),{
 			horizontal: 1,
 			itemNav: 'forceCentered',
@@ -88,11 +85,15 @@ window.AttendeesView = Backbone.View.extend({
 			active: that.itemActive
 		});
 
+		var selectedModel = this.collection.findWhere({selected: true});
+
 		this.sly.init();
 
 		this.resize();
 
 		this.rendered = true;
+
+		this.setActive(selectedModel);
 	},
 
 	itemActive: function(event, index){
@@ -116,18 +117,28 @@ window.AttendeesView = Backbone.View.extend({
 
 	rendered: false,
 
+	showing: false,
+
 	show: function(){
-		if (!this.rendered){
-			this.render();
+		if (!this.showing){
+			if (!this.rendered){
+				this.render();
+			}
+
+			$('.day-view-container').append(this.$el);
+
+			this.setHeight(true);
+
+			App.scrollToSelected();
 		}
 
-		$('.day-view-container').append(this.$el);
-
-		this.setHeight(true);
+		this.showing = true;
 	},
 
 	hide: function(){
 		var that = this;
+
+		this.showing = false;
 
 		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 400, function(){
 			that.$el.detach();
@@ -174,28 +185,6 @@ window.AttendeesView = Backbone.View.extend({
 
 			$(".event-container").css({'padding-bottom': 0});
 		}
-	},
-
-	onScroll: function(event){
-		this.checkScrollPosition();
-	},
-
-	scrollPosition: 0,
-
-	checkScrollPosition: function(){
-		var that = this;
-
-		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();
-
-		if (scrollLeft !== this.scrollPosition){
-			this.scrollPosition = scrollLeft;
-
-			_.each(this.monthStartChoices, function(attendeeView){
-				attendeeView.adjustMonth(scrollLeft);
-			});
-
-			_.delay(that.checkScrollPosition, 30);
-		}
 	}
 });
 
@@ -217,15 +206,6 @@ window.AttendeeView = Backbone.View.extend({
 	},
 
 	tagName: "li",
-
-	adjustMonth: function(scrollLeft){
-		if (scrollLeft < (this.model.daysIn - 1) * this.itemWidth){
-			this.monthLabelEl.show();
-		} else { // if (scrollLeft > this.model.daysIn * this.itemWidth && scrollLeft < (this.model.lastDay -2) * this.itemWidth){
-
-			this.monthLabelEl.hide();
-		}
-	},
 
 	render: function(){
 		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model}));

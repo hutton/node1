@@ -7852,12 +7852,9 @@ a:active {
   color: #4ad16c;
   opacity: 0.9 !important;
 }
-.cell-selected > div.date-cell-container {
-  background: rgba(74, 209, 108, 0.7) !important;
-}
-.cell-selected .date-text {
-  color: white !important;
-  opacity: 1.0  !important;
+.cell-selected > .date-cell-container {
+  border: #4ad16c solid 2px;
+  margin: 2px;
 }
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
@@ -8291,7 +8288,7 @@ a:active {
 }
 .attendees-close {
   color: #4ad16c;
-  font-size: 30px;
+  font-size: 34px;
   position: absolute;
   bottom: -5px;
   left: -5px;

@@ -5,6 +5,7 @@ window.ChoiceView = Backbone.View.extend({
 		this.listenTo(this.model, "change", this.modelChanged);
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
+		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -89,7 +90,7 @@ window.ChoiceView = Backbone.View.extend({
 		}
 	},
 
-	ensureVisible: function(){
+	isVisible: function(){
 		var height = $(window).height();
 		var scrollPos = $(window).scrollTop();
 
@@ -100,16 +101,25 @@ window.ChoiceView = Backbone.View.extend({
 
 		var offset = this.$el.offset();
 
-		if (offset.top >= visTop && (offset.top + this.$el.height() <= visBottom)){
-		} else {
-			var itemHeight = $('.date-cell').first().height();
+		return (offset.top >= visTop && (offset.top + this.$el.height() <= visBottom));
+	},
 
-			$('html, body').stop();
-
-			$('html, body').animate({
-				scrollTop: offset.top - (navBarHeight + itemHeight)
-			}, 400);
+	ensureVisible: function(){
+		if (!this.isVisible()){
+			this.scrollToTopLine();
 		}
+	},
+
+	scrollToTopLine: function(){
+		var navBarHeight = $('.navbar-fixed-top').height();
+		var offset = this.$el.offset();
+		var itemHeight = $('.date-cell').first().height();
+
+		$('html, body').stop();
+
+		$('html, body').animate({
+			scrollTop: offset.top - (navBarHeight + itemHeight)
+		}, 400);
 	},
 
 	adornersRespositioned: function(){
@@ -166,8 +176,6 @@ window.ChoiceView = Backbone.View.extend({
 
 		} else {
 			if (this.model.isSelectable()){
-				App.AttendeesView.show();
-
 				this.isSelected = true;
 
 				if (this.model.get('selected')){
@@ -176,20 +184,7 @@ window.ChoiceView = Backbone.View.extend({
 
 				App.setSelected(this.model);
 
-
-				// if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
-				// 	this.model.toggleFree();
-				// } else {
-				// 	$(".selected").removeClass('selected');
-				// 	$(".cell-selected").removeClass('cell-selected');
-
-				// 	var selectedRow = target.parents("tr");
-
-				// 	App.updateSelectedItem(this.model, selectedRow);
-
-				// 	this.$el.addClass('cell-selected');
-				// 	target.addClass('selected');
-				// }
+				App.AttendeesView.show();
 			}
 		}
 	},
@@ -280,12 +275,6 @@ window.ChoicesView = Backbone.View.extend({
 		}
 
 		return this;
-	},
-
-	scrollTotFirstChoice: function(){
-		var firstSelectableChoice = this.collection.findWhere({selectable: true});
-
-		firstSelectableChoice.trigger('ensureVisible');
 	},
 
 	resize: function(){

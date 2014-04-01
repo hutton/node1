@@ -57,7 +57,7 @@ window.EventApp = Backbone.View.extend({
 
         this.checkForOrientationChange();
 
-        this.ChoicesView.scrollTotFirstChoice();
+        this.scrollToFirstSelectable();
     },
 
     el: $("body"),
@@ -446,5 +446,22 @@ window.EventApp = Backbone.View.extend({
         this.selectedModel = model;
 
         this.AttendeesView.setActive(model);
+    },
+
+    scrollToFirstSelectable: function(){
+        var firstSelectableChoice = this.choices.findWhere({selectable: true});
+
+        if (firstSelectableChoice !== null){
+            firstSelectableChoice.trigger('scrollToTopLine');
+        }
+    },
+
+    scrollToSelected: function(){
+        var firstSelectedChoice = this.choices.findWhere({selected: true});
+
+        if (firstSelectedChoice !== null){
+            firstSelectedChoice.trigger('scrollToTopLine');
+        }
     }
+
 });
