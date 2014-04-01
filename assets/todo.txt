@@ -1,5 +1,4 @@
-- Close attendee view on select date range
-- Selected calendar choice same style as selected attendee choice
+- Attendee view update when selectable changes
 - Style attendee view
 - Add a loader
 - Handle long names better
@@ -15,6 +14,8 @@
 
 Done
 ----
+- Close attendee view on select date range
+- Selected calendar choice same style as selected attendee choice
 - Allow selection of date range
 - Change background of info panel (#f0f0f0)
 - About style
