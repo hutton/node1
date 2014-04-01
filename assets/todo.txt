@@ -1,6 +1,7 @@
 - Add 'Tap if free'
 - Check signup footer
-	- 5 dates selected  Save >
+	- 5 dates selected  
+	    Join event >
 - Change settings to hamburger
 - Attendee view resize
 - Attendee view update when selectable changes
@@ -8,7 +9,6 @@
 - Add a loader
 - Handle long names better
 - Click envelope in example show info
-- New attendee mode with hybrid view (show 'Your name')
 - Update example
 - Your Details in Settings
 - Drop attendees box on signup form
