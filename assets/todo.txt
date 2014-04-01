@@ -1,7 +1,7 @@
 - Add 'Tap if free'
 - Check signup footer
-	- 5 dates selected  
-	    Join event >
+	- Small green footer
+	- Join event >
 - Change settings to hamburger
 - Attendee view resize
 - Attendee view update when selectable changes
