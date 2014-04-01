@@ -97,6 +97,12 @@
       <div class="day-view-container">
       </div>
 
+      <div class="join-event-container">
+        <div class="join-event">
+            Join event <i class="fa fa-chevron-right"></i>
+        </div>
+      </div>
+
     <div class="navbar navbar-fixed-bottom">
       <div class="row">
         <div id="register-footer" style="display: none;">
@@ -153,6 +159,31 @@
           <div class="settings-section">
             <a href="mailto:convenely@gmail.com?subject=Help!"><i class="fa fa-question-circle"></i> Help <i class="fa fa-chevron-right"></i></a>
           </div>
+        </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="join-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Join '<%= name %>'</h4>
+          </div>
+          <div class="modal-body">
+            <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
+              <div class="register-attendee-message"></div>
+              <div class="register-attendee-email-input-container">
+                <input type="text" name="name" class="form-control" id="register-attendee-name-input" placeholder="Your name (optional)"></input>
+                <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Your email address"></input>
+                <input id="register-free-dates" type="hidden" name="isFree"/>
+              </div>
+              <button type="submit" class="register-attendee-button-container">
+                <span class="span-link" id="register-attendee-link">Join <i class="fa fa-chevron-right"></i></span>
+              </button>
+            </form>
         </div>
           </div>
         </div><!-- /.modal-content -->
@@ -235,56 +266,6 @@
       </td>
     </tr>
     </script>
-
-    <script type="text/template" id="first-choice-template">
-      <div class="top-choice-text">
-        <@= choice @>
-      </div>
-    </script>
-
-    <script type="text/template" id="side-info-panel-container-template">
-      <div class="side-info-panel-container">
-        <div>
-        </div>
-      </div>
-    </script>
-
-    <script type="text/template" id="side-info-panel-template">
-    <div class="side-info-panel">
-    <div class="side-info-date"><@= date @></div>
-    <@ if (!showInviteLink) { @>
-      <ul>
-      <@ _.each(attendees, function(attendee){ @>
-        <li><div class="side-info-name <@ if (choices.isAttendeeFree(attendee.get('_id'))) { @> side-info-free <@ } @> "><@= attendee.get('prettyName') @><i class="fa fa-check-circle"></i></div></li>
-        <@ }); @>
-      </ul>
-      <@ } else { @>
-        <div class="side-info-invite">
-        Click dates to show when you're free<br/> <!-- ' -->
-        <br/>
-        <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
-        </div>
-    <@ } @>
-    </div>
-    </script>
-
-        <script type="text/template" id="top-choices-template">
-        <div class="side-info-panel-container">
-        <div>
-        <div class="side-info-panel-left">
-        <div class="side-info-panel-left-title">
-        Top Choices
-        </div>
-        <div class="side-info-panel-left-container">
-        </div>
-        </div>
-        </div>
-        </div>
-        </script>
-
-        <script type="text/template" id="top-choices-item-template">
-        <div class="top-choice-item"><@= date @></div>
-        </script>
 
         <script type="text/template" id="attendees-view-template">
           <div class="attendees-container-margin">

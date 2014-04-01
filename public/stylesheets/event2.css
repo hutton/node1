@@ -167,6 +167,7 @@ div.attendees-choice{margin:0px;padding:0px;border:2px solid transparent;height:
 .attendees-choice-date{border:none;}
 .attendee-free{color:#4ad16c;}
 .attendees-choice-container{padding:10px;font-size:65%;color:#c0c0c0;}
+.att-ch{border-bottom:1px solid #e8e8e8;padding-bottom:2px;margin-bottom:5px;}
 .attendees-choices-top{width:88px;position:absolute;top:34px;margin-left:-4px;z-index:100;border-width:2px;border-style:solid;pointer-events:none;color:white;text-align:right;font-size:55%;border-color:#4ad16c;}
 .attendees-choices-top:before{position:absolute;content:"";right:0px;width:0;height:0;border-bottom:20px solid transparent;border-left:20px solid transparent;z-index:-1;border-top:20px solid #4ad16c;}
 .attendees-choices-top-one{z-index:30;}
@@ -185,3 +186,5 @@ div.attendees-choice{margin:0px;padding:0px;border:2px solid transparent;height:
 .selecting-dates-period-conatiner>span{text-decoration:underline;margin:0px 0px 0px 0px;padding:0px 6px 0px 6px;cursor:pointer;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 .selecting-dates-period-conatiner>span.selected{color:white;background:#4ad16c;text-decoration:none;}
 .day-view-container{position:fixed;width:100%;bottom:0px;z-index:300;background:white;}
+.join-event-container{position:fixed;width:100%;bottom:0px;z-index:400;text-align:center;pointer-events:none;}
+.join-event{background:#4ad16c;color:white;padding:2px 20px;display:inline-block;cursor:pointer;pointer-events:auto;}

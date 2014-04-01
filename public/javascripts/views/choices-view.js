@@ -10,8 +10,6 @@ window.ChoiceView = Backbone.View.extend({
 
 	template: _.template($('#choice-template').html()),
 
-	firstChoiceTemplate: _.template($('#first-choice-template').html()),
-
 	events: {
 		"click":		"dayClicked",
 		"touchstart": 	"touchStart"
@@ -27,6 +25,10 @@ window.ChoiceView = Backbone.View.extend({
 		}
 
 		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability(), selectable: this.model.isSelectable() } ));
+
+		if (this.model.get("past")){
+			this.$el.addClass("past");
+		}
 
 		this.updateView(false);
 
@@ -230,7 +232,6 @@ window.ChoicesView = Backbone.View.extend({
 
 		var row = null;
 		var todayAdded = false;
-		var inPast = true;
 
 		_(this._choiceViews).each(function(choice) {
 			var date = choice.model.get("date");
@@ -257,14 +258,6 @@ window.ChoicesView = Backbone.View.extend({
 				choice.$el.addClass('today');
 
 				todayAdded = true;
-			}
-
-			if (inPast){
-				if (that.today < date || sameDay(that.today, date)){
-					inPast = false;
-				} else {
-					choice.$el.addClass("past");
-				}
 			}
 		});
 

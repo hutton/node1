@@ -68,7 +68,8 @@ window.EventApp = Backbone.View.extend({
         "click #show-info":             "infoClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
-        "click .mode-switch-attendees":     "switchToAttendees"
+        "click .mode-switch-attendees":     "switchToAttendees",
+        "click .join-event":            "showJoinEvent", 
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -462,6 +463,10 @@ window.EventApp = Backbone.View.extend({
         if (firstSelectedChoice !== null){
             firstSelectedChoice.trigger('scrollToTopLine');
         }
+    },
+
+    showJoinEvent: function(){
+        $('#join-view').modal({show: true});
     }
 
 });

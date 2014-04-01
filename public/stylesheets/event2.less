@@ -1260,6 +1260,12 @@ div.attendees-choice{
 
 }
 
+.att-ch{
+	border-bottom: 1px solid @divider-color;
+	padding-bottom: 2px;
+	margin-bottom: 5px;
+}
+
 
 /************ Top choice markers **************/
 @top-choice-color: @free-color;
@@ -1428,4 +1434,23 @@ div.attendees-choice{
 	bottom: 0px;
 	z-index: 300;
 	background: white;
+}
+
+/************** Join event *******************/
+.join-event-container{
+	position: fixed;
+	width: 100%;
+	bottom: 0px;
+	z-index: 400;
+	text-align: center;
+	pointer-events: none;
+}
+
+.join-event{
+	background: @free-color;
+	color: white;
+	padding: 2px 20px;
+	display: inline-block;
+	cursor: pointer;
+	pointer-events: auto;
 }
