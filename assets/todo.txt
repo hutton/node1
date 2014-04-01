@@ -1,3 +1,4 @@
+- Attendee view resize
 - Attendee view update when selectable changes
 - Style attendee view
 - Add a loader
