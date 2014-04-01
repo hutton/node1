@@ -1,3 +1,4 @@
+- Change settings to hamburger
 - Attendee view resize
 - Attendee view update when selectable changes
 - Style attendee view
