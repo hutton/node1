@@ -1,8 +1,9 @@
-- Add 'Tap if free'
-- Check signup footer
-	- Small green footer
-	- Join event >
-- Change settings to hamburger
+- Add Your details to options
+- Try setting scrollSource: '.attendees-choice-date' and dragSource: '.attendees-choice-date'
+- Make example newMode
+- Add 'You have selected 5 dates' to join event
+	- 'When you join an event we will email you your own private link to update your choices.
+	You will also be able to contact everyone participating in the event with the address office-drinks@convenely.com.'
 - Attendee view resize
 - Attendee view update when selectable changes
 - Style attendee view
@@ -19,7 +20,11 @@
 
 Done
 ----
-- Close attendee view on select date range
+- Change settings to hamburger
+- Add 'Tap if free'
+- Check signup footer
+	- Small green footer
+	- Join event >- Close attendee view on select date range
 - Selected calendar choice same style as selected attendee choice
 - Allow selection of date range
 - Change background of info panel (#f0f0f0)
