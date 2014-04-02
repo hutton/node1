@@ -1,3 +1,4 @@
+- Today is not past
 - Add Your details to options
 - Try setting scrollSource: '.attendees-choice-date' and dragSource: '.attendees-choice-date'
 - Make example newMode
@@ -12,15 +13,13 @@
 - Handle long names better
 - Click envelope in example show info
 - Update example
-- Your Details in Settings
-- Drop attendees box on signup form
-
 
 =======
 - Add description
 
 Done
 ----
+- Your Details in Settings
 - Change settings to hamburger
 - Add 'Tap if free'
 - Check signup footer
