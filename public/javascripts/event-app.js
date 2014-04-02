@@ -85,12 +85,6 @@ window.EventApp = Backbone.View.extend({
         this.SettingsView.show();
 
         this.showInfo = !this.showInfo;
-
-        if (this.showInfo){
-            this.$el.find("#show-info > span").addClass("show-info-rotate");
-        } else {
-            this.$el.find("#show-info > span").removeClass("show-info-rotate");
-        }
     },
 
     topNavBarEl: $(".navbar-fixed-top"),
@@ -444,11 +438,13 @@ window.EventApp = Backbone.View.extend({
             this.selectedModel.set('selected', false);
         }
 
-        model.set('selected', true);
-
         this.selectedModel = model;
 
-        this.AttendeesView.setActive(model);
+        if (model !== null){
+            model.set('selected', true);
+
+            this.AttendeesView.setActive(model);
+        }
     },
 
     scrollToFirstSelectable: function(){

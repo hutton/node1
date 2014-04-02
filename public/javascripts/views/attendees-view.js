@@ -81,6 +81,8 @@ window.AttendeesView = Backbone.View.extend({
 			dragHandle: 1,
 			dynamicHandle: 1,
 			clickBar: 1,
+			scrollSource: '.attendees-choice-date',
+			dragSource: '.attendees-choice-date'
 		}, {
 			active: that.itemActive
 		});
@@ -148,6 +150,8 @@ window.AttendeesView = Backbone.View.extend({
 	onClose: function(){
 		this.$el.find('.attendees-close').addClass('attendees-close-hidden');
 
+		App.setSelected(this.model);
+
 		this.hide();
 	},
 
@@ -177,8 +181,6 @@ window.AttendeesView = Backbone.View.extend({
 			} else {
 				$('.day-view-container').append(this.$el);
 			}
-
-
 
 			$(".event-container").css({'padding-bottom': this.$el.height()});
 		} else {

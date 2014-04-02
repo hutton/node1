@@ -112,7 +112,7 @@ function expandDates(input, everythingSelectable){
 
 	processedInput = _.sortBy(processedInput, function(choice){return choice.date;});
 
-	var today = new Date();
+	var today = new Date(new Date().toDateString());
 
 	_.each(processedInput, function(choice){
 		choice.past = choice.date < today;

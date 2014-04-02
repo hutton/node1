@@ -52,7 +52,7 @@ function createEvent(req, res){
 function example(req, res){
 	var calendar = Example.getExample();
 
-	showEvent(req, res, calendar, "A01");
+	showEvent(req, res, calendar, null);
 }
 
 function showEvent(req, res, calendar, attendeeId){

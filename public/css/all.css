@@ -7501,11 +7501,11 @@ a:active {
 }
 #settings-view h2 {
   font-size: 16px;
-  color: #606060;
+  color: #000000;
   line-height: 1.3em;
-  padding: 2px 0px;
+  padding: 8px 0px 2px 0px;
   margin: 0px;
-  font-family: 'Open Sans';
+  font-weight: bold;
 }
 #settings-view .btn {
   margin-left: auto;
@@ -7513,7 +7513,14 @@ a:active {
   display: block;
 }
 .settings-section {
-  margin: 0px 0px 15px 0px;
+  margin: 0px 0px 20px 0px;
+}
+.settings-section i {
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
 }
 .table td {
   padding: 8px 0px;
@@ -7584,7 +7591,7 @@ a:active {
   float: left;
   transition: all 0.4s ease-in-out;
 }
-.show-info-rotate {
+.rotate {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
@@ -8354,6 +8361,7 @@ div.attendees-choice {
   padding: 0px;
   border: 2px solid transparent;
   height: 100%;
+  position: relative;
 }
 .active div.attendees-choice {
   border: 2px solid #4ad16c;
@@ -8383,6 +8391,8 @@ div.attendees-choice {
   font-size: 65%;
   color: #c0c0c0;
   width: 240px;
+  z-index: 100;
+  position: relative;
 }
 .attendees-choice-state {
   width: 60px;
@@ -8435,10 +8445,18 @@ div.attendees-choice {
   color: #4ad16c;
 }
 .attendees-choice-container {
-  padding: 10px;
   font-size: 65%;
   color: #c0c0c0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  padding-top: 60px;
+}
+.attendees-choice-container-scrollable {
+  height: 100%;
   overflow-y: auto;
+  padding: 10px 10px 10px 10px;
 }
 .att-ch {
   border-bottom: 1px solid #e8e8e8;

@@ -8,7 +8,8 @@ window.SettingsView = Backbone.View.extend({
 	el: $("#settings-view"),
 
 	events: {
-		"click #settings-update-dates": "updateSelectableDates"
+		"click #settings-update-dates": "updateSelectableDates",
+		"click #settings-your-details": "yourDetailsClicked"
 	},
 
 	render: function(){
@@ -48,9 +49,15 @@ window.SettingsView = Backbone.View.extend({
 
 	updateSelectableDates: function(){
 		App.AttendeesView.hide();
-		
+
 		window.App.changeSelectableDates();
 
 		this.hide();
+	},
+
+	yourDetailsClicked: function(){
+		this.$el.find('.settings-your-details-section').slideToggle('fast');
+
+		this.$el.find('#settings-your-details .fa-chevron-right').toggleClass('rotate');
 	}
 });
