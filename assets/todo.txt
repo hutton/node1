@@ -4,6 +4,7 @@
 - Add 'You have selected 5 dates' to join event
 	- 'When you join an event we will email you your own private link to update your choices.
 	You will also be able to contact everyone participating in the event with the address office-drinks@convenely.com.'
+- .att-ch overflow: hidden;
 - Attendee view resize
 - Attendee view update when selectable changes
 - Style attendee view
