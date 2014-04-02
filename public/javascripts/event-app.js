@@ -28,7 +28,7 @@ window.EventApp = Backbone.View.extend({
 
             this.newMode = true;
 
-            this.attendees.add({"prettyName": "You", "_id": "new", "me" : true}, {"at": 0});
+            this.attendees.add({"prettyName": "Me", "_id": "new", "me" : true}, {"at": 0});
         }
 
         this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
@@ -106,6 +106,10 @@ window.EventApp = Backbone.View.extend({
 
         if (!this.newMode){
             this.recalcTopSpacer();
+        } else {
+            _.delay(function(){
+                that.$el.find('.join-event').removeClass('join-event-hidden');    
+            }, 1000);
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
@@ -208,8 +212,6 @@ window.EventApp = Backbone.View.extend({
     changesMadeLinkkeyEl: $(".changes-made-email-link"),
 
     updatedFooterEl: $("#updated-footer"),
-
-    registerFooterEl: $("#register-footer"),
 
     titleMailEl: $("#title-mail"),
 

@@ -7490,7 +7490,7 @@ a:active {
 #settings-view {
   text-align: left;
 }
-#settings-view .modal-title {
+.modal-title {
   text-align: center;
   color: #4ad16c;
 }
@@ -8291,13 +8291,14 @@ a:active {
   font-size: 34px;
   position: absolute;
   bottom: -5px;
-  left: -5px;
+  left: -10px;
   padding: 10px;
   -moz-transition-duration: 0.2s;
   -webkit-transition-duration: 0.2s;
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
+  cursor: pointer;
 }
 .attendees-close-hidden {
   bottom: -50px;
@@ -8391,10 +8392,27 @@ div.attendees-choice {
   background: #f0f0f0;
   float: right;
   font-size: 30px;
+  position: relative;
+}
+.attendees-choice-state > i {
+  display: none;
+}
+.attendees-choice-state > div {
+  line-height: 1.3em;
+  font-size: 14px;
+  top: 50%;
+  position: relative;
+  margin-top: -18px;
 }
 .attendees-choice-state-free {
   background: #4ad16c;
   color: rgba(0, 0, 0, 0.3);
+}
+.attendees-choice-state-free > div {
+  display: none;
+}
+.attendees-choice-state-free > i {
+  display: inline-block;
 }
 .attendees-choice-date-date {
   float: left;
@@ -8420,6 +8438,7 @@ div.attendees-choice {
   padding: 10px;
   font-size: 65%;
   color: #c0c0c0;
+  overflow-y: auto;
 }
 .att-ch {
   border-bottom: 1px solid #e8e8e8;
@@ -8566,10 +8585,20 @@ div.attendees-choice {
   pointer-events: none;
 }
 .join-event {
+  position: relative;
+  top: 0px;
   background: #4ad16c;
   color: white;
   padding: 2px 20px;
   display: inline-block;
   cursor: pointer;
   pointer-events: auto;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.join-event-hidden {
+  top: 50px;
 }

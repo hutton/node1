@@ -153,13 +153,14 @@ window.AttendeesView = Backbone.View.extend({
 
 	setHeight: function(animate){
 		var that = this;
+		var panelHeight = 420;
 
 		var windowHeight = $(window).height();
 		var navBarHeight = $('.navbar-fixed-top').height();
 
 		var itemHeight = $('.date-cell').first().height();
 
-		var maxHeight = Math.min(windowHeight - (navBarHeight + (itemHeight * 3)), 420);
+		var maxHeight = Math.min(windowHeight - (navBarHeight + (itemHeight * 3)), panelHeight);
 
 		this.$el.find('.attendees-choices-list-container').animate({height: maxHeight}, 400, function(){
 			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
