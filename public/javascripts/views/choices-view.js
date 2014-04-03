@@ -129,6 +129,8 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	updateTopChoices: function(animate){
+		return;
+		
 		if (this.model.has('top-choice')){
 			var place = this.model.get('top-choice');
 

@@ -464,7 +464,18 @@ window.EventApp = Backbone.View.extend({
     },
 
     showJoinEvent: function(){
-        $('#join-view').modal({show: true});
-    }
+        var modal = $('#join-view');
 
+        var label = modal.find('.join-view-text');
+
+        if (this.isFree.length === 0){
+            label.html("You've not selected any dates but that's fine.");
+        } else if (this.isFree.length === 1) {
+            label.html("You have selected one date.");
+        } else {
+            label.html("You have selected " + this.isFree.length + " dates.");
+        }
+
+        modal.modal({show: true});
+    }
 });

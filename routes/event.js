@@ -105,6 +105,7 @@ function showEvent(req, res, calendar, attendeeId){
 			choices: JSON.stringify(sortedChoices),
 			attendees: JSON.stringify(cleanedAttendees),
 			calendar: JSON.stringify(cleanedCalendar),
+			id: calendar.id,
 			name: calendar.name,
 			inviteEmailLink: inviteEmailLink
 		});

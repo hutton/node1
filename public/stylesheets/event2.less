@@ -723,6 +723,7 @@ a:active{
 
 .register-attendee-email-input-container{
 	.attendee-email-input-container;
+	margin-bottom: 10px;
 }
 
 #register-attendee-name-input{
@@ -894,6 +895,17 @@ a:active{
 
 .modal-content{
 	border-radius: 0px;
+}
+
+.modal p{
+	margin: 0px 0px 10px 0px;
+	font-size: 90%;
+	padding: 0px 20px;
+	line-height: 1.6em;
+}
+
+.modal p > b{
+	color: #000000;
 }
 
 .single-date-container{
@@ -1303,6 +1315,10 @@ div.attendees-choice{
 	border-bottom: 1px solid @divider-color;
 	padding-bottom: 2px;
 	margin-bottom: 5px;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 

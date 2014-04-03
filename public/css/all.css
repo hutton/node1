@@ -7962,6 +7962,7 @@ a:active {
   max-width: 400px;
   margin: 0px auto;
   line-height: 25px;
+  margin-bottom: 10px;
 }
 #register-attendee-name-input {
   width: 100%;
@@ -8120,6 +8121,15 @@ a:active {
 }
 .modal-content {
   border-radius: 0px;
+}
+.modal p {
+  margin: 0px 0px 10px 0px;
+  font-size: 90%;
+  padding: 0px 20px;
+  line-height: 1.6em;
+}
+.modal p > b {
+  color: #000000;
 }
 .single-date-container {
   position: relative;
@@ -8462,6 +8472,9 @@ div.attendees-choice {
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 2px;
   margin-bottom: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /************ Top choice markers **************/
 .attendees-choices-top {
