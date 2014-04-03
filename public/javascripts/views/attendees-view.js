@@ -157,30 +157,22 @@ window.AttendeesView = Backbone.View.extend({
 
 	setHeight: function(animate){
 		var that = this;
-		var maxPanelHeight = 420;
 
 		var windowHeight = $(window).height();
 		var navBarHeight = $('.navbar-fixed-top').height();
 
+		var availableHeight = windowHeight - navBarHeight;
+
 		var itemHeight = $('.date-cell').first().height();
+		var attendeeHeight = $('.att-ch').outerHeight(true);
 
-		var panelWithItemsHeight = (28 * App.attendees.models.length) + 60;
+		var panelWithItemsHeight = (attendeeHeight * App.attendees.models.length) + 70;
 
-		var itemsShown = 20;
+		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
-		var suggestedPanelHeight = 0;
+		var newHeight = Math.min(desiredHeight, availableHeight - (itemHeight * 3));
 
-		do{
-			suggestedPanelHeight = windowHeight - (navBarHeight + (itemHeight * itemsShown));
-
-			itemsShown--;
-
-		} while (suggestedPanelHeight < maxPanelHeight &&
-			suggestedPanelHeight < panelWithItemsHeight);
-
-		var maxHeight = Math.min(windowHeight - (navBarHeight + (itemHeight * 3)), maxPanelHeight);
-
-		this.$el.find('.attendees-choices-list-container').animate({height: suggestedPanelHeight}, 800, 'easeOutExpo', function(){
+		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, 800, 'easeOutExpo', function(){
 			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
 		});
 	},
