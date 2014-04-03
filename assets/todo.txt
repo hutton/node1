@@ -1,4 +1,5 @@
-- Show Invite someone > for less than 5
+- Show Invite someone > for less than 5 and not new
+- In new mode change options icon to help link
 - Make all attendee view drag/scrollable when possible
 - Attendee view resize
 - Attendee view update when selectable changes
@@ -7,6 +8,7 @@
 - Handle long names better
 - Click envelope in example show info
 - Update example
+- Make a help page
 
 =======
 - Add description
