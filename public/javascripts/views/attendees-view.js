@@ -81,8 +81,8 @@ window.AttendeesView = Backbone.View.extend({
 			dragHandle: 1,
 			dynamicHandle: 1,
 			clickBar: 1,
-			scrollSource: '.attendees-choice-date',
-			dragSource: '.attendees-choice-date'
+			scrollSource: '.attendees-choice-draggable',
+			dragSource: '.attendees-choice-draggable'
 		}, {
 			active: that.itemActive
 		});
@@ -113,8 +113,7 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	resize: function(){
-		if (this.isActive){
-		}
+		this.setHeight(false);
 	},
 
 	rendered: false,
@@ -158,42 +157,36 @@ window.AttendeesView = Backbone.View.extend({
 	setHeight: function(animate){
 		var that = this;
 
+		var animateDuration = 800;
+
+		if (!animate){
+			animateDuration = 0;
+		}
+
 		var windowHeight = $(window).height();
 		var navBarHeight = $('.navbar-fixed-top').height();
 
 		var availableHeight = windowHeight - navBarHeight;
 
-		var itemHeight = $('.date-cell').first().height();
-		var attendeeHeight = $('.att-ch').outerHeight(true);
+		var itemHeight = $('.date-cell').first().width();
 
-		var panelWithItemsHeight = (attendeeHeight * App.attendees.models.length) + 70;
+		var panelWithItemsHeight = $('.attendees-choice-items').outerHeight(true) + 80;
 
 		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
-		var newHeight = Math.min(desiredHeight, availableHeight - (itemHeight * 3));
+		if (desiredHeight <= availableHeight - (itemHeight * 3)){
+			this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
+
+			newHeight = desiredHeight;
+		} else {
+			this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
+
+			newHeight = availableHeight - (itemHeight * 3);
+		}
 
 		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, 800, 'easeOutExpo', function(){
 			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
 		});
-	},
-
-	active: function(isActive){
-
-		this.isActive = isActive;
-
-		if (isActive){
-			if (!this.rendered){
-				this.render();
-			} else {
-				$('.day-view-container').append(this.$el);
-			}
-
-			$(".event-container").css({'padding-bottom': this.$el.height()});
-		} else {
-			this.$el.detach();
-
-			$(".event-container").css({'padding-bottom': 0});
-		}
 	}
 });
 
