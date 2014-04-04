@@ -170,16 +170,18 @@ window.AttendeesView = Backbone.View.extend({
 
 		var itemHeight = $('.date-cell').first().width();
 
-		var panelWithItemsHeight = $('.attendees-choice-items').outerHeight(true) + 80;
+		var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
 
 		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
 		if (desiredHeight <= availableHeight - (itemHeight * 3)){
 			this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
+			this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
 
 			newHeight = desiredHeight;
 		} else {
 			this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
+			this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
 
 			newHeight = availableHeight - (itemHeight * 3);
 		}
@@ -210,7 +212,7 @@ window.AttendeeView = Backbone.View.extend({
 	tagName: "li",
 
 	render: function(){
-		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model}));
+		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model, showInvite: App.attendees.models.length < 5 && !App.newMode}));
 
 		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},

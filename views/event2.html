@@ -75,10 +75,10 @@
         <div class="event-container-margin">
           <div class="event-container">
             <div class="row">
-              <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
+<!--               <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
               <div class="calendar-choices-top calendar-choices-top-two" style="display: none;"><div>2</div></div>
               <div class="calendar-choices-top calendar-choices-top-three" style="display: none;"><div>3</div></div>
-              <table class="table event-table">
+ -->              <table class="table event-table">
                 <colgroup>
                   <col width="14.2%">
                   <col width="14.2%">
@@ -278,9 +278,11 @@
                 <i class="fa fa-check-circle"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
+            <@ if (showInvite){ @>
               <div class="attendees-choice-invite">
               <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
               </div>
+            <@ } @>
             </div>
             </div>
           </div>

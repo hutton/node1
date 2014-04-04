@@ -1,7 +1,4 @@
-- Show Invite someone > for less than 5 and not new
 - In new mode change options icon to help link
-- Make all attendee view drag/scrollable when possible
-- Attendee view resize
 - Attendee view update when selectable changes
 - Style attendee view
 - Add a loader
@@ -15,6 +12,9 @@
 
 Done
 ----
+- Attendee view resize
+- Make all attendee view drag/scrollable when possible
+- Show Invite someone > for less than 5 and not new
 - Height of attendee view depend on content
 - Add 'You have selected 5 dates' to join event
 	- 'When you join an event we will email you your own private link to update your choices.

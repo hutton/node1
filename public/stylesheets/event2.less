@@ -1223,7 +1223,7 @@ div.attendees-choice{
 }
 
 .attendees-choice-date{
-	background: rgba(0,0,0,0.04) !important;
+	background: rgba(0,0,0,0.04);
 	text-align: left;
 	font-size: 65%;
 	color: @date-color;
@@ -1238,7 +1238,7 @@ div.attendees-choice{
 	height: 60px;
 	line-height: 60px;
 	text-align: center;
-	background: #f0f0f0;
+	background: rgba(0,0,0,0.04);
 	float: right;
 	font-size: 30px;
 	position: relative;
@@ -1309,11 +1309,15 @@ div.attendees-choice{
 	height: 100%;
 	overflow-y: auto;
 	padding: 10px 10px 10px 10px;
+	position: relative;
+}
+
+.attendees-choice-items{
+	pointer-events: none;
 }
 
 .attendees-choice-draggable-overlay{
 	height: 100%;
-	z-index: 100;
 	position: absolute;
 	width: 100%;
 }
@@ -1323,6 +1327,10 @@ div.attendees-choice{
 	margin-top: 15px;
 	z-index: 200;
 	display: none;
+}
+
+.attendees-choice-invite > a{
+	pointer-events: auto;
 }
 
 .active .attendees-choice-invite{
