@@ -118,12 +118,14 @@ window.EventApp = Backbone.View.extend({
             this.changeSelectableDates();
         }
 
+        this.instantResize();
         this.onResizeWindow();
 
         var throttledResize = _.debounce(that.onResizeWindow, 200);
 
         $(window).resize(function(){
             throttledResize();
+            that.instantResize();
         });
     },
 
@@ -158,6 +160,33 @@ window.EventApp = Backbone.View.extend({
             this.showHeader(false);
         } else {
             this.showHeader(true);
+        }
+    },
+
+    instantResize: function(){
+        this.titleResize();
+    },
+
+    titleResize: function(){
+        var maxFontSize = 21;
+        var minFontSize = 12;
+
+        var fontSize = maxFontSize;
+
+        var titleEl = $('.title');
+
+        titleEl.css({'font-size': fontSize});
+        titleEl.css({'line-height': '30px'});
+
+        while (titleEl.outerHeight(true) > 42 && fontSize > minFontSize)
+        {
+            titleEl.css({'font-size': fontSize});
+
+            fontSize -= 2;
+        }
+
+        if (titleEl.outerHeight(true) > 42){
+            titleEl.css({'line-height': '16px'});               
         }
     },
 
@@ -450,7 +479,7 @@ window.EventApp = Backbone.View.extend({
     scrollToFirstSelectable: function(){
         var firstSelectableChoice = this.choices.findWhere({selectable: true});
 
-        if (firstSelectableChoice !== null){
+        if (firstSelectableChoice !== null && !_.isUndefined(firstSelectableChoice)){
             firstSelectableChoice.trigger('scrollToTopLine');
         }
     },
@@ -458,7 +487,7 @@ window.EventApp = Backbone.View.extend({
     scrollToSelected: function(){
         var firstSelectedChoice = this.choices.findWhere({selected: true});
 
-        if (firstSelectedChoice !== null){
+        if (firstSelectedChoice !== null && !_.isUndefined(firstSelectedChoice)){
             firstSelectedChoice.trigger('scrollToTopLine');
         }
     },

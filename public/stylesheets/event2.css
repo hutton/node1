@@ -29,7 +29,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 .event-container{max-width:600px;margin-left:auto;margin-right:auto;min-height:800px;z-index:101;position:relative;}
 #top-row-spacer{height:60px;}
 .navbar-inner{border:none;}
-.navbar-fixed-top{background:#4ad16c;color:white;}
+.navbar-fixed-top{background:#4ad16c;border-bottom:solid 1px #43B660;color:white;}
 .navbar-fixed-top a{color:white;}
 .navbar-fixed-bottom{border-top:1px solid #e8e8e8;background:#f8f8f8;}
 .title-button-container{position:absolute;height:0px;right:0px;overflow:visible;}
@@ -38,7 +38,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 #show-info>span{-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
 #title-mail{position:absolute;float:left;transition:all 0.4s ease-in-out;}
 .rotate{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-o-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg);}
-.title{text-align:center;padding-top:9px;padding-left:25px;padding-right:25px;margin-left:auto;margin-right:auto;margin-bottom:0px;color:white;}
+.title{text-align:center;padding-top:9px;padding-left:40px;padding-right:40px;margin-left:auto;margin-right:auto;margin-bottom:0px;color:white;}
 .add-attendee-panel{margin:10px;}
 .message-panel{display:none;font-size:14px;}
 .add-attendee-message{display:none;font-size:14px;}
@@ -66,15 +66,15 @@ a:active{color:#4ad16c;text-decoration:none;}
 .event-table tr.selected-row{height:auto;}
 .event-table td{text-align:left;position:relative;color:#c0c0c0;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 .event-table td:nth-of-type(6),.event-table td:nth-of-type(7){color:#d0d0d0;}
-.date-cell-container{background:#f0f0f0;border:1px solid #d0d0d0;position:relative;height:100%;opacity:0.9;cursor:pointer;}
+.date-cell-container{background:#f7f9f7;border:1px solid #d0d0d0;position:relative;height:100%;cursor:pointer;}
 .past{opacity:0.4;}
 .past>.date-cell-container{border:1px solid #d0d0d0;background:transparent !important;}
 .past .date-text{text-decoration:line-through;}
-.unselectable{opacity:0.6;}
+.unselectable{opacity:0.4;}
 .unselectable>.date-cell-container{border:1px solid #d0d0d0;background:transparent !important;}
 .event-table tr.selected-row>td{padding:0px;width:100%;}
 .event-table tr.selected-row>td>div{width:auto;height:auto;}
-.date-text{margin-left:5px;position:absolute;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;color:#000000;opacity:0.4;}
+.date-text{margin-left:5px;position:absolute;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;color:rgba(0, 0, 0, 0.4);}
 .content{position:relative;top:3px;line-height:1.4em;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
 .footer{text-align:center;height:0px;position:relative;top:10px;}
 #register-footer{margin:10px 10px 6px 10px;text-align:center;font-size:16px;}
@@ -161,7 +161,7 @@ div.attendees-choice{margin:0px;padding:0px;border:2px solid transparent;height:
 .attendees-choices-row{list-style:none;margin:0;padding:0;height:100%;}
 .attendees-choices-row>li{float:left;height:100%;cursor:pointer;padding:0px;margin:0px;}
 .attendees-choice-month{color:#4ad16c;border:none !important;background:white !important;position:relative;}
-.attendees-choice-date{background:rgba(0, 0, 0, 0.04);text-align:left;font-size:65%;color:#c0c0c0;width:240px;z-index:100;position:relative;}
+.attendees-choice-date{background:#f7f9f7;text-align:left;font-size:65%;color:rgba(0, 0, 0, 0.4);width:240px;z-index:100;position:relative;}
 .attendees-choice-state{width:60px;height:60px;line-height:60px;text-align:center;background:rgba(0, 0, 0, 0.04);float:right;font-size:30px;position:relative;}
 .attendees-choice-state>i{display:none;}
 .attendees-choice-state>div{line-height:1.3em;font-size:14px;top:50%;position:relative;margin-top:-18px;}

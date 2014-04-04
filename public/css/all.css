@@ -7558,6 +7558,7 @@ a:active {
 }
 .navbar-fixed-top {
   background: #4ad16c;
+  border-bottom: solid 1px #43B660;
   color: white;
 }
 .navbar-fixed-top a {
@@ -7601,8 +7602,8 @@ a:active {
 .title {
   text-align: center;
   padding-top: 9px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;
@@ -7739,11 +7740,10 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
-  background: #f0f0f0;
+  background: #f7f9f7;
   border: 1px solid #d0d0d0;
   position: relative;
   height: 100%;
-  opacity: 0.9;
   cursor: pointer;
 }
 .past {
@@ -7757,7 +7757,7 @@ a:active {
   text-decoration: line-through;
 }
 .unselectable {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 .unselectable > .date-cell-container {
   border: 1px solid #d0d0d0;
@@ -7780,8 +7780,7 @@ a:active {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #000000;
-  opacity: 0.4;
+  color: rgba(0, 0, 0, 0.4);
 }
 .content {
   position: relative;
@@ -8396,10 +8395,10 @@ div.attendees-choice {
   position: relative;
 }
 .attendees-choice-date {
-  background: rgba(0, 0, 0, 0.04);
+  background: #f7f9f7;
   text-align: left;
   font-size: 65%;
-  color: #c0c0c0;
+  color: rgba(0, 0, 0, 0.4);
   width: 240px;
   z-index: 100;
   position: relative;

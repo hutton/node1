@@ -12,6 +12,9 @@
 @light-background-color: rgba(248,248,248,1.0);
 @event-table-content-width: 38px;
 
+@shaded-background: #F7F9F7;
+@item-text-color: rgba(0,0,0,0.4);
+
 @divider-gap: 3px;
 
 @font-face {
@@ -233,6 +236,7 @@ a:active{
 
 .navbar-fixed-top{
 	background: @free-color;
+	border-bottom: solid 1px #43B660;
 	color: white;
 }
 
@@ -277,8 +281,8 @@ a:active{
 .title{
 	text-align: center;
 	padding-top: 9px;
-	padding-left: 25px;
-	padding-right: 25px;
+	padding-left: 40px;
+	padding-right: 40px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 0px;
@@ -445,13 +449,12 @@ a:active{
 }
 
 .date-cell-container{
-	background: #f0f0f0;
+	background: @shaded-background;
 	border: 1px solid #d0d0d0;
 
 	position: relative;
 
 	height: 100%;
-	opacity: 0.9;
 	cursor: pointer;
 }
 
@@ -469,7 +472,7 @@ a:active{
 }
 
 .unselectable{
-	opacity: 0.6;
+	opacity: 0.4;
 }
 
 .unselectable > .date-cell-container{
@@ -502,8 +505,7 @@ a:active{
 	-ms-user-select: none;
 	user-select: none;
 
-	color: #000000;
-	opacity: 0.4;
+	color: @item-text-color;
 }
 
 .content {
@@ -1223,10 +1225,10 @@ div.attendees-choice{
 }
 
 .attendees-choice-date{
-	background: rgba(0,0,0,0.04);
+	background: @shaded-background;
 	text-align: left;
 	font-size: 65%;
-	color: @date-color;
+	color: @item-text-color;
 
 	width: 240px;
 	z-index: 100;

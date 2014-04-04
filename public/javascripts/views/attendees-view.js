@@ -189,6 +189,12 @@ window.AttendeesView = Backbone.View.extend({
 		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, 800, 'easeOutExpo', function(){
 			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
 		});
+	},
+
+	destroy: function(){
+		this.$el.remove();
+
+		this.rendered = false;
 	}
 });
 

@@ -80,6 +80,8 @@ window.SelectDatesView = Backbone.View.extend({
 			dataType: "json"
 		});
 
+		App.AttendeesView.destroy();
+
 		this.hide();
 	},
 
