@@ -1,3 +1,5 @@
+- Item background #F7F9F7
+	.attendees-choice-date, .date-cell-container
 - In new mode change options icon to help link
 - Attendee view update when selectable changes
 - Style attendee view
