@@ -1,35 +1,11 @@
-
-$('html, body').animate({
-    scrollTop: $("#myDiv").offset().top
-}, 2000);
-
-<div class='container'>
-    <div class='date'>18</div>
-    <div class='day'>Wednesday</div>
-    <div class='month'>March</div>
-</div>
-
-body{
-    font-family: Arial;
+.modal.fade {
+  left: -25%;
+  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+          transition: opacity 0.3s linear, left 0.3s ease-out;
 }
 
-.container{
-    border: 1px solid #a0a0a0;
-    height: 60px;
-    line-height: 60px;
-}
-
-.date{
-    float: left;
-    width: 60px;
-    font-size: 46px;
-}
-.day{
-    height: 30px;
-    line-height: 35px;
-}
-
-.month{
-    height: 30px;
-    line-height: 25px;
-}
+.modal.fade.in {
+  left: 50%;
+}​
