@@ -1,3 +1,5 @@
+- .navbar-fixed-top {
+	border-bottom: solid 1px #43B660;
 - Item background #F7F9F7
 	.attendees-choice-date, .date-cell-container
 - In new mode change options icon to help link
