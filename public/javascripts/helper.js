@@ -43,7 +43,7 @@ function sameDay(date1, date2){
 
 function expandDates(input, everythingSelectable){
 	var processedInput = _.map(input, function(choice){
-		return {date: new Date(choice.date), _id: choice._id, free: choice.free, selectable: choice.selectable, selected: false};
+		return {date: new Date(new Date(choice.date).toDateString()), _id: choice._id, free: choice.free, selectable: choice.selectable, selected: false};
 	});
 
 	allPopulatedDates = _.map(processedInput, function(choice){ return choice.date.toDateString();});
