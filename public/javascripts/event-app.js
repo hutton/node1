@@ -98,12 +98,15 @@ window.EventApp = Backbone.View.extend({
     render: function(){
         var that = this;
 
-        if (!this.newMode){
-            this.recalcTopSpacer();
-        } else {
+        if (this.newMode){
             _.delay(function(){
                 that.$el.find('.join-event').removeClass('join-event-hidden');    
             }, 1000);
+        } else {
+            this.recalcTopSpacer();
+
+            this.$el.find('#show-info').show();
+            this.$el.find('#title-button-help').hide();
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
@@ -120,6 +123,10 @@ window.EventApp = Backbone.View.extend({
 
         this.instantResize();
         this.onResizeWindow();
+
+        _.delay(function(){
+            that.titleResize();
+        }, 100);
 
         var throttledResize = _.debounce(that.onResizeWindow, 200);
 
@@ -178,15 +185,15 @@ window.EventApp = Backbone.View.extend({
         titleEl.css({'font-size': fontSize});
         titleEl.css({'line-height': '30px'});
 
-        while (titleEl.outerHeight(true) > 42 && fontSize > minFontSize)
+        while (titleEl.height() > 42 && fontSize > minFontSize)
         {
             titleEl.css({'font-size': fontSize});
 
             fontSize -= 2;
         }
 
-        if (titleEl.outerHeight(true) > 42){
-            titleEl.css({'line-height': '16px'});               
+        if (titleEl.height() > 42 && fontSize <= minFontSize){
+            titleEl.css({'line-height': '16px'});
         }
     },
 
