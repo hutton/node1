@@ -104,6 +104,10 @@
         </div>
       </div>
 
+      <div class="loader">
+        <div>Convenely</div>
+      </div>
+
     <div class="modal fade" id="settings-view">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -169,6 +173,24 @@
                 <span class="span-link" id="register-attendee-link">Save and join '<%= name %>' <i class="fa fa-chevron-right"></i></span>
               </button>
             </form>
+        </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="new-mode-mail-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Group email</h4>
+          </div>
+          <div class="modal-body">
+              <p>When you join the event you can contact everyone participating with the email address</p>
+              <div class="center new-mode-mail-view-email">
+                <p><%= id %>@convenely.com</p>
+              </div>
         </div>
           </div>
         </div><!-- /.modal-content -->
@@ -295,9 +317,10 @@
 
               <i class="fa fa-check"></i>
             </div>
-            <div class="attendees-choice-date-date"><@= moment(choice.get('date')).format("D") @></div>
-            <div class="attendees-choice-date-day"><@= moment(choice.get('date')).format("dddd") @></div>
-            <div class="attendees-choice-date-month"><@= moment(choice.get('date')).format("MMMM") @></div>
+            <div class="attendees-choice-date-date"><@= mom.format("D") @></div>
+            <div class="attendees-choice-date-date"><@= suffix @></div>
+            <div class="attendees-choice-date-day"><@= mom.format("dddd") @></div>
+            <div class="attendees-choice-date-month"><@= mom.format("MMMM") @></div>
           </div>
         </div>
         </script>

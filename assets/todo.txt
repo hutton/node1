@@ -1,8 +1,5 @@
-- In new mode change options icon to help link
-- Attendee view update when selectable changes
 - Style attendee view
 - Add a loader
-- Click envelope in example show info
 - Update example
 - Make a help page
 
@@ -11,6 +8,9 @@
 
 Done
 ----
+- Click envelope in example show info
+- In new mode change options icon to help link
+- Attendee view update when selectable changes
 - Handle long names better
 - .navbar-fixed-top {
 	border-bottom: solid 1px #43B660;

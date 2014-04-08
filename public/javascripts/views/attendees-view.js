@@ -218,7 +218,11 @@ window.AttendeeView = Backbone.View.extend({
 	tagName: "li",
 
 	render: function(){
-		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model, showInvite: App.attendees.models.length < 5 && !App.newMode}));
+		var mom = moment(this.model.get('date'));
+
+		var suffix = mom.format("Do");
+
+		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model, mom: mom, showInvite: App.attendees.models.length < 5 && !App.newMode, suffix: ""}));
 
 		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},

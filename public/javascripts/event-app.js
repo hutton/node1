@@ -102,7 +102,13 @@ window.EventApp = Backbone.View.extend({
             _.delay(function(){
                 that.$el.find('.join-event').removeClass('join-event-hidden');    
             }, 1000);
+
+            this.titleMailEl.click(function(){ 
+                that.showNewModeMail();
+            });
+
         } else {
+            this.updateTellEveryoneLink();
             this.recalcTopSpacer();
 
             this.$el.find('#show-info').show();
@@ -112,8 +118,6 @@ window.EventApp = Backbone.View.extend({
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
         this.SettingsView.initialize();
-
-        this.updateTellEveryoneLink();
 
         this.showBestChoices();
 
@@ -134,6 +138,8 @@ window.EventApp = Backbone.View.extend({
             throttledResize();
             that.instantResize();
         });
+
+        this.$el.find('.loader').addClass('loader-hide');
     },
 
     realignAdorners: function(){
@@ -251,34 +257,6 @@ window.EventApp = Backbone.View.extend({
         var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
         this.changesMadeLinkkeyEl.attr("href", mailTo);
-    },
-
-    swtichUpdateAttendeesLink: function(){
-        this.titleMailEl.show();
-
-        var targetOffset = this.$el.find('#changes-made-banner > .fa-envelope-o').offset();
-        var sourceOffset = this.titleMailEl.find('.fa-envelope-o').offset();
-
-        this.titleMailEl.hide();
-
-        var newTop = (targetOffset.top - sourceOffset.top) + 6;
-        var newLeft = (targetOffset.left - sourceOffset.left) + 8;
-
-        var that = this;
-
-        this.titleMailEl.css({ "left": newLeft + "px", "top": newTop + "px", "-webkit-transform": "scale(0.7,0.7)" });
-
-        _.delay(function(){
-            that.titleMailEl.show();
-
-            that.$el.find('#changes-made-banner > .fa-envelope-o').hide();
-
-            that.updatedFooterEl.slideUp('fast');
-
-            _.delay(function(){
-                that.titleMailEl.removeAttr("style");
-            }, 10);
-        }, 10);
     },
 
     formatUpdatedDays: function(isFree, wasFree){
@@ -511,6 +489,12 @@ window.EventApp = Backbone.View.extend({
         } else {
             label.html("You have selected " + this.isFree.length + " dates.");
         }
+
+        modal.modal({show: true});
+    },
+
+    showNewModeMail: function(){
+        var modal = $('#new-mode-mail-view');
 
         modal.modal({show: true});
     }

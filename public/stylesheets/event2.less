@@ -141,6 +141,35 @@ a:active{
 }
 
 
+/******************* Loader *******************/
+.loader{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: @free-color;
+	z-index: 100000;
+	top: 0px;
+	.transition-duration(0.4s);
+}
+
+.loader > div{
+	text-align: center;
+	color: white;
+	top: 40%;
+	position: relative;
+	.transition-duration(0.4s);
+}
+
+.loader-hide{
+	height: 0%;
+}
+
+.loader-hide > div{
+	top: 0%;
+	opacity: 0.0;
+}
+
+
 /**********************************************************************************/
 
 #settings-view{
@@ -1544,4 +1573,9 @@ div.attendees-choice{
 
 .join-event-hidden{
 	top: 50px;
+}
+
+.new-mode-mail-view-email{
+	color: @free-color;
+	text-decoration: underline;
 }
