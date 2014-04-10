@@ -163,17 +163,14 @@ window.EventApp = Backbone.View.extend({
         var width = $(window).width();
         var height = $(window).height();
 
-        if (height < 400 || width < 400){
-            this.showFooter(false);
-        } else {
-            this.showFooter(true);
-        }
-
         if (height < 350){
             this.showHeader(false);
+            this.AttendeesView.show();
         } else {
             this.showHeader(true);
         }
+
+        this.titleResize();
     },
 
     instantResize: function(){
@@ -404,14 +401,6 @@ window.EventApp = Backbone.View.extend({
         } else {
             this.$el.find(".event-container").css({'padding-top': 0});
             this.$el.find(".selecting-dates-container").css("top", 0);
-        }
-    },
-
-    showFooter: function(show){
-        if (show){
-            this.$el.find('.mode-switch-panel').show();
-        } else {
-            this.$el.find('.mode-switch-panel').hide();
         }
     },
 

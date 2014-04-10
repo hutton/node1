@@ -1,8 +1,52 @@
 
 var moment = require("moment");
 
+function toUTCDate(date){
+	return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+}
+
+function tomorrow(date){
+	var newDate = new Date(date);
+
+	newDate.setDate(newDate.getDate() + 1);
+
+	return newDate;
+}
+
 function getExample(){
-	return {
+
+	var choices = [];
+
+	var daysAdded = 0;
+
+	var date = toUTCDate(new Date());
+
+	var frees = [[
+					"A02",
+					"A03",
+					"A04",
+					"A05",
+					"A06",
+					"A07"
+				]];
+
+	while (!(daysAdded > 45 && date.getDay() !== 0)){
+		if (date.getDay() !== 0 && date.getDay() !== 6){
+
+			choices.push({
+				"busy" : [],
+				"date" : date,
+				"selectable": true,
+				"free" : frees[0]
+			});
+		}
+
+		daysAdded++;
+
+		date = tomorrow(date);
+	}
+
+	var model = {
 		"calendarId" : "example",
 		"id" : "office-drinks",
 		"name" : "Office drinks",
@@ -295,6 +339,10 @@ function getExample(){
 			}
 		]
 	};
+
+	model.choices = choices;
+
+	return model;
 }
 
 exports.getExample = function(){

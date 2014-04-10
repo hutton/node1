@@ -164,26 +164,31 @@ window.AttendeesView = Backbone.View.extend({
 		}
 
 		var windowHeight = $(window).height();
-		var navBarHeight = $('.navbar-fixed-top').height();
 
-		var availableHeight = windowHeight - navBarHeight;
+		if (windowHeight > 350){
+			var navBarHeight = $('.navbar-fixed-top').height();
 
-		var itemHeight = $('.date-cell').first().width();
+			var availableHeight = windowHeight - navBarHeight;
 
-		var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
+			var itemHeight = $('.date-cell').first().width();
 
-		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
+			var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
 
-		if (desiredHeight <= availableHeight - (itemHeight * 3)){
-			this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
-			this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
+			var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
-			newHeight = desiredHeight;
+			if (desiredHeight <= availableHeight - (itemHeight * 3)){
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
+
+				newHeight = desiredHeight;
+			} else {
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
+
+				newHeight = availableHeight - (itemHeight * 3);
+			}
 		} else {
-			this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
-			this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
-
-			newHeight = availableHeight - (itemHeight * 3);
+			newHeight = windowHeight;
 		}
 
 		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, 800, 'easeOutExpo', function(){
@@ -222,7 +227,9 @@ window.AttendeeView = Backbone.View.extend({
 
 		var suffix = mom.format("Do");
 
-		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model, mom: mom, showInvite: App.attendees.models.length < 5 && !App.newMode, suffix: ""}));
+		suffix = suffix.slice(suffix.length - 2, suffix.length);
+
+		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model, mom: mom, showInvite: App.attendees.models.length < 5 && !App.newMode, suffix: suffix}));
 
 		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},

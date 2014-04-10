@@ -7505,6 +7505,7 @@ a:active {
   color: white;
   top: 40%;
   position: relative;
+  height: 0px;
   -moz-transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
   -o-transform-duration: 0.4s;
@@ -8469,16 +8470,25 @@ div.attendees-choice {
 .attendees-choice-date-date {
   float: left;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 18px;
   font-size: 42px;
 }
 .attendees-choice-date-day {
   height: 30px;
   line-height: 35px;
+  font-size: 18px;
 }
 .attendees-choice-date-month {
   height: 30px;
   line-height: 25px;
+}
+.attendees-choice-date-suffix {
+  font-size: 12px;
+  height: 0px;
+  overflow: visible;
+  position: relative;
+  left: -20px;
+  top: 5px;
 }
 .attendees-choice-date {
   border: none;
