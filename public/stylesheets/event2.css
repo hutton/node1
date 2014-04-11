@@ -24,6 +24,7 @@ a:active{color:#4ad16c;text-decoration:none;}
 #settings-view h2{font-size:16px;color:#000000;line-height:1.3em;padding:8px 0px 2px 0px;margin:0px;font-weight:bold;}
 #settings-view .btn{margin-left:auto;margin-right:auto;display:block;}
 .settings-section{margin:0px 0px 20px 0px;}
+#settings-view .center{margin-top:30px;}
 .settings-section i{-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transform-duration:0.2s;-ms-transform-duration:0.2s;transition-duration:0.2s;}
 .table td{padding:8px 0px;border-top:none;}
 .navbar-inner{border-color:#e8e8e8;min-height:50px;}
@@ -173,7 +174,7 @@ div.attendees-choice{margin:0px;padding:0px;border:2px solid transparent;height:
 .attendees-choice-state-free>div{display:none;}
 .attendees-choice-state-free>i{display:inline-block;}
 .attendees-choice-date-date{float:left;margin-left:10px;margin-right:18px;font-size:42px;}
-.attendees-choice-date-day{height:30px;line-height:35px;font-size:18px;}
+.attendees-choice-date-day{height:30px;line-height:35px;}
 .attendees-choice-date-month{height:30px;line-height:25px;}
 .attendees-choice-date-suffix{font-size:12px;height:0px;overflow:visible;position:relative;left:-20px;top:5px;}
 .attendees-choice-date{border:none;}

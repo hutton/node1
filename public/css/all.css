@@ -7548,6 +7548,9 @@ a:active {
 .settings-section {
   margin: 0px 0px 20px 0px;
 }
+#settings-view .center {
+  margin-top: 30px;
+}
 .settings-section i {
   -moz-transition-duration: 0.2s;
   -webkit-transition-duration: 0.2s;
@@ -8476,7 +8479,6 @@ div.attendees-choice {
 .attendees-choice-date-day {
   height: 30px;
   line-height: 35px;
-  font-size: 18px;
 }
 .attendees-choice-date-month {
   height: 30px;

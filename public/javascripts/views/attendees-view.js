@@ -114,6 +114,10 @@ window.AttendeesView = Backbone.View.extend({
 
 	resize: function(){
 		this.setHeight(false);
+
+		if (!_.isUndefined(this.sly)){
+			this.sly.reload();
+		}
 	},
 
 	rendered: false,
@@ -165,16 +169,17 @@ window.AttendeesView = Backbone.View.extend({
 
 		var windowHeight = $(window).height();
 
+		var navBarHeight = $('.navbar-fixed-top').height();
+
+		var availableHeight = windowHeight - navBarHeight;
+
+		var itemHeight = $('.date-cell').first().width();
+
+		var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
+
+		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
+
 		if (windowHeight > 350){
-			var navBarHeight = $('.navbar-fixed-top').height();
-
-			var availableHeight = windowHeight - navBarHeight;
-
-			var itemHeight = $('.date-cell').first().width();
-
-			var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
-
-			var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
 			if (desiredHeight <= availableHeight - (itemHeight * 3)){
 				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
@@ -189,9 +194,17 @@ window.AttendeesView = Backbone.View.extend({
 			}
 		} else {
 			newHeight = windowHeight;
+
+			if (desiredHeight <= newHeight){
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
+			} else {
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
+			}
 		}
 
-		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, 800, 'easeOutExpo', function(){
+		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, animateDuration, 'easeOutExpo', function(){
 			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
 		});
 	},

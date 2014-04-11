@@ -132,7 +132,7 @@ window.EventApp = Backbone.View.extend({
             that.titleResize();
         }, 100);
 
-        var throttledResize = _.debounce(that.onResizeWindow, 200);
+        var throttledResize = _.debounce(that.onResizeWindow, 100);
 
         $(window).resize(function(){
             throttledResize();
@@ -437,16 +437,18 @@ window.EventApp = Backbone.View.extend({
     selectedModel: null,
 
     setSelected: function(model){
-        if (this.selectedModel !== null){
-            this.selectedModel.set('selected', false);
-        }
+        if (this.selectedModel !== model){
+            if (this.selectedModel !== null){
+                this.selectedModel.set('selected', false);
+            }
 
-        this.selectedModel = model;
+            this.selectedModel = model;
 
-        if (model !== null){
-            model.set('selected', true);
+            if (model !== null){
+                model.set('selected', true);
 
-            this.AttendeesView.setActive(model);
+                this.AttendeesView.setActive(model);
+            }
         }
     },
 

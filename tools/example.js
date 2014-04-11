@@ -13,6 +13,120 @@ function tomorrow(date){
 	return newDate;
 }
 
+function getFrees(index){
+	var frees = [[
+					"A02",
+					"A03",
+					"A04",
+					"A05",
+					"A06"
+				],[
+					"A02",
+					"A03"
+					],[
+					"A02",
+					"A04",
+					"A05",
+					"A06"
+				],[
+					"A02",
+					"A03",
+					"A04",
+					"A05",
+					"A06"
+				],[
+					"A01",
+					"A02"
+				],[
+					"A06"
+				],[
+					"A04",
+					"A05",
+					"A06"
+				],[
+					"A01",
+					"A02",
+					"A03",
+					"A04",
+					"A05",
+					"A06"
+				],[
+					"A06"
+				],[
+					"A01",
+					"A02"
+				],
+				[],
+				[],
+				[],
+				[],
+				[
+					"A01",
+					"A02",
+					"A03",
+					"A04",
+					"A05"
+				],
+				[],
+				[],
+				[
+					"A01",
+					"A02",
+					"A05",
+					"A06"
+				],[
+					"A01",
+					"A02",
+					"A03",
+					"A04",
+					"A05",
+					"A06"
+				],[
+					"A02",
+					"A05",
+					"A06"
+				],[
+					"A05"
+				],[
+					"A01",
+					"A05"
+				],[
+					"A03"
+				],[
+					"A04",
+					"A02",
+					"A03"
+				],[
+					"A04"
+				],[
+					"A01",
+					"A06"
+				],[
+					"A02",
+					"A05",
+					"A06"
+				],[
+					"A05"
+				],[
+					"A01",
+					"A05",
+					"A02"
+				],[
+					"A03"
+				],[
+					"A04",
+					"A02",
+					"A03"
+				]];
+
+
+	if (index < frees.length){
+		return frees[index];
+	} else {
+		return [];
+	}
+}
+
 function getExample(){
 
 	var choices = [];
@@ -21,27 +135,20 @@ function getExample(){
 
 	var date = toUTCDate(new Date());
 
-	var frees = [[
-					"A02",
-					"A03",
-					"A04",
-					"A05",
-					"A06",
-					"A07"
-				]];
+	var minDays = 30;
 
-	while (!(daysAdded > 45 && date.getDay() !== 0)){
+	while (!(daysAdded > minDays && date.getDay() !== 0)){
 		if (date.getDay() !== 0 && date.getDay() !== 6){
 
 			choices.push({
 				"busy" : [],
 				"date" : date,
 				"selectable": true,
-				"free" : frees[0]
+				"free" : getFrees(daysAdded)
 			});
-		}
 
-		daysAdded++;
+			daysAdded++;
+		}
 
 		date = tomorrow(date);
 	}
@@ -89,255 +196,10 @@ function getExample(){
 				"attendeeId" : "exampleA06",
 				"email" : "naomi_morgan@newstime.ip",
 				"name" : "Naomi Morgan"
-			},
-			{
-				"_id" : "A07",
-				"attendeeId" : "exampleA07",
-				"email" : "mullinst@thingy.nets",
-				"name" : "Traci Mullins"
 			}
 		],
 		"createdBy" : "1@gmail.com",
-		"choices" : [
-			{
-				"date" : new Date(moment().add('days', 0)),
-				"selectable": true,
-				"free" : [
-					"A02",
-					"A03"
-					],
-				"busy" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 1)),
-				"selectable": true,
-				"free" : [
-					"A02",
-					"A04",
-					"A05",
-					"A06"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 2)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 3)),
-				"selectable": true,
-				"free" : [
-					"A02",
-					"A03",
-					"A04",
-					"A05",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 4)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 5)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A02"
-				]
-			},
-			{
-				"_id" : "c006",
-				"busy" : [],
-				"date" : new Date(moment().add('days', 6)),
-				"selectable": true,
-				"free" : [
-					"A06"
-				]
-			},
-			{
-				"_id" : "c007",
-				"busy" : [],
-				"date" : new Date(moment().add('days', 7)),
-				"selectable": true,
-				"free" : [
-					"A04",
-					"A05",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 8)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A02",
-					"A03",
-					"A04",
-					"A05",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 9)),
-				"selectable": true,
-				"free" : [
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 10)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A02"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 11)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 12)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 13)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 14)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A02",
-					"A03",
-					"A04",
-					"A05",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 15)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 16)),
-				"selectable": true,
-				"free" : []
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 17)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A02",
-					"A05",
-					"A06"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 21)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A02",
-					"A03",
-					"A04",
-					"A05",
-					"A06",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 23)),
-				"selectable": true,
-				"free" : [
-					"A02",
-					"A05",
-					"A06"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 26)),
-				"selectable": true,
-				"free" : [
-					"A05"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 28)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A05",
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 30)),
-				"selectable": true,
-				"free" : [
-					"A03"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 32)),
-				"selectable": true,
-				"free" : [
-					"A04",
-					"A02",
-					"A03"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 34)),
-				"selectable": true,
-				"free" : [
-					"A07"
-				]
-			},
-			{
-				"busy" : [],
-				"date" : new Date(moment().add('days', 37)),
-				"selectable": true,
-				"free" : [
-					"A01",
-					"A06"
-				]
-			}
-		]
+		"choices" : []
 	};
 
 	model.choices = choices;
