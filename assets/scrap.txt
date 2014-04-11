@@ -1,11 +1,23 @@
-.modal.fade {
-  left: -25%;
-  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-     -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-       -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-          transition: opacity 0.3s linear, left 0.3s ease-out;
-}
 
-.modal.fade.in {
-  left: 50%;
-}​
+Office drinks
+
+----------- Date range not set
+
+First select some potential dates
+
+----------- Choices set but < 3 attendees
+
+There's not many people participating
+Invite others >
+
+----------- Attendees >= 3 or new mode
+
+Wednesday
+14th March
+Is looking like the best choice
+
+Tuesday			Monday
+20th March   & 	12th March
+are looking good too.
+
+Let us know when you're available (? if new mode or no choices set)
