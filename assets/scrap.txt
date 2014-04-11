@@ -58,6 +58,8 @@ Let us know when you're available (? if new mode or no choices set)
 			border: 1px solid #808080;
 			min-height: 400px;
 		}
+		
+		-webkit-transform: translateY(0px);
 
 	</style>
 
