@@ -43,6 +43,8 @@ window.EventApp = Backbone.View.extend({
 
         // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
 
+        this.LoaderView = new LoaderView();
+
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
         this.SettingsView = new SettingsView();
@@ -68,8 +70,9 @@ window.EventApp = Backbone.View.extend({
         "click #show-info":             "infoClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
-        "click .mode-switch-attendees":     "switchToAttendees",
+        "click .mode-switch-attendees": "switchToAttendees",
         "click .join-event":            "showJoinEvent", 
+        "click .title":                 "showLoader"    
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -138,8 +141,6 @@ window.EventApp = Backbone.View.extend({
             throttledResize();
             that.instantResize();
         });
-
-        this.$el.find('.loader').addClass('loader-hide');
     },
 
     realignAdorners: function(){
@@ -488,5 +489,9 @@ window.EventApp = Backbone.View.extend({
         var modal = $('#new-mode-mail-view');
 
         modal.modal({show: true});
+    },
+
+    showLoader: function(){
+        this.LoaderView.show();
     }
 });
