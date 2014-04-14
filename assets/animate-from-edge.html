@@ -32,11 +32,9 @@
 		}
 
 		.c{
-			opacity: 0.0;
 		}
 
 		.d{
-			opacity: 0.0;
 			margin-top: 100px;
 		}
 
@@ -48,33 +46,38 @@
 	</style>
 
 	<script type="text/javascript">
-		function animateFromEdge(element, edge){	
-			var height = $(window).height();
-			var offset = element.offset();
-
-			var startPos = height - offset.top;
-
-			if (edge === 'top'){
-				startPos = -offset.top;
-			}
-
-			element.removeClass('slow-animate');
-
-			element.attr({'style': 'transform: translateY(' + startPos + 'px); -webkit-transform: translateY(' + startPos + 'px); opacity: 1.0'});
+		function animateFromEdge(element, edge, delay){	
+			element.attr({'style': 'opacity: 0.0'});
+			element.show();
 
 			setTimeout(function(){
-				element.addClass('slow-animate');
-			    element.attr({'style': 'transform: translateY(0px); -webkit-transform: translateY(0px); opacity: 1.0'});
-			  }, 50);
+				var height = $(window).height();
+				var offset = element.offset();
+
+				var startPos = height - offset.top;
+
+				if (edge === 'top'){
+					startPos = -offset.top;
+				}
+
+				element.removeClass('slow-animate');
+
+				element.attr({'style': 'transform: translateY(' + startPos + 'px); -webkit-transform: translateY(' + startPos + 'px); opacity: 1.0'});
+
+				setTimeout(function(){
+					element.addClass('slow-animate');
+				    element.attr({'style': 'transform: translateY(0px); -webkit-transform: translateY(0px); opacity: 1.0'});
+				  }, 50);
+			  }, delay);
 		}
 
 
 		$(document).ready(function(){	
-			animateFromEdge($('.c'), 'bottom');
+			$('.inner > div').hide();
 
-			setTimeout(function(){
-				animateFromEdge($('.d'), 'top');
-			  }, 2000);
+			animateFromEdge($('.c'), 'bottom', 10);
+			
+			animateFromEdge($('.d'), 'top', 2000);
 		});
 	</script>
 	</head> 
