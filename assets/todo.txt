@@ -1,6 +1,8 @@
-- Style attendee view
-- Add a loader
+- Saving note for updating dates
 - Update example
+	- First names
+	- Remove an attendee
+	- Let's go bowling
 - Make a help page
 
 =======
@@ -8,6 +10,8 @@
 
 Done
 ----
+- Style attendee view
+- Add a loader
 - Click envelope in example show info
 - In new mode change options icon to help link
 - Attendee view update when selectable changes
