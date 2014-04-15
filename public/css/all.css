@@ -7514,7 +7514,6 @@ a:active {
 }
 .loader-inner {
   margin-top: 0px;
-  position: relative;
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
@@ -7524,6 +7523,9 @@ a:active {
   -ms-transform-duration: 0.4s;
   transition-duration: 0.4s;
 }
+.loader-inner > div {
+  margin-bottom: 30px;
+}
 .loader-hide .loader-inner {
   margin-top: -100px;
 }
@@ -7531,6 +7533,28 @@ a:active {
   position: absolute;
   bottom: 0px;
   width: 100%;
+}
+.loader-animate {
+  -webkit-transition: all 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.loader-title {
+  font-size: 30px;
+}
+.loader-between .text {
+  margin-bottom: 10px;
+}
+.loader-between .dates {
+  margin-left: auto;
+  margin-right: auto;
+}
+.inline {
+  display: inline-block;
+}
+.and {
+  margin: 0px 10px;
+  position: relative;
+  top: -15px;
 }
 /**********************************************************************************/
 #settings-view {

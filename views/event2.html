@@ -107,7 +107,7 @@
       <div class="loader">
         <div class="loader-middle">
           <div class="loader-inner">
-            <div><%= name %></div>
+            <div class="loader-convenely">Convenely</div>
           </div>
         <div class="loader-close">Continue <i class="fa fa-chevron-right"></i></div>
         </div>
@@ -328,6 +328,54 @@
             <div class="attendees-choice-date-month"><@= mom.format("MMMM") @></div>
           </div>
         </div>
+        </script>
+
+        <script type="text/template" id="loader-template">
+            <div class="loader-title"><@= title @></div>
+            <div class="loader-select-dates">First select some potential dates</div>
+            <div class="loader-between">
+                <div class="text">
+                Sometime between
+                </div>
+                <div class="dates">
+                  <div class="inline">
+                    <div>Monday</div>
+                    <div>21st March</div>
+                  </div>
+                  <div class="inline and">&</div>
+                  <div class="inline">
+                    <div>Wednesday</div>
+                    <div>31st March</div>
+                  </div>
+                </div>
+            </div>
+            <div class="loader-top-choice">
+                <div>
+                Wednesday
+                </div>
+                <div>
+                14th March
+                </div>
+                <div>
+                looks like the best choice
+                </div>
+            </div>
+            <div class="loader-top-other">
+                <div class="dates">
+                  <div class="inline">
+                    <div>Monday</div>
+                    <div>21st March</div>
+                  </div>
+                  <div class="inline and">&</div>
+                  <div class="inline">
+                    <div>Wednesday</div>
+                    <div>31st March</div>
+                  </div>
+                </div>
+                <div>look good also</div>
+            </div>
+            <div class="loader-set-choices">Let everyone know when you're available <i class="fa fa-chevron-right"></i></div> <!-- ' -->
+            <div class="loader-invite">There's not many people participating</div> <!-- ' -->
         </script>
 
         <% if (webAppDebug) { %>

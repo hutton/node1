@@ -45,6 +45,9 @@ window.EventApp = Backbone.View.extend({
 
         this.LoaderView = new LoaderView();
 
+        this.LoaderView.calendarModel = this.model;
+        this.LoaderView.attendees = this.attendees;
+
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
         this.SettingsView = new SettingsView();
@@ -60,6 +63,8 @@ window.EventApp = Backbone.View.extend({
         this.checkForOrientationChange();
 
         this.scrollToFirstSelectable();
+
+        this.LoaderView.show();
     },
 
     el: $("body"),
