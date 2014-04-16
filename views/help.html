@@ -54,25 +54,17 @@
               <h2>Getting Started</h2>
 
               </br>
-              <h4>1. <a class="scroll" href="#selectDates">Select the dates</a> you're available</h4>
-              <h4>2. <a class="scroll" href="#invite">Invite</a> others to the event</h4>
-              <h4>3. Discover the <a class="scroll" href="#suitable">most suitable</a> date and <a class="scroll" href="#contact">contact everyone</a></h4>
-              </br>
 
-              <a id="selectDates"></a>
-              <h3>Select when you're free.</h3>
-              <p>Click the days when you're available and see who else is available.</p>
+              <h3>1. Select when you're free.</h3>
+              <p>Click the days when you're free and see who else is available.</p>
 
-              <a id="invite"></a>
-              <h3>Inviting others.</h3>
+              <h3>2. Invite others.</h3>
               <p>In Options <i class="fa fa-bars"></i> click the 'Invite someone' link to send an email inviting people to the event.</p>
 
-              <a id="suitable"></a>
-              <h3>Finding the best date.</h3>
+              <h3>3. Find the best date.</h3>
               <p>See the top three dates for your event when you open it up, clicking your event title will re-open the summary screen.</p>
 
-              <a id="contact"></a>
-              <h3>Contact everyone.</h3>
+              <h3>4. Contact everyone.</h3>
               <p>Every event has it's own private email group, click the <i class="fa fa-envelope"></i> button to send an email to everyone participating in the event.</p>
               </br>
               </br>
@@ -105,29 +97,5 @@
 
       <script src="/javascripts/tp/jquery-2.0.3.min.js"></script>
       <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
-      
-      <script>
-
-        $(document).ready(function(){
-          $(".scroll").click(function(event){
-             event.preventDefault();
-             
-             var hash = $(this).attr('href');
-             
-             //calculate destination place
-             var dest=0;
-             if($(this.hash).offset().top > $(document).height()-$(window).height()){
-                  dest=$(document).height()-$(window).height();
-             }else{
-                  dest=$(this.hash).offset().top;
-             }
-             //go to destination
-           $('html,body').animate({scrollTop:dest}, 800,'swing', function(){
-             window.location.hash = hash;
-           });
-         });
-        });
-      </script>
-      
     </body>
   </html>
