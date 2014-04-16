@@ -54,9 +54,9 @@
               <h2>Getting Started</h2>
 
               </br>
-              <h4>1. <a href="#selectDates">Select the dates</a> you're available</h4>
-              <h4>2. <a href="#invite">Invite</a> others to the event</h4>
-              <h4>3. Discover the <a href="#suitable">most suitable</a> date and <a href="#contact">contact everyone</a></h4>
+              <h4>1. <a class="scroll" href="#selectDates">Select the dates</a> you're available</h4>
+              <h4>2. <a class="scroll" href="#invite">Invite</a> others to the event</h4>
+              <h4>3. Discover the <a class="scroll" href="#suitable">most suitable</a> date and <a class="scroll" href="#contact">contact everyone</a></h4>
               </br>
 
               <a id="selectDates"></a>
@@ -103,7 +103,26 @@
         </div>
       </div>
 
-      <script src="/javascripts/jquery-1.8.2.min.js"></script>
+      <script src="/javascripts/jquery-2.0.3.min.js"></script>
       <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
+      
+      <script>
+
+        $(document).ready(function(){
+          $(".scroll").click(function(event){
+             event.preventDefault();
+             //calculate destination place
+             var dest=0;
+             if($(this.hash).offset().top > $(document).height()-$(window).height()){
+                  dest=$(document).height()-$(window).height();
+             }else{
+                  dest=$(this.hash).offset().top;
+             }
+             //go to destination
+           $('html,body').animate({scrollTop:dest}, 400,'swing');
+         });
+        });
+      </script>
+      
     </body>
   </html>
