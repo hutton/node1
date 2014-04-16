@@ -406,9 +406,11 @@ window.EventApp = Backbone.View.extend({
             this.$el.find(".event-container").css({'padding-top': topNavBarHeight});
 
             this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
+            this.$el.find(".selecting-dates-saving-container").css("top", topNavBarHeight);
         } else {
             this.$el.find(".event-container").css({'padding-top': 0});
             this.$el.find(".selecting-dates-container").css("top", 0);
+            this.$el.find(".selecting-dates-saving-container").css("top", 0);
         }
     },
 

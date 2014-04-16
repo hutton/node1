@@ -102,7 +102,7 @@ function showEvent(req, res, calendar, attendeeId){
 		var inviteEmailLink = "mailto:?subject=" + calendar.name + "&body=" + encodeURIComponent(body);
 
 		res.render('event2.html', {
-			webAppDebug: global.app.webAppDebug,
+			webAppDebug: global.app.enableWebAppDebug,
 			choices: JSON.stringify(sortedChoices),
 			attendees: JSON.stringify(cleanedAttendees),
 			calendar: JSON.stringify(cleanedCalendar),

@@ -1,5 +1,3 @@
-- Make a help page
-- Saving note for updating dates
 
 =======
 - Add bounce to Join Event
@@ -12,6 +10,8 @@
 
 Done
 ----
+- Make a help page
+- Saving note for updating dates
 - Update example
 	- First names
 	- Remove an attendee

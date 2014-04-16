@@ -167,8 +167,8 @@ a:active{
 .loader-middle {
     display: table-cell;
     vertical-align: middle;
-    padding-left: 20px;
-	padding-right: 20px;
+    padding-left: 10px;
+	padding-right: 10px;
 }
 
 .loader-inner {
@@ -212,6 +212,14 @@ a:active{
 .loader-between .dates{
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.loader-top-choice > div:first-child{
+	font-size: 30px;
+}
+
+.loader-top-other > div:first-child{
+	margin-bottom: 5px;
 }
 
 .inline{
@@ -1546,6 +1554,10 @@ div.attendees-choice{
 	pointer-events: none;
 }
 
+.selecting-dates-saving-container{
+	.selecting-dates-container;
+}
+
 .selecting-dates{
 	background: @light-background-color;
 	max-width: 580px;
@@ -1559,6 +1571,12 @@ div.attendees-choice{
 	border-bottom: 1px solid @divider-color;
 	pointer-events: auto;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+.selecting-dates-saving{
+	.selecting-dates;
+	padding: 10px 25px 10px 30px;
+	color: #a0a0a0;
 }
 
 .selecting-dates-title{

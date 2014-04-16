@@ -1,6 +1,8 @@
 window.SelectDatesView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+
+		this.savingEL = $('.selecting-dates-saving-container');
 	},
 
 	el: $(".selecting-dates-container"),
@@ -11,14 +13,6 @@ window.SelectDatesView = Backbone.View.extend({
 		"click #selecting-dates-one-month": "oneMonthClicked",
 		"click #selecting-dates-two-months":	"twoMonthsClicked",
 		"click #selecting-dates-all":		"allClicked",
-	},
-
-	render: function(){
-		this.$el.html(this.template());
-
-		this.$el.hide();
-
-		$('.event-container').after(this.$el);
 	},
 
 	show: function(){
@@ -62,6 +56,7 @@ window.SelectDatesView = Backbone.View.extend({
 	},
 
 	save: function(){
+		var that = this;
 		var selectableChoices = this.collection.where({selectable: true});
 
 		var selectableDates = _.map(selectableChoices, function(choice){
@@ -69,6 +64,8 @@ window.SelectDatesView = Backbone.View.extend({
 		});
 
 		var data = JSON.stringify(selectableDates);
+
+		this.savingEL.slideDown('fast');
 
 		$.ajax({
 			type: "POST",
@@ -78,6 +75,8 @@ window.SelectDatesView = Backbone.View.extend({
 
 			},
 			dataType: "json"
+		}).always(function() {
+			that.savingEL.slideUp('fast');
 		});
 
 		App.AttendeesView.destroy();

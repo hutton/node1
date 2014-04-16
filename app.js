@@ -23,8 +23,12 @@
 	connectionString = 'mongodb://localhost:27017/test';
  }
 
-if (_.isUndefined(webAppDebug)){
-	webAppDebug = true;
+ webAppDebug = 'Off';
+
+if (_.isUndefined(webAppDebug) || webAppDebug === null || webAppDebug === 'On'){
+	enableWebAppDebug = true;
+ } else {
+ 	enableWebAppDebug = false;
  }
 
  var app = express();
@@ -64,6 +68,7 @@ Array.prototype.removeElement = function(element) {
 	connectionString = connectionString + "?maxIdleTimeMS=60000";
 
 	logger.info("Connecting to: " + connectionString);
+	logger.info("WebDebug: " + enableWebAppDebug);
 
 	var options = {
 		server: {
@@ -116,7 +121,7 @@ Array.prototype.removeElement = function(element) {
  app.get('/calendar-text/*', calendar.viewText);
 
  app.ourEmail = "convenely@gmail.com";
- app.webAppDebug = webAppDebug;
+ app.enableWebAppDebug = enableWebAppDebug;
 
  global.app = app;
  

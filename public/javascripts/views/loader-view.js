@@ -105,8 +105,6 @@ window.LoaderView = Backbone.View.extend({
 			} else {
 				if (this.attendees.length < 3){
 					this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
-				} else {
-					this.hideClose();
 				}
 			}
 		}

@@ -72,6 +72,12 @@
         </div>
       </div>
 
+      <div class="row selecting-dates-saving-container" style="display: none;">
+        <div class="selecting-dates-saving">
+          Saving...
+        </div>
+      </div>
+
       <div class="scrollable">
         <div class="event-container-margin">
           <div class="event-container">
@@ -357,7 +363,7 @@
                 <@= topDate.format("dddd Do MMMM") @>
                 </div>
                 <div>
-                looks the best date
+                looks like the best date
                 </div>
             </div>
             <div class="loader-top-other">
@@ -377,7 +383,9 @@
             <@ } @>
             <div class="loader-set-choices">Let everyone know when you're available <i class="fa fa-chevron-right"></i></div> <!-- ' -->
             <div class="loader-invite">
-            There's not many people participating<br/>
+            <p>
+            There's not many people participating
+            </p>
             <a href="<%= inviteEmailLink %>">Invite some <i class="fa fa-chevron-right"></i></a>
             </div> <!-- ' -->
         </script>
