@@ -13,11 +13,12 @@ function createEvent(req, res){
 
 	var creatorEmail = req.body.email;
 	var eventName = req.body.event;
+	var name = req.body.name || "";
 	var attendeesText = req.body.attendees || "";
 
 	logger.info("Creator: " + creatorEmail + " Event Name: " + eventName + " Attendees Text: " + attendeesText);
 
-	Calendar.newCalendar(creatorEmail, "", eventName, attendeesText, function(newCalendar){
+	Calendar.newCalendar(creatorEmail, name, eventName, attendeesText, function(newCalendar){
 		var creatorAttendee = newCalendar.getAttendeeFromAddress(creatorEmail);
 
 		global.app.render('mail/created-from-homepage.txt', {

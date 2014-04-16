@@ -175,6 +175,7 @@ form > h3 {
 }
 /* About */
 .about {
+  color: #808080;
   margin: 10px;
   line-height: 1.6em;
 }

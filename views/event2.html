@@ -109,7 +109,7 @@
           <div class="loader-inner">
             <div class="loader-convenely">Convenely</div>
           </div>
-        <div class="loader-close">Continue <i class="fa fa-chevron-right"></i></div>
+        <div class="loader-close">Skip <i class="fa fa-chevron-right"></i></div>
         </div>
       </div>
 
@@ -331,51 +331,58 @@
         </script>
 
         <script type="text/template" id="loader-template">
-            <div class="loader-title"><@= title @></div>
-            <div class="loader-select-dates">First select some potential dates</div>
+            <div class="loader-title loader-large"><@= title @></div>
+            <div class="loader-select-dates">First select some potential dates <i class="fa fa-chevron-right"></i></div>
+            <@ if (firstSelectable !== null && lastSelectable !== null){ @>
             <div class="loader-between">
                 <div class="text">
-                Sometime between
-                </div>
+                It's happening between
+                </div> <!-- ' -->
                 <div class="dates">
                   <div class="inline">
-                    <div>Monday</div>
-                    <div>21st March</div>
+                    <div><@= firstSelectable.format("dddd") @></div>
+                    <div><@= firstSelectable.format("Do MMMM") @></div>
                   </div>
                   <div class="inline and">&</div>
                   <div class="inline">
-                    <div>Wednesday</div>
-                    <div>31st March</div>
+                    <div><@= lastSelectable.format("dddd") @></div>
+                    <div><@= lastSelectable.format("Do MMMM") @></div>
                   </div>
                 </div>
             </div>
+            <@ } @>
+            <@ if (topDate !== null && secondDate !== null && thirdDate !== null){ @>
             <div class="loader-top-choice">
                 <div>
-                Wednesday
+                <@= topDate.format("dddd") @>
                 </div>
                 <div>
-                14th March
+                <@= topDate.format("Do MMMM") @>
                 </div>
                 <div>
-                looks like the best choice
+                looks the best date
                 </div>
             </div>
             <div class="loader-top-other">
                 <div class="dates">
                   <div class="inline">
-                    <div>Monday</div>
-                    <div>21st March</div>
+                    <div><@= secondDate.format("dddd") @></div>
+                    <div><@= secondDate.format("Do MMMM") @></div>
                   </div>
                   <div class="inline and">&</div>
                   <div class="inline">
-                    <div>Wednesday</div>
-                    <div>31st March</div>
+                    <div><@= thirdDate.format("dddd") @></div>
+                    <div><@= thirdDate.format("Do MMMM") @></div>
                   </div>
                 </div>
-                <div>look good also</div>
+                <div>look good too</div>
             </div>
+            <@ } @>
             <div class="loader-set-choices">Let everyone know when you're available <i class="fa fa-chevron-right"></i></div> <!-- ' -->
-            <div class="loader-invite">There's not many people participating</div> <!-- ' -->
+            <div class="loader-invite">
+            There's not many people participating<br/>
+            <a href="<%= inviteEmailLink %>">Invite some <i class="fa fa-chevron-right"></i></a>
+            </div> <!-- ' -->
         </script>
 
         <% if (webAppDebug) { %>

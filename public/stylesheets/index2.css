@@ -30,7 +30,7 @@ form>h3{text-align:center;color:#4ad16c;font-weight:200;}
 .features .row>div{margin-top:40px;}
 .submit-container{font-size:26px;text-align:center;}
 .invalid{border-color:red;}
-.about{margin:10px;line-height:1.6em;}
+.about{color:#808080;margin:10px;line-height:1.6em;}
 .about h2{line-height:1.4em;font-size:34px;}
 .sidebar{margin-top:40px;text-align:center;}
 .help{color:#808080;}

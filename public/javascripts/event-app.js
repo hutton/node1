@@ -47,6 +47,8 @@ window.EventApp = Backbone.View.extend({
 
         this.LoaderView.calendarModel = this.model;
         this.LoaderView.attendees = this.attendees;
+        this.LoaderView.choices = this.choices;
+        this.LoaderView.topChoicesModel = this.TopChoicesModel;
 
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
 
