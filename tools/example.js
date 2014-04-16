@@ -102,8 +102,8 @@ function getFrees(index){
 					"A06"
 				],[
 					"A02",
-					"A05",
-					"A06"
+					"A04",
+					"A05"
 				],[
 					"A05"
 				],[
