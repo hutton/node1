@@ -9,6 +9,7 @@
 - Add bounce to Join Event
 - Cleanup CSS
 - New homepage image
+- Fix debug/fast mode
 
 =======
 - Add description
