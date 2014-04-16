@@ -1,4 +1,3 @@
-
 var moment = require("moment");
 
 function toUTCDate(date){
@@ -155,8 +154,8 @@ function getExample(){
 
 	var model = {
 		"calendarId" : "example",
-		"id" : "office-drinks",
-		"name" : "Office drinks",
+		"id" : "lets-go-bowling",
+		"name" : "Let's go bowling!",
 		"datesSelected": true,
 		"everythingSelectable": false,
 		"date" : new Date(moment()),
@@ -165,37 +164,37 @@ function getExample(){
 				"_id" : "A02",
 				"attendeeId" : "exampleA02",
 				"email" : "harriet.daniels@googles.con",
-				"name" : "Harriet Daniels"
+				"name" : "Harriet"
 			},
 			{
 				"_id" : "A03",
 				"attendeeId" : "exampleA03",
 				"email" : "stewarthart@now.net",
-				"name" : "Stewart Hart"
+				"name" : "Stewart"
 			},
 			{
 				"_id" : "A04",
 				"attendeeId" : "exampleA04",
 				"email" : "jhenderson@timemail.in",
-				"name" : "Julia Henderson"
+				"name" : "Julia"
 			},
 			{
 				"_id" : "A01",
 				"attendeeId" : "exampleA01",
 				"email" : "hbanks@warmmail.co",
-				"name" : "Hugo Banks"
+				"name" : "Hugo"
 			},
 			{
 				"_id" : "A05",
 				"attendeeId" : "exampleA05",
 				"email" : "sheldon.hamilton@lookin.co",
-				"name" : "Sheldon Hamilton"
+				"name" : "Sheldon"
 			},
 			{
 				"_id" : "A06",
 				"attendeeId" : "exampleA06",
 				"email" : "naomi_morgan@newstime.ip",
-				"name" : "Naomi Morgan"
+				"name" : "Naomi"
 			}
 		],
 		"createdBy" : "1@gmail.com",
