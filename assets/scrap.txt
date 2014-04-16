@@ -1,54 +1,14 @@
+<a class="scroll" href="#destination1">Destination 1</a>
 
-Office drinks
-
------------ Date range not set
-
-First select some potential dates
-
------------ Choices set but < 3 attendees
-
-Sometime between
-Tuesday			Monday
-20th March   & 	12th March
-
-There's not many people participating
-Invite others >
-
------------ Attendees >= 3 and >= 3 choices set or new mode
-
-Wednesday
-14th March
-Looks like the best choice
-
-Tuesday			Monday
-20th March   & 	12th March
-look good too.
-
-Let us know when you're available (? if new mode or no choices set)
-
-
-----------------------------------------------------------------
-
-
-if (noDatesSelected)
-	First select some potential dates
-else
-	if (attendees < 3 || choicesSelected < 3)
-		Sometime between
-		Tuesday			Monday
-		20th March   & 	12th March
-	else 
-		Wednesday
-		14th March
-		looks like the best choice
-
-		Tuesday			Monday
-		20th March   & 	12th March
-		look good too.
-
-	if (yourChoices == 0 || newMode)
-		Let everyone know when you're available
-	else 
-		if (attendees < 3)
-			There's not many people participating
-			Invite others >
+ $(".scroll").click(function(event){
+         event.preventDefault();
+         //calculate destination place
+         var dest=0;
+         if($(this.hash).offset().top > $(document).height()-$(window).height()){
+              dest=$(document).height()-$(window).height();
+         }else{
+              dest=$(this.hash).offset().top;
+         }
+         //go to destination
+       $('html,body').animate({scrollTop:dest}, 400,'swing');
+     });
