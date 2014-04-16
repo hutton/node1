@@ -1,9 +1,14 @@
-- Saving note for updating dates
 - Update example
 	- First names
 	- Remove an attendee
 	- Let's go bowling
 - Make a help page
+- Saving note for updating dates
+
+=======
+- Add bounce to Join Event
+- Cleanup CSS
+- New homepage image
 
 =======
 - Add description
