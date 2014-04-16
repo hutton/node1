@@ -111,6 +111,9 @@
         $(document).ready(function(){
           $(".scroll").click(function(event){
              event.preventDefault();
+             
+             var hash = $(this).attr('href');
+             
              //calculate destination place
              var dest=0;
              if($(this.hash).offset().top > $(document).height()-$(window).height()){
@@ -119,7 +122,9 @@
                   dest=$(this.hash).offset().top;
              }
              //go to destination
-           $('html,body').animate({scrollTop:dest}, 400,'swing');
+           $('html,body').animate({scrollTop:dest}, 400,'swing', function(){
+             window.location.hash = '#' + hash;
+           });
          });
         });
       </script>
