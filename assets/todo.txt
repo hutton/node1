@@ -1,7 +1,3 @@
-- Update example
-	- First names
-	- Remove an attendee
-	- Let's go bowling
 - Make a help page
 - Saving note for updating dates
 
@@ -16,6 +12,10 @@
 
 Done
 ----
+- Update example
+	- First names
+	- Remove an attendee
+	- Let's go bowling
 - Style attendee view
 - Add a loader
 - Click envelope in example show info
