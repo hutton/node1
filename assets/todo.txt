@@ -2,6 +2,7 @@
 - Remove marker-container rather than hide
 - Click out calendar to close attendee viwe
 - Add bounce to Join Event
+	- easeOutQuart -> easeOutBounce
 - Cleanup CSS
 - New homepage image
 
