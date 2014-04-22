@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Convenely | <%= name %></title>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
 
   <meta name="description" content="Simple Scheduling Over Email" />
 
@@ -13,7 +13,6 @@
   <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
 
   <link href="/stylesheets/event2.css" rel="stylesheet">
-  <link href="/stylesheets/pie.css" rel="stylesheet">
   <% } else { %>
   <link href="/stylesheets/all.css" rel="stylesheet">
   <% } %>
@@ -30,108 +29,185 @@
 
       <div class="navbar navbar-fixed-top">
         <div class="fixed-width">
-          <a class="tiile-button changes-made-email-link" id="title-mail"><i class="fa fa-envelope-o"></i></a>
+          <a class="title-button changes-made-email-link" id="title-mail"><i class="fa fa-envelope-o"></i></a>
           <div class="title-button-container">
-           <a class="tiile-button" id="show-info"><span class="fa fa-cog"></span></a>
-         </div>
-         <div class="title"></div>
-         <div class="row">
-          <table class="table days-table">
-            <tr>
-              <td>M</td>
-              <td>T</td>
-              <td>W</td>
-              <td>T</td>
-              <td>F</td>
-              <td>S</td>
-              <td>S</td>
-            </tr>
-          </table>
+            <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i></a>
+            <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
+          </div>
+          <div class="title"><%= name %></div>
+          <div class="row">
+            <table class="table days-table">
+              <tr>
+                <td>M</td>
+                <td>T</td>
+                <td>W</td>
+                <td>T</td>
+                <td>F</td>
+                <td>S</td>
+                <td>S</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
-      <div class="info" style="display: none;">
-        <div>
-          <div class="current-attendee-info">
-            <h2>Name</h2>
-            <form id="update-name-form" method="post">
-              <div>
-                <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
-                <input type="hidden" id="current-name-id" name="_id"/></input>
-                <button type="submit" id="current-name-update">
-                  <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
-                </button>
-              </div>
-            </form>
-            <h2>Email</h2>
-            <div class="current-email"></div>
-          </div>
-          <h2>Attendees</h2>
 
+      <div class="row selecting-dates-container" style="display: none;">
+        <div class="selecting-dates">
+          <div class="selecting-dates-title">Select potential dates</div>
+          <div class="selecting-dates-period-conatiner">
+            <span id="selecting-dates-one-month">
+              One month
+            </span>
+            <span id="selecting-dates-two-months">
+              Two months
+            </span>
+            <span id="selecting-dates-all">
+              All
+            </span>
+          </div>          
           <div>
-            <span class="attendees"></span><a href="<%= inviteEmailLink %>" id="add-attendee">Invite <i class="fa fa-plus-circle"></i></a>
-          </div>
-          <div class="center info-links">
-            <a href="/"><i class="fa fa-home"></i> Convenely</a>
-            <a href="mailto:convenely@gmail.com?subject=Help"><i class="fa fa-question-circle"></i> Help</a>
+            <span id="selecting-dates-cancel">Cancel</span>
+            <span id="selecting-dates-save">Save <i class="fa fa-chevron-right"></i></span>
           </div>
         </div>
-          </div>
+      </div>
+
+      <div class="row selecting-dates-saving-container" style="display: none;">
+        <div class="selecting-dates-saving">
+          Saving...
         </div>
+      </div>
 
-        <div id="top-row-spacer"></div>
-
+      <div class="scrollable">
         <div class="event-container-margin">
           <div class="event-container">
-           <div class="row">
-            <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
-            <div class="calendar-choices-top calendar-choices-top-two" style="display: none;"><div>2</div></div>
-            <div class="calendar-choices-top calendar-choices-top-three" style="display: none;"><div>3</div></div>
-            <table class="table event-table">
-              <colgroup>
-              <col width="14.2%">
-              <col width="14.2%">
-              <col width="14.2%">
-              <col width="14.2%">
-              <col width="14.2%">
-              <col width="14.2%">
-              <col width="14.2%">
-            </colgroup>
-          </table>
+            <div class="row">
+<!--               <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
+              <div class="calendar-choices-top calendar-choices-top-two" style="display: none;"><div>2</div></div>
+              <div class="calendar-choices-top calendar-choices-top-three" style="display: none;"><div>3</div></div>
+ -->              <table class="table event-table">
+                <colgroup>
+                  <col width="14.2%">
+                  <col width="14.2%">
+                  <col width="14.2%">
+                  <col width="14.2%">
+                  <col width="14.2%">
+                  <col width="14.2%">
+                  <col width="14.2%">
+                </colgroup>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="navbar navbar-fixed-bottom">
-      <div class="row">
-        <div id="register-footer" style="display: none;">
-          <div>
-            <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
+      <div class="day-view-container">
+      </div>
+
+      <div class="join-event-container">
+        <div class="join-event join-event-hidden">
+            Join event <i class="fa fa-chevron-right"></i>
+        </div>
+      </div>
+
+      <div class="loader">
+        <div class="loader-middle">
+          <div class="loader-inner">
+            <div class="loader-convenely">Convenely</div>
+          </div>
+        <div class="loader-close">Skip <i class="fa fa-chevron-right"></i></div>
+        </div>
+      </div>
+
+    <div class="modal fade" id="settings-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-bars"></i> Options</h4>
+          </div>
+          <div class="modal-body">
+        <div>
+          <div class="current-attendee-info">
+            <div class="settings-section">
+              <span class="span-link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
+              <div class="settings-your-details-section" style="display: none;">
+                <h2>Name</h2>
+                <form id="update-name-form" method="post">
+                  <div>
+                    <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
+                    <input type="hidden" id="current-name-id" name="_id"/></input>
+                    <button type="submit" id="current-name-update">
+                      <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
+                    </button>
+                  </div>
+                </form>
+                <h2>Email</h2>
+                <div class="current-email"></div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <a href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
+          </div>
+          <div class="settings-section">
+            <span class="span-link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change event dates <i class="fa fa-chevron-right"></i></span>
+          </div>
+          <div class="settings-section center">
+            <a href="/help"><i class="fa fa-question-circle"></i> Help</a>
+          </div>
+        </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="join-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Join event</h4>
+          </div>
+          <div class="modal-body">
+              <p>When you join we'll email you a link to check the event and update your choices.</p>
+<!--             <p class="join-view-text"></p>
+ -->            <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
               <div class="register-attendee-message"></div>
               <div class="register-attendee-email-input-container">
                 <input type="text" name="name" class="form-control" id="register-attendee-name-input" placeholder="Your name (optional)"></input>
                 <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Your email address"></input>
                 <input id="register-free-dates" type="hidden" name="isFree"/>
               </div>
-              <button type="submit" class="register-attendee-button-container">
-                <span class="span-link" id="register-attendee-link">Save changes <i class="fa fa-chevron-right"></i></span>
+<!--               <p>Contact everyone participating in the event with the address <br/><b><%= id %>@convenely.com</b>.</p>
+ -->              <button type="submit" class="register-attendee-button-container">
+                <span class="span-link" id="register-attendee-link">Save and join '<%= name %>' <i class="fa fa-chevron-right"></i></span>
               </button>
             </form>
-          </div>
         </div>
-        <div class="mode-switch-panel">
-          <div class="mode-switch-container">
-            <span class="mode-switch-calender mode-switch-selected">
-              <i class="fa fa-calendar"></i>
-              Calendar
-            </span>
-            <span class="mode-switch-attendees">
-              <i class="fa fa-users"></i>
-              Attendees
-            </span>
           </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="new-mode-mail-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Group email</h4>
+          </div>
+          <div class="modal-body">
+              <p>When you join the event you can contact everyone participating with the email address</p>
+              <div class="center new-mode-mail-view-email">
+                <p><%= id %>@convenely.com</p>
+              </div>
         </div>
-      </div>
-    </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -145,21 +221,21 @@
 
     <script type="text/template" id="choice-template">
     <div class="date-cell-container">
-    <div class="date-text">
-    <@= date.getDate() @>
-    </div>
-    <div class="free-marker"><i class="fa fa-check"></i></div>
-    <div class="markers-container">
-    <ul>
-    <@ _.each(availList, function(isAvailable){ @>
-      <@ if (isAvailable) { @>
-        <li class="a"></li>
-        <@ } else { @>
-          <li></li>
+      <div class="date-text">
+        <@= date.getDate() @>
+      </div>
+      <div class="free-marker"><i class="fa fa-check"></i></div>
+      <div class="markers-container">
+        <ul>
+        <@ _.each(availList, function(isAvailable){ @>
+          <@ if (isAvailable) { @>
+            <li class="a"></li>
+          <@ } else { @>
+            <li></li>
           <@ } @>
-          <@ }); @>
-    </ul>
-    </div>
+        <@ }); @>
+        </ul>
+      </div>
     </div>
     </script>
 
@@ -209,110 +285,109 @@
     </tr>
     </script>
 
-    <script type="text/template" id="first-choice-template">
-      <div class="top-choice-text">
-        <@= choice @>
-      </div>
-    </script>
-
-    <script type="text/template" id="side-info-panel-container-template">
-      <div class="side-info-panel-container">
-        <div>
-        </div>
-      </div>
-    </script>
-
-    <script type="text/template" id="side-info-panel-template">
-    <div class="side-info-panel">
-    <div class="side-info-date"><@= date @></div>
-    <@ if (!showInviteLink) { @>
-      <ul>
-      <@ _.each(attendees, function(attendee){ @>
-        <li><div class="side-info-name <@ if (choices.isAttendeeFree(attendee.get('_id'))) { @> side-info-free <@ } @> "><@= attendee.get('prettyName') @><i class="fa fa-check-circle"></i></div></li>
-        <@ }); @>
-      </ul>
-      <@ } else { @>
-        <div class="side-info-invite">
-        Click dates to show when you're free<br/> <!-- ' -->
-        <br/>
-        <a href="<%= inviteEmailLink %>">Invite others <span class="fa fa-chevron-right"></span></a>
-        </div>
-    <@ } @>
-    </div>
-    </script>
-
-        <script type="text/template" id="top-choices-template">
-        <div class="side-info-panel-container">
-        <div>
-        <div class="side-info-panel-left">
-        <div class="side-info-panel-left-title">
-        Top Choices
-        </div>
-        <div class="side-info-panel-left-container">
-        </div>
-        </div>
-        </div>
-        </div>
-        </script>
-
-        <script type="text/template" id="top-choices-item-template">
-        <div class="top-choice-item"><@= date @></div>
-        </script>
-
         <script type="text/template" id="attendees-view-template">
-        <div class="attendees-container-margin">
-        <div class="attendees-container">
-        <div class="row">
-        <div class="attendees-name-list-container">
-        <ul class="attendees-name-list">
-        <li></li>
-        <li></li>
-        <@ _.each(attendees, function(attendee){ @>
-          <li class="<@ if (attendee.get('me')) {@>attendees-name-me<@ } @>"><div><@= attendee.get('prettyName') @></div></li>
-          <@ }); @>
-          <li class="attendees-invite"><a href="<%= inviteEmailLink %>">Invite <i class="fa fa fa-plus-circle"></i></a></li>
-        </ul>
-        </div>
-        <div class="attendees-choices-month-container"></div>
-        <div class="attendees-choices-list-container">
-        <div class="attendees-padding">
-        <div class="attendees-choices-list-content">
-        <div class="attendees-choices-top attendees-choices-top-one"><div>1</div></div>
-        <div class="attendees-choices-top attendees-choices-top-two"><div>2</div></div>
-        <div class="attendees-choices-top attendees-choices-top-three"><div>3</div></div>
-        <table>
-        <tr class="attendees-choices-row"></tr>
-        </table>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+          <div class="attendees-container-margin">
+            <div class="attendees-container">
+              <div class="row">
+                <div class="attendees-choices-list-container">
+                  <div class="attendees-choices-list-content">
+                    <ul class="attendees-choices-row"></ul>
+                  </div>
+                </div>
+                <div class="attendees-close"><i class="fa fa-angle-double-down"></i></div>
+              </div>
+            </div>
+          </div>
         </script>
 
         <script type="text/template" id="attendees-choice-view-template">
-        <ul class="attendees-choice <@ if (choice.get('date').getDay() === 6 || choice.get('date').getDay() === 0) {@>attendees-choice-date-weekend<@ } @> ">
-        <li class="attendees-choice-month">
-        <div>
-        <@ if (choice.showMonth ) {@> <@= moment(choice.get('date')).format("MMMM") @><@ } @>
-        </div>
-        </li>
-        <li class="attendees-choice-date"><@= moment(choice.get('date')).format("ddd Do") @></li>
-        <@ _.each(attendees, function(attendee){ @>
-          <@ if (attendee.get('me')) {@>
-            <li class="att-ch att-ch-me">
-            <div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>><i class="fa fa-check"></i>
+        <div class="attendees-choice">
+          <div class="attendees-choice-container">
+            <div class="attendees-choice-draggable-overlay attendees-choice-draggable">
             </div>
-            </li>
-            <@ } else { @>
-              <li class="att-ch">
-              <div <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>class="attendee-free"<@ } @>>
+            <div class="attendees-choice-container-scrollable">
+              <div class="attendees-choice-items">
+          <@ _.each(attendees, function(attendee){ @>
+              <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>attendee-free<@ } @>">
+                <i class="fa fa-check-circle"></i> <@= attendee.get('prettyName') @>
               </div>
-              </li>
-              <@ } @>
-              <@ }); @>
-        </ul>
+          <@ }); @>
+            <@ if (showInvite){ @>
+              <div class="attendees-choice-invite">
+              <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
+              </div>
+            <@ } @>
+            </div>
+            </div>
+          </div>
+          <div class="attendees-choice-date attendees-choice-draggable">
+            <div class="attendees-choice-state <@ if (choice.isFree()) { @>attendees-choice-state-free<@ } @>">
+              <div>
+                <span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> if<br/>free
+              </div>
+
+              <i class="fa fa-check"></i>
+            </div>
+            <div class="attendees-choice-date-date"><@= mom.format("D") @></div>
+            <div class="attendees-choice-date-suffix"><@= suffix @></div>
+            <div class="attendees-choice-date-day"><@= mom.format("dddd") @></div>
+            <div class="attendees-choice-date-month"><@= mom.format("MMMM") @></div>
+          </div>
+        </div>
+        </script>
+
+        <script type="text/template" id="loader-template">
+            <div class="loader-title loader-large"><@= title @></div>
+            <div class="loader-select-dates">First select some potential dates <i class="fa fa-chevron-right"></i></div>
+            <@ if (firstSelectable !== null && lastSelectable !== null){ @>
+            <div class="loader-between">
+                <div class="text">
+                It's happening between
+                </div> <!-- ' -->
+                <div class="dates">
+                  <div class="inline">
+                    <div><@= firstSelectable.format("dddd") @></div>
+                    <div><@= firstSelectable.format("Do MMMM") @></div>
+                  </div>
+                  <div class="inline and">&</div>
+                  <div class="inline">
+                    <div><@= lastSelectable.format("dddd") @></div>
+                    <div><@= lastSelectable.format("Do MMMM") @></div>
+                  </div>
+                </div>
+            </div>
+            <@ } @>
+            <@ if (topDate !== null && secondDate !== null && thirdDate !== null){ @>
+            <div class="loader-top-choice">
+                <div>
+                <@= topDate.format("dddd Do MMMM") @>
+                </div>
+                <div>
+                Looks the best choice
+                </div>
+            </div>
+            <div class="loader-top-other">
+                <div class="dates">
+                  <div class="inline">
+                    <div><@= secondDate.format("dddd") @></div>
+                    <div><@= secondDate.format("Do MMMM") @></div>
+                  </div>
+                  <div class="inline and">&</div>
+                  <div class="inline">
+                    <div><@= thirdDate.format("dddd") @></div>
+                    <div><@= thirdDate.format("Do MMMM") @></div>
+                  </div>
+                </div>
+                <div>Look good too</div>
+            </div>
+            <@ } @>
+            <div class="loader-set-choices">Select when you're free <i class="fa fa-chevron-right"></i></div> <!-- ' -->
+            <div class="loader-invite">
+            <p>
+            There's not many people participating
+            </p>
+            <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
+            </div> <!-- ' -->
         </script>
 
         <% if (webAppDebug) { %>
@@ -325,6 +400,7 @@
         <script src="/javascripts/tp/underscore-min.js"></script>
         <script src="/javascripts/tp/moment.js"></script>
         <script src="/javascripts/tp/backbone-min.js"></script>
+        <script src="/javascripts/tp/sly.min.js"></script>
 
         <script src="/javascripts/helper.js"></script>
 
@@ -332,11 +408,12 @@
         <script src="/javascripts/models/choices-model.js"></script>
         <script src="/javascripts/models/calendar-model.js"></script>
 
+        <script src="/javascripts/views/loader-view.js"></script>
+
         <script src="/javascripts/views/choices-view.js"></script>
-        <script src="/javascripts/views/info-row-view.js"></script>
-        <script src="/javascripts/views/side-info-panel.js"></script>
-        <script src="/javascripts/views/top-choices-panel.js"></script>
         <script src="/javascripts/views/attendees-view.js"></script>
+        <script src="/javascripts/views/settings-view.js"></script>
+        <script src="/javascripts/views/select-dates-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
         <% } else { %>

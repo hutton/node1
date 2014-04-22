@@ -4,11 +4,11 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.listenTo(this.model, "change", this.modelChanged);
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
+		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
+		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
 	},
 
 	template: _.template($('#choice-template').html()),
-
-	firstChoiceTemplate: _.template($('#first-choice-template').html()),
 
 	events: {
 		"click":		"dayClicked",
@@ -24,9 +24,11 @@ window.ChoiceView = Backbone.View.extend({
 			choices = this.model.get('choices');
 		}
 
-		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability() } ));
+		this.$el.html(this.template({ date: this.model.get('date'), availList: this.model.getAttendeeAvailability(), selectable: this.model.isSelectable() } ));
 
-		this.$el.hover(this.mouseEnter, this.mouseLeave);		
+		if (this.model.get("past")){
+			this.$el.addClass("past");
+		}
 
 		this.updateView(false);
 
@@ -41,6 +43,8 @@ window.ChoiceView = Backbone.View.extend({
 		this.updateTopChoices(true);
 	},
 
+	isSelected: false,
+
 	updateView: function(animate){
 		var target = this.$el.find(".date-cell-container");
 
@@ -54,16 +58,70 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.find('.free-marker').removeClass('free');
 		}
 
-		var availList = this.model.getAttendeeAvailability();
+		if (this.model.isSelectable()){
+			this.$el.removeClass('unselectable');
+			this.$el.find('.markers-container').show();
 
-		this.$el.find(".markers-container li").each(function(index, element){
-			if (availList[index]){
-				$(this).addClass("a");
-			} else {
-				$(this).removeClass("a");
+			var availList = this.model.getAttendeeAvailability();
+
+			this.$el.find(".markers-container li").each(function(index, element){
+				if (availList[index]){
+					$(this).addClass("a");
+				} else {
+					$(this).removeClass("a");
+				}
+			});
+		} else {
+			this.$el.addClass('unselectable');
+			this.$el.find('.markers-container').hide();
+		}
+
+		if (this.model.get('selected')){
+			if (!this.isSelected){
+				this.ensureVisible();
+
 			}
-		});
 
+			this.isSelected = true;
+
+			this.$el.addClass('cell-selected');
+		} else {
+			this.$el.removeClass('cell-selected');
+
+			this.isSelected = false;
+		}
+	},
+
+	isVisible: function(){
+		var height = $(window).height();
+		var scrollPos = $(window).scrollTop();
+
+		var navBarHeight = $('.navbar-fixed-top').height();
+
+		var visTop = scrollPos + navBarHeight;
+		var visBottom = scrollPos + (height - $('.day-view-container').height());
+
+		var offset = this.$el.offset();
+
+		return (offset.top >= visTop && (offset.top + this.$el.height() <= visBottom));
+	},
+
+	ensureVisible: function(){
+		if (!this.isVisible()){
+			this.scrollToTopLine();
+		}
+	},
+
+	scrollToTopLine: function(){
+		var navBarHeight = $('.navbar-fixed-top').height();
+		var offset = this.$el.offset();
+		var itemHeight = $('.date-cell').first().height();
+
+		$('html, body').stop();
+
+		$('html, body').animate({
+			scrollTop: offset.top - (navBarHeight + itemHeight)
+		}, 400);
 	},
 
 	adornersRespositioned: function(){
@@ -71,6 +129,8 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	updateTopChoices: function(animate){
+		return;
+		
 		if (this.model.has('top-choice')){
 			var place = this.model.get('top-choice');
 
@@ -109,35 +169,32 @@ window.ChoiceView = Backbone.View.extend({
 	dayClicked: function(event){
 		var target = $(this.$el).find("div:first");
 
-		if (target.hasClass('selected') || $('.side-info-panel').is(':visible')){
-			this.model.toggleFree();
+		if (App.selectableDateMode){
+			App.SelectDatesView.clearGroupSelected();
+
+			if (this.model.isSelectable()){
+				this.model.set({'selectable': false});
+			} else {
+				this.model.set({'selectable': true});
+			}
+
 		} else {
-			$(".selected").removeClass('selected');
-			$(".cell-selected").removeClass('cell-selected');
+			if (this.model.isSelectable()){
+				this.isSelected = true;
 
-			var selectedRow = target.parents("tr");
+				if (this.model.get('selected')){
+					this.model.toggleFree();
+				}
 
-			App.updateSelectedItem(this.model, selectedRow);
+				App.setSelected(this.model);
 
-			this.$el.addClass('cell-selected');
-			target.addClass('selected');
+				App.AttendeesView.show();
+			}
 		}
 	},
 
 	calcDegrees: function(total, count){
 		return Math.round((count / total) * 36) * 10;
-	},
-
-	mouseEnter: function(){
-		if (App.SideInfoPanel !== null && !this.touchStarted){
-			App.SideInfoPanel.updateModel(this.model);
-		}
-	},
-
-	mouseLeave: function(){
-		if (App.SideInfoPanel !== null && !this.touchStarted){
-			App.SideInfoPanel.updateModel(null);
-		}
 	}
 });
 
@@ -170,24 +227,6 @@ window.ChoicesView = Backbone.View.extend({
 	isActive: true,
 
 	active: function(isActive){
-
-		this.isActive = isActive;
-
-		if (isActive){
-			$('body').append(this.$el);
-
-			if (!window.App.showInfo){
-				$('.days-table').show();
-			}
-
-			if (this.currentScroll !== null){
-				$('body').scrollTop(this.currentScroll);
-			}
-
-		} else {
-			this.currentScroll = $('body').scrollTop();
-			this.$el.detach();
-		}
 	},
 
 	render: function(){
@@ -195,7 +234,6 @@ window.ChoicesView = Backbone.View.extend({
 
 		var row = null;
 		var todayAdded = false;
-		var inPast = true;
 
 		_(this._choiceViews).each(function(choice) {
 			var date = choice.model.get("date");
@@ -223,14 +261,6 @@ window.ChoicesView = Backbone.View.extend({
 
 				todayAdded = true;
 			}
-
-			if (inPast){
-				if (that.today < date || sameDay(that.today, date)){
-					inPast = false;
-				} else {
-					choice.$el.addClass("past");
-				}
-			}
 		});
 
 		this.tableEl.append($("<tr class='selected-row'><td colspan='7' width='7'></td></tr>"));
@@ -238,10 +268,6 @@ window.ChoicesView = Backbone.View.extend({
 		if (this.tableEl.find(".today").length > 0){
 			this.tableEl.find(".today")[0].scrollIntoView(true);
 		}
-
-		var body = $("body");
-
-		body.scrollTop(body.scrollTop() - 112);
 
 		return this;
 	},

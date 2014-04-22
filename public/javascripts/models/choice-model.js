@@ -41,6 +41,10 @@ window.ChoiceModel = Backbone.Model.extend({
 		return false;
 	},
 
+	isSelectable: function(){
+		return this.get("selectable");
+	},
+
 	toggleFree: function(){
 		var date = this.get("date");
 		var freeAttendees = this.get("free");

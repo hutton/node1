@@ -1,15 +1,55 @@
-- About style
-- iPad alignment
-- Add attendee in attendee mode
 
 =======
-- Toggle days-table doesn't work
-- Change background of info panel (#f0f0f0)
+- Add bounce to Join Event
+- Cleanup CSS
+- New homepage image
+- Fix debug/fast mode
+
+=======
 - Add description
-- Allow selection of date range
 
 Done
 ----
+- Make a help page
+- Saving note for updating dates
+- Update example
+	- First names
+	- Remove an attendee
+	- Let's go bowling
+- Style attendee view
+- Add a loader
+- Click envelope in example show info
+- In new mode change options icon to help link
+- Attendee view update when selectable changes
+- Handle long names better
+- .navbar-fixed-top {
+	border-bottom: solid 1px #43B660;
+- Item background #F7F9F7
+	.attendees-choice-date, .date-cell-container
+- Attendee view resize
+- Make all attendee view drag/scrollable when possible
+- Show Invite someone > for less than 5 and not new
+- Height of attendee view depend on content
+- Add 'You have selected 5 dates' to join event
+	- 'When you join an event we will email you your own private link to update your choices.
+	You will also be able to contact everyone participating in the event with the address office-drinks@convenely.com.'
+- .att-ch overflow: hidden;
+- Today is not past
+- Add Your details to options
+- Try setting scrollSource: '.attendees-choice-date' and dragSource: '.attendees-choice-date'
+- Make example newMode
+- Your Details in Settings
+- Change settings to hamburger
+- Add 'Tap if free'
+- Check signup footer
+	- Small green footer
+	- Join event >- Close attendee view on select date range
+- Selected calendar choice same style as selected attendee choice
+- Allow selection of date range
+- Change background of info panel (#f0f0f0)
+- About style
+- iPad alignment
+- Add attendee in attendee mode
 - Try fa-check-circle in side info panel
 - Make links in info panel bigger
 - Cut off old dates

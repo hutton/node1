@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title></title> 
+	
+	<script src="./jquery-2.1.0.min.js"></script>
+
+	<style type="text/css">
+		.title{
+			border: 1px solid;
+			font-size: 32px;
+			line-height: 32px;
+			text-align: center;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		function resizeText(){
+			var maxFontSize = 32;
+			var minFontSize = 12;
+
+			var fontSize = maxFontSize;
+
+			var titleEl = $('.title');
+
+			titleEl.css({'font-size': fontSize});
+			titleEl.css({'line-height': '32px'});
+
+			while (titleEl.outerHeight(true) > 40 && fontSize > minFontSize)
+			{
+				titleEl.css({'font-size': fontSize});
+
+				fontSize -= 2;
+			}
+
+			if (titleEl.outerHeight(true) > 40){
+				titleEl.css({'line-height': '16px'});				
+			}
+
+		}
+
+		$(document).ready(function(){	
+			resizeText();
+			$(window).resize(function(){
+				resizeText();
+			});
+		});
+	</script>
+	</head> 
+<body> 
+	<div class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit ipsum dolor sit amet, consectetur adipiscing elit ctetur adipiscing elit ipsum dolor sit amet, consectetur adipiscing elit</div>
+</body>
+</html>

@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>Convenely | Get it together</title>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+
 
   <meta name="description" content="Simple Scheduling Over Email" />
 
@@ -40,6 +41,7 @@
           <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="mailto:convenely@gmail.com">Contact</a></li>
+              <li><a href="/help">Help</a></li>
               <li><a href="/about">About</a></li>
             </ul>
           </div><!--/.navbar-collapse -->
@@ -72,8 +74,8 @@
                   <input type="email" class="form-control" id="event-email" name="email" placeholder="Email address">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Attendees Email (optional)</label>
-                  <textarea class="form-control" rows="3" name="attendees" placeholder="Optional, you can add them later"></textarea>
+                  <label for="your-name">Your Name (optional)</label>
+                  <input type="name" class="form-control" id="your-name" name="name" placeholder="Optional, you can add it later">
                 </div>
                 <div class="submit-container">
                   <button type="submit" class="btn btn-success btn-lg"> 
@@ -141,7 +143,7 @@
         </div>
       </div>
 
-      <script src="/javascripts/tp/jquery-1.8.2.min.js"></script>
+      <script src="/javascripts/tp/jquery-2.0.3.min.js"></script>
       <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
 
       <script>

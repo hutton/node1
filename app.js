@@ -23,8 +23,10 @@
 	connectionString = 'mongodb://localhost:27017/test';
  }
 
-if (_.isUndefined(webAppDebug)){
-	webAppDebug = true;
+if (_.isUndefined(webAppDebug) || webAppDebug === null || webAppDebug === 'On'){
+	enableWebAppDebug = true;
+ } else {
+ 	enableWebAppDebug = false;
  }
 
  var app = express();
@@ -64,6 +66,7 @@ Array.prototype.removeElement = function(element) {
 	connectionString = connectionString + "?maxIdleTimeMS=60000";
 
 	logger.info("Connecting to: " + connectionString);
+	logger.info("WebDebug: " + enableWebAppDebug);
 
 	var options = {
 		server: {
@@ -103,6 +106,7 @@ Array.prototype.removeElement = function(element) {
  app.post('/event/*/choice', events.updateChoice);
  app.post('/event/*/add', events.addAttendee);
  app.post('/event/*/update-name', events.updateAttendeeName);
+ app.post('/event/*/selectableDates', events.updateSelectableDates);
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
  app.post('/mail', mail.receive);
@@ -115,7 +119,7 @@ Array.prototype.removeElement = function(element) {
  app.get('/calendar-text/*', calendar.viewText);
 
  app.ourEmail = "convenely@gmail.com";
- app.webAppDebug = webAppDebug;
+ app.enableWebAppDebug = enableWebAppDebug;
 
  global.app = app;
  

@@ -4,9 +4,11 @@ window.EventApp = Backbone.View.extend({
     },
 
     loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
+        this.model = new CalendarModel(bootstrappedCalendar);
+
         this.choices = new ChoicesModel;
 
-        this.choices.reset(expandDates(bootstrapedChoices));
+        this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
 
         this.attendees = new Backbone.Collection;
 
@@ -17,8 +19,6 @@ window.EventApp = Backbone.View.extend({
 
         this.attendees.reset(bootstrappedAttendees);
 
-        this.model = new CalendarModel(bootstrappedCalendar);
-
         this.currentAttendee = this.attendees.findWhere({me: true});
 
         this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
@@ -28,14 +28,12 @@ window.EventApp = Backbone.View.extend({
 
             this.newMode = true;
 
-            this.attendees.add({"prettyName": "You", "_id": "new", "me" : true}, {"at": 0});
+            this.attendees.add({"prettyName": "Me", "_id": "new", "me" : true}, {"at": 0});
         }
 
         this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
 
         this.ChoicesView.render();
-
-        this.SideInfoPanel = new SideInfoPanel();
 
         this.TopChoicesModel = new Backbone.Model({
             one: null,
@@ -45,7 +43,18 @@ window.EventApp = Backbone.View.extend({
 
         // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
 
+        this.LoaderView = new LoaderView();
+
+        this.LoaderView.calendarModel = this.model;
+        this.LoaderView.attendees = this.attendees;
+        this.LoaderView.choices = this.choices;
+        this.LoaderView.topChoicesModel = this.TopChoicesModel;
+
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
+
+        this.SettingsView = new SettingsView();
+
+        this.SelectDatesView = new SelectDatesView({collection: this.choices});
 
         var pathNames = window.location.pathname.split( '/' );
 
@@ -54,6 +63,10 @@ window.EventApp = Backbone.View.extend({
         this.render();
 
         this.checkForOrientationChange();
+
+        this.scrollToFirstSelectable();
+
+        this.LoaderView.show();
     },
 
     el: $("body"),
@@ -62,11 +75,11 @@ window.EventApp = Backbone.View.extend({
 
     events: {
         "click #show-info":             "infoClicked",
-        "click .title":                 "infoClicked",
-        "click":                        "eventTableClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
         "click .mode-switch-calender":  "switchToCalendar",
-        "click .mode-switch-attendees":     "switchToAttendees"
+        "click .mode-switch-attendees": "switchToAttendees",
+        "click .join-event":            "showJoinEvent", 
+        "click .title":                 "showLoader"    
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -78,20 +91,10 @@ window.EventApp = Backbone.View.extend({
     showInfo: false,
 
     infoClicked: function(){
+
+        this.SettingsView.show();
+
         this.showInfo = !this.showInfo;
-
-        if (this.showInfo){
-            this.$el.find(".days-table").hide();
-            this.$el.find(".info").slideDown("fast");
-            this.$el.find("#show-info > span").addClass("show-info-rotate");
-        } else {
-            if (this.ChoicesView.isActive){
-                this.$el.find(".days-table").show();
-            }
-
-            this.$el.find(".info").slideUp("fast");
-            this.$el.find("#show-info > span").removeClass("show-info-rotate");
-        }
     },
 
     topNavBarEl: $(".navbar-fixed-top"),
@@ -100,63 +103,50 @@ window.EventApp = Backbone.View.extend({
 
     newMode: false,
 
+    selectableDateMode: false,
+
     render: function(){
         var that = this;
 
-        this.$el.find(".title").html(this.model.get("name"));
-
         if (this.newMode){
-            this.$el.find(".current-attendee-info").hide();
+            _.delay(function(){
+                that.$el.find('.join-event').removeClass('join-event-hidden');    
+            }, 1000);
+
+            this.titleMailEl.click(function(){ 
+                that.showNewModeMail();
+            });
+
         } else {
-            this.$el.find(".current-attendee-info").show();
-
-            var email = this.currentAttendee.get("email");
-            var prettyName = this.currentAttendee.get("prettyName");
-
-            this.$el.find(".current-email").html(email);
-
-            if (email !== prettyName){
-                this.$el.find("#current-name").val(prettyName);
-            }
-
-            this.$el.find("#current-name-id").val(this.currentAttendee.get("_id"));
-
-            this.$el.find("#update-name-form").attr("action", "/event/" + this.currentId + "/update-name/");
-        }
-
-        var nameList = "";  
-        _.each(this.attendees.models, function(model){
-            if (model.get("me")){
-                nameList = "<strong>" + model.get("prettyName") + "</strong>, " + nameList;
-            } else {
-                nameList = nameList + model.get("prettyName") + ", ";
-            }
-        });
-
-        nameList = nameList.slice(0, -2);
-
-        this.$el.find(".attendees").html(nameList);
-
-        if (this.currentAttendee === null){
-            this.$el.find("#add-attendee").hide();
-
-            this.$el.find('#register-footer').show();
-        } else {
+            this.updateTellEveryoneLink();
             this.recalcTopSpacer();
+
+            this.$el.find('#show-info').show();
+            this.$el.find('#title-button-help').hide();
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
 
-        this.updateTellEveryoneLink();
+        this.SettingsView.initialize();
 
         this.showBestChoices();
 
+        if (!this.model.get('datesSelected')){
+            this.changeSelectableDates();
+        }
+
+        this.instantResize();
         this.onResizeWindow();
 
-        var throttledResize = _.debounce(that.onResizeWindow, 200);
+        _.delay(function(){
+            that.titleResize();
+        }, 100);
+
+        var throttledResize = _.debounce(that.onResizeWindow, 100);
 
         $(window).resize(function(){
             throttledResize();
+            that.instantResize();
         });
     },
 
@@ -181,16 +171,40 @@ window.EventApp = Backbone.View.extend({
         var width = $(window).width();
         var height = $(window).height();
 
-        if (height < 400 || width < 400){
-            this.showFooter(false);
-        } else {
-            this.showFooter(true);
-        }
-
         if (height < 350){
             this.showHeader(false);
+            this.AttendeesView.show();
         } else {
             this.showHeader(true);
+        }
+
+        this.titleResize();
+    },
+
+    instantResize: function(){
+        this.titleResize();
+    },
+
+    titleResize: function(){
+        var maxFontSize = 21;
+        var minFontSize = 12;
+
+        var fontSize = maxFontSize;
+
+        var titleEl = $('.title');
+
+        titleEl.css({'font-size': fontSize});
+        titleEl.css({'line-height': '30px'});
+
+        while (titleEl.height() > 42 && fontSize > minFontSize)
+        {
+            titleEl.css({'font-size': fontSize});
+
+            fontSize -= 2;
+        }
+
+        if (titleEl.height() > 42 && fontSize <= minFontSize){
+            titleEl.css({'line-height': '16px'});
         }
     },
 
@@ -218,29 +232,6 @@ window.EventApp = Backbone.View.extend({
         //setInterval(this.checkOrientation, 2000);
     },
 
-    eventTableClicked: function(event){
-        var target = $(event.target);
-
-        if ( !$(event.target).hasClass("date-cell") &&
-            target.parents("td.date-cell").length === 0 &&
-            target.parents(".info-row").length === 0){
-
-            if (this.infoRowView !== null){
-                this.infoRowView.removeSelectedRow();
-            }
-        }
-    },
-
-    infoRowView: null,
-
-    updateSelectedItem: function(choiceModel, selectedRow){
-        if (this.infoRowView === null){
-            this.infoRowView = new InfoRowView({model: choiceModel, el: selectedRow});
-        } else {
-            this.infoRowView.update(choiceModel, selectedRow);
-        }
-    },
-
     registerAttendeeInputChanged: function(event){
         if (event.which != 13){
             var message = $(".register-attendee-message");
@@ -263,11 +254,7 @@ window.EventApp = Backbone.View.extend({
 
     updatedFooterEl: $("#updated-footer"),
 
-    registerFooterEl: $("#register-footer"),
-
     titleMailEl: $("#title-mail"),
-
-    topRowSpacerEl: $("#top-row-spacer"),
 
     switchedUpdateAttendeesLink: false,
 
@@ -275,34 +262,6 @@ window.EventApp = Backbone.View.extend({
         var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
         this.changesMadeLinkkeyEl.attr("href", mailTo);
-    },
-
-    swtichUpdateAttendeesLink: function(){
-        this.titleMailEl.show();
-
-        var targetOffset = this.$el.find('#changes-made-banner > .fa-envelope-o').offset();
-        var sourceOffset = this.titleMailEl.find('.fa-envelope-o').offset();
-
-        this.titleMailEl.hide();
-
-        var newTop = (targetOffset.top - sourceOffset.top) + 6;
-        var newLeft = (targetOffset.left - sourceOffset.left) + 8;
-
-        var that = this;
-
-        this.titleMailEl.css({ "left": newLeft + "px", "top": newTop + "px", "-webkit-transform": "scale(0.7,0.7)" });
-
-        _.delay(function(){
-            that.titleMailEl.show();
-
-            that.$el.find('#changes-made-banner > .fa-envelope-o').hide();
-
-            that.updatedFooterEl.slideUp('fast');
-
-            _.delay(function(){
-                that.titleMailEl.removeAttr("style");
-            }, 10);
-        }, 10);
     },
 
     formatUpdatedDays: function(isFree, wasFree){
@@ -377,7 +336,7 @@ window.EventApp = Backbone.View.extend({
         _.each(this.choices.models, function(model){
             var freeCount = 0;
             
-            if (model.has('date') && model.get('date') >= that.today){
+            if (model.isSelectable() && model.has('date') && model.get('date') >= that.today){
                 if (model.has('free')){
                     freeCount += model.get('free').length;
                 }
@@ -442,17 +401,16 @@ window.EventApp = Backbone.View.extend({
 
     recalcTopSpacer: function(){
         if (this.$el.find(".navbar-fixed-top").is(':visible')){
-            this.$el.find("#top-row-spacer").height(this.$el.find(".navbar-fixed-top").height());
-        } else {
-            this.$el.find("#top-row-spacer").height(0);
-        }
-    },
+            var topNavBarHeight = this.$el.find(".navbar-fixed-top").height();
 
-    showFooter: function(show){
-        if (show){
-            this.$el.find('.mode-switch-panel').show();
+            this.$el.find(".event-container").css({'padding-top': topNavBarHeight});
+
+            this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
+            this.$el.find(".selecting-dates-saving-container").css("top", topNavBarHeight);
         } else {
-            this.$el.find('.mode-switch-panel').hide();
+            this.$el.find(".event-container").css({'padding-top': 0});
+            this.$el.find(".selecting-dates-container").css("top", 0);
+            this.$el.find(".selecting-dates-saving-container").css("top", 0);
         }
     },
 
@@ -467,10 +425,6 @@ window.EventApp = Backbone.View.extend({
     },
 
     switchToCalendar: function(){
-        if (this.showInfo){
-            this.infoClicked();
-        }
-        
         this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
 
@@ -479,14 +433,74 @@ window.EventApp = Backbone.View.extend({
     },
 
     switchToAttendees: function(){
-        if (this.showInfo){
-            this.infoClicked();
-        }
-
         this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
         this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
 
         this.ChoicesView.active(false);
         this.AttendeesView.active(true);
+    },
+
+    changeSelectableDates: function(){
+        this.SelectDatesView.show();
+    },
+
+    selectedModel: null,
+
+    setSelected: function(model){
+        if (this.selectedModel !== model){
+            if (this.selectedModel !== null){
+                this.selectedModel.set('selected', false);
+            }
+
+            this.selectedModel = model;
+
+            if (model !== null){
+                model.set('selected', true);
+
+                this.AttendeesView.setActive(model);
+            }
+        }
+    },
+
+    scrollToFirstSelectable: function(){
+        var firstSelectableChoice = this.choices.findWhere({selectable: true});
+
+        if (firstSelectableChoice !== null && !_.isUndefined(firstSelectableChoice)){
+            firstSelectableChoice.trigger('scrollToTopLine');
+        }
+    },
+
+    scrollToSelected: function(){
+        var firstSelectedChoice = this.choices.findWhere({selected: true});
+
+        if (firstSelectedChoice !== null && !_.isUndefined(firstSelectedChoice)){
+            firstSelectedChoice.trigger('scrollToTopLine');
+        }
+    },
+
+    showJoinEvent: function(){
+        var modal = $('#join-view');
+
+        var label = modal.find('.join-view-text');
+
+        if (this.isFree.length === 0){
+            label.html("You've not selected any dates but that's fine.");
+        } else if (this.isFree.length === 1) {
+            label.html("You have selected one date.");
+        } else {
+            label.html("You have selected " + this.isFree.length + " dates.");
+        }
+
+        modal.modal({show: true});
+    },
+
+    showNewModeMail: function(){
+        var modal = $('#new-mode-mail-view');
+
+        modal.modal({show: true});
+    },
+
+    showLoader: function(){
+        this.LoaderView.show();
     }
 });

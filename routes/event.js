@@ -13,11 +13,12 @@ function createEvent(req, res){
 
 	var creatorEmail = req.body.email;
 	var eventName = req.body.event;
+	var name = req.body.name || "";
 	var attendeesText = req.body.attendees || "";
 
 	logger.info("Creator: " + creatorEmail + " Event Name: " + eventName + " Attendees Text: " + attendeesText);
 
-	Calendar.newCalendar(creatorEmail, "", eventName, attendeesText, function(newCalendar){
+	Calendar.newCalendar(creatorEmail, name, eventName, attendeesText, function(newCalendar){
 		var creatorAttendee = newCalendar.getAttendeeFromAddress(creatorEmail);
 
 		global.app.render('mail/created-from-homepage.txt', {
@@ -52,7 +53,7 @@ function createEvent(req, res){
 function example(req, res){
 	var calendar = Example.getExample();
 
-	showEvent(req, res, calendar, "A01");
+	showEvent(req, res, calendar, null);
 }
 
 function showEvent(req, res, calendar, attendeeId){
@@ -84,7 +85,9 @@ function showEvent(req, res, calendar, attendeeId){
 
 	var cleanedCalendar = {
 		name: calendar.name,
-		id: calendar.id
+		id: calendar.id,
+		datesSelected: calendar.datesSelected,
+		everythingSelectable: calendar.everythingSelectable
 	};
 
 	logger.info("Showing: " + calendar.name);
@@ -99,10 +102,11 @@ function showEvent(req, res, calendar, attendeeId){
 		var inviteEmailLink = "mailto:?subject=" + calendar.name + "&body=" + encodeURIComponent(body);
 
 		res.render('event2.html', {
-			webAppDebug: global.app.webAppDebug,
+			webAppDebug: global.app.enableWebAppDebug,
 			choices: JSON.stringify(sortedChoices),
 			attendees: JSON.stringify(cleanedAttendees),
 			calendar: JSON.stringify(cleanedCalendar),
+			id: calendar.id,
 			name: calendar.name,
 			inviteEmailLink: inviteEmailLink
 		});
@@ -146,8 +150,35 @@ function renderEvent(req, res){
 		});
 	} else {
 		res.status(404);
-		res.send("We can't find the event you're looking for.")
+		res.send("We can't find the event you're looking for.");
 	}
+}
+
+function updateSelectableDates(req, res){
+	if (req.route.params[0] == "example"){
+		res.send(200);		
+	} else {
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with id " + req.route.params[0]);
+
+				res.status(404);
+				res.send('No calendar');
+			} else {
+				var selectableChoices = JSON.parse(req.body.dates);
+
+				calendar.setSelectableDates(selectableChoices);
+
+				res.send(200);
+			}
+		});
+	}	
 }
 
 function updateChoice(req, res){
@@ -310,6 +341,10 @@ exports.create = function(req, res){
 
 exports.updateAttendeeName = function(req, res){
 	updateAttendeeName(req, res);
+};
+
+exports.updateSelectableDates = function(req, res){
+	updateSelectableDates(req, res);
 };
 
 

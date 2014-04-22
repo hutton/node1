@@ -1,14 +1,12 @@
 window.AttendeesView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
-
-		this.listenTo(this.model, "change", this.topChoiceModelChanged);
 	},
 
 	template: _.template($('#attendees-view-template').html()),
 
 	events: {
-		"scroll .attendees-choices-list-content" : "onScroll"
+		"click .attendees-close": "onClose"
 	},
 
 	isActive: false,
@@ -23,7 +21,7 @@ window.AttendeesView = Backbone.View.extend({
 		var newElementRow = newElement.find('.attendees-choices-row');
 
 		this.usedChoices = _.filter(this.collection.models, function(choice){
-			return choice.get('date') >= App.today;
+			return choice.get('date') >= App.today && choice.isSelectable();
 		});
 
 		var daysPassed = 0;
@@ -60,118 +58,161 @@ window.AttendeesView = Backbone.View.extend({
 			}
 		});
 
-		$('body').append(newElement);
-
-		newElement.find('.attendees-choices-top').height($('.attendees-choices-row').height() - 35);
+		$('.day-view-container').append(newElement);
 
 		this.setElement($('.attendees-container-margin').first());
 
 		this.attendeesChoiceListContainerEl = $(".attendees-choices-list-content");
 
-		this.topChoiceOneEl = this.$el.find(".attendees-choices-top-one");
-		this.topChoiceTwoEl = this.$el.find(".attendees-choices-top-two");
-		this.topChoiceThreeEl = this.$el.find(".attendees-choices-top-three");
+		this.sly = new Sly(this.$el.find('.attendees-choices-list-content'),{
+			horizontal: 1,
+			itemNav: 'forceCentered',
+			smart: 1,
+			activateMiddle: 1,
+			activateOn: 'click',
+			mouseDragging: 1,
+			touchDragging: 1,
+			releaseSwing: 1,
+			startAt: 0,
+			scrollBy: 1,
+			speed: 800,
+			easing: 'easeOutExpo',
+			elasticBounds: 1,
+			dragHandle: 1,
+			dynamicHandle: 1,
+			clickBar: 1,
+			scrollSource: '.attendees-choice-draggable',
+			dragSource: '.attendees-choice-draggable'
+		}, {
+			active: that.itemActive
+		});
 
-		this.attendeesChoiceListContainerEl.on("scroll", this.onScroll);
+		var selectedModel = this.collection.findWhere({selected: true});
 
-		this.topChoiceModelChanged();
+		this.sly.init();
 
 		this.resize();
 
 		this.rendered = true;
+
+		this.setActive(selectedModel);
+	},
+
+	itemActive: function(event, index){
+		App.setSelected(this.usedChoices[index]);
+	},
+
+	setActive: function(model){
+		if (this.rendered){
+			var index = this.usedChoices.indexOf(model);
+
+			if (index !== -1){
+				this.sly.toCenter(index);
+			}
+		}
 	},
 
 	resize: function(){
-		if (this.isActive){
-			var totalHeight = $(window).height();
+		this.setHeight(false);
 
-			$('.navbar').each(function(){
-				if ($(this).is(':visible')){
-					totalHeight -= $(this).height();
-				}
-			});
-
-			totalHeight -= 70;
-
-			var tableHeight = this.$el.height();
-
-			if (totalHeight > tableHeight){
-				this.$el.attr('style', 'margin-top: ' + (totalHeight - tableHeight) / 2 +'px');
-			} else {
-				this.$el.attr('style', null);
-			}
+		if (!_.isUndefined(this.sly)){
+			this.sly.reload();
 		}
 	},
 
 	rendered: false,
 
-	active: function(isActive){
+	showing: false,
 
-		this.isActive = isActive;
-
-		if (isActive){
+	show: function(){
+		if (!this.showing){
 			if (!this.rendered){
 				this.render();
-			} else {
-				$('body').append(this.$el);
 			}
 
-			$('.days-table').hide();
+			$('.day-view-container').append(this.$el);
 
-			$('body').scrollTop(0);
-		} else {
-			this.$el.detach();
+			this.setHeight(true);
+
+			App.scrollToSelected();
 		}
+
+		this.showing = true;
 	},
 
-	onScroll: function(event){
-		this.checkScrollPosition();
-	},
-
-	scrollPosition: 0,
-
-	checkScrollPosition: function(){
+	hide: function(){
 		var that = this;
 
-		var scrollLeft = this.attendeesChoiceListContainerEl.scrollLeft();
+		this.showing = false;
 
-		if (scrollLeft !== this.scrollPosition){
-			this.scrollPosition = scrollLeft;
+		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 800, 'easeOutExpo', function(){
+			that.$el.detach();
+		});	
+	},
 
-			_.each(this.monthStartChoices, function(attendeeView){
-				attendeeView.adjustMonth(scrollLeft);
-			});
+	onClose: function(){
+		this.$el.find('.attendees-close').addClass('attendees-close-hidden');
 
-			_.delay(that.checkScrollPosition, 30);
+		App.setSelected(this.model);
+
+		this.hide();
+	},
+
+	setHeight: function(animate){
+		var that = this;
+
+		var animateDuration = 800;
+
+		if (!animate){
+			animateDuration = 0;
 		}
-	},
 
-	topChoiceModelChanged: function(){
-		this.updateTopChoice(this.topChoiceOneEl, 'one');
-		this.updateTopChoice(this.topChoiceTwoEl, 'two');
-		this.updateTopChoice(this.topChoiceThreeEl, 'three');
-	},
+		var windowHeight = $(window).height();
 
-	updateTopChoice: function(element, field){
-		if (!_.isUndefined(element)){
-			if (this.model.has(field)){
-				element.show();
+		var navBarHeight = $('.navbar-fixed-top').height();
 
-				var model = this.model.get(field);
+		var availableHeight = windowHeight - navBarHeight;
 
-				var index = this.usedChoices.indexOf(model);
+		var itemHeight = $('.date-cell').first().width();
 
-				this.animateTopChoiceTo(index, element);
+		var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
+
+		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
+
+		if (windowHeight > 350){
+
+			if (desiredHeight <= availableHeight - (itemHeight * 3)){
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
+
+				newHeight = desiredHeight;
 			} else {
-				element.hide();
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
+
+				newHeight = availableHeight - (itemHeight * 3);
+			}
+		} else {
+			newHeight = windowHeight;
+
+			if (desiredHeight <= newHeight){
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
+			} else {
+				this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
+				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
 			}
 		}
+
+		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, animateDuration, 'easeOutExpo', function(){
+			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
+		});
 	},
 
-	animateTopChoiceTo: function(index, element){
-		var toValue = index * 81;
+	destroy: function(){
+		this.$el.remove();
 
-		element.animate({left: toValue}, 400);
+		this.rendered = false;
 	}
 });
 
@@ -189,37 +230,40 @@ window.AttendeeView = Backbone.View.extend({
 	template: _.template($('#attendees-choice-view-template').html()),
 
 	events: {
-		"click .att-ch-me": "choiceClicked"
+		"click .attendees-choice-state": "choiceClicked"
 	},
 
-	tagName: "td",
-
-	adjustMonth: function(scrollLeft){
-		if (scrollLeft < (this.model.daysIn - 1) * this.itemWidth){
-			this.monthLabelEl.show();
-		} else { // if (scrollLeft > this.model.daysIn * this.itemWidth && scrollLeft < (this.model.lastDay -2) * this.itemWidth){
-
-			$('.attendees-choices-month-container').html(this.monthLabelEl.html());
-
-			this.monthLabelEl.hide();
-		}
-	},
+	tagName: "li",
 
 	render: function(){
-		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model}));
+		var mom = moment(this.model.get('date'));
+
+		var suffix = mom.format("Do");
+
+		suffix = suffix.slice(suffix.length - 2, suffix.length);
+
+		this.$el.html(this.template({attendees: App.attendees.models, choice: this.model, mom: mom, showInvite: App.attendees.models.length < 5 && !App.newMode, suffix: suffix}));
 
 		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},
 
 	modelChanged: function(){
 		var that = this;
-		var attendeeCount = 1;
+		var attendeeCount = 0;
 
-		var items = this.$el.find('li > div');
+		var items = this.$el.find('.att-ch');
 
 		items.removeClass('attendee-free');
 
 		console.log("Attendees - model changed");
+
+		var check = this.$el.find('.attendees-choice-state');
+
+		if (this.model.isFree()){
+			check.addClass('attendees-choice-state-free');
+		} else {
+			check.removeClass('attendees-choice-state-free');
+		}
 
 		_.each(App.attendees.models, function(attendee){
 			if (that.model.isAttendeeFree(attendee.get("_id"))){
