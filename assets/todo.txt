@@ -1,3 +1,4 @@
+- Remove marker-container rather than hide
 
 =======
 - Add bounce to Join Event
