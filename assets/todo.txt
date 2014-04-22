@@ -1,16 +1,15 @@
 - Remove marker-container rather than hide
-
-=======
+- Click out calendar to close attendee viwe
 - Add bounce to Join Event
 - Cleanup CSS
 - New homepage image
-- Fix debug/fast mode
 
 =======
 - Add description
 
 Done
 ----
+- Fix debug/fast mode
 - Make a help page
 - Saving note for updating dates
 - Update example
