@@ -76,10 +76,9 @@ window.EventApp = Backbone.View.extend({
     events: {
         "click #show-info":             "infoClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
-        "click .mode-switch-calender":  "switchToCalendar",
-        "click .mode-switch-attendees": "switchToAttendees",
         "click .join-event":            "showJoinEvent", 
-        "click .title":                 "showLoader"    
+        "click .title":                 "showLoader",
+        "click":                        "onClick" 
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -213,9 +212,7 @@ window.EventApp = Backbone.View.extend({
             this.previousOrientation = window.orientation;
 
             if (window.orientation === 0 || window.orientation === 180){
-                this.switchToCalendar();
             } else {
-                this.switchToAttendees();
             }
 
             // this.trigger('orientation', window.orientation);
@@ -424,22 +421,6 @@ window.EventApp = Backbone.View.extend({
         this.recalcTopSpacer();
     },
 
-    switchToCalendar: function(){
-        this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
-        this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
-
-        this.ChoicesView.active(true);
-        this.AttendeesView.active(false);
-    },
-
-    switchToAttendees: function(){
-        this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
-        this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
-
-        this.ChoicesView.active(false);
-        this.AttendeesView.active(true);
-    },
-
     changeSelectableDates: function(){
         this.SelectDatesView.show();
     },
@@ -502,5 +483,15 @@ window.EventApp = Backbone.View.extend({
 
     showLoader: function(){
         this.LoaderView.show();
+    },
+
+    onClick: function(event){
+        var target = $(event.target);
+
+        if (target.parents('.attendees-container').length === 0 &&
+            (target.parents('.date-cell').length === 0 ||
+            target.parents('.date-cell').hasClass('unselectable'))){
+            this.AttendeesView.onClose();
+        }
     }
 });

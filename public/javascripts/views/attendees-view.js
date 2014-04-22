@@ -126,6 +126,8 @@ window.AttendeesView = Backbone.View.extend({
 
 	show: function(){
 		if (!this.showing){
+			this.showing = true;
+
 			if (!this.rendered){
 				this.render();
 			}
@@ -136,17 +138,20 @@ window.AttendeesView = Backbone.View.extend({
 
 			App.scrollToSelected();
 		}
-
-		this.showing = true;
 	},
 
 	hide: function(){
 		var that = this;
 
-		this.showing = false;
+		that.showing = false;
 
-		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 800, 'easeOutExpo', function(){
-			that.$el.detach();
+		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 600, 'easeOutExpo', function(){
+
+			if (!that.showing){
+				that.$el.detach();
+			} else {
+				that.setHeight(true);
+			}
 		});	
 	},
 

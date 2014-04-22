@@ -1,6 +1,4 @@
-- Add some logging to show event
 - Remove marker-container rather than hide
-- Click out calendar to close attendee viwe
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
 - Cleanup CSS
@@ -11,6 +9,8 @@
 
 Done
 ----
+- Click out calendar to close attendee viwe
+- Add some logging to show event
 - Fix debug/fast mode
 - Make a help page
 - Saving note for updating dates

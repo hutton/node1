@@ -59,6 +59,8 @@ function example(req, res){
 function showEvent(req, res, calendar, attendeeId){
 	var choices = [];
 
+	logger.info("Rendering event: " + calendar.name + " (" + req.route.params[0] + ")");
+
 	_.each(calendar.choices, function(choice){
 		if (choice.date !== null){
 			choice.busyIds = _.map(choice.busy, function(busy){ return String(busy); });
@@ -90,8 +92,6 @@ function showEvent(req, res, calendar, attendeeId){
 		everythingSelectable: calendar.everythingSelectable
 	};
 
-	logger.info("Showing: " + calendar.name);
-
 	var sortedChoices = _.sortBy(choices, function(choice){
 		return choice.date;
 	});
@@ -110,11 +110,15 @@ function showEvent(req, res, calendar, attendeeId){
 			name: calendar.name,
 			inviteEmailLink: inviteEmailLink
 		});
+
+		logger.info("Rendered event: " + calendar.name + " (" + req.route.params[0] + ")");
 	});
 }
 
 function renderEvent(req, res){
 	if (req.route.params[0].length == 9 || req.route.params[0].length == 5){
+		logger.info("Looking for event: " + req.route.params[0]);
+
 		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
 				logger.error("Error finding calendar with attendee " + req.route.params[0]);
@@ -132,6 +136,8 @@ function renderEvent(req, res){
 			}
 		});
 	} else if (req.route.params[0].length == 6){
+		logger.info("Looking for event: " + req.route.params[0]);
+
 		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
 			if (err){
 				logger.error("Error finding calendar with id " + req.route.params[0]);
