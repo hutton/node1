@@ -23,8 +23,6 @@
 	connectionString = 'mongodb://localhost:27017/test';
  }
 
- webAppDebug = 'Off';
-
 if (_.isUndefined(webAppDebug) || webAppDebug === null || webAppDebug === 'On'){
 	enableWebAppDebug = true;
  } else {

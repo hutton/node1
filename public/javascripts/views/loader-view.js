@@ -76,7 +76,7 @@ window.LoaderView = Backbone.View.extend({
 		}, 400);
 	},
 
-	animateDelay: 2000,
+	animateDelay: 3000,
 
 	startAnimations: function(){
 		var choicesSelected = this.choices.totalChoices();
@@ -136,7 +136,7 @@ window.LoaderView = Backbone.View.extend({
 
 			element.removeClass('loader-animate');
 
-			element.attr({'style': 'transform: translateY(' + startPos + 'px); -webkit-transform: translateY(' + startPos + 'px); opacity: 1.0'});
+			element.attr({'style': 'transform: translateY(' + startPos + 'px); -webkit-transform: translateY(' + startPos + 'px); opacity: 0.0'});
 
 			_.delay(function(){
 				element.addClass('loader-animate');
