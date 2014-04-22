@@ -1,3 +1,4 @@
+- Add some logging to show event
 - Remove marker-container rather than hide
 - Click out calendar to close attendee viwe
 - Add bounce to Join Event
