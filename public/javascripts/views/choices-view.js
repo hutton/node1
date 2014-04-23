@@ -136,9 +136,9 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	ensureVisible: function(){
-		//if (!this.isVisible()){
-		//	this.scrollToTopLine();
-		//}
+		if (!this.isVisible()){
+			this.scrollToTopLine();
+		}
 	},
 
 	scrollToTopLine: function(){
