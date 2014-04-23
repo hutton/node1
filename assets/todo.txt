@@ -9,8 +9,8 @@
 	no border or background
 	
 - Fix selectable dates in Choices-view
-- Remove marker-container rather than hide
-	- Remove 'free-marker' not used
+- Remove marker-container rather than hide use detach()
+	- Remove 'free-marker' not used (maybe reinstate it?!)
 - Update favicon
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
