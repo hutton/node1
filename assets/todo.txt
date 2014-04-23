@@ -1,4 +1,5 @@
 - Remove marker-container rather than hide
+	- Remove 'free-marker' not used
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
 - Cleanup CSS
