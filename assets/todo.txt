@@ -1,4 +1,17 @@
-- Remove marker-container rather than hide
+- div.attendees-choice:
+	margin: 0px;
+	border-top: 1px solid rgba(233, 233, 233, 1);
+	border-left: 1px solid rgba(233, 233, 233, 1);
+	border-bottom: 1px solid rgba(233, 233, 233, 1);
+	border-right: 0px solid rgba(233, 233, 233, 1);
+	height: 100%;
+- .attendees-container
+	no border or background
+	
+- Fix selectable dates in Choices-view
+- Remove marker-container rather than hide use detach()
+	- Remove 'free-marker' not used (maybe reinstate it?!)
+- Update favicon
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
 - Cleanup CSS

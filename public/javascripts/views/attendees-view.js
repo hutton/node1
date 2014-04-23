@@ -98,7 +98,11 @@ window.AttendeesView = Backbone.View.extend({
 		this.setActive(selectedModel);
 	},
 
+	centeredIndex: null,
+
 	itemActive: function(event, index){
+		this.centeredIndex = index;
+				
 		App.setSelected(this.usedChoices[index]);
 	},
 
@@ -106,8 +110,9 @@ window.AttendeesView = Backbone.View.extend({
 		if (this.rendered){
 			var index = this.usedChoices.indexOf(model);
 
-			if (index !== -1){
+			if (index !== -1 && this.centeredIndex !== index){
 				this.sly.toCenter(index);
+				this.centeredIndex = index;
 			}
 		}
 	},
