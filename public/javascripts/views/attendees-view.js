@@ -99,7 +99,7 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	itemActive: function(event, index){
-		App.setSelected(this.usedChoices[index]);
+		//App.setSelected(this.usedChoices[index]);
 	},
 
 	setActive: function(model){
