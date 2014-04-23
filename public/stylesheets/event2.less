@@ -669,7 +669,7 @@ a:active{
 }
 
 .free{
-	display: none;
+	display: block;
 }
 
 .markers-container{
@@ -784,6 +784,10 @@ a:active{
 
 	.free-marker{
 		.translate(0px, -10px);
+	}
+
+	.free{
+		display: none;
 	}
 
 	.date-text{
@@ -1199,8 +1203,6 @@ a:active{
 @cell-border: 1px rgba(0,0,0,0.06) solid;
 
 .attendees-container-margin{
-	margin-left: 6px;
-	margin-right: 6px;
 }
 
 .attendees-container{
@@ -1208,9 +1210,6 @@ a:active{
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
-
-	border-top: 2px solid @divider-color;
-	background: #f8f8f8;
 }
 
 .attendees-close{
@@ -1287,12 +1286,16 @@ a:active{
 
 
 div.attendees-choice{
-	margin: 0px;
+	margin: 0px 4px;
 	padding: 0px;
-	border: 2px solid transparent;
 	height: 100%;
 	position: relative;
 	background: white;
+
+	border-top: 1px solid rgba(233, 233, 233, 1);
+	border-left: 1px solid rgba(233, 233, 233, 1);
+	border-bottom: 1px solid rgba(233, 233, 233, 1);
+	border-right: 1px solid rgba(233, 233, 233, 1);
 }
 
 .active div.attendees-choice{
@@ -1636,7 +1639,6 @@ div.attendees-choice{
 	width: 100%;
 	bottom: 0px;
 	z-index: 300;
-	background: white;
 }
 
 /************** Join event *******************/
