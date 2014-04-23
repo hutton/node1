@@ -228,6 +228,7 @@ window.AttendeeView = Backbone.View.extend({
 		this.render();
 
 		this.listenTo(this.model, "change", this.modelChanged);
+		this.listenTo(this.model, "changedFree", this.freeChanged);
 	},
 
 	itemWidth: 80,
@@ -252,7 +253,7 @@ window.AttendeeView = Backbone.View.extend({
 		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},
 
-	modelChanged: function(){
+	freeChanged: function(){
 		var that = this;
 		var attendeeCount = 0;
 
@@ -260,7 +261,7 @@ window.AttendeeView = Backbone.View.extend({
 
 		items.removeClass('attendee-free');
 
-		console.log("Attendees - model changed");
+		console.log("Attendees - free changed");
 
 		var check = this.$el.find('.attendees-choice-state');
 
@@ -277,6 +278,10 @@ window.AttendeeView = Backbone.View.extend({
 
 			attendeeCount++;
 		});
+	},
+
+	modelChanged: function(){
+		console.log("Attendees - model changed");
 	},
 
 	choiceClicked: function(){

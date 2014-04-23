@@ -3,6 +3,7 @@ window.ChoiceView = Backbone.View.extend({
 		_.bindAll(this);
 
 		this.listenTo(this.model, "change", this.modelChanged);
+		this.listenTo(this.model, "changedFree", this.freeChanged);
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
@@ -38,6 +39,18 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	modelChanged: function(){
+		console.log("Choices - model changed");
+
+		var changed = this.model.changedAttributes();
+
+		if (!_.isUndefined(changed['selected'])){
+			this.setSelected(changed['selected']);
+		}
+	},
+
+	freeChanged: function(){
+		console.log("Choices - free changed");
+
 		this.updateView(true);
 
 		this.updateTopChoices(true);
@@ -80,6 +93,22 @@ window.ChoiceView = Backbone.View.extend({
 			if (!this.isSelected){
 				this.ensureVisible();
 
+			}
+
+			this.isSelected = true;
+
+			this.$el.addClass('cell-selected');
+		} else {
+			this.$el.removeClass('cell-selected');
+
+			this.isSelected = false;
+		}
+	},
+
+	setSelected: function(selected){
+		if (selected){
+			if (!this.isSelected){
+				this.ensureVisible();
 			}
 
 			this.isSelected = true;
@@ -184,9 +213,9 @@ window.ChoiceView = Backbone.View.extend({
 
 				if (this.model.get('selected')){
 					this.model.toggleFree();
+				} else {
+					App.setSelected(this.model);
 				}
-
-				App.setSelected(this.model);
 
 				App.AttendeesView.show();
 			}
