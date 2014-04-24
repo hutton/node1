@@ -1,4 +1,5 @@
-	
+- Fix resize when attendees view closed
+- Try adding perspective
 - Update favicon
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
