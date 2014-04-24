@@ -553,6 +553,17 @@ a:active{
 
 	height: 100%;
 	cursor: pointer;
+
+	.transition-duration(0.2s);
+}
+
+@keyframes spin {
+	0% { top: 0; }
+	100% { top: 0; }
+}
+
+.date-cell-container-flip{
+
 }
 
 .past{
@@ -575,6 +586,8 @@ a:active{
 .unselectable > .date-cell-container{
 	border: 1px solid #d0d0d0;
 	background: transparent !important;
+	.scale(0.85);
+	//box-shadow: inset 0px 0px 15px rgba(0,0,0,0.1);
 }
 
 .selected-row{
@@ -708,6 +721,7 @@ a:active{
 
 .cell-selected > div.date-cell-container{
 	//background: rgba(74, 209, 108, 0.7) !important;
+	.scale(1.05);
 }
 
 .cell-selected .date-text{
@@ -982,7 +996,6 @@ a:active{
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     position: relative;
-
 }
 
 .attendees-choices-month-container{
@@ -1034,10 +1047,26 @@ a:active{
 .attendees-choices-row > li{
 	float: left;
 	height: 100%;
-	margin: 0px 0px;
+	margin: 0px -5px;
 	cursor: pointer;
 
 	padding: 0px;
+
+	-webkit-transform-origin: 50% 100%;
+	-moz-transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+
+	.scale(0.95);
+	.transition-duration(0.300ms);
+}
+
+.attendees-choices-row > li.active ~ li {
+	.scale(0.95);
+}
+
+.attendees-choices-row > li.active {
+	.scale(1.0);
 }
 
 .attendees-choice-month{

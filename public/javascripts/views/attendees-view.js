@@ -118,10 +118,12 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	resize: function(){
-		this.setHeight(false);
+		if (this.showing){
+			this.setHeight(false);
 
-		if (!_.isUndefined(this.sly)){
-			this.sly.reload();
+			if (!_.isUndefined(this.sly)){
+				this.sly.reload();
+			}
 		}
 	},
 

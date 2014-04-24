@@ -1,6 +1,3 @@
-- Fix resize when attendees view closed
-- Try shrinking the unselectables
-- Try adding perspective
 - Update favicon
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
@@ -15,6 +12,9 @@
 
 Done
 ----
+- Fix resize when attendees view closed
+- Try shrinking the unselectables
+- Try adding perspective
 - Fix selectable dates in Choices-view
 - Remove marker-container rather than hide use detach()
 - Click out calendar to close attendee viwe

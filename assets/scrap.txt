@@ -1,6 +1,6 @@
 .attendees-choices-list-content{
--webkit-perspective: 800px;
--webkit-perspective-origin: 50% 50%;	
+	-webkit-perspective: 800px;
+	-webkit-perspective-origin: 50% 50%;	
 }
 
 .attendees-choices-row {
