@@ -8,7 +8,7 @@
 @month-divider-color: #e8e8e8;
 @selected-color: #c0c0c0;
 @date-color: #c0c0c0;
-@weekend-color: #d0d0d0;
+@choice-border-color: #d0d0d0;
 @light-background-color: rgba(248,248,248,1.0);
 @event-table-content-width: 38px;
 
@@ -498,7 +498,7 @@ a:active{
 
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7){
-//	color: @weekend-color;
+//	color: @choice-border-color;
 	color: whitei;
 }
 
@@ -538,7 +538,7 @@ a:active{
 
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7){
-	color: @weekend-color;
+	color: @choice-border-color;
 }
 
 .event-table td:nth-of-type(6) .date-text,
@@ -547,7 +547,7 @@ a:active{
 
 .date-cell-container{
 	background: @shaded-background;
-	border: 1px solid #d0d0d0;
+	border: 1px solid @choice-border-color;
 
 	position: relative;
 
@@ -720,105 +720,6 @@ a:active{
 	margin: 2px;
 }
 
-
-@media screen and (min-width: 450px){
-	.event-table tr > td.date-cell{
-		font-size: 100%;
-	}
-
-	.event-table tr > td{
-		font-size: 1em;
-	}
-
-	.info-row-text-container{
-		font-size: 0.9em;
-	}
-
-	.month{
-		.translate(0px, -18px);
-	}
-
-	.free-marker{
-		.translate(0px, -18px);
-	}
-
-	.markers-container{
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 2px;
-		margin-left: 2px;
-	}
-
-	.markers-container li{
-	    margin: 0px 2px 2px 0px;
-	    width: 7px;
-	    height: 7px;
-	}
-
-	.date-cell-container{
-		margin: 3px;
-	}
-
-	.calendar-choices-top{
-		margin-left: -1px;
-		margin-top: 3px;
-	}
-}
-
-@media screen and (max-width: 450px){
-	.event-table tr > td.date-cell{
-		font-size: 60%;
-	}
-
-	.event-table tr > td{
-		font-size: 1em;
-	}
-
-	.info-row-text-container{
-		font-size: 0.8em;
-	}
-
-	.month{
-		.translate(0px, -12px);
-	}
-
-	.free-marker{
-		.translate(0px, -10px);
-	}
-
-	.free{
-		display: none;
-	}
-
-	.date-text{
-		top: -1px;
-		left: -2px;
-	}
-
-	.markers-container{
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 1px;
-		margin-left: 1px;
-	}
-
-	.markers-container li{
-	    margin: 0px 1px 1px 0px;
-	    width: 4px;
-	    height: 4px;
-	}
-
-	.date-cell-container{
-		margin: 2px;
-	}
-
-	.calendar-choices-top{
-		margin-left: 0px;
-		margin-top: 2px;
-	}
-
-}
-
 /**************************************/
 .register-attendee-message{
 	.message-panel;
@@ -882,7 +783,7 @@ a:active{
 
 	float: left;
 	background: #f1f1f1;
-	color: @weekend-color;
+	color: @choice-border-color;
 	.transition-duration(0.2s);
 }
 
@@ -1022,179 +923,6 @@ a:active{
 	line-height: 24px;
 }
 
-/************* panel **************/
-
-@media screen and (min-width: 980px){
-	.side-info-panel-container{
-		display: block;
-	}
-}
-
-@media screen and (max-width: 980px){
-	.side-info-panel-container{
-		display: none;
-	}
-}
-
-.side-info-panel-container{
-	top: 140px;
-
-	position: fixed;
-
-	background: transparent;
-	width: 100%;
-	pointer-events: none;
-
-}
-
-.side-info-panel-container > div{
-
-	position: relative;
-	width: 600px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.side-info-panel{
-	text-align: center;
-	width: 200px;
-	position: relative;
-	left: 600px;
-	color: @selected-color;
-	font-weight: 200;
-	display: inline-block;
-	pointer-events: all;
-	position: absolute;
-	opacity: 1.0;
-
-	.transition-duration(0.25s);
-}
-
-.side-info-date{
-	width: 200px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	position: absolute;
-	pointer-events: none;
-}
-
-.side-info-panel-less{
-	opacity: 0.0;
-	left: 530px;
-}
-
-.side-info-panel-greater{
-	opacity: 0.0;
-	left: 670px;
-}
-
-.side-info-panel ul{
-	margin-top: 85px;
-	list-style: none;
-	padding: 0px;
-	font-size: 80%;
-	line-height: 1.8em;
-	margin-bottom: 0px;
-}
-
-.side-info-panel li{
-	height: 30px;
-}
-
-.side-info-name{
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-.side-info-name > i{
-	margin-left: 5px;
-}
-
-.side-info-name-marker{
-	display: inline-block;
-	width: 8px;
-	height: 8px;
-	border-radius: 10px;
-	background: @selected-color;
-	margin-right: 4px;
-	position: relative;
-	top: -2px;
-}
-
-.side-info-free{
-	color: @free-color;
-}
-
-.side-info-free .side-info-name-marker{
-	background: @free-color;
-	opacity: 1.0;
-}
-
-.side-info-invite{
-	font-size: 0.8em;
-	margin: 100px 10px 0px 10px;
-}
-
-.side-info-panel-left{
-	margin-right: 3px;
-	width: 200px;
-	position: relative;
-	right: 600px;
-	color: @selected-color;
-	font-weight: 200;
-	display: inline-block;
-	text-align: center;
-	pointer-events: all;
-	position: absolute;
-}
-
-.side-info-panel-left{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-bottom: 6px;
-
-}
-
-.side-info-panel-left-container{
-	position: relative;
-}
-
-.side-info-panel-left-title{
-	margin-top: 14px;
-	color: @free-color;
-}
-
-.top-choice-item{
-	.transition-duration(0.4s);
-	position: absolute;
-	font-size: 80%;
-	width: 200px;
-	text-align: center;
-	left: 0px;
-	top: 200px;
-	opacity: 0.0;
-}
-
-.top-choice-one{
-	top: 25px;
-	opacity: 1.0;
-}
-
-.top-choice-two{
-	top: 85px;
-	opacity: 1.0;
-}
-
-.top-choice-three{
-	top: 145px;
-	opacity: 1.0;
-}
-
-.top-choice-hiding{
-	left: -100px;
-	opacity: 0.0;
-}
-
 /*********** Attendee view ****************/
 
 @name-panel-width: 130px;
@@ -1264,10 +992,6 @@ a:active{
 	z-index: 100;
 }
 
-.attendees-choice{
-	float: left;
-}
-
 .attendees-name-list{
 	list-style: none;
 }
@@ -1285,17 +1009,15 @@ a:active{
 }
 
 
-div.attendees-choice{
-	margin: 0px 4px;
+.attendees-choice{
+	float: left;
+	margin: 0px 3px;
 	padding: 0px;
 	height: 100%;
 	position: relative;
 	background: white;
 
-	border-top: 1px solid rgba(233, 233, 233, 1);
-	border-left: 1px solid rgba(233, 233, 233, 1);
-	border-bottom: 1px solid rgba(233, 233, 233, 1);
-	border-right: 1px solid rgba(233, 233, 233, 1);
+	border: 1px solid @choice-border-color;
 }
 
 .active div.attendees-choice{
@@ -1501,18 +1223,6 @@ div.attendees-choice{
 	border-top: 20px solid @top-choice-color;
 }
 
-.attendees-choices-top-one{
-	z-index: 30;
-}
-
-.attendees-choices-top-two{
-	z-index: 20;
-}
-
-.attendees-choices-top-three{
-	z-index: 10;
-}
-
 .attendees-choices-top > div{
 	left: 0px;
 	top: -2px;
@@ -1671,3 +1381,107 @@ div.attendees-choice{
 	color: @free-color;
 	text-decoration: underline;
 }
+
+
+/********* Media rules ******************************/
+@media screen and (min-width: 450px){
+	.event-table tr > td.date-cell{
+		font-size: 100%;
+	}
+
+	.event-table tr > td{
+		font-size: 1em;
+	}
+
+	.info-row-text-container{
+		font-size: 0.9em;
+	}
+
+	.month{
+		.translate(0px, -18px);
+	}
+
+	.free-marker{
+		.translate(0px, -18px);
+	}
+
+	.markers-container{
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-bottom: 2px;
+		margin-left: 2px;
+	}
+
+	.markers-container li{
+	    margin: 0px 2px 2px 0px;
+	    width: 7px;
+	    height: 7px;
+	}
+
+	.date-cell-container{
+		margin: 3px;
+	}
+
+	.calendar-choices-top{
+		margin-left: -1px;
+		margin-top: 3px;
+	}
+}
+
+@media screen and (max-width: 450px){
+	.event-table tr > td.date-cell{
+		font-size: 60%;
+	}
+
+	.event-table tr > td{
+		font-size: 1em;
+	}
+
+	.info-row-text-container{
+		font-size: 0.8em;
+	}
+
+	.month{
+		.translate(0px, -12px);
+	}
+
+	.free-marker{
+		text-align: right;
+		top: 0px;
+		.translate(-1px, -2px);
+	}
+
+	.date-text{
+		top: -1px;
+		left: -2px;
+	}
+
+	.markers-container{
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-bottom: 1px;
+		margin-left: 1px;
+	}
+
+	.markers-container li{
+	    margin: 0px 1px 1px 0px;
+	    width: 4px;
+	    height: 4px;
+	}
+
+	.date-cell-container{
+		margin: 2px;
+	}
+
+	.calendar-choices-top{
+		margin-left: 0px;
+		margin-top: 2px;
+	}
+
+	.attendees-choice{
+		margin: 0px 2px;
+	}
+}
+
+
+

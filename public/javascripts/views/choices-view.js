@@ -34,6 +34,10 @@ window.ChoiceView = Backbone.View.extend({
 		this.markersContainerEl = this.$el.find('.markers-container');
 		this.markerItemsEl = this.$el.find(".markers-container li");
 
+		this.freeMarkerEl = this.$el.find('.free-marker');
+
+		this.dateCellContainerEl = this.$el.find('.date-cell-container');
+
 		this.updateFree(false);
 
 		this.updateSelectable(this.model.get('selectable'));
@@ -68,12 +72,10 @@ window.ChoiceView = Backbone.View.extend({
 	isSelected: false,
 
 	updateFree: function(animate){
-		var target = this.$el.find(".date-cell-container");
-
 		if (this.model.isFree() || this.model.pretendFree){
-			this.$el.find('.free-marker').addClass('free');
+			this.freeMarkerEl.addClass('free');
 		} else {
-			this.$el.find('.free-marker').removeClass('free');
+			this.freeMarkerEl.removeClass('free');
 		}
 
 		var availList = this.model.getAttendeeAvailability();
@@ -106,15 +108,12 @@ window.ChoiceView = Backbone.View.extend({
 	updateSelectable: function(selectable){
 		if (selectable){
 			this.$el.removeClass('unselectable');
-			this.$el.find('.date-cell-container').append(this.markersContainerEl);
-
-			//this.$el.find('.markers-container').show();
-;
+			this.dateCellContainerEl.append(this.markersContainerEl);
+			this.dateCellContainerEl.append(this.freeMarkerEl);
 		} else {
 			this.$el.addClass('unselectable');
 			this.markersContainerEl.detach();
-			//this.$e;
-			//this.$el.find('.markers-container').hide();
+			this.freeMarkerEl.detach();
 		}
 	},
 
