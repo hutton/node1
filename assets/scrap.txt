@@ -1,14 +1,25 @@
-<a class="scroll" href="#destination1">Destination 1</a>
+.attendees-choices-list-content{
+-webkit-perspective: 800px;
+-webkit-perspective-origin: 50% 50%;	
+}
 
- $(".scroll").click(function(event){
-         event.preventDefault();
-         //calculate destination place
-         var dest=0;
-         if($(this.hash).offset().top > $(document).height()-$(window).height()){
-              dest=$(document).height()-$(window).height();
-         }else{
-              dest=$(this.hash).offset().top;
-         }
-         //go to destination
-       $('html,body').animate({scrollTop:dest}, 400,'swing');
-     });
+.attendees-choices-row {
+-webkit-transform-style: preserve-3d;
+}
+
+.attendees-choices-row > li.active {
+-webkit-transform: none;
+}
+
+.attendees-choices-row > li {
+-webkit-transform: rotateY(20deg) scale(0.9);
+-webkit-transition: -webkit-transform 300ms ease-out;
+}
+
+.attendees-choices-row > li.active ~ li {
+-webkit-transform: rotateY(-20deg) scale(0.9);
+}
+
+
+
+http://jsfiddle.net/Yy235/
