@@ -1,15 +1,25 @@
-
-=======
+- Update favicon
 - Add bounce to Join Event
+	- easeOutQuart -> easeOutBounce
+- Join event dialog
+	'Cool, that's 2 days you can make.'
+	'When you join we'll email you a link to keep your choices updated.'
 - Cleanup CSS
 - New homepage image
-- Fix debug/fast mode
 
 =======
 - Add description
 
 Done
 ----
+- Fix resize when attendees view closed
+- Try shrinking the unselectables
+- Try adding perspective
+- Fix selectable dates in Choices-view
+- Remove marker-container rather than hide use detach()
+- Click out calendar to close attendee viwe
+- Add some logging to show event
+- Fix debug/fast mode
 - Make a help page
 - Saving note for updating dates
 - Update example

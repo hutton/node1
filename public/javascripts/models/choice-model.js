@@ -58,7 +58,7 @@ window.ChoiceModel = Backbone.Model.extend({
 				} else {
 					freeAttendees.push(currentAttendeeId);
 
-					this.trigger('change');
+					this.trigger('changedFree');
 				}
 
 				if (window.App.wasFree.indexOf(date) != -1){
@@ -70,7 +70,7 @@ window.ChoiceModel = Backbone.Model.extend({
 			} else {
 				freeAttendees.removeElement(currentAttendeeId);
 
-				this.trigger('change');
+				this.trigger('changedFree');
 
 				if (window.App.isFree.indexOf(date) != -1){
 					window.App.isFree.removeElement(date);
@@ -88,13 +88,13 @@ window.ChoiceModel = Backbone.Model.extend({
 
 				this.pretendFree = false;
 
-				this.trigger('change');
+				this.trigger('changedFree');
 			} else {
 				window.App.isFree.push(this.get("date"));
 
 				this.pretendFree = true;
 
-				this.trigger('change');
+				this.trigger('changedFree');
 			}
 
 			$('#register-free-dates').val(window.App.isFree);

@@ -76,10 +76,9 @@ window.EventApp = Backbone.View.extend({
     events: {
         "click #show-info":             "infoClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
-        "click .mode-switch-calender":  "switchToCalendar",
-        "click .mode-switch-attendees": "switchToAttendees",
         "click .join-event":            "showJoinEvent", 
-        "click .title":                 "showLoader"    
+        "click .title":                 "showLoader",
+        "click":                        "onClick" 
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -133,6 +132,8 @@ window.EventApp = Backbone.View.extend({
 
         if (!this.model.get('datesSelected')){
             this.changeSelectableDates();
+        } else {
+            this.setSelectableDateMode(false);
         }
 
         this.instantResize();
@@ -213,9 +214,7 @@ window.EventApp = Backbone.View.extend({
             this.previousOrientation = window.orientation;
 
             if (window.orientation === 0 || window.orientation === 180){
-                this.switchToCalendar();
             } else {
-                this.switchToAttendees();
             }
 
             // this.trigger('orientation', window.orientation);
@@ -371,23 +370,14 @@ window.EventApp = Backbone.View.extend({
 
         if (bestModel !== null){
             bestModel.setTopChoice(1);
-            $('.calendar-choices-top-one').show();
-        } else {
-            $('.calendar-choices-top-one').hide();
         }
 
         if (secondBestModel !== null){
             secondBestModel.setTopChoice(2);
-            $('.calendar-choices-top-two').show();
-        } else {
-            $('.calendar-choices-top-two').hide();
         }
 
         if (thirdBestModel !== null){
             thirdBestModel.setTopChoice(3);
-            $('.calendar-choices-top-three').show();
-        } else {
-            $('.calendar-choices-top-three').hide();
         }
 
         _.each(modelsWithTopChoice, function(model){
@@ -422,22 +412,6 @@ window.EventApp = Backbone.View.extend({
         }
 
         this.recalcTopSpacer();
-    },
-
-    switchToCalendar: function(){
-        this.$el.find('.mode-switch-calender').addClass('mode-switch-selected');
-        this.$el.find('.mode-switch-attendees').removeClass('mode-switch-selected');
-
-        this.ChoicesView.active(true);
-        this.AttendeesView.active(false);
-    },
-
-    switchToAttendees: function(){
-        this.$el.find('.mode-switch-calender').removeClass('mode-switch-selected');
-        this.$el.find('.mode-switch-attendees').addClass('mode-switch-selected');
-
-        this.ChoicesView.active(false);
-        this.AttendeesView.active(true);
     },
 
     changeSelectableDates: function(){
@@ -484,11 +458,10 @@ window.EventApp = Backbone.View.extend({
         var label = modal.find('.join-view-text');
 
         if (this.isFree.length === 0){
-            label.html("You've not selected any dates but that's fine.");
         } else if (this.isFree.length === 1) {
-            label.html("You have selected one date.");
+            label.html("Ok, that's one day you're free.");
         } else {
-            label.html("You have selected " + this.isFree.length + " dates.");
+            label.html("Cool, that's " + this.isFree.length + " days you can make.");
         }
 
         modal.modal({show: true});
@@ -502,5 +475,21 @@ window.EventApp = Backbone.View.extend({
 
     showLoader: function(){
         this.LoaderView.show();
+    },
+
+    onClick: function(event){
+        var target = $(event.target);
+
+        if (target.parents('.attendees-container').length === 0 &&
+            (target.parents('.date-cell').length === 0 ||
+            target.parents('.date-cell').hasClass('unselectable'))){
+            this.AttendeesView.onClose();
+        }
+    },
+
+    setSelectableDateMode: function(selectableDateModeOn){
+        this.selectableDateMode = selectableDateModeOn;
+
+        this.ChoicesView.setSelectableDateMode(selectableDateModeOn);
     }
 });

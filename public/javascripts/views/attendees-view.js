@@ -98,7 +98,11 @@ window.AttendeesView = Backbone.View.extend({
 		this.setActive(selectedModel);
 	},
 
+	centeredIndex: null,
+
 	itemActive: function(event, index){
+		this.centeredIndex = index;
+				
 		App.setSelected(this.usedChoices[index]);
 	},
 
@@ -106,17 +110,20 @@ window.AttendeesView = Backbone.View.extend({
 		if (this.rendered){
 			var index = this.usedChoices.indexOf(model);
 
-			if (index !== -1){
+			if (index !== -1 && this.centeredIndex !== index){
 				this.sly.toCenter(index);
+				this.centeredIndex = index;
 			}
 		}
 	},
 
 	resize: function(){
-		this.setHeight(false);
+		if (this.showing){
+			this.setHeight(false);
 
-		if (!_.isUndefined(this.sly)){
-			this.sly.reload();
+			if (!_.isUndefined(this.sly)){
+				this.sly.reload();
+			}
 		}
 	},
 
@@ -126,6 +133,8 @@ window.AttendeesView = Backbone.View.extend({
 
 	show: function(){
 		if (!this.showing){
+			this.showing = true;
+
 			if (!this.rendered){
 				this.render();
 			}
@@ -136,17 +145,20 @@ window.AttendeesView = Backbone.View.extend({
 
 			App.scrollToSelected();
 		}
-
-		this.showing = true;
 	},
 
 	hide: function(){
 		var that = this;
 
-		this.showing = false;
+		that.showing = false;
 
-		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 800, 'easeOutExpo', function(){
-			that.$el.detach();
+		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 600, 'easeOutExpo', function(){
+
+			if (!that.showing){
+				that.$el.detach();
+			} else {
+				that.setHeight(true);
+			}
 		});	
 	},
 
@@ -223,6 +235,7 @@ window.AttendeeView = Backbone.View.extend({
 		this.render();
 
 		this.listenTo(this.model, "change", this.modelChanged);
+		this.listenTo(this.model, "changedFree", this.freeChanged);
 	},
 
 	itemWidth: 80,
@@ -247,7 +260,7 @@ window.AttendeeView = Backbone.View.extend({
 		this.monthLabelEl = this.$el.find('.attendees-choice-month > div');
 	},
 
-	modelChanged: function(){
+	freeChanged: function(){
 		var that = this;
 		var attendeeCount = 0;
 
@@ -255,7 +268,7 @@ window.AttendeeView = Backbone.View.extend({
 
 		items.removeClass('attendee-free');
 
-		console.log("Attendees - model changed");
+		console.log("Attendees - free changed");
 
 		var check = this.$el.find('.attendees-choice-state');
 
@@ -272,6 +285,10 @@ window.AttendeeView = Backbone.View.extend({
 
 			attendeeCount++;
 		});
+	},
+
+	modelChanged: function(){
+		console.log("Attendees - model changed");
 	},
 
 	choiceClicked: function(){

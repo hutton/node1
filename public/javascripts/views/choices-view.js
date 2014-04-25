@@ -3,6 +3,7 @@ window.ChoiceView = Backbone.View.extend({
 		_.bindAll(this);
 
 		this.listenTo(this.model, "change", this.modelChanged);
+		this.listenTo(this.model, "changedFree", this.freeChanged);
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
@@ -30,7 +31,16 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.addClass("past");
 		}
 
-		this.updateView(false);
+		this.markersContainerEl = this.$el.find('.markers-container');
+		this.markerItemsEl = this.$el.find(".markers-container li");
+
+		this.freeMarkerEl = this.$el.find('.free-marker');
+
+		this.dateCellContainerEl = this.$el.find('.date-cell-container');
+
+		this.updateFree(false);
+
+		this.updateSelectable(this.model.get('selectable'));
 
 		this.updateTopChoices(false);
 
@@ -38,48 +48,51 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	modelChanged: function(){
-		this.updateView(true);
+		console.log("Choices - model changed");
+
+		var changed = this.model.changedAttributes();
+
+		if (!_.isUndefined(changed['selected'])){
+			this.updateSelected(changed['selected']);
+		}
+
+		if (!_.isUndefined(changed['selectable'])){
+			this.updateSelectable(changed['selectable']);
+		}
+	},
+
+	freeChanged: function(){
+		console.log("Choices - free changed");
+
+		this.updateFree(true);
 
 		this.updateTopChoices(true);
 	},
 
 	isSelected: false,
 
-	updateView: function(animate){
-		var target = this.$el.find(".date-cell-container");
-
-		// target.css("background-color", this.model.calcBackground());
-		// target.css("border-color", this.model.calcBorder());
-		// target.find("div.date-text").css("opacity", this.model.calcForegroundOpacity());
-
+	updateFree: function(animate){
 		if (this.model.isFree() || this.model.pretendFree){
-			this.$el.find('.free-marker').addClass('free');
+			this.freeMarkerEl.addClass('free');
 		} else {
-			this.$el.find('.free-marker').removeClass('free');
+			this.freeMarkerEl.removeClass('free');
 		}
 
-		if (this.model.isSelectable()){
-			this.$el.removeClass('unselectable');
-			this.$el.find('.markers-container').show();
+		var availList = this.model.getAttendeeAvailability();
 
-			var availList = this.model.getAttendeeAvailability();
+		this.markerItemsEl.each(function(index, element){
+			if (availList[index]){
+				$(this).addClass("a");
+			} else {
+				$(this).removeClass("a");
+			}
+		});
+	},
 
-			this.$el.find(".markers-container li").each(function(index, element){
-				if (availList[index]){
-					$(this).addClass("a");
-				} else {
-					$(this).removeClass("a");
-				}
-			});
-		} else {
-			this.$el.addClass('unselectable');
-			this.$el.find('.markers-container').hide();
-		}
-
-		if (this.model.get('selected')){
+	updateSelected: function(selected){
+		if (selected){
 			if (!this.isSelected){
 				this.ensureVisible();
-
 			}
 
 			this.isSelected = true;
@@ -89,6 +102,18 @@ window.ChoiceView = Backbone.View.extend({
 			this.$el.removeClass('cell-selected');
 
 			this.isSelected = false;
+		}
+	},
+
+	updateSelectable: function(selectable){
+		if (selectable){
+			this.$el.removeClass('unselectable');
+			this.dateCellContainerEl.append(this.markersContainerEl);
+			this.dateCellContainerEl.append(this.freeMarkerEl);
+		} else {
+			this.$el.addClass('unselectable');
+			this.markersContainerEl.detach();
+			this.freeMarkerEl.detach();
 		}
 	},
 
@@ -184,17 +209,13 @@ window.ChoiceView = Backbone.View.extend({
 
 				if (this.model.get('selected')){
 					this.model.toggleFree();
+				} else {
+					App.setSelected(this.model);
 				}
-
-				App.setSelected(this.model);
 
 				App.AttendeesView.show();
 			}
 		}
-	},
-
-	calcDegrees: function(total, count){
-		return Math.round((count / total) * 36) * 10;
 	}
 });
 
@@ -228,6 +249,8 @@ window.ChoicesView = Backbone.View.extend({
 
 	active: function(isActive){
 	},
+
+	lastSelectableRow: null,
 
 	render: function(){
 		var that = this;
@@ -270,6 +293,20 @@ window.ChoicesView = Backbone.View.extend({
 		}
 
 		return this;
+	},
+
+	updateLastSelectableRow: function(){
+		var that = this;
+
+		this.lastSelectableRow = null;
+
+		this.tableEl.find('tr').each(function(index, rowEl){
+			rowEl  = $(rowEl);
+
+			if (rowEl.find('.markers-container').length > 0){
+				that.lastSelectableRow = rowEl;
+			}
+		});
 	},
 
 	resize: function(){
@@ -324,5 +361,39 @@ window.ChoicesView = Backbone.View.extend({
 		}
 
 		return row;
+	},
+
+	detachedRows: [],
+
+	setSelectableDateMode: function(selectableDateModeOn){
+		var that = this;
+
+		if (selectableDateModeOn){
+			_.each(this.detachedRows, function(row){
+				that.tableEl.append(row);
+			});
+
+			this.resize();
+		} else {
+			this.updateLastSelectableRow();
+
+			var currentRow = this.lastSelectableRow.next();
+
+			var skipRows = 7;
+			while (currentRow.length > 0 && skipRows-- > 0){
+				currentRow = currentRow.next();
+			}
+
+			this.detachedRows = [];
+
+			while (currentRow.length > 0){
+				var prev = currentRow;
+
+				currentRow = currentRow.next();
+
+				this.detachedRows.push(prev);
+				prev.detach();
+			}
+		}
 	}
 });

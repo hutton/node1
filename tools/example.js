@@ -17,46 +17,44 @@ function getFrees(index){
 					"A02",
 					"A03",
 					"A04",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A02",
 					"A03"
 					],[
 					"A02",
 					"A04",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A02",
 					"A03",
 					"A04",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A01",
 					"A02"
 				],[
-					"A06"
+					"A05"
 				],[
 					"A04",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A01",
 					"A02",
 					"A03",
 					"A04",
-					"A05",
-					"A06"
+					"A05"
 				],[
-					"A06"
+					"A01"
 				],[
 					"A01",
 					"A02"
 				],
 				[],
-				[],
+				[
+					"A03",
+					"A05"
+				],
 				[],
 				[],
 				[
@@ -71,19 +69,16 @@ function getFrees(index){
 				[
 					"A01",
 					"A02",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A01",
 					"A02",
 					"A03",
 					"A04",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A02",
-					"A05",
-					"A06"
+					"A05"
 				],[
 					"A05"
 				],[
@@ -99,7 +94,7 @@ function getFrees(index){
 					"A04"
 				],[
 					"A01",
-					"A06"
+					"A02"
 				],[
 					"A02",
 					"A04",
@@ -163,20 +158,20 @@ function getExample(){
 			{
 				"_id" : "A02",
 				"attendeeId" : "exampleA02",
-				"email" : "harriet.daniels@googles.con",
-				"name" : "Harriet"
+				"email" : "cory.daniels@googles.con",
+				"name" : "Cory"
 			},
 			{
 				"_id" : "A03",
 				"attendeeId" : "exampleA03",
 				"email" : "stewarthart@now.net",
-				"name" : "Stewart"
+				"name" : "Lilly"
 			},
 			{
 				"_id" : "A04",
 				"attendeeId" : "exampleA04",
-				"email" : "jhenderson@timemail.in",
-				"name" : "Julia"
+				"email" : "chenderson@timemail.in",
+				"name" : "Carla"
 			},
 			{
 				"_id" : "A01",
@@ -189,12 +184,6 @@ function getExample(){
 				"attendeeId" : "exampleA05",
 				"email" : "sheldon.hamilton@lookin.co",
 				"name" : "Sheldon"
-			},
-			{
-				"_id" : "A06",
-				"attendeeId" : "exampleA06",
-				"email" : "naomi_morgan@newstime.ip",
-				"name" : "Naomi"
 			}
 		],
 		"createdBy" : "1@gmail.com",
