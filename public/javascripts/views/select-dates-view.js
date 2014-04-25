@@ -16,7 +16,7 @@ window.SelectDatesView = Backbone.View.extend({
 	},
 
 	show: function(){
-		window.App.selectableDateMode = true;
+		window.App.setSelectableDateMode(true);
 
 		this.$el.slideDown('fast');
 
@@ -24,7 +24,7 @@ window.SelectDatesView = Backbone.View.extend({
 	},
 
 	hide: function(){
-		window.App.selectableDateMode = false;
+		window.App.setSelectableDateMode(false);
 
 		this.$el.slideUp('fast');
 

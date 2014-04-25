@@ -597,13 +597,6 @@ a:active {
   color: #4ad16c;
   opacity: 0.9 !important;
 }
-.cell-selected > div.date-cell-container {
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -o-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  transform: scale(1.05);
-}
 .cell-selected > .date-cell-container {
   border: #4ad16c solid 2px;
   margin: 2px;
@@ -883,37 +876,9 @@ a:active {
 .attendees-choices-row > li {
   float: left;
   height: 100%;
-  margin: 0px -5px;
+  margin: 0px;
   cursor: pointer;
   padding: 0px;
-  -webkit-transform-origin: 50% 100%;
-  -moz-transform-origin: 50% 100%;
-  -ms-transform-origin: 50% 100%;
-  transform-origin: 50% 100%;
-  -webkit-transform: scale(0.95);
-  -moz-transform: scale(0.95);
-  -o-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  transform: scale(0.95);
-  -moz-transition-duration: 0.3ms;
-  -webkit-transition-duration: 0.3ms;
-  -o-transform-duration: 0.3ms;
-  -ms-transform-duration: 0.3ms;
-  transition-duration: 0.3ms;
-}
-.attendees-choices-row > li.active ~ li {
-  -webkit-transform: scale(0.95);
-  -moz-transform: scale(0.95);
-  -o-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  transform: scale(0.95);
-}
-.attendees-choices-row > li.active {
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -o-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
 }
 .attendees-choice-month {
   color: #4ad16c;

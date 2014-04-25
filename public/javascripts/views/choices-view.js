@@ -250,6 +250,8 @@ window.ChoicesView = Backbone.View.extend({
 	active: function(isActive){
 	},
 
+	lastSelectableRow: null,
+
 	render: function(){
 		var that = this;
 
@@ -291,6 +293,20 @@ window.ChoicesView = Backbone.View.extend({
 		}
 
 		return this;
+	},
+
+	updateLastSelectableRow: function(){
+		var that = this;
+
+		this.lastSelectableRow = null;
+
+		this.tableEl.find('tr').each(function(index, rowEl){
+			rowEl  = $(rowEl);
+
+			if (rowEl.find('.markers-container').length > 0){
+				that.lastSelectableRow = rowEl;
+			}
+		});
 	},
 
 	resize: function(){
@@ -345,5 +361,39 @@ window.ChoicesView = Backbone.View.extend({
 		}
 
 		return row;
+	},
+
+	detachedRows: [],
+
+	setSelectableDateMode: function(selectableDateModeOn){
+		var that = this;
+
+		if (selectableDateModeOn){
+			_.each(this.detachedRows, function(row){
+				that.tableEl.append(row);
+			});
+
+			this.resize();
+		} else {
+			this.updateLastSelectableRow();
+
+			var currentRow = this.lastSelectableRow.next();
+
+			var skipRows = 7;
+			while (currentRow.length > 0 && skipRows-- > 0){
+				currentRow = currentRow.next();
+			}
+
+			this.detachedRows = [];
+
+			while (currentRow.length > 0){
+				var prev = currentRow;
+
+				currentRow = currentRow.next();
+
+				this.detachedRows.push(prev);
+				prev.detach();
+			}
+		}
 	}
 });
