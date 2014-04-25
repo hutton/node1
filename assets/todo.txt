@@ -1,5 +1,6 @@
 - Update favicon
 - Improve landscape mode
+- Improve skip banner on loader
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
 - Join event dialog
