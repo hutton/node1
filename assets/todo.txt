@@ -1,6 +1,10 @@
 - Update favicon
 - Improve landscape mode
 - Improve skip banner on loader
+- Improve loader
+	- animate from 100px below
+	- less delay
+- Bigger month
 - Add bounce to Join Event
 	- easeOutQuart -> easeOutBounce
 - Join event dialog
