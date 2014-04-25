@@ -1,5 +1,6 @@
 
 @import "elements.less";
+@import "font-awesome.min.css.less";
 
 @free-color: #4AD16C;
 @font-size: 21px;
@@ -699,16 +700,19 @@ a:active{
 
 .markers-container li{
     float: left;
-    margin: 0px 2px 2px 0px;
-    background: #e0e0e0;
-    width: 7px;
-    height: 7px;
 
-    border-radius: 5px;
+    // width: 7px;
+    // height: 7px;
+
+    // border-radius: 5px;
+}
+
+.markers-container li > i{
+	.fa;
 }
 
 .markers-container li.a{
-	background: @free-color;
+	color: @free-color;
 }
 
 .today .date-text{
@@ -1426,14 +1430,17 @@ a:active{
 	.markers-container{
 		margin-top: 0px;
 		margin-right: 0px;
-		margin-bottom: 2px;
+		margin-bottom: 0px;
 		margin-left: 2px;
 	}
 
 	.markers-container li{
 	    margin: 0px 2px 2px 0px;
-	    width: 7px;
-	    height: 7px;
+	    font-size: 11px;
+	}
+
+	.markers-container li > i:before{
+		content:"\f007"
 	}
 
 	.date-cell-container{
@@ -1482,9 +1489,12 @@ a:active{
 	}
 
 	.markers-container li{
-	    margin: 0px 1px 1px 0px;
-	    width: 4px;
-	    height: 4px;
+	    margin: 0px 0px 0px 0px;
+        font-size: 5px;
+	}
+
+	.markers-container li > i:before{
+		content:"\f111"
 	}
 
 	.date-cell-container{

@@ -229,9 +229,9 @@
         <ul>
         <@ _.each(availList, function(isAvailable){ @>
           <@ if (isAvailable) { @>
-            <li class="a"></li>
+            <li class="a"><i></i></li>
           <@ } else { @>
-            <li></li>
+            <li><i></i></li>
           <@ } @>
         <@ }); @>
         </ul>
@@ -309,7 +309,7 @@
               <div class="attendees-choice-items">
           <@ _.each(attendees, function(attendee){ @>
               <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>attendee-free<@ } @>">
-                <i class="fa fa-check-circle"></i> <@= attendee.get('prettyName') @>
+                <i class="fa fa-user"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
             <@ if (showInvite){ @>
@@ -381,7 +381,7 @@
                 <div>Look good too</div>
             </div>
             <@ } @>
-            <div class="loader-set-choices">Select when you're free <i class="fa fa-chevron-right"></i></div> <!-- ' -->
+            <div class="loader-set-choices">When are you free? <i class="fa fa-chevron-right"></i></div> <!-- ' -->
             <div class="loader-invite">
             <p>
             There's not many people participating

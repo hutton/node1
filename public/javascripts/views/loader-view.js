@@ -76,7 +76,7 @@ window.LoaderView = Backbone.View.extend({
 		}, 400);
 	},
 
-	animateDelay: 3000,
+	animateDelay: 1000,
 
 	startAnimations: function(){
 		var choicesSelected = this.choices.totalChoices();
@@ -128,7 +128,7 @@ window.LoaderView = Backbone.View.extend({
 			var height = $(window).height();
 			var offset = element.position();
 
-			var startPos = height - offset.top;
+			var startPos = 60;
 
 			if (edge === 'top'){
 				startPos = -offset.top;
