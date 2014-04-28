@@ -6,7 +6,7 @@
 	- less delay
 - Bigger month
 - Add bounce to Join Event
-	- easeOutQuart -> easeOutBounce
+	- easeOutCubic -> easeOutBounce
 - Join event dialog
 	'Cool, that's 2 days you can make.'
 	'When you join we'll email you a link to keep your choices updated.'
