@@ -229,9 +229,9 @@
         <ul>
         <@ _.each(availList, function(isAvailable){ @>
           <@ if (isAvailable) { @>
-            <li class="a"><i></i></li>
+            <li class="a"></li>
           <@ } else { @>
-            <li><i></i></li>
+            <li></li>
           <@ } @>
         <@ }); @>
         </ul>
@@ -338,7 +338,7 @@
 
         <script type="text/template" id="loader-template">
             <div class="loader-title loader-large"><@= title @></div>
-            <div class="loader-select-dates">First select some potential dates <i class="fa fa-chevron-right"></i></div>
+            <div class="loader-select-dates">First select some potential dates</div>
             <@ if (firstSelectable !== null && lastSelectable !== null){ @>
             <div class="loader-between">
                 <div class="text">
@@ -381,7 +381,7 @@
                 <div>Look good too</div>
             </div>
             <@ } @>
-            <div class="loader-set-choices">When are you free? <i class="fa fa-chevron-right"></i></div> <!-- ' -->
+            <div class="loader-set-choices">When are you free?</div> <!-- ' -->
             <div class="loader-invite">
             <p>
             There's not many people participating

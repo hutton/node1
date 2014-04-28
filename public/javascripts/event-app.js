@@ -76,9 +76,9 @@ window.EventApp = Backbone.View.extend({
     events: {
         "click #show-info":             "infoClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
-        "click .join-event":            "showJoinEvent", 
+        "click .join-event":            "showJoinEvent",
         "click .title":                 "showLoader",
-        "click":                        "onClick" 
+        "click":                        "onClick"
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -107,12 +107,14 @@ window.EventApp = Backbone.View.extend({
     render: function(){
         var that = this;
 
+        this.joinEventEl = this.$el.find('.join-event');
+
         if (this.newMode){
             _.delay(function(){
-                that.$el.find('.join-event').removeClass('join-event-hidden');    
+                that.joinEventEl.removeClass('join-event-hidden');
             }, 1000);
 
-            this.titleMailEl.click(function(){ 
+            this.titleMailEl.click(function(){
                 that.showNewModeMail();
             });
 
@@ -491,5 +493,14 @@ window.EventApp = Backbone.View.extend({
         this.selectableDateMode = selectableDateModeOn;
 
         this.ChoicesView.setSelectableDateMode(selectableDateModeOn);
+    },
+
+    bounceJoin: function(){
+        var that = this;
+        this.joinEventEl.animate({top: 70}, 120, 'easeOutQuart', function(){
+            that.joinEventEl.animate({top: 100}, 1400, 'easeOutBounce', function(){
+
+            });
+        });
     }
 });

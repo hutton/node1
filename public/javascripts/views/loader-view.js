@@ -84,13 +84,15 @@ window.LoaderView = Backbone.View.extend({
 
 		this.currentAnimateDelay = 400;
 
+		this.setCloseText("Skip");
+
 		this.$el.find('.loader-title').show();
 		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
 
 		if (!this.calendarModel.get('datesSelected')){
 			this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
 
-			this.hideClose();
+			this.setCloseText("Continue");
 		} else{
 			if (this.attendees.length < 3 || choicesSelected < 3){
 				this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
@@ -101,13 +103,21 @@ window.LoaderView = Backbone.View.extend({
 
 			if (yourChoices == 0 || App.newMode){
 				this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
-				this.hideClose();
+				this.setCloseText("Continue");
 			} else {
 				if (this.attendees.length < 3){
 					this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
 				}
 			}
 		}
+	},
+
+	setCloseText: function(text){
+		var that = this;
+
+		_.delay(function(){
+			that.$el.find('.loader-close').html(text + " <i class='fa fa-chevron-right'></i>");
+		}, this.currentAnimateDelay - this.animateDelay);
 	},
 
 	hideClose: function(){

@@ -98,6 +98,8 @@ window.ChoiceModel = Backbone.Model.extend({
 			}
 
 			$('#register-free-dates').val(window.App.isFree);
+
+			App.bounceJoin();
 		}
 
 		window.App.showBestChoices();

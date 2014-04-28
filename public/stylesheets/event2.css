@@ -1917,8 +1917,7 @@ a:active {
 }
 .markers-container li {
   float: left;
-}
-.markers-container li > i {
+  opacity: 0.5;
   display: inline-block;
   font-family: FontAwesome;
   font-style: normal;
@@ -1929,6 +1928,7 @@ a:active {
 }
 .markers-container li.a {
   color: #4ad16c;
+  opacity: 1.0;
 }
 .today .date-text {
   color: #4ad16c;
@@ -2491,18 +2491,13 @@ a:active {
 }
 .join-event {
   position: relative;
-  top: 0px;
+  top: 98px;
   background: #4ad16c;
   color: white;
-  padding: 2px 20px;
+  padding: 2px 20px 100px 20px;
   display: inline-block;
   cursor: pointer;
   pointer-events: auto;
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transform-duration: 0.2s;
-  -ms-transform-duration: 0.2s;
-  transition-duration: 0.2s;
 }
 .join-event-hidden {
   top: 50px;
@@ -2546,7 +2541,7 @@ a:active {
     margin: 0px 2px 2px 0px;
     font-size: 11px;
   }
-  .markers-container li > i:before {
+  .markers-container li:before {
     content: "\f007";
   }
   .date-cell-container {
@@ -2594,10 +2589,10 @@ a:active {
     margin-left: 1px;
   }
   .markers-container li {
-    margin: 0px 0px 0px 0px;
+    margin: 0px 1px 0px 0px;
     font-size: 5px;
   }
-  .markers-container li > i:before {
+  .markers-container li:before {
     content: "\f111";
   }
   .date-cell-container {
