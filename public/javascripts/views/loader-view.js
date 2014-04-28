@@ -11,6 +11,8 @@ window.LoaderView = Backbone.View.extend({
 		"click": "close"
 	},
 
+	autoClose: true,
+
 	render: function(){
 		this.inner = this.$el.find('.loader-inner');
 
@@ -79,11 +81,13 @@ window.LoaderView = Backbone.View.extend({
 	animateDelay: 1000,
 
 	startAnimations: function(){
+		var that = this;
 		var choicesSelected = this.choices.totalChoices();
 		var yourChoices = this.choices.choicesForAttendee(App.currentAttendeeId);
 
 		this.currentAnimateDelay = 400;
 
+		this.showClose();
 		this.setCloseText("Skip");
 
 		this.$el.find('.loader-title').show();
@@ -110,6 +114,12 @@ window.LoaderView = Backbone.View.extend({
 				}
 			}
 		}
+
+		if (this.autoClose){
+			_.delay(function(){
+				that.close();
+			}, this.currentAnimateDelay + 1500);
+		}
 	},
 
 	setCloseText: function(text){
@@ -124,7 +134,15 @@ window.LoaderView = Backbone.View.extend({
 		var that = this;
 
 		_.delay(function(){
-			that.$el.find('.loader-close').animate({bottom: '-30px'}, 400);
+			that.$el.find('.loader-close').addClass('loader-close-hidden');
+		}, this.currentAnimateDelay - this.animateDelay);
+	},
+
+	showClose: function(){
+		var that = this;
+
+		_.delay(function(){
+			that.$el.find('.loader-close').removeClass('loader-close-hidden');
 		}, this.currentAnimateDelay - this.animateDelay);
 	},
 

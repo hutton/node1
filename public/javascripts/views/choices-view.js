@@ -245,11 +245,6 @@ window.ChoicesView = Backbone.View.extend({
 
 	currentScroll: null,
 
-	isActive: true,
-
-	active: function(isActive){
-	},
-
 	lastSelectableRow: null,
 
 	render: function(){
@@ -310,7 +305,11 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	resize: function(){
-		if (this.isActive){
+		var windowHeight = $(window).height();
+
+		if (windowHeight > 350){
+			this.$el.show();
+
 			var size = $(".event-table .date-cell").first().width();
 			var windowSize = Math.min($("body").first().width(), 600);
 			
@@ -330,6 +329,8 @@ window.ChoicesView = Backbone.View.extend({
 			this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
 
 			App.realignAdorners();
+		} else {
+			this.$el.hide();
 		}
 	},
 
