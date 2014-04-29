@@ -1,25 +1,65 @@
-.attendees-choices-list-content{
-	-webkit-perspective: 800px;
-	-webkit-perspective-origin: 50% 50%;	
+html{
+    background: #4ad16c;
+    color: white;
+    font-family: 'Open Sans';
 }
 
-.attendees-choices-row {
--webkit-transform-style: preserve-3d;
+.calendar{
+    position: relative;
+    display: inline-block;
 }
 
-.attendees-choices-row > li.active {
--webkit-transform: none;
+.calendar > .fa{
+    font-size: 100px;
 }
 
-.attendees-choices-row > li {
--webkit-transform: rotateY(20deg) scale(0.9);
--webkit-transition: -webkit-transform 300ms ease-out;
+.calendar > div{
+    position: absolute;
+    top: 34px;
+    width: 100%;
+    line-height: 1.3em;
 }
 
-.attendees-choices-row > li.active ~ li {
--webkit-transform: rotateY(-20deg) scale(0.9);
+.calendar > div > div{
+    text-align: center;
 }
 
+.day{
+    font-size: 12px;
+}
+.date{
+    font-size: 30px;
+    font-family: Arial;
+}
+.month{
+    font-size: 12px;
+}
 
+.big .fa{
+    font-size: 130px;
+}
 
-http://jsfiddle.net/Yy235/
+.big > div{
+    top: 45px;
+    line-height: 1.6em;
+}
+
+.big .day, .big .month{
+    font-size: 15px;
+}
+
+.big .date{
+    font-size: 40px;
+}
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+<div class="calendar">
+    <i class="fa fa-calendar-o"></i>
+    <div>
+        <div class="day">Wednesday</div>
+        <div class="date">28</div>
+        <div class="month">December</div>
+    </div>
+</div>
+
+<div class="calendar big">
