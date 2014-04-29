@@ -63,4 +63,7 @@ html{
 </div>
 
 <div class="calendar big">
-    <i clas
+    
+    
+http://jsfiddle.net/aNvqy/1/    
+    
