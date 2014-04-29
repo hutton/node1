@@ -674,21 +674,24 @@ a:active{
 }
 
 .free-marker{
-	display: none;
+	opacity: 0.0;
 
 	position: absolute;
 	color: @free-color;	
 
-	top: 50%;
+	top: 60%;
 
 	text-align: center;
 
 	font-size: 130%;
 	width: 100%;
+	.transition-duration(0.15s);
 }
 
 .free{
 	display: block;
+	opacity: 1.0;
+	top: 50%;
 }
 
 .markers-container{
@@ -705,6 +708,7 @@ a:active{
 }
 
 .markers-container li{
+    position: relative;
     float: left;
     opacity: 0.5;
     .fa;

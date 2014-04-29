@@ -82,7 +82,18 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.markerItemsEl.each(function(index, element){
 			if (availList[index]){
-				$(this).addClass("a");
+				var marker = $(this);
+
+				if (!marker.hasClass("a")){
+					marker.addClass("a");
+
+					if (animate){
+						marker.animate({top: -6}, 120, 'easeOutCubic', function(){
+							marker.animate({top: 0}, 600, 'easeOutBounce', function(){
+							});
+						});
+					}
+				}
 			} else {
 				$(this).removeClass("a");
 			}

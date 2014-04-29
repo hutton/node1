@@ -1902,16 +1902,23 @@ a:active {
   height: 100%;
 }
 .free-marker {
-  display: none;
+  opacity: 0.0;
   position: absolute;
   color: #4ad16c;
-  top: 50%;
+  top: 60%;
   text-align: center;
   font-size: 130%;
   width: 100%;
+  -moz-transition-duration: 0.15s;
+  -webkit-transition-duration: 0.15s;
+  -o-transform-duration: 0.15s;
+  -ms-transform-duration: 0.15s;
+  transition-duration: 0.15s;
 }
 .free {
   display: block;
+  opacity: 1.0;
+  top: 50%;
 }
 .markers-container {
   position: absolute;
@@ -1924,6 +1931,7 @@ a:active {
   list-style-image: none;
 }
 .markers-container li {
+  position: relative;
   float: left;
   opacity: 0.5;
   display: inline-block;
