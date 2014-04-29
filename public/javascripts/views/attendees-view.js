@@ -6,7 +6,6 @@ window.AttendeesView = Backbone.View.extend({
 	template: _.template($('#attendees-view-template').html()),
 
 	events: {
-		"click .attendees-close": "onClose"
 	},
 
 	isActive: false,
@@ -163,8 +162,6 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	onClose: function(){
-		this.$el.find('.attendees-close').addClass('attendees-close-hidden');
-
 		App.setSelected(this.model);
 
 		this.hide();
@@ -216,9 +213,7 @@ window.AttendeesView = Backbone.View.extend({
 			}
 		}
 
-		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, animateDuration, 'easeOutExpo', function(){
-			that.$el.find('.attendees-close').removeClass('attendees-close-hidden');
-		});
+		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, animateDuration, 'easeOutExpo');
 	},
 
 	destroy: function(){

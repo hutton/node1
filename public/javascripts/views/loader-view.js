@@ -11,6 +11,8 @@ window.LoaderView = Backbone.View.extend({
 		"click": "close"
 	},
 
+	autoClose: true,
+
 	render: function(){
 		this.inner = this.$el.find('.loader-inner');
 
@@ -76,13 +78,17 @@ window.LoaderView = Backbone.View.extend({
 		}, 400);
 	},
 
-	animateDelay: 3000,
+	animateDelay: 1000,
 
 	startAnimations: function(){
+		var that = this;
 		var choicesSelected = this.choices.totalChoices();
 		var yourChoices = this.choices.choicesForAttendee(App.currentAttendeeId);
 
 		this.currentAnimateDelay = 400;
+
+		this.showClose();
+		this.setCloseText("Skip");
 
 		this.$el.find('.loader-title').show();
 		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
@@ -90,7 +96,7 @@ window.LoaderView = Backbone.View.extend({
 		if (!this.calendarModel.get('datesSelected')){
 			this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
 
-			this.hideClose();
+			this.setCloseText("Continue");
 		} else{
 			if (this.attendees.length < 3 || choicesSelected < 3){
 				this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
@@ -101,20 +107,42 @@ window.LoaderView = Backbone.View.extend({
 
 			if (yourChoices == 0 || App.newMode){
 				this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
-				this.hideClose();
+				this.setCloseText("Continue");
 			} else {
 				if (this.attendees.length < 3){
 					this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
 				}
 			}
 		}
+
+		if (this.autoClose){
+			_.delay(function(){
+				that.close();
+			}, this.currentAnimateDelay + 1500);
+		}
+	},
+
+	setCloseText: function(text){
+		var that = this;
+
+		_.delay(function(){
+			that.$el.find('.loader-close').html(text + " <i class='fa fa-chevron-right'></i>");
+		}, this.currentAnimateDelay - this.animateDelay);
 	},
 
 	hideClose: function(){
 		var that = this;
 
 		_.delay(function(){
-			that.$el.find('.loader-close').animate({bottom: '-30px'}, 400);
+			that.$el.find('.loader-close').addClass('loader-close-hidden');
+		}, this.currentAnimateDelay - this.animateDelay);
+	},
+
+	showClose: function(){
+		var that = this;
+
+		_.delay(function(){
+			that.$el.find('.loader-close').removeClass('loader-close-hidden');
 		}, this.currentAnimateDelay - this.animateDelay);
 	},
 
@@ -128,7 +156,7 @@ window.LoaderView = Backbone.View.extend({
 			var height = $(window).height();
 			var offset = element.position();
 
-			var startPos = height - offset.top;
+			var startPos = 60;
 
 			if (edge === 'top'){
 				startPos = -offset.top;

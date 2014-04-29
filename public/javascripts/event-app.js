@@ -76,9 +76,9 @@ window.EventApp = Backbone.View.extend({
     events: {
         "click #show-info":             "infoClicked",
         "keyup #register-attendee-email-input": "registerAttendeeInputChanged",
-        "click .join-event":            "showJoinEvent", 
+        "click .join-event":            "showJoinEvent",
         "click .title":                 "showLoader",
-        "click":                        "onClick" 
+        "click":                        "onClick"
     },
 
     selectedRowTemplate: _.template($('#selected-row-template').html()),
@@ -107,12 +107,14 @@ window.EventApp = Backbone.View.extend({
     render: function(){
         var that = this;
 
+        this.joinEventEl = this.$el.find('.join-event');
+
         if (this.newMode){
             _.delay(function(){
-                that.$el.find('.join-event').removeClass('join-event-hidden');    
+                that.joinEventEl.removeClass('join-event-hidden');
             }, 1000);
 
-            this.titleMailEl.click(function(){ 
+            this.titleMailEl.click(function(){
                 that.showNewModeMail();
             });
 
@@ -172,7 +174,7 @@ window.EventApp = Backbone.View.extend({
         var width = $(window).width();
         var height = $(window).height();
 
-        if (height < 350){
+        if (height <= 350){
             this.showHeader(false);
             this.AttendeesView.show();
         } else {
@@ -474,6 +476,7 @@ window.EventApp = Backbone.View.extend({
     },
 
     showLoader: function(){
+        this.LoaderView.autoClose = false;
         this.LoaderView.show();
     },
 
@@ -482,7 +485,8 @@ window.EventApp = Backbone.View.extend({
 
         if (target.parents('.attendees-container').length === 0 &&
             (target.parents('.date-cell').length === 0 ||
-            target.parents('.date-cell').hasClass('unselectable'))){
+            target.parents('.date-cell').hasClass('unselectable')) &&
+            target.parents('.loader').length === 0){
             this.AttendeesView.onClose();
         }
     },
@@ -491,5 +495,13 @@ window.EventApp = Backbone.View.extend({
         this.selectableDateMode = selectableDateModeOn;
 
         this.ChoicesView.setSelectableDateMode(selectableDateModeOn);
+    },
+
+    bounceJoin: function(){
+        var that = this;
+        this.joinEventEl.animate({top: 75}, 120, 'easeOutCubic', function(){
+            that.joinEventEl.animate({top: 100}, 1000, 'easeOutBounce', function(){
+            });
+        });
     }
 });

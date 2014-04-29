@@ -22,7 +22,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
 
-      <link rel="shortcut icon" href="/images/favicon.png">
+      <link rel="shortcut icon" href="/images/favicon_48x48.ico">
     </head>
     <body>
       <div class="background"></div>
@@ -115,7 +115,7 @@
           <div class="loader-inner">
             <div class="loader-convenely">Convenely</div>
           </div>
-        <div class="loader-close">Skip <i class="fa fa-chevron-right"></i></div>
+        <div class="loader-close loader-close-hidden">Skip <i class="fa fa-chevron-right"></i></div>
         </div>
       </div>
 
@@ -294,7 +294,6 @@
                     <ul class="attendees-choices-row"></ul>
                   </div>
                 </div>
-                <div class="attendees-close"><i class="fa fa-angle-double-down"></i></div>
               </div>
             </div>
           </div>
@@ -309,7 +308,7 @@
               <div class="attendees-choice-items">
           <@ _.each(attendees, function(attendee){ @>
               <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>attendee-free<@ } @>">
-                <i class="fa fa-check-circle"></i> <@= attendee.get('prettyName') @>
+                <i class="fa fa-user"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
             <@ if (showInvite){ @>
@@ -338,7 +337,7 @@
 
         <script type="text/template" id="loader-template">
             <div class="loader-title loader-large"><@= title @></div>
-            <div class="loader-select-dates">First select some potential dates <i class="fa fa-chevron-right"></i></div>
+            <div class="loader-select-dates">First select some potential dates</div>
             <@ if (firstSelectable !== null && lastSelectable !== null){ @>
             <div class="loader-between">
                 <div class="text">
@@ -381,7 +380,7 @@
                 <div>Look good too</div>
             </div>
             <@ } @>
-            <div class="loader-set-choices">Select when you're free <i class="fa fa-chevron-right"></i></div> <!-- ' -->
+            <div class="loader-set-choices">When are you free?</div> <!-- ' -->
             <div class="loader-invite">
             <p>
             There's not many people participating

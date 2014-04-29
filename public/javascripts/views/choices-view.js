@@ -82,7 +82,18 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.markerItemsEl.each(function(index, element){
 			if (availList[index]){
-				$(this).addClass("a");
+				var marker = $(this);
+
+				if (!marker.hasClass("a")){
+					marker.addClass("a");
+
+					if (animate){
+						marker.animate({top: -6}, 120, 'easeOutCubic', function(){
+							marker.animate({top: 0}, 600, 'easeOutBounce', function(){
+							});
+						});
+					}
+				}
 			} else {
 				$(this).removeClass("a");
 			}
@@ -245,11 +256,6 @@ window.ChoicesView = Backbone.View.extend({
 
 	currentScroll: null,
 
-	isActive: true,
-
-	active: function(isActive){
-	},
-
 	lastSelectableRow: null,
 
 	render: function(){
@@ -310,7 +316,11 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	resize: function(){
-		if (this.isActive){
+		var windowHeight = $(window).height();
+
+		if (windowHeight > 350){
+			this.$el.show();
+
 			var size = $(".event-table .date-cell").first().width();
 			var windowSize = Math.min($("body").first().width(), 600);
 			
@@ -330,6 +340,8 @@ window.ChoicesView = Backbone.View.extend({
 			this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
 
 			App.realignAdorners();
+		} else {
+			this.$el.hide();
 		}
 	},
 

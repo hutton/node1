@@ -95,6 +95,8 @@ window.ChoiceModel = Backbone.Model.extend({
 				this.pretendFree = true;
 
 				this.trigger('changedFree');
+
+				App.bounceJoin();
 			}
 
 			$('#register-free-dates').val(window.App.isFree);

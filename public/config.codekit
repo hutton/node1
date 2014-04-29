@@ -607,17 +607,6 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/javascripts\/views\/settings-view-ck.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/javascripts\/views\/settings-view-ck.js",
-		"outputAbbreviatedPath": "\/javascripts\/views\/settings-view-ck-ck.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
 	"\/javascripts\/views\/settings-view.js": {
 		"fileType": 64,
 		"ignore": 1,
