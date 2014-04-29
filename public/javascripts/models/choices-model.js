@@ -1,6 +1,12 @@
 window.ChoicesModel = Backbone.Collection.extend({
  	model: ChoiceModel,
 
+	totalSelectable: function(){
+		var total = 0;
+
+		return this.where({selectable: true}).length;
+	},
+
 	totalChoices: function(){
 		var total = 0;
 

@@ -337,29 +337,57 @@
 
         <script type="text/template" id="loader-template">
             <div class="loader-title loader-large"><@= title @></div>
-            <div class="loader-select-dates">First select some potential dates</div>
+            <div class="loader-select-dates">Select some potential dates</div>
             <@ if (firstSelectable !== null && lastSelectable !== null){ @>
+            <div class="loader-on">
+                <div class="text">
+                It's happening on
+                </div> <!-- ' -->
+                <div class="dates">
+                  <div class="loader-calendar">
+                    <i class="fa fa-calendar-o"></i>
+                      <div>
+                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
+                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
+                          <div class="loader-calendar-month"><@= firstSelectable.format("MMMM") @></div>
+                      </div>
+                  </div>
+                </div>
+            </div>
             <div class="loader-between">
                 <div class="text">
                 It's happening between
                 </div> <!-- ' -->
                 <div class="dates">
-                  <div class="inline">
-                    <div><@= firstSelectable.format("dddd") @></div>
-                    <div><@= firstSelectable.format("Do MMMM") @></div>
+                  <div class="loader-calendar">
+                    <i class="fa fa-calendar-o"></i>
+                      <div>
+                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
+                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
+                          <div class="loader-calendar-month"><@= firstSelectable.format("MMMM") @></div>
+                      </div>
                   </div>
                   <div class="inline and">&</div>
-                  <div class="inline">
-                    <div><@= lastSelectable.format("dddd") @></div>
-                    <div><@= lastSelectable.format("Do MMMM") @></div>
+                  <div class="loader-calendar">
+                    <i class="fa fa-calendar-o"></i>
+                      <div>
+                          <div class="loader-calendar-day"><@= lastSelectable.format("dddd") @></div>
+                          <div class="loader-calendar-date"><@= lastSelectable.format("D") @></div>
+                          <div class="loader-calendar-month"><@= lastSelectable.format("MMMM") @></div>
+                      </div>
                   </div>
                 </div>
             </div>
             <@ } @>
             <@ if (topDate !== null && secondDate !== null && thirdDate !== null){ @>
             <div class="loader-top-choice">
-                <div>
-                <@= topDate.format("dddd Do MMMM") @>
+                <div class="loader-calendar loader-calendar-big">
+                    <i class="fa fa-calendar-o"></i>
+                    <div>
+                        <div class="loader-calendar-day"><@= topDate.format("dddd") @></div>
+                        <div class="loader-calendar-date"><@= topDate.format("D") @></div>
+                        <div class="loader-calendar-month"><@= topDate.format("MMMM") @></div>
+                    </div>
                 </div>
                 <div>
                 Looks the best choice
@@ -367,14 +395,22 @@
             </div>
             <div class="loader-top-other">
                 <div class="dates">
-                  <div class="inline">
-                    <div><@= secondDate.format("dddd") @></div>
-                    <div><@= secondDate.format("Do MMMM") @></div>
+                  <div class="loader-calendar">
+                    <i class="fa fa-calendar-o"></i>
+                      <div>
+                          <div class="loader-calendar-day"><@= secondDate.format("dddd") @></div>
+                          <div class="loader-calendar-date"><@= secondDate.format("D") @></div>
+                          <div class="loader-calendar-month"><@= secondDate.format("MMMM") @></div>
+                      </div>
                   </div>
                   <div class="inline and">&</div>
-                  <div class="inline">
-                    <div><@= thirdDate.format("dddd") @></div>
-                    <div><@= thirdDate.format("Do MMMM") @></div>
+                  <div class="loader-calendar">
+                    <i class="fa fa-calendar-o"></i>
+                      <div>
+                          <div class="loader-calendar-day"><@= thirdDate.format("dddd") @></div>
+                          <div class="loader-calendar-date"><@= thirdDate.format("D") @></div>
+                          <div class="loader-calendar-month"><@= thirdDate.format("MMMM") @></div>
+                      </div>
                   </div>
                 </div>
                 <div>Look good too</div>

@@ -93,12 +93,14 @@ window.LoaderView = Backbone.View.extend({
 		this.$el.find('.loader-title').show();
 		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
 
-		if (!this.calendarModel.get('datesSelected')){
+		if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
 			this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
 
 			this.setCloseText("Continue");
 		} else{
-			if (this.attendees.length < 3 || choicesSelected < 3){
+			if (this.choices.totalSelectable() === 1){
+				this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
+			} else if (this.attendees.length <= 3 || choicesSelected <= 3){
 				this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
 			} else {
 				this.animateFromEdge(this.$el.find('.loader-top-choice'), 'bottom');

@@ -313,6 +313,10 @@ window.ChoicesView = Backbone.View.extend({
 				that.lastSelectableRow = rowEl;
 			}
 		});
+
+		if (this.lastSelectableRow === null){
+			this.lastSelectableRow = this.tableEl.find('tr').last();
+		}
 	},
 
 	resize: function(){
