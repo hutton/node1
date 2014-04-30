@@ -88,10 +88,7 @@ window.ChoiceView = Backbone.View.extend({
 					marker.addClass("a");
 
 					if (animate){
-						marker.animate({top: -6}, 120, 'easeOutCubic', function(){
-							marker.animate({top: 0}, 600, 'easeOutBounce', function(){
-							});
-						});
+						marker.velocity({top: -6}, 120, 'easeOutCubic').velocity({top: 0}, 600, 'easeOutBounce');
 					}
 				}
 			} else {
@@ -153,11 +150,7 @@ window.ChoiceView = Backbone.View.extend({
 		var offset = this.$el.offset();
 		var itemHeight = $('.date-cell').first().height();
 
-		$('html, body').stop();
-
-		$('html, body').animate({
-			scrollTop: offset.top - (navBarHeight + itemHeight)
-		}, 400);
+		this.$el.velocity("scroll", {duration: 400, offset: -(navBarHeight + itemHeight)});
 	},
 
 	adornersRespositioned: function(){
@@ -183,9 +176,9 @@ window.ChoiceView = Backbone.View.extend({
 			var position = this.$el.position();
 
 			if (animate){
-				$(".calendar-choices-top-" + classSuffix).animate({left: position.left, top: position.top}, 400);
+				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 400);
 			} else {
-				$(".calendar-choices-top-" + classSuffix).animate({left: position.left, top: position.top}, 0);
+				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 0);
 			}
 		}
 	},

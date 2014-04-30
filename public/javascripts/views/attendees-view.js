@@ -151,7 +151,7 @@ window.AttendeesView = Backbone.View.extend({
 
 		that.showing = false;
 
-		this.$el.find('.attendees-choices-list-container').animate({height: 0}, 600, 'easeOutExpo', function(){
+		this.$el.find('.attendees-choices-list-container').velocity({height: 0}, 600, 'easeOutExpo', function(){
 
 			if (!that.showing){
 				that.$el.detach();
@@ -213,7 +213,7 @@ window.AttendeesView = Backbone.View.extend({
 			}
 		}
 
-		this.$el.find('.attendees-choices-list-container').animate({height: newHeight}, animateDuration, 'easeOutExpo');
+		this.$el.find('.attendees-choices-list-container').velocity({height: newHeight}, animateDuration, 'easeOutExpo');
 	},
 
 	destroy: function(){

@@ -499,9 +499,6 @@ window.EventApp = Backbone.View.extend({
 
     bounceJoin: function(){
         var that = this;
-        this.joinEventEl.animate({top: 75}, 120, 'easeOutCubic', function(){
-            that.joinEventEl.animate({top: 100}, 1000, 'easeOutBounce', function(){
-            });
-        });
+        this.joinEventEl.velocity({top: 75}, 120, 'easeOutCubic').velocity({top: 100}, 1000, 'easeOutBounce');
     }
 });

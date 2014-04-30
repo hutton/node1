@@ -508,6 +508,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/javascripts\/tp\/jquery.velocity.min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/tp\/jquery.velocity.min.js",
+		"outputAbbreviatedPath": "\/javascripts\/tp\/jquery.velocity.min-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/javascripts\/tp\/moment.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -574,17 +585,6 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/javascripts\/views\/info-row-view.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/javascripts\/views\/info-row-view.js",
-		"outputAbbreviatedPath": "\/javascripts\/views\/info-row-view-ck.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
 	"\/javascripts\/views\/loader-view.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -613,28 +613,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/javascripts\/views\/settings-view.js",
 		"outputAbbreviatedPath": "\/javascripts\/views\/settings-view-ck.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/javascripts\/views\/side-info-panel.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/javascripts\/views\/side-info-panel.js",
-		"outputAbbreviatedPath": "\/javascripts\/views\/side-info-panel-ck.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
-	"\/javascripts\/views\/top-choices-panel.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/javascripts\/views\/top-choices-panel.js",
-		"outputAbbreviatedPath": "\/javascripts\/views\/top-choices-panel-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
