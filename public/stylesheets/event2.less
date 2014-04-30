@@ -211,6 +211,10 @@ a:active{
 	line-height: 1.2em;
 }
 
+.loader-on .text{
+	margin-bottom: 10px;
+}
+
 .loader-between .text{
 	margin-bottom: 10px;
 }
@@ -220,6 +224,10 @@ a:active{
 	margin-right: auto;
 }
 
+.loader-inner > div.loader-top-choice{
+	margin-bottom: 10px;
+}
+
 .loader-top-choice > div:first-child{
 	font-size: 30px;
 }
@@ -227,6 +235,56 @@ a:active{
 .loader-top-other > div:first-child{
 	margin-bottom: 5px;
 }
+
+.loader-calendar{
+    position: relative;
+    display: inline-block;
+}
+
+.loader-calendar > .fa{
+    font-size: 90px;
+}
+
+.loader-calendar > div{
+    position: absolute;
+    top: 31px;
+    width: 100%;
+    //line-height: 1.3em;
+}
+
+.loader-calendar > div > div{
+    text-align: center;
+}
+
+.loader-calendar-day{
+    font-size: 12px;
+}
+.loader-calendar-date{
+    font-size: 22px;
+    font-family: Arial;
+    line-height: 19px;
+}
+.loader-calendar-month{
+    font-size: 12px;
+}
+
+.loader-calendar-big .fa{
+    font-size: 110px;
+}
+
+.loader-calendar-big > div{
+    top: 39px;
+}
+
+.loader-calendar-big .loader-calendar-day, .loader-calendar-big .loader-calendar-month{
+    font-size: 13px;
+}
+
+.loader-calendar-big .loader-calendar-date{
+    font-size: 34px;
+    line-height: 26px;
+}
+
 
 .inline{
 	display: inline-block;
@@ -765,135 +823,6 @@ a:active{
 	.attendee-button-container;
 	border: none;
 	background: none;
-}
-
-/********** nfo-row *******************/
-.info-row{
-	position: relative;
-	overflow: hidden;
-	margin: 3px;
-}
-
-.info-row > div{
-	position: relative;
-}
-
-.info-row-date{
-	font-size: 12px;
-	padding-left: 10px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	color: #a0a0a0;
-	text-align: left;
-}
-
-.info-row-text-container {
-	text-align: center;
-	margin-left: 80px;
-	padding: 15px;
-	background: @light-background-color;
-}
-
-.info-row-selector{
-	font-size: 80%;
-
-	width: 80px;
-	position: absolute;
-	height: 100%;
-	text-align: center;
-
-	float: left;
-	background: #f1f1f1;
-	color: @choice-border-color;
-	.transition-duration(0.2s);
-}
-
-.info-row-selector > div, .info-row-selector-free > div{
-	position: relative;
-	top: 50%;
-}
-
-.info-row-selector > div{
-	margin-top: -24px;
-}
-
-.info-row-selector-free{
-	.info-row-selector;
-	font-size: 100%;
-
-	background: @free-color;
-	color: white;
-	position: absolute;
-	left: -80px;
-}
-
-.info-row-selector-free > div{
-	margin-top: -18px;
-}
-
-.info-row-selector-free-show{
-	left: 0px;
-}
-
-#info-row-details-link{
-	position: relative;
-	top: 4px;
-	color: @free-color;
-	padding: 6px;
-}
-
-#info-row-hide-details-link{
-	position: relative;
-	top: 4px;
-	color: @free-color;
-	padding: 6px;
-}
-
-.info-row-names{
-	text-align: left;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	font-size: 0.85em;
-	color: #d0d0d0;
-	word-wrap: break-word;
-}
-
-.info-row-names > strong{
-	color: @free-color;
-	font-weight: normal;
-}
-
-/**************************************/
-.top-choice-text{
-	font-size: 12px;
-	position: absolute;
-	top: 27px;
-	left: -7px;
-
-	background: crimson;
-	border-radius: 10px;
-	width: 18px;
-	height: 18px;
-	color: white;
-	z-index: 101;
-	margin: 0 auto;
-	padding-top: 1px;
-	line-height: 1.4;
-}
-
-.info-row-top-choice{
-	text-align: left;
-}
-
-.info-row-top-choice > div{
-	background: crimson;
-	color: white;
-	padding: 2px 8px;
-	font-size: 12px;
-	font-weight: bold;
-	display: inline-block;
-	position: relative;
-	top: -5px;
 }
 
 /**************************************/

@@ -48,6 +48,6 @@ def find_unused_css(stylesheet, rootdir):
 	for rule in allRules:
 		print rule
 
-# python unused-css.py 'event2.css' './site/'
+# python clean-css.py 'event2.less' './'
 
 find_unused_css(sys.argv[1], sys.argv[2])
