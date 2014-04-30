@@ -127,7 +127,7 @@ function processEmailRequest(parsedReq, createCalendarCallback, updateCalendarCa
 						updateCalendarCallback(calendar);
 					}
 				} else {
-					Mail.sendCouldntFindYouInCalendarEmail(from, to);
+					// Mail.sendCouldntFindYouInCalendarEmail(from, to);
 
 					logger.error("Couldn't find " + from + " in calendar " + calendar.id);
 

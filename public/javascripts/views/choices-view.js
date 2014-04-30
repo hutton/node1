@@ -335,8 +335,6 @@ window.ChoicesView = Backbone.View.extend({
 			this.tableEl.find("tr > td > .date-cell-container").height(size - 6);
 			this.tableEl.find("tr > td > .month").height(size - 6);
 
-			this.tableEl.find(".info-row-names").width(windowSize - 132);
-			 
 			parent.append(this.tableEl);
 
 			var topChoiceSize = size - 2;
