@@ -1628,6 +1628,9 @@ a:active {
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
 }
+#settings-home {
+  margin-right: 30px;
+}
 .table td {
   padding: 8px 0px;
   border-top: none;
