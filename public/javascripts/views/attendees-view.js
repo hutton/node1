@@ -149,16 +149,18 @@ window.AttendeesView = Backbone.View.extend({
 	hide: function(){
 		var that = this;
 
-		that.showing = false;
+		if (this.showing){
+			that.showing = false;
 
-		this.$el.find('.attendees-choices-list-container').velocity({height: 0}, 600, 'easeOutExpo', function(){
+			this.$el.find('.attendees-choices-list-container').velocity({height: 0}, 600, 'easeOutExpo', function(){
 
-			if (!that.showing){
-				that.$el.detach();
-			} else {
-				that.setHeight(true);
-			}
-		});	
+				if (!that.showing){
+					that.$el.detach();
+				} else {
+					that.setHeight(true);
+				}
+			});
+		}
 	},
 
 	onClose: function(){

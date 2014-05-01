@@ -54,6 +54,24 @@
       <div class="row selecting-dates-container" style="display: none;">
         <div class="selecting-dates">
           <div class="selecting-dates-title">Select potential dates</div>
+          <div class="selecting-dates-help-text"><span class="inline-text-desktop">Click</span><span class="inline-text-mobile">Tap</span> a date to toogle or select a range.</div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              Select a range <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><span id="selecting-dates-one-month">Next month</span></li>
+              <li class="divider"></li>
+              <li><span id="selecting-dates-two-months">Next two months</span></li>
+              <li class="divider"></li>
+              <li><span id="selecting-dates-all">All dates</span></li>
+              <li class="divider"></li>
+              <li><span id="selecting-dates-clear">Clear</span></li>
+            </ul>
+          </div>
+
+
+<!-- 
           <div class="selecting-dates-period-conatiner">
             <span id="selecting-dates-one-month">
               One month
@@ -64,7 +82,7 @@
             <span id="selecting-dates-all">
               All
             </span>
-          </div>          
+          </div>           -->
           <div>
             <span id="selecting-dates-cancel">Cancel</span>
             <span id="selecting-dates-save">Save <i class="fa fa-chevron-right"></i></span>

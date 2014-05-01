@@ -13,6 +13,7 @@ window.SelectDatesView = Backbone.View.extend({
 		"click #selecting-dates-one-month": "oneMonthClicked",
 		"click #selecting-dates-two-months":	"twoMonthsClicked",
 		"click #selecting-dates-all":		"allClicked",
+		"click #selecting-dates-clear":		"clearClicked"
 	},
 
 	show: function(){
@@ -152,6 +153,10 @@ window.SelectDatesView = Backbone.View.extend({
 		}
 
 		this.allSelected = !this.allSelected;
+	},
+
+	clearClicked: function(){
+		this.updateAll(false);
 	},
 
 	updateAll: function(selected){
