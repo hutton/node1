@@ -576,11 +576,13 @@ a:active{color:#4ad16c;text-decoration:none;}
 .calendar-choices-top>div{left:-2px;top:0px;position:relative;}
 .selecting-dates-container{position:fixed;top:0px;width:100%;z-index:200;text-align:center;pointer-events:none;}
 .selecting-dates-saving-container{position:fixed;top:0px;width:100%;z-index:200;text-align:center;pointer-events:none;}
-.selecting-dates{background:#f8f8f8;max-width:580px;text-align:center;color:#4ad16c;font-size:75%;display:inline-block;padding:0px 20px 10px 20px;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;pointer-events:auto;}
-.selecting-dates-saving{background:#f8f8f8;max-width:580px;text-align:center;color:#4ad16c;font-size:75%;display:inline-block;padding:0px 20px 10px 20px;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;pointer-events:auto;padding:10px 25px 10px 30px;color:#a0a0a0;}
-.selecting-dates-title{margin-top:10px;margin-bottom:10px;font-weight:bold;}
-.selecting-dates-help-text{color:#c0c0c0;margin-bottom:10px;}
-#selecting-dates-save{cursor:pointer;margin-top:10px;}
+.selecting-dates{width:260px;background:#f8f8f8;max-width:580px;text-align:center;font-size:75%;display:inline-block;padding:10px 20px 10px 20px;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;pointer-events:auto;}
+.selecting-dates button{width:210px;}
+.selecting-dates li{width:210px;margin:4px 0px;cursor:pointer;text-align:left;padding:0px 10px;}
+.selecting-dates li:hover{color:#4ad16c;}
+.selecting-dates-saving{width:260px;background:#f8f8f8;max-width:580px;text-align:center;font-size:75%;display:inline-block;padding:10px 20px 10px 20px;border-left:1px solid #e8e8e8;border-right:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8;pointer-events:auto;padding:10px 25px 10px 30px;color:#a0a0a0;}
+.selecting-dates-help-text{color:#c0c0c0;margin-top:5px;margin-bottom:10px;}
+#selecting-dates-save{cursor:pointer;margin-top:10px;color:#4ad16c;}
 #selecting-dates-cancel{color:#c0c0c0;margin-top:10px;margin-right:20px;cursor:pointer;}
 .selecting-dates-period-conatiner{margin:6px 0px 16px 0px;text-align:center;}
 .selecting-dates-period-conatiner>span{text-decoration:underline;margin:0px 0px 0px 0px;padding:0px 6px 0px 6px;cursor:pointer;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}

@@ -1220,18 +1220,34 @@ a:active{
 }
 
 .selecting-dates{
+	width: 260px;
 	background: @light-background-color;
 	max-width: 580px;
 	text-align: center;
-	color: @free-color;
 	font-size: 75%;
 	display: inline-block;
-	padding: 0px 20px 10px 20px;
+	padding: 10px 20px 10px 20px;
 	border-left: 1px solid @divider-color;
 	border-right: 1px solid @divider-color;
 	border-bottom: 1px solid @divider-color;
 	pointer-events: auto;
 	// box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+.selecting-dates button{
+	width: 210px;
+}
+
+.selecting-dates li{
+	width: 210px;
+	margin: 4px 0px;
+	cursor: pointer;
+	text-align: left;
+	padding: 0px 10px;
+}
+
+.selecting-dates li:hover{
+	color: @free-color;
 }
 
 .selecting-dates-saving{
@@ -1240,20 +1256,16 @@ a:active{
 	color: #a0a0a0;
 }
 
-.selecting-dates-title{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	font-weight: bold;
-}
-
 .selecting-dates-help-text{
 	color: @selected-color;
+	margin-top: 5px;
 	margin-bottom: 10px;
 }
 
 #selecting-dates-save{
 	cursor: pointer;
 	margin-top: 10px;
+	color: @free-color;
 }
 
 #selecting-dates-cancel{
