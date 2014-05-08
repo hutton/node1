@@ -29,7 +29,17 @@
 
       <div class="navbar navbar-fixed-top">
         <div class="fixed-width">
-          <a class="title-button changes-made-email-link" id="title-mail"><i class="fa fa-envelope-o"></i></a>
+          <div class="title-mail-button btn-group">
+            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a></li>
+              <li><a id="title-mail">Email the group <i class="fa fa-chevron-right"></i></a></li>
+            </ul>
+          </div>
+
+          
           <div class="title-button-container">
             <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i></a>
             <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
@@ -148,7 +158,7 @@
         <div>
           <div class="current-attendee-info">
             <div class="settings-section">
-              <span class="span-link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
+              <span class="link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
               <div class="settings-your-details-section" style="display: none;">
                 <h2>Name</h2>
                 <form id="update-name-form" method="post">
@@ -166,13 +176,13 @@
             </div>
           </div>
           <div class="settings-section">
-            <a href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
+            <a class="link" href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
           </div>
           <div class="settings-section">
-            <span class="span-link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change dates <i class="fa fa-chevron-right"></i></span>
+            <span class="link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change available dates <i class="fa fa-chevron-right"></i></span>
           </div>
           <div class="settings-section center">
-            <a id="settings-home" href="/"><i class="fa fa-home"></i> Home</a><a href="/help"><i class="fa fa-question-circle"></i> Help</a>
+            <a class="link" id="settings-home" href="/"><i class="fa fa-home"></i> Home</a><a class="link" href="/help"><i class="fa fa-question-circle"></i> Help</a>
           </div>
         </div>
           </div>
@@ -213,13 +223,28 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Group email</h4>
+            <h4 class="modal-title">Stay Connected</h4>
           </div>
           <div class="modal-body">
               <p>When you join the event you can contact everyone participating with the email address</p>
               <div class="center new-mode-mail-view-email">
                 <p><%= id %>@convenely.com</p>
               </div>
+        </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="new-mode-start-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Stay Connected</h4>
+          </div>
+          <div class="modal-body">
+              <p>Select the dates when you're free<br/>then <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> 'Join Event' below.</p>
         </div>
           </div>
         </div><!-- /.modal-content -->
@@ -329,11 +354,6 @@
                 <i class="fa fa-user"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
-            <@ if (showInvite){ @>
-              <div class="attendees-choice-invite">
-              <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
-              </div>
-            <@ } @>
             </div>
             </div>
           </div>

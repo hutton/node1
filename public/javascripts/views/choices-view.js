@@ -199,8 +199,6 @@ window.ChoiceView = Backbone.View.extend({
 		var target = $(this.$el).find("div:first");
 
 		if (App.selectableDateMode){
-			App.SelectDatesView.clearGroupSelected();
-
 			if (this.model.isSelectable()){
 				this.model.set({'selectable': false});
 			} else {

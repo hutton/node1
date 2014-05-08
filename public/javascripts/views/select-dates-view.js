@@ -127,7 +127,15 @@ window.SelectDatesView = Backbone.View.extend({
 	},
 
 	clearClicked: function(){
-		this.updateAll(false);
+		_.each(this.collection.models, function(choice){
+			if (choice.has('date')){
+				var date = choice.get('date');
+
+				if (date >= window.App.today){
+					choice.set('selectable', false);
+				}
+			}
+		});
 	},
 
 	updateAll: function(weekdays){

@@ -114,10 +114,11 @@ window.EventApp = Backbone.View.extend({
                 that.joinEventEl.removeClass('join-event-hidden');
             }, 1000);
 
-            this.titleMailEl.click(function(){
+            this.$el.find(".title-mail-button button").click(function(){
                 that.showNewModeMail();
             });
 
+            $('#new-mode-start-view').modal({show: true});
         } else {
             this.updateTellEveryoneLink();
             this.recalcTopSpacer();
@@ -251,8 +252,6 @@ window.EventApp = Backbone.View.extend({
         return !_.isUndefined(matches) && matches !== null;
     },
 
-    changesMadeLinkkeyEl: $(".changes-made-email-link"),
-
     updatedFooterEl: $("#updated-footer"),
 
     titleMailEl: $("#title-mail"),
@@ -262,7 +261,7 @@ window.EventApp = Backbone.View.extend({
     updateTellEveryoneLink: function(){
         var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
-        this.changesMadeLinkkeyEl.attr("href", mailTo);
+        this.titleMailEl.attr("href", mailTo);
     },
 
     formatUpdatedDays: function(isFree, wasFree){
