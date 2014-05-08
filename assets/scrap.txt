@@ -1,68 +1,9 @@
-html{
-    background: #4ad16c;
-    color: white;
-    font-family: 'Open Sans';
-}
+Welcome!
 
-.calendar{
-    position: relative;
-    display: inline-block;
-}
+Select the days on the calendar when you're free then click 'Join Event >' below.
 
-.calendar > .fa{
-    font-size: 100px;
-}
 
-.calendar > div{
-    position: absolute;
-    top: 34px;
-    width: 100%;
-    line-height: 1.3em;
-}
 
-.calendar > div > div{
-    text-align: center;
-}
+Click the calendar to select which days you're free then click 'Join Event >' below.
 
-.day{
-    font-size: 12px;
-}
-.date{
-    font-size: 30px;
-    font-family: Arial;
-}
-.month{
-    font-size: 12px;
-}
-
-.big .fa{
-    font-size: 130px;
-}
-
-.big > div{
-    top: 45px;
-    line-height: 1.6em;
-}
-
-.big .day, .big .month{
-    font-size: 15px;
-}
-
-.big .date{
-    font-size: 40px;
-}
-
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-<div class="calendar">
-    <i class="fa fa-calendar-o"></i>
-    <div>
-        <div class="day">Wednesday</div>
-        <div class="date">28</div>
-        <div class="month">December</div>
-    </div>
-</div>
-
-<div class="calendar big">
-    
-    
 http://jsfiddle.net/aNvqy/3/
