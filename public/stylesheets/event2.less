@@ -277,7 +277,7 @@ a:active{
 
 .loader-calendar > div{
     position: absolute;
-    top: 31px;
+    top: 23px;
     width: 100%;
     //line-height: 1.3em;
 }
@@ -288,11 +288,14 @@ a:active{
 
 .loader-calendar-day{
     font-size: 12px;
+    background: white;
+    color: @free-color;
 }
 .loader-calendar-date{
     font-size: 22px;
     font-family: Arial;
     line-height: 19px;
+    margin-top: 5px;
 }
 .loader-calendar-month{
     font-size: 12px;
@@ -303,7 +306,7 @@ a:active{
 }
 
 .loader-calendar-big > div{
-    top: 39px;
+    top: 30px;
 }
 
 .loader-calendar-big .loader-calendar-day, .loader-calendar-big .loader-calendar-month{
@@ -313,6 +316,7 @@ a:active{
 .loader-calendar-big .loader-calendar-date{
     font-size: 34px;
     line-height: 26px;
+    margin-top: 6px;
 }
 
 
@@ -661,7 +665,7 @@ a:active{
 }
 
 .date-cell-container{
-	background: @shaded-background;
+	background: white;
 	border: 1px solid @choice-border-color;
 
 	position: relative;
@@ -700,7 +704,7 @@ a:active{
 
 .unselectable > .date-cell-container{
 	border: 1px solid #d0d0d0;
-	background: transparent !important;
+	background: #f0f0f0 !important;
 	.scale(0.85);
 	//box-shadow: inset 0px 0px 15px rgba(0,0,0,0.1);
 }
@@ -1389,6 +1393,11 @@ a:active{
 	text-decoration: underline;
 }
 
+.new-mode-start-join{
+	color: white;
+	background: @free-color;
+	padding: 2px 8px;
+}
 
 /********* Media rules ******************************/
 @media screen and (min-width: 450px){

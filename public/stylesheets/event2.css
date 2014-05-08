@@ -1571,7 +1571,7 @@ a:active {
 }
 .loader-calendar > div {
   position: absolute;
-  top: 31px;
+  top: 23px;
   width: 100%;
 }
 .loader-calendar > div > div {
@@ -1579,11 +1579,14 @@ a:active {
 }
 .loader-calendar-day {
   font-size: 12px;
+  background: white;
+  color: #4ad16c;
 }
 .loader-calendar-date {
   font-size: 22px;
   font-family: Arial;
   line-height: 19px;
+  margin-top: 5px;
 }
 .loader-calendar-month {
   font-size: 12px;
@@ -1592,7 +1595,7 @@ a:active {
   font-size: 110px;
 }
 .loader-calendar-big > div {
-  top: 39px;
+  top: 30px;
 }
 .loader-calendar-big .loader-calendar-day,
 .loader-calendar-big .loader-calendar-month {
@@ -1601,6 +1604,7 @@ a:active {
 .loader-calendar-big .loader-calendar-date {
   font-size: 34px;
   line-height: 26px;
+  margin-top: 6px;
 }
 .inline {
   display: inline-block;
@@ -1888,7 +1892,7 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
-  background: #f7f9f7;
+  background: white;
   border: 1px solid #d0d0d0;
   position: relative;
   height: 100%;
@@ -1922,7 +1926,7 @@ a:active {
 }
 .unselectable > .date-cell-container {
   border: 1px solid #d0d0d0;
-  background: transparent !important;
+  background: #f0f0f0 !important;
   -webkit-transform: scale(0.85);
   -moz-transform: scale(0.85);
   -o-transform: scale(0.85);
@@ -2481,6 +2485,11 @@ a:active {
 .new-mode-mail-view-email {
   color: #4ad16c;
   text-decoration: underline;
+}
+.new-mode-start-join {
+  color: white;
+  background: #4ad16c;
+  padding: 2px 8px;
 }
 /********* Media rules ******************************/
 @media screen and (min-width: 450px) {

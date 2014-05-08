@@ -1,3 +1,4 @@
+- Invert calendar colors?!
 - Cleanup CSS
 - New homepage image
 
