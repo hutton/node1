@@ -2,4 +2,6 @@ Hi,
 
 You've joined the '<%= calendar.name %>' event on Convenely.
 
+Send this link to anyone you want to join the event http://convenely.com/event/<%= calendar.calendarId %>
+
 Contact everyone participating in the event with the email group <%= calendar.id %>@convenely.com.
