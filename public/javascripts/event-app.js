@@ -459,9 +459,12 @@ window.EventApp = Backbone.View.extend({
         var label = modal.find('.join-view-text');
 
         if (this.isFree.length === 0){
+            label.hide();
         } else if (this.isFree.length === 1) {
+            label.show();
             label.html("Ok, that's one day you're free.");
         } else {
+            label.show();
             label.html("Cool, that's " + this.isFree.length + " days you can make.");
         }
 
