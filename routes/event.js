@@ -28,10 +28,10 @@ function createEvent(req, res){
 
 			Mail.sendMailToAttendee(newCalendar, creatorAttendee, newCalendar.name, message, "");
 			
-			Mail.sendShareLinkToAttendee(newCalendar, creatorAttendee);
-
 			res.redirect('/event/' + creatorAttendee.attendeeId);
 		});
+
+		Mail.sendShareLinkToAttendee(newCalendar, creatorAttendee);
 
 		var inviter = creatorAttendee.email;
 
@@ -282,6 +282,8 @@ function addAttendee(req, res){
 					}, function(err, message){
 						Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 					});
+					
+					Mail.sendShareLinkToAttendee(calendar, newAttendee);
 
 					calendar.updateCalendar(newAttendee, [], req.body.isFree.split(','));
 
