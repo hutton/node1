@@ -1,3 +1,4 @@
+- Remove past strikethrough
 - Welcome popup for created event.
 - Emails: remove contact with email and put link on separate line.
 - Bigger text on 'it's increadabily easy
