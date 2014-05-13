@@ -239,7 +239,7 @@ window.EventApp = Backbone.View.extend({
             var message = $(".register-attendee-message");
 
             message.html("");
-            messages.slideUp('fast');
+            message.slideUp('fast');
         }
     },
 
@@ -318,6 +318,8 @@ window.EventApp = Backbone.View.extend({
 
             return false;
         }
+
+        return true;
     },
 
     showBestChoices: function(){

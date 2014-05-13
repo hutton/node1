@@ -70,12 +70,12 @@
                   <input type="text" class="form-control" id="event-name" name="event" placeholder="Poker night, Office drinks">
                 </div>
                 <div class="form-group">
-                  <label for="your-email">Your Email Address</label>
-                  <input type="email" class="form-control" id="event-email" name="email" placeholder="Email address">
+                  <label for="your-name">Your Name</label>
+                  <input type="name" class="form-control" id="your-name" name="name" placeholder="Name">
                 </div>
                 <div class="form-group">
-                  <label for="your-name">Your Name (optional)</label>
-                  <input type="name" class="form-control" id="your-name" name="name" placeholder="Optional, you can add it later">
+                  <label for="your-email">Your Email Address</label>
+                  <input type="email" class="form-control" id="event-email" name="email" placeholder="Email address">
                 </div>
                 <div class="submit-container">
                   <button type="submit" class="btn btn-success btn-lg"> 
@@ -159,6 +159,11 @@
             email.removeClass("invalid");
           });
 
+          var name = $("#your-name");
+          name.keyup(function(){
+            name.removeClass("invalid");
+          });
+
           setDimensions();
 
           //when resizing the site, we adjust the heights of the sections
@@ -179,6 +184,13 @@
 
           if (email.val() === null || email.val() === ""){
               email.addClass("invalid");
+              return false;
+          }
+
+          var name = $("#your-name");
+
+          if (name.val() === null || name.val() === ""){
+              name.addClass("invalid");
               return false;
           }
         }

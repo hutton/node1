@@ -203,7 +203,7 @@
               <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
               <div class="register-attendee-message"></div>
               <div class="register-attendee-email-input-container">
-                <input type="text" name="name" class="form-control" id="register-attendee-name-input" placeholder="Your name (optional)"></input>
+                <input type="text" name="name" class="form-control" id="register-attendee-name-input" placeholder="Your name"></input>
                 <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Your email address"></input>
                 <input id="register-free-dates" type="hidden" name="isFree"/>
               </div>
@@ -388,9 +388,9 @@
                       <span></span>
                       <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
                           <div class="loader-calendar-month"><@= firstSelectable.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
+                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
                       </div>
                   </div>
                 </div>
@@ -404,9 +404,9 @@
                       <span></span>
                       <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
                           <div class="loader-calendar-month"><@= firstSelectable.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
+                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
                       </div>
                   </div>
                   <div class="inline and">&</div>
@@ -414,9 +414,9 @@
                       <span></span>
                       <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= lastSelectable.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= lastSelectable.format("D") @></div>
                           <div class="loader-calendar-month"><@= lastSelectable.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= lastSelectable.format("D") @></div>
+                          <div class="loader-calendar-day"><@= lastSelectable.format("dddd") @></div>
                       </div>
                   </div>
                 </div>
@@ -428,9 +428,9 @@
                     <span></span>
                     <span></span>
                     <div>
-                        <div class="loader-calendar-day"><@= topDate.format("dddd") @></div>
-                        <div class="loader-calendar-date"><@= topDate.format("D") @></div>
                         <div class="loader-calendar-month"><@= topDate.format("MMMM") @></div>
+                        <div class="loader-calendar-date"><@= topDate.format("D") @></div>
+                        <div class="loader-calendar-day"><@= topDate.format("dddd") @></div>
                     </div>
                 </div>
                 <div>
@@ -443,9 +443,9 @@
                       <span></span>
                       <span></span>
                         <div>
-                          <div class="loader-calendar-day"><@= secondDate.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= secondDate.format("D") @></div>
                           <div class="loader-calendar-month"><@= secondDate.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= secondDate.format("D") @></div>
+                          <div class="loader-calendar-day"><@= secondDate.format("dddd") @></div>
                       </div>
                   </div>
                   <div class="inline and">&</div>
@@ -453,9 +453,9 @@
                       <span></span>
                       <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= thirdDate.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= thirdDate.format("D") @></div>
                           <div class="loader-calendar-month"><@= thirdDate.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= thirdDate.format("D") @></div>
+                          <div class="loader-calendar-day"><@= thirdDate.format("dddd") @></div>
                       </div>
                   </div>
                 </div>

@@ -1594,7 +1594,7 @@ a:active {
 .loader-calendar > div > div {
   text-align: center;
 }
-.loader-calendar-day {
+.loader-calendar-month {
   font-size: 12px;
   background: white;
   color: #4ad16c;
@@ -1605,7 +1605,7 @@ a:active {
   line-height: 19px;
   margin-top: 8px;
 }
-.loader-calendar-month {
+.loader-calendar-day {
   font-size: 12px;
 }
 .loader-calendar-big {
@@ -1944,17 +1944,16 @@ a:active {
 }
 .past > .date-cell-container {
   border: 1px solid #d0d0d0;
-  background: transparent !important;
+  background: #f0f0f0 !important;
 }
 .past .date-text {
   text-decoration: line-through;
 }
 .unselectable {
-  opacity: 0.4;
+  opacity: 0.6;
 }
 .unselectable > .date-cell-container {
   border: 1px solid #d0d0d0;
-  background: #f0f0f0 !important;
   -webkit-transform: scale(0.85);
   -moz-transform: scale(0.85);
   -o-transform: scale(0.85);
@@ -2118,7 +2117,7 @@ a:active {
   border-radius: 0px;
 }
 .modal p {
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 15px 0px;
   font-size: 90%;
   padding: 0px 20px;
   line-height: 1.8em;
