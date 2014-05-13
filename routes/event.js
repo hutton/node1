@@ -27,6 +27,8 @@ function createEvent(req, res){
 			logger.info("New calendar " + newCalendar.calendarId + " created.");
 
 			Mail.sendMailToAttendee(newCalendar, creatorAttendee, newCalendar.name, message, "");
+			
+			Mail.sendShareLinkToAttendee(newCalendar, creatorAttendee);
 
 			res.redirect('/event/' + creatorAttendee.attendeeId);
 		});
