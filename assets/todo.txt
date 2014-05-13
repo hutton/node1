@@ -1,3 +1,4 @@
+- Active choices date should be moving box
 - Remove past strikethrough
 - Welcome popup for created event.
 - Emails: remove contact with email and put link on separate line.
