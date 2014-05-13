@@ -1,3 +1,4 @@
+- Make loader calendars wider
 - Remove past strikethrough
 - Emails: remove contact with email and put link on separate line.
 - Active choices date should be moving box
