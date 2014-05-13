@@ -2309,6 +2309,10 @@ a:active {
 .att-ch .fa {
   font-size: 16px;
 }
+.calendar-selected-item {
+  position: absolute;
+  border: 2px solid #4ad16c;
+}
 /************ Top choice markers **************/
 .attendees-choices-top {
   width: 88px;
