@@ -304,6 +304,15 @@ function sendMailToAttendee(calendar, toAttendee, subject, message, fromName){
 	});
 }
 
+function sendShareLinkToAttendee(calendar, attendee){
+	global.app.render('mail/share-link.txt', {
+					calendar: calendar,
+					attendee: attendee
+				}, function(err, message){
+					sendTextMail(attendee.email, calendar.id + "@convenely.com", "Link for event '" + calendar.name + "'", message);
+				});
+}
+
 function buildNewAttendeeMailToLink(calendar, callback){
 	global.app.render('mail/invite-attendee-link.txt', {
 		calendar: calendar
@@ -599,5 +608,6 @@ module.exports = {
 	sendCouldntFindYouInCalendarEmail: sendCouldntFindYouInCalendarEmail,
 	sendMailToAttendee: sendMailToAttendee,
 	getEmailAddressesAndBody: getEmailAddressesAndBody,
-	renderEmail: renderEmail
+	renderEmail: renderEmail,
+	sendShareLinkToAttendee: sendShareLinkToAttendee
 }
