@@ -1,8 +1,8 @@
-- Active choices date should be moving box
 - Remove past strikethrough
-- Welcome popup for created event.
 - Emails: remove contact with email and put link on separate line.
+- Active choices date should be moving box
 - Bigger text on 'it's increadabily easy class=lead
+- Welcome popup for created event.
 
 - Cleanup CSS
 
