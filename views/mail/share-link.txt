@@ -1,0 +1,5 @@
+Here's the link for your event '<%= calendar.name %>'.
+
+Share this with anyone you want to join the event.
+
+http://convenely.com/event/<%= calendar.calendarId %>
