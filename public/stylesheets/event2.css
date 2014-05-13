@@ -1569,7 +1569,7 @@ a:active {
   position: relative;
   display: inline-block;
   border: 2px solid white;
-  width: 70px;
+  width: 74px;
   height: 70px;
   border-radius: 5px;
 }
@@ -1610,7 +1610,7 @@ a:active {
 }
 .loader-calendar-big {
   border: 2px solid white;
-  width: 75px;
+  width: 80px;
   height: 75px;
 }
 .loader-calendar-big > span {
@@ -1946,9 +1946,6 @@ a:active {
   border: 1px solid #d0d0d0;
   background: #f0f0f0 !important;
 }
-.past .date-text {
-  text-decoration: line-through;
-}
 .unselectable {
   opacity: 0.6;
 }
@@ -2066,10 +2063,6 @@ a:active {
 .today .date-text {
   color: #4ad16c;
   opacity: 0.9 !important;
-}
-.cell-selected > .date-cell-container {
-  border: #4ad16c solid 2px;
-  margin: 2px;
 }
 /**************************************/
 .register-attendee-message {

@@ -1,5 +1,4 @@
-- Make loader calendars wider
-- Remove past strikethrough
+
 - Active choices date should be moving box
 - Better 404
 - Bigger text on 'it's increadabily easy class=lead
@@ -12,7 +11,8 @@
 
 Done
 ----
-- Fix unsubscribe removing dates
+- Make loader calendars wider
+- Remove past strikethrough- Fix unsubscribe removing dates
 - Emails: remove contact with email and put link on separate line.
 - Make your name required.
 - Swap month and day on loader calendar.
