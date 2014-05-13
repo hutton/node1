@@ -1,9 +1,5 @@
-Welcome!
+Here's the link for your event 'Poker night'.
 
-Select the days on the calendar when you're free then click 'Join Event >' below.
+Share this with anyone you want to join the event.
 
-
-
-Click the calendar to select which days you're free then click 'Join Event >' below.
-
-http://jsfiddle.net/aNvqy/3/
+http://convenely.com/event/lk8sdk4s
