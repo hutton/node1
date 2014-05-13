@@ -628,11 +628,6 @@ function removeAttendeeAvailabiltyFromCalendar(calendar, attendee){
 				break;
 			}
 		}
-
-		if (choice.busy.length === 0 && choice.free.length === 0){
-			calendar.choices.splice(c,1);
-			c--;
-		}
 	}
 
 	var a = calendar.attendees.indexOf(attendee);
