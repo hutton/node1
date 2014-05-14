@@ -699,7 +699,6 @@ a:active{
 
 .date-cell-container{
 	background: white;
-	border: 1px solid @choice-border-color;
 
 	position: relative;
 
@@ -723,8 +722,7 @@ a:active{
 }
 
 .past > .date-cell-container{
-	border: 1px solid #d0d0d0;
-	background: #f0f0f0 !important;
+	background: #e0e0e0 !important;
 }
 
 .past .date-text{
@@ -735,9 +733,8 @@ a:active{
 }
 
 .unselectable > .date-cell-container{
-	border: 1px solid #d0d0d0;
-	.scale(0.85);
 	//box-shadow: inset 0px 0px 15px rgba(0,0,0,0.1);
+	background: #f0f0f0;
 }
 
 .selected-row{
@@ -809,12 +806,14 @@ a:active{
 .event-table{
 	border-collapse: collapse;
 	border-spacing: 0px;
+	border-color: #e0e0e0;
 }
 
 .event-table tr > td.date-cell{
 	position: relative;
 	overflow: hidden;
 	height: 100%;
+	border: solid 1px;
 }
 
 .free-marker{
@@ -1496,10 +1495,6 @@ a:active{
 		content:"\f007"
 	}
 
-	.date-cell-container, .calendar-selected-item{
-		margin: 3px;
-	}
-
 	.calendar-choices-top{
 		margin-left: -1px;
 		margin-top: 3px;
@@ -1548,10 +1543,6 @@ a:active{
 
 	.markers-container li:before{
 		content:"\f111"
-	}
-
-	.date-cell-container, .calendar-selected-item{
-		margin: 2px;
 	}
 
 	.calendar-choices-top{

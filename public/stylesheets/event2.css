@@ -1921,7 +1921,6 @@ a:active {
 }
 .date-cell-container {
   background: white;
-  border: 1px solid #d0d0d0;
   position: relative;
   height: 100%;
   cursor: pointer;
@@ -1943,19 +1942,13 @@ a:active {
   opacity: 0.4;
 }
 .past > .date-cell-container {
-  border: 1px solid #d0d0d0;
-  background: #f0f0f0 !important;
+  background: #e0e0e0 !important;
 }
 .unselectable {
   opacity: 0.6;
 }
 .unselectable > .date-cell-container {
-  border: 1px solid #d0d0d0;
-  -webkit-transform: scale(0.85);
-  -moz-transform: scale(0.85);
-  -o-transform: scale(0.85);
-  -ms-transform: scale(0.85);
-  transform: scale(0.85);
+  background: #f0f0f0;
 }
 .event-table tr.selected-row > td {
   padding: 0px;
@@ -2009,11 +2002,13 @@ a:active {
 .event-table {
   border-collapse: collapse;
   border-spacing: 0px;
+  border-color: #e0e0e0;
 }
 .event-table tr > td.date-cell {
   position: relative;
   overflow: hidden;
   height: 100%;
+  border: solid 1px;
 }
 .free-marker {
   opacity: 0.0;
@@ -2571,10 +2566,6 @@ a:active {
   .markers-container li:before {
     content: "\f007";
   }
-  .date-cell-container,
-  .calendar-selected-item {
-    margin: 3px;
-  }
   .calendar-choices-top {
     margin-left: -1px;
     margin-top: 3px;
@@ -2622,10 +2613,6 @@ a:active {
   }
   .markers-container li:before {
     content: "\f111";
-  }
-  .date-cell-container,
-  .calendar-selected-item {
-    margin: 2px;
   }
   .calendar-choices-top {
     margin-left: 0px;
