@@ -1938,17 +1938,14 @@ a:active {
     top: 0;
   }
 }
-.past {
+.past > .date-cell-container {
+  background: #f0f0f0 !important;
+}
+.past .date-text {
   opacity: 0.4;
 }
-.past > .date-cell-container {
-  background: #e0e0e0 !important;
-}
-.unselectable {
-  opacity: 0.6;
-}
 .unselectable > .date-cell-container {
-  background: #f0f0f0;
+  background: #f6f6f6;
 }
 .event-table tr.selected-row > td {
   padding: 0px;
@@ -2192,12 +2189,11 @@ a:active {
 }
 .attendees-choice {
   float: left;
-  margin: 0px 3px;
+  margin: 0px;
   padding: 0px;
   height: 100%;
   position: relative;
   background: white;
-  border: 1px solid #d0d0d0;
 }
 .attendees-choices-row {
   list-style: none;
@@ -2211,6 +2207,14 @@ a:active {
   margin: 0px;
   cursor: pointer;
   padding: 0px;
+}
+.attendees-choices-row > li > .attendees-choice {
+  border-top: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+}
+.attendees-choices-row > li:last-child > .attendees-choice {
+  border: 1px solid #d0d0d0;
 }
 .attendees-choice-month {
   color: #4ad16c;

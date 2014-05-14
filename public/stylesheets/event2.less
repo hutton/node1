@@ -713,28 +713,24 @@ a:active{
 	100% { top: 0; }
 }
 
-.date-cell-container-flip{
-
-}
-
 .past{
-	opacity: 0.4;
 }
 
 .past > .date-cell-container{
-	background: #e0e0e0 !important;
+	background: #f0f0f0 !important;
 }
 
 .past .date-text{
+	//color: white;
+	opacity: 0.4;
 }
 
 .unselectable{
-	opacity: 0.6;
 }
 
 .unselectable > .date-cell-container{
 	//box-shadow: inset 0px 0px 15px rgba(0,0,0,0.1);
-	background: #f0f0f0;
+	background: #f6f6f6;//@shaded-background;
 }
 
 .selected-row{
@@ -1050,13 +1046,11 @@ a:active{
 
 .attendees-choice{
 	float: left;
-	margin: 0px 3px;
+	margin: 0px;
 	padding: 0px;
 	height: 100%;
 	position: relative;
 	background: white;
-
-	border: 1px solid @choice-border-color;
 }
 
 .active div.attendees-choice{
@@ -1083,6 +1077,17 @@ a:active{
 }
 
 .attendees-choices-row > li.active {
+}
+
+
+.attendees-choices-row > li > .attendees-choice{
+	border-top: 1px solid @choice-border-color;
+	border-left: 1px solid @choice-border-color;
+	border-bottom: 1px solid @choice-border-color;
+}
+
+.attendees-choices-row > li:last-child > .attendees-choice{
+	border: 1px solid @choice-border-color;
 }
 
 .attendees-choice-month{

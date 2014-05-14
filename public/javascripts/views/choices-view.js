@@ -335,15 +335,15 @@ window.ChoicesView = Backbone.View.extend({
 			 
 			this.tableEl.detach();
 			 
-			this.tableEl.find("tr > td > .date-cell-container").height(size - 6);
-			this.tableEl.find("tr > td > .month").height(size - 6);
+			this.tableEl.find("tr > td > .date-cell-container").height(size);
+			this.tableEl.find("tr > td > .month").height(size);
 
 			parent.append(this.tableEl);
 
 			// var topChoiceSize = size - 2;
 
 			// this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
-			this.$el.find(".calendar-selected-item").width(size - 8).height(size - 9);
+			this.$el.find(".calendar-selected-item").width(size).height(size);
 
 			App.realignAdorners();
 		} else {
