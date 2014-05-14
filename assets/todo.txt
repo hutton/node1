@@ -1,11 +1,24 @@
+
+- Active choices date should be moving box
+- Better 404
+- Bigger text on 'it's increadabily easy class=lead
+- Welcome popup for created event.
+
 - Cleanup CSS
-- New homepage image
 
 =======
 - Add description
 
 Done
 ----
+- Make loader calendars wider
+- Remove past strikethrough- Fix unsubscribe removing dates
+- Emails: remove contact with email and put link on separate line.
+- Make your name required.
+- Swap month and day on loader calendar.
+- More distinction between past and un-selectable.
+- New homepage image
+- Invert calendar colors?!
 - Join event dialog
 	'Cool, that's 2 days you can make.'
 	'When you join we'll email you a link to keep your choices updated.'

@@ -29,7 +29,17 @@
 
       <div class="navbar navbar-fixed-top">
         <div class="fixed-width">
-          <a class="title-button changes-made-email-link" id="title-mail"><i class="fa fa-envelope-o"></i></a>
+          <div class="title-mail-button btn-group">
+            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a></li>
+              <li><a id="title-mail">Email the group <i class="fa fa-chevron-right"></i></a></li>
+            </ul>
+          </div>
+
+          
           <div class="title-button-container">
             <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i></a>
             <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
@@ -53,7 +63,25 @@
 
       <div class="row selecting-dates-container" style="display: none;">
         <div class="selecting-dates">
-          <div class="selecting-dates-title">Select potential dates</div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              Select a date range <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><span id="selecting-dates-one-month">Next month</span></li>
+              <li><span id="selecting-dates-one-month-weekdays">Next month (weekdays)</span></li>
+              <li><span id="selecting-dates-two-months">Next two months</span></li>
+              <li><span id="selecting-dates-two-months-weekdays">Next two months (weekdays)</span></li>
+              <li><span id="selecting-dates-all">All dates</span></li>
+              <li><span id="selecting-dates-all-weekdays">All dates (weekdays)</span></li>
+              <li class="divider"></li>
+              <li><span id="selecting-dates-clear">Clear</span></li>
+            </ul>
+          </div>
+          <div class="selecting-dates-help-text"><span class="inline-text-desktop">or click</span><span class="inline-text-mobile">tap</span> a date to toogle.</div>
+
+
+<!-- 
           <div class="selecting-dates-period-conatiner">
             <span id="selecting-dates-one-month">
               One month
@@ -64,7 +92,7 @@
             <span id="selecting-dates-all">
               All
             </span>
-          </div>          
+          </div>           -->
           <div>
             <span id="selecting-dates-cancel">Cancel</span>
             <span id="selecting-dates-save">Save <i class="fa fa-chevron-right"></i></span>
@@ -85,7 +113,9 @@
 <!--               <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
               <div class="calendar-choices-top calendar-choices-top-two" style="display: none;"><div>2</div></div>
               <div class="calendar-choices-top calendar-choices-top-three" style="display: none;"><div>3</div></div>
- -->              <table class="table event-table">
+ -->          
+              <div class="calendar-selected-item" style="display: none;"></div>  
+              <table class="table event-table">
                 <colgroup>
                   <col width="14.2%">
                   <col width="14.2%">
@@ -130,7 +160,7 @@
         <div>
           <div class="current-attendee-info">
             <div class="settings-section">
-              <span class="span-link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
+              <span class="link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
               <div class="settings-your-details-section" style="display: none;">
                 <h2>Name</h2>
                 <form id="update-name-form" method="post">
@@ -148,13 +178,13 @@
             </div>
           </div>
           <div class="settings-section">
-            <a href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
+            <a class="link" href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
           </div>
           <div class="settings-section">
-            <span class="span-link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change dates <i class="fa fa-chevron-right"></i></span>
+            <span class="link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change available dates <i class="fa fa-chevron-right"></i></span>
           </div>
           <div class="settings-section center">
-            <a href="/help"><i class="fa fa-question-circle"></i> Help</a>
+            <a class="link" id="settings-home" href="/"><i class="fa fa-home"></i> Home</a><a class="link" href="/help"><i class="fa fa-question-circle"></i> Help</a>
           </div>
         </div>
           </div>
@@ -175,7 +205,7 @@
               <form id="register-form" method="post" onsubmit="return window.App.validateEmail()">
               <div class="register-attendee-message"></div>
               <div class="register-attendee-email-input-container">
-                <input type="text" name="name" class="form-control" id="register-attendee-name-input" placeholder="Your name (optional)"></input>
+                <input type="text" name="name" class="form-control" id="register-attendee-name-input" placeholder="Your name"></input>
                 <input type="email" name="email" class="form-control" id="register-attendee-email-input" placeholder="Your email address"></input>
                 <input id="register-free-dates" type="hidden" name="isFree"/>
               </div>
@@ -195,13 +225,30 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Group email</h4>
+            <h4 class="modal-title">Stay Connected</h4>
           </div>
           <div class="modal-body">
               <p>When you join the event you can contact everyone participating with the email address</p>
               <div class="center new-mode-mail-view-email">
                 <p><%= id %>@convenely.com</p>
               </div>
+        </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="new-mode-start-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Welcome!</h4>
+          </div>
+          <div class="modal-body">
+              <p>It's incredibly easy to get started with Convenely.</p>
+              <p>Select the days when you're free.</p>
+              <p>Then <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> <span class="new-mode-start-join">Join event <i class="fa fa-chevron-right"></i></span> below.</p>
         </div>
           </div>
         </div><!-- /.modal-content -->
@@ -290,6 +337,9 @@
             <div class="attendees-container">
               <div class="row">
                 <div class="attendees-choices-list-container">
+                  <div class="attendees-choices-active-container">
+                    <div class="attendees-choices-active"></div>
+                  </div>
                   <div class="attendees-choices-list-content">
                     <ul class="attendees-choices-row"></ul>
                   </div>
@@ -311,11 +361,6 @@
                 <i class="fa fa-user"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
-            <@ if (showInvite){ @>
-              <div class="attendees-choice-invite">
-              <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
-              </div>
-            <@ } @>
             </div>
             </div>
           </div>
@@ -345,11 +390,12 @@
                 </div> <!-- ' -->
                 <div class="dates">
                   <div class="loader-calendar">
-                    <i class="fa fa-calendar-o"></i>
+                      <span></span>
+                      <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
                           <div class="loader-calendar-month"><@= firstSelectable.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
+                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
                       </div>
                   </div>
                 </div>
@@ -360,20 +406,22 @@
                 </div> <!-- ' -->
                 <div class="dates">
                   <div class="loader-calendar">
-                    <i class="fa fa-calendar-o"></i>
+                      <span></span>
+                      <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
                           <div class="loader-calendar-month"><@= firstSelectable.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= firstSelectable.format("D") @></div>
+                          <div class="loader-calendar-day"><@= firstSelectable.format("dddd") @></div>
                       </div>
                   </div>
                   <div class="inline and">&</div>
                   <div class="loader-calendar">
-                    <i class="fa fa-calendar-o"></i>
+                      <span></span>
+                      <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= lastSelectable.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= lastSelectable.format("D") @></div>
                           <div class="loader-calendar-month"><@= lastSelectable.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= lastSelectable.format("D") @></div>
+                          <div class="loader-calendar-day"><@= lastSelectable.format("dddd") @></div>
                       </div>
                   </div>
                 </div>
@@ -382,11 +430,12 @@
             <@ if (topDate !== null && secondDate !== null && thirdDate !== null){ @>
             <div class="loader-top-choice">
                 <div class="loader-calendar loader-calendar-big">
-                    <i class="fa fa-calendar-o"></i>
+                    <span></span>
+                    <span></span>
                     <div>
-                        <div class="loader-calendar-day"><@= topDate.format("dddd") @></div>
-                        <div class="loader-calendar-date"><@= topDate.format("D") @></div>
                         <div class="loader-calendar-month"><@= topDate.format("MMMM") @></div>
+                        <div class="loader-calendar-date"><@= topDate.format("D") @></div>
+                        <div class="loader-calendar-day"><@= topDate.format("dddd") @></div>
                     </div>
                 </div>
                 <div>
@@ -396,20 +445,22 @@
             <div class="loader-top-other">
                 <div class="dates">
                   <div class="loader-calendar">
-                    <i class="fa fa-calendar-o"></i>
-                      <div>
-                          <div class="loader-calendar-day"><@= secondDate.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= secondDate.format("D") @></div>
+                      <span></span>
+                      <span></span>
+                        <div>
                           <div class="loader-calendar-month"><@= secondDate.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= secondDate.format("D") @></div>
+                          <div class="loader-calendar-day"><@= secondDate.format("dddd") @></div>
                       </div>
                   </div>
                   <div class="inline and">&</div>
                   <div class="loader-calendar">
-                    <i class="fa fa-calendar-o"></i>
+                      <span></span>
+                      <span></span>
                       <div>
-                          <div class="loader-calendar-day"><@= thirdDate.format("dddd") @></div>
-                          <div class="loader-calendar-date"><@= thirdDate.format("D") @></div>
                           <div class="loader-calendar-month"><@= thirdDate.format("MMMM") @></div>
+                          <div class="loader-calendar-date"><@= thirdDate.format("D") @></div>
+                          <div class="loader-calendar-day"><@= thirdDate.format("dddd") @></div>
                       </div>
                   </div>
                 </div>
@@ -427,6 +478,7 @@
 
         <% if (webAppDebug) { %>
         <script src="/javascripts/tp/jquery-2.0.3.min.js"></script>
+        <script src="/javascripts/tp/jquery.velocity.min.js"></script>
         <script src="/javascripts/tp/tp.helper.js"></script>
         <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
 

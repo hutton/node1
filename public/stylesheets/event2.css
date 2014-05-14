@@ -1406,9 +1406,27 @@ a:active {
   color: #4ad16c;
   text-decoration: none;
 }
+.btn {
+  border-radius: 0px;
+}
+.dropdown-menu .divider {
+  padding: 0px;
+}
+.dropdown-menu > li > a {
+  color: #808080;
+}
+.dropdown-menu > li > a:hover {
+  color: #4ad16c;
+}
+.modal-header .close {
+  padding: 2px 5px;
+}
 .span-link {
   color: #4ad16c;
   cursor: pointer;
+}
+.span-link:hover {
+  text-decoration: underline;
 }
 .cancel-link {
   color: #c0c0c0;
@@ -1416,6 +1434,12 @@ a:active {
 .cancel-link:hover {
   color: #c0c0c0;
   cursor: pointer;
+}
+.link {
+  color: #808080;
+}
+.link:hover {
+  color: #4ad16c;
 }
 .center {
   text-align: center;
@@ -1544,34 +1568,64 @@ a:active {
 .loader-calendar {
   position: relative;
   display: inline-block;
+  border: 2px solid white;
+  width: 74px;
+  height: 70px;
+  border-radius: 5px;
 }
-.loader-calendar > .fa {
-  font-size: 90px;
+.loader-calendar > span {
+  width: 7px;
+  height: 10px;
+  border: 2px solid white;
+  border-radius: 2px;
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  z-index: 100;
+  background: #4ad16c;
+}
+.loader-calendar > span:nth-child(odd) {
+  left: 49px;
 }
 .loader-calendar > div {
   position: absolute;
-  top: 31px;
   width: 100%;
 }
 .loader-calendar > div > div {
   text-align: center;
 }
-.loader-calendar-day {
+.loader-calendar-month {
   font-size: 12px;
+  background: white;
+  color: #4ad16c;
 }
 .loader-calendar-date {
   font-size: 22px;
   font-family: Arial;
   line-height: 19px;
+  margin-top: 8px;
 }
-.loader-calendar-month {
+.loader-calendar-day {
   font-size: 12px;
 }
-.loader-calendar-big .fa {
-  font-size: 110px;
+.loader-calendar-big {
+  border: 2px solid white;
+  width: 80px;
+  height: 75px;
 }
-.loader-calendar-big > div {
-  top: 39px;
+.loader-calendar-big > span {
+  width: 8px;
+  height: 14px;
+  border: 2px solid white;
+  border-radius: 2px;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  z-index: 100;
+  background: #4ad16c;
+}
+.loader-calendar-big > span:nth-child(odd) {
+  left: 54px;
 }
 .loader-calendar-big .loader-calendar-day,
 .loader-calendar-big .loader-calendar-month {
@@ -1580,6 +1634,7 @@ a:active {
 .loader-calendar-big .loader-calendar-date {
   font-size: 34px;
   line-height: 26px;
+  margin-top: 6px;
 }
 .inline {
   display: inline-block;
@@ -1587,7 +1642,7 @@ a:active {
 .and {
   margin: 0px 10px;
   position: relative;
-  top: -15px;
+  top: -25px;
 }
 /**********************************************************************************/
 #settings-view {
@@ -1596,14 +1651,15 @@ a:active {
 .modal-title {
   text-align: center;
   color: #4ad16c;
+  margin-left: 10px;
 }
 #settings-view > div {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.6em;
   max-width: 400px;
 }
 #settings-view h2 {
-  font-size: 16px;
+  font-size: 14px;
   color: #000000;
   line-height: 1.3em;
   padding: 8px 0px 2px 0px;
@@ -1618,8 +1674,11 @@ a:active {
 .settings-section {
   margin: 0px 0px 20px 0px;
 }
-#settings-view .center {
-  margin-top: 30px;
+.settings-section span {
+  cursor: pointer;
+}
+.settings-section .fa {
+  margin-right: 5px;
 }
 .settings-section i {
   -moz-transition-duration: 0.2s;
@@ -1627,6 +1686,9 @@ a:active {
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
+}
+#settings-home {
+  margin-right: 30px;
 }
 .table td {
   padding: 8px 0px;
@@ -1694,10 +1756,20 @@ a:active {
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
 }
-#title-mail {
+.title-mail-button {
   position: absolute;
   float: left;
   transition: all 0.4s ease-in-out;
+}
+.title-mail-button button {
+  font-size: 21px;
+  color: white;
+}
+.title-mail-button.btn-group.open .dropdown-toggle.btn-link {
+  color: white;
+}
+.title-mail-button.btn-group:hover .dropdown-toggle.btn-link {
+  color: white;
 }
 .rotate {
   -webkit-transform: rotate(90deg);
@@ -1848,7 +1920,7 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
-  background: #f7f9f7;
+  background: white;
   border: 1px solid #d0d0d0;
   position: relative;
   height: 100%;
@@ -1872,17 +1944,13 @@ a:active {
 }
 .past > .date-cell-container {
   border: 1px solid #d0d0d0;
-  background: transparent !important;
-}
-.past .date-text {
-  text-decoration: line-through;
+  background: #f0f0f0 !important;
 }
 .unselectable {
-  opacity: 0.4;
+  opacity: 0.6;
 }
 .unselectable > .date-cell-container {
   border: 1px solid #d0d0d0;
-  background: transparent !important;
   -webkit-transform: scale(0.85);
   -moz-transform: scale(0.85);
   -o-transform: scale(0.85);
@@ -1996,10 +2064,6 @@ a:active {
   color: #4ad16c;
   opacity: 0.9 !important;
 }
-.cell-selected > .date-cell-container {
-  border: #4ad16c solid 2px;
-  margin: 2px;
-}
 /**************************************/
 .register-attendee-message {
   display: none;
@@ -2046,7 +2110,7 @@ a:active {
   border-radius: 0px;
 }
 .modal p {
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 15px 0px;
   font-size: 90%;
   padding: 0px 20px;
   line-height: 1.8em;
@@ -2094,6 +2158,24 @@ a:active {
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
+.attendees-choices-active-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  pointer-events: none;
+  z-index: 1000;
+}
+.attendees-choices-active {
+  border: 2px solid #4ad16c;
+  z-index: 1000;
+  height: 100%;
+  width: 240px;
+  pointer-events: none;
+  margin-left: auto;
+  margin-right: auto;
+}
 .attendees-choices-month-container {
   position: absolute;
   left: 130px;
@@ -2121,9 +2203,6 @@ a:active {
   position: relative;
   background: white;
   border: 1px solid #d0d0d0;
-}
-.active div.attendees-choice {
-  border: 2px solid #4ad16c;
 }
 .attendees-choices-row {
   list-style: none;
@@ -2234,18 +2313,6 @@ a:active {
   position: absolute;
   width: 100%;
 }
-.attendees-choice-invite {
-  text-align: center;
-  margin-top: 15px;
-  z-index: 200;
-  display: none;
-}
-.attendees-choice-invite > a {
-  pointer-events: auto;
-}
-.active .attendees-choice-invite {
-  display: block;
-}
 .att-ch {
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 2px;
@@ -2256,6 +2323,12 @@ a:active {
 }
 .att-ch .fa {
   font-size: 16px;
+}
+.calendar-selected-item {
+  position: absolute;
+  border: 2px solid #4ad16c;
+  z-index: 1000;
+  pointer-events: none;
 }
 /************ Top choice markers **************/
 .attendees-choices-top {
@@ -2329,49 +2402,67 @@ a:active {
   pointer-events: none;
 }
 .selecting-dates {
+  width: 260px;
   background: #f8f8f8;
   max-width: 580px;
   text-align: center;
-  color: #4ad16c;
   font-size: 75%;
   display: inline-block;
-  padding: 0px 20px 10px 20px;
-  border-left: 1px solid #e8e8e8;
-  border-right: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 20px 10px 20px;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
   pointer-events: auto;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.selecting-dates button {
+  width: 210px;
+  font-size: 16px;
+  color: #808080;
+}
+.selecting-dates .btn-default .caret {
+  border-top-color: #808080;
+}
+.selecting-dates li {
+  width: 210px;
+  cursor: pointer;
+  text-align: left;
+  padding: 2px 10px;
+}
+.selecting-dates li:hover {
+  color: #4ad16c;
 }
 .selecting-dates-saving {
+  width: 260px;
   background: #f8f8f8;
   max-width: 580px;
   text-align: center;
-  color: #4ad16c;
   font-size: 75%;
   display: inline-block;
-  padding: 0px 20px 10px 20px;
-  border-left: 1px solid #e8e8e8;
-  border-right: 1px solid #e8e8e8;
-  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 20px 10px 20px;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
   pointer-events: auto;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   padding: 10px 25px 10px 30px;
   color: #a0a0a0;
 }
-.selecting-dates-title {
-  margin-top: 10px;
+.selecting-dates-help-text {
+  margin-top: 5px;
   margin-bottom: 10px;
-  font-weight: bold;
 }
 #selecting-dates-save {
   cursor: pointer;
   margin-top: 10px;
+  color: #4ad16c;
 }
 #selecting-dates-cancel {
   color: #c0c0c0;
   margin-top: 10px;
   margin-right: 20px;
   cursor: pointer;
+}
+#selecting-dates-cancel:hover {
+  color: #808080;
 }
 .selecting-dates-period-conatiner {
   margin: 6px 0px 16px 0px;
@@ -2436,6 +2527,11 @@ a:active {
   color: #4ad16c;
   text-decoration: underline;
 }
+.new-mode-start-join {
+  color: white;
+  background: #4ad16c;
+  padding: 2px 8px;
+}
 /********* Media rules ******************************/
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
@@ -2475,7 +2571,8 @@ a:active {
   .markers-container li:before {
     content: "\f007";
   }
-  .date-cell-container {
+  .date-cell-container,
+  .calendar-selected-item {
     margin: 3px;
   }
   .calendar-choices-top {
@@ -2526,7 +2623,8 @@ a:active {
   .markers-container li:before {
     content: "\f111";
   }
-  .date-cell-container {
+  .date-cell-container,
+  .calendar-selected-item {
     margin: 2px;
   }
   .calendar-choices-top {

@@ -114,10 +114,11 @@ window.EventApp = Backbone.View.extend({
                 that.joinEventEl.removeClass('join-event-hidden');
             }, 1000);
 
-            this.titleMailEl.click(function(){
+            this.$el.find(".title-mail-button button").click(function(){
                 that.showNewModeMail();
             });
 
+            $('#new-mode-start-view').modal({show: true});
         } else {
             this.updateTellEveryoneLink();
             this.recalcTopSpacer();
@@ -238,7 +239,7 @@ window.EventApp = Backbone.View.extend({
             var message = $(".register-attendee-message");
 
             message.html("");
-            messages.slideUp('fast');
+            message.slideUp('fast');
         }
     },
 
@@ -251,8 +252,6 @@ window.EventApp = Backbone.View.extend({
         return !_.isUndefined(matches) && matches !== null;
     },
 
-    changesMadeLinkkeyEl: $(".changes-made-email-link"),
-
     updatedFooterEl: $("#updated-footer"),
 
     titleMailEl: $("#title-mail"),
@@ -262,7 +261,7 @@ window.EventApp = Backbone.View.extend({
     updateTellEveryoneLink: function(){
         var mailTo = "mailto:" + this.model.get("id") + "@convenely.com?subject=RE:" + encodeURIComponent(" " +this.model.get("name")) + "&body=" + encodeURIComponent(this.formatUpdatedDays(this.isFree, this.wasFree));
 
-        this.changesMadeLinkkeyEl.attr("href", mailTo);
+        this.titleMailEl.attr("href", mailTo);
     },
 
     formatUpdatedDays: function(isFree, wasFree){
@@ -319,6 +318,8 @@ window.EventApp = Backbone.View.extend({
 
             return false;
         }
+
+        return true;
     },
 
     showBestChoices: function(){
@@ -433,7 +434,11 @@ window.EventApp = Backbone.View.extend({
             if (model !== null){
                 model.set('selected', true);
 
+                this.ChoicesView.selectedMarkerEl.show();
+
                 this.AttendeesView.setActive(model);
+            } else {
+                this.ChoicesView.selectedMarkerEl.hide();
             }
         }
     },
@@ -460,9 +465,12 @@ window.EventApp = Backbone.View.extend({
         var label = modal.find('.join-view-text');
 
         if (this.isFree.length === 0){
+            label.hide();
         } else if (this.isFree.length === 1) {
+            label.show();
             label.html("Ok, that's one day you're free.");
         } else {
+            label.show();
             label.html("Cool, that's " + this.isFree.length + " days you can make.");
         }
 
@@ -499,9 +507,6 @@ window.EventApp = Backbone.View.extend({
 
     bounceJoin: function(){
         var that = this;
-        this.joinEventEl.animate({top: 75}, 120, 'easeOutCubic', function(){
-            that.joinEventEl.animate({top: 100}, 1000, 'easeOutBounce', function(){
-            });
-        });
+        this.joinEventEl.velocity({top: 75}, 120, 'easeOutCubic').velocity({top: 100}, 1000, 'easeOutBounce');
     }
 });

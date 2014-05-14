@@ -44,6 +44,8 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.updateTopChoices(false);
 
+		this.updateSelected(this.model.get('selected'), false);
+
 		return this;
 	},
 
@@ -53,7 +55,7 @@ window.ChoiceView = Backbone.View.extend({
 		var changed = this.model.changedAttributes();
 
 		if (!_.isUndefined(changed['selected'])){
-			this.updateSelected(changed['selected']);
+			this.updateSelected(changed['selected'], true);
 		}
 
 		if (!_.isUndefined(changed['selectable'])){
@@ -88,10 +90,7 @@ window.ChoiceView = Backbone.View.extend({
 					marker.addClass("a");
 
 					if (animate){
-						marker.animate({top: -6}, 120, 'easeOutCubic', function(){
-							marker.animate({top: 0}, 600, 'easeOutBounce', function(){
-							});
-						});
+						marker.velocity({top: -6}, 120, 'easeOutCubic').velocity({top: 0}, 600, 'easeOutBounce');
 					}
 				}
 			} else {
@@ -100,7 +99,7 @@ window.ChoiceView = Backbone.View.extend({
 		});
 	},
 
-	updateSelected: function(selected){
+	updateSelected: function(selected, animate){
 		if (selected){
 			if (!this.isSelected){
 				this.ensureVisible();
@@ -108,10 +107,18 @@ window.ChoiceView = Backbone.View.extend({
 
 			this.isSelected = true;
 
-			this.$el.addClass('cell-selected');
-		} else {
-			this.$el.removeClass('cell-selected');
+			var position = this.$el.position();
 
+			var duration = 0;
+
+			if (animate){
+				duration = 400;
+			}
+
+			App.ChoicesView.selectedMarkerEl.stop();
+
+			App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
+		} else {
 			this.isSelected = false;
 		}
 	},
@@ -153,11 +160,7 @@ window.ChoiceView = Backbone.View.extend({
 		var offset = this.$el.offset();
 		var itemHeight = $('.date-cell').first().height();
 
-		$('html, body').stop();
-
-		$('html, body').animate({
-			scrollTop: offset.top - (navBarHeight + itemHeight)
-		}, 400);
+		this.$el.velocity("scroll", {duration: 400, offset: -(navBarHeight + itemHeight)});
 	},
 
 	adornersRespositioned: function(){
@@ -183,9 +186,9 @@ window.ChoiceView = Backbone.View.extend({
 			var position = this.$el.position();
 
 			if (animate){
-				$(".calendar-choices-top-" + classSuffix).animate({left: position.left, top: position.top}, 400);
+				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 400);
 			} else {
-				$(".calendar-choices-top-" + classSuffix).animate({left: position.left, top: position.top}, 0);
+				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 0);
 			}
 		}
 	},
@@ -206,8 +209,6 @@ window.ChoiceView = Backbone.View.extend({
 		var target = $(this.$el).find("div:first");
 
 		if (App.selectableDateMode){
-			App.SelectDatesView.clearGroupSelected();
-
 			if (this.model.isSelectable()){
 				this.model.set({'selectable': false});
 			} else {
@@ -247,6 +248,8 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	el: $(".event-container-margin"),
+
+	selectedMarkerEl: $(".calendar-selected-item"),
 	
 	tableEl: $(".event-container-margin .event-table"),
 
@@ -337,9 +340,10 @@ window.ChoicesView = Backbone.View.extend({
 
 			parent.append(this.tableEl);
 
-			var topChoiceSize = size - 2;
+			// var topChoiceSize = size - 2;
 
-			this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
+			// this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
+			this.$el.find(".calendar-selected-item").width(size - 8).height(size - 9);
 
 			App.realignAdorners();
 		} else {

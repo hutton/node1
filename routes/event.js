@@ -27,9 +27,11 @@ function createEvent(req, res){
 			logger.info("New calendar " + newCalendar.calendarId + " created.");
 
 			Mail.sendMailToAttendee(newCalendar, creatorAttendee, newCalendar.name, message, "");
-
+			
 			res.redirect('/event/' + creatorAttendee.attendeeId);
 		});
+
+		Mail.sendShareLinkToAttendee(newCalendar, creatorAttendee);
 
 		var inviter = creatorAttendee.email;
 
@@ -215,7 +217,9 @@ function updateChoice(req, res){
 }
 
 function addAttendee(req, res){
-	if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
+	if (req.route.params[0] == "example"){
+		res.redirect('/example');
+	} else if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
 		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
 				logger.error("Error finding calendar " + req.route.params[0]);
@@ -278,6 +282,8 @@ function addAttendee(req, res){
 					}, function(err, message){
 						Mail.sendMailToAttendee(calendar, newAttendee, calendar.name, message, "");
 					});
+					
+					Mail.sendShareLinkToAttendee(calendar, newAttendee);
 
 					calendar.updateCalendar(newAttendee, [], req.body.isFree.split(','));
 

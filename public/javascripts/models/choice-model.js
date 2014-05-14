@@ -57,9 +57,9 @@ window.ChoiceModel = Backbone.Model.extend({
 					this.set("free", [currentAttendeeId]);
 				} else {
 					freeAttendees.push(currentAttendeeId);
-
-					this.trigger('changedFree');
 				}
+
+				this.trigger('changedFree');
 
 				if (window.App.wasFree.indexOf(date) != -1){
 					window.App.wasFree.removeElement(date);

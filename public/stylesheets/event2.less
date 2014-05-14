@@ -12,6 +12,8 @@
 @choice-border-color: #d0d0d0;
 @light-background-color: rgba(248,248,248,1.0);
 @event-table-content-width: 38px;
+@default-color: #808080;
+@link-color: #808080;
 
 @shaded-background: #F7F9F7;
 @item-text-color: rgba(0,0,0,0.4);
@@ -81,9 +83,33 @@ a:active{
 	text-decoration: none;
 }
 
+.btn{
+	border-radius: 0px;
+}
+
+.dropdown-menu .divider{
+	padding: 0px;
+}
+
+.dropdown-menu > li > a{
+	.link;
+}
+
+.dropdown-menu > li > a:hover{
+	color: @free-color;
+}
+
+.modal-header .close{
+	padding: 2px 5px;
+}
+
 .span-link{
 	color: @free-color;
 	cursor: pointer;
+}
+
+.span-link:hover{
+	text-decoration: underline;
 }
 
 .cancel-link{
@@ -93,6 +119,14 @@ a:active{
 .cancel-link:hover{
 	color: @selected-color;
 	cursor: pointer;
+}
+
+.link{
+	color: @link-color;
+}
+
+.link:hover{
+	color: @free-color;
 }
 
 .center{
@@ -239,15 +273,30 @@ a:active{
 .loader-calendar{
     position: relative;
     display: inline-block;
+	border: 2px solid white;
+	width: 74px;
+	height: 70px;
+	border-radius: 5px;
 }
 
-.loader-calendar > .fa{
-    font-size: 90px;
+.loader-calendar > span{
+	width: 7px;
+	height: 10px;
+	border: 2px solid white;
+	border-radius: 2px;
+	position: absolute;
+	top: -8px;
+	left: 10px;
+	z-index: 100;
+	background: @free-color;
+}
+
+.loader-calendar > span:nth-child(odd){
+	left: 49px;
 }
 
 .loader-calendar > div{
     position: absolute;
-    top: 31px;
     width: 100%;
     //line-height: 1.3em;
 }
@@ -256,24 +305,44 @@ a:active{
     text-align: center;
 }
 
-.loader-calendar-day{
+.loader-calendar-month{
     font-size: 12px;
+    background: white;
+    color: @free-color;
 }
 .loader-calendar-date{
     font-size: 22px;
     font-family: Arial;
     line-height: 19px;
+    margin-top: 8px;
 }
-.loader-calendar-month{
+.loader-calendar-day{
     font-size: 12px;
 }
 
-.loader-calendar-big .fa{
-    font-size: 110px;
+.loader-calendar-big{
+	border: 2px solid white;
+	width: 80px;
+	height: 75px;
+}
+
+.loader-calendar-big > span{
+	width: 8px;
+	height: 14px;
+	border: 2px solid white;
+	border-radius: 2px;
+	position: absolute;
+	top: -10px;
+	left: 10px;
+	z-index: 100;
+	background: @free-color;
+}
+
+.loader-calendar-big > span:nth-child(odd){
+	left: 54px;
 }
 
 .loader-calendar-big > div{
-    top: 39px;
 }
 
 .loader-calendar-big .loader-calendar-day, .loader-calendar-big .loader-calendar-month{
@@ -283,6 +352,7 @@ a:active{
 .loader-calendar-big .loader-calendar-date{
     font-size: 34px;
     line-height: 26px;
+    margin-top: 6px;
 }
 
 
@@ -293,7 +363,7 @@ a:active{
 .and{
 	margin: 0px 10px;
 	position: relative;
-	top: -15px;
+	top: -25px;
 }
 
 /**********************************************************************************/
@@ -305,17 +375,18 @@ a:active{
 .modal-title{
 	text-align: center;
 	color: @free-color;
+	margin-left: 10px;
 }
 
 #settings-view > div{
-	font-size: 16px;
+	font-size: 14px;
 
 	line-height: 1.6em;
 	max-width: 400px;
 }
 
 #settings-view h2{
-	font-size: 16px;
+	font-size: 14px;
 	color: #000000;
 	line-height: 1.3em;
 	padding: 8px 0px 2px 0px;
@@ -333,16 +404,20 @@ a:active{
 	margin: 0px 0px 20px 0px;
 }
 
-#settings-view .center{
-	margin-top: 30px;
+.settings-section span{
+	cursor: pointer;
 }
 
-.settings-section a{
-//	font-size: 
+.settings-section .fa{
+	margin-right: 5px;
 }
-
 .settings-section i{
+
 	.transition-duration(0.2s);
+}
+
+#settings-home{
+	margin-right: 30px;
 }
 
 .table td{
@@ -431,10 +506,23 @@ a:active{
 	.transition-duration(0.2s);
 }
 
-#title-mail{
+.title-mail-button{
 	position: absolute;
 	float: left;
 	transition: all 0.4s ease-in-out;
+}
+
+.title-mail-button button{
+	font-size: 21px;
+	color: white;
+}
+
+.title-mail-button.btn-group.open .dropdown-toggle.btn-link{
+	color: white;
+}
+
+.title-mail-button.btn-group:hover .dropdown-toggle.btn-link{
+	color: white;
 }
 
 .rotate{
@@ -610,7 +698,7 @@ a:active{
 }
 
 .date-cell-container{
-	background: @shaded-background;
+	background: white;
 	border: 1px solid @choice-border-color;
 
 	position: relative;
@@ -636,20 +724,18 @@ a:active{
 
 .past > .date-cell-container{
 	border: 1px solid #d0d0d0;
-	background: transparent !important;
+	background: #f0f0f0 !important;
 }
 
 .past .date-text{
-	text-decoration: line-through;
 }
 
 .unselectable{
-	opacity: 0.4;
+	opacity: 0.6;
 }
 
 .unselectable > .date-cell-container{
 	border: 1px solid #d0d0d0;
-	background: transparent !important;
 	.scale(0.85);
 	//box-shadow: inset 0px 0px 15px rgba(0,0,0,0.1);
 }
@@ -795,8 +881,8 @@ a:active{
 }
 
 .cell-selected > .date-cell-container{
-	border: @free-color solid 2px;
-	margin: 2px;
+	// border: @free-color solid 2px;
+	// margin: 2px;
 }
 
 /**************************************/
@@ -852,7 +938,7 @@ a:active{
 }
 
 .modal p{
-	margin: 0px 0px 20px 0px;
+	margin: 0px 0px 15px 0px;
 	font-size: 90%;
 	padding: 0px 20px;
 	line-height: 1.8em;
@@ -919,6 +1005,26 @@ a:active{
     position: relative;
 }
 
+.attendees-choices-active-container{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	pointer-events: none;
+	z-index: 1000;
+}
+
+.attendees-choices-active{
+	border: 2px solid #4ad16c;
+	z-index: 1000;
+	height: 100%;
+	width: 240px;
+	pointer-events: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .attendees-choices-month-container{
 	position: absolute;
 	left: @name-panel-width;
@@ -955,7 +1061,7 @@ a:active{
 }
 
 .active div.attendees-choice{
-	border: 2px solid @free-color;
+	//border: 2px solid @free-color;
 }
 
 .attendees-choices-row{
@@ -1096,21 +1202,6 @@ a:active{
 	width: 100%;
 }
 
-.attendees-choice-invite{
-	text-align: center;
-	margin-top: 15px;
-	z-index: 200;
-	display: none;
-}
-
-.attendees-choice-invite > a{
-	pointer-events: auto;
-}
-
-.active .attendees-choice-invite{
-	display: block;
-}
-
 .att-ch{
 	border-bottom: 1px solid @divider-color;
 	padding-bottom: 2px;
@@ -1123,6 +1214,13 @@ a:active{
 
 .att-ch .fa{
 	font-size: 16px;
+}
+
+.calendar-selected-item{
+	position: absolute;
+	border: 2px solid @free-color;
+	z-index: 1000;
+	pointer-events: none;
 }
 
 /************ Top choice markers **************/
@@ -1216,18 +1314,39 @@ a:active{
 }
 
 .selecting-dates{
+	width: 260px;
 	background: @light-background-color;
 	max-width: 580px;
 	text-align: center;
-	color: @free-color;
 	font-size: 75%;
 	display: inline-block;
-	padding: 0px 20px 10px 20px;
-	border-left: 1px solid @divider-color;
-	border-right: 1px solid @divider-color;
-	border-bottom: 1px solid @divider-color;
+	padding: 10px 20px 10px 20px;
+	border-left: 1px solid @choice-border-color;
+	border-right: 1px solid @choice-border-color;
+	border-bottom: 1px solid @choice-border-color;
 	pointer-events: auto;
-	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+	// box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+
+.selecting-dates button{
+	width: 210px;
+	font-size: 16px;
+	color: @default-color;
+}
+
+.selecting-dates .btn-default .caret {
+	border-top-color: @default-color;
+}
+
+.selecting-dates li{
+	width: 210px;
+	cursor: pointer;
+	text-align: left;
+	padding: 2px 10px;
+}
+
+.selecting-dates li:hover{
+	color: @free-color;
 }
 
 .selecting-dates-saving{
@@ -1236,15 +1355,16 @@ a:active{
 	color: #a0a0a0;
 }
 
-.selecting-dates-title{
-	margin-top: 10px;
+.selecting-dates-help-text{
+	//color: @selected-color;
+	margin-top: 5px;
 	margin-bottom: 10px;
-	font-weight: bold;
 }
 
 #selecting-dates-save{
 	cursor: pointer;
 	margin-top: 10px;
+	color: @free-color;
 }
 
 #selecting-dates-cancel{
@@ -1252,6 +1372,10 @@ a:active{
 	margin-top: 10px;
 	margin-right: 20px;
 	cursor: pointer;
+}
+
+#selecting-dates-cancel:hover{
+	color: @default-color;
 }
 
 .selecting-dates-period-conatiner{
@@ -1327,6 +1451,11 @@ a:active{
 	text-decoration: underline;
 }
 
+.new-mode-start-join{
+	color: white;
+	background: @free-color;
+	padding: 2px 8px;
+}
 
 /********* Media rules ******************************/
 @media screen and (min-width: 450px){
@@ -1367,7 +1496,7 @@ a:active{
 		content:"\f007"
 	}
 
-	.date-cell-container{
+	.date-cell-container, .calendar-selected-item{
 		margin: 3px;
 	}
 
@@ -1421,7 +1550,7 @@ a:active{
 		content:"\f111"
 	}
 
-	.date-cell-container{
+	.date-cell-container, .calendar-selected-item{
 		margin: 2px;
 	}
 

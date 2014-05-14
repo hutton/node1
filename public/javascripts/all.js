@@ -1,5 +1,6 @@
 
 // @codekit-prepend "tp/jquery-2.0.3.min.js";
+// @codekit-prepend "tp/jquery.velocity.min.js";
 // @codekit-prepend "tp/tp.helper.js";
 // @codekit-prepend "bootstrap/bootstrap.min.js";
 

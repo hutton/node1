@@ -68,6 +68,8 @@ window.LoaderView = Backbone.View.extend({
 	close: function(){
 		var that = this;
 
+		this.canceled = true;
+
 		this.inner.css({'margin-top': -this.inner.height()});
 
 		this.$el.addClass('loader-hide');
@@ -79,6 +81,8 @@ window.LoaderView = Backbone.View.extend({
 	},
 
 	animateDelay: 1000,
+
+	canceled: false,
 
 	startAnimations: function(){
 		var that = this;
@@ -100,7 +104,7 @@ window.LoaderView = Backbone.View.extend({
 		} else{
 			if (this.choices.totalSelectable() === 1){
 				this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
-			} else if (this.attendees.length <= 3 || !this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){
+			} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){
 				this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
 			} else {
 				this.animateFromEdge(this.$el.find('.loader-top-choice'), 'bottom');
@@ -111,7 +115,7 @@ window.LoaderView = Backbone.View.extend({
 				this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
 				this.setCloseText("Continue");
 			} else {
-				if (this.attendees.length <= 3){
+				if (this.attendees.length < 3){
 					this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
 				}
 			}
@@ -119,7 +123,10 @@ window.LoaderView = Backbone.View.extend({
 
 		if (this.autoClose){
 			_.delay(function(){
-				that.close();
+				if (!that.canceled){
+					that.close();
+				}
+
 			}, this.currentAnimateDelay + 1500);
 		}
 	},
