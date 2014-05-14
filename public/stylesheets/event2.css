@@ -2158,6 +2158,24 @@ a:active {
   -webkit-overflow-scrolling: touch;
   position: relative;
 }
+.attendees-choices-active-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  pointer-events: none;
+  z-index: 1000;
+}
+.attendees-choices-active {
+  border: 2px solid #4ad16c;
+  z-index: 1000;
+  height: 100%;
+  width: 240px;
+  pointer-events: none;
+  margin-left: auto;
+  margin-right: auto;
+}
 .attendees-choices-month-container {
   position: absolute;
   left: 130px;
@@ -2185,9 +2203,6 @@ a:active {
   position: relative;
   background: white;
   border: 1px solid #d0d0d0;
-}
-.active div.attendees-choice {
-  border: 2px solid #4ad16c;
 }
 .attendees-choices-row {
   list-style: none;
@@ -2312,6 +2327,8 @@ a:active {
 .calendar-selected-item {
   position: absolute;
   border: 2px solid #4ad16c;
+  z-index: 1000;
+  pointer-events: none;
 }
 /************ Top choice markers **************/
 .attendees-choices-top {
@@ -2554,7 +2571,8 @@ a:active {
   .markers-container li:before {
     content: "\f007";
   }
-  .date-cell-container {
+  .date-cell-container,
+  .calendar-selected-item {
     margin: 3px;
   }
   .calendar-choices-top {
@@ -2605,7 +2623,8 @@ a:active {
   .markers-container li:before {
     content: "\f111";
   }
-  .date-cell-container {
+  .date-cell-container,
+  .calendar-selected-item {
     margin: 2px;
   }
   .calendar-choices-top {

@@ -44,6 +44,8 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.updateTopChoices(false);
 
+		this.updateSelected(this.model.get('selected'), false);
+
 		return this;
 	},
 
@@ -53,7 +55,7 @@ window.ChoiceView = Backbone.View.extend({
 		var changed = this.model.changedAttributes();
 
 		if (!_.isUndefined(changed['selected'])){
-			this.updateSelected(changed['selected']);
+			this.updateSelected(changed['selected'], true);
 		}
 
 		if (!_.isUndefined(changed['selectable'])){
@@ -97,7 +99,7 @@ window.ChoiceView = Backbone.View.extend({
 		});
 	},
 
-	updateSelected: function(selected){
+	updateSelected: function(selected, animate){
 		if (selected){
 			if (!this.isSelected){
 				this.ensureVisible();
@@ -105,10 +107,18 @@ window.ChoiceView = Backbone.View.extend({
 
 			this.isSelected = true;
 
-			this.$el.addClass('cell-selected');
-		} else {
-			this.$el.removeClass('cell-selected');
+			var position = this.$el.position();
 
+			var duration = 0;
+
+			if (animate){
+				duration = 400;
+			}
+
+			App.ChoicesView.selectedMarkerEl.stop();
+
+			App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
+		} else {
 			this.isSelected = false;
 		}
 	},
@@ -238,6 +248,8 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	el: $(".event-container-margin"),
+
+	selectedMarkerEl: $(".calendar-selected-item"),
 	
 	tableEl: $(".event-container-margin .event-table"),
 
@@ -331,7 +343,7 @@ window.ChoicesView = Backbone.View.extend({
 			// var topChoiceSize = size - 2;
 
 			// this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
-			this.$el.find(".calendar-selected-item").width(size).height(size);
+			this.$el.find(".calendar-selected-item").width(size - 8).height(size - 9);
 
 			App.realignAdorners();
 		} else {

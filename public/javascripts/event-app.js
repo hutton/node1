@@ -434,7 +434,11 @@ window.EventApp = Backbone.View.extend({
             if (model !== null){
                 model.set('selected', true);
 
+                this.ChoicesView.selectedMarkerEl.show();
+
                 this.AttendeesView.setActive(model);
+            } else {
+                this.ChoicesView.selectedMarkerEl.hide();
             }
         }
     },

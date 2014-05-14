@@ -164,7 +164,7 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	onClose: function(){
-		App.setSelected(this.model);
+		App.setSelected(null);
 
 		this.hide();
 	},
