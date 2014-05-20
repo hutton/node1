@@ -56,6 +56,8 @@ window.EventApp = Backbone.View.extend({
 
         this.SelectDatesView = new SelectDatesView({collection: this.choices});
 
+        this.StartSelectDatesView = new StartSelectDatesView();
+
         var pathNames = window.location.pathname.split( '/' );
 
         this.currentId = pathNames[pathNames.length - 1];
@@ -134,7 +136,8 @@ window.EventApp = Backbone.View.extend({
         this.showBestChoices();
 
         if (!this.model.get('datesSelected') || this.choices.totalSelectable() === 0){
-            this.changeSelectableDates();
+
+            this.StartSelectDatesView.show();
         } else {
             this.setSelectableDateMode(false);
         }

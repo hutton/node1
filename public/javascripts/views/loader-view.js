@@ -91,17 +91,20 @@ window.LoaderView = Backbone.View.extend({
 
 		this.currentAnimateDelay = 400;
 
-		this.showClose();
-		this.setCloseText("Skip");
-
-		this.$el.find('.loader-title').show();
 		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
 
 		if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
-			this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
+			// this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
 
-			this.setCloseText("Continue");
+			// this.setCloseText("Continue");
+
+			this.close();
 		} else{
+			this.showClose();
+			this.setCloseText("Skip");
+
+			this.$el.find('.loader-title').show();
+			
 			if (this.choices.totalSelectable() === 1){
 				this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
 			} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){

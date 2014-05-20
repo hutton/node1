@@ -1920,7 +1920,7 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
-  background: white;
+  background: #f4fff4;
   position: relative;
   height: 100%;
   cursor: pointer;
@@ -1939,13 +1939,13 @@ a:active {
   }
 }
 .past > .date-cell-container {
-  background: #f0f0f0 !important;
+  background: #f4f4f4 !important;
 }
 .past .date-text {
   opacity: 0.4;
 }
 .unselectable > .date-cell-container {
-  background: #f6f6f6;
+  background: #ffffff;
 }
 .event-table tr.selected-row > td {
   padding: 0px;
@@ -2531,6 +2531,10 @@ a:active {
   background: #4ad16c;
   padding: 2px 8px;
 }
+/********* Start select dates *******/
+.start-select-dates-option {
+  margin: 0px 6px;
+}
 /********* Media rules ******************************/
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
@@ -2621,8 +2625,5 @@ a:active {
   .calendar-choices-top {
     margin-left: 0px;
     margin-top: 2px;
-  }
-  .attendees-choice {
-    margin: 0px 2px;
   }
 }
