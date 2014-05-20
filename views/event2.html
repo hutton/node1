@@ -68,14 +68,14 @@
               Select a date range <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><span id="selecting-dates-one-month">Next month</span></li>
-              <li><span id="selecting-dates-one-month-weekdays">Next month (weekdays)</span></li>
-              <li><span id="selecting-dates-two-months">Next two months</span></li>
-              <li><span id="selecting-dates-two-months-weekdays">Next two months (weekdays)</span></li>
-              <li><span id="selecting-dates-all">All dates</span></li>
-              <li><span id="selecting-dates-all-weekdays">All dates (weekdays)</span></li>
+              <li><div id="selecting-dates-one-month">Next month</div></li>
+              <li><div id="selecting-dates-one-month-weekdays">Next month (weekdays)</div></li>
+              <li><div id="selecting-dates-two-months">Next two months</div></li>
+              <li><div id="selecting-dates-two-months-weekdays">Next two months (weekdays)</div></li>
+              <li><div id="selecting-dates-all">All dates</div></li>
+              <li><div id="selecting-dates-all-weekdays">All dates (weekdays)</div></li>
               <li class="divider"></li>
-              <li><span id="selecting-dates-clear">Clear</span></li>
+              <li><div id="selecting-dates-clear">Clear</div></li>
             </ul>
           </div>
           <div class="selecting-dates-help-text"><span class="inline-text-desktop">or click</span><span class="inline-text-mobile">tap</span> a date to toogle.</div>
@@ -242,16 +242,16 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">Welcome!</h4>
           </div>
           <div class="modal-body">
-              <p>To get started select the date range for your event.</p>
-              <p>
-                <span id="" class="span-link start-select-dates-option">One month</span><span class="span-link start-select-dates-option">Two months</span><span class="span-link start-select-dates-option">Three months</span>
-              </p>
-
-              <span id="start-select-dates-custom" class="span-link">or select a custom range <i class="fa fa-chevron-right"></i></span>
+              <p>To get started select a date range for the event</p>
+              <div>
+                <span id="start-select-dates-next-month" class="span-link start-select-dates-option">next month</span><span class="span-link start-select-dates-option">next two months</span><span class="span-link start-select-dates-option">next three months</span>
+              </div>
+                <div>or</div>
+              <span id="start-select-dates-custom" class="span-link">a custom range <i class="fa fa-chevron-right"></i></span>
+            </p>
         </div>
           </div>
         </div><!-- /.modal-content -->

@@ -98,13 +98,15 @@ window.LoaderView = Backbone.View.extend({
 
 			// this.setCloseText("Continue");
 
+			App.StartSelectDatesView.show();
+
 			this.close();
 		} else{
 			this.showClose();
 			this.setCloseText("Skip");
 
 			this.$el.find('.loader-title').show();
-			
+
 			if (this.choices.totalSelectable() === 1){
 				this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
 			} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){

@@ -112,7 +112,7 @@ window.ChoiceView = Backbone.View.extend({
 			var duration = 0;
 
 			if (animate){
-				duration = 400;
+				duration = 200;
 			}
 
 			App.ChoicesView.selectedMarkerEl.stop();

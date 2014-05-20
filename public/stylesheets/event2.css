@@ -1920,7 +1920,7 @@ a:active {
   color: #d0d0d0;
 }
 .date-cell-container {
-  background: #f4fff4;
+  background: #f5f9f5;
   position: relative;
   height: 100%;
   cursor: pointer;
@@ -1937,12 +1937,6 @@ a:active {
   100% {
     top: 0;
   }
-}
-.past > .date-cell-container {
-  background: #f4f4f4 !important;
-}
-.past .date-text {
-  opacity: 0.4;
 }
 .unselectable > .date-cell-container {
   background: #ffffff;
@@ -2054,7 +2048,7 @@ a:active {
 }
 .today .date-text {
   color: #4ad16c;
-  opacity: 0.9 !important;
+  text-decoration: underline;
 }
 /**************************************/
 .register-attendee-message {
@@ -2091,6 +2085,8 @@ a:active {
 }
 .modal-header {
   background: #f8f8f8;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 .modal-footer {
   margin-top: 0px;
@@ -2099,7 +2095,7 @@ a:active {
   background: #f8f8f8;
 }
 .modal-content {
-  border-radius: 0px;
+  border-radius: 6px;
 }
 .modal p {
   margin: 0px 0px 15px 0px;
@@ -2223,7 +2219,7 @@ a:active {
   position: relative;
 }
 .attendees-choice-date {
-  background: #f7f9f7;
+  background: #f5f9f5;
   text-align: left;
   font-size: 65%;
   color: rgba(0, 0, 0, 0.4);

@@ -136,8 +136,6 @@ window.EventApp = Backbone.View.extend({
         this.showBestChoices();
 
         if (!this.model.get('datesSelected') || this.choices.totalSelectable() === 0){
-
-            this.StartSelectDatesView.show();
         } else {
             this.setSelectableDateMode(false);
         }

@@ -15,7 +15,7 @@
 @default-color: #808080;
 @link-color: #808080;
 
-@shaded-background: #F7F9F7;
+@shaded-background: #F5F9F5;
 @item-text-color: rgba(0,0,0,0.4);
 
 @divider-gap: 3px;
@@ -698,7 +698,7 @@ a:active{
 }
 
 .date-cell-container{
-	background: #f4fff4;
+	background: @shaded-background;
 
 	position: relative;
 
@@ -717,12 +717,9 @@ a:active{
 }
 
 .past > .date-cell-container{
-	background: #f4f4f4 !important;
 }
 
 .past .date-text{
-	//color: white;
-	opacity: 0.4;
 }
 
 .unselectable{
@@ -859,7 +856,7 @@ a:active{
 
 .today .date-text{
 	color: @free-color;
-	opacity: 0.9 !important;
+	text-decoration: underline;
 }
 
 .event-table td > div.date-cell-container{
@@ -918,6 +915,8 @@ a:active{
 
 .modal-header{
 	background: @light-background-color;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
 }
 
 .modal-footer{
@@ -928,7 +927,7 @@ a:active{
 }
 
 .modal-content{
-	border-radius: 0px;
+	border-radius: 6px;
 }
 
 .modal p{
