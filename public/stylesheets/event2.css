@@ -2076,7 +2076,7 @@ a:active {
 }
 /**************************************/
 .modal {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.8em;
   text-align: center;
 }
@@ -2085,8 +2085,8 @@ a:active {
 }
 .modal-header {
   background: #f8f8f8;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .modal-footer {
   margin-top: 0px;
@@ -2095,11 +2095,10 @@ a:active {
   background: #f8f8f8;
 }
 .modal-content {
-  border-radius: 6px;
+  border-radius: 4px;
 }
 .modal p {
   margin: 0px 0px 15px 0px;
-  font-size: 90%;
   padding: 0px 20px;
   line-height: 1.8em;
 }
@@ -2401,7 +2400,7 @@ a:active {
   background: #f8f8f8;
   max-width: 580px;
   text-align: center;
-  font-size: 75%;
+  font-size: 14px;
   display: inline-block;
   padding: 10px 20px 10px 20px;
   border-left: 1px solid #d0d0d0;
@@ -2411,7 +2410,7 @@ a:active {
 }
 .selecting-dates button {
   width: 210px;
-  font-size: 16px;
+  font-size: 14px;
   color: #808080;
 }
 .selecting-dates .btn-default .caret {
@@ -2431,7 +2430,7 @@ a:active {
   background: #f8f8f8;
   max-width: 580px;
   text-align: center;
-  font-size: 75%;
+  font-size: 14px;
   display: inline-block;
   padding: 10px 20px 10px 20px;
   border-left: 1px solid #d0d0d0;
@@ -2528,6 +2527,9 @@ a:active {
   padding: 2px 8px;
 }
 /********* Start select dates *******/
+#new-mode-start-select-dates-view .modal-title {
+  margin: 0px;
+}
 .start-select-dates-option {
   margin: 0px 6px;
 }

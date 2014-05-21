@@ -52,17 +52,27 @@ window.LoaderView = Backbone.View.extend({
 	show: function(){
 		var that = this;
 
-		this.$el.show();
+		if (App.newMode){
+			this.$el.hide();
+			
+			$('#new-mode-start-view').modal({show: true});
+		} else if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
+			this.$el.hide();
 
-		this.$el.find('.loader-convenely').hide();
+			App.StartSelectDatesView.show();
+		} else {
+			this.$el.show();
 
-		this.render();
+			this.$el.find('.loader-convenely').hide();
 
-		this.inner.css({'margin-top': 0});
+			this.render();
 
-		that.$el.removeClass('loader-hide');	
+			this.inner.css({'margin-top': 0});
 
-		this.startAnimations();
+			that.$el.removeClass('loader-hide');	
+
+			this.startAnimations();
+		}
 	},
 
 	close: function(){
@@ -94,17 +104,17 @@ window.LoaderView = Backbone.View.extend({
 		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
 
 		if (App.newMode){
-			$('#new-mode-start-view').modal({show: true});
+			// $('#new-mode-start-view').modal({show: true});
 
-			this.close();
+			// this.close();
 		} else if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
 			// this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
 
 			// this.setCloseText("Continue");
 
-			App.StartSelectDatesView.show();
+			// App.StartSelectDatesView.show();
 
-			this.close();
+			// this.close();
 		} else{
 			this.showClose();
 			this.setCloseText("Skip");
