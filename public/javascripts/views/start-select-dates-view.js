@@ -9,7 +9,9 @@ window.StartSelectDatesView = Backbone.View.extend({
 
 	events: {
 		"click #start-select-dates-custom": "selectCustomRange",
-		"click #start-select-dates-next-month": "selectNextMonth"
+		"click #start-select-dates-next-month": "selectNextMonth",
+		"click #start-select-dates-next-two-months": "selectNextTwoMonths",
+		"click #start-select-dates-all": "selectAll"
 	},
 
 	selectCustomRange: function(){
@@ -30,6 +32,22 @@ window.StartSelectDatesView = Backbone.View.extend({
 
 	selectNextMonth: function(){
 		App.SelectDatesView.oneMonth(false);
+
+		App.SelectDatesView.save();
+
+		this.hide();
+	},
+
+	selectNextTwoMonths: function(){
+		App.SelectDatesView.twoMonths(false);
+
+		App.SelectDatesView.save();
+
+		this.hide();
+	},
+
+	selectAll: function(){
+		App.SelectDatesView.all(false);
 
 		App.SelectDatesView.save();
 

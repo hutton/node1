@@ -120,7 +120,6 @@ window.EventApp = Backbone.View.extend({
                 that.showNewModeMail();
             });
 
-            $('#new-mode-start-view').modal({show: true});
         } else {
             this.updateTellEveryoneLink();
             this.recalcTopSpacer();

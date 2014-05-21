@@ -42,8 +42,6 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.updateSelectable(this.model.get('selectable'));
 
-		this.updateTopChoices(false);
-
 		this.updateSelected(this.model.get('selected'), false);
 
 		return this;
@@ -67,8 +65,6 @@ window.ChoiceView = Backbone.View.extend({
 		console.log("Choices - free changed");
 
 		this.updateFree(true);
-
-		this.updateTopChoices(true);
 	},
 
 	isSelected: false,
@@ -164,33 +160,6 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	adornersRespositioned: function(){
-		this.updateTopChoices(false);
-	},
-
-	updateTopChoices: function(animate){
-		return;
-		
-		if (this.model.has('top-choice')){
-			var place = this.model.get('top-choice');
-
-			var classSuffix;
-
-			if (place === 1){
-				classSuffix = "one";
-			} else if (place === 2){
-				classSuffix = "two";
-			} else if (place === 3){
-				classSuffix = "three";
-			}
-
-			var position = this.$el.position();
-
-			if (animate){
-				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 400);
-			} else {
-				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 0);
-			}
-		}
 	},
 
 	touchStarted: false,

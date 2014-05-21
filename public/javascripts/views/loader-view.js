@@ -93,7 +93,11 @@ window.LoaderView = Backbone.View.extend({
 
 		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
 
-		if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
+		if (App.newMode){
+			$('#new-mode-start-view').modal({show: true});
+
+			this.close();
+		} else if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
 			// this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
 
 			// this.setCloseText("Continue");

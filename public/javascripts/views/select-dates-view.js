@@ -36,21 +36,13 @@ window.SelectDatesView = Backbone.View.extend({
 	cancel: function(){
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
-				var date = choice.get('date');
-
-				if (date > window.App.today){
-					choice.set('selectable', false);
-				}
+				choice.set('selectable', false);
 			}
 		});
 
 		_.each(this.originalSelectableChoices, function(choice){
 			if (choice.has('date')){
-				var date = choice.get('date');
-
-				if (date > window.App.today){
-					choice.set('selectable', true);
-				}
+				choice.set('selectable', true);
 			}
 		});
 
@@ -129,11 +121,7 @@ window.SelectDatesView = Backbone.View.extend({
 	clearClicked: function(){
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
-				var date = choice.get('date');
-
-				if (date >= window.App.today){
-					choice.set('selectable', false);
-				}
+				choice.set('selectable', false);
 			}
 		});
 	},
@@ -149,6 +137,8 @@ window.SelectDatesView = Backbone.View.extend({
 					} else {
 						choice.set('selectable', false);
 					}
+				} else {
+					choice.set('selectable', false);
 				}
 			}
 		});
@@ -165,6 +155,8 @@ window.SelectDatesView = Backbone.View.extend({
 					} else {
 						choice.set('selectable', false);
 					}
+				} else {
+					choice.set('selectable', false);
 				}
 			}
 		});

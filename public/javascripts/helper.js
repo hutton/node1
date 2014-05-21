@@ -120,7 +120,7 @@ function expandDates(input, everythingSelectable){
 
 	_.each(processedInput, function(choice){
 		choice.past = choice.date < today;
-		choice.selectable = choice.selectable && !choice.past;
+		//choice.selectable = choice.selectable && !choice.past;
 	});
 
 
