@@ -2,6 +2,8 @@
 @import "elements.less";
 @import "font-awesome.min.css.less";
 
+@fixed-width: 800px;
+
 @free-color: #4AD16C;
 @font-size: 21px;
 @divider-color: #e8e8e8;
@@ -9,13 +11,13 @@
 @month-divider-color: #e8e8e8;
 @selected-color: #c0c0c0;
 @date-color: #c0c0c0;
-@choice-border-color: #d0d0d0;
+@choice-border-color: #d8d8d8;
 @light-background-color: rgba(248,248,248,1.0);
 @event-table-content-width: 38px;
 @default-color: #808080;
 @link-color: #808080;
 
-@shaded-background: #F5F9F5;
+@shaded-background: #F3F9F5;
 @item-text-color: rgba(0,0,0,0.4);
 
 @divider-gap: 3px;
@@ -143,7 +145,7 @@ a:active{
 .fixed-width{
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 600px;
+	max-width: @fixed-width;
 	position: relative;
 }
 
@@ -210,7 +212,7 @@ a:active{
 	margin-top: 0px;
     margin-left: auto;
     margin-right: auto; 
-    max-width: 600px;
+    max-width: @fixed-width;
 	//border: 1px solid #808080;
 
 	.transition-duration(0.4s);
@@ -447,7 +449,7 @@ a:active{
 }
 
 .event-container{
-	max-width: 600px;
+	max-width: @fixed-width;
 	margin-left: auto;
 	margin-right: auto;
 	min-height: 800px;
@@ -629,7 +631,6 @@ a:active{
 }
 
 .days-table{
-	max-width: 600px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 46%;
@@ -805,7 +806,7 @@ a:active{
 	position: relative;
 	overflow: hidden;
 	height: 100%;
-	border: solid 1px #e0e0e0;
+	border: solid 1px @choice-border-color;
 }
 
 .free-marker{
@@ -911,6 +912,8 @@ a:active{
 
 .modal-dialog{
 	max-width: 450px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 @modal-corner-radius: 4px;

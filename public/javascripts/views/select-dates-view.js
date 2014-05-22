@@ -72,7 +72,7 @@ window.SelectDatesView = Backbone.View.extend({
 		}).always(function() {
 			that.savingEL.slideUp('fast');
 
-			if (that.originalSelectableChoices.length() === 0){
+			if (_.isUndefined(that.originalSelectableChoices) || that.originalSelectableChoices.length === 0){
 				$('#new-mode-start-started-view').modal({show: true});
 			}
 		});
