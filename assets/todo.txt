@@ -1,7 +1,5 @@
 
-- Underline today, remove past shading
 - Possible color border around active dates
-- Active choices date should be moving box
 - Better 404
 - Bigger text on 'it's increadabily easy class=lead
 - Welcome popup for created event.
@@ -13,6 +11,8 @@
 
 Done
 ----
+- Active choices date should be moving box
+- Underline today, remove past shading
 - Make loader calendars wider
 - Remove past strikethrough- Fix unsubscribe removing dates
 - Emails: remove contact with email and put link on separate line.

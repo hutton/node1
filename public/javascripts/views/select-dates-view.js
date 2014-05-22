@@ -71,6 +71,10 @@ window.SelectDatesView = Backbone.View.extend({
 			dataType: "json"
 		}).always(function() {
 			that.savingEL.slideUp('fast');
+
+			if (that.originalSelectableChoices.length() === 0){
+				$('#new-mode-start-started-view').modal({show: true});
+			}
 		});
 
 		App.AttendeesView.destroy();
@@ -145,6 +149,8 @@ window.SelectDatesView = Backbone.View.extend({
 	},
 
 	updateSelected: function(endDate, weekdays){
+		var scrolledToView = false;
+
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
 				var date = choice.get('date');
@@ -152,6 +158,12 @@ window.SelectDatesView = Backbone.View.extend({
 				if (date >= window.App.today){
 					if (date < endDate && (!weekdays || (date.getDay() > 0 && date.getDay() < 6))){
 						choice.set('selectable', true);
+
+						if (!scrolledToView){
+							choice.trigger('scrollToTopLine');
+							scrolledToView = true;
+						}
+
 					} else {
 						choice.set('selectable', false);
 					}

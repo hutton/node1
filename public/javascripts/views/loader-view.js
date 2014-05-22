@@ -51,15 +51,20 @@ window.LoaderView = Backbone.View.extend({
 
 	show: function(){
 		var that = this;
+		var choicesSelected = this.choices.totalChoices();
 
 		if (App.newMode){
 			this.$el.hide();
-			
+
 			$('#new-mode-start-view').modal({show: true});
 		} else if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
 			this.$el.hide();
 
 			App.StartSelectDatesView.show();
+		} else if (choicesSelected == 0 && this.attendees.length == 1) {
+			this.$el.hide();
+
+			$('#new-mode-start-started-view').modal({show: true});
 		} else {
 			this.$el.show();
 
@@ -101,42 +106,26 @@ window.LoaderView = Backbone.View.extend({
 
 		this.currentAnimateDelay = 400;
 
-		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
+		this.showClose();
+		this.setCloseText("Skip");
 
-		if (App.newMode){
-			// $('#new-mode-start-view').modal({show: true});
+		this.$el.find('.loader-title').show();
 
-			// this.close();
-		} else if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
-			// this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
+		if (this.choices.totalSelectable() === 1){
+			this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
+		} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){
+			this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
+		} else {
+			this.animateFromEdge(this.$el.find('.loader-top-choice'), 'bottom');
+			this.animateFromEdge(this.$el.find('.loader-top-other'), 'bottom');
+		}
 
-			// this.setCloseText("Continue");
-
-			// App.StartSelectDatesView.show();
-
-			// this.close();
-		} else{
-			this.showClose();
-			this.setCloseText("Skip");
-
-			this.$el.find('.loader-title').show();
-
-			if (this.choices.totalSelectable() === 1){
-				this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
-			} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){
-				this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
-			} else {
-				this.animateFromEdge(this.$el.find('.loader-top-choice'), 'bottom');
-				this.animateFromEdge(this.$el.find('.loader-top-other'), 'bottom');
-			}
-
-			if (yourChoices === 0 || App.newMode){
-				this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
-				this.setCloseText("Continue");
-			} else {
-				if (this.attendees.length < 3){
-					this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
-				}
+		if (yourChoices === 0 || App.newMode){
+			this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
+			this.setCloseText("Continue");
+		} else {
+			if (this.attendees.length < 3){
+				this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
 			}
 		}
 
