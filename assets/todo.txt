@@ -1,5 +1,5 @@
-
-- Max width to 800
+- .modal-title: margin-left: 20px;
+- Reposition selected
 - Better 404
 
 - Cleanup CSS
@@ -9,6 +9,7 @@
 
 Done
 ----
+- Max width to 800
 - Active choices date should be moving box
 - Underline today, remove past shading
 - Make loader calendars wider
