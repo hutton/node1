@@ -1,5 +1,7 @@
 - .modal-title: margin-left: 20px;
 - Reposition selected
+- Put gap back in attendee view
+- Month text
 - Better 404
 
 - Cleanup CSS
