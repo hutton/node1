@@ -111,9 +111,10 @@ window.ChoiceView = Backbone.View.extend({
 				duration = 200;
 			}
 
-			App.ChoicesView.selectedMarkerEl.stop();
+			// App.ChoicesView.selectedMarkerEl.stop();
+			// App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
 
-			App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
+			App.ChoicesView.selectedMarkerEl.css({left: position.left, top: position.top});
 		} else {
 			this.isSelected = false;
 		}
