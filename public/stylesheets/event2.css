@@ -1915,10 +1915,6 @@ a:active {
   -ms-user-select: none;
   user-select: none;
 }
-.event-table td:nth-of-type(6),
-.event-table td:nth-of-type(7) {
-  color: #d8d8d8;
-}
 .date-cell-container {
   background: #f3f9f5;
   position: relative;
@@ -1951,7 +1947,7 @@ a:active {
   height: auto;
 }
 .date-text {
-  margin-left: 5px;
+  margin-left: 6px;
   position: absolute;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -2003,12 +1999,10 @@ a:active {
   border: solid 1px #d8d8d8;
 }
 .free-marker {
-  opacity: 0.0;
   position: absolute;
-  color: #4ad16c;
-  top: 60%;
-  text-align: center;
-  font-size: 140%;
+  text-align: right;
+  top: 0px;
+  font-size: 80%;
   width: 100%;
   -moz-transition-duration: 0.15s;
   -webkit-transition-duration: 0.15s;
@@ -2016,10 +2010,21 @@ a:active {
   -ms-transform-duration: 0.15s;
   transition-duration: 0.15s;
 }
-.free {
-  display: block;
-  opacity: 1.0;
-  top: 50%;
+.free-marker > span {
+  color: transparent;
+  border-bottom: 3px solid rgba(192, 192, 192, 0.5);
+  border-right: 3px solid rgba(192, 192, 192, 0.5);
+  -webkit-transform: rotate(42deg);
+  -moz-transform: rotate(42deg);
+  -o-transform: rotate(42deg);
+  -ms-transform: rotate(42deg);
+  transform: rotate(42deg);
+  padding: 0px 0px;
+  display: inline-block;
+}
+.free > span {
+  border-bottom: 3px solid #4ad16c;
+  border-right: 3px solid #4ad16c;
 }
 .markers-container {
   position: absolute;
@@ -2611,11 +2616,11 @@ a:active {
     font-size: 0.9em;
   }
   .free-marker {
-    -moz-transform: translate(0px, -18px);
-    -webkit-transform: translate(0px, -18px);
-    -o-transform: translate(0px, -18px);
-    -ms-transform: translate(0px, -18px);
-    transform: translate(0px, -18px);
+    -moz-transform: translate(-15px, -1px);
+    -webkit-transform: translate(-15px, -1px);
+    -o-transform: translate(-15px, -1px);
+    -ms-transform: translate(-15px, -1px);
+    transform: translate(-15px, -1px);
   }
   .markers-container {
     margin-top: 0px;
@@ -2646,16 +2651,14 @@ a:active {
     font-size: 0.8em;
   }
   .free-marker {
-    text-align: right;
-    top: 0px;
-    -moz-transform: translate(-1px, -2px);
-    -webkit-transform: translate(-1px, -2px);
-    -o-transform: translate(-1px, -2px);
-    -ms-transform: translate(-1px, -2px);
-    transform: translate(-1px, -2px);
+    -moz-transform: translate(-2px, -4px);
+    -webkit-transform: translate(-2px, -4px);
+    -o-transform: translate(-2px, -4px);
+    -ms-transform: translate(-2px, -4px);
+    transform: translate(-2px, -4px);
   }
   .date-text {
-    top: -1px;
+    top: 0px;
     left: -2px;
     font-size: 100%;
   }

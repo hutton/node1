@@ -692,7 +692,6 @@ a:active{
 
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7){
-	color: @choice-border-color;
 }
 
 .event-table td:nth-of-type(6) .date-text,
@@ -747,7 +746,7 @@ a:active{
 }
 
 .date-text{
-	margin-left: 5px;
+	margin-left: 6px;
 
 	position: absolute;
 
@@ -813,24 +812,32 @@ a:active{
 }
 
 .free-marker{
-	opacity: 0.0;
-
 	position: absolute;
-	color: @free-color;	
 
-	top: 60%;
+	text-align: right;
+	top: 0px;
 
-	text-align: center;
-
-	font-size: 140%;
+	font-size: 80%;
 	width: 100%;
 	.transition-duration(0.15s);
 }
 
 .free{
-	display: block;
-	opacity: 1.0;
-	top: 50%;
+
+}
+
+.free-marker > span{
+	color: transparent;
+	border-bottom: 3px solid rgba(192,192,192,0.5);
+	border-right: 3px solid rgba(192,192,192,0.5);
+	.rotation(42deg);
+	padding: 0px 0px;
+	display: inline-block;
+}
+
+.free > span{
+	border-bottom: 3px solid @free-color;
+	border-right: 3px solid @free-color;
 }
 
 .markers-container{
@@ -1550,7 +1557,7 @@ a:active{
 	}
 
 	.free-marker{
-		.translate(0px, -18px);
+		.translate(-15px, -1px);
 	}
 
 	.markers-container{
@@ -1589,13 +1596,11 @@ a:active{
 	}
 
 	.free-marker{
-		text-align: right;
-		top: 0px;
-		.translate(-1px, -2px);
+		.translate(-2px, -4px);
 	}
 
 	.date-text{
-		top: -1px;
+		top: 0px;
 		left: -2px;
 		font-size: 100%;
 	}
