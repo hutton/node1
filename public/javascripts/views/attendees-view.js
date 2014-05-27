@@ -20,7 +20,7 @@ window.AttendeesView = Backbone.View.extend({
 		var newElementRow = newElement.find('.attendees-choices-row');
 
 		this.usedChoices = _.filter(this.collection.models, function(choice){
-			return choice.get('date') >= App.today && choice.isSelectable();
+			return choice.isSelectable();
 		});
 
 		var daysPassed = 0;
@@ -143,6 +143,8 @@ window.AttendeesView = Backbone.View.extend({
 			this.setHeight(true);
 
 			App.scrollToSelected();
+
+			this.resize();
 		}
 	},
 

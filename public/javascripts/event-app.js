@@ -190,7 +190,7 @@ window.EventApp = Backbone.View.extend({
     },
 
     titleResize: function(){
-        var maxFontSize = 21;
+        var maxFontSize = 23;
         var minFontSize = 12;
 
         var fontSize = maxFontSize;

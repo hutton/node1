@@ -1651,7 +1651,7 @@ a:active {
 .modal-title {
   text-align: center;
   color: #4ad16c;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 #settings-view > div {
   font-size: 14px;
@@ -1893,6 +1893,7 @@ a:active {
   height: 100%;
   position: relative;
   width: 38px;
+  font-size: 34px;
 }
 .month > div {
   position: relative;
@@ -2186,7 +2187,7 @@ a:active {
 }
 .attendees-choice {
   float: left;
-  margin: 0px;
+  margin: 0px 4px;
   padding: 0px;
   height: 100%;
   position: relative;
@@ -2206,9 +2207,7 @@ a:active {
   padding: 0px;
 }
 .attendees-choices-row > li > .attendees-choice {
-  border-top: 1px solid #d8d8d8;
-  border-left: 1px solid #d8d8d8;
-  border-bottom: 1px solid #d8d8d8;
+  border: 1px solid #d8d8d8;
 }
 .attendees-choices-row > li:last-child > .attendees-choice {
   border: 1px solid #d8d8d8;
@@ -2540,25 +2539,65 @@ a:active {
   .date-cell-container {
     font-size: 22px;
   }
+  .month {
+    font-size: 32px;
+    -moz-transform: translate(0px, -26px);
+    -webkit-transform: translate(0px, -26px);
+    -o-transform: translate(0px, -26px);
+    -ms-transform: translate(0px, -26px);
+    transform: translate(0px, -26px);
+  }
 }
 @media screen and (min-width: 600px) and (max-width: 700px) {
   .date-cell-container {
     font-size: 20px;
+  }
+  .month {
+    font-size: 30px;
+    -moz-transform: translate(0px, -23px);
+    -webkit-transform: translate(0px, -23px);
+    -o-transform: translate(0px, -23px);
+    -ms-transform: translate(0px, -23px);
+    transform: translate(0px, -23px);
   }
 }
 @media screen and (min-width: 500px) and (max-width: 600px) {
   .date-cell-container {
     font-size: 18px;
   }
+  .month {
+    font-size: 27px;
+    -moz-transform: translate(0px, -20px);
+    -webkit-transform: translate(0px, -20px);
+    -o-transform: translate(0px, -20px);
+    -ms-transform: translate(0px, -20px);
+    transform: translate(0px, -20px);
+  }
 }
 @media screen and (min-width: 450px) and (max-width: 500px) {
   .date-cell-container {
     font-size: 16px;
   }
+  .month {
+    font-size: 24px;
+    -moz-transform: translate(0px, -16px);
+    -webkit-transform: translate(0px, -16px);
+    -o-transform: translate(0px, -16px);
+    -ms-transform: translate(0px, -16px);
+    transform: translate(0px, -16px);
+  }
 }
 @media screen and (max-width: 450px) {
   .date-cell-container {
     font-size: 12px;
+  }
+  .month {
+    font-size: 21px;
+    -moz-transform: translate(0px, -12px);
+    -webkit-transform: translate(0px, -12px);
+    -o-transform: translate(0px, -12px);
+    -ms-transform: translate(0px, -12px);
+    transform: translate(0px, -12px);
   }
 }
 @media screen and (min-width: 450px) {
@@ -2570,14 +2609,6 @@ a:active {
   }
   .info-row-text-container {
     font-size: 0.9em;
-  }
-  .month {
-    -moz-transform: translate(0px, -26px);
-    -webkit-transform: translate(0px, -26px);
-    -o-transform: translate(0px, -26px);
-    -ms-transform: translate(0px, -26px);
-    transform: translate(0px, -26px);
-    font-size: 24px;
   }
   .free-marker {
     -moz-transform: translate(0px, -18px);
@@ -2613,13 +2644,6 @@ a:active {
   }
   .info-row-text-container {
     font-size: 0.8em;
-  }
-  .month {
-    -moz-transform: translate(0px, -12px);
-    -webkit-transform: translate(0px, -12px);
-    -o-transform: translate(0px, -12px);
-    -ms-transform: translate(0px, -12px);
-    transform: translate(0px, -12px);
   }
   .free-marker {
     text-align: right;

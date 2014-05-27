@@ -7,6 +7,7 @@ window.ChoiceView = Backbone.View.extend({
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
+		this.listenTo(this.model, "repositionSelected", this.repositionSelected);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -93,6 +94,10 @@ window.ChoiceView = Backbone.View.extend({
 				$(this).removeClass("a");
 			}
 		});
+	},
+
+	repositionSelected: function(){
+		this.updateSelected(this.model.get('selected'), false);
 	},
 
 	updateSelected: function(selected, animate){
@@ -313,7 +318,11 @@ window.ChoicesView = Backbone.View.extend({
 			// var topChoiceSize = size - 2;
 
 			// this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
-			this.$el.find(".calendar-selected-item").width(size).height(size);
+	        this.$el.find(".calendar-selected-item").width(size).height(size);
+
+	        if (App.selectedModel !== null){
+	            App.selectedModel.trigger('repositionSelected');
+	        }
 
 			App.realignAdorners();
 		} else {

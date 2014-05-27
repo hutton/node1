@@ -377,7 +377,7 @@ a:active{
 .modal-title{
 	text-align: center;
 	color: @free-color;
-	margin-left: 10px;
+	margin-left: 20px;
 }
 
 #settings-view > div{
@@ -659,6 +659,7 @@ a:active{
 	height: 100%;
 	position: relative;
 	width: @event-table-content-width;
+	font-size: 34px;
 }
 
 .month > div{
@@ -1051,7 +1052,7 @@ a:active{
 
 .attendees-choice{
 	float: left;
-	margin: 0px;
+	margin: 0px 4px;
 	padding: 0px;
 	height: 100%;
 	position: relative;
@@ -1086,9 +1087,10 @@ a:active{
 
 
 .attendees-choices-row > li > .attendees-choice{
-	border-top: 1px solid @choice-border-color;
-	border-left: 1px solid @choice-border-color;
-	border-bottom: 1px solid @choice-border-color;
+	border: 1px solid @choice-border-color;
+	// border-top: 1px solid @choice-border-color;
+	// border-left: 1px solid @choice-border-color;
+	// border-bottom: 1px solid @choice-border-color;
 }
 
 .attendees-choices-row > li:last-child > .attendees-choice{
@@ -1482,11 +1484,21 @@ a:active{
 	.date-cell-container{
 		font-size: 22px;
 	}
+
+	.month{
+		font-size: 32px;
+		.translate(0px, -26px);
+	}
 }
 
 @media screen and (min-width: 600px) and (max-width: 700px){
 	.date-cell-container{
 		font-size: 20px;
+	}
+
+	.month{
+		font-size: 30px;
+		.translate(0px, -23px);
 	}
 }
 
@@ -1494,17 +1506,32 @@ a:active{
 	.date-cell-container{
 		font-size: 18px;
 	}
+
+	.month{
+		font-size: 27px;
+		.translate(0px, -20px);
+	}
 }
 
 @media screen and (min-width: 450px) and (max-width: 500px){
 	.date-cell-container{
 		font-size: 16px;
 	}
+
+	.month{
+		font-size: 24px;
+		.translate(0px, -16px);
+	}
 }
 
 @media screen and (max-width: 450px){
 	.date-cell-container{
 		font-size: 12px;
+	}
+
+	.month{
+		font-size: 21px;
+		.translate(0px, -12px);
 	}
 }
 
@@ -1520,11 +1547,6 @@ a:active{
 
 	.info-row-text-container{
 		font-size: 0.9em;
-	}
-
-	.month{
-		.translate(0px, -26px);
-		font-size: 24px;
 	}
 
 	.free-marker{
@@ -1564,10 +1586,6 @@ a:active{
 
 	.info-row-text-container{
 		font-size: 0.8em;
-	}
-
-	.month{
-		.translate(0px, -12px);
 	}
 
 	.free-marker{
