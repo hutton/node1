@@ -1,12 +1,9 @@
-function centerModal() {
-    $(this).css('display', 'block');
-    var $dialog = $(this).find(".modal-dialog");
-    var offset = ($(window).height() - $dialog.height()) / 2;
-    // Center modal vertically in window
-    $dialog.css("margin-top", offset);
-}
+Primary Color:
+4AD16D	519D65	188835	78E895	96E8AB
+Secondary Color A: (Blue)
+4996BC	4C788D	185A7A	77BCDE	93C5DE
+Secondary Color B: (Orange)
+FFB35A	BF9463	A6661D	FFC683	FFD5A4
+Complementary Color: (Pink/Red)
+FF6D5A	BF6D63	A62D1D	FF9283	FFAFA4
 
-$('.modal').on('show.bs.modal', centerModal);
-$(window).on("resize", function () {
-    $('.modal:visible').each(centerModal);
-});
