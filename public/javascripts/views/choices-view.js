@@ -7,6 +7,7 @@ window.ChoiceView = Backbone.View.extend({
 		this.listenTo(this.model, "repositioned", this.adornersRespositioned);
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
+		this.listenTo(this.model, "repositionSelected", this.repositionSelected);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -42,8 +43,6 @@ window.ChoiceView = Backbone.View.extend({
 
 		this.updateSelectable(this.model.get('selectable'));
 
-		this.updateTopChoices(false);
-
 		this.updateSelected(this.model.get('selected'), false);
 
 		return this;
@@ -67,8 +66,6 @@ window.ChoiceView = Backbone.View.extend({
 		console.log("Choices - free changed");
 
 		this.updateFree(true);
-
-		this.updateTopChoices(true);
 	},
 
 	isSelected: false,
@@ -99,6 +96,10 @@ window.ChoiceView = Backbone.View.extend({
 		});
 	},
 
+	repositionSelected: function(){
+		this.updateSelected(this.model.get('selected'), false);
+	},
+
 	updateSelected: function(selected, animate){
 		if (selected){
 			if (!this.isSelected){
@@ -112,12 +113,13 @@ window.ChoiceView = Backbone.View.extend({
 			var duration = 0;
 
 			if (animate){
-				duration = 400;
+				duration = 200;
 			}
 
-			App.ChoicesView.selectedMarkerEl.stop();
+			// App.ChoicesView.selectedMarkerEl.stop();
+			// App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
 
-			App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
+			App.ChoicesView.selectedMarkerEl.css({left: position.left, top: position.top});
 		} else {
 			this.isSelected = false;
 		}
@@ -164,33 +166,6 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	adornersRespositioned: function(){
-		this.updateTopChoices(false);
-	},
-
-	updateTopChoices: function(animate){
-		return;
-		
-		if (this.model.has('top-choice')){
-			var place = this.model.get('top-choice');
-
-			var classSuffix;
-
-			if (place === 1){
-				classSuffix = "one";
-			} else if (place === 2){
-				classSuffix = "two";
-			} else if (place === 3){
-				classSuffix = "three";
-			}
-
-			var position = this.$el.position();
-
-			if (animate){
-				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 400);
-			} else {
-				$(".calendar-choices-top-" + classSuffix).velocity({left: position.left, top: position.top}, 0);
-			}
-		}
 	},
 
 	touchStarted: false,
@@ -335,15 +310,19 @@ window.ChoicesView = Backbone.View.extend({
 			 
 			this.tableEl.detach();
 			 
-			this.tableEl.find("tr > td > .date-cell-container").height(size - 6);
-			this.tableEl.find("tr > td > .month").height(size - 6);
+			this.tableEl.find("tr > td > .date-cell-container").height(size);
+			this.tableEl.find("tr > td > .month").height(size);
 
 			parent.append(this.tableEl);
 
 			// var topChoiceSize = size - 2;
 
 			// this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
-			this.$el.find(".calendar-selected-item").width(size - 8).height(size - 9);
+	        this.$el.find(".calendar-selected-item").width(size).height(size);
+
+	        if (App.selectedModel !== null){
+	            App.selectedModel.trigger('repositionSelected');
+	        }
 
 			App.realignAdorners();
 		} else {

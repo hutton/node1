@@ -36,21 +36,13 @@ window.SelectDatesView = Backbone.View.extend({
 	cancel: function(){
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
-				var date = choice.get('date');
-
-				if (date > window.App.today){
-					choice.set('selectable', false);
-				}
+				choice.set('selectable', false);
 			}
 		});
 
 		_.each(this.originalSelectableChoices, function(choice){
 			if (choice.has('date')){
-				var date = choice.get('date');
-
-				if (date > window.App.today){
-					choice.set('selectable', true);
-				}
+				choice.set('selectable', true);
 			}
 		});
 
@@ -79,6 +71,10 @@ window.SelectDatesView = Backbone.View.extend({
 			dataType: "json"
 		}).always(function() {
 			that.savingEL.slideUp('fast');
+
+			if (_.isUndefined(that.originalSelectableChoices) || that.originalSelectableChoices.length === 0){
+				$('#new-mode-start-started-view').modal({show: true});
+			}
 		});
 
 		App.AttendeesView.destroy();
@@ -129,11 +125,7 @@ window.SelectDatesView = Backbone.View.extend({
 	clearClicked: function(){
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
-				var date = choice.get('date');
-
-				if (date >= window.App.today){
-					choice.set('selectable', false);
-				}
+				choice.set('selectable', false);
 			}
 		});
 	},
@@ -149,12 +141,16 @@ window.SelectDatesView = Backbone.View.extend({
 					} else {
 						choice.set('selectable', false);
 					}
+				} else {
+					choice.set('selectable', false);
 				}
 			}
 		});
 	},
 
 	updateSelected: function(endDate, weekdays){
+		var scrolledToView = false;
+
 		_.each(this.collection.models, function(choice){
 			if (choice.has('date')){
 				var date = choice.get('date');
@@ -162,9 +158,17 @@ window.SelectDatesView = Backbone.View.extend({
 				if (date >= window.App.today){
 					if (date < endDate && (!weekdays || (date.getDay() > 0 && date.getDay() < 6))){
 						choice.set('selectable', true);
+
+						if (!scrolledToView){
+							choice.trigger('scrollToTopLine');
+							scrolledToView = true;
+						}
+
 					} else {
 						choice.set('selectable', false);
 					}
+				} else {
+					choice.set('selectable', false);
 				}
 			}
 		});

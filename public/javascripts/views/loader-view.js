@@ -51,18 +51,33 @@ window.LoaderView = Backbone.View.extend({
 
 	show: function(){
 		var that = this;
+		var choicesSelected = this.choices.totalChoices();
 
-		this.$el.show();
+		if (App.newMode){
+			this.$el.hide();
 
-		this.$el.find('.loader-convenely').hide();
+			$('#new-mode-start-view').modal({show: true});
+		} else if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
+			this.$el.hide();
 
-		this.render();
+			App.StartSelectDatesView.show();
+		} else if (choicesSelected == 0 && this.attendees.length == 1) {
+			this.$el.hide();
 
-		this.inner.css({'margin-top': 0});
+			$('#new-mode-start-started-view').modal({show: true});
+		} else {
+			this.$el.show();
 
-		that.$el.removeClass('loader-hide');	
+			this.$el.find('.loader-convenely').hide();
 
-		this.startAnimations();
+			this.render();
+
+			this.inner.css({'margin-top': 0});
+
+			that.$el.removeClass('loader-hide');	
+
+			this.startAnimations();
+		}
 	},
 
 	close: function(){
@@ -95,29 +110,22 @@ window.LoaderView = Backbone.View.extend({
 		this.setCloseText("Skip");
 
 		this.$el.find('.loader-title').show();
-		//this.animateFromEdge(this.$el.find('.loader-title'), 'top');
 
-		if (!this.calendarModel.get('datesSelected') || this.choices.totalSelectable() === 0){
-			this.animateFromEdge(this.$el.find('.loader-select-dates'), 'bottom');
+		if (this.choices.totalSelectable() === 1){
+			this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
+		} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){
+			this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
+		} else {
+			this.animateFromEdge(this.$el.find('.loader-top-choice'), 'bottom');
+			this.animateFromEdge(this.$el.find('.loader-top-other'), 'bottom');
+		}
 
+		if (yourChoices === 0 || App.newMode){
+			this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
 			this.setCloseText("Continue");
-		} else{
-			if (this.choices.totalSelectable() === 1){
-				this.animateFromEdge(this.$el.find('.loader-on'), 'bottom');
-			} else if (!this.topChoicesModel.has('one') || !this.topChoicesModel.has('two') || !this.topChoicesModel.has('three')){
-				this.animateFromEdge(this.$el.find('.loader-between'), 'bottom');
-			} else {
-				this.animateFromEdge(this.$el.find('.loader-top-choice'), 'bottom');
-				this.animateFromEdge(this.$el.find('.loader-top-other'), 'bottom');
-			}
-
-			if (yourChoices === 0 || App.newMode){
-				this.animateFromEdge(this.$el.find('.loader-set-choices'), 'bottom');
-				this.setCloseText("Continue");
-			} else {
-				if (this.attendees.length < 3){
-					this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
-				}
+		} else {
+			if (this.attendees.length < 3){
+				this.animateFromEdge(this.$el.find('.loader-invite'), 'bottom');
 			}
 		}
 

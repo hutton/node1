@@ -120,10 +120,25 @@ function expandDates(input, everythingSelectable){
 
 	_.each(processedInput, function(choice){
 		choice.past = choice.date < today;
-		choice.selectable = choice.selectable && !choice.past;
+		//choice.selectable = choice.selectable && !choice.past;
 	});
 
 
 	return processedInput;
 }
+
+function centerModal() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 3;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+}
+
+$('.modal').on('show.bs.modal', centerModal);
+
+$(window).on("resize", function () {
+    $('.modal:visible').each(centerModal);
+});
+
 

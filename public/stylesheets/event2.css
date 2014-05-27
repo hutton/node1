@@ -1453,7 +1453,7 @@ a:active {
 .fixed-width {
   margin-left: auto;
   margin-right: auto;
-  max-width: 600px;
+  max-width: 800px;
   position: relative;
 }
 .disabled {
@@ -1512,7 +1512,7 @@ a:active {
   margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 600px;
+  max-width: 800px;
   -moz-transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
   -o-transform-duration: 0.4s;
@@ -1651,7 +1651,7 @@ a:active {
 .modal-title {
   text-align: center;
   color: #4ad16c;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 #settings-view > div {
   font-size: 14px;
@@ -1711,7 +1711,7 @@ a:active {
   margin-right: 6px;
 }
 .event-container {
-  max-width: 600px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   min-height: 800px;
@@ -1870,7 +1870,6 @@ a:active {
   padding-right: 0px;
 }
 .days-table {
-  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   font-size: 46%;
@@ -1894,6 +1893,7 @@ a:active {
   height: 100%;
   position: relative;
   width: 38px;
+  font-size: 34px;
 }
 .month > div {
   position: relative;
@@ -1917,11 +1917,10 @@ a:active {
 }
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7) {
-  color: #d0d0d0;
+  color: #d8d8d8;
 }
 .date-cell-container {
-  background: white;
-  border: 1px solid #d0d0d0;
+  background: #f3f9f5;
   position: relative;
   height: 100%;
   cursor: pointer;
@@ -1930,6 +1929,7 @@ a:active {
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
+  font-size: 24px;
 }
 @keyframes spin {
   0% {
@@ -1939,23 +1939,8 @@ a:active {
     top: 0;
   }
 }
-.past {
-  opacity: 0.4;
-}
-.past > .date-cell-container {
-  border: 1px solid #d0d0d0;
-  background: #f0f0f0 !important;
-}
-.unselectable {
-  opacity: 0.6;
-}
 .unselectable > .date-cell-container {
-  border: 1px solid #d0d0d0;
-  -webkit-transform: scale(0.85);
-  -moz-transform: scale(0.85);
-  -o-transform: scale(0.85);
-  -ms-transform: scale(0.85);
-  transform: scale(0.85);
+  background: #ffffff;
 }
 .event-table tr.selected-row > td {
   padding: 0px;
@@ -2009,11 +1994,13 @@ a:active {
 .event-table {
   border-collapse: collapse;
   border-spacing: 0px;
+  border-color: #e0e0e0;
 }
 .event-table tr > td.date-cell {
   position: relative;
   overflow: hidden;
   height: 100%;
+  border: solid 1px #d8d8d8;
 }
 .free-marker {
   opacity: 0.0;
@@ -2021,7 +2008,7 @@ a:active {
   color: #4ad16c;
   top: 60%;
   text-align: center;
-  font-size: 130%;
+  font-size: 140%;
   width: 100%;
   -moz-transition-duration: 0.15s;
   -webkit-transition-duration: 0.15s;
@@ -2062,7 +2049,7 @@ a:active {
 }
 .today .date-text {
   color: #4ad16c;
-  opacity: 0.9 !important;
+  text-decoration: underline;
 }
 /**************************************/
 .register-attendee-message {
@@ -2090,15 +2077,19 @@ a:active {
 }
 /**************************************/
 .modal {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.8em;
   text-align: center;
 }
 .modal-dialog {
   max-width: 450px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .modal-header {
   background: #f8f8f8;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 .modal-footer {
   margin-top: 0px;
@@ -2107,11 +2098,10 @@ a:active {
   background: #f8f8f8;
 }
 .modal-content {
-  border-radius: 0px;
+  border-radius: 4px;
 }
 .modal p {
   margin: 0px 0px 15px 0px;
-  font-size: 90%;
   padding: 0px 20px;
   line-height: 1.8em;
 }
@@ -2197,12 +2187,11 @@ a:active {
 }
 .attendees-choice {
   float: left;
-  margin: 0px 3px;
+  margin: 0px 4px;
   padding: 0px;
   height: 100%;
   position: relative;
   background: white;
-  border: 1px solid #d0d0d0;
 }
 .attendees-choices-row {
   list-style: none;
@@ -2217,6 +2206,12 @@ a:active {
   cursor: pointer;
   padding: 0px;
 }
+.attendees-choices-row > li > .attendees-choice {
+  border: 1px solid #d8d8d8;
+}
+.attendees-choices-row > li:last-child > .attendees-choice {
+  border: 1px solid #d8d8d8;
+}
 .attendees-choice-month {
   color: #4ad16c;
   border: none !important;
@@ -2224,7 +2219,7 @@ a:active {
   position: relative;
 }
 .attendees-choice-date {
-  background: #f7f9f7;
+  background: #f3f9f5;
   text-align: left;
   font-size: 65%;
   color: rgba(0, 0, 0, 0.4);
@@ -2406,17 +2401,17 @@ a:active {
   background: #f8f8f8;
   max-width: 580px;
   text-align: center;
-  font-size: 75%;
+  font-size: 14px;
   display: inline-block;
   padding: 10px 20px 10px 20px;
-  border-left: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
+  border-left: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
   pointer-events: auto;
 }
 .selecting-dates button {
   width: 210px;
-  font-size: 16px;
+  font-size: 14px;
   color: #808080;
 }
 .selecting-dates .btn-default .caret {
@@ -2436,12 +2431,12 @@ a:active {
   background: #f8f8f8;
   max-width: 580px;
   text-align: center;
-  font-size: 75%;
+  font-size: 14px;
   display: inline-block;
   padding: 10px 20px 10px 20px;
-  border-left: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
+  border-left: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
   pointer-events: auto;
   padding: 10px 25px 10px 30px;
   color: #a0a0a0;
@@ -2532,7 +2527,79 @@ a:active {
   background: #4ad16c;
   padding: 2px 8px;
 }
+/********* Start select dates *******/
+#new-mode-start-select-dates-view .modal-title {
+  margin: 0px;
+}
+.start-select-dates-option {
+  margin: 0px 6px;
+}
 /********* Media rules ******************************/
+@media screen and (min-width: 700px) and (max-width: 800px) {
+  .date-cell-container {
+    font-size: 22px;
+  }
+  .month {
+    font-size: 32px;
+    -moz-transform: translate(0px, -26px);
+    -webkit-transform: translate(0px, -26px);
+    -o-transform: translate(0px, -26px);
+    -ms-transform: translate(0px, -26px);
+    transform: translate(0px, -26px);
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 700px) {
+  .date-cell-container {
+    font-size: 20px;
+  }
+  .month {
+    font-size: 30px;
+    -moz-transform: translate(0px, -23px);
+    -webkit-transform: translate(0px, -23px);
+    -o-transform: translate(0px, -23px);
+    -ms-transform: translate(0px, -23px);
+    transform: translate(0px, -23px);
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 600px) {
+  .date-cell-container {
+    font-size: 18px;
+  }
+  .month {
+    font-size: 27px;
+    -moz-transform: translate(0px, -20px);
+    -webkit-transform: translate(0px, -20px);
+    -o-transform: translate(0px, -20px);
+    -ms-transform: translate(0px, -20px);
+    transform: translate(0px, -20px);
+  }
+}
+@media screen and (min-width: 450px) and (max-width: 500px) {
+  .date-cell-container {
+    font-size: 16px;
+  }
+  .month {
+    font-size: 24px;
+    -moz-transform: translate(0px, -16px);
+    -webkit-transform: translate(0px, -16px);
+    -o-transform: translate(0px, -16px);
+    -ms-transform: translate(0px, -16px);
+    transform: translate(0px, -16px);
+  }
+}
+@media screen and (max-width: 450px) {
+  .date-cell-container {
+    font-size: 12px;
+  }
+  .month {
+    font-size: 21px;
+    -moz-transform: translate(0px, -12px);
+    -webkit-transform: translate(0px, -12px);
+    -o-transform: translate(0px, -12px);
+    -ms-transform: translate(0px, -12px);
+    transform: translate(0px, -12px);
+  }
+}
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
     font-size: 100%;
@@ -2542,14 +2609,6 @@ a:active {
   }
   .info-row-text-container {
     font-size: 0.9em;
-  }
-  .month {
-    -moz-transform: translate(0px, -26px);
-    -webkit-transform: translate(0px, -26px);
-    -o-transform: translate(0px, -26px);
-    -ms-transform: translate(0px, -26px);
-    transform: translate(0px, -26px);
-    font-size: 24px;
   }
   .free-marker {
     -moz-transform: translate(0px, -18px);
@@ -2566,14 +2625,10 @@ a:active {
   }
   .markers-container li {
     margin: 0px 2px 2px 0px;
-    font-size: 11px;
+    font-size: 60%;
   }
   .markers-container li:before {
     content: "\f007";
-  }
-  .date-cell-container,
-  .calendar-selected-item {
-    margin: 3px;
   }
   .calendar-choices-top {
     margin-left: -1px;
@@ -2590,13 +2645,6 @@ a:active {
   .info-row-text-container {
     font-size: 0.8em;
   }
-  .month {
-    -moz-transform: translate(0px, -12px);
-    -webkit-transform: translate(0px, -12px);
-    -o-transform: translate(0px, -12px);
-    -ms-transform: translate(0px, -12px);
-    transform: translate(0px, -12px);
-  }
   .free-marker {
     text-align: right;
     top: 0px;
@@ -2609,6 +2657,7 @@ a:active {
   .date-text {
     top: -1px;
     left: -2px;
+    font-size: 100%;
   }
   .markers-container {
     margin-top: 0px;
@@ -2618,20 +2667,13 @@ a:active {
   }
   .markers-container li {
     margin: 0px 1px 0px 0px;
-    font-size: 5px;
+    font-size: 45%;
   }
   .markers-container li:before {
     content: "\f111";
   }
-  .date-cell-container,
-  .calendar-selected-item {
-    margin: 2px;
-  }
   .calendar-choices-top {
     margin-left: 0px;
     margin-top: 2px;
-  }
-  .attendees-choice {
-    margin: 0px 2px;
   }
 }

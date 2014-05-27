@@ -132,7 +132,7 @@ function getExample(){
 	var minDays = 30;
 
 	while (!(daysAdded > minDays && date.getDay() !== 0)){
-		if (date.getDay() !== 0 && date.getDay() !== 1 && date.getDay() !== 2 && date.getDay() !== 6){
+		if (date.getDay() !== 0 && date.getDay() !== 6){
 
 			choices.push({
 				"busy" : [],

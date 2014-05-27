@@ -20,7 +20,7 @@ window.AttendeesView = Backbone.View.extend({
 		var newElementRow = newElement.find('.attendees-choices-row');
 
 		this.usedChoices = _.filter(this.collection.models, function(choice){
-			return choice.get('date') >= App.today && choice.isSelectable();
+			return choice.isSelectable();
 		});
 
 		var daysPassed = 0;
@@ -143,6 +143,8 @@ window.AttendeesView = Backbone.View.extend({
 			this.setHeight(true);
 
 			App.scrollToSelected();
+
+			this.resize();
 		}
 	},
 
@@ -206,7 +208,7 @@ window.AttendeesView = Backbone.View.extend({
 		} else {
 			newHeight = windowHeight;
 
-			if (desiredHeight <= newHeight){
+			if (desiredHeight < newHeight){
 				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
 				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
 			} else {
@@ -214,6 +216,8 @@ window.AttendeesView = Backbone.View.extend({
 				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
 			}
 		}
+
+		newHeight = Math.max(newHeight, 154);
 
 		this.$el.find('.attendees-choices-list-container').velocity({height: newHeight}, animateDuration, 'easeOutExpo');
 	},

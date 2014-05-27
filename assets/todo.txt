@@ -1,8 +1,5 @@
 
-- Active choices date should be moving box
 - Better 404
-- Bigger text on 'it's increadabily easy class=lead
-- Welcome popup for created event.
 
 - Cleanup CSS
 
@@ -11,6 +8,12 @@
 
 Done
 ----
+- .modal-title: margin-left: 20px;
+- Reposition selected
+- Put gap back in attendee view
+- Month text- Max width to 800
+- Active choices date should be moving box
+- Underline today, remove past shading
 - Make loader calendars wider
 - Remove past strikethrough- Fix unsubscribe removing dates
 - Emails: remove contact with email and put link on separate line.

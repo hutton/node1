@@ -56,6 +56,8 @@ window.EventApp = Backbone.View.extend({
 
         this.SelectDatesView = new SelectDatesView({collection: this.choices});
 
+        this.StartSelectDatesView = new StartSelectDatesView();
+
         var pathNames = window.location.pathname.split( '/' );
 
         this.currentId = pathNames[pathNames.length - 1];
@@ -118,7 +120,6 @@ window.EventApp = Backbone.View.extend({
                 that.showNewModeMail();
             });
 
-            $('#new-mode-start-view').modal({show: true});
         } else {
             this.updateTellEveryoneLink();
             this.recalcTopSpacer();
@@ -134,7 +135,6 @@ window.EventApp = Backbone.View.extend({
         this.showBestChoices();
 
         if (!this.model.get('datesSelected') || this.choices.totalSelectable() === 0){
-            this.changeSelectableDates();
         } else {
             this.setSelectableDateMode(false);
         }
@@ -190,7 +190,7 @@ window.EventApp = Backbone.View.extend({
     },
 
     titleResize: function(){
-        var maxFontSize = 21;
+        var maxFontSize = 23;
         var minFontSize = 12;
 
         var fontSize = maxFontSize;
