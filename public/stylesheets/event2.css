@@ -1988,15 +1988,15 @@ a:active {
   padding: 0px !important;
 }
 .event-table {
-  border-collapse: collapse;
-  border-spacing: 0px;
+  border-collapse: separate;
+  border-spacing: 3px 10px;
   border-color: #e0e0e0;
 }
 .event-table tr > td.date-cell {
   position: relative;
   overflow: hidden;
   height: 100%;
-  border: solid 1px #d8d8d8;
+  border-top: solid 1px #d8d8d8;
 }
 .free-marker {
   position: absolute;
@@ -2028,7 +2028,7 @@ a:active {
 }
 .markers-container {
   position: absolute;
-  bottom: 0px;
+  top: 30px;
 }
 .markers-container > ul {
   margin: 2px;
