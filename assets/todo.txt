@@ -1,4 +1,7 @@
 - Move free tick
+- Better See example button, coloured border white BG, coloured BW on hover
+- Users popup
+- Move change dates to header button
 - Better 404
 
 - Cleanup CSS
