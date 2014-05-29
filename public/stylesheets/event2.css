@@ -1706,10 +1706,6 @@ a:active {
 .scrollable {
   height: 100%;
 }
-.event-container-margin {
-  margin-left: 6px;
-  margin-right: 6px;
-}
 .event-container {
   max-width: 800px;
   margin-left: auto;
@@ -1925,7 +1921,9 @@ a:active {
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
-  font-size: 24px;
+  font-size: 21px;
+  border-top: solid 1px #d8d8d8;
+  margin: 4px 4px;
 }
 @keyframes spin {
   0% {
@@ -1945,17 +1943,6 @@ a:active {
 .event-table tr.selected-row > td > div {
   width: auto;
   height: auto;
-}
-.date-text {
-  margin-left: 6px;
-  position: absolute;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  color: rgba(0, 0, 0, 0.4);
 }
 .content {
   position: relative;
@@ -1988,32 +1975,33 @@ a:active {
   padding: 0px !important;
 }
 .event-table {
-  border-collapse: separate;
-  border-spacing: 3px 10px;
+  border-collapse: collapse;
+  border-spacing: 0px;
   border-color: #e0e0e0;
 }
 .event-table tr > td.date-cell {
   position: relative;
   overflow: hidden;
   height: 100%;
-  border-top: solid 1px #d8d8d8;
+}
+.date-text {
+  margin-left: 6px;
+  text-align: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: rgba(0, 0, 0, 0.4);
+  display: inline-block;
 }
 .free-marker {
-  position: absolute;
   text-align: right;
-  top: 0px;
-  font-size: 80%;
-  width: 100%;
-  -moz-transition-duration: 0.15s;
-  -webkit-transition-duration: 0.15s;
-  -o-transform-duration: 0.15s;
-  -ms-transform-duration: 0.15s;
-  transition-duration: 0.15s;
-}
-.free-marker > span {
+  font-size: 70%;
   color: transparent;
-  border-bottom: 3px solid rgba(192, 192, 192, 0.5);
-  border-right: 3px solid rgba(192, 192, 192, 0.5);
+  border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+  border-right: 1px solid rgba(192, 192, 192, 0.5);
   -webkit-transform: rotate(42deg);
   -moz-transform: rotate(42deg);
   -o-transform: rotate(42deg);
@@ -2021,14 +2009,13 @@ a:active {
   transform: rotate(42deg);
   padding: 0px 0px;
   display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
-.free > span {
+.free {
   border-bottom: 3px solid #4ad16c;
   border-right: 3px solid #4ad16c;
-}
-.markers-container {
-  position: absolute;
-  top: 30px;
 }
 .markers-container > ul {
   margin: 2px;
@@ -2542,7 +2529,8 @@ a:active {
 /********* Media rules ******************************/
 @media screen and (min-width: 700px) and (max-width: 800px) {
   .date-cell-container {
-    font-size: 22px;
+    font-size: 20px;
+    margin: 3px 3px;
   }
   .month {
     font-size: 32px;
@@ -2555,7 +2543,8 @@ a:active {
 }
 @media screen and (min-width: 600px) and (max-width: 700px) {
   .date-cell-container {
-    font-size: 20px;
+    font-size: 19px;
+    margin: 3px 3px;
   }
   .month {
     font-size: 30px;
@@ -2569,6 +2558,7 @@ a:active {
 @media screen and (min-width: 500px) and (max-width: 600px) {
   .date-cell-container {
     font-size: 18px;
+    margin: 3px 3px;
   }
   .month {
     font-size: 27px;
@@ -2582,6 +2572,7 @@ a:active {
 @media screen and (min-width: 450px) and (max-width: 500px) {
   .date-cell-container {
     font-size: 16px;
+    margin: 2px 2px;
   }
   .month {
     font-size: 24px;
@@ -2595,6 +2586,7 @@ a:active {
 @media screen and (max-width: 450px) {
   .date-cell-container {
     font-size: 12px;
+    margin: 2px 2px;
   }
   .month {
     font-size: 21px;
@@ -2616,11 +2608,8 @@ a:active {
     font-size: 0.9em;
   }
   .free-marker {
-    -moz-transform: translate(-15px, -1px);
-    -webkit-transform: translate(-15px, -1px);
-    -o-transform: translate(-15px, -1px);
-    -ms-transform: translate(-15px, -1px);
-    transform: translate(-15px, -1px);
+    top: -1px;
+    right: 13px;
   }
   .markers-container {
     margin-top: 0px;
@@ -2651,11 +2640,8 @@ a:active {
     font-size: 0.8em;
   }
   .free-marker {
-    -moz-transform: translate(-7px, 0px);
-    -webkit-transform: translate(-7px, 0px);
-    -o-transform: translate(-7px, 0px);
-    -ms-transform: translate(-7px, 0px);
-    transform: translate(-7px, 0px);
+    top: 0px;
+    right: 7px;
   }
   .date-text {
     top: 0px;

@@ -444,8 +444,8 @@ a:active{
 }
 
 .event-container-margin{
-	margin-left: 6px;
-	margin-right: 6px;
+	// margin-left: 6px;
+	// margin-right: 6px;
 }
 
 .event-container{
@@ -708,7 +708,11 @@ a:active{
 
 	.transition-duration(0.2s);
 
-	font-size: 24px;
+	font-size: 21px;
+
+	border-top: solid 1px @choice-border-color;
+
+	margin: 4px 4px;
 }
 
 @keyframes spin {
@@ -743,21 +747,6 @@ a:active{
 .event-table tr.selected-row > td > div{
 	width: auto;
 	height: auto;
-}
-
-.date-text{
-	margin-left: 6px;
-
-	position: absolute;
-
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-
-	color: @item-text-color;
 }
 
 .content {
@@ -799,8 +788,8 @@ a:active{
 
 
 .event-table{
-	border-collapse: separate;
-	border-spacing: 3px 10px;
+	border-collapse: collapse;
+	border-spacing: 0px;
 	border-color: #e0e0e0;
 }
 
@@ -808,42 +797,49 @@ a:active{
 	position: relative;
 	overflow: hidden;
 	height: 100%;
-	border-top: solid 1px @choice-border-color;
 }
 
-.free-marker{
-	position: absolute;
+.date-text{
+	margin-left: 6px;
 
-	text-align: right;
-	top: 0px;
+	text-align: left;
 
-	font-size: 80%;
-	width: 100%;
-	.transition-duration(0.15s);
-}
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 
-.free{
+	color: @item-text-color;
 
-}
-
-.free-marker > span{
-	color: transparent;
-	border-bottom: 3px solid rgba(192,192,192,0.5);
-	border-right: 3px solid rgba(192,192,192,0.5);
-	.rotation(42deg);
-	padding: 0px 0px;
 	display: inline-block;
 }
 
-.free > span{
+.free-marker{
+	text-align: right;
+	top: 0px;
+
+	font-size: 70%;
+
+	color: transparent;
+	border-bottom: 1px solid rgba(192,192,192,0.5);
+	border-right: 1px solid rgba(192,192,192,0.5);
+	.rotation(42deg);
+	padding: 0px 0px;
+	display: inline-block;
+	position: absolute;
+
+	top: 0px;
+	right: 0px;
+}
+
+.free{
 	border-bottom: 3px solid @free-color;
 	border-right: 3px solid @free-color;
 }
 
 .markers-container{
-    position: absolute;
-    top: 30px;
-
 }
 
 .markers-container > ul{
@@ -868,23 +864,6 @@ a:active{
 .today .date-text{
 	color: @free-color;
 	text-decoration: underline;
-}
-
-.event-table td > div.date-cell-container{
-}
-
-.cell-selected > div.date-cell-container{
-	//background: rgba(74, 209, 108, 0.7) !important;
-}
-
-.cell-selected .date-text{
-	// color: white !important;
-	// opacity: 1.0  !important;
-}
-
-.cell-selected > .date-cell-container{
-	// border: @free-color solid 2px;
-	// margin: 2px;
 }
 
 /**************************************/
@@ -1489,7 +1468,8 @@ a:active{
 
 @media screen and (min-width: 700px) and (max-width: 800px){
 	.date-cell-container{
-		font-size: 22px;
+		font-size: 20px;
+		margin: 3px 3px;
 	}
 
 	.month{
@@ -1500,7 +1480,8 @@ a:active{
 
 @media screen and (min-width: 600px) and (max-width: 700px){
 	.date-cell-container{
-		font-size: 20px;
+		font-size: 19px;
+		margin: 3px 3px;
 	}
 
 	.month{
@@ -1512,6 +1493,7 @@ a:active{
 @media screen and (min-width: 500px) and (max-width: 600px){
 	.date-cell-container{
 		font-size: 18px;
+		margin: 3px 3px;
 	}
 
 	.month{
@@ -1523,6 +1505,7 @@ a:active{
 @media screen and (min-width: 450px) and (max-width: 500px){
 	.date-cell-container{
 		font-size: 16px;
+		margin: 2px 2px;
 	}
 
 	.month{
@@ -1534,6 +1517,7 @@ a:active{
 @media screen and (max-width: 450px){
 	.date-cell-container{
 		font-size: 12px;
+		margin: 2px 2px;
 	}
 
 	.month{
@@ -1557,7 +1541,8 @@ a:active{
 	}
 
 	.free-marker{
-		.translate(-15px, -1px);
+		top: -1px;
+		right: 13px;
 	}
 
 	.markers-container{
@@ -1596,7 +1581,8 @@ a:active{
 	}
 
 	.free-marker{
-		.translate(-7px, 0px);
+		top: 0px;
+		right: 7px;
 	}
 
 	.date-text{

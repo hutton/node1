@@ -119,7 +119,7 @@ window.ChoiceView = Backbone.View.extend({
 			// App.ChoicesView.selectedMarkerEl.stop();
 			// App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
 
-			App.ChoicesView.selectedMarkerEl.css({left: position.left, top: position.top});
+			App.ChoicesView.selectedMarkerEl.css({left: position.left, top: position.top + 3});
 		} else {
 			this.isSelected = false;
 		}
@@ -129,7 +129,7 @@ window.ChoiceView = Backbone.View.extend({
 		if (selectable){
 			this.$el.removeClass('unselectable');
 			this.dateCellContainerEl.append(this.markersContainerEl);
-			this.dateCellContainerEl.append(this.freeMarkerEl);
+			this.markersContainerEl.before(this.freeMarkerEl);
 		} else {
 			this.$el.addClass('unselectable');
 			this.markersContainerEl.detach();
@@ -303,7 +303,7 @@ window.ChoicesView = Backbone.View.extend({
 		if (windowHeight > 350){
 			this.$el.show();
 
-			var size = $(".event-table .date-cell").first().width();
+			var size = $(".date-cell-container").first().width();
 			var windowSize = Math.min($("body").first().width(), 600);
 			
 			var parent = this.tableEl.parent();
@@ -317,7 +317,6 @@ window.ChoicesView = Backbone.View.extend({
 
 			// var topChoiceSize = size - 2;
 
-			// this.$el.find(".calendar-choices-top").width(topChoiceSize).height(topChoiceSize);
 	        this.$el.find(".calendar-selected-item").width(size).height(size);
 
 	        if (App.selectedModel !== null){
