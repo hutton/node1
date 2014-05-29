@@ -800,6 +800,7 @@ a:active{
 }
 
 .date-text{
+	margin-top: 1px;
 	margin-left: 6px;
 
 	text-align: left;
@@ -840,23 +841,19 @@ a:active{
 }
 
 .markers-container{
-}
-
-.markers-container > ul{
-    margin: 2px; 
-    padding: 0; 
-    list-style-type: none; 
-    list-style-image: none;
-}
-
-.markers-container li{
+    text-align: left;
     position: relative;
-    float: left;
+    line-height: 85%;
+    margin: 0px 4px;
+}
+
+.markers-container span{
+	position: relative;
     opacity: 0.5;
     .fa;
 }
 
-.markers-container li.a{
+.markers-container span.a{
 	color: @free-color;
     opacity: 1.0;
 }
@@ -1218,6 +1215,8 @@ a:active{
 	border: 2px solid @free-color;
 	z-index: 1000;
 	pointer-events: none;
+
+	margin: 4px;
 }
 
 /************ Top choice markers **************/
@@ -1472,6 +1471,10 @@ a:active{
 		margin: 3px 3px;
 	}
 
+	.calendar-selected-item{
+		margin: 3px;
+	}
+
 	.month{
 		font-size: 32px;
 		.translate(0px, -26px);
@@ -1482,6 +1485,10 @@ a:active{
 	.date-cell-container{
 		font-size: 19px;
 		margin: 3px 3px;
+	}
+
+	.calendar-selected-item{
+		margin: 3px;
 	}
 
 	.month{
@@ -1496,6 +1503,10 @@ a:active{
 		margin: 3px 3px;
 	}
 
+	.calendar-selected-item{
+		margin: 3px;
+	}
+
 	.month{
 		font-size: 27px;
 		.translate(0px, -20px);
@@ -1508,6 +1519,10 @@ a:active{
 		margin: 2px 2px;
 	}
 
+	.calendar-selected-item{
+		margin: 2px;
+	}
+
 	.month{
 		font-size: 24px;
 		.translate(0px, -16px);
@@ -1518,6 +1533,10 @@ a:active{
 	.date-cell-container{
 		font-size: 12px;
 		margin: 2px 2px;
+	}
+
+	.calendar-selected-item{
+		margin: 2px;
 	}
 
 	.month{
@@ -1541,23 +1560,19 @@ a:active{
 	}
 
 	.free-marker{
-		top: -1px;
-		right: 13px;
+		top: 0px;
+		right: 14px;
 	}
 
 	.markers-container{
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		margin-left: 2px;
 	}
 
-	.markers-container li{
-	    margin: 0px 2px 2px 0px;
+	.markers-container span{
+	    margin: 0px -1px -2px 0px;
 	    font-size: 60%;
 	}
 
-	.markers-container li:before{
+	.markers-container span:before{
 		content:"\f007"
 	}
 
@@ -1586,24 +1601,20 @@ a:active{
 	}
 
 	.date-text{
-		top: 0px;
-		left: -2px;
+		margin-top: 0px;
+		margin-left: 2px;
 		font-size: 100%;
 	}
 
 	.markers-container{
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 1px;
-		margin-left: 1px;
 	}
 
-	.markers-container li{
-	    margin: 0px 1px 0px 0px;
+	.markers-container span{
+	    margin: 0px -2px 0px 0px;
         font-size: 45%;
 	}
 
-	.markers-container li:before{
+	.markers-container span:before{
 		content:"\f111"
 	}
 

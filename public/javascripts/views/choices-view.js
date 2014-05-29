@@ -33,7 +33,7 @@ window.ChoiceView = Backbone.View.extend({
 		}
 
 		this.markersContainerEl = this.$el.find('.markers-container');
-		this.markerItemsEl = this.$el.find(".markers-container li");
+		this.markerItemsEl = this.$el.find(".markers-container span");
 
 		this.freeMarkerEl = this.$el.find('.free-marker');
 
@@ -119,7 +119,7 @@ window.ChoiceView = Backbone.View.extend({
 			// App.ChoicesView.selectedMarkerEl.stop();
 			// App.ChoicesView.selectedMarkerEl.velocity({left: position.left, top: position.top}, duration);
 
-			App.ChoicesView.selectedMarkerEl.css({left: position.left, top: position.top + 3});
+			App.ChoicesView.selectedMarkerEl.css({left: position.left, top: position.top});
 		} else {
 			this.isSelected = false;
 		}
