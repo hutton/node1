@@ -444,8 +444,8 @@ a:active{
 }
 
 .event-container-margin{
-	margin-left: 6px;
-	margin-right: 6px;
+	// margin-left: 6px;
+	// margin-right: 6px;
 }
 
 .event-container{
@@ -652,7 +652,6 @@ a:active{
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7){
 //	color: @choice-border-color;
-	color: whitei;
 }
 
 .month{
@@ -692,7 +691,6 @@ a:active{
 
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7){
-	color: @choice-border-color;
 }
 
 .event-table td:nth-of-type(6) .date-text,
@@ -709,7 +707,11 @@ a:active{
 
 	.transition-duration(0.2s);
 
-	font-size: 24px;
+	font-size: 21px;
+
+	border-top: solid 1px @choice-border-color;
+
+	margin: 4px 4px;
 }
 
 @keyframes spin {
@@ -744,21 +746,6 @@ a:active{
 .event-table tr.selected-row > td > div{
 	width: auto;
 	height: auto;
-}
-
-.date-text{
-	margin-left: 5px;
-
-	position: absolute;
-
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-
-	color: @item-text-color;
 }
 
 .content {
@@ -809,75 +796,73 @@ a:active{
 	position: relative;
 	overflow: hidden;
 	height: 100%;
-	border: solid 1px @choice-border-color;
+}
+
+.date-text{
+	margin-top: 1px;
+	margin-left: 6px;
+
+	text-align: left;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	color: @item-text-color;
+
+	display: inline-block;
 }
 
 .free-marker{
-	opacity: 0.0;
+	text-align: right;
+	top: 0px;
 
+	font-size: 70%;
+
+	color: transparent;
+	border-bottom: 1px solid rgba(192,192,192,0.5);
+	border-right: 1px solid rgba(192,192,192,0.5);
+	.rotation(42deg);
+	padding: 0px 0px;
+	display: inline-block;
 	position: absolute;
-	color: @free-color;	
 
-	top: 60%;
-
-	text-align: center;
-
-	font-size: 140%;
-	width: 100%;
-	.transition-duration(0.15s);
+	top: 0px;
+	right: 0px;
 }
 
 .free{
-	display: block;
-	opacity: 1.0;
-	top: 50%;
+	border-bottom: 3px solid @free-color;
+	border-right: 3px solid @free-color;
 }
 
 .markers-container{
-    position: absolute;
-    bottom: 0px;
-
-}
-
-.markers-container > ul{
-    margin: 2px; 
-    padding: 0; 
-    list-style-type: none; 
-    list-style-image: none;
-}
-
-.markers-container li{
+    text-align: left;
     position: relative;
-    float: left;
+    line-height: 85%;
+    margin: 0px 4px;
+}
+
+.markers-container span{
+	position: relative;
     opacity: 0.5;
     .fa;
 }
 
-.markers-container li.a{
+.markers-container span.a{
 	color: @free-color;
     opacity: 1.0;
 }
 
 .today .date-text{
 	color: @free-color;
-	text-decoration: underline;
 }
 
-.event-table td > div.date-cell-container{
-}
-
-.cell-selected > div.date-cell-container{
-	//background: rgba(74, 209, 108, 0.7) !important;
-}
-
-.cell-selected .date-text{
-	// color: white !important;
-	// opacity: 1.0  !important;
-}
-
-.cell-selected > .date-cell-container{
-	// border: @free-color solid 2px;
-	// margin: 2px;
+.today .date-cell-container{
+	border-top: 2px solid @free-color;
 }
 
 /**************************************/
@@ -1232,6 +1217,8 @@ a:active{
 	border: 2px solid @free-color;
 	z-index: 1000;
 	pointer-events: none;
+
+	margin: 4px;
 }
 
 /************ Top choice markers **************/
@@ -1482,7 +1469,12 @@ a:active{
 
 @media screen and (min-width: 700px) and (max-width: 800px){
 	.date-cell-container{
-		font-size: 22px;
+		font-size: 20px;
+		margin: 3px 3px;
+	}
+
+	.calendar-selected-item{
+		margin: 3px;
 	}
 
 	.month{
@@ -1493,7 +1485,12 @@ a:active{
 
 @media screen and (min-width: 600px) and (max-width: 700px){
 	.date-cell-container{
-		font-size: 20px;
+		font-size: 19px;
+		margin: 3px 3px;
+	}
+
+	.calendar-selected-item{
+		margin: 3px;
 	}
 
 	.month{
@@ -1505,6 +1502,11 @@ a:active{
 @media screen and (min-width: 500px) and (max-width: 600px){
 	.date-cell-container{
 		font-size: 18px;
+		margin: 3px 3px;
+	}
+
+	.calendar-selected-item{
+		margin: 3px;
 	}
 
 	.month{
@@ -1516,6 +1518,11 @@ a:active{
 @media screen and (min-width: 450px) and (max-width: 500px){
 	.date-cell-container{
 		font-size: 16px;
+		margin: 2px 2px;
+	}
+
+	.calendar-selected-item{
+		margin: 2px;
 	}
 
 	.month{
@@ -1527,6 +1534,11 @@ a:active{
 @media screen and (max-width: 450px){
 	.date-cell-container{
 		font-size: 12px;
+		margin: 2px 2px;
+	}
+
+	.calendar-selected-item{
+		margin: 2px;
 	}
 
 	.month{
@@ -1550,22 +1562,19 @@ a:active{
 	}
 
 	.free-marker{
-		.translate(0px, -18px);
+		top: 0px;
+		right: 14px;
 	}
 
 	.markers-container{
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 0px;
-		margin-left: 2px;
 	}
 
-	.markers-container li{
-	    margin: 0px 2px 2px 0px;
+	.markers-container span{
+	    margin: 0px -1px -2px 0px;
 	    font-size: 60%;
 	}
 
-	.markers-container li:before{
+	.markers-container span:before{
 		content:"\f007"
 	}
 
@@ -1589,30 +1598,25 @@ a:active{
 	}
 
 	.free-marker{
-		text-align: right;
 		top: 0px;
-		.translate(-1px, -2px);
+		right: 7px;
 	}
 
 	.date-text{
-		top: -1px;
-		left: -2px;
+		margin-top: 0px;
+		margin-left: 2px;
 		font-size: 100%;
 	}
 
 	.markers-container{
-		margin-top: 0px;
-		margin-right: 0px;
-		margin-bottom: 1px;
-		margin-left: 1px;
 	}
 
-	.markers-container li{
-	    margin: 0px 1px 0px 0px;
+	.markers-container span{
+	    margin: 0px -2px 0px 0px;
         font-size: 45%;
 	}
 
-	.markers-container li:before{
+	.markers-container span:before{
 		content:"\f111"
 	}
 

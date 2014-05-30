@@ -30,3 +30,8 @@ exports.event2 = function(req, res){
 exports.email = function(req, res){
   res.render('email2.html');
 };
+
+exports.notFound = function(req, res){
+  res.status(404);
+  res.render('404.html');
+};

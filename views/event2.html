@@ -307,17 +307,15 @@
       <div class="date-text">
         <@= date.getDate() @>
       </div>
-      <div class="free-marker"><i class="fa fa-check"></i></div>
+      <div class="free-marker">L</div>
       <div class="markers-container">
-        <ul>
         <@ _.each(availList, function(isAvailable){ @>
           <@ if (isAvailable) { @>
-            <li class="a"></li>
+            <span class="a"></span>
           <@ } else { @>
-            <li></li>
+            <span></span>
           <@ } @>
         <@ }); @>
-        </ul>
       </div>
     </div>
     </script>

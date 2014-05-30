@@ -158,7 +158,7 @@ function renderEvent(req, res){
 		});
 	} else {
 		res.status(404);
-		res.send("We can't find the event you're looking for.");
+		res.render('404-calendar.html');
 	}
 }
 

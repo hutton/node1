@@ -1,4 +1,7 @@
-
+- Better See example button, coloured border white BG, coloured BW on hover
+- Users popup
+- Move change dates to header button
+- Highlight top border on this week
 - Better 404
 
 - Cleanup CSS
@@ -8,6 +11,7 @@
 
 Done
 ----
+- Move free tick
 - .modal-title: margin-left: 20px;
 - Reposition selected
 - Put gap back in attendee view
