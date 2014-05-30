@@ -1,4 +1,4 @@
-- No max width
+- No max width, max-height 120 on cells
 - Better See example button, coloured border white BG, coloured BW on hover
 - Users popup
 - Move change dates to header button
