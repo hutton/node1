@@ -1881,10 +1881,6 @@ a:active {
   border: none;
   padding: 0px;
 }
-.days-table td:nth-of-type(6),
-.days-table td:nth-of-type(7) {
-  color: whitei;
-}
 .month {
   height: 100%;
   position: relative;
@@ -2041,7 +2037,9 @@ a:active {
 }
 .today .date-text {
   color: #4ad16c;
-  text-decoration: underline;
+}
+.today .date-cell-container {
+  border-top: 2px solid #4ad16c;
 }
 /**************************************/
 .register-attendee-message {
