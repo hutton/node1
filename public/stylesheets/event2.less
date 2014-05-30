@@ -16,6 +16,8 @@
 @event-table-content-width: 38px;
 @default-color: #808080;
 @link-color: #808080;
+@light-green: #78E895;
+
 
 @shaded-background: #F3F9F5;
 @item-text-color: rgba(0,0,0,0.4);
@@ -145,7 +147,6 @@ a:active{
 .fixed-width{
 	margin-left: auto;
 	margin-right: auto;
-	max-width: @fixed-width;
 	position: relative;
 }
 
@@ -449,7 +450,6 @@ a:active{
 }
 
 .event-container{
-	max-width: @fixed-width;
 	margin-left: auto;
 	margin-right: auto;
 	min-height: 800px;
@@ -664,7 +664,7 @@ a:active{
 .month > div{
 	position: relative;
 	color: @free-color;
-	top: 50%;
+	top: 25%;
 	left: 10px;
 
 }
@@ -691,6 +691,7 @@ a:active{
 
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7){
+	background: rgba(0,0,0,0.025);
 }
 
 .event-table td:nth-of-type(6) .date-text,
@@ -698,7 +699,7 @@ a:active{
 }
 
 .date-cell-container{
-	background: @shaded-background;
+	border-top: 1px solid @light-green;
 
 	position: relative;
 
@@ -707,9 +708,7 @@ a:active{
 
 	.transition-duration(0.2s);
 
-	font-size: 21px;
-
-	border-top: solid 1px @choice-border-color;
+	font-size: 18px;
 
 	margin: 4px 4px;
 }
@@ -728,11 +727,12 @@ a:active{
 .past .date-text{
 }
 
-.unselectable{
+.unselectable .date-text{
+	color: @item-text-color;
 }
 
 .unselectable > .date-cell-container{
-	background: #ffffff;//@shaded-background;
+	border-top: solid 1px @choice-border-color;
 }
 
 .selected-row{
@@ -811,7 +811,8 @@ a:active{
 	-ms-user-select: none;
 	user-select: none;
 
-	color: @item-text-color;
+	color: @free-color;
+	//color: @item-text-color;
 
 	display: inline-block;
 }
@@ -840,7 +841,7 @@ a:active{
 }
 
 .markers-container{
-    text-align: left;
+    text-align: center;
     position: relative;
     line-height: 85%;
     margin: 0px 4px;
@@ -858,11 +859,10 @@ a:active{
 }
 
 .today .date-text{
-	color: @free-color;
 }
 
 .today .date-cell-container{
-	border-top: 2px solid @free-color;
+	background: @shaded-background;
 }
 
 /**************************************/
@@ -1002,7 +1002,7 @@ a:active{
 }
 
 .attendees-choices-active{
-	border: 2px solid #4ad16c;
+	border: 1px solid @free-color;
 	z-index: 1000;
 	height: 100%;
 	width: 240px;
@@ -1214,7 +1214,7 @@ a:active{
 
 .calendar-selected-item{
 	position: absolute;
-	border: 2px solid @free-color;
+	border: 1px solid @free-color;
 	z-index: 1000;
 	pointer-events: none;
 

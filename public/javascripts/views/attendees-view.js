@@ -186,7 +186,7 @@ window.AttendeesView = Backbone.View.extend({
 
 		var availableHeight = windowHeight - navBarHeight;
 
-		var itemHeight = $('.date-cell').first().width();
+		var itemHeight = $('.date-cell').first().height();
 
 		var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
 

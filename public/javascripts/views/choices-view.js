@@ -310,14 +310,16 @@ window.ChoicesView = Backbone.View.extend({
 			 
 			this.tableEl.detach();
 			 
-			this.tableEl.find("tr > td > .date-cell-container").height(size);
-			this.tableEl.find("tr > td > .month").height(size);
+			height = Math.min(size, 120);
+
+			this.tableEl.find("tr > td > .date-cell-container").height(height);
+			this.tableEl.find("tr > td > .month").height(height);
 
 			parent.append(this.tableEl);
 
 			// var topChoiceSize = size - 2;
 
-	        this.$el.find(".calendar-selected-item").width(size).height(size);
+	        this.$el.find(".calendar-selected-item").width(size).height(height);
 
 	        if (App.selectedModel !== null){
 	            App.selectedModel.trigger('repositionSelected');
@@ -330,6 +332,38 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	insertMonthTitle: function(rowItemCount, row, month){
+		var originalRowItemCount = rowItemCount;
+
+		var showTitleAt = 0;
+		var first = true;
+
+		var itemsInserted = 0;
+
+		if (rowItemCount > 1){
+			showTitleAt = 7 - rowItemCount;
+		}
+
+		while (itemsInserted < 7){
+			var newItem = $(this.monthTitleTemplate({month: month, showTitle: itemsInserted == showTitleAt}));
+
+			if (moment().format("MMMM") == month){
+				newItem.addClass("this-month");
+			}
+
+			row.append(newItem);
+			itemsInserted++;
+
+			if (itemsInserted == 7 - rowItemCount){
+				this.tableEl.append($("<tr></tr>"));
+
+				row = this.tableEl.find("tr:last");
+			}
+		}
+
+		return row;
+	},
+
+	insertMonthTitle2: function(rowItemCount, row, month){
 		var originalRowItemCount = rowItemCount;
 
 		var showTitleAt = 0;
