@@ -1994,7 +1994,7 @@ a:active {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: #4ad16c;
+  color: rgba(0, 0, 0, 0.4);
   display: inline-block;
 }
 .free-marker {
