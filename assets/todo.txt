@@ -1,7 +1,7 @@
 - No max width, max-height 120 on cells
 - Drop day labels down
 - Section off header buttons
-- Better See example button, coloured border white BG, coloured BW on hover
+- Single line of blank cells from month break
 - Users popup
 - Move change dates to header button
 - Highlight top border on this week
