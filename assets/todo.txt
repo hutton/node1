@@ -1,4 +1,5 @@
 - No max width, max-height 120 on cells
+- Make date numbers smaller
 - Drop day labels down
 - Section off header buttons
 - Single line of blank cells from month break
