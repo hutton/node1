@@ -118,6 +118,8 @@ Array.prototype.removeElement = function(element) {
  app.get('/calendar/*', calendar.view);
  app.get('/calendar-text/*', calendar.viewText);
 
+// app.get('/*', routes.notFound);
+
  app.ourEmail = "convenely@gmail.com";
  app.enableWebAppDebug = enableWebAppDebug;
 
