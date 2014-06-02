@@ -1,8 +1,3 @@
-- Calendar selected item background: rgba(0,120,0,0.04);
-	- #f3f9f5 -> rgba(0,120,0,0.04);
-- Make month names smaller
-- Toady rgba(0,0,0,0.025)
-- Thin out free marker
 - Add description
 - Section off header buttons
 - Users popup
@@ -15,6 +10,11 @@
 
 Done
 ----
+- Make month names smaller
+- Thin out free marker
+- Toady rgba(0,0,0,0.025)
+- Calendar selected item background: rgba(0,120,0,0.04);
+	- #f3f9f5 -> rgba(0,120,0,0.04);
 - Check analytics on home, about and help
 - Highlight top border on this week
 - Single line of blank cells from month break

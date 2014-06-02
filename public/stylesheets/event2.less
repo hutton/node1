@@ -19,7 +19,7 @@
 @light-green: #78E895;
 
 
-@shaded-background: #F3F9F5;
+@shaded-background: rgba(0,120,0,0.04);
 @item-text-color: rgba(0,0,0,0.4);
 
 @divider-gap: 3px;
@@ -441,7 +441,6 @@ a:active{
 
 .scrollable{
 	height: 100%;
-
 }
 
 .event-container-margin{
@@ -668,7 +667,7 @@ a:active{
 	height: 100%;
 	position: relative;
 	width: @event-table-content-width;
-	font-size: 34px;
+	font-size: 24px;
 }
 
 .month > div{
@@ -846,8 +845,8 @@ a:active{
 }
 
 .free{
-	border-bottom: 3px solid @free-color;
-	border-right: 3px solid @free-color;
+	border-bottom: 2px solid @free-color;
+	border-right: 2px solid @free-color;
 }
 
 .markers-container{
@@ -872,7 +871,7 @@ a:active{
 }
 
 .today .date-cell-container{
-	background: @shaded-background;
+	background: rgba(0,0,0,0.025);
 }
 
 /**************************************/
@@ -1227,6 +1226,7 @@ a:active{
 	border: 1px solid @free-color;
 	z-index: 1000;
 	pointer-events: none;
+	background: @shaded-background;
 
 	margin: 4px;
 }
@@ -1488,8 +1488,7 @@ a:active{
 	}
 
 	.month{
-		font-size: 32px;
-		.translate(0px, -26px);
+		font-size: 24px;
 	}
 }
 
@@ -1504,8 +1503,7 @@ a:active{
 	}
 
 	.month{
-		font-size: 30px;
-		.translate(0px, -23px);
+		font-size: 22px;
 	}
 }
 
@@ -1520,8 +1518,7 @@ a:active{
 	}
 
 	.month{
-		font-size: 27px;
-		.translate(0px, -20px);
+		font-size: 21px;
 	}
 }
 
@@ -1536,8 +1533,7 @@ a:active{
 	}
 
 	.month{
-		font-size: 24px;
-		.translate(0px, -16px);
+		font-size: 19px;
 	}
 }
 
@@ -1552,8 +1548,7 @@ a:active{
 	}
 
 	.month{
-		font-size: 21px;
-		.translate(0px, -12px);
+		font-size: 18px;
 	}
 }
 

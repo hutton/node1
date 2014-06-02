@@ -1892,7 +1892,7 @@ a:active {
   height: 100%;
   position: relative;
   width: 38px;
-  font-size: 34px;
+  font-size: 24px;
 }
 .month > div {
   position: relative;
@@ -2024,8 +2024,8 @@ a:active {
   right: 0px;
 }
 .free {
-  border-bottom: 3px solid #4ad16c;
-  border-right: 3px solid #4ad16c;
+  border-bottom: 2px solid #4ad16c;
+  border-right: 2px solid #4ad16c;
 }
 .markers-container {
   text-align: center;
@@ -2049,7 +2049,7 @@ a:active {
   opacity: 1.0;
 }
 .today .date-cell-container {
-  background: #f3f9f5;
+  background: rgba(0, 0, 0, 0.025);
 }
 /**************************************/
 .register-attendee-message {
@@ -2219,7 +2219,7 @@ a:active {
   position: relative;
 }
 .attendees-choice-date {
-  background: #f3f9f5;
+  background: rgba(0, 120, 0, 0.04);
   text-align: left;
   font-size: 65%;
   color: rgba(0, 0, 0, 0.4);
@@ -2324,6 +2324,7 @@ a:active {
   border: 1px solid #4ad16c;
   z-index: 1000;
   pointer-events: none;
+  background: rgba(0, 120, 0, 0.04);
   margin: 4px;
 }
 /************ Top choice markers **************/
@@ -2545,12 +2546,7 @@ a:active {
     margin: 3px;
   }
   .month {
-    font-size: 32px;
-    -moz-transform: translate(0px, -26px);
-    -webkit-transform: translate(0px, -26px);
-    -o-transform: translate(0px, -26px);
-    -ms-transform: translate(0px, -26px);
-    transform: translate(0px, -26px);
+    font-size: 24px;
   }
 }
 @media screen and (min-width: 600px) and (max-width: 700px) {
@@ -2562,12 +2558,7 @@ a:active {
     margin: 3px;
   }
   .month {
-    font-size: 30px;
-    -moz-transform: translate(0px, -23px);
-    -webkit-transform: translate(0px, -23px);
-    -o-transform: translate(0px, -23px);
-    -ms-transform: translate(0px, -23px);
-    transform: translate(0px, -23px);
+    font-size: 22px;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 600px) {
@@ -2579,12 +2570,7 @@ a:active {
     margin: 3px;
   }
   .month {
-    font-size: 27px;
-    -moz-transform: translate(0px, -20px);
-    -webkit-transform: translate(0px, -20px);
-    -o-transform: translate(0px, -20px);
-    -ms-transform: translate(0px, -20px);
-    transform: translate(0px, -20px);
+    font-size: 21px;
   }
 }
 @media screen and (min-width: 450px) and (max-width: 500px) {
@@ -2596,12 +2582,7 @@ a:active {
     margin: 2px;
   }
   .month {
-    font-size: 24px;
-    -moz-transform: translate(0px, -16px);
-    -webkit-transform: translate(0px, -16px);
-    -o-transform: translate(0px, -16px);
-    -ms-transform: translate(0px, -16px);
-    transform: translate(0px, -16px);
+    font-size: 19px;
   }
 }
 @media screen and (max-width: 450px) {
@@ -2613,12 +2594,7 @@ a:active {
     margin: 2px;
   }
   .month {
-    font-size: 21px;
-    -moz-transform: translate(0px, -12px);
-    -webkit-transform: translate(0px, -12px);
-    -o-transform: translate(0px, -12px);
-    -ms-transform: translate(0px, -12px);
-    transform: translate(0px, -12px);
+    font-size: 18px;
   }
 }
 @media screen and (min-width: 450px) {
