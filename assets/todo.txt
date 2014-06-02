@@ -1,3 +1,6 @@
+- Calendar selected item background: rgba(0,120,0,0.04);
+- Make month names smaller
+- Toady rgba(0,0,0,0.025)
 - Section off header buttons
 - Users popup
 - Move change dates to header button
