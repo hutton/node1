@@ -2,6 +2,7 @@
 	- #f3f9f5 -> rgba(0,120,0,0.04);
 - Make month names smaller
 - Toady rgba(0,0,0,0.025)
+- Thin out free marker
 - Section off header buttons
 - Users popup
 - Move change dates to header button
