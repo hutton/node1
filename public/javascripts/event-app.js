@@ -394,16 +394,18 @@ window.EventApp = Backbone.View.extend({
 
     recalcTopSpacer: function(){
         if (this.$el.find(".navbar-fixed-top").is(':visible')){
-            var topNavBarHeight = this.$el.find(".navbar-fixed-top").height();
+            var topNavBarHeight = this.$el.find(".navbar-fixed-top").height() + this.$el.find(".days-table-container").height();
 
             this.$el.find(".event-container").css({'padding-top': topNavBarHeight});
 
             this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
             this.$el.find(".selecting-dates-saving-container").css("top", topNavBarHeight);
+            this.$el.find(".days-table-container").css("top", this.$el.find(".navbar-fixed-top").height());
         } else {
             this.$el.find(".event-container").css({'padding-top': 0});
             this.$el.find(".selecting-dates-container").css("top", 0);
             this.$el.find(".selecting-dates-saving-container").css("top", 0);
+            this.$el.find(".days-table-container").css("top", topNavBarHeight);
         }
     },
 

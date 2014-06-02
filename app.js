@@ -26,7 +26,7 @@
 if (_.isUndefined(webAppDebug) || webAppDebug === null || webAppDebug === 'On'){
 	enableWebAppDebug = true;
  } else {
- 	enableWebAppDebug = false;
+	enableWebAppDebug = false;
  }
 
  var app = express();
@@ -62,6 +62,25 @@ Array.prototype.removeElement = function(element) {
 	//app.use(require('less-middleware')({ src: __dirname + '/public' }));
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use('/logs', express.static(path.join(__dirname, 'iisnode')));
+
+	app.use(function(req, res, next){
+		res.status(404);
+
+		// respond with html page
+		if (req.accepts('html')) {
+			res.render('404.html', { url: req.url });
+			return;
+		}
+
+		// respond with json
+		if (req.accepts('json')) {
+			res.send({ error: 'Not found' });
+			return;
+		}
+
+		// default to plain-text. send()
+		res.type('txt').send('Not found');
+	});
 
 	connectionString = connectionString + "?maxIdleTimeMS=60000";
 

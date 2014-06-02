@@ -1,9 +1,6 @@
-- Drop day labels down
 - Section off header buttons
-- Single line of blank cells from month break
 - Users popup
 - Move change dates to header button
-- Highlight top border on this week
 - Better 404
 
 - Cleanup CSS
@@ -13,6 +10,9 @@
 
 Done
 ----
+- Highlight top border on this week
+- Single line of blank cells from month break
+- Drop day labels down
 - No max width, max-height 120 on cells
 - Make date numbers smaller
 - Try today bars as active days and background for today

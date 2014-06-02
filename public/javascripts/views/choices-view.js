@@ -141,7 +141,7 @@ window.ChoiceView = Backbone.View.extend({
 		var height = $(window).height();
 		var scrollPos = $(window).scrollTop();
 
-		var navBarHeight = $('.navbar-fixed-top').height();
+		var navBarHeight = $('.navbar-fixed-top').height() + $('.days-table').height();
 
 		var visTop = scrollPos + navBarHeight;
 		var visBottom = scrollPos + (height - $('.day-view-container').height());
@@ -158,7 +158,7 @@ window.ChoiceView = Backbone.View.extend({
 	},
 
 	scrollToTopLine: function(){
-		var navBarHeight = $('.navbar-fixed-top').height();
+		var navBarHeight = $('.navbar-fixed-top').height() + $('.days-table').height();
 		var offset = this.$el.offset();
 		var itemHeight = $('.date-cell').first().height();
 
@@ -301,6 +301,7 @@ window.ChoicesView = Backbone.View.extend({
 		var windowHeight = $(window).height();
 
 		if (windowHeight > 350){
+			$(".days-table-container").show();
 			this.$el.show();
 
 			var size = $(".date-cell-container").first().width();
@@ -327,6 +328,8 @@ window.ChoicesView = Backbone.View.extend({
 
 			App.realignAdorners();
 		} else {
+			$(".days-table-container").hide();
+
 			this.$el.hide();
 		}
 	},

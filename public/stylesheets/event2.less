@@ -493,7 +493,7 @@ a:active{
 }
 
 .title-button{
-	padding: 6px 10px 10px 10px;
+	padding: 4px 10px 10px 10px;
 }
 
 .title-button-right{
@@ -517,6 +517,7 @@ a:active{
 .title-mail-button button{
 	font-size: 21px;
 	color: white;
+	.title-button;
 }
 
 .title-mail-button.btn-group.open .dropdown-toggle.btn-link{
@@ -533,7 +534,8 @@ a:active{
 
 .title{
 	text-align: center;
-	padding-top: 9px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 	padding-left: 40px;
 	padding-right: 40px;
 	margin-left: auto;
@@ -630,23 +632,31 @@ a:active{
 	padding-right: 0px;
 }
 
+.days-table-container{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 200;
+}
+
 .days-table{
 	margin-left: auto;
 	margin-right: auto;
-	font-size: 46%;
-	margin-bottom: 2px;
-	color: white;
+	margin-bottom: 0px;
+	font-size: 50%;
+	color: @item-text-color;
+	background: rgba(255,255,255,0.8);
+	border-bottom: @choice-border-color solid 1px;
 }
 
 .days-table td{
 	text-align: center;
-	padding: 0px 0px;
 	width: 30px;
 }
 
 .days-table > tbody > tr > td{
 	border: none;
-	padding: 0px;
+	padding: 4px 0px;
 }
 
 .days-table td:nth-of-type(6),
