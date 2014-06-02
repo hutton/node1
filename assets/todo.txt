@@ -1,3 +1,4 @@
+- Check analytics on home
 - Calendar selected item background: rgba(0,120,0,0.04);
 	- #f3f9f5 -> rgba(0,120,0,0.04);
 - Make month names smaller
