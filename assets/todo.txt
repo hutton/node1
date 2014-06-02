@@ -1,9 +1,9 @@
-- Check analytics on home, about and help
 - Calendar selected item background: rgba(0,120,0,0.04);
 	- #f3f9f5 -> rgba(0,120,0,0.04);
 - Make month names smaller
 - Toady rgba(0,0,0,0.025)
 - Thin out free marker
+- Add description
 - Section off header buttons
 - Users popup
 - Move change dates to header button
@@ -12,10 +12,10 @@
 - Cleanup CSS
 
 =======
-- Add description
 
 Done
 ----
+- Check analytics on home, about and help
 - Highlight top border on this week
 - Single line of blank cells from month break
 - Drop day labels down
