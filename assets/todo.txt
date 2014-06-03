@@ -2,13 +2,18 @@
 - Section off header buttons
 - Users popup
 - Move change dates to header button
-- Better 404
+
+- Make header bar higher (~54px) and responsive
+- Hover over on header buttons
+- Make attendee user icons bigger and responsive based on available space
+
 - Cleanup CSS
 
 =======
 
 Done
 ----
+- Better 404
 - Make month names smaller
 - Thin out free marker
 - Toady rgba(0,0,0,0.025)
