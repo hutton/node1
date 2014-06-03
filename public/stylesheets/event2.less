@@ -444,8 +444,8 @@ a:active{
 }
 
 .event-container-margin{
-	// margin-left: 6px;
-	// margin-right: 6px;
+	margin-left: 16px;
+	margin-right: 16px;
 }
 
 .event-container{
@@ -639,28 +639,32 @@ a:active{
 }
 
 .days-table{
-	margin-left: auto;
-	margin-right: auto;
 	margin-bottom: 0px;
-	font-size: 50%;
+	font-size: 60%;
 	color: @item-text-color;
-	background: rgba(255,255,255,0.8);
-	border-bottom: @choice-border-color solid 1px;
+	background: rgba(255,255,255,0.85);
 }
 
 .days-table td{
-	text-align: center;
-	width: 30px;
 }
 
 .days-table > tbody > tr > td{
 	border: none;
-	padding: 4px 0px;
+	padding: 4px 4px 0px 4px;
+	text-align: center;
+	width: 40px;
 }
+
+.days-table > tbody > tr > td > div{
+	padding: 0px 0px 2px 0px;
+	border-bottom: @choice-border-color solid 1px;
+}
+
 
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7){
 //	color: @choice-border-color;
+
 }
 
 .month{
@@ -1478,9 +1482,18 @@ a:active{
 /********* Media rules ******************************/
 
 @media screen and (min-width: 700px) and (max-width: 800px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 20px;
 		margin: 3px 3px;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 3px 3px 0px 3px;
 	}
 
 	.calendar-selected-item{
@@ -1493,9 +1506,18 @@ a:active{
 }
 
 @media screen and (min-width: 600px) and (max-width: 700px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 19px;
 		margin: 3px 3px;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 3px 3px 0px 3px;
 	}
 
 	.calendar-selected-item{
@@ -1508,9 +1530,18 @@ a:active{
 }
 
 @media screen and (min-width: 500px) and (max-width: 600px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 18px;
 		margin: 3px 3px;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 3px 3px 0px 3px;
 	}
 
 	.calendar-selected-item{
@@ -1523,9 +1554,22 @@ a:active{
 }
 
 @media screen and (min-width: 450px) and (max-width: 500px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 16px;
 		margin: 2px 2px;
+	}
+
+	.days-table{
+		font-size: 50%;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 2px 2px 0px 2px;
 	}
 
 	.calendar-selected-item{
@@ -1538,9 +1582,22 @@ a:active{
 }
 
 @media screen and (max-width: 450px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 12px;
 		margin: 2px 2px;
+	}
+
+	.days-table{
+		font-size: 50%;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 2px 2px 0px 2px;
 	}
 
 	.calendar-selected-item{
@@ -1552,6 +1609,7 @@ a:active{
 	}
 }
 
+/************************/
 
 @media screen and (min-width: 450px){
 	.event-table tr > td.date-cell{
