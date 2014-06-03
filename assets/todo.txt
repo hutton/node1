@@ -1,16 +1,26 @@
-- Better See example button, coloured border white BG, coloured BW on hover
+- Add description
+- Section off header buttons
 - Users popup
 - Move change dates to header button
-- Highlight top border on this week
 - Better 404
-
 - Cleanup CSS
 
 =======
-- Add description
 
 Done
 ----
+- Make month names smaller
+- Thin out free marker
+- Toady rgba(0,0,0,0.025)
+- Calendar selected item background: rgba(0,120,0,0.04);
+	- #f3f9f5 -> rgba(0,120,0,0.04);
+- Check analytics on home, about and help
+- Highlight top border on this week
+- Single line of blank cells from month break
+- Drop day labels down
+- No max width, max-height 120 on cells
+- Make date numbers smaller
+- Try today bars as active days and background for today
 - Move free tick
 - .modal-title: margin-left: 20px;
 - Reposition selected

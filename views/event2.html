@@ -35,7 +35,7 @@
             </button>
             <ul class="dropdown-menu" role="menu">
               <li><a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a></li>
-              <li><a id="title-mail">Email the group <i class="fa fa-chevron-right"></i></a></li>
+              <li><a id="title-mail">Email all participants <i class="fa fa-chevron-right"></i></a></li>
             </ul>
           </div>
 
@@ -45,21 +45,9 @@
             <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
           </div>
           <div class="title"><%= name %></div>
-          <div class="row">
-            <table class="table days-table">
-              <tr>
-                <td>M</td>
-                <td>T</td>
-                <td>W</td>
-                <td>T</td>
-                <td>F</td>
-                <td>S</td>
-                <td>S</td>
-              </tr>
-            </table>
-          </div>
         </div>
       </div>
+
 
       <div class="row selecting-dates-container" style="display: none;">
         <div class="selecting-dates">
@@ -106,14 +94,27 @@
         </div>
       </div>
 
+      <div class="row days-table-container">
+        <div class="event-container-margin">
+          <table class="table days-table">
+            <tr>
+              <td><div>Mon</div></td>
+              <td><div>Tue</div></td>
+              <td><div>Wed</div></td>
+              <td><div>Thu</div></td>
+              <td><div>Fri</div></td>
+              <td><div>Sat</div></td>
+              <td><div>Sun</div></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
       <div class="scrollable">
         <div class="event-container-margin">
           <div class="event-container">
             <div class="row">
-<!--               <div class="calendar-choices-top calendar-choices-top-one" style="display: none;"><div>1</div></div>
-              <div class="calendar-choices-top calendar-choices-top-two" style="display: none;"><div>2</div></div>
-              <div class="calendar-choices-top calendar-choices-top-three" style="display: none;"><div>3</div></div>
- -->          
               <div class="calendar-selected-item" style="display: none;"></div>  
               <table class="table event-table">
                 <colgroup>

@@ -20,7 +20,8 @@ function getFrees(index){
 					"A05"
 				],[
 					"A02",
-					"A03"
+					"A03",
+					"A05"
 					],[
 					"A02",
 					"A04",
@@ -50,7 +51,9 @@ function getFrees(index){
 					"A01",
 					"A02"
 				],
-				[],
+				[
+					"A04",
+					"A05"],
 				[
 					"A03",
 					"A05"
@@ -64,7 +67,9 @@ function getFrees(index){
 					"A04",
 					"A05"
 				],
-				[],
+				[
+					"A02",
+					"A05"],
 				[],
 				[
 					"A01",
@@ -131,7 +136,7 @@ function getExample(){
 
 	var minDays = 30;
 
-	while (!(daysAdded > minDays && date.getDay() !== 0)){
+	while (!(daysAdded > minDays && date.getDay() === 6)){
 		if (date.getDay() !== 0 && date.getDay() !== 6){
 
 			choices.push({

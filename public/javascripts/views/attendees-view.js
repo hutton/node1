@@ -182,18 +182,17 @@ window.AttendeesView = Backbone.View.extend({
 
 		var windowHeight = $(window).height();
 
-		var navBarHeight = $('.navbar-fixed-top').height();
+		var navBarHeight = $('.navbar-fixed-top').height() + $('.days-table').height();
 
 		var availableHeight = windowHeight - navBarHeight;
 
-		var itemHeight = $('.date-cell').first().width();
+		var itemHeight = $('.date-cell').first().height();
 
 		var panelWithItemsHeight = $('.active .attendees-choice-items').outerHeight(true) + 80;
 
 		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
 		if (windowHeight > 350){
-
 			if (desiredHeight <= availableHeight - (itemHeight * 3)){
 				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
 				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});

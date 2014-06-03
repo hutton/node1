@@ -16,8 +16,10 @@
 @event-table-content-width: 38px;
 @default-color: #808080;
 @link-color: #808080;
+@light-green: #78E895;
 
-@shaded-background: #F3F9F5;
+
+@shaded-background: rgba(0,120,0,0.04);
 @item-text-color: rgba(0,0,0,0.4);
 
 @divider-gap: 3px;
@@ -145,7 +147,6 @@ a:active{
 .fixed-width{
 	margin-left: auto;
 	margin-right: auto;
-	max-width: @fixed-width;
 	position: relative;
 }
 
@@ -440,16 +441,14 @@ a:active{
 
 .scrollable{
 	height: 100%;
-
 }
 
 .event-container-margin{
-	// margin-left: 6px;
-	// margin-right: 6px;
+	margin-left: 16px;
+	margin-right: 16px;
 }
 
 .event-container{
-	max-width: @fixed-width;
 	margin-left: auto;
 	margin-right: auto;
 	min-height: 800px;
@@ -493,7 +492,7 @@ a:active{
 }
 
 .title-button{
-	padding: 6px 10px 10px 10px;
+	padding: 4px 10px 10px 10px;
 }
 
 .title-button-right{
@@ -517,6 +516,7 @@ a:active{
 .title-mail-button button{
 	font-size: 21px;
 	color: white;
+	.title-button;
 }
 
 .title-mail-button.btn-group.open .dropdown-toggle.btn-link{
@@ -533,7 +533,8 @@ a:active{
 
 .title{
 	text-align: center;
-	padding-top: 9px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 	padding-left: 40px;
 	padding-right: 40px;
 	margin-left: auto;
@@ -630,41 +631,53 @@ a:active{
 	padding-right: 0px;
 }
 
+.days-table-container{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 200;
+}
+
 .days-table{
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 46%;
-	margin-bottom: 2px;
-	color: white;
+	margin-bottom: 0px;
+	font-size: 60%;
+	color: @item-text-color;
+	background: rgba(255,255,255,0.85);
 }
 
 .days-table td{
-	text-align: center;
-	padding: 0px 0px;
-	width: 30px;
 }
 
 .days-table > tbody > tr > td{
 	border: none;
-	padding: 0px;
+	padding: 4px 4px 0px 4px;
+	text-align: center;
+	width: 40px;
 }
+
+.days-table > tbody > tr > td > div{
+	padding: 0px 0px 2px 0px;
+	border-bottom: @choice-border-color solid 1px;
+}
+
 
 .days-table td:nth-of-type(6),
 .days-table td:nth-of-type(7){
 //	color: @choice-border-color;
+
 }
 
 .month{
 	height: 100%;
 	position: relative;
 	width: @event-table-content-width;
-	font-size: 34px;
+	font-size: 24px;
 }
 
 .month > div{
 	position: relative;
 	color: @free-color;
-	top: 50%;
+	top: 25%;
 	left: 10px;
 
 }
@@ -691,6 +704,7 @@ a:active{
 
 .event-table td:nth-of-type(6),
 .event-table td:nth-of-type(7){
+	background: rgba(0,0,0,0.025);
 }
 
 .event-table td:nth-of-type(6) .date-text,
@@ -698,7 +712,7 @@ a:active{
 }
 
 .date-cell-container{
-	background: @shaded-background;
+	border-top: 1px solid @light-green;
 
 	position: relative;
 
@@ -707,9 +721,7 @@ a:active{
 
 	.transition-duration(0.2s);
 
-	font-size: 21px;
-
-	border-top: solid 1px @choice-border-color;
+	font-size: 18px;
 
 	margin: 4px 4px;
 }
@@ -728,11 +740,12 @@ a:active{
 .past .date-text{
 }
 
-.unselectable{
+.unselectable .date-text{
+	color: @item-text-color;
 }
 
 .unselectable > .date-cell-container{
-	background: #ffffff;//@shaded-background;
+	border-top: solid 1px @choice-border-color;
 }
 
 .selected-row{
@@ -811,6 +824,7 @@ a:active{
 	-ms-user-select: none;
 	user-select: none;
 
+	//color: @free-color;
 	color: @item-text-color;
 
 	display: inline-block;
@@ -835,12 +849,12 @@ a:active{
 }
 
 .free{
-	border-bottom: 3px solid @free-color;
-	border-right: 3px solid @free-color;
+	border-bottom: 2px solid @free-color;
+	border-right: 2px solid @free-color;
 }
 
 .markers-container{
-    text-align: left;
+    text-align: center;
     position: relative;
     line-height: 85%;
     margin: 0px 4px;
@@ -858,11 +872,10 @@ a:active{
 }
 
 .today .date-text{
-	color: @free-color;
 }
 
 .today .date-cell-container{
-	border-top: 2px solid @free-color;
+	background: rgba(0,0,0,0.025);
 }
 
 /**************************************/
@@ -1002,7 +1015,7 @@ a:active{
 }
 
 .attendees-choices-active{
-	border: 2px solid #4ad16c;
+	border: 1px solid @free-color;
 	z-index: 1000;
 	height: 100%;
 	width: 240px;
@@ -1214,9 +1227,10 @@ a:active{
 
 .calendar-selected-item{
 	position: absolute;
-	border: 2px solid @free-color;
+	border: 1px solid @free-color;
 	z-index: 1000;
 	pointer-events: none;
+	background: @shaded-background;
 
 	margin: 4px;
 }
@@ -1468,85 +1482,134 @@ a:active{
 /********* Media rules ******************************/
 
 @media screen and (min-width: 700px) and (max-width: 800px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 20px;
 		margin: 3px 3px;
 	}
 
+	.days-table > tbody > tr > td{
+		padding: 3px 3px 0px 3px;
+	}
+
 	.calendar-selected-item{
 		margin: 3px;
 	}
 
 	.month{
-		font-size: 32px;
-		.translate(0px, -26px);
+		font-size: 24px;
 	}
 }
 
 @media screen and (min-width: 600px) and (max-width: 700px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 19px;
 		margin: 3px 3px;
 	}
 
+	.days-table > tbody > tr > td{
+		padding: 3px 3px 0px 3px;
+	}
+
 	.calendar-selected-item{
 		margin: 3px;
 	}
 
 	.month{
-		font-size: 30px;
-		.translate(0px, -23px);
+		font-size: 22px;
 	}
 }
 
 @media screen and (min-width: 500px) and (max-width: 600px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 18px;
 		margin: 3px 3px;
 	}
 
+	.days-table > tbody > tr > td{
+		padding: 3px 3px 0px 3px;
+	}
+
 	.calendar-selected-item{
 		margin: 3px;
 	}
 
 	.month{
-		font-size: 27px;
-		.translate(0px, -20px);
+		font-size: 21px;
 	}
 }
 
 @media screen and (min-width: 450px) and (max-width: 500px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 16px;
 		margin: 2px 2px;
 	}
 
+	.days-table{
+		font-size: 50%;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 2px 2px 0px 2px;
+	}
+
 	.calendar-selected-item{
 		margin: 2px;
 	}
 
 	.month{
-		font-size: 24px;
-		.translate(0px, -16px);
+		font-size: 19px;
 	}
 }
 
 @media screen and (max-width: 450px){
+	.event-container-margin{
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
 	.date-cell-container{
 		font-size: 12px;
 		margin: 2px 2px;
 	}
 
+	.days-table{
+		font-size: 50%;
+	}
+
+	.days-table > tbody > tr > td{
+		padding: 2px 2px 0px 2px;
+	}
+
 	.calendar-selected-item{
 		margin: 2px;
 	}
 
 	.month{
-		font-size: 21px;
-		.translate(0px, -12px);
+		font-size: 18px;
 	}
 }
 
+/************************/
 
 @media screen and (min-width: 450px){
 	.event-table tr > td.date-cell{

@@ -1453,7 +1453,6 @@ a:active {
 .fixed-width {
   margin-left: auto;
   margin-right: auto;
-  max-width: 800px;
   position: relative;
 }
 .disabled {
@@ -1706,8 +1705,11 @@ a:active {
 .scrollable {
   height: 100%;
 }
+.event-container-margin {
+  margin-left: 16px;
+  margin-right: 16px;
+}
 .event-container {
-  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   min-height: 800px;
@@ -1739,10 +1741,10 @@ a:active {
   overflow: visible;
 }
 .title-button {
-  padding: 6px 10px 10px 10px;
+  padding: 4px 10px 10px 10px;
 }
 .title-button-right {
-  padding: 6px 10px 10px 10px;
+  padding: 4px 10px 10px 10px;
   float: right;
 }
 #show-info > span {
@@ -1760,6 +1762,7 @@ a:active {
 .title-mail-button button {
   font-size: 21px;
   color: white;
+  padding: 4px 10px 10px 10px;
 }
 .title-mail-button.btn-group.open .dropdown-toggle.btn-link {
   color: white;
@@ -1776,7 +1779,8 @@ a:active {
 }
 .title {
   text-align: center;
-  padding-top: 9px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   padding-left: 40px;
   padding-right: 40px;
   margin-left: auto;
@@ -1865,32 +1869,38 @@ a:active {
   margin-top: 2px;
   padding-right: 0px;
 }
-.days-table {
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 46%;
-  margin-bottom: 2px;
-  color: white;
+.days-table-container {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 200;
 }
-.days-table td {
-  text-align: center;
-  padding: 0px 0px;
-  width: 30px;
+.days-table {
+  margin-bottom: 0px;
+  font-size: 60%;
+  color: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.85);
 }
 .days-table > tbody > tr > td {
   border: none;
-  padding: 0px;
+  padding: 4px 4px 0px 4px;
+  text-align: center;
+  width: 40px;
+}
+.days-table > tbody > tr > td > div {
+  padding: 0px 0px 2px 0px;
+  border-bottom: #d8d8d8 solid 1px;
 }
 .month {
   height: 100%;
   position: relative;
   width: 38px;
-  font-size: 34px;
+  font-size: 24px;
 }
 .month > div {
   position: relative;
   color: #4ad16c;
-  top: 50%;
+  top: 25%;
   left: 10px;
 }
 .event-table tr.selected-row {
@@ -1907,8 +1917,12 @@ a:active {
   -ms-user-select: none;
   user-select: none;
 }
+.event-table td:nth-of-type(6),
+.event-table td:nth-of-type(7) {
+  background: rgba(0, 0, 0, 0.025);
+}
 .date-cell-container {
-  background: #f3f9f5;
+  border-top: 1px solid #78e895;
   position: relative;
   height: 100%;
   cursor: pointer;
@@ -1917,8 +1931,7 @@ a:active {
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
-  font-size: 21px;
-  border-top: solid 1px #d8d8d8;
+  font-size: 18px;
   margin: 4px 4px;
 }
 @keyframes spin {
@@ -1929,8 +1942,11 @@ a:active {
     top: 0;
   }
 }
+.unselectable .date-text {
+  color: rgba(0, 0, 0, 0.4);
+}
 .unselectable > .date-cell-container {
-  background: #ffffff;
+  border-top: solid 1px #d8d8d8;
 }
 .event-table tr.selected-row > td {
   padding: 0px;
@@ -2011,11 +2027,11 @@ a:active {
   right: 0px;
 }
 .free {
-  border-bottom: 3px solid #4ad16c;
-  border-right: 3px solid #4ad16c;
+  border-bottom: 2px solid #4ad16c;
+  border-right: 2px solid #4ad16c;
 }
 .markers-container {
-  text-align: left;
+  text-align: center;
   position: relative;
   line-height: 85%;
   margin: 0px 4px;
@@ -2035,11 +2051,8 @@ a:active {
   color: #4ad16c;
   opacity: 1.0;
 }
-.today .date-text {
-  color: #4ad16c;
-}
 .today .date-cell-container {
-  border-top: 2px solid #4ad16c;
+  background: rgba(0, 0, 0, 0.025);
 }
 /**************************************/
 .register-attendee-message {
@@ -2148,7 +2161,7 @@ a:active {
   z-index: 1000;
 }
 .attendees-choices-active {
-  border: 2px solid #4ad16c;
+  border: 1px solid #4ad16c;
   z-index: 1000;
   height: 100%;
   width: 240px;
@@ -2209,7 +2222,7 @@ a:active {
   position: relative;
 }
 .attendees-choice-date {
-  background: #f3f9f5;
+  background: rgba(0, 120, 0, 0.04);
   text-align: left;
   font-size: 65%;
   color: rgba(0, 0, 0, 0.4);
@@ -2311,9 +2324,10 @@ a:active {
 }
 .calendar-selected-item {
   position: absolute;
-  border: 2px solid #4ad16c;
+  border: 1px solid #4ad16c;
   z-index: 1000;
   pointer-events: none;
+  background: rgba(0, 120, 0, 0.04);
   margin: 4px;
 }
 /************ Top choice markers **************/
@@ -2527,90 +2541,107 @@ a:active {
 }
 /********* Media rules ******************************/
 @media screen and (min-width: 700px) and (max-width: 800px) {
+  .event-container-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
   .date-cell-container {
     font-size: 20px;
     margin: 3px 3px;
   }
+  .days-table > tbody > tr > td {
+    padding: 3px 3px 0px 3px;
+  }
   .calendar-selected-item {
     margin: 3px;
   }
   .month {
-    font-size: 32px;
-    -moz-transform: translate(0px, -26px);
-    -webkit-transform: translate(0px, -26px);
-    -o-transform: translate(0px, -26px);
-    -ms-transform: translate(0px, -26px);
-    transform: translate(0px, -26px);
+    font-size: 24px;
   }
 }
 @media screen and (min-width: 600px) and (max-width: 700px) {
+  .event-container-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
   .date-cell-container {
     font-size: 19px;
     margin: 3px 3px;
   }
+  .days-table > tbody > tr > td {
+    padding: 3px 3px 0px 3px;
+  }
   .calendar-selected-item {
     margin: 3px;
   }
   .month {
-    font-size: 30px;
-    -moz-transform: translate(0px, -23px);
-    -webkit-transform: translate(0px, -23px);
-    -o-transform: translate(0px, -23px);
-    -ms-transform: translate(0px, -23px);
-    transform: translate(0px, -23px);
+    font-size: 22px;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 600px) {
+  .event-container-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
   .date-cell-container {
     font-size: 18px;
     margin: 3px 3px;
   }
+  .days-table > tbody > tr > td {
+    padding: 3px 3px 0px 3px;
+  }
   .calendar-selected-item {
     margin: 3px;
   }
   .month {
-    font-size: 27px;
-    -moz-transform: translate(0px, -20px);
-    -webkit-transform: translate(0px, -20px);
-    -o-transform: translate(0px, -20px);
-    -ms-transform: translate(0px, -20px);
-    transform: translate(0px, -20px);
+    font-size: 21px;
   }
 }
 @media screen and (min-width: 450px) and (max-width: 500px) {
+  .event-container-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
   .date-cell-container {
     font-size: 16px;
     margin: 2px 2px;
   }
+  .days-table {
+    font-size: 50%;
+  }
+  .days-table > tbody > tr > td {
+    padding: 2px 2px 0px 2px;
+  }
   .calendar-selected-item {
     margin: 2px;
   }
   .month {
-    font-size: 24px;
-    -moz-transform: translate(0px, -16px);
-    -webkit-transform: translate(0px, -16px);
-    -o-transform: translate(0px, -16px);
-    -ms-transform: translate(0px, -16px);
-    transform: translate(0px, -16px);
+    font-size: 19px;
   }
 }
 @media screen and (max-width: 450px) {
+  .event-container-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
   .date-cell-container {
     font-size: 12px;
     margin: 2px 2px;
   }
+  .days-table {
+    font-size: 50%;
+  }
+  .days-table > tbody > tr > td {
+    padding: 2px 2px 0px 2px;
+  }
   .calendar-selected-item {
     margin: 2px;
   }
   .month {
-    font-size: 21px;
-    -moz-transform: translate(0px, -12px);
-    -webkit-transform: translate(0px, -12px);
-    -o-transform: translate(0px, -12px);
-    -ms-transform: translate(0px, -12px);
-    transform: translate(0px, -12px);
+    font-size: 18px;
   }
 }
+/************************/
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
     font-size: 100%;
