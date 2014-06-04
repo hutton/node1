@@ -2581,11 +2581,50 @@ a:active {
 .event-settings-content {
   margin: 10px;
 }
+.settings-label {
+  font-size: 80%;
+  color: rgba(0, 0, 0, 0.3);
+}
 .settings-textarea {
   width: 100%;
   border: none;
   padding: 0px;
-  margin: 0px;
+  margin-left: -2px;
+  resize: none;
+  color: rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+.event-settings-text {
+  color: rgba(0, 0, 0, 0.4);
+}
+.event-settings-divider {
+  width: 100px;
+  border-top: 1px solid #d8d8d8;
+  margin: 10px auto;
+}
+.settings-button-container {
+  text-align: right;
+}
+.settings-button {
+  min-width: 120px;
+  border: 2px solid #4ad16c;
+  padding: 2px 30px;
+  background: white;
+  color: #4ad16c;
+  opacity: 1.0;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.settings-button-hidden {
+  opacity: 0.0;
+}
+.settings-button:hover {
+  color: white;
+  background: #4ad16c;
+  border: 2px solid #4ad16c;
 }
 /********* Media rules ******************************/
 @media screen and (min-width: 700px) and (max-width: 800px) {

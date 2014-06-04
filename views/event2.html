@@ -38,11 +38,8 @@
               <li><a id="title-mail">Email all participants <i class="fa fa-chevron-right"></i></a></li>
             </ul>
           </div>
-
-          
           <div class="title-button-container">
-            <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i><i style="display: none;" class="fa fa-calendar"></i></a>
-            <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
+            <a class="title-button-right" id="show-info"><i class="fa fa-bars"></i><i style="display: none;" class="fa fa-calendar"></i></a>
           </div>
           <div class="title"><%= name %></div>
         </div>
@@ -138,8 +135,30 @@
       <div class="event-settings-container">
         <div class="row event-settings">
           <div class="event-settings-content">
-            <div class="settings-label">Description</div>
-            <textarea class="settings-textarea" placeholder="Enter a description"></textarea>
+            <div class="event-settings-section">
+              <div class="settings-label">Description</div>
+              <textarea id="settings-description" rows="2" class="settings-textarea" placeholder="Enter a description"></textarea>
+              <div class="settings-button-container">
+                <button id="settings-description-save" type="button" class="btn btn-default settings-button settings-button-hidden">Save</button>
+              </div>
+            </div>
+            <div class="event-settings-divider"></div>
+            <div class="event-settings-section">
+              <div class="settings-label">Venue</div>
+              <textarea class="settings-textarea" rows="2" placeholder="Enter a location"></textarea>
+              <div class="settings-button-container">
+                <button id="settings-venue-save" type="button" class="btn btn-default settings-button settings-button-hidden">Save</button>
+              </div>
+            </div>
+            <div class="event-settings-divider"></div>
+            <div class="event-settings-section">
+              <div class="settings-label">When</div>
+              <div class="event-settings-text">Between</div>
+              <div class="settings-button-container">
+                <button type="button" class="btn btn-default settings-button">Change</button>
+              </div>
+            </div>
+            <div class="event-settings-divider"></div>
           </div>
         </div>
       </div>

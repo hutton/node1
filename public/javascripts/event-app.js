@@ -158,9 +158,6 @@ window.EventApp = Backbone.View.extend({
         } else {
             this.updateTellEveryoneLink();
             this.recalcTopSpacer();
-
-            this.$el.find('#show-info').show();
-            this.$el.find('#title-button-help').hide();
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");

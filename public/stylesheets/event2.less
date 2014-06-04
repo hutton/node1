@@ -1488,6 +1488,10 @@ a:active{
 }
 
 /********* Event settings **********************/
+
+@label-color: rgba(0,0,0,0.3);
+@text-color: rgba(0,0,0,0.4);
+
 .event-settings-container{
 	position: fixed;
 	width: 100%;
@@ -1511,11 +1515,53 @@ a:active{
 	margin: 10px;
 }
 
+.settings-label{
+	font-size: 80%;
+	color: @label-color;
+}
+
 .settings-textarea{
 	width: 100%;
 	border: none;
 	padding: 0px;
-	margin: 0px;
+	margin-left: -2px;
+	resize: none;
+	color: @text-color;
+	outline: none;
+}
+
+.event-settings-text{
+	color: @text-color;
+}
+
+.event-settings-divider{
+	width: 100px;
+	border-top: 1px solid @choice-border-color;
+	margin: 10px auto;
+}
+
+.settings-button-container{
+	text-align: right;
+}
+
+.settings-button{
+	min-width: 120px;
+	border: 2px solid @free-color;
+	padding: 2px 30px;
+	background: white;
+	color: @free-color;
+	opacity: 1.0;
+	.transition-duration(0.2s);
+}
+
+.settings-button-hidden{
+	opacity: 0.0;
+}
+
+.settings-button:hover{
+	color: white;
+	background: @free-color;
+	border: 2px solid @free-color;
 }
 
 /********* Media rules ******************************/
