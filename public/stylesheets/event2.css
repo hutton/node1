@@ -2568,6 +2568,7 @@ a:active {
   -o-transform-duration: 0.4s;
   -ms-transform-duration: 0.4s;
   transition-duration: 0.4s;
+  opacity: 1.0;
 }
 .event-settings-container-hidden {
   opacity: 0.0;
