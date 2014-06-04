@@ -1,5 +1,23 @@
-$("#container").scroll(function() {
+Title
+Description
+When
+Location(?)
 
-   this.scrollTop = parseInt(this.scrollTop / 84) * 84;
+People
+- Name
+- Email
+- Delete
 
+Invite link
+Invite button
+Contact everyone
+
+
+$('#textareaID').bind('input propertychange', function() {
+
+      $("#yourBtnID").hide();
+
+      if(this.value.length){
+        $("#yourBtnID").show();
+      }
 });
