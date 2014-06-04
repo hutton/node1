@@ -1704,6 +1704,25 @@ a:active {
 }
 .scrollable {
   height: 100%;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transform-duration: 0.4s;
+  -ms-transform-duration: 0.4s;
+  transition-duration: 0.4s;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1.0;
+}
+.scrollable-hidden {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  opacity: 0.0;
 }
 .event-container-margin {
   margin-left: 16px;
@@ -2538,6 +2557,34 @@ a:active {
 }
 .start-select-dates-option {
   margin: 0px 6px;
+}
+/********* Event settings **********************/
+.event-settings-container {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transform-duration: 0.4s;
+  -ms-transform-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.event-settings-container-hidden {
+  opacity: 0.0;
+}
+.event-settings {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+}
+.event-settings-content {
+  margin: 10px;
+}
+.settings-textarea {
+  width: 100%;
+  border: none;
+  padding: 0px;
+  margin: 0px;
 }
 /********* Media rules ******************************/
 @media screen and (min-width: 700px) and (max-width: 800px) {

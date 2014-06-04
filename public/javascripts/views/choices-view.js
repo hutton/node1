@@ -222,7 +222,7 @@ window.ChoicesView = Backbone.View.extend({
 		});
 	},
 
-	el: $(".event-container-margin"),
+	el: $(".scrollable"),
 
 	selectedMarkerEl: $(".calendar-selected-item"),
 	
@@ -279,6 +279,33 @@ window.ChoicesView = Backbone.View.extend({
 		return this;
 	},
 
+	showing: false,
+
+	show: function(){
+		this.$el.show();
+
+		this.$el.removeClass('scrollable-hidden');
+
+		this.showing = true;
+
+		$(".days-table-container").show();
+		this.resize();
+	},
+
+	hide: function(){
+		var that = this;
+
+		$(".days-table-container").hide();
+		
+		this.$el.addClass('scrollable-hidden');
+
+		_.delay(function(){
+			that.$el.hide();
+		}, 400);
+
+		this.showing = false;
+	},
+
 	updateLastSelectableRow: function(){
 		var that = this;
 
@@ -298,6 +325,10 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	resize: function(){
+		if (!this.showing){
+			return;
+		}
+
 		var windowHeight = $(window).height();
 
 		if (windowHeight > 350){

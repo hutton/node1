@@ -54,6 +54,8 @@ window.EventApp = Backbone.View.extend({
 
         this.SettingsView = new SettingsView();
 
+        this.EventSettingsView = new EventSettingsView();
+
         this.SelectDatesView = new SelectDatesView({collection: this.choices});
 
         this.StartSelectDatesView = new StartSelectDatesView();
@@ -69,6 +71,8 @@ window.EventApp = Backbone.View.extend({
         this.scrollToFirstSelectable();
 
         this.LoaderView.show();
+
+        this.showCalendar();
     },
 
     el: $("body"),
@@ -93,9 +97,40 @@ window.EventApp = Backbone.View.extend({
 
     infoClicked: function(){
 
-        this.SettingsView.show();
+        if (this.showInfo){
+            this.showCalendar();
+        } else {
+            this.showEventSettings();
+        }
 
         this.showInfo = !this.showInfo;
+    },
+
+    attendeesListWasShowing: false,
+
+    showCalendar: function(){
+        this.ChoicesView.show();
+
+        if (this.attendeesListWasShowing){
+            this.AttendeesView.show();
+        }
+
+        this.EventSettingsView.hide();
+
+        this.$el.find("#show-info > .fa-bars").show();
+        this.$el.find("#show-info > .fa-calendar").hide();
+    },
+
+    showEventSettings: function(){
+        this.ChoicesView.hide();
+
+        this.attendeesListWasShowing = this.AttendeesView.showing;
+
+        this.AttendeesView.hide();
+        this.EventSettingsView.show();
+
+        this.$el.find("#show-info > .fa-bars").hide();
+        this.$el.find("#show-info > .fa-calendar").show();
     },
 
     topNavBarEl: $(".navbar-fixed-top"),
@@ -397,12 +432,15 @@ window.EventApp = Backbone.View.extend({
             var topNavBarHeight = this.$el.find(".navbar-fixed-top").height() + this.$el.find(".days-table-container").height();
 
             this.$el.find(".event-container").css({'padding-top': topNavBarHeight});
+            this.$el.find(".event-settings").css({'padding-top': topNavBarHeight});
 
             this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
             this.$el.find(".selecting-dates-saving-container").css("top", topNavBarHeight);
             this.$el.find(".days-table-container").css("top", this.$el.find(".navbar-fixed-top").height());
         } else {
             this.$el.find(".event-container").css({'padding-top': 0});
+            this.$el.find(".event-settings").css({'padding-top': 0});
+
             this.$el.find(".selecting-dates-container").css("top", 0);
             this.$el.find(".selecting-dates-saving-container").css("top", 0);
             this.$el.find(".days-table-container").css("top", topNavBarHeight);
@@ -493,11 +531,13 @@ window.EventApp = Backbone.View.extend({
     onClick: function(event){
         var target = $(event.target);
 
-        if (target.parents('.attendees-container').length === 0 &&
+        if (target.parents('.navbar').length === 0 &&
+            target.parents('.attendees-container').length === 0 &&
             (target.parents('.date-cell').length === 0 ||
             target.parents('.date-cell').hasClass('unselectable')) &&
             target.parents('.loader').length === 0){
-            this.AttendeesView.onClose();
+            this.setSelected(null);
+            this.AttendeesView.hide();
         }
     },
 

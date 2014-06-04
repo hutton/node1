@@ -41,7 +41,7 @@
 
           
           <div class="title-button-container">
-            <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i></a>
+            <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i><i style="display: none;" class="fa fa-calendar"></i></a>
             <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
           </div>
           <div class="title"><%= name %></div>
@@ -133,6 +133,15 @@
       </div>
 
       <div class="day-view-container">
+      </div>
+
+      <div class="event-settings-container">
+        <div class="row event-settings">
+          <div class="event-settings-content">
+            <div class="settings-label">Description</div>
+            <textarea class="settings-textarea" placeholder="Enter a description"></textarea>
+          </div>
+        </div>
       </div>
 
       <div class="join-event-container">
@@ -537,6 +546,7 @@
         <script src="/javascripts/views/settings-view.js"></script>
         <script src="/javascripts/views/select-dates-view.js"></script>
         <script src="/javascripts/views/start-select-dates-view.js"></script>
+        <script src="/javascripts/views/event-settings-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
         <% } else { %>

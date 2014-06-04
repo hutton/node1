@@ -165,16 +165,10 @@ window.AttendeesView = Backbone.View.extend({
 		}
 	},
 
-	onClose: function(){
-		App.setSelected(null);
-
-		this.hide();
-	},
-
 	setHeight: function(animate){
 		var that = this;
 
-		var animateDuration = 800;
+		var animateDuration = 400;
 
 		if (!animate){
 			animateDuration = 0;

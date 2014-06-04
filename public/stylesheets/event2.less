@@ -441,6 +441,14 @@ a:active{
 
 .scrollable{
 	height: 100%;
+	.transition-duration(0.4s);
+	.scale(1.0);
+	opacity: 1.0;
+}
+
+.scrollable-hidden{
+	.scale(1.05);
+	opacity: 0.0;
 }
 
 .event-container-margin{
@@ -1477,6 +1485,36 @@ a:active{
 
 .start-select-dates-option{
 	margin: 0px 6px;
+}
+
+/********* Event settings **********************/
+.event-settings-container{
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	.transition-duration(0.4s);
+}
+
+.event-settings-container-hidden{
+	opacity: 0.0;
+}
+
+.event-settings{
+	margin-left: auto;
+	margin-right: auto;
+
+	max-width: 800px;
+}
+
+.event-settings-content{
+	margin: 10px;
+}
+
+.settings-textarea{
+	width: 100%;
+	border: none;
+	padding: 0px;
+	margin: 0px;
 }
 
 /********* Media rules ******************************/

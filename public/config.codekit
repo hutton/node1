@@ -585,6 +585,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/javascripts\/views\/event-settings-view.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/javascripts\/views\/event-settings-view.js",
+		"outputAbbreviatedPath": "\/javascripts\/views\/event-settings-view-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/javascripts\/views\/loader-view.js": {
 		"fileType": 64,
 		"ignore": 1,
