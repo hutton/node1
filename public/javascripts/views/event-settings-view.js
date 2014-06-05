@@ -18,6 +18,9 @@ window.EventSettingsView = Backbone.View.extend({
 	},
 
 	render: function(){
+		this.descriptionInputEl.elastic();
+
+		this.descriptionInputEl.val(this.model.get('description'));
 	},
 
 	show: function(){
@@ -47,6 +50,10 @@ window.EventSettingsView = Backbone.View.extend({
 
 	descriptionSave: function(){
 		this.savedDescription = this.descriptionInputEl.val();
+
+		this.model.set({description: this.descriptionInputEl.val()});
+
+		this.model.save();
 
 		this.descriptionChanged();
 	}

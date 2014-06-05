@@ -90,6 +90,7 @@ function showEvent(req, res, calendar, attendeeId){
 	var cleanedCalendar = {
 		name: calendar.name,
 		id: calendar.id,
+		description: calendar.description,
 		datesSelected: calendar.datesSelected,
 		everythingSelectable: calendar.everythingSelectable
 	};
@@ -182,6 +183,31 @@ function updateSelectableDates(req, res){
 				var selectableChoices = JSON.parse(req.body.dates);
 
 				calendar.setSelectableDates(selectableChoices);
+
+				res.send(200);
+			}
+		});
+	}	
+}
+
+function updateDetails(req, res){
+	if (req.route.params[0] == "example"){
+		res.send(200);		
+	} else {
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with id " + req.route.params[0]);
+
+				res.status(404);
+				res.send('No calendar');
+			} else {
+				calendar.setDetails(req.body.description);
 
 				res.send(200);
 			}
@@ -358,5 +384,10 @@ exports.updateAttendeeName = function(req, res){
 exports.updateSelectableDates = function(req, res){
 	updateSelectableDates(req, res);
 };
+
+exports.updateDetails = function(req, res){
+	updateDetails(req, res);
+};
+
 
 

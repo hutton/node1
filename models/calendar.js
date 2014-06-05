@@ -17,6 +17,10 @@ var CalendarSchema = new mongoose.Schema({
 		type: String,
 		index: true
 	},
+	description: {
+		type: String,
+		default: ""
+	},
 	choices: [{
 		date: Date,
 		selectable: {type: Boolean, default: true},
@@ -524,6 +528,21 @@ CalendarSchema.methods.setSelectableDates = function(dates){
 		}
 	});
 };
+
+CalendarSchema.methods.setDetails = function(description){
+	var calendar = this;
+
+	calendar.description = description;
+
+	calendar.save(function(err, calendar){
+		if (err){
+			logger.error("Failed to save calendar details: " + err);
+		} else {
+			logger.info("Details saved for for calendar " + calendar.name + "(" + calendar.id + ").");
+		}
+	});
+};
+
 
 function findNewAttendeeId(calendar){
 	var matches = true;

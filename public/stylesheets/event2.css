@@ -1461,6 +1461,21 @@ a:active {
 .faded {
   opacity: 0.0;
 }
+*::-webkit-input-placeholder {
+  color: #e0e0e0;
+}
+*:-moz-placeholder {
+  /* FF 4-18 */
+  color: #e0e0e0;
+}
+*::-moz-placeholder {
+  /* FF 19+ */
+  color: #e0e0e0;
+}
+*:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #e0e0e0;
+}
 @media screen and (min-width: 768px) {
   .inline-text-desktop {
     display: inline-block;

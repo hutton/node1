@@ -54,7 +54,7 @@ window.EventApp = Backbone.View.extend({
 
         this.SettingsView = new SettingsView();
 
-        this.EventSettingsView = new EventSettingsView();
+        this.EventSettingsView = new EventSettingsView({model: this.model});
 
         this.SelectDatesView = new SelectDatesView({collection: this.choices});
 
