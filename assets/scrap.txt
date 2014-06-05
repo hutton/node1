@@ -21,3 +21,10 @@ $('#textareaID').bind('input propertychange', function() {
         $("#yourBtnID").show();
       }
 });
+
+
+Invite people
+
+http://convenely.com/event/asdfasdf
+
+Share this link with anyone you want to invite or just click here >.
