@@ -21,6 +21,9 @@ var CalendarSchema = new mongoose.Schema({
 		type: String,
 		default: ""
 	},
+	venue: {
+		type: String
+	},
 	choices: [{
 		date: Date,
 		selectable: {type: Boolean, default: true},
@@ -529,10 +532,11 @@ CalendarSchema.methods.setSelectableDates = function(dates){
 	});
 };
 
-CalendarSchema.methods.setDetails = function(description){
+CalendarSchema.methods.setDetails = function(description, venue){
 	var calendar = this;
 
 	calendar.description = description;
+	calendar.venue = venue;
 
 	calendar.save(function(err, calendar){
 		if (err){

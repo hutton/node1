@@ -1,6 +1,3 @@
-- .event-settings-container remove position: fixed.
-- Remove divider lines
-- Label 0.4, text 0.6
 - Section off header buttons
 - Users popup
 - Move change dates to header button
@@ -15,6 +12,9 @@
 
 Done
 ----
+- .event-settings-container remove position: fixed.
+- Remove divider lines
+- Label 0.4, text 0.6
 - Add description
 - Better 404
 - Make month names smaller

@@ -91,6 +91,7 @@ function showEvent(req, res, calendar, attendeeId){
 		name: calendar.name,
 		id: calendar.id,
 		description: calendar.description,
+		venue: calendar.venue,
 		datesSelected: calendar.datesSelected,
 		everythingSelectable: calendar.everythingSelectable
 	};
@@ -207,7 +208,7 @@ function updateDetails(req, res){
 				res.status(404);
 				res.send('No calendar');
 			} else {
-				calendar.setDetails(req.body.description);
+				calendar.setDetails(req.body.description, req.body.venue);
 
 				res.send(200);
 			}

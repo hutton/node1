@@ -139,26 +139,29 @@
               <div class="settings-label">Description</div>
               <textarea id="settings-description" class="settings-textarea" placeholder="Enter a description"></textarea>
               <div class="settings-button-container">
+                <button id="settings-description-cancel" type="button" class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
                 <button id="settings-description-save" type="button" class="btn btn-default settings-button settings-button-hidden">Save</button>
               </div>
             </div>
             <div class="event-settings-divider"></div>
             <div class="event-settings-section">
               <div class="settings-label">Venue</div>
-              <textarea class="settings-textarea" placeholder="Enter a location"></textarea>
+              <textarea id="settings-venue" class="settings-textarea" placeholder="Enter a location"></textarea>
               <div class="settings-button-container">
+                <button id="settings-venue-cancel" type="button" class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
                 <button id="settings-venue-save" type="button" class="btn btn-default settings-button settings-button-hidden">Save</button>
               </div>
             </div>
             <div class="event-settings-divider"></div>
             <div class="event-settings-section">
-              <div class="settings-label">When</div>
-              <div class="event-settings-text">Between</div>
-              <div class="settings-button-container">
-                <button type="button" class="btn btn-default settings-button">Change</button>
-              </div>
+              <div class="settings-label">Sometime between</div>
+              <span id="event-settings-between-text" class="event-settings-text"></span>
+                <button id="settings-between-change" type="button" class="btn btn-default settings-button">Change</button>
             </div>
             <div class="event-settings-divider"></div>
+            <div class="event-settings-section">
+              <div class="settings-label">People</div>
+            </div>
           </div>
         </div>
       </div>
