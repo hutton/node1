@@ -1,4 +1,8 @@
-- Add description
+- .event-settings-container
+	overflow-y: auto;
+	height: 100%;
+- Remove divider lines
+- Label 0.4, text 0.6
 - Section off header buttons
 - Users popup
 - Move change dates to header button
@@ -13,6 +17,7 @@
 
 Done
 ----
+- Add description
 - Better 404
 - Make month names smaller
 - Thin out free marker
