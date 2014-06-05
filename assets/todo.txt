@@ -1,6 +1,4 @@
-- .event-settings-container
-	overflow-y: auto;
-	height: 100%;
+- .event-settings-container remove position: fixed.
 - Remove divider lines
 - Label 0.4, text 0.6
 - Section off header buttons
