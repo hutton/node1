@@ -160,21 +160,21 @@
             </div>
             <div class="event-settings-divider"></div>
             <div class="event-settings-section">
-              <div class="settings-label">People</div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">Invite people</div>
-                  <div class="panel-body">
-                    <p>
-                    Share the link below with anyone you want to invite or just <a href="<%= inviteEmailLink %>">click here <span class="fa fa-chevron-right"></span></a>.
-                    </p>
-                    <p>
-                    http://convenely.com/event/<%= calendarId %>
-                    </p>
-                  </div>
-                </div>
-                <div id="settings-attendee-list">
+              <div class="settings-label">Invitees</div>
+              <div id="settings-attendee-list">
 
+              </div>
+              <div id="event-settings-invite-panel" class="panel panel-default">
+                <div class="panel-heading">Invite people</div>
+                <div class="panel-body">
+                  <p>
+                  Share the link below with anyone you want to invite or just <a href="<%= inviteEmailLink %>">click here <span class="fa fa-chevron-right"></span></a>.
+                  </p>
+                  <p>
+                  http://convenely.com/event/<%= calendarId %>
+                  </p>
                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -431,7 +431,13 @@
 
         <script type="text/template" id="settings-attendee-view-template">
           <div class="settings-attendee">
-            <@= name @>
+            <div class="settings-attendee-buttons">
+              <span class="settings-attendee-remove"><i class="fa fa-times"></i></span>
+                <button type="button" style="display: none;" class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
+                <button type="button" style="display: none;" class="btn btn-default settings-button-delete settings-button-hidden">Remove</button>
+            </div>
+            <div><@= name @></div>
+            <div class="settings-attendee-email"><@= email @></div>
           </div>
         </script>
 

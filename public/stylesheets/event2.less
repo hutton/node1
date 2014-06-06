@@ -1531,7 +1531,7 @@ a:active{
 }
 
 .event-settings-content{
-	margin: 10px;
+	margin: 0px 10px 100px 10px;
 }
 
 .settings-label{
@@ -1583,6 +1583,12 @@ a:active{
 	color: @label-color;
 }
 
+.settings-button-delete{
+	.settings-button;
+	border: 2px solid red;
+	color: red;
+}
+
 .settings-button:hover{
 	color: white;
 	background: @free-color;
@@ -1594,6 +1600,12 @@ a:active{
 	color: white;
 }
 
+.settings-button-delete:hover{
+	border: 2px solid red;
+	background: red;
+	color: white;
+}
+
 .settings-button-hidden{
 	opacity: 0.0;
 }
@@ -1602,6 +1614,31 @@ a:active{
 	float: right;
 }
 
+.settings-attendee{
+	margin: 10px 0px;
+	color: @text-color;
+}
+
+.settings-attendee-email{
+	font-size: 80%;
+	color: @label-color;
+}
+
+.settings-attendee-buttons{
+	float: right;
+}
+
+.settings-attendee-remove{
+	color: @label-color;
+	opacity: 0.5;
+	.transition-duration(0.2);
+}
+
+.settings-attendee-remove:hover{
+	opacity: 1.0;
+	color: @text-color;
+	cursor: pointer;
+}
 /********* Media rules ******************************/
 
 @media screen and (min-width: 700px) and (max-width: 800px){

@@ -2596,7 +2596,7 @@ a:active {
   min-height: 100px;
 }
 .event-settings-content {
-  margin: 10px;
+  margin: 0px 10px 100px 10px;
 }
 .settings-label {
   font-size: 80%;
@@ -2652,6 +2652,21 @@ a:active {
   border: 2px solid rgba(0, 0, 0, 0.4);
   color: rgba(0, 0, 0, 0.4);
 }
+.settings-button-delete {
+  min-width: 120px;
+  border: 2px solid #4ad16c;
+  padding: 2px 30px;
+  background: white;
+  color: #4ad16c;
+  opacity: 1.0;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+  border: 2px solid red;
+  color: red;
+}
 .settings-button:hover {
   color: white;
   background: #4ad16c;
@@ -2661,11 +2676,41 @@ a:active {
   background: rgba(0, 0, 0, 0.4);
   color: white;
 }
+.settings-button-delete:hover {
+  border: 2px solid red;
+  background: red;
+  color: white;
+}
 .settings-button-hidden {
   opacity: 0.0;
 }
 #settings-between-change {
   float: right;
+}
+.settings-attendee {
+  margin: 10px 0px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.settings-attendee-email {
+  font-size: 80%;
+  color: rgba(0, 0, 0, 0.4);
+}
+.settings-attendee-buttons {
+  float: right;
+}
+.settings-attendee-remove {
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 0.5;
+  -moz-transition-duration: 0.2;
+  -webkit-transition-duration: 0.2;
+  -o-transform-duration: 0.2;
+  -ms-transform-duration: 0.2;
+  transition-duration: 0.2;
+}
+.settings-attendee-remove:hover {
+  opacity: 1.0;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 /********* Media rules ******************************/
 @media screen and (min-width: 700px) and (max-width: 800px) {

@@ -45,10 +45,16 @@ window.EventSettingsView = Backbone.View.extend({
 		this.venueInputEl.val(this.model.get('venue'));
 
 		_.each(this.attendees.models, function(model){
-			var attendee = new EventSettingsAttendeeView({model: model});
+			if (!(model.get('me') && App.newMode)){
+				var attendee = new EventSettingsAttendeeView({model: model});
 
-			that.attendeeListEl.append(attendee.$el);
+				that.attendeeListEl.append(attendee.$el);
+			}
 		});
+
+		if (App.newMode){
+			this.$el.find("#event-settings-invite-panel").hide();
+		}
 	},
 
 	choicesChanged: function(){
@@ -65,6 +71,8 @@ window.EventSettingsView = Backbone.View.extend({
 		this.$el.show();
 
 		this.$el.removeClass('event-settings-container-hidden');
+
+		this.$el.scrollTop(0);
 	},
 
 	hide: function(){
