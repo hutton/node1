@@ -2592,6 +2592,9 @@ a:active {
   margin-right: auto;
   max-width: 800px;
 }
+.event-settings-section {
+  min-height: 100px;
+}
 .event-settings-content {
   margin: 10px;
 }
@@ -2607,6 +2610,9 @@ a:active {
   resize: none;
   color: rgba(0, 0, 0, 0.6);
   outline: none;
+}
+.event-settings-container .panel {
+  font-size: 70%;
 }
 .event-settings-text {
   color: rgba(0, 0, 0, 0.6);

@@ -2,6 +2,8 @@ window.EventSettingsView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
 
+		this.attendees = this.options.attendees;
+
 		this.descriptionInputEl = this.$el.find("#settings-description");
 		this.descriptionSaveButtonEl = this.$el.find("#settings-description-save");
 		this.descriptionCancelButtonEl = this.$el.find("#settings-description-cancel");
@@ -11,6 +13,8 @@ window.EventSettingsView = Backbone.View.extend({
 		this.venueCancelButtonEl = this.$el.find("#settings-venue-cancel");
 
 		this.betweenTextEl = this.$el.find("#event-settings-between-text");
+
+		this.attendeeListEl = this.$el.find("#settings-attendee-list");
 
 		this.listenTo(this.collection, "change", this.choicesChanged);
 
@@ -30,6 +34,8 @@ window.EventSettingsView = Backbone.View.extend({
 	},
 
 	render: function(){
+		var that = this;
+
 		this.descriptionInputEl.elastic();
 
 		this.descriptionInputEl.val(this.model.get('description'));
@@ -37,6 +43,12 @@ window.EventSettingsView = Backbone.View.extend({
 		this.venueInputEl.elastic();
 
 		this.venueInputEl.val(this.model.get('venue'));
+
+		_.each(this.attendees.models, function(model){
+			var attendee = new EventSettingsAttendeeView({model: model});
+
+			that.attendeeListEl.append(attendee.$el);
+		});
 	},
 
 	choicesChanged: function(){

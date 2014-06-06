@@ -90,6 +90,7 @@ function showEvent(req, res, calendar, attendeeId){
 	var cleanedCalendar = {
 		name: calendar.name,
 		id: calendar.id,
+		calendarId: calendar.calendarId,
 		description: calendar.description,
 		venue: calendar.venue,
 		datesSelected: calendar.datesSelected,
@@ -110,6 +111,7 @@ function showEvent(req, res, calendar, attendeeId){
 			choices: JSON.stringify(sortedChoices),
 			attendees: JSON.stringify(cleanedAttendees),
 			calendar: JSON.stringify(cleanedCalendar),
+			calendarId: calendar.calendarId,
 			id: calendar.id,
 			name: calendar.name,
 			inviteEmailLink: inviteEmailLink

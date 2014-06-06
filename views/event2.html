@@ -161,6 +161,20 @@
             <div class="event-settings-divider"></div>
             <div class="event-settings-section">
               <div class="settings-label">People</div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">Invite people</div>
+                  <div class="panel-body">
+                    <p>
+                    Share the link below with anyone you want to invite or just <a href="<%= inviteEmailLink %>">click here <span class="fa fa-chevron-right"></span></a>.
+                    </p>
+                    <p>
+                    http://convenely.com/event/<%= calendarId %>
+                    </p>
+                  </div>
+                </div>
+                <div id="settings-attendee-list">
+
+                </div>
             </div>
           </div>
         </div>
@@ -415,6 +429,12 @@
           </div>
         </script>
 
+        <script type="text/template" id="settings-attendee-view-template">
+          <div class="settings-attendee">
+            <@= name @>
+          </div>
+        </script>
+
         <script type="text/template" id="attendees-choice-view-template">
         <div class="attendees-choice">
           <div class="attendees-choice-container">
@@ -569,6 +589,7 @@
         <script src="/javascripts/views/settings-view.js"></script>
         <script src="/javascripts/views/select-dates-view.js"></script>
         <script src="/javascripts/views/start-select-dates-view.js"></script>
+        <script src="/javascripts/views/event-settings-attendee-view.js"></script>
         <script src="/javascripts/views/event-settings-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
