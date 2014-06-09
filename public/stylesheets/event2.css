@@ -2649,7 +2649,7 @@ a:active {
   -o-transform-duration: 0.2s;
   -ms-transform-duration: 0.2s;
   transition-duration: 0.2s;
-  border: 2px solid rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(0, 0, 0, 0.3);
   color: rgba(0, 0, 0, 0.4);
 }
 .settings-button-delete {
@@ -2673,7 +2673,7 @@ a:active {
   border: 2px solid #4ad16c;
 }
 .settings-button-cancel:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.3);
   color: white;
 }
 .settings-button-delete:hover {
@@ -2696,11 +2696,13 @@ a:active {
   color: rgba(0, 0, 0, 0.4);
 }
 .settings-attendee-buttons {
-  float: right;
+  text-align: right;
 }
 .settings-attendee-remove {
+  float: right;
   color: rgba(0, 0, 0, 0.4);
   opacity: 0.5;
+  padding: 0px 10px 5px 10px;
   -moz-transition-duration: 0.2;
   -webkit-transition-duration: 0.2;
   -o-transform-duration: 0.2;

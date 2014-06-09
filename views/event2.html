@@ -431,13 +431,13 @@
 
         <script type="text/template" id="settings-attendee-view-template">
           <div class="settings-attendee">
-            <div class="settings-attendee-buttons">
-              <span class="settings-attendee-remove"><i class="fa fa-times"></i></span>
-                <button type="button" style="display: none;" class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
-                <button type="button" style="display: none;" class="btn btn-default settings-button-delete settings-button-hidden">Remove</button>
-            </div>
+            <span class="settings-attendee-remove"><i class="fa fa-times"></i></span>
             <div><@= name @></div>
             <div class="settings-attendee-email"><@= email @></div>
+            <div class="settings-attendee-buttons" style="display: none;">
+                <button type="button"  class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
+                <button type="button" class="btn btn-default settings-button-delete settings-button-hidden">Remove</button>
+            </div>
           </div>
         </script>
 
@@ -587,6 +587,7 @@
         <script src="/javascripts/models/choice-model.js"></script>
         <script src="/javascripts/models/choices-model.js"></script>
         <script src="/javascripts/models/calendar-model.js"></script>
+        <script src="/javascripts/models/attendee-model.js"></script>
 
         <script src="/javascripts/views/loader-view.js"></script>
 

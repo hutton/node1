@@ -431,6 +431,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/javascripts\/models\/attendee-model.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/models\/attendee-model.js",
+		"outputAbbreviatedPath": "\/javascripts\/models\/attendee-model-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/javascripts\/models\/calendar-model.js": {
 		"fileType": 64,
 		"ignore": 1,

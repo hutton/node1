@@ -6,11 +6,11 @@ window.EventApp = Backbone.View.extend({
     loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
         this.model = new CalendarModel(bootstrappedCalendar);
 
-        this.choices = new ChoicesModel;
+        this.choices = new ChoicesModel();
 
         this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
 
-        this.attendees = new Backbone.Collection;
+        this.attendees = new Backbone.Collection();
 
         this.attendees.comparator = function(model){
 
@@ -21,7 +21,7 @@ window.EventApp = Backbone.View.extend({
 
         this.currentAttendee = this.attendees.findWhere({me: true});
 
-        this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
+        this.currentAttendeeId = this.currentAttendee !== null ? this.currentAttendee.get("_id") : -1;
 
         if (_.isUndefined(this.currentAttendee)){
             this.currentAttendee = null;

@@ -5,6 +5,7 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 		this.render();
 
 		this.removeEl = this.$el.find('.settings-attendee-remove');
+		this.buttonsEl = this.$el.find('.settings-attendee-buttons');
 		this.buttons = this.$el.find('button');
 	},
 
@@ -12,7 +13,8 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 
 	events: {
 		"click .settings-attendee-remove": "removeClicked",
-		"click .settings-button-cancel": "cancelClicked"
+		"click .settings-button-cancel": "cancelClicked",
+		"click .settings-button-delete": "deleteClicked"
 	},
 
 	render: function(){
@@ -24,7 +26,7 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 
 		this.removeEl.hide();
 
-		this.buttons.show();
+		this.buttonsEl.slideDown('fast');
 
 		_.delay(function(){
 			that.buttons.removeClass('settings-button-hidden');
@@ -32,16 +34,24 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 	},
 
 	cancelClicked: function(){
+		this.closeButtons();
+	},
+
+	closeButtons: function(){
 		var that = this;
 
 		that.buttons.addClass('settings-button-hidden');
 
 		_.delay(function(){
-			that.buttons.removeClass('settings-button-hidden');
-
-			that.buttons.hide();
+			that.buttonsEl.slideUp('fast');
 
 			that.removeEl.show();
 		}, 400);
+	},
+
+	deleteClicked: function(){
+		var retu = this.model.destroy();
+
+		this.closeButtons();
 	}
 });

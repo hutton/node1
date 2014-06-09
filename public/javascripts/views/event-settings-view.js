@@ -72,7 +72,7 @@ window.EventSettingsView = Backbone.View.extend({
 
 		this.$el.removeClass('event-settings-container-hidden');
 
-		this.$el.scrollTop(0);
+		window.scrollTo(0,0);
 	},
 
 	hide: function(){

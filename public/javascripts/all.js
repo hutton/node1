@@ -17,6 +17,7 @@
 // @codekit-prepend "models/choice-model.js";
 // @codekit-prepend "models/choices-model.js";
 // @codekit-prepend "models/calendar-model.js";
+// @codekit-prepend "models/attendee-model.js";
 
 // @codekit-prepend "views/loader-view.js";
 // @codekit-prepend "views/choices-view.js";
