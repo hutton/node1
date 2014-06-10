@@ -80,7 +80,7 @@ function showEvent(req, res, calendar, attendeeId){
 
 	_.each(calendar.attendees, function(att){
 		cleanedAttendees.push({
-			_id: att._id,
+			id: att._id,
 			prettyName: att.name || att.email,
 			me: att._id == attendeeId,
 			email: att.email
