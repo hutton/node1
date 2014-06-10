@@ -360,6 +360,10 @@ function updateAttendeeName(req, res){
 	}
 }
 
+function removeAttendee(req, res){
+	res.send(200);		
+}
+
 exports.example = function(req, res){
 	example(req, res);
 };
@@ -390,6 +394,10 @@ exports.updateSelectableDates = function(req, res){
 
 exports.updateDetails = function(req, res){
 	updateDetails(req, res);
+};
+
+exports.removeAttendee  = function(req, res){
+	removeAttendee(req, res);
 };
 
 

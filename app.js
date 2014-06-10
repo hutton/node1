@@ -126,6 +126,7 @@ Array.prototype.removeElement = function(element) {
  app.post('/event/*/add', events.addAttendee);
  app.post('/event/*/update-name', events.updateAttendeeName);
  app.post('/event/*/selectableDates', events.updateSelectableDates);
+ app.delete('/event/*/attendee/*', events.removeAttendee);
  app.put('/event/*/details', events.updateDetails);
  app.get('/event2', routes.event2);
  app.get('/email', routes.email);
@@ -137,6 +138,7 @@ Array.prototype.removeElement = function(element) {
  //app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
  app.get('/calendar/*', calendar.view);
  app.get('/calendar-text/*', calendar.viewText);
+
 
 // app.get('/*', routes.notFound);
 
