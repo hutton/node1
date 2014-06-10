@@ -21,14 +21,14 @@ window.EventApp = Backbone.View.extend({
 
         this.currentAttendee = this.attendees.findWhere({me: true});
 
-        this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
+        this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("id") : -1;
 
         if (_.isUndefined(this.currentAttendee)){
             this.currentAttendee = null;
 
             this.newMode = true;
 
-            this.attendees.add({"prettyName": "Me", "_id": "new", "me" : true}, {"at": 0});
+            this.attendees.add({"prettyName": "Me", "id": "new", "me" : true}, {"at": 0});
         }
 
         this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});

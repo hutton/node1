@@ -15,9 +15,7 @@ window.ChoiceModel = Backbone.Model.extend({
 		if (window.App.newMode){
 			return this.pretendFree;
 		} else {
-			var currentAttendeeId = window.App.currentAttendee.get("_id");
-
-			return this.isAttendeeFree(currentAttendeeId);
+			return this.isAttendeeFree(App.currentAttendeeId);
 		}
 
 		return false;
@@ -50,13 +48,11 @@ window.ChoiceModel = Backbone.Model.extend({
 		var freeAttendees = this.get("free");
 
 		if (!window.App.newMode){
-			var currentAttendeeId = window.App.currentAttendee.get("_id");
-
-			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(currentAttendeeId) == -1){
+			if (_.isUndefined(freeAttendees) || freeAttendees.indexOf(App.currentAttendeeId) == -1){
 				if (_.isUndefined(freeAttendees)){
-					this.set("free", [currentAttendeeId]);
+					this.set("free", [App.currentAttendeeId]);
 				} else {
-					freeAttendees.push(currentAttendeeId);
+					freeAttendees.push(App.currentAttendeeId);
 				}
 
 				this.trigger('changedFree');
@@ -68,7 +64,7 @@ window.ChoiceModel = Backbone.Model.extend({
 				}
 
 			} else {
-				freeAttendees.removeElement(currentAttendeeId);
+				freeAttendees.removeElement(App.currentAttendeeId);
 
 				this.trigger('changedFree');
 
@@ -117,7 +113,7 @@ window.ChoiceModel = Backbone.Model.extend({
 		var list = [];
 
 		_.each(App.attendees.models, function(attendee){
-			if (that.isAttendeeFree(attendee.get("_id"))){
+			if (that.isAttendeeFree(attendee.get("id"))){
 				list.push(true);
 			} else {
 				list.push(false);

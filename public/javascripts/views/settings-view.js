@@ -27,7 +27,7 @@ window.SettingsView = Backbone.View.extend({
                 this.$el.find("#current-name").val(prettyName);
             }
 
-            this.$el.find("#current-name-id").val(window.App.currentAttendee.get("_id"));
+            this.$el.find("#current-name-id").val(window.App.currentAttendee.get("id"));
 
             this.$el.find("#update-name-form").attr("action", "/event/" + window.App.currentId + "/update-name/");
         }

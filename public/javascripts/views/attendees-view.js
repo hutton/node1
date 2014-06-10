@@ -273,7 +273,7 @@ window.AttendeeView = Backbone.View.extend({
 		}
 
 		_.each(App.attendees.models, function(attendee){
-			if (that.model.isAttendeeFree(attendee.get("_id"))){
+			if (that.model.isAttendeeFree(attendee.get("id"))){
 				$(items[attendeeCount]).addClass('attendee-free');
 			}
 

@@ -449,7 +449,7 @@
             <div class="attendees-choice-container-scrollable">
               <div class="attendees-choice-items">
           <@ _.each(attendees, function(attendee){ @>
-              <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>attendee-free<@ } @>">
+              <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("id"))) { @>attendee-free<@ } @>">
                 <i class="fa fa-user"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
