@@ -50,8 +50,10 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 	},
 
 	deleteClicked: function(){
-		var retu = this.model.destroy();
+		this.model.destroy();
 
 		this.closeButtons();
+
+		App.buildViews();
 	}
 });

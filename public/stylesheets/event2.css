@@ -1784,8 +1784,8 @@ a:active {
   height: 50px;
   padding: 7px 10px 10px 10px;
   float: right;
-  transition: all 0.2s ease-in-out;
   text-align: center;
+  background: rgba(0, 0, 0, 0.025);
 }
 .title-button-right:hover {
   background: rgba(0, 0, 0, 0.15);
@@ -1793,7 +1793,7 @@ a:active {
 .title-mail-button {
   position: absolute;
   float: left;
-  transition: all 0.2s ease-in-out;
+  background: rgba(0, 0, 0, 0.025);
 }
 .title-mail-button button {
   font-size: 21px;

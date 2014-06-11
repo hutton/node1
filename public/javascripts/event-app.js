@@ -31,10 +31,6 @@ window.EventApp = Backbone.View.extend({
             this.attendees.add({"prettyName": "Me", "id": "new", "me" : true}, {"at": 0});
         }
 
-        this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
-
-        this.ChoicesView.render();
-
         this.TopChoicesModel = new Backbone.Model({
             one: null,
             two: null,
@@ -43,14 +39,7 @@ window.EventApp = Backbone.View.extend({
 
         // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
 
-        this.LoaderView = new LoaderView();
-
-        this.LoaderView.calendarModel = this.model;
-        this.LoaderView.attendees = this.attendees;
-        this.LoaderView.choices = this.choices;
-        this.LoaderView.topChoicesModel = this.TopChoicesModel;
-
-        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
+        this.buildViews();
 
         this.SettingsView = new SettingsView();
 
@@ -94,6 +83,19 @@ window.EventApp = Backbone.View.extend({
     wasFree: [],
 
     showInfo: false,
+
+    buildViews: function(){
+        this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
+        this.ChoicesView.render();
+
+        this.LoaderView = new LoaderView();
+        this.LoaderView.calendarModel = this.model;
+        this.LoaderView.attendees = this.attendees;
+        this.LoaderView.choices = this.choices;
+        this.LoaderView.topChoicesModel = this.TopChoicesModel;
+
+        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
+    },
 
     infoClicked: function(){
 

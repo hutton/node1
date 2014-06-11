@@ -1,6 +1,8 @@
 window.LoaderView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+		
+		this.listenTo(App.attendees, "remove", this.remove);
 	},
 
 	template: _.template($('#loader-template').html()),
