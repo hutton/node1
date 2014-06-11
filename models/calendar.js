@@ -633,6 +633,16 @@ CalendarSchema.methods.removeAttendee = function(attendee){
 	});
 };
 
+CalendarSchema.methods.findAttendee = function(attendeeId){
+	var calendar = this;
+
+	var attendee = _.find(calendar.attendees, function(attendee){
+		return attendee.attendeeId == attendeeId;
+	});
+
+	return attendee;
+};
+
 function removeAttendeeAvailabiltyFromCalendar(calendar, attendee){
 
 	for (var c = 0; c < calendar.choices.length; c++){

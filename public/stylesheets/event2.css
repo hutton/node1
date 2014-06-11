@@ -1760,6 +1760,7 @@ a:active {
   background: #4ad16c;
   border-bottom: solid 1px #43B660;
   color: white;
+  min-height: 50px;
 }
 .navbar-fixed-top a {
   color: white;
@@ -1775,34 +1776,40 @@ a:active {
   overflow: visible;
 }
 .title-button {
-  padding: 4px 10px 10px 10px;
+  width: 50px;
+  height: 50px;
 }
 .title-button-right {
-  padding: 4px 10px 10px 10px;
+  width: 50px;
+  height: 50px;
+  padding: 7px 10px 10px 10px;
   float: right;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
 }
-#show-info > span {
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transform-duration: 0.2s;
-  -ms-transform-duration: 0.2s;
-  transition-duration: 0.2s;
+.title-button-right:hover {
+  background: rgba(0, 0, 0, 0.15);
 }
 .title-mail-button {
   position: absolute;
   float: left;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .title-mail-button button {
   font-size: 21px;
   color: white;
   padding: 4px 10px 10px 10px;
+  width: 50px;
+  height: 50px;
 }
 .title-mail-button.btn-group.open .dropdown-toggle.btn-link {
   color: white;
 }
 .title-mail-button.btn-group:hover .dropdown-toggle.btn-link {
   color: white;
+}
+.title-mail-button:hover {
+  background: rgba(0, 0, 0, 0.15);
 }
 .rotate {
   -webkit-transform: rotate(90deg);
@@ -1813,10 +1820,10 @@ a:active {
 }
 .title {
   text-align: center;
-  padding-top: 6px;
+  padding-top: 9px;
   padding-bottom: 6px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;

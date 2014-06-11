@@ -361,7 +361,36 @@ function updateAttendeeName(req, res){
 }
 
 function removeAttendee(req, res){
-	res.send(200);		
+	console.log(req.route.params);
+
+	if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+			} else if (!calendar){
+				logger.error("Could not find calendar " + req.route.params[0]);
+
+				res.status(404);
+			} else {
+				var atteenee = calendar.findAttendee(req.route.params[1]);
+
+				if (attendee != null){
+					calendar.removeAttendee(attendee);
+
+					logger.info("Calendar '" + calendar.name + "' removed attendee '" + attendee.email + "'");
+				} else {
+					logger.error("Could not find attendeeId: " + req.route.params[1] + " in calendarId: " + calendar.calendarId);
+				}
+
+				res.send(200);		
+			}
+		});
+	} else if (req.route.params[0] == "example"){
+		res.send(200);		
+	}
 }
 
 exports.example = function(req, res){
