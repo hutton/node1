@@ -1,5 +1,7 @@
+- Remove attendees
 - Show buttons on focus, hide on blur plue not changed
 - Find better place for invite banner
+- Edit your own name
 
 - Section off header buttons
 - Users popup

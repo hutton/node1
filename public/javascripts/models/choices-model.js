@@ -50,5 +50,20 @@ window.ChoicesModel = Backbone.Collection.extend({
 		});
 
 		return {first: first, last: last};
+	},
+
+	removeAttendee: function(attendeeId){
+
+		_.each(this.models, function(choice){
+			var free = choice.get('free');
+
+			if (!_.isUndefined(free)){
+				var index = free.indexOf(attendeeId);
+
+				if (index !== -1){
+					free.splice(index, 1);
+				}
+			}
+		});
 	}
 });

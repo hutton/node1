@@ -50,10 +50,12 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 	},
 
 	deleteClicked: function(){
-		this.model.destroy();
+		this.model.destroy({success: function(model, response){
+			App.attendeeRemoved(model.get('id'));
+		}});
+
+		App.attendeeRemoved(this.model.get('id'));
 
 		this.closeButtons();
-
-		App.buildViews();
 	}
 });

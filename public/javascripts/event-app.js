@@ -97,6 +97,12 @@ window.EventApp = Backbone.View.extend({
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
     },
 
+    attendeeRemoved: function(attendeeId){
+        this.choices.removeAttendee(attendeeId);
+
+        this.buildViews();
+    },
+
     infoClicked: function(){
 
         if (this.showInfo){

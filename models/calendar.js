@@ -637,7 +637,7 @@ CalendarSchema.methods.findAttendee = function(attendeeId){
 	var calendar = this;
 
 	var attendee = _.find(calendar.attendees, function(attendee){
-		return attendee.attendeeId == attendeeId;
+		return attendee._id.equals(attendeeId);
 	});
 
 	return attendee;

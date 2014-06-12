@@ -375,12 +375,12 @@ function removeAttendee(req, res){
 
 				res.status(404);
 			} else {
-				var atteenee = calendar.findAttendee(req.route.params[1]);
+				var attendeeToRemove = calendar.findAttendee(req.route.params[1]);
 
-				if (attendee != null){
-					calendar.removeAttendee(attendee);
+				if (attendeeToRemove != null){
+					calendar.removeAttendee(attendeeToRemove);
 
-					logger.info("Calendar '" + calendar.name + "' removed attendee '" + attendee.email + "'");
+					logger.info("Calendar '" + calendar.name + "' removed attendee '" + attendeeToRemove.email + "'");
 				} else {
 					logger.error("Could not find attendeeId: " + req.route.params[1] + " in calendarId: " + calendar.calendarId);
 				}
