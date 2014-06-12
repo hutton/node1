@@ -7,6 +7,8 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 		this.removeEl = this.$el.find('.settings-attendee-remove');
 		this.buttonsEl = this.$el.find('.settings-attendee-buttons');
 		this.buttons = this.$el.find('button');
+
+		this.listenTo(this.model, "destroy", this.attendeeRemoved);
 	},
 
 	template: _.template($('#settings-attendee-view-template').html()),
@@ -50,12 +52,14 @@ window.EventSettingsAttendeeView = Backbone.View.extend({
 	},
 
 	deleteClicked: function(){
-		this.model.destroy({success: function(model, response){
-			App.attendeeRemoved(model.get('id'));
-		}});
+		this.model.destroy();
+	},
 
-		App.attendeeRemoved(this.model.get('id'));
+	attendeeRemoved: function(){
+		var that = this;
 
-		this.closeButtons();
+		this.$el.slideUp('fast', function(){
+			that.remove();
+		});
 	}
 });

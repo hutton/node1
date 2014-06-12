@@ -8,7 +8,7 @@ window.ChoiceView = Backbone.View.extend({
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
 		this.listenTo(this.model, "repositionSelected", this.repositionSelected);
-		this.listenTo(App.attendees, "remove", this.remove);
+		this.listenTo(this.model, "reset", this.render);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -210,8 +210,6 @@ window.ChoiceView = Backbone.View.extend({
 window.ChoicesView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
-
-		this.listenTo(App.attendees, "remove", this.remove);
 
 		var that = this;
 	

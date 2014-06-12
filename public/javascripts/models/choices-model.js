@@ -1,4 +1,8 @@
 window.ChoicesModel = Backbone.Collection.extend({
+	initialize: function() {
+		this.listenTo(App.attendees, "remove", this.attendeeRemoved);
+	},
+
  	model: ChoiceModel,
 
 	totalSelectable: function(){
@@ -52,7 +56,8 @@ window.ChoicesModel = Backbone.Collection.extend({
 		return {first: first, last: last};
 	},
 
-	removeAttendee: function(attendeeId){
+	attendeeRemoved: function(model){
+		var attendeeId = model.get("id");
 
 		_.each(this.models, function(choice){
 			var free = choice.get('free');
@@ -64,6 +69,8 @@ window.ChoicesModel = Backbone.Collection.extend({
 					free.splice(index, 1);
 				}
 			}
+
+			choice.trigger('reset');
 		});
 	}
 });

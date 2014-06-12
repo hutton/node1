@@ -1,8 +1,6 @@
 window.AttendeesView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
-
-		this.listenTo(App.attendees, "remove", this.remove);
 	},
 
 	template: _.template($('#attendees-view-template').html()),
@@ -232,7 +230,7 @@ window.AttendeeView = Backbone.View.extend({
 
 		this.listenTo(this.model, "change", this.modelChanged);
 		this.listenTo(this.model, "changedFree", this.freeChanged);
-		this.listenTo(App.attendees, "remove", this.remove);
+		this.listenTo(this.model, "reset", this.render);
 	},
 
 	itemWidth: 80,

@@ -6,18 +6,17 @@ window.EventApp = Backbone.View.extend({
     loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
         this.model = new CalendarModel(bootstrappedCalendar);
 
-        this.choices = new ChoicesModel();
-
-        this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
-
         this.attendees = new AttendeesModel();
 
         this.attendees.comparator = function(model){
-
             return !model.get('me');
         };
 
         this.attendees.reset(bootstrappedAttendees);
+
+        this.choices = new ChoicesModel();
+
+        this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
 
         this.currentAttendee = this.attendees.findWhere({me: true});
 
@@ -31,13 +30,11 @@ window.EventApp = Backbone.View.extend({
             this.attendees.add({"prettyName": "Me", "id": "new", "me" : true}, {"at": 0});
         }
 
-        this.TopChoicesModel = new Backbone.Model({
+        this.topChoicesModel = new TopChoicesModel({
             one: null,
             two: null,
             three: null
         });
-
-        // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
 
         this.buildViews();
 
@@ -92,15 +89,9 @@ window.EventApp = Backbone.View.extend({
         this.LoaderView.calendarModel = this.model;
         this.LoaderView.attendees = this.attendees;
         this.LoaderView.choices = this.choices;
-        this.LoaderView.topChoicesModel = this.TopChoicesModel;
+        this.LoaderView.topChoicesModel = this.topChoicesModel;
 
-        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
-    },
-
-    attendeeRemoved: function(attendeeId){
-        this.choices.removeAttendee(attendeeId);
-
-        this.buildViews();
+        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.topChoicesModel});
     },
 
     infoClicked: function(){
@@ -195,16 +186,16 @@ window.EventApp = Backbone.View.extend({
     },
 
     realignAdorners: function(){
-        if (this.TopChoicesModel.has("one")){
-            this.TopChoicesModel.get("one").trigger("repositioned");
+        if (this.topChoicesModel.has("one")){
+            this.topChoicesModel.get("one").trigger("repositioned");
         }
 
-        if (this.TopChoicesModel.has("two")){
-            this.TopChoicesModel.get("two").trigger("repositioned");
+        if (this.topChoicesModel.has("two")){
+            this.topChoicesModel.get("two").trigger("repositioned");
         }
 
-        if (this.TopChoicesModel.has("three")){
-            this.TopChoicesModel.get("three").trigger("repositioned");
+        if (this.topChoicesModel.has("three")){
+            this.topChoicesModel.get("three").trigger("repositioned");
         }
     },
 
@@ -363,73 +354,7 @@ window.EventApp = Backbone.View.extend({
     },
 
     showBestChoices: function(){
-        var that = this;
-        var bestModel = null;
-        var bestCount = 0;
-
-        var secondBestModel = null;
-        var secondBestCount = 0;
-
-        var thirdBestModel = null;
-        var thirdBestCount = 0;
-
-        var modelsWithTopChoice = [];
-
-        _.each(this.choices.models, function(model){
-            var freeCount = 0;
-            
-            if (model.isSelectable() && model.has('date') && model.get('date') >= that.today){
-                if (model.has('free')){
-                    freeCount += model.get('free').length;
-                }
-                
-                freeCount += (model.pretendFree ? 1 : 0);
-
-                if (freeCount > bestCount){
-                    thirdBestCount = secondBestCount;
-                    thirdBestModel = secondBestModel;
-
-                    secondBestCount = bestCount;
-                    secondBestModel = bestModel;
-
-                    bestCount = freeCount;
-                    bestModel = model;
-                } else if (freeCount > secondBestCount){
-                    thirdBestCount = secondBestCount;
-                    thirdBestModel = secondBestModel;
-
-                    secondBestCount = freeCount;
-                    secondBestModel = model;
-                } else if (freeCount > thirdBestCount){
-                    thirdBestCount = freeCount;
-                    thirdBestModel = model;
-                }
-
-                if (model.has('top-choice')){
-                    modelsWithTopChoice.push(model);
-                }
-            }
-        });
-
-        if (bestModel !== null){
-            bestModel.setTopChoice(1);
-        }
-
-        if (secondBestModel !== null){
-            secondBestModel.setTopChoice(2);
-        }
-
-        if (thirdBestModel !== null){
-            thirdBestModel.setTopChoice(3);
-        }
-
-        _.each(modelsWithTopChoice, function(model){
-            if (model !== bestModel && model !== secondBestModel && model !== thirdBestModel){
-                model.unset('top-choice');
-            }
-        });
-
-        this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
+        this.topChoicesModel.updateTopChoice();
     },
 
     recalcTopSpacer: function(){
