@@ -52,8 +52,14 @@ window.EventSettingsView = Backbone.View.extend({
 			}
 		});
 
+		this.choicesChanged();
+
 		if (App.newMode){
 			this.$el.find("#event-settings-invite-panel").hide();
+			this.$el.find(".settings-attendee-remove").hide();
+			this.$el.find("#settings-between-change").hide();
+
+			this.$el.find("textarea").attr("readonly", "true");
 		}
 	},
 
@@ -61,9 +67,15 @@ window.EventSettingsView = Backbone.View.extend({
 		var selectable = this.collection.firstAndLastDates();
 
 		if (selectable.first !== null && selectable.last !== null){
-			var text = moment(selectable.first).format("dddd Do MMMM") + " and " + moment(selectable.last).format("dddd Do MMMM");
+			if (sameDay(selectable.first, selectable.last)){
+				this.betweenTextEl.html(moment(selectable.first).format("dddd Do MMMM"));
+			} else {
+				var text = moment(selectable.first).format("dddd Do MMMM") + " and " + moment(selectable.last).format("dddd Do MMMM");
 
-			this.betweenTextEl.html(text);
+				this.betweenTextEl.html(text);
+			}
+		} else {
+			this.betweenTextEl.html("No potential dates selected yet");
 		}
 	},
 

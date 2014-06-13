@@ -38,8 +38,6 @@ window.EventApp = Backbone.View.extend({
 
         this.buildViews();
 
-        this.SettingsView = new SettingsView();
-
         this.EventSettingsView = new EventSettingsView({model: this.model, collection: this.choices, attendees: this.attendees});
 
         this.SelectDatesView = new SelectDatesView({collection: this.choices});
@@ -160,8 +158,6 @@ window.EventApp = Backbone.View.extend({
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
-
-        this.SettingsView.initialize();
 
         this.showBestChoices();
 

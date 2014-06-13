@@ -23,7 +23,6 @@
 // @codekit-prepend "views/loader-view.js";
 // @codekit-prepend "views/choices-view.js";
 // @codekit-prepend "views/attendees-view.js";
-// @codekit-prepend "views/settings-view.js";
 // @codekit-prepend "views/select-dates-view.js";
 // @codekit-prepend "views/start-select-dates-view.js";
 // @codekit-prepend "views/event-settings-attendee-view.js";

@@ -2599,6 +2599,9 @@ a:active {
   margin-right: auto;
   max-width: 800px;
 }
+.event-settings .span-link {
+  font-size: 70%;
+}
 .event-settings-section {
   min-height: 100px;
 }
