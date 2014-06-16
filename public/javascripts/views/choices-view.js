@@ -243,6 +243,8 @@ window.ChoicesView = Backbone.View.extend({
 		var row = null;
 		var todayAdded = false;
 
+		var todayView = null;
+
 		_(this._choiceViews).each(function(choice) {
 			var date = choice.model.get("date");
 
@@ -267,15 +269,15 @@ window.ChoicesView = Backbone.View.extend({
 			if (!todayAdded && sameDay(that.today, date)){
 				choice.$el.addClass('today');
 
+				todayView = choice;
+
 				todayAdded = true;
 			}
 		});
 
 		this.tableEl.append($("<tr class='selected-row'><td colspan='7' width='7'></td></tr>"));
 
-		if (this.tableEl.find(".today").length > 0){
-			this.tableEl.find(".today")[0].scrollIntoView(true);
-		}
+		todayView.scrollToTopLine();
 
 		return this;
 	},

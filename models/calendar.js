@@ -22,7 +22,8 @@ var CalendarSchema = new mongoose.Schema({
 		default: ""
 	},
 	venue: {
-		type: String
+		type: String,
+		default: ""
 	},
 	choices: [{
 		date: Date,

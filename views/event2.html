@@ -136,6 +136,7 @@
         <div class="row event-settings">
           <div class="event-settings-content">
             <div class="event-settings-section">
+              <div class="settings-need-help-container"><a href="/help">Need help?</a></div>
               <div class="settings-label">Description</div>
               <textarea id="settings-description" class="settings-textarea" placeholder="What's happening?"></textarea>
               <div class="settings-button-container">
@@ -194,49 +195,6 @@
         <div class="loader-close loader-close-hidden">Skip <i class="fa fa-chevron-right"></i></div>
         </div>
       </div>
-
-    <div class="modal fade" id="settings-view">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title"><i class="fa fa-bars"></i> Options</h4>
-          </div>
-          <div class="modal-body">
-        <div>
-          <div class="current-attendee-info">
-            <div class="settings-section">
-              <span class="link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
-              <div class="settings-your-details-section" style="display: none;">
-                <h2>Name</h2>
-                <form id="update-name-form" method="post">
-                  <div>
-                    <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
-                    <input type="hidden" id="current-name-id" name="_id"/></input>
-                    <button type="submit" id="current-name-update">
-                      <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
-                    </button>
-                  </div>
-                </form>
-                <h2>Email</h2>
-                <div class="current-email"></div>
-              </div>
-            </div>
-          </div>
-          <div class="settings-section">
-            <a class="link" href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
-          </div>
-          <div class="settings-section">
-            <span class="link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change available dates <i class="fa fa-chevron-right"></i></span>
-          </div>
-          <div class="settings-section center">
-            <a class="link" id="settings-home" href="/"><i class="fa fa-home"></i> Home</a><a class="link" href="/help"><i class="fa fa-question-circle"></i> Help</a>
-          </div>
-        </div>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
     <div class="modal fade" id="join-view">
       <div class="modal-dialog">

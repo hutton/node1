@@ -146,7 +146,7 @@ window.EventSettingsView = Backbone.View.extend({
 	},
 
 	changeBetween: function(){
-		App.showCalendar();
+		App.infoClicked();
 
 		App.changeSelectableDates();
 	}

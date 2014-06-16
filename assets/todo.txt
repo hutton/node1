@@ -1,12 +1,8 @@
 - Show buttons on focus, hide on blur plue not changed
-- Remove old settings
-- Find better place for invite banner
 - Edit your own name
 
 - Tidy media queries
 
-- Make header bar higher (~54px) and responsive
-- Hover over on header buttons
 - Make attendee user icons bigger and responsive based on available space
 
 - Cleanup CSS
@@ -15,6 +11,11 @@
 
 Done
 ----
+- Make header bar higher (~54px) and responsive
+- Hover over on header buttons
+- Remove old settings
+- Find better place for invite banner
+- Help and home links
 - Remove attendees
 - Section off header buttons
 - Read only in new mode

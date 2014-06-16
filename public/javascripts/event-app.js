@@ -90,6 +90,7 @@ window.EventApp = Backbone.View.extend({
         this.LoaderView.topChoicesModel = this.topChoicesModel;
 
         this.AttendeesView = new AttendeesView({collection: this.choices, model: this.topChoicesModel});
+        this.AttendeesView.render();
     },
 
     infoClicked: function(){
@@ -120,6 +121,7 @@ window.EventApp = Backbone.View.extend({
 
     showEventSettings: function(){
         this.ChoicesView.hide();
+        this.SelectDatesView.hide();
 
         this.attendeesListWasShowing = this.AttendeesView.showing;
 

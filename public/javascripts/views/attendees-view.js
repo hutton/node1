@@ -100,9 +100,11 @@ window.AttendeesView = Backbone.View.extend({
 	centeredIndex: null,
 
 	itemActive: function(event, index){
-		this.centeredIndex = index;
-				
-		App.setSelected(this.usedChoices[index]);
+		if (this.rendered){
+			this.centeredIndex = index;
+					
+			App.setSelected(this.usedChoices[index]);
+		}
 	},
 
 	setActive: function(model){
