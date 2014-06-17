@@ -46,7 +46,7 @@ window.EventApp = Backbone.View.extend({
 
         var pathNames = window.location.pathname.split( '/' );
 
-        this.currentId = pathNames[pathNames.length - 1];
+        this.currentId = pathNames[2];
 
         this.render();
 
@@ -54,7 +54,7 @@ window.EventApp = Backbone.View.extend({
 
         this.scrollToFirstSelectable();
 
-        this.LoaderView.show();
+        // this.LoaderView.show();
 
         this.showCalendar();
     },
@@ -96,17 +96,16 @@ window.EventApp = Backbone.View.extend({
     infoClicked: function(){
 
         if (this.showInfo){
-            this.showCalendar();
+            this.Routes.navigate("event/" + this.currentId + "/calendar", {trigger: true});
         } else {
-            this.showEventSettings();
+            this.Routes.navigate("event/" + this.currentId + "/details", {trigger: true});
         }
-
-        this.showInfo = !this.showInfo;
     },
 
     attendeesListWasShowing: false,
 
     showCalendar: function(){
+
         this.ChoicesView.show();
 
         if (this.attendeesListWasShowing){
@@ -117,6 +116,8 @@ window.EventApp = Backbone.View.extend({
 
         this.$el.find("#show-info > .fa-bars").show();
         this.$el.find("#show-info > .fa-calendar").hide();
+
+        this.showInfo = false;
     },
 
     showEventSettings: function(){
@@ -130,6 +131,8 @@ window.EventApp = Backbone.View.extend({
 
         this.$el.find("#show-info > .fa-bars").hide();
         this.$el.find("#show-info > .fa-calendar").show();
+
+        this.showInfo = true;
     },
 
     topNavBarEl: $(".navbar-fixed-top"),
@@ -452,7 +455,6 @@ window.EventApp = Backbone.View.extend({
     },
 
     showLoader: function(){
-        this.LoaderView.autoClose = false;
         this.LoaderView.show();
     },
 

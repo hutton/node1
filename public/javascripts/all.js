@@ -29,3 +29,5 @@
 // @codekit-prepend "views/event-settings-view.js";
 
 // @codekit-prepend "event-app.js";
+
+// @codekit-prepend "router.js";

@@ -271,8 +271,8 @@
             <h4 class="modal-title">You're almost done!</h4>
           </div>
           <div class="modal-body">
-              <p>Now just select the dates you're free and click <i class="fa fa-envelope-o"></i> above to invite others to the event.</p>
-              <p>You can set a description and venue for your event in the settings page <i class="fa fa-bars"></i>.</p>
+              <p>Just select the dates you're free and <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> <i class="fa fa-envelope-o"></i> above to invite others to the event.</p>
+              <p>Set a description and venue for your event in the settings page <i class="fa fa-bars"></i>.</p>
         </div>
           </div>
         </div><!-- /.modal-content -->
@@ -518,13 +518,13 @@
                 <div>Look good too</div>
             </div>
             <@ } @>
-            <div class="loader-set-choices">When are you free?</div> <!-- ' -->
+            <div class="loader-set-choices">When are you free?</div> 
             <div class="loader-invite">
             <p>
             There's not many people participating
-            </p>
+            </p><!-- ' -->
             <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
-            </div> <!-- ' -->
+            </div>
         </script>
 
         <% if (webAppDebug) { %>
@@ -559,6 +559,8 @@
         <script src="/javascripts/views/event-settings-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
+
+        <script src="/javascripts/router.js"></script>
         <% } else { %>
         <script src="/javascripts/all-ck.js"></script>
         <% } %>
@@ -570,6 +572,10 @@
           window.App = new EventApp();
 
           window.App.loadBootstrapData(<%= choices %>, <%= attendees %>, <%= calendar %>);
+
+          window.App.Routes = new Workspace();
+
+          Backbone.history.start({pushState: true});
         });
 
         </script>

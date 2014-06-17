@@ -122,18 +122,20 @@ function showEvent(req, res, calendar, attendeeId){
 }
 
 function renderEvent(req, res){
-	if (req.route.params[0].length == 9 || req.route.params[0].length == 5){
-		logger.info("Looking for event: " + req.route.params[0]);
+	var id = req.route.params[0].split("/")[0];
 
-		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+	if (id.length == 9 || id.length == 5){
+		logger.info("Looking for event: " + id);
+
+		Calendar.findCalendarByAttendeeId(id, function(err, calendar, attendee){
 			if (err){
-				logger.error("Error finding calendar with attendee " + req.route.params[0]);
+				logger.error("Error finding calendar with attendee " + id);
 				logger.error("Error:" + err);
 
 				res.status(404);
 				res.send('No calendar');
 			} else if (!calendar){
-				logger.error("Could not find calendar with attendee " + req.route.params[0]);
+				logger.error("Could not find calendar with attendee " + id);
 
 				res.status(404);
 				res.send('No calendar');
@@ -141,18 +143,18 @@ function renderEvent(req, res){
 				showEvent(req, res, calendar, attendee._id);
 			}
 		});
-	} else if (req.route.params[0].length == 6){
-		logger.info("Looking for event: " + req.route.params[0]);
+	} else if (id.length == 6){
+		logger.info("Looking for event: " + id);
 
-		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
+		Calendar.findCalendarByCalendarId(id, function(err, calendar){
 			if (err){
-				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error finding calendar with id " + id);
 				logger.error("Error:" + err);
 
 				res.status(404);
 				res.send('No calendar');
 			} else if (!calendar){
-				logger.error("Could not find calendar with id " + req.route.params[0]);
+				logger.error("Could not find calendar with id " + id);
 
 				res.status(404);
 				res.send('No calendar');
@@ -161,6 +163,8 @@ function renderEvent(req, res){
 			}
 		});
 	} else {
+		logger.error("Could not find calendar with id " + id);
+
 		res.status(404);
 		res.render('404-calendar.html');
 	}

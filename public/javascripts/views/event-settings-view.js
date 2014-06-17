@@ -79,7 +79,11 @@ window.EventSettingsView = Backbone.View.extend({
 		}
 	},
 
+	showing: false,
+
 	show: function(){
+		this.showing = true;
+
 		this.$el.show();
 
 		this.$el.removeClass('event-settings-container-hidden');
@@ -90,10 +94,14 @@ window.EventSettingsView = Backbone.View.extend({
 	hide: function(){
 		var that = this;
 
+		this.showing = false;
+
 		this.$el.addClass('event-settings-container-hidden');
 
 		_.delay(function(){
-			that.$el.hide();
+			if (!that.showing){
+				that.$el.hide();
+			}
 		}, 400);
 	},
 

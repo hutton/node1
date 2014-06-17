@@ -24,38 +24,40 @@ window.AttendeesView = Backbone.View.extend({
 		});
 
 		var daysPassed = 0;
-		var prevMonthChoice = this.usedChoices[0];
+		if (this.usedChoices.length > 0){
+			var prevMonthChoice = this.usedChoices[0];
 
-		prevMonthChoice.showMonth = true;
-		prevMonthChoice.daysIn = 0;
+			prevMonthChoice.showMonth = true;
+			prevMonthChoice.daysIn = 0;
 
-		_.each(this.usedChoices, function(choice){
-			if (choice.get('date').getDate() == 1){
-				prevMonthChoice.lastDay = daysPassed;
+			_.each(this.usedChoices, function(choice){
+				if (choice.get('date').getDate() == 1){
+					prevMonthChoice.lastDay = daysPassed;
 
-				choice.showMonth = true;
-				choice.daysIn = daysPassed;
-				prevMonthChoice = choice;
-			} else {
-				choice.showMonth = false;
-			}
+					choice.showMonth = true;
+					choice.daysIn = daysPassed;
+					prevMonthChoice = choice;
+				} else {
+					choice.showMonth = false;
+				}
 
-			daysPassed++;
-		});
+				daysPassed++;
+			});
 
-		this.usedChoices[0].showMonth = true;
+			this.usedChoices[0].showMonth = true;
 
-		prevMonthChoice.lastDay = daysPassed;
+			prevMonthChoice.lastDay = daysPassed;
 
-		_.each(this.usedChoices, function(choice){
-			var newAttendeeView = new AttendeeView({model: choice});
+			_.each(this.usedChoices, function(choice){
+				var newAttendeeView = new AttendeeView({model: choice});
 
-			newElementRow.append(newAttendeeView.$el);
+				newElementRow.append(newAttendeeView.$el);
 
-			if (choice.showMonth){
-				that.monthStartChoices.push(newAttendeeView);
-			}
-		});
+				if (choice.showMonth){
+					that.monthStartChoices.push(newAttendeeView);
+				}
+			});
+		}
 
 		$('.day-view-container').append(newElement);
 
