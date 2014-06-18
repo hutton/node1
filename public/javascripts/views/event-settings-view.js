@@ -75,7 +75,7 @@ window.EventSettingsView = Backbone.View.extend({
 				this.betweenTextEl.html(text);
 			}
 		} else {
-			this.betweenTextEl.html("No potential dates selected yet");
+			this.betweenTextEl.html("No dates selected yet");
 		}
 	},
 

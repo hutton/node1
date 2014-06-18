@@ -3,14 +3,13 @@
 
 - Tidy media queries
 
-- Make attendee user icons bigger and responsive based on available space
-
 - Cleanup CSS
 
 =======
 
 Done
 ----
+- Make attendee user icons bigger and responsive based on available space
 - Make header bar higher (~54px) and responsive
 - Hover over on header buttons
 - Remove old settings

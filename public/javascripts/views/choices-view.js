@@ -328,7 +328,7 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	resize: function(){
-		if (!this.showing){
+		if (!this.showing || App.showInfo){
 			return;
 		}
 

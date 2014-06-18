@@ -176,6 +176,7 @@ window.EventApp = Backbone.View.extend({
 
         _.delay(function(){
             that.titleResize();
+            that.availMarkersResize();
         }, 100);
 
         var throttledResize = _.debounce(that.onResizeWindow, 100);
@@ -208,13 +209,16 @@ window.EventApp = Backbone.View.extend({
         var height = $(window).height();
 
         if (height <= 350){
-            this.showHeader(false);
-            this.AttendeesView.show();
+            if (!this.showInfo){
+                this.showHeader(false);
+                this.AttendeesView.show();
+            }
         } else {
             this.showHeader(true);
         }
 
         this.titleResize();
+        this.availMarkersResize();
     },
 
     instantResize: function(){
@@ -242,6 +246,26 @@ window.EventApp = Backbone.View.extend({
         if (titleEl.height() > 42 && fontSize <= minFontSize){
             titleEl.css({'line-height': '16px'});
         }
+    },
+
+    availMarkersResize: function(){
+        var maxFontSize = 95;
+        var minFontSize = 55;
+
+        var fontSize = maxFontSize;
+
+        var firstMarkerEl = $('.markers-container').first();
+
+        firstMarkerEl.css({'font-size': fontSize + "%"});
+
+        while (firstMarkerEl.height() > firstMarkerEl.find('span').first().height() + 4 && fontSize > minFontSize)
+        {
+            fontSize -= 10;
+
+            firstMarkerEl.css({'font-size': fontSize + "%"});
+        }
+
+        $('.markers-container').css({'font-size': fontSize + "%"});
     },
 
     checkOrientation: function(){

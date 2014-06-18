@@ -529,10 +529,6 @@ a:active{
 	background: rgba(0,0,0,0.05);
 }
 
-.title-button-right:hover{
-	background: rgba(0,0,0,0.15);
-}
-
 .title-mail-button{
 	position: absolute;
 	float: left;
@@ -552,10 +548,6 @@ a:active{
 
 .title-mail-button.btn-group:hover .dropdown-toggle.btn-link{
 	color: white;
-}
-
-.title-mail-button:hover{
-	background: rgba(0,0,0,0.15);
 }
 
 .rotate{
@@ -1795,6 +1787,16 @@ a:active{
 
 /************************/
 
+@media screen and (min-width: 800px){
+	.title-button-right:hover{
+		background: rgba(0,0,0,0.15);
+	}
+
+	.title-mail-button:hover{
+		background: rgba(0,0,0,0.15);
+	}
+}
+
 @media screen and (min-width: 450px){
 	.event-table tr > td.date-cell{
 		font-size: 100%;
@@ -1814,11 +1816,11 @@ a:active{
 	}
 
 	.markers-container{
+		margin-top: 6px;
 	}
 
 	.markers-container span{
 	    margin: 0px -1px -2px 0px;
-	    font-size: 60%;
 	}
 
 	.markers-container span:before{
@@ -1856,11 +1858,11 @@ a:active{
 	}
 
 	.markers-container{
+		margin-top: 1px;
 	}
 
 	.markers-container span{
 	    margin: 0px -2px 0px 0px;
-        font-size: 45%;
 	}
 
 	.markers-container span:before{

@@ -119,26 +119,29 @@ Array.prototype.removeElement = function(element) {
  app.get('/users', user.list);
  app.get('/new', calendar.new);
  app.get('/mail', mail.show);
+
+ app.get('/event2', routes.event2);
+ app.get('/email', routes.email);
+ app.get('/mandrillReceive', mail.mandrillShow);
+ app.get('/calendar/*', calendar.view);
+ app.get('/calendar-text/*', calendar.viewText);
  
  app.get('/event/example', events.example);
  app.get('/event/example/*', events.example);
  app.get('/event/*', events.view);
+ 
+
  app.post('/event/*/choice', events.updateChoice);
  app.post('/event/*/add', events.addAttendee);
  app.post('/event/*/update-name', events.updateAttendeeName);
  app.post('/event/*/selectableDates', events.updateSelectableDates);
  app.delete('/event/*/attendee/*', events.removeAttendee);
  app.put('/event/*/details', events.updateDetails);
- app.get('/event2', routes.event2);
- app.get('/email', routes.email);
  app.post('/mail', mail.receive);
 
- app.get('/mandrillReceive', mail.mandrillShow);
  app.post('/mandrillReceive', mail.mandrillReceive);
 
  //app.get(/^\/[a-zA-Z0-9]{10}$/, calendar.view);
- app.get('/calendar/*', calendar.view);
- app.get('/calendar-text/*', calendar.viewText);
 
 
 // app.get('/*', routes.notFound);
