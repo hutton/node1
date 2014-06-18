@@ -104,9 +104,12 @@ window.EventApp = Backbone.View.extend({
 
     attendeesListWasShowing: false,
 
-    showCalendar: function(){
+    calendarScrollPosition: 0,
 
+    showCalendar: function(){
         this.ChoicesView.show();
+
+        window.scrollTo(0,this.calendarScrollPosition);
 
         if (this.attendeesListWasShowing){
             this.AttendeesView.show();
@@ -121,6 +124,8 @@ window.EventApp = Backbone.View.extend({
     },
 
     showEventSettings: function(){
+        this.calendarScrollPosition = window.scrollY;
+
         this.ChoicesView.hide();
         this.SelectDatesView.hide();
 

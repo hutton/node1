@@ -2890,7 +2890,8 @@ a:active {
     margin-top: 1px;
   }
   .markers-container span {
-    margin: 0px -2px 0px 0px;
+    font-size: 80%;
+    margin: 0px -1px 0px 0px;
   }
   .markers-container span:before {
     content: "\f111";

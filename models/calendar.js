@@ -583,6 +583,8 @@ CalendarSchema.methods.addAttendee = function(address, fromName, name, savedCall
 			logger.error("Failed to add attendee calendar: " + err);
 		} else {
 			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
+
+			Mail.sendTextMail(global.app.ourEmail, global.app.ourEmail ,"Attendee added: " + calendar.name, "Attendee added to http://convenely.com/event/" + calendar.calendarId);
 		}
 
 		savedCallback();
