@@ -1,3 +1,6 @@
+- Save and restore scroll position on switch to details
+- Check size of dots in mobile resolution for small number
+- Add margin around small dots
 - Show buttons on focus, hide on blur plue not changed
 - Edit your own name
 
