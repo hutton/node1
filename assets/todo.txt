@@ -1,5 +1,6 @@
 - Save and restore scroll position on switch to details
 - Check size of dots in mobile resolution for small number
+	.markers-container span -> margin: 0px -1px 0px 0px;
 - Add margin around small dots
 - Show buttons on focus, hide on blur plue not changed
 - Edit your own name
