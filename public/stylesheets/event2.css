@@ -2566,7 +2566,7 @@ a:active {
 .new-mode-start-join {
   color: white;
   background: #4ad16c;
-  padding: 2px 8px;
+  padding: 2px 12px;
 }
 /********* Start select dates *******/
 #new-mode-start-select-dates-view .modal-title {
