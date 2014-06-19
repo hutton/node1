@@ -6,53 +6,39 @@ window.EventApp = Backbone.View.extend({
     loadBootstrapData: function(bootstrapedChoices, bootstrappedAttendees, bootstrappedCalendar){
         this.model = new CalendarModel(bootstrappedCalendar);
 
-        this.choices = new ChoicesModel;
-
-        this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
-
-        this.attendees = new Backbone.Collection;
+        this.attendees = new AttendeesModel();
 
         this.attendees.comparator = function(model){
-
             return !model.get('me');
         };
 
         this.attendees.reset(bootstrappedAttendees);
 
+        this.choices = new ChoicesModel();
+
+        this.choices.reset(expandDates(bootstrapedChoices, this.model.get("everythingSelectable")));
+
         this.currentAttendee = this.attendees.findWhere({me: true});
 
-        this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("_id") : -1;
+        this.currentAttendeeId = this.currentAttendee != null ? this.currentAttendee.get("id") : -1;
 
         if (_.isUndefined(this.currentAttendee)){
             this.currentAttendee = null;
 
             this.newMode = true;
 
-            this.attendees.add({"prettyName": "Me", "_id": "new", "me" : true}, {"at": 0});
+            this.attendees.add({"prettyName": "Me", "id": "new", "me" : true}, {"at": 0});
         }
 
-        this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
-
-        this.ChoicesView.render();
-
-        this.TopChoicesModel = new Backbone.Model({
+        this.topChoicesModel = new TopChoicesModel({
             one: null,
             two: null,
             three: null
         });
 
-        // this.TopChoicesPanel = new TopChoicesPanel({model: this.TopChoicesModel});
+        this.buildViews();
 
-        this.LoaderView = new LoaderView();
-
-        this.LoaderView.calendarModel = this.model;
-        this.LoaderView.attendees = this.attendees;
-        this.LoaderView.choices = this.choices;
-        this.LoaderView.topChoicesModel = this.TopChoicesModel;
-
-        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.TopChoicesModel});
-
-        this.SettingsView = new SettingsView();
+        this.EventSettingsView = new EventSettingsView({model: this.model, collection: this.choices, attendees: this.attendees});
 
         this.SelectDatesView = new SelectDatesView({collection: this.choices});
 
@@ -60,7 +46,7 @@ window.EventApp = Backbone.View.extend({
 
         var pathNames = window.location.pathname.split( '/' );
 
-        this.currentId = pathNames[pathNames.length - 1];
+        this.currentId = pathNames[2];
 
         this.render();
 
@@ -68,7 +54,9 @@ window.EventApp = Backbone.View.extend({
 
         this.scrollToFirstSelectable();
 
-        this.LoaderView.show();
+        // this.LoaderView.show();
+
+        this.showCalendar();
     },
 
     el: $("body"),
@@ -91,11 +79,65 @@ window.EventApp = Backbone.View.extend({
 
     showInfo: false,
 
+    buildViews: function(){
+        this.ChoicesView = new ChoicesView({collection: this.choices, attendees: this.attendees});
+        this.ChoicesView.render();
+
+        this.LoaderView = new LoaderView();
+        this.LoaderView.calendarModel = this.model;
+        this.LoaderView.attendees = this.attendees;
+        this.LoaderView.choices = this.choices;
+        this.LoaderView.topChoicesModel = this.topChoicesModel;
+
+        this.AttendeesView = new AttendeesView({collection: this.choices, model: this.topChoicesModel});
+        this.AttendeesView.render();
+    },
+
     infoClicked: function(){
 
-        this.SettingsView.show();
+        if (this.showInfo){
+            this.Routes.navigate("event/" + this.currentId + "/calendar", {trigger: true});
+        } else {
+            this.Routes.navigate("event/" + this.currentId + "/details", {trigger: true});
+        }
+    },
 
-        this.showInfo = !this.showInfo;
+    attendeesListWasShowing: false,
+
+    calendarScrollPosition: 0,
+
+    showCalendar: function(){
+        this.ChoicesView.show();
+
+        window.scrollTo(0,this.calendarScrollPosition);
+
+        if (this.attendeesListWasShowing){
+            this.AttendeesView.show();
+        }
+
+        this.EventSettingsView.hide();
+
+        this.$el.find("#show-info > .fa-bars").show();
+        this.$el.find("#show-info > .fa-calendar").hide();
+
+        this.showInfo = false;
+    },
+
+    showEventSettings: function(){
+        this.calendarScrollPosition = window.scrollY;
+
+        this.ChoicesView.hide();
+        this.SelectDatesView.hide();
+
+        this.attendeesListWasShowing = this.AttendeesView.showing;
+
+        this.AttendeesView.hide();
+        this.EventSettingsView.show();
+
+        this.$el.find("#show-info > .fa-bars").hide();
+        this.$el.find("#show-info > .fa-calendar").show();
+
+        this.showInfo = true;
     },
 
     topNavBarEl: $(".navbar-fixed-top"),
@@ -123,14 +165,9 @@ window.EventApp = Backbone.View.extend({
         } else {
             this.updateTellEveryoneLink();
             this.recalcTopSpacer();
-
-            this.$el.find('#show-info').show();
-            this.$el.find('#title-button-help').hide();
         }
 
         this.$el.find("#register-form").attr("action", "/event/" + this.currentId + "/add/");
-
-        this.SettingsView.initialize();
 
         this.showBestChoices();
 
@@ -144,6 +181,7 @@ window.EventApp = Backbone.View.extend({
 
         _.delay(function(){
             that.titleResize();
+            that.availMarkersResize();
         }, 100);
 
         var throttledResize = _.debounce(that.onResizeWindow, 100);
@@ -155,16 +193,16 @@ window.EventApp = Backbone.View.extend({
     },
 
     realignAdorners: function(){
-        if (this.TopChoicesModel.has("one")){
-            this.TopChoicesModel.get("one").trigger("repositioned");
+        if (this.topChoicesModel.has("one")){
+            this.topChoicesModel.get("one").trigger("repositioned");
         }
 
-        if (this.TopChoicesModel.has("two")){
-            this.TopChoicesModel.get("two").trigger("repositioned");
+        if (this.topChoicesModel.has("two")){
+            this.topChoicesModel.get("two").trigger("repositioned");
         }
 
-        if (this.TopChoicesModel.has("three")){
-            this.TopChoicesModel.get("three").trigger("repositioned");
+        if (this.topChoicesModel.has("three")){
+            this.topChoicesModel.get("three").trigger("repositioned");
         }
     },
 
@@ -176,13 +214,16 @@ window.EventApp = Backbone.View.extend({
         var height = $(window).height();
 
         if (height <= 350){
-            this.showHeader(false);
-            this.AttendeesView.show();
+            if (!this.showInfo){
+                this.showHeader(false);
+                this.AttendeesView.show();
+            }
         } else {
             this.showHeader(true);
         }
 
         this.titleResize();
+        this.availMarkersResize();
     },
 
     instantResize: function(){
@@ -210,6 +251,26 @@ window.EventApp = Backbone.View.extend({
         if (titleEl.height() > 42 && fontSize <= minFontSize){
             titleEl.css({'line-height': '16px'});
         }
+    },
+
+    availMarkersResize: function(){
+        var maxFontSize = 95;
+        var minFontSize = 55;
+
+        var fontSize = maxFontSize;
+
+        var firstMarkerEl = $('.markers-container').first();
+
+        firstMarkerEl.css({'font-size': fontSize + "%"});
+
+        while (firstMarkerEl.height() > firstMarkerEl.find('span').first().height() + 4 && fontSize > minFontSize)
+        {
+            fontSize -= 10;
+
+            firstMarkerEl.css({'font-size': fontSize + "%"});
+        }
+
+        $('.markers-container').css({'font-size': fontSize + "%"});
     },
 
     checkOrientation: function(){
@@ -323,73 +384,7 @@ window.EventApp = Backbone.View.extend({
     },
 
     showBestChoices: function(){
-        var that = this;
-        var bestModel = null;
-        var bestCount = 0;
-
-        var secondBestModel = null;
-        var secondBestCount = 0;
-
-        var thirdBestModel = null;
-        var thirdBestCount = 0;
-
-        var modelsWithTopChoice = [];
-
-        _.each(this.choices.models, function(model){
-            var freeCount = 0;
-            
-            if (model.isSelectable() && model.has('date') && model.get('date') >= that.today){
-                if (model.has('free')){
-                    freeCount += model.get('free').length;
-                }
-                
-                freeCount += (model.pretendFree ? 1 : 0);
-
-                if (freeCount > bestCount){
-                    thirdBestCount = secondBestCount;
-                    thirdBestModel = secondBestModel;
-
-                    secondBestCount = bestCount;
-                    secondBestModel = bestModel;
-
-                    bestCount = freeCount;
-                    bestModel = model;
-                } else if (freeCount > secondBestCount){
-                    thirdBestCount = secondBestCount;
-                    thirdBestModel = secondBestModel;
-
-                    secondBestCount = freeCount;
-                    secondBestModel = model;
-                } else if (freeCount > thirdBestCount){
-                    thirdBestCount = freeCount;
-                    thirdBestModel = model;
-                }
-
-                if (model.has('top-choice')){
-                    modelsWithTopChoice.push(model);
-                }
-            }
-        });
-
-        if (bestModel !== null){
-            bestModel.setTopChoice(1);
-        }
-
-        if (secondBestModel !== null){
-            secondBestModel.setTopChoice(2);
-        }
-
-        if (thirdBestModel !== null){
-            thirdBestModel.setTopChoice(3);
-        }
-
-        _.each(modelsWithTopChoice, function(model){
-            if (model !== bestModel && model !== secondBestModel && model !== thirdBestModel){
-                model.unset('top-choice');
-            }
-        });
-
-        this.TopChoicesModel.set({'one': bestModel, 'two': secondBestModel, 'three': thirdBestModel});
+        this.topChoicesModel.updateTopChoice();
     },
 
     recalcTopSpacer: function(){
@@ -397,12 +392,15 @@ window.EventApp = Backbone.View.extend({
             var topNavBarHeight = this.$el.find(".navbar-fixed-top").height() + this.$el.find(".days-table-container").height();
 
             this.$el.find(".event-container").css({'padding-top': topNavBarHeight});
+            this.$el.find(".event-settings").css({'padding-top': topNavBarHeight});
 
             this.$el.find(".selecting-dates-container").css("top", topNavBarHeight);
             this.$el.find(".selecting-dates-saving-container").css("top", topNavBarHeight);
             this.$el.find(".days-table-container").css("top", this.$el.find(".navbar-fixed-top").height());
         } else {
             this.$el.find(".event-container").css({'padding-top': 0});
+            this.$el.find(".event-settings").css({'padding-top': 0});
+
             this.$el.find(".selecting-dates-container").css("top", 0);
             this.$el.find(".selecting-dates-saving-container").css("top", 0);
             this.$el.find(".days-table-container").css("top", topNavBarHeight);
@@ -486,18 +484,19 @@ window.EventApp = Backbone.View.extend({
     },
 
     showLoader: function(){
-        this.LoaderView.autoClose = false;
         this.LoaderView.show();
     },
 
     onClick: function(event){
         var target = $(event.target);
 
-        if (target.parents('.attendees-container').length === 0 &&
+        if (target.parents('.navbar').length === 0 &&
+            target.parents('.attendees-container').length === 0 &&
             (target.parents('.date-cell').length === 0 ||
             target.parents('.date-cell').hasClass('unselectable')) &&
             target.parents('.loader').length === 0){
-            this.AttendeesView.onClose();
+            this.setSelected(null);
+            this.AttendeesView.hide();
         }
     },
 

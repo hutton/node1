@@ -1,14 +1,34 @@
-- Add description
-- Section off header buttons
-- Users popup
-- Move change dates to header button
-- Better 404
+
+- Show buttons on focus, hide on blur plue not changed
+- Edit your own name
+
+- Tidy media queries
+
 - Cleanup CSS
 
 =======
 
 Done
 ----
+- Update help
+- Save and restore scroll position on switch to details
+- Check size of dots in mobile resolution for small number
+- Add margin around small dots
+	.markers-container span -> margin: 0px -1px 0px 0px;
+- Make attendee user icons bigger and responsive based on available space
+- Make header bar higher (~54px) and responsive
+- Hover over on header buttons
+- Remove old settings
+- Find better place for invite banner
+- Help and home links
+- Remove attendees
+- Section off header buttons
+- Read only in new mode
+- .event-settings-container remove position: fixed.
+- Remove divider lines
+- Label 0.4, text 0.6
+- Add description
+- Better 404
 - Make month names smaller
 - Thin out free marker
 - Toady rgba(0,0,0,0.025)

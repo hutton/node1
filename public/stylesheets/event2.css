@@ -1461,6 +1461,21 @@ a:active {
 .faded {
   opacity: 0.0;
 }
+*::-webkit-input-placeholder {
+  color: #e0e0e0;
+}
+*:-moz-placeholder {
+  /* FF 4-18 */
+  color: #e0e0e0;
+}
+*::-moz-placeholder {
+  /* FF 19+ */
+  color: #e0e0e0;
+}
+*:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #e0e0e0;
+}
 @media screen and (min-width: 768px) {
   .inline-text-desktop {
     display: inline-block;
@@ -1644,50 +1659,10 @@ a:active {
   top: -25px;
 }
 /**********************************************************************************/
-#settings-view {
-  text-align: left;
-}
 .modal-title {
   text-align: center;
   color: #4ad16c;
   margin-left: 20px;
-}
-#settings-view > div {
-  font-size: 14px;
-  line-height: 1.6em;
-  max-width: 400px;
-}
-#settings-view h2 {
-  font-size: 14px;
-  color: #000000;
-  line-height: 1.3em;
-  padding: 8px 0px 2px 0px;
-  margin: 0px;
-  font-weight: bold;
-}
-#settings-view .btn {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-.settings-section {
-  margin: 0px 0px 20px 0px;
-}
-.settings-section span {
-  cursor: pointer;
-}
-.settings-section .fa {
-  margin-right: 5px;
-}
-.settings-section i {
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transform-duration: 0.2s;
-  -ms-transform-duration: 0.2s;
-  transition-duration: 0.2s;
-}
-#settings-home {
-  margin-right: 30px;
 }
 .table td {
   padding: 8px 0px;
@@ -1704,6 +1679,25 @@ a:active {
 }
 .scrollable {
   height: 100%;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transform-duration: 0.4s;
+  -ms-transform-duration: 0.4s;
+  transition-duration: 0.4s;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  opacity: 1.0;
+}
+.scrollable-hidden {
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  opacity: 0.0;
 }
 .event-container-margin {
   margin-left: 16px;
@@ -1726,6 +1720,7 @@ a:active {
   background: #4ad16c;
   border-bottom: solid 1px #43B660;
   color: white;
+  min-height: 50px;
 }
 .navbar-fixed-top a {
   color: white;
@@ -1741,28 +1736,28 @@ a:active {
   overflow: visible;
 }
 .title-button {
-  padding: 4px 10px 10px 10px;
+  width: 50px;
+  height: 50px;
 }
 .title-button-right {
-  padding: 4px 10px 10px 10px;
+  width: 50px;
+  height: 50px;
+  padding: 7px 10px 10px 10px;
   float: right;
-}
-#show-info > span {
-  -moz-transition-duration: 0.2s;
-  -webkit-transition-duration: 0.2s;
-  -o-transform-duration: 0.2s;
-  -ms-transform-duration: 0.2s;
-  transition-duration: 0.2s;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
 }
 .title-mail-button {
   position: absolute;
   float: left;
-  transition: all 0.4s ease-in-out;
+  background: rgba(0, 0, 0, 0.05);
 }
 .title-mail-button button {
   font-size: 21px;
   color: white;
   padding: 4px 10px 10px 10px;
+  width: 50px;
+  height: 50px;
 }
 .title-mail-button.btn-group.open .dropdown-toggle.btn-link {
   color: white;
@@ -1779,10 +1774,10 @@ a:active {
 }
 .title {
   text-align: center;
-  padding-top: 6px;
+  padding-top: 9px;
   padding-bottom: 6px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;
@@ -2053,6 +2048,7 @@ a:active {
 }
 .today .date-cell-container {
   background: rgba(0, 0, 0, 0.025);
+  border: solid 1px #d8d8d8;
 }
 /**************************************/
 .register-attendee-message {
@@ -2530,7 +2526,7 @@ a:active {
 .new-mode-start-join {
   color: white;
   background: #4ad16c;
-  padding: 2px 8px;
+  padding: 2px 12px;
 }
 /********* Start select dates *******/
 #new-mode-start-select-dates-view .modal-title {
@@ -2538,6 +2534,159 @@ a:active {
 }
 .start-select-dates-option {
   margin: 0px 6px;
+}
+/********* Event settings **********************/
+.event-settings-container {
+  width: 100%;
+  top: 0px;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transform-duration: 0.4s;
+  -ms-transform-duration: 0.4s;
+  transition-duration: 0.4s;
+  opacity: 1.0;
+}
+.event-settings-container-hidden {
+  opacity: 0.0;
+}
+.event-settings {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+}
+.event-settings .span-link {
+  font-size: 70%;
+}
+.settings-need-help-container {
+  float: right;
+  font-size: 70%;
+}
+.event-settings-section {
+  min-height: 100px;
+}
+.event-settings-content {
+  margin: 0px 10px 100px 10px;
+}
+.settings-label {
+  font-size: 80%;
+  color: rgba(0, 0, 0, 0.4);
+}
+.settings-textarea {
+  width: 100%;
+  border: none;
+  padding: 0px;
+  margin-left: -2px;
+  resize: none;
+  color: rgba(0, 0, 0, 0.6);
+  outline: none;
+}
+.event-settings-container .panel {
+  font-size: 70%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.event-settings-container .panel-heading {
+  color: rgba(0, 0, 0, 0.6);
+}
+.event-settings-text {
+  color: rgba(0, 0, 0, 0.6);
+}
+.event-settings-divider {
+  width: 100px;
+  height: 10px;
+}
+.settings-button-container {
+  text-align: right;
+}
+.settings-button {
+  min-width: 120px;
+  border: 2px solid #4ad16c;
+  padding: 2px 30px;
+  background: white;
+  color: #4ad16c;
+  opacity: 1.0;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.settings-button-cancel {
+  min-width: 120px;
+  border: 2px solid #4ad16c;
+  padding: 2px 30px;
+  background: white;
+  color: #4ad16c;
+  opacity: 1.0;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.4);
+}
+.settings-button-delete {
+  min-width: 120px;
+  border: 2px solid #4ad16c;
+  padding: 2px 30px;
+  background: white;
+  color: #4ad16c;
+  opacity: 1.0;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transform-duration: 0.2s;
+  -ms-transform-duration: 0.2s;
+  transition-duration: 0.2s;
+  border: 2px solid red;
+  color: red;
+}
+.settings-button:hover {
+  color: white;
+  background: #4ad16c;
+  border: 2px solid #4ad16c;
+}
+.settings-button-cancel:hover {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+.settings-button-delete:hover {
+  border: 2px solid red;
+  background: red;
+  color: white;
+}
+.settings-button-hidden {
+  opacity: 0.0;
+}
+#settings-between-change {
+  float: right;
+}
+.settings-attendee {
+  margin: 10px 0px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.settings-attendee-email {
+  font-size: 80%;
+  color: rgba(0, 0, 0, 0.4);
+}
+.settings-attendee-buttons {
+  text-align: right;
+}
+.settings-attendee-remove {
+  float: right;
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 0.5;
+  padding: 0px 10px 5px 10px;
+  -moz-transition-duration: 0.2;
+  -webkit-transition-duration: 0.2;
+  -o-transform-duration: 0.2;
+  -ms-transform-duration: 0.2;
+  transition-duration: 0.2;
+}
+.settings-attendee-remove:hover {
+  opacity: 1.0;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 /********* Media rules ******************************/
 @media screen and (min-width: 700px) and (max-width: 800px) {
@@ -2642,6 +2791,14 @@ a:active {
   }
 }
 /************************/
+@media screen and (min-width: 800px) {
+  .title-button-right:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+  .title-mail-button:hover {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
 @media screen and (min-width: 450px) {
   .event-table tr > td.date-cell {
     font-size: 100%;
@@ -2656,9 +2813,12 @@ a:active {
     top: 0px;
     right: 14px;
   }
+  .markers-container {
+    margin-top: 4px;
+    line-height: 1.4em;
+  }
   .markers-container span {
     margin: 0px -1px -2px 0px;
-    font-size: 60%;
   }
   .markers-container span:before {
     content: "\f007";
@@ -2687,9 +2847,12 @@ a:active {
     margin-left: 2px;
     font-size: 100%;
   }
+  .markers-container {
+    margin-top: 1px;
+  }
   .markers-container span {
-    margin: 0px -2px 0px 0px;
-    font-size: 45%;
+    font-size: 80%;
+    margin: 0px -1px 0px 0px;
   }
   .markers-container span:before {
     content: "\f111";

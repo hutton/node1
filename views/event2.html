@@ -38,11 +38,8 @@
               <li><a id="title-mail">Email all participants <i class="fa fa-chevron-right"></i></a></li>
             </ul>
           </div>
-
-          
           <div class="title-button-container">
-            <a class="title-button-right" id="show-info" style="display: none;" ><i class="fa fa-bars"></i></a>
-            <a class="title-button-right" id="title-button-help" href="/help"><i class="fa fa-question-circle"></i></a>
+            <a class="title-button-right" id="show-info"><i class="fa fa-bars"></i><i style="display: none;" class="fa fa-calendar"></i></a>
           </div>
           <div class="title"><%= name %></div>
         </div>
@@ -135,6 +132,55 @@
       <div class="day-view-container">
       </div>
 
+      <div class="event-settings-container">
+        <div class="row event-settings">
+          <div class="event-settings-content">
+            <div class="event-settings-section">
+              <div class="settings-need-help-container"><a href="/help">Need help?</a></div>
+              <div class="settings-label">Description</div>
+              <textarea id="settings-description" class="settings-textarea" placeholder="What's happening?"></textarea>
+              <div class="settings-button-container">
+                <button id="settings-description-cancel" type="button" class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
+                <button id="settings-description-save" type="button" class="btn btn-default settings-button settings-button-hidden">Save</button>
+              </div>
+            </div>
+            <div class="event-settings-divider"></div>
+            <div class="event-settings-section">
+              <div class="settings-label">Venue</div>
+              <textarea id="settings-venue" class="settings-textarea" placeholder="Where is it happening?"></textarea>
+              <div class="settings-button-container">
+                <button id="settings-venue-cancel" type="button" class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
+                <button id="settings-venue-save" type="button" class="btn btn-default settings-button settings-button-hidden">Save</button>
+              </div>
+            </div>
+            <div class="event-settings-divider"></div>
+            <div class="event-settings-section">
+              <div class="settings-label">Sometime between</div>
+              <span id="event-settings-between-text" class="event-settings-text"></span>
+                <span id="settings-between-change" class="span-link">Change <i class="fa fa-chevron-right"></i></span>
+            </div>
+            <div class="event-settings-divider"></div>
+            <div class="event-settings-section">
+              <div class="settings-label">Invitees</div>
+                   <div id="settings-attendee-list">
+
+              </div>
+              <div id="event-settings-invite-panel" class="panel panel-default">
+                <div class="panel-heading">Invite people</div>
+                <div class="panel-body">
+                  <p>
+                  Share the link below with anyone you want to invite or just <a href="<%= inviteEmailLink %>">click here <span class="fa fa-chevron-right"></span></a>.
+                  </p>
+                  <p>
+                  http://convenely.com/event/<%= calendarId %>
+                  </p>
+                </div>
+              </div>
+       </div>
+          </div>
+        </div>
+      </div>
+
       <div class="join-event-container">
         <div class="join-event join-event-hidden">
             Join event <i class="fa fa-chevron-right"></i>
@@ -149,49 +195,6 @@
         <div class="loader-close loader-close-hidden">Skip <i class="fa fa-chevron-right"></i></div>
         </div>
       </div>
-
-    <div class="modal fade" id="settings-view">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title"><i class="fa fa-bars"></i> Options</h4>
-          </div>
-          <div class="modal-body">
-        <div>
-          <div class="current-attendee-info">
-            <div class="settings-section">
-              <span class="link" id="settings-your-details"><i class="fa fa-user"></i> Your details <i class="fa fa-chevron-right"></i></span>
-              <div class="settings-your-details-section" style="display: none;">
-                <h2>Name</h2>
-                <form id="update-name-form" method="post">
-                  <div>
-                    <input type="text" placeholder="Your name" class="form-control" id="current-name" name="name"></input>
-                    <input type="hidden" id="current-name-id" name="_id"/></input>
-                    <button type="submit" id="current-name-update">
-                      <span class="span-link">Update <i class="fa fa-chevron-right"></i></span>
-                    </button>
-                  </div>
-                </form>
-                <h2>Email</h2>
-                <div class="current-email"></div>
-              </div>
-            </div>
-          </div>
-          <div class="settings-section">
-            <a class="link" href="<%= inviteEmailLink %>" id="add-attendee"><i class="fa fa-plus-circle"></i> Invite someone <i class="fa fa-chevron-right"></i></a>
-          </div>
-          <div class="settings-section">
-            <span class="link" id="settings-update-dates"><i class="fa fa-calendar"></i> Change available dates <i class="fa fa-chevron-right"></i></span>
-          </div>
-          <div class="settings-section center">
-            <a class="link" id="settings-home" href="/"><i class="fa fa-home"></i> Home</a><a class="link" href="/help"><i class="fa fa-question-circle"></i> Help</a>
-          </div>
-        </div>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
     <div class="modal fade" id="join-view">
       <div class="modal-dialog">
@@ -268,7 +271,8 @@
             <h4 class="modal-title">You're almost done!</h4>
           </div>
           <div class="modal-body">
-              <p>Just select the dates you're free and click <i class="fa fa-envelope-o"></i> above to invite others to the event.</p>
+              <p>Just select the dates you're free and <span class="inline-text-desktop">click</span><span class="inline-text-mobile">tap</span> <i class="fa fa-envelope-o"></i> above to invite others to the event.</p>
+              <p>Set a description and venue for your event in the settings page <i class="fa fa-bars"></i>.</p>
         </div>
           </div>
         </div><!-- /.modal-content -->
@@ -384,6 +388,18 @@
           </div>
         </script>
 
+        <script type="text/template" id="settings-attendee-view-template">
+          <div class="settings-attendee">
+            <span class="settings-attendee-remove"><i class="fa fa-times"></i></span>
+            <div><@= name @></div>
+            <div class="settings-attendee-email"><@= email @></div>
+            <div class="settings-attendee-buttons" style="display: none;">
+                <button type="button"  class="btn btn-default settings-button-cancel settings-button-hidden">Cancel</button>
+                <button type="button" class="btn btn-default settings-button-delete settings-button-hidden">Remove</button>
+            </div>
+          </div>
+        </script>
+
         <script type="text/template" id="attendees-choice-view-template">
         <div class="attendees-choice">
           <div class="attendees-choice-container">
@@ -392,7 +408,7 @@
             <div class="attendees-choice-container-scrollable">
               <div class="attendees-choice-items">
           <@ _.each(attendees, function(attendee){ @>
-              <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("_id"))) { @>attendee-free<@ } @>">
+              <div class="att-ch <@ if (choice.isAttendeeFree(attendee.get("id"))) { @>attendee-free<@ } @>">
                 <i class="fa fa-user"></i> <@= attendee.get('prettyName') @>
               </div>
           <@ }); @>
@@ -502,18 +518,19 @@
                 <div>Look good too</div>
             </div>
             <@ } @>
-            <div class="loader-set-choices">When are you free?</div> <!-- ' -->
+            <div class="loader-set-choices">When are you free?</div> 
             <div class="loader-invite">
             <p>
             There's not many people participating
-            </p>
+            </p><!-- ' -->
             <a href="<%= inviteEmailLink %>">Invite someone <i class="fa fa-chevron-right"></i></a>
-            </div> <!-- ' -->
+            </div>
         </script>
 
         <% if (webAppDebug) { %>
         <script src="/javascripts/tp/jquery-2.0.3.min.js"></script>
         <script src="/javascripts/tp/jquery.velocity.min.js"></script>
+        <script src="/javascripts/tp/jquery.elastic.source.js"></script>
         <script src="/javascripts/tp/tp.helper.js"></script>
         <script src="/javascripts/bootstrap/bootstrap.min.js"></script>
 
@@ -529,16 +546,21 @@
         <script src="/javascripts/models/choice-model.js"></script>
         <script src="/javascripts/models/choices-model.js"></script>
         <script src="/javascripts/models/calendar-model.js"></script>
+        <script src="/javascripts/models/attendee-model.js"></script>
+        <script src="/javascripts/models/top-choice-model.js"></script>
 
         <script src="/javascripts/views/loader-view.js"></script>
 
         <script src="/javascripts/views/choices-view.js"></script>
         <script src="/javascripts/views/attendees-view.js"></script>
-        <script src="/javascripts/views/settings-view.js"></script>
         <script src="/javascripts/views/select-dates-view.js"></script>
         <script src="/javascripts/views/start-select-dates-view.js"></script>
+        <script src="/javascripts/views/event-settings-attendee-view.js"></script>
+        <script src="/javascripts/views/event-settings-view.js"></script>
 
         <script src="/javascripts/event-app.js"></script>
+
+        <script src="/javascripts/router.js"></script>
         <% } else { %>
         <script src="/javascripts/all-ck.js"></script>
         <% } %>
@@ -550,6 +572,10 @@
           window.App = new EventApp();
 
           window.App.loadBootstrapData(<%= choices %>, <%= attendees %>, <%= calendar %>);
+
+          window.App.Routes = new Workspace();
+
+          Backbone.history.start({pushState: true});
         });
 
         </script>

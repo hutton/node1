@@ -431,6 +431,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/javascripts\/models\/attendee-model.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/models\/attendee-model.js",
+		"outputAbbreviatedPath": "\/javascripts\/models\/attendee-model-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/javascripts\/models\/calendar-model.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -464,12 +475,56 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/javascripts\/models\/top-choice-model.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/models\/top-choice-model.js",
+		"outputAbbreviatedPath": "\/javascripts\/models\/top-choice-model-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
+	"\/javascripts\/router-ck.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/router-ck.js",
+		"outputAbbreviatedPath": "\/javascripts\/router-ck-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
+	"\/javascripts\/router.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/router.js",
+		"outputAbbreviatedPath": "\/javascripts\/router-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/javascripts\/tp\/backbone-min.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/javascripts\/tp\/backbone-min.js",
 		"outputAbbreviatedPath": "\/javascripts\/tp\/backbone-min-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
+	"\/javascripts\/tp\/backbone.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/tp\/backbone.js",
+		"outputAbbreviatedPath": "\/javascripts\/tp\/backbone-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -503,6 +558,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/javascripts\/tp\/jquery-2.0.3.min.js",
 		"outputAbbreviatedPath": "\/javascripts\/tp\/jquery-2.0.3.min-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
+	"\/javascripts\/tp\/jquery.elastic.source.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/tp\/jquery.elastic.source.js",
+		"outputAbbreviatedPath": "\/javascripts\/tp\/jquery.elastic.source-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -585,6 +651,28 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/javascripts\/views\/event-settings-attendee-view.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/views\/event-settings-attendee-view.js",
+		"outputAbbreviatedPath": "\/javascripts\/views\/event-settings-attendee-view-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
+	"\/javascripts\/views\/event-settings-view.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/javascripts\/views\/event-settings-view.js",
+		"outputAbbreviatedPath": "\/javascripts\/views\/event-settings-view-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 0
+		},
 	"\/javascripts\/views\/loader-view.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -602,17 +690,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/javascripts\/views\/select-dates-view.js",
 		"outputAbbreviatedPath": "\/javascripts\/views\/select-dates-view-ck.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 0
-		},
-	"\/javascripts\/views\/settings-view.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/javascripts\/views\/settings-view.js",
-		"outputAbbreviatedPath": "\/javascripts\/views\/settings-view-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

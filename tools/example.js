@@ -156,6 +156,8 @@ function getExample(){
 		"calendarId" : "example",
 		"id" : "office-drinks",
 		"name" : "Office drinks",
+		"description": "It's been a while, time for some team bonding!",
+		"venue": "Sports bar just across the road",
 		"datesSelected": true,
 		"everythingSelectable": false,
 		"date" : new Date(moment()),

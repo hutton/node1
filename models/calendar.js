@@ -17,6 +17,14 @@ var CalendarSchema = new mongoose.Schema({
 		type: String,
 		index: true
 	},
+	description: {
+		type: String,
+		default: ""
+	},
+	venue: {
+		type: String,
+		default: ""
+	},
 	choices: [{
 		date: Date,
 		selectable: {type: Boolean, default: true},
@@ -525,6 +533,22 @@ CalendarSchema.methods.setSelectableDates = function(dates){
 	});
 };
 
+CalendarSchema.methods.setDetails = function(description, venue){
+	var calendar = this;
+
+	calendar.description = description;
+	calendar.venue = venue;
+
+	calendar.save(function(err, calendar){
+		if (err){
+			logger.error("Failed to save calendar details: " + err);
+		} else {
+			logger.info("Details saved for for calendar " + calendar.name + "(" + calendar.id + ").");
+		}
+	});
+};
+
+
 function findNewAttendeeId(calendar){
 	var matches = true;
 	var tryId;
@@ -559,6 +583,8 @@ CalendarSchema.methods.addAttendee = function(address, fromName, name, savedCall
 			logger.error("Failed to add attendee calendar: " + err);
 		} else {
 			logger.info("Attendee added to calendar " + calendar.name + "(" + calendar.id + ") saved.");
+
+			Mail.sendTextMail(global.app.ourEmail, global.app.ourEmail ,"Attendee added: " + calendar.name, "Attendee added to http://convenely.com/event/" + calendar.calendarId);
 		}
 
 		savedCallback();
@@ -608,6 +634,16 @@ CalendarSchema.methods.removeAttendee = function(attendee){
 			logger.info("Removed '" + attendee.email + "'' Calendar " + calendar.name + "(" + calendar.id + ") saved.");
 		}
 	});
+};
+
+CalendarSchema.methods.findAttendee = function(attendeeId){
+	var calendar = this;
+
+	var attendee = _.find(calendar.attendees, function(attendee){
+		return attendee._id.equals(attendeeId);
+	});
+
+	return attendee;
 };
 
 function removeAttendeeAvailabiltyFromCalendar(calendar, attendee){

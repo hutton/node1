@@ -1,6 +1,8 @@
 window.LoaderView = Backbone.View.extend({
 	initialize: function(){
 		_.bindAll(this);
+
+		this.inner = this.$el.find('.loader-inner');
 	},
 
 	template: _.template($('#loader-template').html()),
@@ -136,6 +138,8 @@ window.LoaderView = Backbone.View.extend({
 				}
 
 			}, this.currentAnimateDelay + 1500);
+
+			this.autoClose = false;
 		}
 	},
 

@@ -8,6 +8,7 @@ window.ChoiceView = Backbone.View.extend({
 		this.listenTo(this.model, "ensureVisible", this.ensureVisible);
 		this.listenTo(this.model, "scrollToTopLine", this.scrollToTopLine);
 		this.listenTo(this.model, "repositionSelected", this.repositionSelected);
+		this.listenTo(this.model, "reset", this.render);
 	},
 
 	template: _.template($('#choice-template').html()),
@@ -162,6 +163,8 @@ window.ChoiceView = Backbone.View.extend({
 		var offset = this.$el.offset();
 		var itemHeight = $('.date-cell').first().height();
 
+		//window.scrollTo(0,offset);
+
 		this.$el.velocity("scroll", {duration: 400, offset: -(navBarHeight + itemHeight)});
 	},
 
@@ -222,7 +225,7 @@ window.ChoicesView = Backbone.View.extend({
 		});
 	},
 
-	el: $(".event-container-margin"),
+	el: $(".scrollable"),
 
 	selectedMarkerEl: $(".calendar-selected-item"),
 	
@@ -241,6 +244,8 @@ window.ChoicesView = Backbone.View.extend({
 
 		var row = null;
 		var todayAdded = false;
+
+		var todayView = null;
 
 		_(this._choiceViews).each(function(choice) {
 			var date = choice.model.get("date");
@@ -266,17 +271,46 @@ window.ChoicesView = Backbone.View.extend({
 			if (!todayAdded && sameDay(that.today, date)){
 				choice.$el.addClass('today');
 
+				todayView = choice;
+
 				todayAdded = true;
 			}
 		});
 
 		this.tableEl.append($("<tr class='selected-row'><td colspan='7' width='7'></td></tr>"));
 
-		if (this.tableEl.find(".today").length > 0){
-			this.tableEl.find(".today")[0].scrollIntoView(true);
-		}
+		todayView.scrollToTopLine();
 
 		return this;
+	},
+
+	showing: false,
+
+	show: function(){
+		this.$el.show();
+
+		this.$el.removeClass('scrollable-hidden');
+
+		this.showing = true;
+
+		$(".days-table-container").show();
+		this.resize();
+	},
+
+	hide: function(){
+		var that = this;
+
+		$(".days-table-container").hide();
+		
+		this.$el.addClass('scrollable-hidden');
+
+		_.delay(function(){
+			if (!that.showing){
+				that.$el.hide();
+			}
+		}, 400);
+
+		this.showing = false;
 	},
 
 	updateLastSelectableRow: function(){
@@ -298,6 +332,10 @@ window.ChoicesView = Backbone.View.extend({
 	},
 
 	resize: function(){
+		if (!this.showing || App.showInfo){
+			return;
+		}
+
 		var windowHeight = $(window).height();
 
 		if (windowHeight > 350){
@@ -320,11 +358,11 @@ window.ChoicesView = Backbone.View.extend({
 
 			// var topChoiceSize = size - 2;
 
-	        this.$el.find(".calendar-selected-item").width(size).height(height);
+			this.$el.find(".calendar-selected-item").width(size).height(height);
 
-	        if (App.selectedModel !== null){
-	            App.selectedModel.trigger('repositionSelected');
-	        }
+			if (App.selectedModel !== null){
+				App.selectedModel.trigger('repositionSelected');
+			}
 
 			App.realignAdorners();
 		} else {

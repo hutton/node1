@@ -80,7 +80,7 @@ function showEvent(req, res, calendar, attendeeId){
 
 	_.each(calendar.attendees, function(att){
 		cleanedAttendees.push({
-			_id: att._id,
+			id: att._id,
 			prettyName: att.name || att.email,
 			me: att._id == attendeeId,
 			email: att.email
@@ -90,6 +90,9 @@ function showEvent(req, res, calendar, attendeeId){
 	var cleanedCalendar = {
 		name: calendar.name,
 		id: calendar.id,
+		calendarId: calendar.calendarId,
+		description: calendar.description,
+		venue: calendar.venue,
 		datesSelected: calendar.datesSelected,
 		everythingSelectable: calendar.everythingSelectable
 	};
@@ -108,6 +111,7 @@ function showEvent(req, res, calendar, attendeeId){
 			choices: JSON.stringify(sortedChoices),
 			attendees: JSON.stringify(cleanedAttendees),
 			calendar: JSON.stringify(cleanedCalendar),
+			calendarId: calendar.calendarId,
 			id: calendar.id,
 			name: calendar.name,
 			inviteEmailLink: inviteEmailLink
@@ -118,18 +122,20 @@ function showEvent(req, res, calendar, attendeeId){
 }
 
 function renderEvent(req, res){
-	if (req.route.params[0].length == 9 || req.route.params[0].length == 5){
-		logger.info("Looking for event: " + req.route.params[0]);
+	var id = req.route.params[0].split("/")[0];
 
-		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+	if (id.length == 9 || id.length == 5){
+		logger.info("Looking for event: " + id);
+
+		Calendar.findCalendarByAttendeeId(id, function(err, calendar, attendee){
 			if (err){
-				logger.error("Error finding calendar with attendee " + req.route.params[0]);
+				logger.error("Error finding calendar with attendee " + id);
 				logger.error("Error:" + err);
 
 				res.status(404);
 				res.send('No calendar');
 			} else if (!calendar){
-				logger.error("Could not find calendar with attendee " + req.route.params[0]);
+				logger.error("Could not find calendar with attendee " + id);
 
 				res.status(404);
 				res.send('No calendar');
@@ -137,18 +143,18 @@ function renderEvent(req, res){
 				showEvent(req, res, calendar, attendee._id);
 			}
 		});
-	} else if (req.route.params[0].length == 6){
-		logger.info("Looking for event: " + req.route.params[0]);
+	} else if (id.length == 6){
+		logger.info("Looking for event: " + id);
 
-		Calendar.findCalendarByCalendarId(req.route.params[0], function(err, calendar){
+		Calendar.findCalendarByCalendarId(id, function(err, calendar){
 			if (err){
-				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error finding calendar with id " + id);
 				logger.error("Error:" + err);
 
 				res.status(404);
 				res.send('No calendar');
 			} else if (!calendar){
-				logger.error("Could not find calendar with id " + req.route.params[0]);
+				logger.error("Could not find calendar with id " + id);
 
 				res.status(404);
 				res.send('No calendar');
@@ -157,6 +163,8 @@ function renderEvent(req, res){
 			}
 		});
 	} else {
+		logger.error("Could not find calendar with id " + id);
+
 		res.status(404);
 		res.render('404-calendar.html');
 	}
@@ -182,6 +190,31 @@ function updateSelectableDates(req, res){
 				var selectableChoices = JSON.parse(req.body.dates);
 
 				calendar.setSelectableDates(selectableChoices);
+
+				res.send(200);
+			}
+		});
+	}	
+}
+
+function updateDetails(req, res){
+	if (req.route.params[0] == "example"){
+		res.send(200);		
+	} else {
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar with id " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+				res.send('No calendar');
+			} else if (!calendar){
+				logger.error("Could not find calendar with id " + req.route.params[0]);
+
+				res.status(404);
+				res.send('No calendar');
+			} else {
+				calendar.setDetails(req.body.description, req.body.venue);
 
 				res.send(200);
 			}
@@ -331,6 +364,39 @@ function updateAttendeeName(req, res){
 	}
 }
 
+function removeAttendee(req, res){
+	console.log(req.route.params);
+
+	if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
+		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
+			if (err){
+				logger.error("Error finding calendar " + req.route.params[0]);
+				logger.error("Error:" + err);
+
+				res.status(404);
+			} else if (!calendar){
+				logger.error("Could not find calendar " + req.route.params[0]);
+
+				res.status(404);
+			} else {
+				var attendeeToRemove = calendar.findAttendee(req.route.params[1]);
+
+				if (attendeeToRemove != null){
+					calendar.removeAttendee(attendeeToRemove);
+
+					logger.info("Calendar '" + calendar.name + "' removed attendee '" + attendeeToRemove.email + "'");
+				} else {
+					logger.error("Could not find attendeeId: " + req.route.params[1] + " in calendarId: " + calendar.calendarId);
+				}
+
+				res.send(200);		
+			}
+		});
+	} else if (req.route.params[0] == "example"){
+		res.send(200);		
+	}
+}
+
 exports.example = function(req, res){
 	example(req, res);
 };
@@ -358,5 +424,14 @@ exports.updateAttendeeName = function(req, res){
 exports.updateSelectableDates = function(req, res){
 	updateSelectableDates(req, res);
 };
+
+exports.updateDetails = function(req, res){
+	updateDetails(req, res);
+};
+
+exports.removeAttendee  = function(req, res){
+	removeAttendee(req, res);
+};
+
 
 

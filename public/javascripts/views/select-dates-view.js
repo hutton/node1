@@ -24,7 +24,7 @@ window.SelectDatesView = Backbone.View.extend({
 
 		this.$el.slideDown('fast');
 
-		this.originalSelectableChoices = this.collection.where({selectable: true});	
+		this.originalSelectableChoices = this.collection.where({selectable: true});
 	},
 
 	hide: function(){

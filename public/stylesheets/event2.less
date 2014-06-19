@@ -158,6 +158,22 @@ a:active{
 	opacity: 0.0;
 }
 
+*::-webkit-input-placeholder {
+    color: #e0e0e0;
+}
+*:-moz-placeholder {
+    /* FF 4-18 */
+    color: #e0e0e0;
+}
+*::-moz-placeholder {
+    /* FF 19+ */
+    color: #e0e0e0;
+}
+*:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #e0e0e0;
+}
+
 @media screen and (min-width: 768px){
 	.inline-text-desktop{
 		display: inline-block;
@@ -371,56 +387,10 @@ a:active{
 
 /**********************************************************************************/
 
-#settings-view{
-	text-align: left;
-}
-
 .modal-title{
 	text-align: center;
 	color: @free-color;
 	margin-left: 20px;
-}
-
-#settings-view > div{
-	font-size: 14px;
-
-	line-height: 1.6em;
-	max-width: 400px;
-}
-
-#settings-view h2{
-	font-size: 14px;
-	color: #000000;
-	line-height: 1.3em;
-	padding: 8px 0px 2px 0px;
-	margin: 0px;
-	font-weight: bold;
-}
-
-#settings-view .btn{
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-}
-
-.settings-section{
-	margin: 0px 0px 20px 0px;
-}
-
-.settings-section span{
-	cursor: pointer;
-}
-
-.settings-section .fa{
-	margin-right: 5px;
-}
-.settings-section i{
-
-	.transition-duration(0.2s);
-}
-
-#settings-home{
-	margin-right: 30px;
 }
 
 .table td{
@@ -441,6 +411,14 @@ a:active{
 
 .scrollable{
 	height: 100%;
+	.transition-duration(0.4s);
+	.scale(1.0);
+	opacity: 1.0;
+}
+
+.scrollable-hidden{
+	.scale(1.05);
+	opacity: 0.0;
 }
 
 .event-container-margin{
@@ -473,6 +451,7 @@ a:active{
 	background: @free-color;
 	border-bottom: solid 1px #43B660;
 	color: white;
+	min-height: 50px;
 }
 
 .navbar-fixed-top a{
@@ -492,30 +471,28 @@ a:active{
 }
 
 .title-button{
-	padding: 4px 10px 10px 10px;
+	width: 50px;
+	height: 50px;
 }
 
 .title-button-right{
 	.title-button;
+	padding: 7px 10px 10px 10px;
 	float: right;
-}
-
-#show-info{
-}
-
-#show-info > span{
-	.transition-duration(0.2s);
+	text-align: center;
+	background: rgba(0,0,0,0.05);
 }
 
 .title-mail-button{
 	position: absolute;
 	float: left;
-	transition: all 0.4s ease-in-out;
+	background: rgba(0,0,0,0.05);
 }
 
 .title-mail-button button{
 	font-size: 21px;
 	color: white;
+	padding: 4px 10px 10px 10px;
 	.title-button;
 }
 
@@ -533,10 +510,10 @@ a:active{
 
 .title{
 	text-align: center;
-	padding-top: 6px;
+	padding-top: 9px;
 	padding-bottom: 6px;
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 0px;
@@ -876,6 +853,7 @@ a:active{
 
 .today .date-cell-container{
 	background: rgba(0,0,0,0.025);
+	border: solid 1px @choice-border-color;
 }
 
 /**************************************/
@@ -1466,7 +1444,7 @@ a:active{
 .new-mode-start-join{
 	color: white;
 	background: @free-color;
-	padding: 2px 8px;
+	padding: 2px 12px;
 }
 
 /********* Start select dates *******/
@@ -1479,6 +1457,158 @@ a:active{
 	margin: 0px 6px;
 }
 
+/********* Event settings **********************/
+
+@label-color: rgba(0,0,0,0.4);
+@text-color: rgba(0,0,0,0.6);
+
+.event-settings-container{
+	width: 100%;
+	top: 0px;
+	.transition-duration(0.4s);
+	opacity: 1.0;
+}
+
+.event-settings-container-hidden{
+	opacity: 0.0;
+}
+
+.event-settings{
+	margin-left: auto;
+	margin-right: auto;
+
+	max-width: 800px;
+}
+
+.event-settings .span-link{
+	font-size: 70%;
+}
+
+.settings-need-help-container{
+	float: right;
+	font-size: 70%;
+}
+
+.event-settings-section{
+	min-height: 100px;
+}
+
+.event-settings-content{
+	margin: 0px 10px 100px 10px;
+}
+
+.settings-label{
+	font-size: 80%;
+	color: @label-color;
+}
+
+.settings-textarea{
+	width: 100%;
+	border: none;
+	padding: 0px;
+	margin-left: -2px;
+	resize: none;
+	color: @text-color;
+	outline: none;
+}
+
+.event-settings-container .panel{
+	font-size: 70%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.event-settings-container .panel-heading{
+	color: @text-color;
+}
+
+.event-settings-text{
+	color: @text-color;
+}
+
+.event-settings-divider{
+	width: 100px;
+	height: 10px;
+}
+
+.settings-button-container{
+	text-align: right;
+}
+
+.settings-button{
+	min-width: 120px;
+	border: 2px solid @free-color;
+	padding: 2px 30px;
+	background: white;
+	color: @free-color;
+	opacity: 1.0;
+	.transition-duration(0.2s);
+}
+
+.settings-button-cancel{
+	.settings-button;
+	border: 2px solid rgba(0,0,0,0.3);
+	color: @label-color;
+}
+
+.settings-button-delete{
+	.settings-button;
+	border: 2px solid red;
+	color: red;
+}
+
+.settings-button:hover{
+	color: white;
+	background: @free-color;
+	border: 2px solid @free-color;
+}
+
+.settings-button-cancel:hover{
+	background: rgba(0,0,0,0.3);
+	color: white;
+}
+
+.settings-button-delete:hover{
+	border: 2px solid red;
+	background: red;
+	color: white;
+}
+
+.settings-button-hidden{
+	opacity: 0.0;
+}
+
+#settings-between-change{
+	float: right;
+}
+
+.settings-attendee{
+	margin: 10px 0px;
+	color: @text-color;
+}
+
+.settings-attendee-email{
+	font-size: 80%;
+	color: @label-color;
+}
+
+.settings-attendee-buttons{
+	text-align: right;
+}
+
+.settings-attendee-remove{
+	float: right;
+	color: @label-color;
+	opacity: 0.5;
+	padding: 0px 10px 5px 10px;
+	.transition-duration(0.2);
+}
+
+.settings-attendee-remove:hover{
+	opacity: 1.0;
+	color: @text-color;
+	cursor: pointer;
+}
 /********* Media rules ******************************/
 
 @media screen and (min-width: 700px) and (max-width: 800px){
@@ -1611,6 +1741,16 @@ a:active{
 
 /************************/
 
+@media screen and (min-width: 800px){
+	.title-button-right:hover{
+		background: rgba(0,0,0,0.15);
+	}
+
+	.title-mail-button:hover{
+		background: rgba(0,0,0,0.15);
+	}
+}
+
 @media screen and (min-width: 450px){
 	.event-table tr > td.date-cell{
 		font-size: 100%;
@@ -1630,11 +1770,12 @@ a:active{
 	}
 
 	.markers-container{
+		margin-top: 4px;
+		line-height: 1.4em;
 	}
 
 	.markers-container span{
 	    margin: 0px -1px -2px 0px;
-	    font-size: 60%;
 	}
 
 	.markers-container span:before{
@@ -1672,11 +1813,12 @@ a:active{
 	}
 
 	.markers-container{
+		margin-top: 1px;
 	}
 
 	.markers-container span{
-	    margin: 0px -2px 0px 0px;
-        font-size: 45%;
+		font-size: 80%;
+	    margin: 0px -1px 0px 0px;
 	}
 
 	.markers-container span:before{

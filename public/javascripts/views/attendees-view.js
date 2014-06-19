@@ -24,38 +24,40 @@ window.AttendeesView = Backbone.View.extend({
 		});
 
 		var daysPassed = 0;
-		var prevMonthChoice = this.usedChoices[0];
+		if (this.usedChoices.length > 0){
+			var prevMonthChoice = this.usedChoices[0];
 
-		prevMonthChoice.showMonth = true;
-		prevMonthChoice.daysIn = 0;
+			prevMonthChoice.showMonth = true;
+			prevMonthChoice.daysIn = 0;
 
-		_.each(this.usedChoices, function(choice){
-			if (choice.get('date').getDate() == 1){
-				prevMonthChoice.lastDay = daysPassed;
+			_.each(this.usedChoices, function(choice){
+				if (choice.get('date').getDate() == 1){
+					prevMonthChoice.lastDay = daysPassed;
 
-				choice.showMonth = true;
-				choice.daysIn = daysPassed;
-				prevMonthChoice = choice;
-			} else {
-				choice.showMonth = false;
-			}
+					choice.showMonth = true;
+					choice.daysIn = daysPassed;
+					prevMonthChoice = choice;
+				} else {
+					choice.showMonth = false;
+				}
 
-			daysPassed++;
-		});
+				daysPassed++;
+			});
 
-		this.usedChoices[0].showMonth = true;
+			this.usedChoices[0].showMonth = true;
 
-		prevMonthChoice.lastDay = daysPassed;
+			prevMonthChoice.lastDay = daysPassed;
 
-		_.each(this.usedChoices, function(choice){
-			var newAttendeeView = new AttendeeView({model: choice});
+			_.each(this.usedChoices, function(choice){
+				var newAttendeeView = new AttendeeView({model: choice});
 
-			newElementRow.append(newAttendeeView.$el);
+				newElementRow.append(newAttendeeView.$el);
 
-			if (choice.showMonth){
-				that.monthStartChoices.push(newAttendeeView);
-			}
-		});
+				if (choice.showMonth){
+					that.monthStartChoices.push(newAttendeeView);
+				}
+			});
+		}
 
 		$('.day-view-container').append(newElement);
 
@@ -100,9 +102,11 @@ window.AttendeesView = Backbone.View.extend({
 	centeredIndex: null,
 
 	itemActive: function(event, index){
-		this.centeredIndex = index;
-				
-		App.setSelected(this.usedChoices[index]);
+		if (this.rendered){
+			this.centeredIndex = index;
+					
+			App.setSelected(this.usedChoices[index]);
+		}
 	},
 
 	setActive: function(model){
@@ -117,6 +121,10 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	resize: function(){
+		if (App.showInfo){
+			return;
+		}
+
 		if (this.showing){
 			this.setHeight(false);
 
@@ -165,16 +173,10 @@ window.AttendeesView = Backbone.View.extend({
 		}
 	},
 
-	onClose: function(){
-		App.setSelected(null);
-
-		this.hide();
-	},
-
 	setHeight: function(animate){
 		var that = this;
 
-		var animateDuration = 800;
+		var animateDuration = 400;
 
 		if (!animate){
 			animateDuration = 0;
@@ -222,7 +224,7 @@ window.AttendeesView = Backbone.View.extend({
 	},
 
 	destroy: function(){
-		this.$el.remove();
+		this.remove();
 
 		this.rendered = false;
 	}
@@ -236,6 +238,7 @@ window.AttendeeView = Backbone.View.extend({
 
 		this.listenTo(this.model, "change", this.modelChanged);
 		this.listenTo(this.model, "changedFree", this.freeChanged);
+		this.listenTo(this.model, "reset", this.render);
 	},
 
 	itemWidth: 80,
@@ -279,7 +282,7 @@ window.AttendeeView = Backbone.View.extend({
 		}
 
 		_.each(App.attendees.models, function(attendee){
-			if (that.model.isAttendeeFree(attendee.get("_id"))){
+			if (that.model.isAttendeeFree(attendee.get("id"))){
 				$(items[attendeeCount]).addClass('attendee-free');
 			}
 
