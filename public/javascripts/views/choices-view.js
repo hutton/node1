@@ -163,6 +163,8 @@ window.ChoiceView = Backbone.View.extend({
 		var offset = this.$el.offset();
 		var itemHeight = $('.date-cell').first().height();
 
+		//window.scrollTo(0,offset);
+
 		this.$el.velocity("scroll", {duration: 400, offset: -(navBarHeight + itemHeight)});
 	},
 
@@ -303,7 +305,9 @@ window.ChoicesView = Backbone.View.extend({
 		this.$el.addClass('scrollable-hidden');
 
 		_.delay(function(){
-			that.$el.hide();
+			if (!that.showing){
+				that.$el.hide();
+			}
 		}, 400);
 
 		this.showing = false;
@@ -354,11 +358,11 @@ window.ChoicesView = Backbone.View.extend({
 
 			// var topChoiceSize = size - 2;
 
-	        this.$el.find(".calendar-selected-item").width(size).height(height);
+			this.$el.find(".calendar-selected-item").width(size).height(height);
 
-	        if (App.selectedModel !== null){
-	            App.selectedModel.trigger('repositionSelected');
-	        }
+			if (App.selectedModel !== null){
+				App.selectedModel.trigger('repositionSelected');
+			}
 
 			App.realignAdorners();
 		} else {
