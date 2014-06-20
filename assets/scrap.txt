@@ -11,3 +11,43 @@ footer{
     width: 940px;
   }
 }
+
+Hi,
+
+We just wanted to let you know that Convenely 2.0 has launched and you can try it right now for free!
+
+In case you've forgotten Convenely is a super easy way to arrange meeting up with friends.  
+
+As well as the beautifully simple shared calendar every event on Convenely has it's own mailing list which anyone invited to the event can use to stay up to date.
+
+We'd love to hear your feedback, so if you've got anything to say just reply to this email.
+
+Thanks
+Simon
+
+
+Ian Beaumont
+beaumont.ij@gmail.com
+
+Hi,
+
+Just a short note to tell you about the big changes at Convenely, after loads of great feedback our shared calendar is as slick as every and works great on mobile, tablet or desktop.
+
+In case you've forgotten Convenely is a super easy way to arrange meeting up with friends.
+
+I'd love to hear your feedback, so if you've got anything to say just reply to this email.
+
+Thanks
+Simon
+
+
+Hi,
+
+Just a quick note to let you know that Convenely 2.0 has launched and you can try it right now for free!
+
+In case you've forgotten Convenely is a super easy way to arrange meeting up with friends.  
+
+I'd love to hear your feedback, so if you've got anything to say just reply to this email.
+
+Thanks
+Simon
