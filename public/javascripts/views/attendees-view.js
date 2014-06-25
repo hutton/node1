@@ -182,6 +182,8 @@ window.AttendeesView = Backbone.View.extend({
 			animateDuration = 0;
 		}
 
+		var calendarRowsToShow = 2;
+
 		var windowHeight = $(window).height();
 
 		var navBarHeight = $('.navbar-fixed-top').height() + $('.days-table').height();
@@ -195,7 +197,7 @@ window.AttendeesView = Backbone.View.extend({
 		var desiredHeight = (availableHeight - panelWithItemsHeight) % itemHeight + panelWithItemsHeight;
 
 		if (windowHeight > 350){
-			if (desiredHeight <= availableHeight - (itemHeight * 3)){
+			if (desiredHeight <= availableHeight - (itemHeight * calendarRowsToShow)){
 				this.$el.find('.attendees-choice-draggable-overlay').css({height: '100%'});
 				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'none'});
 
@@ -204,7 +206,7 @@ window.AttendeesView = Backbone.View.extend({
 				this.$el.find('.attendees-choice-draggable-overlay').css({height: '0%'});
 				this.$el.find('.attendees-choice-container-scrollable').css({'pointer-events': 'auto'});
 
-				newHeight = availableHeight - (itemHeight * 3);
+				newHeight = availableHeight - (itemHeight * calendarRowsToShow);
 			}
 		} else {
 			newHeight = windowHeight;

@@ -251,7 +251,7 @@ function updateChoice(req, res){
 
 function addAttendee(req, res){
 	if (req.route.params[0] == "example"){
-		res.redirect('/example');
+		res.redirect('/event/example');
 	} else if (req.route.params[0].length == 5 || req.route.params[0].length == 9){
 		Calendar.findCalendarByAttendeeId(req.route.params[0], function(err, calendar, attendee){
 			if (err){
@@ -320,7 +320,7 @@ function addAttendee(req, res){
 
 					calendar.updateCalendar(newAttendee, [], req.body.isFree.split(','));
 
-					res.redirect('/event/' + newAttendee.attendeeId);
+					res.redirect('/event/' + newAttendee.attendeeId + '/calendar');
 				});
 			}
 		});
@@ -360,7 +360,7 @@ function updateAttendeeName(req, res){
 			}
 		});
 	} else if (req.route.params[0] == "example"){
-		res.redirect('/example');
+		res.redirect('/event/example');
 	}
 }
 
